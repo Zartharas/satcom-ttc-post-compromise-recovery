@@ -1,5 +1,21 @@
 # Changelog
 
+## Unreleased — Phase 07 seeded fault schedules and metrics
+
+- Added deterministic seeded fault-schedule generation with canonical JSON serialization.
+- Added SHA-256 schedule identity so replay depends on the complete serialized schedule, not only
+  the seed.
+- Added explicit drop, delay, duplicate, reorder, contact-close, endpoint-restart, stale-counter,
+  and stale-replay fault actions.
+- Added contact-window recovery duration, divergence, degradation, transmission, retry, rejection,
+  command, telemetry, and compromise metrics.
+- Kept security and availability as separate reported dimensions.
+- Added JSON result/event export and flat CSV metric export.
+- Added a provisional seed configuration, 14-scenario regression catalog, Phase 07 validator, and
+  CI export smoke test.
+- Kept all seeds, parameters, distributions, thresholds, analysis rules, and security claims
+  provisional and unfrozen.
+
 ## Unreleased — Phase 06 provisional T1 design
 
 - Added an abstract bounded-resynchronization controller for T1.
