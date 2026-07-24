@@ -255,4 +255,8 @@ StatusLossNotDivergence ==
 \* an expected TLC counterexample. It is not a claimed protocol property.
 NegativeControlNoActivation == activationCount = 0
 
+\* Testing-only false invariant used to capture the shortest TLC witness reaching SUCCESS.
+\* It supports trace cross-validation only and is not a claimed safety property.
+ReachabilityWitnessNoSuccess == outcome # "SUCCESS"
+
 =============================================================================
