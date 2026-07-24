@@ -2,120 +2,138 @@
 
 ## Decision status
 
-**Locked for abstract implementation.** This decision fixes the B1 and B2 semantics that must
-be stable before T1 is designed or coded.
+**Corrected and locked for abstract implementation.** This revision resolves the adversarial
+review findings that blocked PR #1 from merge.
 
-## Why this phase exists
+## Why the correction was required
 
-The Phase Three scaffold intentionally simplified both baselines. That simplification became
-too strong in two places:
+The first Phase 04 implementation still contained two unfair abstractions:
 
-1. B1 treated loss of the final confirmation as automatic ground-space epoch divergence.
-2. B2 advanced the spacecraft first and treated acknowledgment loss as the lockout event.
+1. B1 used simulator-wide knowledge to activate both endpoints only after the simulator knew
+   that the final Triple-KEM confirmation had arrived.
+2. B2 represented all compromise as disclosure of the current traffic key even though the URKE
+   source distinguishes traffic-key reveal, sender-state exposure, and receiver-state exposure.
 
-Neither behavior was sufficiently tied to the selected source construction. Phase 04 corrects
-those assumptions.
+The corrected model removes the hidden B1 oracle and makes B2 compromise scope explicit.
 
 ## B1: Triple-KEM key update
 
 ### Source-supported behavior
 
-Triple-KEM is modeled as a standalone three-message key exchange, not as a full secure
-channel. Final keys are derived only once the handshake has completed for the party in
-question, and key confirmation is mandatory. The proposal also states that missing or
-out-of-order fragments cause the presented protocol to drop the connection unless another
-layer supplies ordering and retransmission.
+Triple-KEM is a standalone three-message key exchange that provides a fresh key for SDLS.
+Final keys are derived only after the handshake has completed for the party in question, and key
+confirmation is mandatory. The source does not define SDLS operational-key activation, rollback,
+or a post-handshake installation acknowledgment.
 
-### Locked model
+### Primary baseline: local-completion activation
+
+The minimum-assumption integration policy is `ACTIVATE_ON_LOCAL_COMPLETION`:
 
 - Ground is the initiator.
 - Spacecraft is the responder.
-- Initiator cryptographic completion occurs after it constructs and sends the final
-  confirmation.
-- Responder cryptographic completion occurs only after it receives and validates that
-  confirmation.
-- Cryptographic completion does not itself define when an SDLS security association becomes
-  operational.
+- Ground cryptographically completes after constructing and sending `KEM_CONFIRM`.
+- Ground activates its candidate SDLS epoch after that local completion.
+- Spacecraft cryptographically completes and activates only after receiving and validating
+  `KEM_CONFIRM`.
 
-The default experimental integration rule is
-`DEFER_UNTIL_BILATERAL_COMPLETION`. Under this rule, loss of the final confirmation leaves
-both endpoints on the previous operational SDLS epoch. The recovery attempt expires, and the
-model records that the initiator completed cryptographically while the responder did not.
+Consequently, loss of `KEM_CONFIRM` produces `G_AHEAD` and `DIVERGED`. This is the primary
+B1 baseline because it adds no hidden bilateral-delivery oracle and no extra protocol message.
 
-A second rule, `ACTIVATE_ON_LOCAL_COMPLETION`, is retained only as a negative control. It
-allows the initiator to activate after local completion and demonstrates that final-confirmation
-loss can then produce one-sided operational activation. This policy is not attributed to the
-Triple-KEM authors.
+### Enhanced comparison: authenticated-status gating
 
-### Consequence
+`DEFER_UNTIL_AUTHENTICATED_STATUS` is retained as an explicitly enhanced four-message
+integration policy:
 
-B1 final-confirmation loss is no longer automatically classified as permanent lockout or
-protocol-level divergence. The result depends on the explicit SDLS activation policy.
+1. Triple-KEM completes through `KEM_CONFIRM`.
+2. Spacecraft activates and sends authenticated status under the candidate state.
+3. Ground activates after receiving that status.
+
+This extension avoids ground activation when `KEM_CONFIRM` is lost, but it does not eliminate
+the last-message problem. If authenticated status is lost, spacecraft is ahead and the outcome is
+`DIVERGED`. Solving that uncertainty would require another acknowledgment, bounded rollback, or
+a recovery mechanism and therefore belongs outside the B1 source protocol.
+
+### Attribution boundary
+
+Neither activation policy is attributed to the Triple-KEM authors. The source supports
+party-specific cryptographic completion and mandatory confirmation; this repository supplies and
+labels the operational SDLS integration rules.
 
 ## B2: strict URKE state evolution
 
 ### Selected construction family
 
-B2 uses the unidirectional ratcheted key-exchange pattern of Poettering and Rösler. Their URKE
-construction combines KEM encapsulation with evolving sender and receiver state. The sender
-updates after sending, and the receiver updates when it processes the ciphertext.
+B2 uses the Poettering-Rösler unidirectional ratcheted key-exchange pattern with ground as sender
+and spacecraft as receiver. The sender evolves in `snd`; the receiver evolves in `rcv` after
+accepting the ciphertext. The strict TT&C baseline retains no skipped-state cache, rollback state,
+or recovery checkpoint.
 
-The unidirectional construction is selected instead of the full bidirectional construction
-because this paper's primary compromise direction is ground-to-space recovery, and URKE uses
-a generic KEM abstraction without importing the bidirectional construction's substantially
-more complex concurrent-epoch machinery.
+### Explicit compromise scopes
 
-### TT&C role mapping
+The simulator distinguishes:
 
-- Ground is the URKE sender.
-- Spacecraft is the URKE receiver.
-- A new ground-generated KEM encapsulation introduces fresh entropy.
-- The strict sender deletes its prior state when sending the update.
-- The spacecraft deletes its prior state after accepting the update.
-- No skipped-state cache, rollback state, or recovery checkpoint exists.
-- Status telemetry verifies completion but is not a ratchet transition.
+- `NONE`
+- `TRAFFIC_KEY`
+- `SENDER_STATE`
+- `RECEIVER_STATE`
+- `BOTH_ENDPOINT_STATES`
 
-### Locked fault behavior
+These scopes are not interchangeable.
 
-- **Update dropped after sender evolution:** ground is ahead; strict baseline is locked.
-- **Status telemetry lost after both endpoints evolve:** endpoints are synchronized, but the
-  experiment outcome is indeterminate because completion evidence is missing.
-- **Stale ground snapshot restored:** spacecraft is ahead; strict baseline is locked.
-- **Replayed or non-forward update:** reject without state change.
+#### Traffic-key exposure
 
-### Attribution boundary
+Disclosure of the current output traffic key does not itself expose the evolving URKE state. A
+fresh legitimate update can replace that exposed key in the abstract model.
 
-The simulator is URKE-inspired; it does not implement the original algorithms or inherit their
-proof. The strict deletion and TT&C activation policy are experimental operational choices.
+#### Sender-state exposure
 
-## Red-team review
+The URKE analysis states that sender-state exposure does not harm later keys if the adversary does
+not use the copied sender state to bring the receiver out of sync. Under a passive recovery
+interval, the next legitimate update is therefore modeled as restoring a secret active key.
 
-### Risk: making B1 artificially strong
+If an active adversary uses copied sender state first, it can impersonate the sender, advance the
+spacecraft onto an attacker-known branch, and leave the legitimate ground state behind. The
+strict TT&C adaptation classifies that path as `S_AHEAD` and `LOCKED`.
 
-Deferring activation until bilateral completion adds an integration rule not supplied by the
-key-exchange paper. The model therefore labels it explicitly and includes unilateral activation
-as a negative control.
+#### Receiver-state exposure
 
-### Risk: making B2 artificially weak
+An exposed in-sync receiver state allows the adversary to trace later receiver keys and, by
+correctness, corresponding sender keys. A normal future update may remain operationally aligned,
+but the resulting key is attacker-known, so the outcome is `AVAILABLE_UNSAFE`.
 
-The strict B2 intentionally has no skipped-state cache or rollback checkpoint. This is justified
-only as a lower-bound recoverability baseline. T1 must later be compared against stronger
-published recovery variants where suitable.
+#### Both endpoint states
 
-### Risk: conflating missing evidence with lost synchronization
+Receiver-state traceability dominates. With both states exposed, a normal aligned update remains
+`AVAILABLE_UNSAFE` in the strict URKE model.
 
-Status-telemetry loss no longer changes cryptographic alignment. It changes the outcome from
-success to indeterminate.
+### Other locked B2 faults
 
-### Risk: overclaiming PCS
+- Update lost after sender evolution: `G_AHEAD`, `LOCKED`.
+- Status telemetry lost after both endpoints evolve: `SYNC`, `INDETERMINATE`.
+- Stale ground snapshot restored: `S_AHEAD`, `LOCKED`.
+- Replayed or non-forward update: reject without state change.
 
-The simulator may demonstrate exclusion of modeled compromised key references after fresh
-entropy. It cannot establish the cryptographic PCS proof of the source construction.
+## Red-team conclusions
+
+### Baseline fairness
+
+B1 no longer receives a hidden fourth-message oracle. The enhanced status-gated variant is
+measured separately and exposes its own final-message failure.
+
+### Compromise precision
+
+B2 no longer turns traffic-key disclosure into a claim about state-exposure recovery. Sender and
+receiver exposure are encoded separately according to the source model.
+
+### Claim boundary
+
+The simulator demonstrates state and attacker-knowledge consequences under an abstract model. It
+does not inherit the source papers' proofs, establish formal PCS, or claim CCSDS conformance.
 
 ## Phase gate
 
 T1 remains blocked until:
 
-1. these semantics pass deterministic tests;
-2. the B1 and B2 source mappings receive independent cryptography review; and
-3. baseline fault outcomes are frozen for the experiment protocol.
+1. the corrected 19-test suite passes locally and in CI;
+2. B1 and B2 semantic mappings receive independent cryptography review; and
+3. baseline outcomes are frozen in the experiment protocol.
