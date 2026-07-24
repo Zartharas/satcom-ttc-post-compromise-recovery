@@ -1,27 +1,32 @@
 {
-  "schema_version": "0.3.0",
+  "schema_version": "0.4.0",
   "safety": [
     {"id": "I-S01", "statement": "Each endpoint has exactly one authoritative active epoch."},
     {"id": "I-S02", "statement": "Accepted epoch numbers never decrease during normal protocol execution."},
     {"id": "I-S03", "statement": "Candidate or pending keys cannot authorize normal commands."},
     {"id": "I-S04", "statement": "Cryptographic completion and operational SDLS activation are distinct state transitions."},
-    {"id": "I-S05", "statement": "Replayed identifiers and non-forward epochs are rejected."},
+    {"id": "I-S05", "statement": "Replayed identifiers and non-forward commit or confirmation epochs are rejected."},
     {"id": "I-S06", "statement": "After VERIFIED, compromised key references cannot authenticate accepted commands."},
     {"id": "I-S07", "statement": "Conflicting epochs cannot be simultaneously authoritative at one endpoint."},
-    {"id": "I-S08", "statement": "Recovery messages bind spacecraft identity, recovery ID, target epoch, counter, and transcript."},
-    {"id": "I-S09", "statement": "Pending states and skipped epochs are bounded by count and lifetime."},
-    {"id": "I-S10", "statement": "No automatic fallback to a prior compromised epoch is permitted."}
+    {"id": "I-S08", "statement": "Recovery messages bind spacecraft identity, recovery ID, epoch information, counter, transcript, authority, and candidate reference when present."},
+    {"id": "I-S09", "statement": "Pending states, activation receipts, retries, and lifetimes are bounded."},
+    {"id": "I-S10", "statement": "No automatic fallback to a prior compromised epoch is permitted."},
+    {"id": "I-S11", "statement": "The ground cannot select a target using simulator-only spacecraft state."},
+    {"id": "I-S12", "statement": "An exact commit retry may re-emit confirmation but cannot activate the spacecraft twice."},
+    {"id": "I-S13", "statement": "A recovery-authority counter never decreases and equal counters are accepted only for an exact pending retry."}
   ],
   "liveness": [
     {"id": "I-L01", "statement": "Under a finite passive interval and bounded delivery, a recoverable treatment terminates in an explicit outcome."},
     {"id": "I-L02", "statement": "No protocol receives a liveness claim against indefinite suppression."},
-    {"id": "I-L03", "statement": "Retry cannot reopen stale or replayed state."}
+    {"id": "I-L03", "statement": "Retry cannot reopen stale, conflicting, or replayed state."},
+    {"id": "I-L04", "statement": "Within the configured transmission budget, one lost prepare, response, commit, or confirmation can be retried without allocating an unbounded state set."}
   ],
   "evidence": [
     {"id": "I-E01", "statement": "Every state-changing transition produces an append-only event."},
-    {"id": "I-E02", "statement": "SUCCESS requires endpoint convergence and complete verification evidence."},
+    {"id": "I-E02", "statement": "SUCCESS requires endpoint convergence and complete command/status verification evidence."},
     {"id": "I-E03", "statement": "Loss of status telemetry after endpoint convergence produces INDETERMINATE, not cryptographic divergence."},
-    {"id": "I-E04", "statement": "Ordering uses simulator event sequence, not wall-clock timestamps."}
+    {"id": "I-E04", "statement": "Ordering uses simulator event sequence, not wall-clock timestamps."},
+    {"id": "I-E05", "statement": "SECURE_DEGRADED records incomplete operational restoration and cannot be reported as SUCCESS."}
   ],
   "baseline_expectations": [
     {"id": "I-B0", "statement": "B0 cannot claim PCS after compromise of the OTAR-protecting master key."},
@@ -35,5 +40,13 @@
     {"id": "I-B2D", "statement": "Passive sender-state exposure can recover only while copied state is not used to desynchronize the receiver."},
     {"id": "I-B2E", "statement": "In-sync receiver-state exposure makes later aligned keys attacker-traceable in the strict URKE model."},
     {"id": "I-B2F", "statement": "A dropped update after sender evolution can permanently lock the strict baseline because no prior state or recovery checkpoint is retained."}
+  ],
+  "provisional_treatment_expectations": [
+    {"id": "I-T1A", "statement": "Ground proposes an epoch floor using only ground state and the external recovery-authority floor; spacecraft selects the exact forward target."},
+    {"id": "I-T1B", "statement": "RECOVERY_PREPARE and RECOVERY_RESPONSE cannot authorize normal commands."},
+    {"id": "I-T1C", "statement": "Spacecraft activates on an exact commit and ground activates on an exact confirmation."},
+    {"id": "I-T1D", "statement": "One exact commit retry can use a bounded activation receipt to recover from confirmation loss without second activation."},
+    {"id": "I-T1E", "statement": "Confirmation-budget exhaustion after spacecraft activation is SECURE_DEGRADED unless no authorized recovery path remains."},
+    {"id": "I-T1F", "statement": "All T1 outcome oracles remain provisional until independent cryptography review."}
   ]
 }
