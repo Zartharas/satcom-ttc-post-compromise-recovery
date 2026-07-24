@@ -27,6 +27,22 @@ JAR's SHA-256, Java version, platform, commands, worker count, and all model inp
 CI uses Temurin Java 17 and one TLC worker. One worker reduces run-to-run variation in trace ordering and
 state-space reporting. It is not a performance configuration.
 
+The first successful CI execution recorded:
+
+- TLA+ command-line tools `1.7.4`;
+- Temurin Java `17.0.19`;
+- JAR SHA-256 `936a262061c914694dfd669a543be24573c45d5aa0ff20a8b96b23d01e050e88`;
+- SANY status `PARSE_SUCCESS`;
+- 50 generated states;
+- 28 distinct states;
+- zero states left on the queue;
+- complete-state-graph search depth 10;
+- positive status `NO_COUNTEREXAMPLE_WITHIN_RECORDED_BOUND`; and
+- a four-state expected negative-control counterexample.
+
+These numbers describe one exact finite configuration and execution environment. They are not performance
+benchmarks, probability estimates, or proof results.
+
 ## Positive model configuration
 
 The recorded finite constants are:
@@ -55,6 +71,7 @@ These properties are provisional and incomplete until independent review.
 `NegativeControlNoActivation == activationCount = 0` is intentionally false because the model permits a
 spacecraft activation. TLC is expected to produce a counterexample reaching `activationCount = 1`.
 
+The recorded four-state trace follows the abstract sequence `Init → Prepare → SelectCandidate → Commit`.
 The negative-control trace validates the capture pipeline. It must never be presented as a newly found
 protocol weakness, treatment failure, or security result.
 
