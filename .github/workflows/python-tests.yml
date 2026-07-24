@@ -60,6 +60,12 @@ jobs:
             python experiments/scripts/validate_phase07_seeded_metrics.py
           fi
 
+      - name: Validate Phase 08 provisional analysis
+        run: |
+          if [ -f experiments/scripts/validate_phase08_provisional_analysis.py ]; then
+            python experiments/scripts/validate_phase08_provisional_analysis.py
+          fi
+
       - name: Run Phase 07 export smoke test
         if: matrix.python-version == '3.13'
         env:
@@ -71,6 +77,25 @@ jobs:
               --csv-output /tmp/phase07-metrics.csv
             test -s /tmp/phase07-results.json
             test -s /tmp/phase07-metrics.csv
+          fi
+
+      - name: Run Phase 08 analysis smoke test
+        if: matrix.python-version == '3.13'
+        env:
+          PYTHONPATH: src
+        run: |
+          if [ -f experiments/scripts/analyze_phase07_results.py ]; then
+            python experiments/scripts/analyze_phase07_results.py \
+              --input-json /tmp/phase07-results.json \
+              --metrics-csv /tmp/phase07-metrics.csv \
+              --output-dir /tmp/phase08-analysis
+            test -s /tmp/phase08-analysis/phase08-analysis.json
+            test -s /tmp/phase08-analysis/phase08-trace-anomalies.csv
+            test -s /tmp/phase08-analysis/phase08-sensitivity-summary.csv
+            (
+              cd /tmp/phase08-analysis
+              sha256sum -c phase08-derived-bundle.sha256
+            )
           fi
 
       - name: Generate expected manifest
