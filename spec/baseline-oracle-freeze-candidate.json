@@ -1,0 +1,234 @@
+{
+  "schema_version": "0.1.0",
+  "status": "PENDING_INDEPENDENT_REVIEW",
+  "purpose": "Candidate freeze record for Phase 04 baseline scenario outcomes. This file does not constitute reviewer approval.",
+  "source": {
+    "repository": "Zartharas/satcom-ttc-post-compromise-recovery",
+    "branch": "phase-04/baseline-semantics",
+    "commit": "efcca8c4c0a20ba2fc1a5d4ddca292410b9a6571",
+    "catalog_path": "tests/scenarios/baseline-test-catalog.json",
+    "review_gate_path": "governance/phase-04-independent-review-gate.md"
+  },
+  "review": {
+    "reviewer_name": null,
+    "review_date": null,
+    "decision": "PENDING",
+    "approved_commit": null,
+    "ci_run_id": null,
+    "manifest_verified": false,
+    "notes": []
+  },
+  "oracles": [
+    {
+      "id": "B0-01",
+      "baseline": "B0",
+      "compromise": "NONE",
+      "faults": [],
+      "expected_alignment": "SYNC(1)",
+      "expected_outcome": "SUCCESS"
+    },
+    {
+      "id": "B0-02",
+      "baseline": "B0",
+      "compromise": "TRAFFIC_KEY",
+      "faults": [],
+      "expected_alignment": "SYNC(1)",
+      "expected_outcome": "SUCCESS"
+    },
+    {
+      "id": "B0-03",
+      "baseline": "B0",
+      "compromise": "MASTER_AND_TRAFFIC_KEYS",
+      "faults": [],
+      "expected_alignment": "SYNC(1)",
+      "expected_outcome": "AVAILABLE_UNSAFE"
+    },
+    {
+      "id": "B0-04",
+      "baseline": "B0",
+      "compromise": "TRAFFIC_KEY",
+      "faults": [
+        "DROP:OTAR_UPLOAD"
+      ],
+      "expected_alignment": "SYNC(0)",
+      "expected_outcome": "AVAILABLE_UNSAFE"
+    },
+    {
+      "id": "B1-01",
+      "baseline": "B1",
+      "compromise": "NONE",
+      "activation_policy": "ACTIVATE_ON_LOCAL_COMPLETION",
+      "faults": [],
+      "expected_alignment": "SYNC(1)",
+      "expected_outcome": "SUCCESS"
+    },
+    {
+      "id": "B1-02",
+      "baseline": "B1",
+      "compromise": "OPERATIONAL_KEYS",
+      "activation_policy": "ACTIVATE_ON_LOCAL_COMPLETION",
+      "faults": [
+        "eventually passive attacker",
+        "long-term update enabled"
+      ],
+      "expected_alignment": "SYNC(1)",
+      "expected_outcome": "SUCCESS"
+    },
+    {
+      "id": "B1-03",
+      "baseline": "B1",
+      "compromise": "NONE",
+      "activation_policy": "ACTIVATE_ON_LOCAL_COMPLETION",
+      "faults": [
+        "REORDER:required fragments"
+      ],
+      "expected_alignment": "SYNC(0)",
+      "expected_outcome": "EXPIRED"
+    },
+    {
+      "id": "B1-04",
+      "baseline": "B1",
+      "compromise": "NONE",
+      "activation_policy": "ACTIVATE_ON_LOCAL_COMPLETION",
+      "faults": [
+        "DROP:KEM_CONFIRM"
+      ],
+      "expected_alignment": "G_AHEAD",
+      "expected_outcome": "DIVERGED"
+    },
+    {
+      "id": "B1-05",
+      "baseline": "B1-STATUS-ENHANCED",
+      "compromise": "NONE",
+      "activation_policy": "DEFER_UNTIL_AUTHENTICATED_STATUS",
+      "faults": [],
+      "expected_alignment": "SYNC(1)",
+      "expected_outcome": "SUCCESS"
+    },
+    {
+      "id": "B1-06",
+      "baseline": "B1-STATUS-ENHANCED",
+      "compromise": "NONE",
+      "activation_policy": "DEFER_UNTIL_AUTHENTICATED_STATUS",
+      "faults": [
+        "DROP:KEM_CONFIRM"
+      ],
+      "expected_alignment": "SYNC(0)",
+      "expected_outcome": "EXPIRED"
+    },
+    {
+      "id": "B1-07",
+      "baseline": "B1-STATUS-ENHANCED",
+      "compromise": "NONE",
+      "activation_policy": "DEFER_UNTIL_AUTHENTICATED_STATUS",
+      "faults": [
+        "DROP:AUTHENTICATED_STATUS"
+      ],
+      "expected_alignment": "S_AHEAD",
+      "expected_outcome": "DIVERGED"
+    },
+    {
+      "id": "B2-01",
+      "baseline": "B2-URKE",
+      "compromise": "NONE",
+      "faults": [],
+      "expected_alignment": "SYNC(1)",
+      "expected_outcome": "SUCCESS"
+    },
+    {
+      "id": "B2-02",
+      "baseline": "B2-URKE",
+      "compromise": "TRAFFIC_KEY",
+      "faults": [
+        "eventually passive attacker",
+        "fresh KEM entropy"
+      ],
+      "expected_alignment": "SYNC(1)",
+      "expected_outcome": "SUCCESS"
+    },
+    {
+      "id": "B2-03",
+      "baseline": "B2-URKE",
+      "compromise": "SENDER_STATE",
+      "faults": [
+        "passive recovery interval",
+        "no impersonation"
+      ],
+      "expected_alignment": "SYNC(1)",
+      "expected_outcome": "SUCCESS"
+    },
+    {
+      "id": "B2-04",
+      "baseline": "B2-URKE",
+      "compromise": "RECEIVER_STATE",
+      "faults": [
+        "normal legitimate update"
+      ],
+      "expected_alignment": "SYNC(1)",
+      "expected_outcome": "AVAILABLE_UNSAFE"
+    },
+    {
+      "id": "B2-05",
+      "baseline": "B2-URKE",
+      "compromise": "BOTH_ENDPOINT_STATES",
+      "faults": [
+        "normal legitimate update"
+      ],
+      "expected_alignment": "SYNC(1)",
+      "expected_outcome": "AVAILABLE_UNSAFE"
+    },
+    {
+      "id": "B2-06",
+      "baseline": "B2-URKE",
+      "compromise": "SENDER_STATE",
+      "faults": [
+        "ACTIVE:SENDER_IMPERSONATION before legitimate send"
+      ],
+      "expected_alignment": "S_AHEAD",
+      "expected_joint_state": "LOCKED",
+      "expected_outcome": "LOCKED"
+    },
+    {
+      "id": "B2-07",
+      "baseline": "B2-URKE",
+      "compromise": "NONE",
+      "faults": [
+        "DROP:RATCHET_UPDATE after sender evolution"
+      ],
+      "expected_alignment": "G_AHEAD",
+      "expected_joint_state": "LOCKED",
+      "expected_outcome": "LOCKED"
+    },
+    {
+      "id": "B2-08",
+      "baseline": "B2-URKE",
+      "compromise": "NONE",
+      "faults": [
+        "DROP:STATUS_TELEMETRY after both endpoints evolve"
+      ],
+      "expected_alignment": "SYNC(1)",
+      "expected_outcome": "INDETERMINATE"
+    },
+    {
+      "id": "B2-09",
+      "baseline": "B2-URKE",
+      "compromise": "NONE",
+      "faults": [
+        "STALE_GROUND_RESTORE to epoch 0"
+      ],
+      "expected_alignment": "S_AHEAD",
+      "expected_joint_state": "LOCKED",
+      "expected_outcome": "LOCKED"
+    },
+    {
+      "id": "B2-10",
+      "baseline": "B2-URKE",
+      "compromise": "NONE",
+      "faults": [
+        "REPLAY:RATCHET_UPDATE for epoch 1"
+      ],
+      "expected_alignment": "SYNC(1)",
+      "expected_outcome": "SUCCESS"
+    }
+  ]
+}
