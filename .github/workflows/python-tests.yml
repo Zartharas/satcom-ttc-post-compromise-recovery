@@ -40,6 +40,7 @@ jobs:
       - name: Run unit tests
         env:
           PYTHONPATH: src
+          PYTHONWARNINGS: error::ResourceWarning
         run: python -m unittest discover -s tests -p "test_*.py" -v
 
       - name: Validate review handoff
@@ -64,6 +65,14 @@ jobs:
         run: |
           if [ -f experiments/scripts/validate_phase08_provisional_analysis.py ]; then
             python experiments/scripts/validate_phase08_provisional_analysis.py
+          fi
+
+      - name: Validate Phase 09 formal coverage
+        env:
+          PYTHONPATH: src
+        run: |
+          if [ -f experiments/scripts/validate_phase09_formal_coverage.py ]; then
+            python experiments/scripts/validate_phase09_formal_coverage.py
           fi
 
       - name: Run Phase 07 export smoke test
@@ -95,6 +104,23 @@ jobs:
             (
               cd /tmp/phase08-analysis
               sha256sum -c phase08-derived-bundle.sha256
+            )
+          fi
+
+      - name: Run Phase 09 coverage smoke test
+        if: matrix.python-version == '3.13'
+        env:
+          PYTHONPATH: src
+        run: |
+          if [ -f experiments/scripts/run_phase09_coverage.py ]; then
+            python experiments/scripts/run_phase09_coverage.py \
+              --output-dir /tmp/phase09-coverage
+            test -s /tmp/phase09-coverage/phase09-coverage-reachability.json
+            test -s /tmp/phase09-coverage/phase09-reachability.csv
+            test -s /tmp/phase09-coverage/phase09-invariant-traceability.csv
+            (
+              cd /tmp/phase09-coverage
+              sha256sum -c phase09-derived-bundle.sha256
             )
           fi
 
