@@ -1,5 +1,5 @@
 {
-  "schema_version": "0.3.0",
+  "schema_version": "0.4.0",
   "global_guards": [
     {"id": "G-001", "name": "contact_open", "expression": "link.contact_open == true"},
     {"id": "G-002", "name": "future_epoch_only", "expression": "message.target_epoch > receiver.epoch"},
@@ -8,136 +8,60 @@
     {"id": "G-005", "name": "authority_allowed", "expression": "message.authorized_by in receiver.allowed_recovery_authorities"},
     {"id": "G-006", "name": "not_expired", "expression": "current_contact <= pending.expires_after_contact"},
     {"id": "G-007", "name": "bounded_pending_capacity", "expression": "count(receiver.pending_states) < configured_pending_limit"},
-    {"id": "G-008", "name": "candidate_cannot_execute_commands", "expression": "command.key_ref == receiver.active_key_ref and receiver.mode in ['NORMAL','VERIFIED']"},
+    {"id": "G-008", "name": "candidate_cannot_execute_commands", "expression": "command.key_ref == receiver.active_key_ref"},
     {"id": "G-009", "name": "no_compromised_key_after_verification", "expression": "command.key_ref not in receiver.compromised_key_refs"},
-    {"id": "G-010", "name": "monotonic_counter", "expression": "message.counter > receiver.monotonic_counter"}
+    {"id": "G-010", "name": "monotonic_counter", "expression": "message.counter > receiver.monotonic_counter or exact_retry(message, pending)"},
+    {"id": "G-011", "name": "exact_recovery_binding", "expression": "spacecraft_id, recovery_id, epoch, counter, transcript, authority, and candidate fields match the pending or receipt record"},
+    {"id": "G-012", "name": "single_pending_candidate", "expression": "count(receiver.pending_states) <= 1"},
+    {"id": "G-013", "name": "single_activation_receipt", "expression": "count(receiver.activation_receipts) <= 1"},
+    {"id": "G-014", "name": "no_hidden_peer_oracle", "expression": "ground target proposal uses ground state and recovery-authority epoch floor only"},
+    {"id": "G-015", "name": "selected_epoch_forward", "expression": "response.target_epoch >= prepare.proposal_epoch and response.target_epoch > spacecraft.epoch_at_prepare"}
   ],
   "baseline_specific": {
     "B0": [
-      {
-        "transition": "receive_otar",
-        "guards": ["G-001", "G-003"],
-        "action": "stage uploaded session key; attacker learns it if the protecting master key is compromised"
-      },
-      {
-        "transition": "activate_uploaded_key",
-        "guards": ["G-002", "G-003"],
-        "action": "activate uploaded session key and increment epoch"
-      }
+      {"transition": "receive_otar", "guards": ["G-001", "G-003"], "action": "stage uploaded session key; attacker learns it if the protecting master key is compromised"},
+      {"transition": "activate_uploaded_key", "guards": ["G-002", "G-003"], "action": "activate uploaded session key and increment epoch"}
     ],
     "B1": [
-      {
-        "transition": "receive_kem_init",
-        "guards": ["G-001", "G-002", "G-003", "G-004"],
-        "action": "stage transcript-bound candidate; do not activate operational SDLS state"
-      },
-      {
-        "transition": "send_kem_confirm",
-        "guards": ["G-001", "G-003", "G-004"],
-        "action": "mark initiator cryptographic completion"
-      },
-      {
-        "transition": "activate_initiator_on_local_completion",
-        "guards": ["activation_policy == ACTIVATE_ON_LOCAL_COMPLETION", "initiator.crypto_complete_epoch == target_epoch"],
-        "action": "activate the ground candidate without using simulator-wide knowledge of responder receipt"
-      },
-      {
-        "transition": "receive_kem_confirm",
-        "guards": ["G-001", "G-003", "G-004"],
-        "action": "mark responder cryptographic completion"
-      },
-      {
-        "transition": "activate_responder_on_local_completion",
-        "guards": ["activation_policy == ACTIVATE_ON_LOCAL_COMPLETION", "responder.crypto_complete_epoch == target_epoch"],
-        "action": "activate the spacecraft candidate after validating KEM_CONFIRM"
-      },
-      {
-        "transition": "send_authenticated_status",
-        "guards": ["activation_policy == DEFER_UNTIL_AUTHENTICATED_STATUS", "responder.crypto_complete_epoch == target_epoch"],
-        "action": "activate spacecraft candidate and send the explicit fourth integration message"
-      },
-      {
-        "transition": "receive_authenticated_status",
-        "guards": ["activation_policy == DEFER_UNTIL_AUTHENTICATED_STATUS", "initiator.crypto_complete_epoch == target_epoch"],
-        "action": "activate ground candidate after receiving authenticated status"
-      },
-      {
-        "transition": "drop_kem_confirm_local_policy",
-        "guards": ["activation_policy == ACTIVATE_ON_LOCAL_COMPLETION"],
-        "action": "record G_AHEAD and DIVERGED"
-      },
-      {
-        "transition": "drop_kem_confirm_status_policy",
-        "guards": ["activation_policy == DEFER_UNTIL_AUTHENTICATED_STATUS"],
-        "action": "expire both candidates and retain SYNC(previous_epoch)"
-      },
-      {
-        "transition": "drop_authenticated_status",
-        "guards": ["activation_policy == DEFER_UNTIL_AUTHENTICATED_STATUS"],
-        "action": "record S_AHEAD and DIVERGED; do not treat status delivery as an oracle"
-      },
-      {
-        "transition": "missing_or_out_of_order_required_material",
-        "guards": [],
-        "action": "abort or expire the exchange; no protocol-layer reordering or retransmission is assumed"
-      }
+      {"transition": "receive_kem_init", "guards": ["G-001", "G-002", "G-003", "G-004"], "action": "stage transcript-bound candidate; do not activate operational SDLS state"},
+      {"transition": "send_kem_confirm", "guards": ["G-001", "G-003", "G-004"], "action": "mark initiator cryptographic completion"},
+      {"transition": "activate_initiator_on_local_completion", "guards": ["activation_policy == ACTIVATE_ON_LOCAL_COMPLETION", "initiator.crypto_complete_epoch == target_epoch"], "action": "activate the ground candidate without using simulator-wide knowledge of responder receipt"},
+      {"transition": "receive_kem_confirm", "guards": ["G-001", "G-003", "G-004"], "action": "mark responder cryptographic completion"},
+      {"transition": "activate_responder_on_local_completion", "guards": ["activation_policy == ACTIVATE_ON_LOCAL_COMPLETION", "responder.crypto_complete_epoch == target_epoch"], "action": "activate the spacecraft candidate after validating KEM_CONFIRM"},
+      {"transition": "send_authenticated_status", "guards": ["activation_policy == DEFER_UNTIL_AUTHENTICATED_STATUS", "responder.crypto_complete_epoch == target_epoch"], "action": "activate spacecraft candidate and send the explicit fourth integration message"},
+      {"transition": "receive_authenticated_status", "guards": ["activation_policy == DEFER_UNTIL_AUTHENTICATED_STATUS", "initiator.crypto_complete_epoch == target_epoch"], "action": "activate ground candidate after receiving authenticated status"},
+      {"transition": "drop_kem_confirm_local_policy", "guards": ["activation_policy == ACTIVATE_ON_LOCAL_COMPLETION"], "action": "record G_AHEAD and DIVERGED"},
+      {"transition": "drop_kem_confirm_status_policy", "guards": ["activation_policy == DEFER_UNTIL_AUTHENTICATED_STATUS"], "action": "expire both candidates and retain SYNC(previous_epoch)"},
+      {"transition": "drop_authenticated_status", "guards": ["activation_policy == DEFER_UNTIL_AUTHENTICATED_STATUS"], "action": "record S_AHEAD and DIVERGED; do not treat status delivery as an oracle"},
+      {"transition": "missing_or_out_of_order_required_material", "guards": [], "action": "abort or expire the exchange; no protocol-layer reordering or retransmission is assumed"}
     ],
     "B2": [
-      {
-        "transition": "apply_traffic_key_exposure",
-        "guards": ["compromise_scope == TRAFFIC_KEY"],
-        "action": "mark only the current output traffic key attacker-known"
-      },
-      {
-        "transition": "apply_sender_state_exposure",
-        "guards": ["compromise_scope in [SENDER_STATE, BOTH_ENDPOINT_STATES]"],
-        "action": "mark ground sender state exposed without automatically marking future keys known"
-      },
-      {
-        "transition": "apply_receiver_state_exposure",
-        "guards": ["compromise_scope in [RECEIVER_STATE, BOTH_ENDPOINT_STATES]"],
-        "action": "mark spacecraft receiver state exposed and future aligned keys traceable"
-      },
-      {
-        "transition": "sender_state_impersonation",
-        "guards": ["active_sender_impersonation == true", "compromise_scope in [SENDER_STATE, BOTH_ENDPOINT_STATES]"],
-        "action": "advance spacecraft on an attacker-known branch and record S_AHEAD and LOCKED"
-      },
-      {
-        "transition": "send_urke_update",
-        "guards": ["G-001", "G-002", "G-003", "G-010"],
-        "action": "ground sender derives the new key, evolves sender state, and deletes prior sender state"
-      },
-      {
-        "transition": "receive_urke_update",
-        "guards": ["G-001", "G-002", "G-003", "G-010"],
-        "action": "spacecraft receiver derives the matching key, evolves receiver state, and deletes prior receiver state"
-      },
-      {
-        "transition": "receiver_exposure_trace",
-        "guards": ["compromise_scope in [RECEIVER_STATE, BOTH_ENDPOINT_STATES]"],
-        "action": "mark the new aligned key attacker-known and classify availability as unsafe"
-      },
-      {
-        "transition": "drop_after_sender_evolution",
-        "guards": [],
-        "action": "record G_AHEAD and LOCKED because the strict baseline retains no prior sender state or recovery checkpoint"
-      },
-      {
-        "transition": "status_telemetry_loss",
-        "guards": [],
-        "action": "leave endpoints cryptographically synchronized but mark recovery verification INDETERMINATE"
-      },
-      {
-        "transition": "stale_state_restore",
-        "guards": [],
-        "action": "restore ground to an older epoch and record S_AHEAD and LOCKED"
-      },
-      {
-        "transition": "replayed_or_nonforward_update",
-        "guards": [],
-        "action": "reject without state change"
-      }
+      {"transition": "apply_traffic_key_exposure", "guards": ["compromise_scope == TRAFFIC_KEY"], "action": "mark only the current output traffic key attacker-known"},
+      {"transition": "apply_sender_state_exposure", "guards": ["compromise_scope in [SENDER_STATE, BOTH_ENDPOINT_STATES]"], "action": "mark ground sender state exposed without automatically marking future keys known"},
+      {"transition": "apply_receiver_state_exposure", "guards": ["compromise_scope in [RECEIVER_STATE, BOTH_ENDPOINT_STATES]"], "action": "mark spacecraft receiver state exposed and future aligned keys traceable"},
+      {"transition": "sender_state_impersonation", "guards": ["active_sender_impersonation == true", "compromise_scope in [SENDER_STATE, BOTH_ENDPOINT_STATES]"], "action": "advance spacecraft on an attacker-known branch and record S_AHEAD and LOCKED"},
+      {"transition": "send_urke_update", "guards": ["G-001", "G-002", "G-003", "G-010"], "action": "ground sender derives the new key, evolves sender state, and deletes prior sender state"},
+      {"transition": "receive_urke_update", "guards": ["G-001", "G-002", "G-003", "G-010"], "action": "spacecraft receiver derives the matching key, evolves receiver state, and deletes prior receiver state"},
+      {"transition": "receiver_exposure_trace", "guards": ["compromise_scope in [RECEIVER_STATE, BOTH_ENDPOINT_STATES]"], "action": "mark the new aligned key attacker-known and classify availability as unsafe"},
+      {"transition": "drop_after_sender_evolution", "guards": [], "action": "record G_AHEAD and LOCKED because the strict baseline retains no prior sender state or recovery checkpoint"},
+      {"transition": "status_telemetry_loss", "guards": [], "action": "leave endpoints cryptographically synchronized but mark recovery verification INDETERMINATE"},
+      {"transition": "stale_state_restore", "guards": [], "action": "restore ground to an older epoch and record S_AHEAD and LOCKED"},
+      {"transition": "replayed_or_nonforward_update", "guards": [], "action": "reject without state change"}
+    ]
+  },
+  "treatment_specific": {
+    "T1_PROVISIONAL": [
+      {"transition": "send_recovery_prepare", "guards": ["G-001", "G-005", "G-012", "G-014"], "action": "ground reserves one bounded attempt and proposes max(ground epoch, authority floor)+1; no candidate activates"},
+      {"transition": "accept_recovery_prepare", "guards": ["G-001", "G-003", "G-005", "G-010", "G-012"], "action": "spacecraft selects max(proposed epoch, local epoch+1), stages one candidate, and returns RECOVERY_RESPONSE"},
+      {"transition": "retry_exact_prepare", "guards": ["G-001", "G-003", "G-005", "G-011"], "action": "return the same selected candidate without allocating another pending state"},
+      {"transition": "accept_recovery_response", "guards": ["G-001", "G-003", "G-011", "G-015"], "action": "ground stages the exact selected candidate and emits RECOVERY_COMMIT"},
+      {"transition": "accept_recovery_commit", "guards": ["G-001", "G-003", "G-006", "G-011", "G-013"], "action": "spacecraft activates the candidate once and stores one bounded activation receipt"},
+      {"transition": "retry_exact_commit", "guards": ["G-001", "G-003", "G-011", "G-013"], "action": "re-emit RECOVERY_CONFIRM from the activation receipt without a second activation"},
+      {"transition": "accept_recovery_confirm", "guards": ["G-001", "G-003", "G-011", "G-002"], "action": "ground activates the exact candidate and advances the recovery-authority epoch floor"},
+      {"transition": "verify_recovery", "guards": ["G-008", "G-009", "ground active state == spacecraft active state"], "action": "accept a fresh test command, receive authenticated status, mark both endpoints VERIFIED, and permit SUCCESS"},
+      {"transition": "expire_before_activation", "guards": ["retry budget exhausted", "no endpoint activated candidate"], "action": "clear bounded candidates, retain prior operational states, and classify EXPIRED"},
+      {"transition": "expire_after_spacecraft_activation", "guards": ["confirmation budget exhausted", "spacecraft activation receipt exists", "ground candidate not activated"], "action": "clear bounded attempt records and classify SECURE_DEGRADED rather than permanent LOCKED"},
+      {"transition": "reject_conflicting_or_unauthorized_recovery", "guards": ["not G-005 or not G-011 or not G-012"], "action": "reject without operational state change"}
     ]
   }
 }
