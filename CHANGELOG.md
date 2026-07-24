@@ -1,5 +1,25 @@
 # Changelog
 
+## Unreleased — Phase 09 adversarial coverage and formal-model preparation
+
+- Added 24 explicit adversarial recovery schedules covering every supported fault kind and protocol
+  phase.
+- Added retry-budget minus-one, equality, and plus-one schedules, including explicit accounting for
+  fault actions beyond a reduced execution bound.
+- Added candidate-lifetime equality and plus-one boundary schedules.
+- Added spacecraft-ahead, authority-epoch-floor, restart, replay, stale-counter, evidence-loss, and
+  multi-fault schedules.
+- Added bounded state and outcome reachability reports with deterministic shortest known witnesses.
+- Added `NOT_REACHED_WITHIN_PROVISIONAL_BOUND` language so bounded non-reachability is not converted
+  into an impossibility claim.
+- Added 13 invariant mappings connecting machine-readable requirements, implementation guards, unit
+  tests, explicit schedules, and formal-property identifiers.
+- Added a provisional TLA+ recovery-control module and model-check configuration.
+- Added JSON/CSV coverage, reachability, and traceability output with a SHA-256 manifest.
+- Added Phase 09 tests, a standalone validator, and a full CI coverage smoke test.
+- Kept the scenario population, formal property set, model bounds, parameters, and all security or
+  publication claims provisional and unfrozen.
+
 ## Unreleased — Phase 08 provisional analysis
 
 - Added read-only verification for preserved Phase 07 evidence bundles using relative-path SHA-256
