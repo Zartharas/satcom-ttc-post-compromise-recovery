@@ -11,14 +11,17 @@
 - machine-readable Phase 04 baseline semantics
 - adversarial review of B1 activation and B2 compromise scope
 - corrected deterministic B1 and B2 fault tests
+- Phase 04 local, CI, JSON, and tracked-file manifest validation
+- Phase 05 independent-review handoff package and oracle-freeze candidate
 
 ## Current gate
 
-Validate the corrected Phase 04 branch locally and through pull-request CI, then obtain independent
-cryptography review of the B1 activation boundary and B2 URKE exposure mapping.
+Obtain an independent cryptography review using the Phase 05 response template, resolve every
+`REJECT` or `ACCEPT WITH CORRECTION` item, and then freeze the approved scenario oracles.
 
-T1 remains blocked until the corrected baseline semantic review is accepted and the test oracles
-are frozen.
+T1 remains blocked until the reviewer approves the B1 and B2 source-to-model mappings and the
+oracle candidate status changes from `PENDING_INDEPENDENT_REVIEW` to an accepted state with
+complete evidence metadata.
 
 ## Corrected Phase 04 decisions
 
@@ -29,17 +32,28 @@ are frozen.
   `S_AHEAD` and `DIVERGED`.
 - No B1 policy uses simulator-wide bilateral-delivery knowledge as an activation oracle.
 - B2 maps ground to the strict URKE sender and spacecraft to the receiver.
-- B2 distinguishes traffic-key reveal, sender-state exposure, receiver-state exposure, and both-state
-  exposure.
+- B2 distinguishes traffic-key reveal, sender-state exposure, receiver-state exposure, and
+  both-state exposure.
 - Passive sender-state exposure may recover while active sender impersonation can lock the strict
   model on an attacker-known receiver branch.
 - Receiver-state exposure makes later aligned keys `AVAILABLE_UNSAFE` in the strict URKE model.
 - Lost status telemetry after endpoint convergence produces an indeterminate evidence outcome,
   not cryptographic divergence.
 
+## Phase 05 artifacts
+
+- `governance/phase-05-reviewer-response-template.md`
+- `spec/baseline-oracle-freeze-candidate.json`
+- `experiments/scripts/validate_review_handoff.py`
+- `tests/test_review_handoff.py`
+
+The freeze candidate contains 21 scenario oracles and remains explicitly pending. It cannot become
+accepted without reviewer identity, source-located decisions, an approved commit SHA, a CI run ID,
+and manifest-verification evidence.
+
 ## Deferred
 
-- named independent cryptography review
+- completed independent cryptography review
 - named space-systems review
 - formal model checking
 - T1 implementation
