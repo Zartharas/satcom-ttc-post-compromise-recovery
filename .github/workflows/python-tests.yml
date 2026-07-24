@@ -47,3 +47,9 @@ jobs:
           if [ -f experiments/scripts/validate_review_handoff.py ]; then
             python experiments/scripts/validate_review_handoff.py
           fi
+
+      - name: Validate provisional T1 design
+        run: |
+          if [ -f experiments/scripts/validate_t1_provisional_design.py ]; then
+            python experiments/scripts/validate_t1_provisional_design.py
+          fi
