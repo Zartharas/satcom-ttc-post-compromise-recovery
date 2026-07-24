@@ -1,5 +1,28 @@
 # Changelog
 
+## Unreleased — Phase 13 abstraction-gap outcome expansion
+
+- Preserved `formal/tla/T1Recovery.tla` byte-for-byte as the Phase 12 baseline and enforced its recorded
+  SHA-256 in code, tests, and the machine-readable Phase 13 contract.
+- Reproduced the baseline 50-generated / 28-distinct / depth-10 state space for `DIVERGED`,
+  `AVAILABLE_UNSAFE`, and `LOCKED` absence checks.
+- Added separate opt-in `T1RecoveryOutcomeExpansion.tla` diagnostic modeling with the expansion-only
+  `gapCause` state variable.
+- Added explicit confirmation-loss, adversary-known-candidate, and prior-sender-state-deletion paths.
+- Captured four-, seven-, and five-state testing-only witnesses for `DIVERGED`, `AVAILABLE_UNSAFE`, and
+  `LOCKED`, respectively.
+- Compared the three expansion traces over the existing 16-field projection and recorded 272/272 matched
+  rows with zero mismatches.
+- Added independent canonical Python checks using the existing B1 confirmation-loss, B2 receiver-state
+  exposure, and B2 dropped-update semantics.
+- Added assignment auditing that records zero assignments in the baseline and exactly one explicit
+  assignment per outcome in the opt-in expansion.
+- Added JSON witness records, comparison and audit CSV files, raw Java/SANY/TLC logs, and a SHA-256 derived
+  manifest.
+- Added Phase 13 tests, specification, validator, runner, documentation, and a real Java/TLC CI gate.
+- Kept the expansion, causes, transition paths, projection, model-completeness interpretation, and
+  publication claims provisional and unfrozen.
+
 ## Unreleased — Phase 12 adverse-outcome witnesses
 
 - Added six testing-only outcome reachability properties and separate TLC configurations.
