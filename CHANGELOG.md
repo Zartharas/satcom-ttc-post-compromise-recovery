@@ -1,5 +1,13 @@
 # Changelog
 
+## Unreleased — Phase 05 review handoff
+
+- Added an independent-review response template with source-locator and conflict-of-interest fields.
+- Added a machine-readable candidate freeze record for all 21 baseline scenario oracles.
+- Added a standard-library validator that compares the freeze candidate with the scenario catalog.
+- Added automated tests for oracle identity, consistency, and pending-review status.
+- Kept T1 blocked until independent review and formal oracle acceptance.
+
 ## Unreleased — Phase 04 semantic hardening
 
 - Made B1 local-completion activation the primary minimum-assumption baseline.
