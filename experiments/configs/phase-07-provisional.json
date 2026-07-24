@@ -1,0 +1,38 @@
+{
+  "schema_version": "0.1.0",
+  "status": "PROVISIONAL_INTERNAL_REVIEW_ONLY",
+  "description": "Initial reproducibility configuration for Phase 07 development. No seed, distribution, retry budget, lifetime, or threshold is frozen.",
+  "seeds": [7001, 7002, 7003, 7004, 7005, 7006, 7007, 7008, 7009, 7010, 7011, 7012],
+  "ground_epoch": 2,
+  "spacecraft_epoch": 1,
+  "authority_epoch_floor": 0,
+  "max_transmissions": 3,
+  "candidate_lifetime_contacts": 3,
+  "max_faults": 4,
+  "compromise_active_keys": true,
+  "allowed_faults": [
+    "DROP",
+    "DELAY",
+    "DUPLICATE",
+    "REORDER",
+    "CONTACT_CLOSE",
+    "ENDPOINT_RESTART",
+    "STALE_COUNTER",
+    "STALE_REPLAY"
+  ],
+  "outputs": {
+    "json": "results/raw/phase-07-seeded-results.json",
+    "csv": "results/processed/phase-07-seeded-metrics.csv"
+  },
+  "parameter_status": {
+    "seeds": "UNFROZEN",
+    "initial_epochs": "UNFROZEN",
+    "authority_epoch_floor": "UNFROZEN",
+    "max_transmissions": "UNFROZEN",
+    "candidate_lifetime_contacts": "UNFROZEN",
+    "max_faults": "UNFROZEN",
+    "allowed_faults": "UNFROZEN",
+    "fault_selection_distribution": "UNFROZEN",
+    "success_thresholds": "UNFROZEN"
+  }
+}
