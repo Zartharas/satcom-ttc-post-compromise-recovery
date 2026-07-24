@@ -87,6 +87,12 @@ jobs:
             python experiments/scripts/validate_phase11_cross_validation.py
           fi
 
+      - name: Validate Phase 12 adverse outcomes
+        run: |
+          if [ -f experiments/scripts/validate_phase12_adverse_outcomes.py ]; then
+            python experiments/scripts/validate_phase12_adverse_outcomes.py
+          fi
+
       - name: Run Phase 07 export smoke test
         if: matrix.python-version == '3.13'
         env:
@@ -154,7 +160,7 @@ jobs:
   formal:
     name: TLA+ TLC 1.7.4
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 20
 
     steps:
       - name: Check out repository
@@ -235,5 +241,35 @@ jobs:
         with:
           name: phase11-formal-python-cross-validation
           path: /tmp/phase11-cross-validation/phase11-*
+          if-no-files-found: warn
+          retention-days: 7
+
+      - name: Validate Phase 12 design
+        run: python experiments/scripts/validate_phase12_adverse_outcomes.py
+
+      - name: Run Phase 12 adverse witness gates
+        env:
+          PYTHONPATH: src
+        run: |
+          python experiments/scripts/run_phase12_adverse_validation.py \
+            --jar /tmp/tla2tools.jar \
+            --output-dir /tmp/phase12-adverse-validation
+
+      - name: Verify Phase 12 derived bundle
+        run: |
+          cd /tmp/phase12-adverse-validation
+          sha256sum -c phase12-derived-bundle.sha256
+          test -s phase12-adverse-outcome-validation.json
+          test -s phase12-witness-indeterminate.json
+          test -s phase12-witness-secure-degraded.json
+          test -s phase12-witness-expired.json
+          test -s phase12-unreached-outcomes.csv
+
+      - name: Upload Phase 12 adverse-outcome evidence
+        if: always()
+        uses: actions/upload-artifact@v5
+        with:
+          name: phase12-adverse-outcome-validation
+          path: /tmp/phase12-adverse-validation/phase12-*
           if-no-files-found: warn
           retention-days: 7
