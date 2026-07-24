@@ -21,41 +21,41 @@
 - provisional Phase 08 aggregation, trace-audit, and sensitivity analysis layer
 - Phase 09 explicit adversarial coverage, bounded reachability, and formal-model scaffold
 - Phase 10 command-line SANY/TLC execution and counterexample-capture workflow
-- Phase 11 formal/Python trace cross-validation and finite bound panel
+- Phase 11 formal/Python success-trace cross-validation and finite bound panel
+- Phase 12 adverse-outcome witnesses and abstraction-gap diagnostics
 
 ## Current phase
 
-Phase 11 compares an actual TLC success witness with the Python T1 controller under a declared abstract
-projection and records a small finite bound panel while the Phase 04/05 independent-review gate remains open.
+Phase 12 captures bounded formal witnesses for adverse outcomes, replays them through the Python T1
+controller under the declared 16-field projection, and diagnoses why three other outcomes remain absent while
+the Phase 04/05 independent-review gate remains open.
 
-The Phase 11 layer now provides:
+The Phase 12 layer provides:
 
-- testing-only `ReachabilityWitnessNoSuccess` reachability property;
-- an eight-state shortest bounded path from initialization through successful verification;
-- normalization of TLC state assignments and transition labels;
-- Python replay of the same declared macro-step sequence;
-- comparison of 16 abstract fields at every witness step;
-- explicit `MATCH_WITHIN_DECLARED_ABSTRACTION` and `MISMATCH_REQUIRES_REVIEW` statuses;
-- no silent reconciliation of formal/Python differences;
-- five finite TLC configurations covering lower/higher retry and epoch bounds plus the exact baseline;
-- mandatory reproduction of the Phase 10 baseline state counts;
-- JSON, CSV, raw logs, and SHA-256 derived output; and
+- testing-only reachability properties for `INDETERMINATE`, `SECURE_DEGRADED`, `EXPIRED`, `DIVERGED`,
+  `AVAILABLE_UNSAFE`, and `LOCKED`;
+- explicit formal witness capture for the first three outcomes;
+- Python replay with per-field comparison and `MISMATCH_REQUIRES_REVIEW` retention;
+- an explicit retained-receipt-evidence projection for post-activation terminal cleanup;
+- bounded non-reachability checks for the final three outcomes;
+- a source-level transition-assignment audit;
+- `ABSENT_FROM_CURRENT_TRANSITION_ASSIGNMENTS` diagnosis instead of an impossibility claim;
+- JSON, CSV, raw SANY/TLC logs, and a SHA-256 derived manifest; and
 - a real Java/TLC CI gate with a short-lived evidence artifact.
 
-The first successful Phase 11 CI execution recorded:
+The first successful Phase 12 CI execution recorded:
 
 - SANY: `PARSE_SUCCESS`;
-- success witness: eight states and the action sequence `Init`, `Prepare`, `SelectCandidate`, `Commit`,
-  `Confirm`, `AcceptCommand`, `ReceiveStatus`, `Verify`;
-- witness state-space summary: 28 generated states, 21 distinct states, depth 8;
-- formal/Python comparison: 136 matched rows, zero mismatches;
-- comparison status: `MATCH_WITHIN_DECLARED_ABSTRACTION`;
-- attempts 1: 18 generated states, 12 distinct states, depth 8;
-- baseline attempts 3 / epoch ceiling 6: 50 generated states, 28 distinct states, depth 10;
-- attempts 5: 82 generated states, 44 distinct states, depth 12;
-- epoch ceiling 4: 50 generated states, 28 distinct states, depth 10;
-- epoch ceiling 8: 50 generated states, 28 distinct states, depth 10; and
-- every positive bound case: `NO_COUNTEREXAMPLE_WITHIN_RECORDED_BOUND`.
+- `INDETERMINATE`: seven-state witness, 22 generated states, 17 distinct states, depth 7;
+- `INDETERMINATE` comparison: 119 matched rows, zero mismatches;
+- `SECURE_DEGRADED`: seven-state witness, 25 generated states, 20 distinct states, depth 7;
+- `SECURE_DEGRADED` comparison: 119 matched rows, zero mismatches;
+- `EXPIRED`: five-state witness, 14 generated states, 11 distinct states, depth 5;
+- `EXPIRED` comparison: 85 matched rows, zero mismatches;
+- `DIVERGED`, `AVAILABLE_UNSAFE`, and `LOCKED`: each 50 generated states, 28 distinct states,
+  zero queued states, and depth 10;
+- all three currently absent outcomes: `NOT_REACHED_WITHIN_RECORDED_BOUND`; and
+- all three absence diagnoses: `ABSENT_FROM_CURRENT_TRANSITION_ASSIGNMENTS`.
 
 ## Review status
 
@@ -65,18 +65,18 @@ The first successful Phase 11 CI execution recorded:
 - Phase 07 seed and parameter status: `UNFROZEN`
 - Phase 08 denominator and grid status: `UNFROZEN`
 - Phase 09 scenario population: `PROVISIONAL_EXPLICIT_REGRESSION_SET`
-- Phase 09/10/11 formal property set: `PROVISIONAL_ONLY`
+- Phase 09/10/11/12 formal property set: `PROVISIONAL_ONLY`
 - Formal model review status: `NOT_INDEPENDENTLY_REVIEWED`
 - Phase 10 execution status: `FORMAL_EXECUTION_GATES_PASSED`
-- Phase 11 trace status: `MATCH_WITHIN_DECLARED_ABSTRACTION`
-- Phase 11 implementation-equivalence claim: `NOT_PERMITTED`
-- Phase 11 bound and parameter status: `UNFROZEN`
-- Positive TLC interpretation: `NO_COUNTEREXAMPLE_WITHIN_RECORDED_BOUND`
-- Phase 11 publication-evidence status: `NOT_PERMITTED`
+- Phase 11 success-trace status: `MATCH_WITHIN_DECLARED_ABSTRACTION`
+- Phase 12 adverse-trace status: `MATCH_WITHIN_DECLARED_ABSTRACTION`
+- Phase 12 formal-model-completeness claim: `NOT_PERMITTED`
+- Phase 12 implementation-equivalence claim: `NOT_PERMITTED`
+- Phase 12 publication-evidence status: `NOT_PERMITTED`
 - Publication, treatment-effectiveness, causal, or PCS claim status: not permitted
 
-Development may continue on internal trace inspection, additional explicitly bounded configurations,
-projection review, mismatch regression handling, toolchain reproducibility, and external-review preparation.
+Development may continue on internal witness review, abstraction-gap analysis, explicit transition proposals,
+mismatch regression handling, toolchain reproducibility, and external-review preparation.
 
 ## Mandatory stop point
 
@@ -85,60 +85,57 @@ Independent cryptography review becomes mandatory before:
 - accepting or freezing baseline or T1 outcome oracles;
 - freezing the experiment population, fault distribution, scenario exclusions, or formal property set;
 - freezing the formal/Python projection or claiming refinement or implementation equivalence;
+- treating the current formal outcome population as complete;
+- adding and accepting transition semantics for `DIVERGED`, `AVAILABLE_UNSAFE`, or `LOCKED`;
+- treating bounded non-reachability as impossibility;
 - freezing retry budgets, candidate lifetimes, passive intervals, model constants, or other parameters;
-- adopting denominator exclusions, success thresholds, or a statistical analysis plan;
 - selecting T1 as the final treatment;
 - mapping the abstract model to a concrete cryptographic protocol or implementation;
-- treating bounded non-reachability, a clean TLC run, or trace agreement as proof;
 - interpreting formal or simulation output as post-compromise-security evidence;
 - claiming CCSDS/SDLS conformance, flight-software correctness, or operational-spacecraft behavior;
-- using Phase 08/09/10/11, NOS3/cFS, or formal-model output as publication evidence; or
+- using Phase 08/09/10/11/12, NOS3/cFS, or formal-model output as publication evidence; or
 - manuscript submission or any external security claim.
 
 At that point, development must pause until the review record is complete and all corrections are
 revalidated.
 
-## Provisional Phase 11 decisions
+## Provisional Phase 12 decisions
 
-- `ReachabilityWitnessNoSuccess` is intentionally false and exists only to capture a shortest bounded
-  success path.
-- The expected success-witness violation is not a defect or failed protocol property.
-- `SelectCandidate` maps to Python prepare acceptance plus response acceptance.
-- `AcceptCommand` and `ReceiveStatus` are projected evidence substeps before the Python verification call.
-- Trace agreement is limited to the 16 declared abstract fields and eight recorded macro-steps.
-- A future mismatch is preserved and classified; it is not automatically repaired.
-- The five-case bound panel is diagnostic and does not select parameters.
-- The larger retry bound exposes additional retry states in this finite model.
-- The unchanged epoch-ceiling counts reflect this initial condition and single-recovery abstraction only.
-- No projection, bound, property, treatment parameter, or interpretation is frozen.
+- The three captured adverse reachability properties are intentionally false testing properties.
+- Their expected TLC counterexamples are witnesses, not discovered safety defects.
+- Every captured witness is replayed through Python under the Phase 11 16-field projection.
+- The formal `receipt` field maps to retained activation evidence during post-activation expiry.
+- A future mismatch remains `MISMATCH_REQUIRES_REVIEW`; it is not automatically reconciled.
+- `DIVERGED`, `AVAILABLE_UNSAFE`, and `LOCKED` have zero current transition assignments.
+- Their current bounded absence is an abstraction-coverage gap, not evidence that they are impossible.
+- No projection, transition set, property, bound, treatment parameter, or interpretation is frozen.
 
-## Phase 11 artifacts
+## Phase 12 artifacts
 
-- `src/ttc_recovery/formal_cross_validation.py`
-- `spec/phase-11-formal-python-cross-validation.json`
-- `experiments/scripts/run_phase11_cross_validation.py`
-- `experiments/scripts/validate_phase11_cross_validation.py`
-- `tests/test_formal_cross_validation.py`
-- `tests/test_phase11_spec.py`
-- `formal/tla/SuccessWitness.cfg`
-- `formal/tla/bounds/Attempts1.cfg`
-- `formal/tla/bounds/Attempts5.cfg`
-- `formal/tla/bounds/Epoch4.cfg`
-- `formal/tla/bounds/Epoch8.cfg`
+- `src/ttc_recovery/formal_adverse_validation.py`
+- `spec/phase-12-adverse-outcome-witnesses.json`
+- `experiments/scripts/run_phase12_adverse_validation.py`
+- `experiments/scripts/validate_phase12_adverse_outcomes.py`
+- `tests/test_formal_adverse_validation.py`
+- `tests/test_phase12_spec.py`
+- `formal/tla/adverse/IndeterminateWitness.cfg`
+- `formal/tla/adverse/SecureDegradedWitness.cfg`
+- `formal/tla/adverse/ExpiredWitness.cfg`
+- `formal/tla/adverse/DivergedAbsence.cfg`
+- `formal/tla/adverse/AvailableUnsafeAbsence.cfg`
+- `formal/tla/adverse/LockedAbsence.cfg`
 - `formal/tla/T1Recovery.tla`
-- `formal/README.md`
-- `docs/phase-11-formal-python-cross-validation.md`
+- `docs/phase-12-adverse-outcome-witnesses.md`
 - `.github/workflows/python-tests.yml`
 
 ## Next internal work
 
-- run the complete Phase 11 local gate and preserve an external evidence bundle;
-- inspect every formal/Python comparison row and the raw eight-state witness;
-- confirm bound-panel counts on the local pinned toolchain;
-- add explicit mismatch fixtures and reviewer-facing trace summaries;
-- identify projection assumptions requiring cryptography or space-systems review;
-- decide whether another bounded panel is useful before external review; and
-- prepare the independent-review package before any projection, property, parameter, or claim freeze.
+- run the complete Phase 12 local gate and preserve an external evidence bundle;
+- inspect all 323 formal/Python comparison rows and raw adverse witness traces;
+- prepare explicit abstraction proposals for the three currently absent outcomes without adopting them;
+- identify which proposals require cryptography, protocol, or space-systems review;
+- add reviewer-facing witness and abstraction-gap summaries; and
+- prepare the independent-review package before any transition, property, projection, parameter, or claim freeze.
 
 ## Deferred
 
@@ -146,6 +143,7 @@ revalidated.
 - completed space-systems review
 - frozen baseline and T1 oracles
 - frozen formal/Python projection or implementation-equivalence argument
+- frozen formal outcome population or transition semantics
 - frozen experiment population, parameters, thresholds, and statistical analysis plan
 - frozen and independently reviewed formal property set
 - publication-grade formal evidence
