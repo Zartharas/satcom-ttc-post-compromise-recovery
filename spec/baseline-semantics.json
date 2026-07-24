@@ -1,45 +1,51 @@
 {
-  "schema_version": "0.2.0",
-  "status": "locked for Phase 04 baseline implementation",
-  "scope": "abstract protocol and operational-activation semantics; no cryptographic implementation",
+  "schema_version": "0.3.0",
+  "status": "corrected and locked for Phase 04 abstract implementation",
+  "scope": "abstract protocol, activation, compromise, and fault semantics; no cryptographic implementation",
   "B1": {
     "name": "Triple-KEM/PQNoise-style SDLS key update",
     "source_role_mapping": {
       "initiator": "ground",
       "responder": "spacecraft"
     },
-    "messages": [
+    "source_messages": [
       "KEM_INIT",
       "KEM_RESPONSE",
       "KEM_CONFIRM"
     ],
     "source_supported_semantics": [
-      "the construction is a standalone key exchange that outputs fresh SDLS keys",
+      "the construction is a standalone key exchange that outputs fresh SDLS key material",
       "final keys are derived only after the handshake is complete for the party in question",
       "key confirmation is mandatory",
-      "missing or out-of-order required fragments cause abort/drop unless a lower layer repairs ordering or loss"
+      "missing or out-of-order required fragments cause abort/drop unless another layer repairs ordering or loss"
     ],
     "model_decisions": {
       "cryptographic_completion": "tracked separately for each endpoint",
-      "default_activation_policy": "DEFER_UNTIL_BILATERAL_COMPLETION",
-      "default_confirm_loss": {
-        "alignment": "SYNC(previous_epoch)",
-        "outcome": "EXPIRED",
-        "meaning": "initiator completion is ambiguous to the responder; neither endpoint changes the active SDLS epoch"
+      "primary_activation_policy": "ACTIVATE_ON_LOCAL_COMPLETION",
+      "primary_confirm_loss": {
+        "alignment": "G_AHEAD",
+        "outcome": "DIVERGED",
+        "meaning": "ground completes and activates locally after sending KEM_CONFIRM; spacecraft remains on the previous epoch when the message is lost"
       },
-      "alternative_policy": {
-        "name": "ACTIVATE_ON_LOCAL_COMPLETION",
-        "purpose": "negative-control integration policy",
+      "enhanced_policy": {
+        "name": "DEFER_UNTIL_AUTHENTICATED_STATUS",
+        "additional_message": "AUTHENTICATED_STATUS",
+        "purpose": "measure an explicit four-message operational integration rather than use hidden simulator knowledge",
         "confirm_loss": {
-          "alignment": "G_AHEAD",
-          "outcome": "DIVERGED"
+          "alignment": "SYNC(previous_epoch)",
+          "outcome": "EXPIRED"
+        },
+        "status_loss": {
+          "alignment": "S_AHEAD",
+          "outcome": "DIVERGED",
+          "meaning": "spacecraft activates when sending authenticated status; ground remains on the previous epoch if status is lost"
         }
       }
     },
     "non_attribution": [
-      "The deferred activation policy is an experimental SDLS integration rule, not a claim about the Triple-KEM paper.",
-      "The paper does not specify an operational SDLS commit or rollback procedure.",
-      "Final-confirmation loss is not labeled a permanent lockout without an explicit activation policy."
+      "Neither activation policy is specified by the Triple-KEM paper.",
+      "The paper does not specify an operational SDLS commit, rollback, or installation-acknowledgment procedure.",
+      "The enhanced status-gated variant adds a fourth message and does not solve the last-message problem by itself."
     ]
   },
   "B2": {
@@ -49,20 +55,42 @@
       "sender": "ground",
       "receiver": "spacecraft"
     },
-    "selection_rationale": [
-      "matches the study's ground-compromise threat direction",
-      "uses a generic KEM abstraction rather than requiring the more complex bidirectional HIBE-like construction",
-      "introduces fresh entropy and evolves state after each send or receipt",
-      "provides a clean strict-state baseline for measuring synchronization loss"
-    ],
     "strict_model_decisions": {
       "sender_transition": "ground derives the new session state and deletes the prior sender state when the update is sent",
       "receiver_transition": "spacecraft derives and installs the matching state only after accepting the update ciphertext",
       "skipped_state_cache": 0,
       "rollback": "not permitted",
       "recovery_checkpoint": "none",
-      "application_acknowledgment": "not part of cryptographic convergence",
       "status_telemetry": "evidence of completion, not a ratchet transition"
+    },
+    "compromise_scopes": {
+      "NONE": {
+        "future_key": "secret under the abstract model"
+      },
+      "TRAFFIC_KEY": {
+        "exposure": "current output traffic key only",
+        "future_key": "a fresh legitimate update replaces the exposed key",
+        "expected_outcome": "SUCCESS"
+      },
+      "SENDER_STATE": {
+        "passive_interval": {
+          "future_key": "secret if copied sender state is not used to desynchronize the receiver",
+          "expected_outcome": "SUCCESS"
+        },
+        "active_impersonation": {
+          "alignment": "S_AHEAD",
+          "future_key": "attacker-known receiver branch",
+          "expected_outcome": "LOCKED"
+        }
+      },
+      "RECEIVER_STATE": {
+        "future_key": "traceable for the receiver and corresponding in-sync sender",
+        "expected_outcome": "AVAILABLE_UNSAFE"
+      },
+      "BOTH_ENDPOINT_STATES": {
+        "future_key": "receiver-state traceability dominates",
+        "expected_outcome": "AVAILABLE_UNSAFE"
+      }
     },
     "fault_semantics": {
       "dropped_update_after_sender_evolution": {
@@ -83,16 +111,16 @@
       }
     },
     "non_attribution": [
-      "This is a TT&C operational adaptation of the URKE state-evolution pattern, not a claim of protocol conformance.",
-      "The simulator does not implement the paper's cryptographic algorithms or proof model.",
-      "The strict deletion policy is deliberately recovery-hostile and serves as the comparison baseline for T1."
+      "This is a TT&C operational adaptation of the URKE state-evolution pattern, not a conformance claim.",
+      "The simulator does not implement the paper's cryptographic algorithms or inherit its proof.",
+      "Strict deletion and lockout classification are experimental operational choices."
     ]
   },
   "phase_gate": {
     "T1_implementation_allowed": false,
     "requirements_before_T1": [
-      "B1 source and integration semantics encoded in tests",
-      "B2 construction family and role mapping encoded in tests",
+      "corrected B1 activation policies encoded in tests",
+      "B2 traffic-key and state-exposure scopes encoded separately",
       "baseline fault outcomes stable under deterministic replay",
       "independent cryptography review of the semantic mapping"
     ]
