@@ -1,5 +1,5 @@
 ---------------------------- MODULE T1Recovery ----------------------------
-EXTENDS Naturals, Sequences, TLC
+EXTENDS Integers, Sequences, TLC
 
 CONSTANTS MaxAttempts, InitialGroundEpoch, InitialSpaceEpoch, MaxEpoch
 
@@ -228,9 +228,15 @@ TypeOK ==
     /\ sEpoch \in 0..MaxEpoch
     /\ gPrevEpoch \in 0..MaxEpoch
     /\ sPrevEpoch \in 0..MaxEpoch
-    /\ candidateEpoch \in {-1} \cup 0..MaxEpoch
+    /\ candidateEpoch \in {Null} \cup 0..MaxEpoch
+    /\ pending \in BOOLEAN
+    /\ receipt \in BOOLEAN
     /\ attempts \in 0..MaxAttempts
     /\ activationCount \in 0..1
+    /\ commandAccepted \in BOOLEAN
+    /\ statusSeen \in BOOLEAN
+    /\ statusDropped \in BOOLEAN
+    /\ verified \in BOOLEAN
     /\ outcome \in Outcomes
 
 EpochMonotonicity == gEpoch >= gPrevEpoch /\ sEpoch >= sPrevEpoch
@@ -244,5 +250,9 @@ SuccessRequiresEvidence ==
 DegradedNotSuccess == outcome = "SECURE_DEGRADED" => ~verified
 StatusLossNotDivergence ==
     statusDropped /\ gEpoch = sEpoch => outcome # "DIVERGED"
+
+\* Testing-only false invariant used to demonstrate that the execution pipeline captures
+\* an expected TLC counterexample. It is not a claimed protocol property.
+NegativeControlNoActivation == activationCount = 0
 
 =============================================================================
