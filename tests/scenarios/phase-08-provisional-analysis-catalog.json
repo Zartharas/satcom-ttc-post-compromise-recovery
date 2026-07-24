@@ -1,0 +1,61 @@
+{
+  "schema_version": "0.1.0",
+  "status": "PROVISIONAL_INTERNAL_REVIEW_ONLY",
+  "scenarios": [
+    {
+      "id": "P8-01",
+      "test": "test_bundle_and_metrics_csv_verify",
+      "purpose": "verify the preserved bundle and JSON/CSV agreement"
+    },
+    {
+      "id": "P8-02",
+      "test": "test_checksum_verification_detects_tampering",
+      "purpose": "reject modified Phase 07 evidence"
+    },
+    {
+      "id": "P8-03",
+      "test": "test_json_csv_mismatch_is_rejected",
+      "purpose": "reject contradictory source representations"
+    },
+    {
+      "id": "P8-04",
+      "test": "test_annotations_keep_diagnostic_labels_descriptive",
+      "purpose": "prevent diagnostic labels from becoming causal claims"
+    },
+    {
+      "id": "P8-05",
+      "test": "test_valid_records_have_no_trace_anomalies",
+      "purpose": "accept internally consistent Phase 07 records"
+    },
+    {
+      "id": "P8-06",
+      "test": "test_trace_audit_detects_schedule_hash_tampering",
+      "purpose": "detect schedule identity drift"
+    },
+    {
+      "id": "P8-07",
+      "test": "test_aggregates_declare_overlapping_denominators",
+      "purpose": "make overlapping aggregate membership explicit"
+    },
+    {
+      "id": "P8-08",
+      "test": "test_coverage_audit_flags_missing_and_low_n_groups",
+      "purpose": "surface missing and weakly represented analysis groups"
+    },
+    {
+      "id": "P8-09",
+      "test": "test_adverse_case_table_excludes_success",
+      "purpose": "isolate non-success cases for adversarial review"
+    },
+    {
+      "id": "P8-10",
+      "test": "test_sensitivity_reuses_fixed_schedules",
+      "purpose": "hold serialized schedules fixed across the provisional grid"
+    },
+    {
+      "id": "P8-11",
+      "test": "test_analysis_outputs_are_complete_and_checksummed",
+      "purpose": "produce a self-verifying derived analysis bundle"
+    }
+  ]
+}
