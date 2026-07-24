@@ -194,8 +194,10 @@ jobs:
           test -s phase10-tlc-negative-control.log
 
       - name: Upload Phase 10 execution evidence
+        if: always()
         uses: actions/upload-artifact@v5
         with:
           name: phase10-formal-execution
           path: /tmp/phase10-formal/phase10-*
+          if-no-files-found: warn
           retention-days: 7
