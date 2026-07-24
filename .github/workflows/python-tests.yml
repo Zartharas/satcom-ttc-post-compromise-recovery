@@ -54,5 +54,17 @@ jobs:
             python experiments/scripts/validate_t1_provisional_design.py
           fi
 
+      - name: Generate expected manifest
+        if: matrix.python-version == '3.13'
+        run: python experiments/scripts/validate_repository_manifest.py --print > expected-manifest.sha256
+
+      - name: Upload expected manifest
+        if: matrix.python-version == '3.13'
+        uses: actions/upload-artifact@v5
+        with:
+          name: expected-manifest
+          path: expected-manifest.sha256
+          retention-days: 1
+
       - name: Validate tracked-file manifest
         run: python experiments/scripts/validate_repository_manifest.py
