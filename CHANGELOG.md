@@ -1,5 +1,26 @@
 # Changelog
 
+## Unreleased — Phase 08 provisional analysis
+
+- Added read-only verification for preserved Phase 07 evidence bundles using relative-path SHA-256
+  manifests.
+- Added field-level JSON/CSV consistency checks before analysis.
+- Added per-schedule fault, phase, and event-derived diagnostic annotations while marking diagnostic
+  labels descriptive rather than causal.
+- Added overall, outcome, fault-kind, fault-phase, fault-count, security, and availability summaries.
+- Added explicit denominators, overlapping-group declarations, and low-count warnings.
+- Added coverage auditing for missing or weakly represented fault classes and phases.
+- Added trace checks for schedule hashes, seeds, fault counts, event ordering, retry accounting, and
+  outcome-field consistency.
+- Added adverse-case extraction for all non-success records.
+- Added fixed-schedule sensitivity scaffolding over provisional transmission and candidate-lifetime
+  grids, including counts of scheduled fault actions made unreachable by reduced budgets.
+- Added a derived JSON/CSV analysis bundle with its own SHA-256 manifest.
+- Added Phase 08 tests, a machine-readable specification, a standalone validator, and a full CI
+  analysis smoke test.
+- Kept all denominators, grids, thresholds, statistical methods, interpretations, and security claims
+  provisional and unfrozen.
+
 ## Unreleased — Phase 07 seeded fault schedules and metrics
 
 - Added deterministic seeded fault-schedule generation with canonical JSON serialization.
