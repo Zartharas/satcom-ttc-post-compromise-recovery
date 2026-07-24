@@ -259,4 +259,13 @@ NegativeControlNoActivation == activationCount = 0
 \* It supports trace cross-validation only and is not a claimed safety property.
 ReachabilityWitnessNoSuccess == outcome # "SUCCESS"
 
+\* Phase 12 testing-only reachability properties. A counterexample is expected for the first
+\* three adverse outcomes. The final three are diagnostic absence checks only.
+ReachabilityWitnessNoIndeterminate == outcome # "INDETERMINATE"
+ReachabilityWitnessNoSecureDegraded == outcome # "SECURE_DEGRADED"
+ReachabilityWitnessNoExpired == outcome # "EXPIRED"
+ReachabilityWitnessNoDiverged == outcome # "DIVERGED"
+ReachabilityWitnessNoAvailableUnsafe == outcome # "AVAILABLE_UNSAFE"
+ReachabilityWitnessNoLocked == outcome # "LOCKED"
+
 =============================================================================
