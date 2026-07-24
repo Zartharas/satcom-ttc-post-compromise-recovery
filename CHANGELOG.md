@@ -1,5 +1,24 @@
 # Changelog
 
+## Unreleased — Phase 10 formal model execution
+
+- Pinned the stable TLA+ command-line tools release `1.7.4` and verified the official published JAR
+  checksum before execution.
+- Added a real SANY parse gate and a bounded positive TLC model-check gate.
+- Added mandatory `NO_COUNTEREXAMPLE_WITHIN_RECORDED_BOUND` wording for clean finite TLC runs.
+- Added the intentionally false `NegativeControlNoActivation` property and separate TLC configuration
+  to prove the counterexample-capture pipeline is working.
+- Added structured negative-control trace serialization and retained raw SANY/TLC logs.
+- Added tool, Java, platform, command, worker-count, input-hash, state-count, and search-depth metadata.
+- Added a SHA-256 manifest for all derived Phase 10 execution files.
+- Added a separate Java/TLC CI job and short-lived formal-execution artifacts.
+- Added Phase 10 parser tests, specification tests, a machine-readable contract, validator, runner, and
+  documentation.
+- Recorded the first successful finite CI run: 50 generated states, 28 distinct states, depth 10, no
+  positive counterexample within the recorded bound, and a four-state expected negative-control trace.
+- Kept the model, properties, constants, treatment mapping, interpretation, and publication claims
+  provisional and unfrozen.
+
 ## Unreleased — Phase 09 adversarial coverage and formal-model preparation
 
 - Added 24 explicit adversarial recovery schedules covering every supported fault kind and protocol
