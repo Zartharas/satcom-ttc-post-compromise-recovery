@@ -1,0 +1,22 @@
+id,scope,path,role,reviewer_action,pin_method
+E-01,baseline_gate,governance/phase-04-independent-review-gate.md,"Defines mandatory review questions, acceptance criteria, and freeze consequences.",Answer every required question and identify any required correction.,REVIEW_TARGET_COMMIT
+E-02,baseline_response,governance/phase-05-reviewer-response-template.md,Original response template; retained as historical handoff evidence.,Use Phase 14 integrated template instead because B1-R5 is missing here.,REVIEW_TARGET_COMMIT
+E-03,baseline_decision,docs/baseline-semantics-decision.md,Human-readable B1/B2 mapping decisions and claim boundaries.,Verify each source-to-model interpretation.,REVIEW_TARGET_COMMIT
+E-04,baseline_spec,spec/baseline-semantics.json,Machine-readable B1/B2 semantic decisions.,Check consistency with sources and simulator.,REVIEW_TARGET_COMMIT
+E-05,oracle_candidate,spec/baseline-oracle-freeze-candidate.json,Twenty-one pending baseline outcome oracles.,"Decide ACCEPT, ACCEPT WITH CORRECTION, or REJECT for every oracle.",REVIEW_TARGET_COMMIT
+E-06,scenario_catalog,tests/scenarios/baseline-test-catalog.json,Implemented baseline scenario catalog and expected outcomes.,Check that catalog and oracle candidate agree and are source-fair.,REVIEW_TARGET_COMMIT
+E-07,implementation,src/ttc_recovery/simulator.py,Abstract B0/B1/B2 simulator implementation.,"Identify hidden information, unsupported assistance, or semantic drift.",REVIEW_TARGET_COMMIT
+E-08,implementation_tests,tests/test_simulator.py,Deterministic baseline tests.,Check test assumptions and outcome assertions.,REVIEW_TARGET_COMMIT
+E-09,source_navigation,references/source-notes/triple-kem.md,Navigation note for the Triple-KEM source paper.,Consult the paper directly; do not rely on the note alone.,REVIEW_TARGET_COMMIT
+E-10,source_navigation,references/source-notes/poettering-roesler-urke.md,Navigation note for the Poettering-Rösler URKE source paper.,Consult the paper directly; do not rely on the note alone.,REVIEW_TARGET_COMMIT
+E-11,formal_execution,spec/phase-10-formal-model-execution.json,"Phase 10 toolchain, bounds, outputs, and claim restrictions.",Review finite-model wording and positive/negative-control interpretation.,REVIEW_TARGET_COMMIT
+E-12,formal_trace,spec/phase-11-formal-python-cross-validation.json,Phase 11 success-witness projection and bound panel.,Review macro-step and field projection limitations.,REVIEW_TARGET_COMMIT
+E-13,formal_adverse,spec/phase-12-adverse-outcome-witnesses.json,Phase 12 adverse witnesses and bounded absence diagnostics.,Review adverse-outcome mappings and retained receipt-evidence projection.,REVIEW_TARGET_COMMIT
+E-14,formal_expansion,spec/phase-13-abstraction-gap-outcomes.json,Phase 13 baseline preservation and opt-in outcome expansion.,Review expansion paths and gapCause labels as proposals only.,REVIEW_TARGET_COMMIT
+E-15,formal_baseline,formal/tla/T1Recovery.tla,Preserved Phase 10–12 TLA+ baseline.,Assess abstraction scope and omitted behavior.,REVIEW_TARGET_COMMIT
+E-16,formal_expansion,formal/tla/T1RecoveryOutcomeExpansion.tla,Opt-in Phase 13 diagnostic expansion.,Do not treat as accepted or complete; assess each added transition separately.,REVIEW_TARGET_COMMIT
+E-17,project_governance,PROJECT_STATUS.md,"Current status, mandatory stop points, and prohibited claims.",Identify inconsistencies or missing stop points.,REVIEW_TARGET_COMMIT
+E-18,project_history,CHANGELOG.md,Chronological record of provisional phases and evidence additions.,Use to determine retrospective revalidation scope.,REVIEW_TARGET_COMMIT
+E-19,phase14_package,governance/phase-14-independent-review-package.md,Integrated reviewer instructions and scope.,Follow the declared review order and sign-off requirements.,REVIEW_TARGET_COMMIT
+E-20,phase14_response,governance/phase-14-reviewer-response-template.md,Complete response form covering all 24 questions and 21 oracles.,Complete without deleting unresolved items.,REVIEW_TARGET_COMMIT
+E-21,phase14_claims,governance/phase-14-claims-traceability.csv,Reviewer-facing claim status matrix.,"Accept, narrow, correct, or reject proposed wording.",REVIEW_TARGET_COMMIT
