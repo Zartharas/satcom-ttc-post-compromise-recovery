@@ -53,3 +53,6 @@ jobs:
           if [ -f experiments/scripts/validate_t1_provisional_design.py ]; then
             python experiments/scripts/validate_t1_provisional_design.py
           fi
+
+      - name: Validate tracked-file manifest
+        run: python experiments/scripts/validate_repository_manifest.py
