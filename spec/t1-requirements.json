@@ -1,74 +1,53 @@
 {
-  "schema_version": "0.1.0",
-  "status": "requirements only; no protocol implementation",
-  "objective": "Reduce B2 lockout after bounded state divergence without reopening compromised or replayed state.",
+  "schema_version": "0.2.0",
+  "status": "provisional abstract design; independent cryptography review pending",
+  "objective": "Reduce strict B2 lockout after bounded state divergence without reopening compromised or replayed state.",
   "mandatory": [
-    {
-      "id": "T1-R01",
-      "requirement": "Use an established cryptographic core; T1 adds recovery control and state management only."
-    },
-    {
-      "id": "T1-R02",
-      "requirement": "Bind every recovery message to spacecraft identity, recovery ID, target epoch, monotonic counter, and transcript."
-    },
-    {
-      "id": "T1-R03",
-      "requirement": "Use two-phase activation or equivalent confirmation so candidate state cannot authorize normal commands."
-    },
-    {
-      "id": "T1-R04",
-      "requirement": "Retain at most N skipped or candidate states for at most H contact windows; N and H are experiment parameters."
-    },
-    {
-      "id": "T1-R05",
-      "requirement": "Never automatically reactivate a lower epoch or key marked compromised."
-    },
-    {
-      "id": "T1-R06",
-      "requirement": "Require a fresh post-recovery command and authenticated telemetry exchange before SUCCESS."
-    },
-    {
-      "id": "T1-R07",
-      "requirement": "Define deterministic behavior for loss of prepare, response, commit, confirmation, and status messages."
-    },
-    {
-      "id": "T1-R08",
-      "requirement": "Every attempt terminates in exactly one defined outcome class."
-    },
-    {
-      "id": "T1-R09",
-      "requirement": "Bound denial-of-service cost from repeated recovery triggers, cache exhaustion, and replay floods."
-    },
-    {
-      "id": "T1-R10",
-      "requirement": "Produce independent ground, spacecraft, and evidence-service records."
-    },
-    {
-      "id": "T1-R11",
-      "requirement": "State the passive-adversary interval required for any PCS claim."
-    },
-    {
-      "id": "T1-R12",
-      "requirement": "Report security and availability separately, not as a hidden composite score."
-    }
+    {"id": "T1-R01", "requirement": "Use an established cryptographic core; T1 adds recovery control and state management only."},
+    {"id": "T1-R02", "requirement": "Bind every recovery message to spacecraft identity, recovery ID, target or proposed epoch, monotonic counter, transcript, authorized authority, and candidate reference when one exists."},
+    {"id": "T1-R03", "requirement": "Use two-phase activation or equivalent confirmation so candidate state cannot authorize normal commands."},
+    {"id": "T1-R04", "requirement": "Retain at most N pending candidates and activation receipts for at most H contact windows; N and H are experiment parameters."},
+    {"id": "T1-R05", "requirement": "Never automatically reactivate a lower epoch or key marked compromised."},
+    {"id": "T1-R06", "requirement": "Require a fresh post-recovery command and authenticated telemetry exchange before SUCCESS."},
+    {"id": "T1-R07", "requirement": "Define deterministic behavior for loss of prepare, response, commit, confirmation, test-command, and status messages."},
+    {"id": "T1-R08", "requirement": "Every attempt terminates in exactly one defined outcome class."},
+    {"id": "T1-R09", "requirement": "Bound denial-of-service cost from repeated recovery triggers, cache exhaustion, conflicting attempts, and replay floods."},
+    {"id": "T1-R10", "requirement": "Produce independent ground, spacecraft, recovery-authority, and evidence-service records."},
+    {"id": "T1-R11", "requirement": "State the finite passive-adversary interval and bounded-delivery condition required for any later PCS claim."},
+    {"id": "T1-R12", "requirement": "Report security and availability separately, not as a hidden composite score."},
+    {"id": "T1-R13", "requirement": "No transition may depend on simulator-only knowledge of the peer epoch; the spacecraft selects a forward target and returns it in RECOVERY_RESPONSE."},
+    {"id": "T1-R14", "requirement": "Permit retransmission only when the recovery binding is exact; reject conflicting bindings and duplicate message identifiers without operational state change."},
+    {"id": "T1-R15", "requirement": "Use a recovery-authority counter and epoch floor that survive endpoint rollback and are independent of the active operational traffic key."},
+    {"id": "T1-R16", "requirement": "Retain at most one bounded spacecraft activation receipt so an exact commit retry can re-emit confirmation without a second activation."},
+    {"id": "T1-R17", "requirement": "Classify confirmation-budget exhaustion after spacecraft activation as SECURE_DEGRADED unless the model proves that no authorized recovery transition remains."}
+  ],
+  "provisional_selected_controls": [
+    "one pending candidate per endpoint",
+    "one bounded activation receipt",
+    "prepare-response target negotiation",
+    "spacecraft activation on exact commit",
+    "ground activation on exact confirmation",
+    "idempotent exact-binding retransmission",
+    "strict expiry and monotonic recovery-authority counters",
+    "post-activation command and telemetry verification"
   ],
   "prohibited_shortcuts": [
     "fallback to a prior compromised epoch",
     "unbounded grace windows",
-    "unbounded pending-state cache",
+    "unbounded pending-state or activation-receipt cache",
     "multiple authoritative epochs",
-    "treating key generation as recovery completion",
+    "treating candidate generation or endpoint convergence as recovery completion",
+    "using simulator-only peer state as an activation or epoch-selection oracle",
     "claiming proof from simulation",
     "claiming availability against indefinite suppression",
     "importing unrelated one-message stateless recovery designs"
   ],
-  "candidate_controls_for_later_review": [
-    "bounded skipped-epoch cache",
-    "two-phase activation",
-    "commit/acknowledgment recovery",
-    "single-use recovery checkpoint",
-    "separate emergency recovery security association",
-    "attested epoch restoration",
-    "strict expiry and monotonic counters"
+  "external_review_mandatory_before": [
+    "baseline oracle acceptance or freeze",
+    "final T1 treatment selection",
+    "final experiment-protocol freeze",
+    "real cryptographic implementation",
+    "NOS3/cFS evidence collection for publication",
+    "manuscript submission or external security claims"
   ]
 }
