@@ -41,14 +41,29 @@ Terminal states are expected in this finite state machine, so both configuration
 `CHECK_DEADLOCK FALSE`. This prevents normal terminal completion from being mislabeled as a model error;
 it does not create a liveness claim.
 
+## Phase 11 trace cross-validation
+
+`SuccessWitness.cfg` checks the intentionally false `ReachabilityWitnessNoSuccess` property. It exists only
+to obtain the shortest bounded trace reaching `SUCCESS`.
+
+The emitted formal trace is normalized and replayed through the Python T1 controller under a declared
+macro-step mapping. A clean comparison is labeled `MATCH_WITHIN_DECLARED_ABSTRACTION`; it is not called a
+refinement proof or an implementation-equivalence result. A mismatch is labeled
+`MISMATCH_REQUIRES_REVIEW` and must not be silently reconciled.
+
+The bound configurations in `formal/tla/bounds/` vary one finite constant at a time. They are diagnostic
+configurations, not selected treatment parameters. Every clean run retains the wording
+`NO_COUNTEREXAMPLE_WITHIN_RECORDED_BOUND`.
+
 ## Evidence boundary
 
-Phase 10 records SANY output, TLC output, finite constants, state counts, depth, tool and Java versions,
-input hashes, the expected negative-control trace, and a SHA-256 manifest for the derived bundle.
+Phases 10 and 11 record SANY output, TLC output, finite constants, state counts, depth, tool and Java versions,
+input hashes, expected testing-only witness traces, comparison records, and SHA-256 manifests.
 
-The positive result is not described as formal proof, cryptographic verification, or proof of
-post-compromise security. Model-checking output remains internal diagnostic evidence until independent
-review accepts the abstraction, property set, and mapping to any concrete treatment.
+The results are not described as formal proof, cryptographic verification, implementation equivalence, or
+proof of post-compromise security. Model-checking and trace-comparison output remains internal diagnostic
+evidence until independent review accepts the abstraction, property set, projection, and mapping to any
+concrete treatment.
 
 Any state, outcome, or behavior not observed in the recorded finite model must remain labeled
 `NOT_REACHED_WITHIN_PROVISIONAL_BOUND`, never impossible.
