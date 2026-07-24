@@ -54,6 +54,25 @@ jobs:
             python experiments/scripts/validate_t1_provisional_design.py
           fi
 
+      - name: Validate Phase 07 seeded metrics
+        run: |
+          if [ -f experiments/scripts/validate_phase07_seeded_metrics.py ]; then
+            python experiments/scripts/validate_phase07_seeded_metrics.py
+          fi
+
+      - name: Run Phase 07 export smoke test
+        if: matrix.python-version == '3.13'
+        env:
+          PYTHONPATH: src
+        run: |
+          if [ -f experiments/scripts/run_seeded_fault_experiments.py ]; then
+            python experiments/scripts/run_seeded_fault_experiments.py \
+              --json-output /tmp/phase07-results.json \
+              --csv-output /tmp/phase07-metrics.csv
+            test -s /tmp/phase07-results.json
+            test -s /tmp/phase07-metrics.csv
+          fi
+
       - name: Generate expected manifest
         if: matrix.python-version == '3.13'
         run: python experiments/scripts/validate_repository_manifest.py --print > expected-manifest.sha256
