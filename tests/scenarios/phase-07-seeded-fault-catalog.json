@@ -1,0 +1,90 @@
+{
+  "schema_version": "0.1.0",
+  "status": "PROVISIONAL_INTERNAL_REVIEW_ONLY",
+  "scenarios": [
+    {
+      "id": "P7-001",
+      "name": "same seed reproduces identical schedule",
+      "test": "test_same_seed_generates_identical_serialized_schedule",
+      "focus": "reproducibility"
+    },
+    {
+      "id": "P7-002",
+      "name": "serialized schedule round trip preserves digest",
+      "test": "test_serialized_schedule_round_trip_preserves_digest",
+      "focus": "schedule identity"
+    },
+    {
+      "id": "P7-003",
+      "name": "no-fault recovery separates security and availability",
+      "test": "test_no_fault_recovery_reports_separate_security_and_availability",
+      "focus": "metric separation"
+    },
+    {
+      "id": "P7-004",
+      "name": "prepare drop budget expires without activation",
+      "test": "test_prepare_drop_budget_exhaustion_is_expired",
+      "focus": "loss and bounded retry"
+    },
+    {
+      "id": "P7-005",
+      "name": "contact closure advances contact duration",
+      "test": "test_contact_close_increases_duration_and_retry_overhead",
+      "focus": "contact windows"
+    },
+    {
+      "id": "P7-006",
+      "name": "commit delay is measured in contacts",
+      "test": "test_delay_is_measured_in_contact_windows",
+      "focus": "delay"
+    },
+    {
+      "id": "P7-007",
+      "name": "duplicate commit is rejected without blocking recovery",
+      "test": "test_duplicate_commit_is_rejected_without_blocking_recovery",
+      "focus": "duplication and replay rejection"
+    },
+    {
+      "id": "P7-008",
+      "name": "reordered response is rejected before normal delivery",
+      "test": "test_reordered_response_is_rejected_then_normal_response_succeeds",
+      "focus": "reordering"
+    },
+    {
+      "id": "P7-009",
+      "name": "stale recovery counter is rejected",
+      "test": "test_stale_counter_is_rejected_and_counted",
+      "focus": "stale-state rejection"
+    },
+    {
+      "id": "P7-010",
+      "name": "stale commit replay is rejected",
+      "test": "test_stale_commit_replay_is_rejected_and_counted",
+      "focus": "stale replay"
+    },
+    {
+      "id": "P7-011",
+      "name": "spacecraft restart loses pending commit state",
+      "test": "test_spacecraft_restart_before_commit_prevents_activation",
+      "focus": "endpoint restart"
+    },
+    {
+      "id": "P7-012",
+      "name": "confirmation contact closure exhausts into secure degraded",
+      "test": "test_confirm_contact_closure_exhaustion_is_secure_degraded",
+      "focus": "multi-contact confirmation failure"
+    },
+    {
+      "id": "P7-013",
+      "name": "status loss is indeterminate after convergence",
+      "test": "test_status_loss_is_indeterminate_not_diverged",
+      "focus": "evidence completion"
+    },
+    {
+      "id": "P7-014",
+      "name": "JSON and CSV outputs expose analysis fields",
+      "test": "test_json_and_csv_outputs_are_analysis_ready",
+      "focus": "result export"
+    }
+  ]
+}
