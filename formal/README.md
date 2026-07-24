@@ -49,3 +49,6 @@ input hashes, the expected negative-control trace, and a SHA-256 manifest for th
 The positive result is not described as formal proof, cryptographic verification, or proof of
 post-compromise security. Model-checking output remains internal diagnostic evidence until independent
 review accepts the abstraction, property set, and mapping to any concrete treatment.
+
+Any state, outcome, or behavior not observed in the recorded finite model must remain labeled
+`NOT_REACHED_WITHIN_PROVISIONAL_BOUND`, never impossible.
