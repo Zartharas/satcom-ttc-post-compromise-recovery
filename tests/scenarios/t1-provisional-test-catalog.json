@@ -1,0 +1,143 @@
+{
+  "schema_version": "0.1.0",
+  "status": "PROVISIONAL_NOT_EXTERNALLY_REVIEWED",
+  "design_ref": "spec/t1-provisional-design.json",
+  "note": "Expected outcomes are internal design oracles for the abstract T1 controller, not empirical findings or cryptographic proofs.",
+  "tests": [
+    {
+      "id": "T1-01",
+      "name": "normal ground-ahead recovery",
+      "initial_alignment": "G_AHEAD",
+      "faults": [],
+      "expected_alignment": "SYNC(3)",
+      "expected_outcome": "SUCCESS",
+      "test": "test_normal_ground_ahead_recovery_succeeds"
+    },
+    {
+      "id": "T1-02",
+      "name": "spacecraft-ahead target negotiation",
+      "initial_alignment": "S_AHEAD",
+      "faults": [],
+      "expected_alignment": "SYNC(4)",
+      "expected_outcome": "SUCCESS",
+      "test": "test_spacecraft_ahead_selects_epoch_above_spacecraft_without_oracle"
+    },
+    {
+      "id": "T1-03",
+      "name": "single prepare loss",
+      "initial_alignment": "G_AHEAD",
+      "faults": ["DROP:RECOVERY_PREPARE once"],
+      "expected_alignment": "SYNC(2)",
+      "expected_outcome": "SUCCESS",
+      "test": "test_prepare_loss_is_retried_within_bound"
+    },
+    {
+      "id": "T1-04",
+      "name": "single response loss",
+      "initial_alignment": "G_AHEAD",
+      "faults": ["DROP:RECOVERY_RESPONSE once"],
+      "expected_alignment": "SYNC(2)",
+      "expected_outcome": "SUCCESS",
+      "test": "test_response_loss_uses_idempotent_prepare_retry"
+    },
+    {
+      "id": "T1-05",
+      "name": "single commit loss",
+      "initial_alignment": "G_AHEAD",
+      "faults": ["DROP:RECOVERY_COMMIT once"],
+      "expected_alignment": "SYNC(2)",
+      "expected_outcome": "SUCCESS",
+      "test": "test_commit_loss_is_retried_before_spacecraft_activation"
+    },
+    {
+      "id": "T1-06",
+      "name": "single confirmation loss",
+      "initial_alignment": "G_AHEAD",
+      "faults": ["DROP:RECOVERY_CONFIRM once"],
+      "expected_alignment": "SYNC(2)",
+      "expected_outcome": "SUCCESS",
+      "test": "test_confirm_loss_uses_activation_receipt_for_idempotent_retry"
+    },
+    {
+      "id": "T1-07",
+      "name": "confirmation budget exhausted after spacecraft activation",
+      "initial_alignment": "G_AHEAD",
+      "faults": ["DROP:RECOVERY_CONFIRM until retry budget exhausted"],
+      "expected_alignment": "S_AHEAD",
+      "expected_outcome": "SECURE_DEGRADED",
+      "test": "test_confirmation_budget_exhaustion_is_secure_degraded_not_locked"
+    },
+    {
+      "id": "T1-08",
+      "name": "prepare budget exhausted before activation",
+      "initial_alignment": "G_AHEAD",
+      "faults": ["DROP:RECOVERY_PREPARE until retry budget exhausted"],
+      "expected_alignment": "G_AHEAD",
+      "expected_outcome": "EXPIRED",
+      "test": "test_prepare_budget_exhaustion_expires_without_activation"
+    },
+    {
+      "id": "T1-09",
+      "name": "status telemetry loss after convergence",
+      "initial_alignment": "G_AHEAD",
+      "faults": ["DROP:STATUS_TELEMETRY"],
+      "expected_alignment": "SYNC(2)",
+      "expected_outcome": "INDETERMINATE",
+      "test": "test_status_loss_is_indeterminate_after_convergence"
+    },
+    {
+      "id": "T1-10",
+      "name": "candidate command isolation",
+      "initial_alignment": "G_AHEAD",
+      "faults": [],
+      "expected_alignment": "G_AHEAD",
+      "expected_outcome": "NOT_EVALUATED",
+      "test": "test_candidate_cannot_authorize_before_activation"
+    },
+    {
+      "id": "T1-11",
+      "name": "unauthorized recovery authority",
+      "initial_alignment": "G_AHEAD",
+      "faults": ["FORGE:RECOVERY_PREPARE authority"],
+      "expected_alignment": "G_AHEAD",
+      "expected_outcome": "REJECTED_NO_STATE_CHANGE",
+      "test": "test_unauthorized_prepare_is_rejected_without_spacecraft_state_change"
+    },
+    {
+      "id": "T1-12",
+      "name": "bounded pending capacity",
+      "initial_alignment": "G_AHEAD",
+      "faults": ["CONCURRENT:conflicting recovery"],
+      "expected_alignment": "G_AHEAD",
+      "expected_outcome": "REJECTED_NO_STATE_CHANGE",
+      "test": "test_pending_capacity_rejects_conflicting_recovery"
+    },
+    {
+      "id": "T1-13",
+      "name": "replayed commit after success",
+      "initial_alignment": "SYNC(2)",
+      "faults": ["REPLAY:RECOVERY_COMMIT"],
+      "expected_alignment": "SYNC(2)",
+      "expected_outcome": "SUCCESS",
+      "test": "test_replayed_commit_after_success_is_rejected_without_state_change"
+    },
+    {
+      "id": "T1-14",
+      "name": "conflicting commit binding",
+      "initial_alignment": "G_AHEAD",
+      "faults": ["CORRUPT:candidate key reference"],
+      "expected_alignment": "G_AHEAD",
+      "expected_outcome": "REJECTED_NO_STATE_CHANGE",
+      "test": "test_conflicting_commit_is_rejected"
+    },
+    {
+      "id": "T1-15",
+      "name": "replace compromised operational keys",
+      "initial_alignment": "SYNC(1) attacker-known operational keys",
+      "faults": ["eventually passive attacker"],
+      "expected_alignment": "SYNC(2)",
+      "expected_outcome": "SUCCESS",
+      "test": "test_compromised_operational_keys_are_replaced"
+    }
+  ]
+}
