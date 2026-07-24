@@ -1,0 +1,80 @@
+{
+  "schema_version": "0.1.0",
+  "status": "PROVISIONAL_INTERNAL_REVIEW_ONLY",
+  "objective": "Analyze preserved Phase 07 schedules without altering source evidence, freezing parameters, or converting descriptive results into security claims.",
+  "source_requirements": [
+    "verify the relative-path SHA-256 bundle manifest before analysis when a bundle directory is provided",
+    "cross-check the Phase 07 metrics CSV against the JSON result records",
+    "retain the source JSON SHA-256 in every Phase 08 analysis bundle",
+    "treat the preserved Phase 07 directory as read-only evidence"
+  ],
+  "analysis_dimensions": [
+    "outcome",
+    "fault kind",
+    "fault phase",
+    "fault count",
+    "security state",
+    "availability state",
+    "recovery duration contacts",
+    "transmission and retry overhead",
+    "divergent and degraded contact windows",
+    "replay and stale-state rejection counts"
+  ],
+  "denominator_controls": [
+    "every aggregate reports n",
+    "low-n groups remain visible and are flagged",
+    "fault-kind and fault-phase groups declare overlapping membership",
+    "outcome and fault-count groups declare mutually exclusive membership",
+    "success fractions are descriptive proportions only"
+  ],
+  "trace_controls": [
+    "recompute each serialized schedule SHA-256",
+    "verify seed and fault-count consistency",
+    "verify per-fault metric counts against the schedule",
+    "verify contiguous append-only event sequence numbers",
+    "verify outcome-specific consistency across alignment, verification, security, and availability fields"
+  ],
+  "diagnostic_controls": [
+    "diagnostic labels are derived from recorded events",
+    "diagnostic labels are explicitly descriptive and not causal",
+    "all non-success cases are exported for adversarial review"
+  ],
+  "sensitivity_scaffold": {
+    "fixed_input": "serialized Phase 07 schedules",
+    "varied_parameters": [
+      "max_transmissions",
+      "candidate_lifetime_contacts"
+    ],
+    "requirements": [
+      "the same serialized schedule is reused for every grid point",
+      "fault actions beyond a reduced transmission budget are counted as unreachable",
+      "every grid output remains descriptive and unfrozen"
+    ]
+  },
+  "required_output_classes": [
+    "complete analysis JSON",
+    "annotated per-schedule table",
+    "overall and grouped descriptive summaries",
+    "security-availability cross table",
+    "coverage audit",
+    "trace anomaly report",
+    "adverse-case table",
+    "sensitivity rows and summary",
+    "derived-output SHA-256 manifest"
+  ],
+  "mandatory_external_review_stop_points": [
+    "before freezing the experiment population or seed set",
+    "before freezing retry budgets or candidate lifetimes",
+    "before adopting denominator exclusions or success thresholds",
+    "before defining or freezing the statistical analysis plan",
+    "before selecting T1 as the final treatment",
+    "before interpreting results as evidence of post-compromise security",
+    "before using derived results as publication evidence or external claims"
+  ],
+  "review_status": {
+    "independent_cryptography_review": "NOT_YET_PERFORMED",
+    "baseline_oracles": "PENDING_INDEPENDENT_REVIEW",
+    "t1_claim_status": "PROVISIONAL_ONLY",
+    "phase08_analysis_status": "DESCRIPTIVE_INTERNAL_ONLY"
+  }
+}
