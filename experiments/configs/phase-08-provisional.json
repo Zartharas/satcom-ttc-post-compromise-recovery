@@ -1,0 +1,78 @@
+{
+  "schema_version": "0.1.0",
+  "status": "PROVISIONAL_INTERNAL_REVIEW_ONLY",
+  "analysis_scope": "DESCRIPTIVE_AND_SENSITIVITY_SCAFFOLD_ONLY",
+  "description": "Initial Phase 08 aggregation and sensitivity configuration. No denominator rule, grid, threshold, statistical method, or interpretation is frozen.",
+  "source_bundle": {
+    "results_json": "phase07-results.json",
+    "metrics_csv": "phase07-metrics.csv",
+    "checksum_manifest": "phase07-run-bundle.sha256"
+  },
+  "denominator_policy": {
+    "minimum_group_size": 3,
+    "retain_low_n_groups": true,
+    "low_n_label": "LOW_N_DESCRIPTIVE_ONLY",
+    "overlapping_fault_groups_must_be_declared": true
+  },
+  "coverage_expectations": {
+    "required_fault_kinds": [
+      "DROP",
+      "DELAY",
+      "DUPLICATE",
+      "REORDER",
+      "CONTACT_CLOSE",
+      "ENDPOINT_RESTART",
+      "STALE_COUNTER",
+      "STALE_REPLAY"
+    ],
+    "required_fault_phases": [
+      "RECOVERY_PREPARE",
+      "RECOVERY_RESPONSE",
+      "RECOVERY_COMMIT",
+      "RECOVERY_CONFIRM",
+      "TEST_COMMAND",
+      "STATUS_TELEMETRY"
+    ]
+  },
+  "sensitivity_scaffold": {
+    "fixed_input": "SERIALIZED_PHASE_07_SCHEDULES",
+    "max_transmissions": [2, 3, 4],
+    "candidate_lifetime_contacts": [2, 3, 4],
+    "grid_status": "UNFROZEN",
+    "interpretation": "DESCRIPTIVE_ONLY"
+  },
+  "required_outputs": [
+    "phase08-analysis.json",
+    "phase08-annotated-results.csv",
+    "phase08-overall-summary.csv",
+    "phase08-outcome-summary.csv",
+    "phase08-fault-kind-summary.csv",
+    "phase08-fault-phase-summary.csv",
+    "phase08-fault-count-summary.csv",
+    "phase08-security-availability.csv",
+    "phase08-coverage-audit.csv",
+    "phase08-trace-anomalies.csv",
+    "phase08-adverse-cases.csv",
+    "phase08-sensitivity-rows.csv",
+    "phase08-sensitivity-summary.csv",
+    "phase08-derived-bundle.sha256"
+  ],
+  "claim_boundary": {
+    "causal_inference": "NOT_PERMITTED",
+    "hypothesis_testing": "NOT_PERFORMED",
+    "confidence_intervals": "NOT_PERFORMED",
+    "treatment_effectiveness_claim": "NOT_PERMITTED",
+    "post_compromise_security_claim": "NOT_PERMITTED"
+  },
+  "parameter_status": {
+    "minimum_group_size": "UNFROZEN",
+    "required_fault_kinds": "UNFROZEN",
+    "required_fault_phases": "UNFROZEN",
+    "max_transmissions_grid": "UNFROZEN",
+    "candidate_lifetime_grid": "UNFROZEN",
+    "diagnostic_labels": "UNFROZEN",
+    "aggregation_rules": "UNFROZEN",
+    "statistical_analysis_plan": "NOT_DEFINED",
+    "success_thresholds": "NOT_DEFINED"
+  }
+}
