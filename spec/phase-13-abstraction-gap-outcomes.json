@@ -1,0 +1,144 @@
+{
+  "schema_version": "0.1.0",
+  "phase": "Phase 13",
+  "title": "Explicit abstraction-gap modeling and outcome completeness diagnostics",
+  "status": "PROVISIONAL_INTERNAL_REVIEW_ONLY",
+  "toolchain": {
+    "tla_tools_version": "1.7.4",
+    "official_jar_sha1": "bee4a54f3ee3d4afc347c3240ec2d9e93b075104",
+    "workers": 1
+  },
+  "baseline_preservation": {
+    "module": "formal/tla/T1Recovery.tla",
+    "expected_sha256": "c2a97fa0eb93b7b84a2109be67d673a0199b82e52b8baf67f16d5b137e0da754",
+    "expected_status": "BASELINE_PRESERVED",
+    "expected_state_counts": {
+      "generated_states": 50,
+      "distinct_states": 28,
+      "queued_states": 0,
+      "search_depth": 10
+    },
+    "require_zero_baseline_assignments": true
+  },
+  "expansion": {
+    "module": "formal/tla/T1RecoveryOutcomeExpansion.tla",
+    "status": "EXPANDED_OUTCOME_POPULATION_DIAGNOSTIC_ONLY",
+    "cause_variable": "gapCause",
+    "causes": [
+      "NONE",
+      "CANDIDATE_KNOWN",
+      "CONFIRM_LOSS",
+      "SENDER_STATE_DELETED"
+    ],
+    "claim_boundary": "Adding one explicit path for each previously absent outcome does not establish completeness, realism, refinement, implementation equivalence, or security."
+  },
+  "projection": {
+    "field_count": 16,
+    "fields": [
+      "gMode",
+      "sMode",
+      "gEpoch",
+      "sEpoch",
+      "gPrevEpoch",
+      "sPrevEpoch",
+      "candidateEpoch",
+      "pending",
+      "receipt",
+      "attempts",
+      "activationCount",
+      "commandAccepted",
+      "statusSeen",
+      "statusDropped",
+      "verified",
+      "outcome"
+    ],
+    "match_status": "MATCH_WITHIN_DECLARED_ABSTRACTION",
+    "mismatch_status": "MISMATCH_REQUIRES_REVIEW",
+    "canonical_baseline_check_required": true
+  },
+  "expanded_witnesses": [
+    {
+      "case_id": "diverged",
+      "outcome": "DIVERGED",
+      "property": "ReachabilityWitnessNoExpandedDiverged",
+      "config": "formal/tla/expansion/DivergedWitness.cfg",
+      "baseline_config": "formal/tla/adverse/DivergedAbsence.cfg",
+      "cause": "CONFIRM_LOSS",
+      "canonical_scenario": "B1_CONFIRM_LOSS_LOCAL_COMPLETION",
+      "expected_actions": [
+        "Init",
+        "PrepareExpanded",
+        "SelectCandidateExpanded",
+        "DivergeOnConfirmLoss"
+      ]
+    },
+    {
+      "case_id": "available-unsafe",
+      "outcome": "AVAILABLE_UNSAFE",
+      "property": "ReachabilityWitnessNoExpandedAvailableUnsafe",
+      "config": "formal/tla/expansion/AvailableUnsafeWitness.cfg",
+      "baseline_config": "formal/tla/adverse/AvailableUnsafeAbsence.cfg",
+      "cause": "CANDIDATE_KNOWN",
+      "canonical_scenario": "B2_RECEIVER_STATE_EXPOSURE",
+      "expected_actions": [
+        "Init",
+        "PrepareExpanded",
+        "SelectCandidateExpanded",
+        "MarkCandidateKnown",
+        "CommitExpanded",
+        "ConfirmExpanded",
+        "VerifyAvailableUnsafe"
+      ]
+    },
+    {
+      "case_id": "locked",
+      "outcome": "LOCKED",
+      "property": "ReachabilityWitnessNoExpandedLocked",
+      "config": "formal/tla/expansion/LockedWitness.cfg",
+      "baseline_config": "formal/tla/adverse/LockedAbsence.cfg",
+      "cause": "SENDER_STATE_DELETED",
+      "canonical_scenario": "B2_DROPPED_UPDATE_AFTER_SENDER_EVOLUTION",
+      "expected_actions": [
+        "Init",
+        "PrepareExpanded",
+        "SelectCandidateExpanded",
+        "MarkSenderStateDeleted",
+        "LockAfterSenderAdvance"
+      ]
+    }
+  ],
+  "required_outputs": [
+    "phase13-outcome-expansion-validation.json",
+    "phase13-witness-diverged.json",
+    "phase13-witness-available-unsafe.json",
+    "phase13-witness-locked.json",
+    "phase13-comparison-diverged.csv",
+    "phase13-comparison-available-unsafe.csv",
+    "phase13-comparison-locked.csv",
+    "phase13-baseline-regression.csv",
+    "phase13-expansion-assignment-audit.csv",
+    "phase13-java-version.log",
+    "phase13-sany-baseline.log",
+    "phase13-sany-expanded.log",
+    "phase13-tlc-baseline-diverged.log",
+    "phase13-tlc-baseline-available-unsafe.log",
+    "phase13-tlc-baseline-locked.log",
+    "phase13-tlc-expanded-diverged.log",
+    "phase13-tlc-expanded-available-unsafe.log",
+    "phase13-tlc-expanded-locked.log",
+    "phase13-derived-bundle.sha256"
+  ],
+  "external_review_stop_points": [
+    "claiming the expanded outcome population or transition relation is complete or realistic",
+    "claiming refinement proof or implementation equivalence",
+    "replacing the preserved baseline module with the expansion",
+    "freezing any expansion cause, transition, witness, property, or projection",
+    "mapping the expansion to a concrete cryptographic protocol or operational spacecraft",
+    "using Phase 13 output as publication evidence"
+  ],
+  "formal_model_completeness_claim": "NOT_PERMITTED",
+  "implementation_equivalence_claim": "NOT_PERMITTED",
+  "cryptographic_security_claim": "NOT_PERMITTED",
+  "publication_evidence_status": "NOT_PERMITTED",
+  "baseline_review_status": "PENDING_INDEPENDENT_REVIEW"
+}
