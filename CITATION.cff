@@ -8,7 +8,7 @@ authors:
   - family-names: Singh
     given-names: Aman Kumar
 license: MIT
-repository-code: "https://github.com/Zartharas/satcom-ttc-post-compromise-recovery""
+repository-code: "https://github.com/Zartharas/satcom-ttc-post-compromise-recovery"
 abstract: >
   Experimental cybersecurity research software for evaluating post-compromise
   key recovery and ground-space state resynchronization in satellite TT&C systems.
