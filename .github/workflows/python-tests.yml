@@ -81,6 +81,12 @@ jobs:
             python experiments/scripts/validate_phase10_formal_execution.py
           fi
 
+      - name: Validate Phase 11 cross-validation
+        run: |
+          if [ -f experiments/scripts/validate_phase11_cross_validation.py ]; then
+            python experiments/scripts/validate_phase11_cross_validation.py
+          fi
+
       - name: Run Phase 07 export smoke test
         if: matrix.python-version == '3.13'
         env:
@@ -148,7 +154,7 @@ jobs:
   formal:
     name: TLA+ TLC 1.7.4
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 15
 
     steps:
       - name: Check out repository
@@ -199,5 +205,35 @@ jobs:
         with:
           name: phase10-formal-execution
           path: /tmp/phase10-formal/phase10-*
+          if-no-files-found: warn
+          retention-days: 7
+
+      - name: Validate Phase 11 design
+        run: python experiments/scripts/validate_phase11_cross_validation.py
+
+      - name: Run Phase 11 trace and bound gates
+        env:
+          PYTHONPATH: src
+        run: |
+          python experiments/scripts/run_phase11_cross_validation.py \
+            --jar /tmp/tla2tools.jar \
+            --output-dir /tmp/phase11-cross-validation
+
+      - name: Verify Phase 11 derived bundle
+        run: |
+          cd /tmp/phase11-cross-validation
+          sha256sum -c phase11-derived-bundle.sha256
+          test -s phase11-cross-validation.json
+          test -s phase11-success-witness.json
+          test -s phase11-trace-comparison.csv
+          test -s phase11-bound-expansion.csv
+          test -s phase11-tlc-success-witness.log
+
+      - name: Upload Phase 11 cross-validation evidence
+        if: always()
+        uses: actions/upload-artifact@v5
+        with:
+          name: phase11-formal-python-cross-validation
+          path: /tmp/phase11-cross-validation/phase11-*
           if-no-files-found: warn
           retention-days: 7
