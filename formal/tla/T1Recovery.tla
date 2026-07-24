@@ -73,7 +73,7 @@ Prepare ==
         sMode, gEpoch, sEpoch, gPrevEpoch, sPrevEpoch, candidateEpoch,
         receipt, activationCount, commandAccepted, statusSeen,
         statusDropped, verified, outcome
-    >>
+        >>
 
 SelectCandidate ==
     /\ pending
@@ -87,7 +87,7 @@ SelectCandidate ==
         gEpoch, sEpoch, gPrevEpoch, sPrevEpoch, pending, receipt,
         attempts, activationCount, commandAccepted, statusSeen,
         statusDropped, verified, outcome
-    >>
+        >>
 
 Commit ==
     /\ pending
@@ -102,7 +102,7 @@ Commit ==
     /\ UNCHANGED <<
         gMode, gEpoch, gPrevEpoch, candidateEpoch, pending, attempts,
         commandAccepted, statusSeen, statusDropped, verified, outcome
-    >>
+        >>
 
 Confirm ==
     /\ receipt
@@ -117,7 +117,7 @@ Confirm ==
         sMode, sEpoch, sPrevEpoch, candidateEpoch, receipt, attempts,
         activationCount, commandAccepted, statusSeen, statusDropped,
         verified, outcome
-    >>
+        >>
 
 AcceptCommand ==
     /\ gMode = "ACTIVATED"
@@ -128,7 +128,7 @@ AcceptCommand ==
         gMode, sMode, gEpoch, sEpoch, gPrevEpoch, sPrevEpoch,
         candidateEpoch, pending, receipt, attempts, activationCount,
         statusSeen, statusDropped, verified, outcome
-    >>
+        >>
 
 ReceiveStatus ==
     /\ commandAccepted
@@ -138,7 +138,7 @@ ReceiveStatus ==
         gMode, sMode, gEpoch, sEpoch, gPrevEpoch, sPrevEpoch,
         candidateEpoch, pending, receipt, attempts, activationCount,
         commandAccepted, statusDropped, verified, outcome
-    >>
+        >>
 
 Verify ==
     /\ commandAccepted
@@ -155,7 +155,7 @@ Verify ==
         gEpoch, sEpoch, gPrevEpoch, sPrevEpoch, candidateEpoch,
         pending, attempts, activationCount, commandAccepted,
         statusSeen, statusDropped
-    >>
+        >>
 
 DropStatus ==
     /\ commandAccepted
@@ -166,7 +166,7 @@ DropStatus ==
         gMode, sMode, gEpoch, sEpoch, gPrevEpoch, sPrevEpoch,
         candidateEpoch, pending, receipt, attempts, activationCount,
         commandAccepted, statusSeen, verified
-    >>
+        >>
 
 Retry ==
     /\ pending
@@ -176,7 +176,7 @@ Retry ==
         gMode, sMode, gEpoch, sEpoch, gPrevEpoch, sPrevEpoch,
         candidateEpoch, pending, receipt, activationCount,
         commandAccepted, statusSeen, statusDropped, verified, outcome
-    >>
+        >>
 
 ExpireBeforeActivation ==
     /\ attempts = MaxAttempts
@@ -190,7 +190,7 @@ ExpireBeforeActivation ==
         gEpoch, sEpoch, gPrevEpoch, sPrevEpoch, candidateEpoch,
         receipt, attempts, activationCount, commandAccepted,
         statusSeen, statusDropped, verified
-    >>
+        >>
 
 ExpireAfterSpacecraftActivation ==
     /\ attempts = MaxAttempts
@@ -204,7 +204,7 @@ ExpireAfterSpacecraftActivation ==
         sMode, gEpoch, sEpoch, gPrevEpoch, sPrevEpoch, candidateEpoch,
         receipt, attempts, activationCount, commandAccepted,
         statusSeen, statusDropped, verified
-    >>
+        >>
 
 Next ==
     \/ Prepare
