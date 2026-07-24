@@ -10,6 +10,22 @@ from ttc_recovery.formal_execution import execute_formal_model
 ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_SHA1 = "bee4a54f3ee3d4afc347c3240ec2d9e93b075104"
 DEFAULT_VERSION = "1.7.4"
+LOG_NAMES = (
+    "phase10-java-version.log",
+    "phase10-sany.log",
+    "phase10-tlc-positive.log",
+    "phase10-tlc-negative-control.log",
+)
+
+
+def print_failure_logs(output_dir: Path) -> None:
+    for name in LOG_NAMES:
+        path = output_dir / name
+        if not path.is_file():
+            continue
+        print(f"\n===== {name} =====")
+        print(path.read_text(encoding="utf-8"), end="")
+        print(f"===== end {name} =====")
 
 
 def main() -> None:
@@ -24,15 +40,19 @@ def main() -> None:
     parser.add_argument("--timeout-seconds", type=int, default=120)
     args = parser.parse_args()
 
-    report = execute_formal_model(
-        jar_path=args.jar,
-        output_dir=args.output_dir,
-        repository_root=ROOT,
-        java_command=args.java,
-        expected_jar_sha1=args.expected_sha1,
-        tool_version=args.tool_version,
-        timeout_seconds=args.timeout_seconds,
-    )
+    try:
+        report = execute_formal_model(
+            jar_path=args.jar,
+            output_dir=args.output_dir,
+            repository_root=ROOT,
+            java_command=args.java,
+            expected_jar_sha1=args.expected_sha1,
+            tool_version=args.tool_version,
+            timeout_seconds=args.timeout_seconds,
+        )
+    except Exception:
+        print_failure_logs(args.output_dir.resolve())
+        raise
 
     positive = report["positive_model_check"]
     negative = report["negative_control"]
