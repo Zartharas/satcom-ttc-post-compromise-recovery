@@ -1,0 +1,94 @@
+{
+  "schema_version": "0.1.0",
+  "status": "PROVISIONAL_INTERNAL_REVIEW_ONLY",
+  "objective": "Measure provisional T1 recovery behavior under reproducible seeded and explicit fault schedules without freezing experiment parameters or making post-compromise-security claims.",
+  "schedule_contract": {
+    "generation": "Python random.Random initialized with the recorded integer seed",
+    "serialization": "canonical JSON sorted by phase, attempt, and fault kind",
+    "identity": "SHA-256 of the canonical serialized schedule",
+    "execution_rule": "the serialized schedule is the authoritative replay artifact; the seed alone is not sufficient evidence"
+  },
+  "fault_kinds": [
+    "DROP",
+    "DELAY",
+    "DUPLICATE",
+    "REORDER",
+    "CONTACT_CLOSE",
+    "ENDPOINT_RESTART",
+    "STALE_COUNTER",
+    "STALE_REPLAY"
+  ],
+  "phases": [
+    "RECOVERY_PREPARE",
+    "RECOVERY_RESPONSE",
+    "RECOVERY_COMMIT",
+    "RECOVERY_CONFIRM",
+    "TEST_COMMAND",
+    "STATUS_TELEMETRY"
+  ],
+  "required_metrics": [
+    "outcome",
+    "alignment",
+    "security_state",
+    "availability_state",
+    "recovery_duration_contacts",
+    "divergent_contact_windows",
+    "degraded_contact_windows",
+    "total_transmissions",
+    "retry_overhead",
+    "fault_count",
+    "drop_count",
+    "delay_count",
+    "duplicate_count",
+    "reorder_count",
+    "contact_close_count",
+    "restart_count",
+    "replay_count",
+    "rejection_count",
+    "replay_rejection_count",
+    "stale_state_rejection_count",
+    "command_accepted",
+    "telemetry_complete",
+    "verification_complete",
+    "active_key_compromised"
+  ],
+  "measurement_rules": {
+    "contact_time": "Measured in discrete contact windows, not wall-clock time.",
+    "security_availability": "Reported as separate dimensions and never collapsed into one score.",
+    "recovery_success": "Requires endpoint convergence, accepted fresh command, complete telemetry evidence, and an active key not marked compromised in the abstract model.",
+    "indeterminate": "Endpoint convergence with incomplete command or telemetry evidence is INDETERMINATE, not SUCCESS.",
+    "secure_degraded": "Spacecraft-only activation after bounded confirmation failure is SECURE_DEGRADED while an authorized recovery path remains modeled; this is not a liveness or safety proof."
+  },
+  "unfrozen_parameters": [
+    "seed set",
+    "retry budget",
+    "candidate lifetime in contacts",
+    "initial ground and spacecraft epochs",
+    "authority epoch floor",
+    "fault count",
+    "fault type weights",
+    "fault phase distribution",
+    "delay duration",
+    "contact-window model",
+    "attacker passive interval",
+    "success thresholds",
+    "aggregation and statistical analysis plan"
+  ],
+  "mandatory_external_review_stop_points": [
+    "before freezing any experiment parameter or seed set",
+    "before choosing T1 as the final treatment",
+    "before freezing outcome or metric interpretation",
+    "before treating results as evidence of post-compromise security",
+    "before implementing concrete cryptography or protocol conformance",
+    "before NOS3/cFS evidence is used for publication claims",
+    "before manuscript submission or any external security claim"
+  ],
+  "allowed_pre_review_work": [
+    "seeded schedule generation",
+    "explicit adversarial regression schedules",
+    "deterministic simulation runs",
+    "JSON and CSV result generation",
+    "internal red-team analysis",
+    "non-cryptographic performance instrumentation"
+  ]
+}
