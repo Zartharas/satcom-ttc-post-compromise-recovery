@@ -1,5 +1,5 @@
 {
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "paper_scope": {
     "topology": "one authoritative ground security domain and one spacecraft",
     "entities": [
@@ -21,10 +21,9 @@
   "endpoint_modes": [
     "NORMAL",
     "SUSPECTED",
-    "PREPARED",
-    "REQUEST_SENT",
+    "RECOVERING",
     "CANDIDATE",
-    "COMMIT_PENDING",
+    "ACTIVATED_UNVERIFIED",
     "VERIFIED",
     "EXPIRED",
     "LOCKED"
@@ -37,17 +36,25 @@
     "active_key_ref": "opaque identifier",
     "pending": {
       "nullable": true,
+      "maximum_count": 1,
       "fields": {
         "recovery_id": "unique string",
-        "target_epoch": "integer greater than current epoch",
+        "proposal_epoch": "positive integer proposed by ground",
+        "target_epoch": "nullable forward epoch selected by spacecraft",
         "method": "B0|B1|B2|T1",
-        "phase": "PREPARE|RESPONSE|CONFIRM|COMMIT|VERIFY",
-        "candidate_key_ref": "opaque identifier",
+        "phase": "PREPARE|RESPONSE|COMMIT|CONFIRM|VERIFY",
+        "candidate_key_ref": "nullable opaque identifier until response",
         "created_contact": "nonnegative integer",
         "expires_after_contact": "nonnegative integer",
         "transcript_ref": "opaque identifier",
-        "authorized_by": "recovery authority identifier"
+        "authorized_by": "recovery authority identifier",
+        "counter": "positive monotonic recovery-authority counter"
       }
+    },
+    "activation_receipt": {
+      "nullable": true,
+      "maximum_count": 1,
+      "purpose": "permit exact commit retry to re-emit confirmation without reactivation"
     },
     "replay_cache": "bounded set",
     "monotonic_counter": "nonnegative integer",
@@ -55,12 +62,18 @@
     "attacker_known_key_refs": "set",
     "retired_key_refs": "set"
   },
+  "recovery_authority_state": {
+    "authority_id": "string",
+    "counter": "monotonic integer surviving endpoint rollback",
+    "epoch_floor": "highest externally confirmed recovery epoch",
+    "credential_status": "uncompromised|compromised|unknown"
+  },
   "joint_states": {
     "SYNC": "same active epoch, SA, and key state",
     "G_AHEAD": "ground epoch greater than spacecraft epoch",
     "S_AHEAD": "spacecraft epoch greater than ground epoch",
     "DIVERGED": "incompatible branch or state",
-    "RECOVERING": "at least one pending recovery",
+    "RECOVERING": "at least one pending recovery or activation receipt",
     "VERIFIED": "new state tested and old compromised state rejected",
     "LOCKED": "no authorized modeled transition can restore communication"
   },
@@ -79,7 +92,7 @@
     "all compromised key references are rejected",
     "replayed or lower-epoch recovery messages are rejected",
     "authenticated telemetry confirms active epoch and status",
-    "ground, spacecraft, and evidence records agree on completion"
+    "ground, spacecraft, recovery-authority, and evidence records agree on completion"
   ],
   "message_classes": [
     "OTAR_UPLOAD",
@@ -90,6 +103,7 @@
     "RATCHET_ADVANCE",
     "RATCHET_ACK",
     "RECOVERY_PREPARE",
+    "RECOVERY_RESPONSE",
     "RECOVERY_COMMIT",
     "RECOVERY_CONFIRM",
     "TEST_COMMAND",
@@ -103,6 +117,13 @@
     "CORRUPT",
     "CONTACT_CLOSE",
     "STALE_GROUND_RESTORE",
-    "ENDPOINT_RESTART"
-  ]
+    "ENDPOINT_RESTART",
+    "UNAUTHORIZED_AUTHORITY",
+    "CONFLICTING_RECOVERY"
+  ],
+  "provisional_t1_epoch_selection": {
+    "ground_proposal": "max(ground.epoch, recovery_authority.epoch_floor) + 1",
+    "spacecraft_selection": "max(message.proposal_epoch, spacecraft.epoch + 1)",
+    "hidden_peer_state_oracle": false
+  }
 }
