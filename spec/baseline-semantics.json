@@ -1,0 +1,100 @@
+{
+  "schema_version": "0.2.0",
+  "status": "locked for Phase 04 baseline implementation",
+  "scope": "abstract protocol and operational-activation semantics; no cryptographic implementation",
+  "B1": {
+    "name": "Triple-KEM/PQNoise-style SDLS key update",
+    "source_role_mapping": {
+      "initiator": "ground",
+      "responder": "spacecraft"
+    },
+    "messages": [
+      "KEM_INIT",
+      "KEM_RESPONSE",
+      "KEM_CONFIRM"
+    ],
+    "source_supported_semantics": [
+      "the construction is a standalone key exchange that outputs fresh SDLS keys",
+      "final keys are derived only after the handshake is complete for the party in question",
+      "key confirmation is mandatory",
+      "missing or out-of-order required fragments cause abort/drop unless a lower layer repairs ordering or loss"
+    ],
+    "model_decisions": {
+      "cryptographic_completion": "tracked separately for each endpoint",
+      "default_activation_policy": "DEFER_UNTIL_BILATERAL_COMPLETION",
+      "default_confirm_loss": {
+        "alignment": "SYNC(previous_epoch)",
+        "outcome": "EXPIRED",
+        "meaning": "initiator completion is ambiguous to the responder; neither endpoint changes the active SDLS epoch"
+      },
+      "alternative_policy": {
+        "name": "ACTIVATE_ON_LOCAL_COMPLETION",
+        "purpose": "negative-control integration policy",
+        "confirm_loss": {
+          "alignment": "G_AHEAD",
+          "outcome": "DIVERGED"
+        }
+      }
+    },
+    "non_attribution": [
+      "The deferred activation policy is an experimental SDLS integration rule, not a claim about the Triple-KEM paper.",
+      "The paper does not specify an operational SDLS commit or rollback procedure.",
+      "Final-confirmation loss is not labeled a permanent lockout without an explicit activation policy."
+    ]
+  },
+  "B2": {
+    "name": "Poettering-Roesler URKE-inspired strict evolution baseline",
+    "construction_family": "unidirectional ratcheted key exchange using generic KEM encapsulation and evolving endpoint state",
+    "source_role_mapping": {
+      "sender": "ground",
+      "receiver": "spacecraft"
+    },
+    "selection_rationale": [
+      "matches the study's ground-compromise threat direction",
+      "uses a generic KEM abstraction rather than requiring the more complex bidirectional HIBE-like construction",
+      "introduces fresh entropy and evolves state after each send or receipt",
+      "provides a clean strict-state baseline for measuring synchronization loss"
+    ],
+    "strict_model_decisions": {
+      "sender_transition": "ground derives the new session state and deletes the prior sender state when the update is sent",
+      "receiver_transition": "spacecraft derives and installs the matching state only after accepting the update ciphertext",
+      "skipped_state_cache": 0,
+      "rollback": "not permitted",
+      "recovery_checkpoint": "none",
+      "application_acknowledgment": "not part of cryptographic convergence",
+      "status_telemetry": "evidence of completion, not a ratchet transition"
+    },
+    "fault_semantics": {
+      "dropped_update_after_sender_evolution": {
+        "alignment": "G_AHEAD",
+        "outcome": "LOCKED"
+      },
+      "lost_status_after_both_endpoints_evolve": {
+        "alignment": "SYNC(new_epoch)",
+        "outcome": "INDETERMINATE"
+      },
+      "stale_ground_restore": {
+        "alignment": "S_AHEAD",
+        "outcome": "LOCKED"
+      },
+      "replayed_or_nonforward_update": {
+        "action": "reject",
+        "state_change": "none"
+      }
+    },
+    "non_attribution": [
+      "This is a TT&C operational adaptation of the URKE state-evolution pattern, not a claim of protocol conformance.",
+      "The simulator does not implement the paper's cryptographic algorithms or proof model.",
+      "The strict deletion policy is deliberately recovery-hostile and serves as the comparison baseline for T1."
+    ]
+  },
+  "phase_gate": {
+    "T1_implementation_allowed": false,
+    "requirements_before_T1": [
+      "B1 source and integration semantics encoded in tests",
+      "B2 construction family and role mapping encoded in tests",
+      "baseline fault outcomes stable under deterministic replay",
+      "independent cryptography review of the semantic mapping"
+    ]
+  }
+}
