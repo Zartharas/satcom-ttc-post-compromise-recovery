@@ -1,0 +1,77 @@
+{
+  "schema_version": "0.1.0",
+  "phase": "Phase 10",
+  "title": "Formal Model Execution and Counterexample Capture",
+  "status": "PROVISIONAL_INTERNAL_REVIEW_ONLY",
+  "toolchain": {
+    "project": "TLA+ command-line tools",
+    "release": "1.7.4",
+    "release_channel": "STABLE",
+    "asset": "tla2tools.jar",
+    "asset_url": "https://github.com/tlaplus/tlaplus/releases/download/v1.7.4/tla2tools.jar",
+    "official_sha1": "bee4a54f3ee3d4afc347c3240ec2d9e93b075104",
+    "minimum_java": 11,
+    "ci_java_distribution": "temurin",
+    "ci_java_version": 17,
+    "workers": 1
+  },
+  "execution_gates": [
+    "SANY_PARSE_SUCCESS",
+    "POSITIVE_TLC_NO_COUNTEREXAMPLE_WITHIN_RECORDED_BOUND",
+    "EXPECTED_NEGATIVE_CONTROL_COUNTEREXAMPLE_CAPTURED",
+    "DERIVED_SHA256_MANIFEST_VALID"
+  ],
+  "positive_model": {
+    "module": "formal/tla/T1Recovery.tla",
+    "configuration": "formal/tla/MC.cfg",
+    "constants": {
+      "MaxAttempts": 3,
+      "InitialGroundEpoch": 2,
+      "InitialSpaceEpoch": 1,
+      "MaxEpoch": 6
+    },
+    "result_wording": "NO_COUNTEREXAMPLE_WITHIN_RECORDED_BOUND",
+    "prohibited_wording": [
+      "PROVED_SECURE",
+      "FORMALLY_PROVEN",
+      "CRYPTOGRAPHICALLY_VERIFIED",
+      "NO_COUNTEREXAMPLE_EXISTS"
+    ]
+  },
+  "negative_control": {
+    "configuration": "formal/tla/NegativeControl.cfg",
+    "invariant": "NegativeControlNoActivation",
+    "role": "INTENTIONAL_PIPELINE_NEGATIVE_CONTROL",
+    "expected_result": "EXPECTED_NEGATIVE_CONTROL_COUNTEREXAMPLE_CAPTURED",
+    "interpretation": "The intentionally false property validates counterexample capture and is not a discovered protocol flaw."
+  },
+  "required_outputs": [
+    "phase10-formal-execution.json",
+    "phase10-negative-control-counterexample.json",
+    "phase10-java-version.log",
+    "phase10-sany.log",
+    "phase10-tlc-positive.log",
+    "phase10-tlc-negative-control.log",
+    "phase10-derived-bundle.sha256"
+  ],
+  "unmodeled": [
+    "concrete cryptographic primitives",
+    "cryptographic security reduction",
+    "CCSDS or SDLS protocol conformance",
+    "flight software behavior",
+    "RF link behavior",
+    "operational spacecraft behavior",
+    "unbounded liveness",
+    "complete attacker knowledge"
+  ],
+  "external_review_stop_points": [
+    "freezing the formal property set",
+    "mapping the abstract model to a concrete cryptographic protocol",
+    "claiming post-compromise security from TLC output",
+    "treating bounded non-reachability as impossibility",
+    "selecting final recovery parameters or treatment",
+    "using model-checking output as publication evidence",
+    "making an external security or conformance claim"
+  ],
+  "publication_evidence_status": "NOT_PERMITTED"
+}
