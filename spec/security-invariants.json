@@ -1,5 +1,5 @@
 {
-  "schema_version": "0.2.0",
+  "schema_version": "0.3.0",
   "safety": [
     {"id": "I-S01", "statement": "Each endpoint has exactly one authoritative active epoch."},
     {"id": "I-S02", "statement": "Accepted epoch numbers never decrease during normal protocol execution."},
@@ -26,10 +26,14 @@
   "baseline_expectations": [
     {"id": "I-B0", "statement": "B0 cannot claim PCS after compromise of the OTAR-protecting master key."},
     {"id": "I-B1A", "statement": "B1 requires party-specific transcript completion and mandatory key confirmation."},
-    {"id": "I-B1B", "statement": "Under the default activation policy, final-confirmation loss expires the attempt without changing the active SDLS epoch."},
-    {"id": "I-B1C", "statement": "Unilateral activation after local cryptographic completion is a negative-control integration policy, not a Triple-KEM requirement."},
+    {"id": "I-B1B", "statement": "The primary B1 policy activates each endpoint on local completion; final-confirmation loss therefore produces G_AHEAD and DIVERGED."},
+    {"id": "I-B1C", "statement": "The status-gated B1 variant adds an explicit fourth message and must model status loss as S_AHEAD and DIVERGED."},
+    {"id": "I-B1D", "statement": "No B1 policy may use simulator-wide bilateral-delivery knowledge as an activation guard."},
     {"id": "I-B2A", "statement": "B2 is the Poettering-Roesler URKE state-evolution pattern adapted as a ground-to-space strict baseline."},
-    {"id": "I-B2B", "statement": "The B2 sender evolves on send and the receiver evolves on accepted receipt; no application acknowledgment is required for cryptographic convergence."},
-    {"id": "I-B2C", "statement": "A dropped update after sender evolution can permanently lock the strict baseline because it retains no prior state or recovery checkpoint."}
+    {"id": "I-B2B", "statement": "Traffic-key reveal and sender-state or receiver-state exposure are distinct compromise scopes."},
+    {"id": "I-B2C", "statement": "A fresh update may replace an exposed traffic key without implying recovery from receiver-state exposure."},
+    {"id": "I-B2D", "statement": "Passive sender-state exposure can recover only while copied state is not used to desynchronize the receiver."},
+    {"id": "I-B2E", "statement": "In-sync receiver-state exposure makes later aligned keys attacker-traceable in the strict URKE model."},
+    {"id": "I-B2F", "statement": "A dropped update after sender evolution can permanently lock the strict baseline because no prior state or recovery checkpoint is retained."}
   ]
 }
