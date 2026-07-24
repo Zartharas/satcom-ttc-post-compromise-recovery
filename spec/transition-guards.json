@@ -1,5 +1,5 @@
 {
-  "schema_version": "0.2.0",
+  "schema_version": "0.3.0",
   "global_guards": [
     {"id": "G-001", "name": "contact_open", "expression": "link.contact_open == true"},
     {"id": "G-002", "name": "future_epoch_only", "expression": "message.target_epoch > receiver.epoch"},
@@ -34,7 +34,12 @@
       {
         "transition": "send_kem_confirm",
         "guards": ["G-001", "G-003", "G-004"],
-        "action": "mark initiator cryptographic completion; operational activation depends on the explicit integration policy"
+        "action": "mark initiator cryptographic completion"
+      },
+      {
+        "transition": "activate_initiator_on_local_completion",
+        "guards": ["activation_policy == ACTIVATE_ON_LOCAL_COMPLETION", "initiator.crypto_complete_epoch == target_epoch"],
+        "action": "activate the ground candidate without using simulator-wide knowledge of responder receipt"
       },
       {
         "transition": "receive_kem_confirm",
@@ -42,25 +47,62 @@
         "action": "mark responder cryptographic completion"
       },
       {
-        "transition": "bilateral_activation",
-        "guards": [
-          "initiator.crypto_complete_epoch == target_epoch",
-          "responder.crypto_complete_epoch == target_epoch"
-        ],
-        "action": "activate the candidate at both endpoints under the default experimental integration policy"
+        "transition": "activate_responder_on_local_completion",
+        "guards": ["activation_policy == ACTIVATE_ON_LOCAL_COMPLETION", "responder.crypto_complete_epoch == target_epoch"],
+        "action": "activate the spacecraft candidate after validating KEM_CONFIRM"
+      },
+      {
+        "transition": "send_authenticated_status",
+        "guards": ["activation_policy == DEFER_UNTIL_AUTHENTICATED_STATUS", "responder.crypto_complete_epoch == target_epoch"],
+        "action": "activate spacecraft candidate and send the explicit fourth integration message"
+      },
+      {
+        "transition": "receive_authenticated_status",
+        "guards": ["activation_policy == DEFER_UNTIL_AUTHENTICATED_STATUS", "initiator.crypto_complete_epoch == target_epoch"],
+        "action": "activate ground candidate after receiving authenticated status"
+      },
+      {
+        "transition": "drop_kem_confirm_local_policy",
+        "guards": ["activation_policy == ACTIVATE_ON_LOCAL_COMPLETION"],
+        "action": "record G_AHEAD and DIVERGED"
+      },
+      {
+        "transition": "drop_kem_confirm_status_policy",
+        "guards": ["activation_policy == DEFER_UNTIL_AUTHENTICATED_STATUS"],
+        "action": "expire both candidates and retain SYNC(previous_epoch)"
+      },
+      {
+        "transition": "drop_authenticated_status",
+        "guards": ["activation_policy == DEFER_UNTIL_AUTHENTICATED_STATUS"],
+        "action": "record S_AHEAD and DIVERGED; do not treat status delivery as an oracle"
       },
       {
         "transition": "missing_or_out_of_order_required_material",
         "guards": [],
         "action": "abort or expire the exchange; no protocol-layer reordering or retransmission is assumed"
-      },
-      {
-        "transition": "local_completion_activation_negative_control",
-        "guards": ["activation_policy == ACTIVATE_ON_LOCAL_COMPLETION"],
-        "action": "allow unilateral activation solely to measure divergence risk; do not attribute this policy to Triple-KEM"
       }
     ],
     "B2": [
+      {
+        "transition": "apply_traffic_key_exposure",
+        "guards": ["compromise_scope == TRAFFIC_KEY"],
+        "action": "mark only the current output traffic key attacker-known"
+      },
+      {
+        "transition": "apply_sender_state_exposure",
+        "guards": ["compromise_scope in [SENDER_STATE, BOTH_ENDPOINT_STATES]"],
+        "action": "mark ground sender state exposed without automatically marking future keys known"
+      },
+      {
+        "transition": "apply_receiver_state_exposure",
+        "guards": ["compromise_scope in [RECEIVER_STATE, BOTH_ENDPOINT_STATES]"],
+        "action": "mark spacecraft receiver state exposed and future aligned keys traceable"
+      },
+      {
+        "transition": "sender_state_impersonation",
+        "guards": ["active_sender_impersonation == true", "compromise_scope in [SENDER_STATE, BOTH_ENDPOINT_STATES]"],
+        "action": "advance spacecraft on an attacker-known branch and record S_AHEAD and LOCKED"
+      },
       {
         "transition": "send_urke_update",
         "guards": ["G-001", "G-002", "G-003", "G-010"],
@@ -70,6 +112,11 @@
         "transition": "receive_urke_update",
         "guards": ["G-001", "G-002", "G-003", "G-010"],
         "action": "spacecraft receiver derives the matching key, evolves receiver state, and deletes prior receiver state"
+      },
+      {
+        "transition": "receiver_exposure_trace",
+        "guards": ["compromise_scope in [RECEIVER_STATE, BOTH_ENDPOINT_STATES]"],
+        "action": "mark the new aligned key attacker-known and classify availability as unsafe"
       },
       {
         "transition": "drop_after_sender_evolution",
