@@ -1,6 +1,7 @@
 {
-  "schema_version": "0.1.0",
-  "note": "Expected outcomes are design oracles to validate simulator semantics, not empirical findings.",
+  "schema_version": "0.2.0",
+  "note": "Expected outcomes are design oracles for simulator semantics, not empirical findings or cryptographic proofs.",
+  "baseline_semantics_ref": "spec/baseline-semantics.json",
   "tests": [
     {
       "id": "B0-01",
@@ -8,12 +9,9 @@
       "initial_state": "SYNC(0), keys secret",
       "compromise": "none",
       "faults": [],
-      "expected_joint_state": "SYNC(1)",
+      "expected_alignment": "SYNC(1)",
       "expected_outcome": "SUCCESS",
-      "properties": [
-        "normal OTAR",
-        "activation"
-      ]
+      "properties": ["normal OTAR", "activation"]
     },
     {
       "id": "B0-02",
@@ -21,11 +19,9 @@
       "initial_state": "SYNC(0)",
       "compromise": "session key only",
       "faults": [],
-      "expected_joint_state": "SYNC(1)",
+      "expected_alignment": "SYNC(1)",
       "expected_outcome": "SUCCESS",
-      "properties": [
-        "master key survives"
-      ]
+      "properties": ["master key survives"]
     },
     {
       "id": "B0-03",
@@ -33,224 +29,147 @@
       "initial_state": "SYNC(0)",
       "compromise": "master and session keys",
       "faults": [],
-      "expected_joint_state": "SYNC(1)",
+      "expected_alignment": "SYNC(1)",
       "expected_outcome": "AVAILABLE_UNSAFE",
-      "properties": [
-        "absence of PCS"
-      ]
+      "properties": ["absence of PCS"]
     },
     {
       "id": "B0-04",
       "baseline": "B0",
       "initial_state": "SYNC(0)",
       "compromise": "session key",
-      "faults": [
-        "DROP:OTAR_UPLOAD"
-      ],
-      "expected_joint_state": "SYNC(0)",
+      "faults": ["DROP:OTAR_UPLOAD"],
+      "expected_alignment": "SYNC(0)",
       "expected_outcome": "AVAILABLE_UNSAFE",
-      "properties": [
-        "lost update"
-      ]
-    },
-    {
-      "id": "B0-05",
-      "baseline": "B0",
-      "initial_state": "SYNC(0)",
-      "compromise": "none",
-      "faults": [
-        "DROP:KEY_ACTIVATE asymmetrically"
-      ],
-      "expected_joint_state": "G_AHEAD or S_AHEAD",
-      "expected_outcome": "DIVERGED",
-      "properties": [
-        "one-sided activation"
-      ]
-    },
-    {
-      "id": "B0-06",
-      "baseline": "B0",
-      "initial_state": "SYNC(1)",
-      "compromise": "none",
-      "faults": [
-        "REPLAY:old OTAR/activation"
-      ],
-      "expected_joint_state": "SYNC(1)",
-      "expected_outcome": "SUCCESS",
-      "properties": [
-        "replay rejection"
-      ]
+      "properties": ["lost update", "no healing"]
     },
     {
       "id": "B1-01",
       "baseline": "B1",
       "initial_state": "SYNC(0), valid long-term KEM keys",
       "compromise": "none",
+      "activation_policy": "DEFER_UNTIL_BILATERAL_COMPLETION",
       "faults": [],
-      "expected_joint_state": "SYNC(1)",
+      "expected_alignment": "SYNC(1)",
       "expected_outcome": "SUCCESS",
-      "properties": [
-        "three-message completion",
-        "key confirmation"
-      ]
+      "properties": ["three-message completion", "mandatory key confirmation", "bilateral activation"]
     },
     {
       "id": "B1-02",
       "baseline": "B1",
       "initial_state": "SYNC(0)",
       "compromise": "operational keys",
-      "faults": [
-        "eventually passive attacker",
-        "long-term update enabled"
-      ],
-      "expected_joint_state": "SYNC(1)",
+      "activation_policy": "DEFER_UNTIL_BILATERAL_COMPLETION",
+      "faults": ["eventually passive attacker", "long-term update enabled"],
+      "expected_alignment": "SYNC(1)",
       "expected_outcome": "SUCCESS",
-      "properties": [
-        "PCS under baseline assumptions"
-      ]
+      "properties": ["PCS under cited construction assumptions"]
     },
     {
       "id": "B1-03",
       "baseline": "B1",
       "initial_state": "SYNC(0)",
       "compromise": "none",
-      "faults": [
-        "DROP:KEM_INIT"
-      ],
-      "expected_joint_state": "SYNC(0)",
+      "activation_policy": "DEFER_UNTIL_BILATERAL_COMPLETION",
+      "faults": ["REORDER:required fragments"],
+      "expected_alignment": "SYNC(0)",
       "expected_outcome": "EXPIRED",
-      "properties": [
-        "clean abort"
-      ]
+      "properties": ["published abort/drop behavior"]
     },
     {
       "id": "B1-04",
       "baseline": "B1",
       "initial_state": "SYNC(0)",
       "compromise": "none",
-      "faults": [
-        "REORDER:required fragments"
-      ],
-      "expected_joint_state": "SYNC(0)",
+      "activation_policy": "DEFER_UNTIL_BILATERAL_COMPLETION",
+      "faults": ["DROP:KEM_CONFIRM"],
+      "expected_alignment": "SYNC(0)",
       "expected_outcome": "EXPIRED",
-      "properties": [
-        "published abort/drop behavior"
-      ]
+      "properties": ["initiator cryptographic completion", "responder noncompletion", "completion ambiguity"]
     },
     {
       "id": "B1-05",
       "baseline": "B1",
       "initial_state": "SYNC(0)",
       "compromise": "none",
-      "faults": [
-        "DROP:KEM_CONFIRM"
-      ],
-      "expected_joint_state": "G_AHEAD or RECOVERING",
+      "activation_policy": "ACTIVATE_ON_LOCAL_COMPLETION",
+      "faults": ["DROP:KEM_CONFIRM"],
+      "expected_alignment": "G_AHEAD",
       "expected_outcome": "DIVERGED",
-      "properties": [
-        "confirmation loss"
-      ]
+      "properties": ["negative-control activation policy", "one-sided operational activation"]
     },
     {
       "id": "B1-06",
       "baseline": "B1",
       "initial_state": "SYNC(0)",
       "compromise": "all operational state",
-      "faults": [
-        "active attacker throughout"
-      ],
-      "expected_joint_state": "RECOVERING or EXPIRED",
+      "activation_policy": "DEFER_UNTIL_BILATERAL_COMPLETION",
+      "faults": ["active attacker throughout"],
+      "expected_alignment": "SYNC(0)",
       "expected_outcome": "EXPIRED",
-      "properties": [
-        "no indefinite-interference liveness claim"
-      ]
+      "properties": ["no liveness claim against indefinite active interference"]
     },
     {
       "id": "B2-01",
-      "baseline": "B2",
+      "baseline": "B2-URKE",
       "initial_state": "SYNC(0)",
       "compromise": "none",
       "faults": [],
-      "expected_joint_state": "SYNC(1)",
+      "expected_alignment": "SYNC(1)",
       "expected_outcome": "SUCCESS",
-      "properties": [
-        "normal evolution",
-        "old-state deletion"
-      ]
+      "properties": ["sender evolution", "receiver evolution", "old-state deletion"]
     },
     {
       "id": "B2-02",
-      "baseline": "B2",
+      "baseline": "B2-URKE",
       "initial_state": "SYNC(0)",
       "compromise": "current state",
-      "faults": [
-        "eventually passive attacker",
-        "fresh entropy"
-      ],
-      "expected_joint_state": "SYNC(1)",
+      "faults": ["eventually passive attacker", "fresh KEM entropy"],
+      "expected_alignment": "SYNC(1)",
       "expected_outcome": "SUCCESS",
-      "properties": [
-        "strong-PCS family behavior"
-      ]
+      "properties": ["recovery from current-state exposure under model assumptions"]
     },
     {
       "id": "B2-03",
-      "baseline": "B2",
+      "baseline": "B2-URKE",
       "initial_state": "SYNC(0)",
       "compromise": "current state",
-      "faults": [
-        "DROP:RATCHET_ADVANCE"
-      ],
-      "expected_joint_state": "SYNC(0)",
-      "expected_outcome": "AVAILABLE_UNSAFE",
-      "properties": [
-        "no healing if update never arrives"
-      ]
+      "faults": ["DROP:RATCHET_UPDATE after sender evolution"],
+      "expected_alignment": "G_AHEAD",
+      "expected_joint_state": "LOCKED",
+      "expected_outcome": "LOCKED",
+      "properties": ["strict one-sided advancement", "permanent modeled lockout"]
     },
     {
       "id": "B2-04",
-      "baseline": "B2",
+      "baseline": "B2-URKE",
       "initial_state": "SYNC(0)",
-      "compromise": "current state",
-      "faults": [
-        "DROP:RATCHET_ACK after spacecraft advances"
-      ],
-      "expected_joint_state": "S_AHEAD",
-      "expected_outcome": "LOCKED",
-      "properties": [
-        "one-sided advancement",
-        "lockout"
-      ]
+      "compromise": "none",
+      "faults": ["DROP:STATUS_TELEMETRY after both endpoints evolve"],
+      "expected_alignment": "SYNC(1)",
+      "expected_outcome": "INDETERMINATE",
+      "properties": ["cryptographic convergence separated from recovery evidence"]
     },
     {
       "id": "B2-05",
-      "baseline": "B2",
-      "initial_state": "SYNC(3)",
+      "baseline": "B2-URKE",
+      "initial_state": "SYNC(1)",
       "compromise": "none",
-      "faults": [
-        "STALE_GROUND_RESTORE to epoch 1"
-      ],
-      "expected_joint_state": "S_AHEAD",
+      "faults": ["STALE_GROUND_RESTORE to epoch 0"],
+      "expected_alignment": "S_AHEAD",
+      "expected_joint_state": "LOCKED",
       "expected_outcome": "LOCKED",
-      "properties": [
-        "rollback resistance",
-        "backup restoration"
-      ]
+      "properties": ["rollback resistance", "stale backup restoration"]
     },
     {
       "id": "B2-06",
-      "baseline": "B2",
-      "initial_state": "SYNC(2)",
+      "baseline": "B2-URKE",
+      "initial_state": "SYNC(1)",
       "compromise": "none",
-      "faults": [
-        "REPLAY:RATCHET_ADVANCE epoch 2"
-      ],
-      "expected_joint_state": "SYNC(2)",
+      "faults": ["REPLAY:RATCHET_UPDATE for epoch 1"],
+      "expected_alignment": "SYNC(1)",
       "expected_outcome": "SUCCESS",
-      "properties": [
-        "replay rejection",
-        "monotonic counters"
-      ]
+      "properties": ["replay rejection", "no state change"]
     }
   ]
 }
