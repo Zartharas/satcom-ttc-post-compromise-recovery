@@ -5,8 +5,6 @@ on:
     branches:
       - main
   pull_request:
-    branches:
-      - main
   workflow_dispatch:
 
 permissions:
@@ -43,3 +41,9 @@ jobs:
         env:
           PYTHONPATH: src
         run: python -m unittest discover -s tests -p "test_*.py" -v
+
+      - name: Validate review handoff
+        run: |
+          if [ -f experiments/scripts/validate_review_handoff.py ]; then
+            python experiments/scripts/validate_review_handoff.py
+          fi
