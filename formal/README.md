@@ -1,8 +1,8 @@
 # Provisional formal-model execution
 
-The files in `formal/tla/` describe an abstract recovery-control state machine for internal review.
+The files in `formal/tla/` describe abstract recovery-control state machines for internal review.
 
-They model:
+The preserved baseline module models:
 
 - ground and spacecraft recovery modes;
 - forward epoch selection;
@@ -11,7 +11,7 @@ They model:
 - bounded attempts and one spacecraft activation; and
 - explicit `SUCCESS`, `INDETERMINATE`, `SECURE_DEGRADED`, and `EXPIRED` outcomes.
 
-They do not model or prove:
+The formal files do not model or prove:
 
 - a concrete cryptographic primitive;
 - CCSDS or SDLS conformance;
@@ -69,21 +69,51 @@ Each trace is replayed through Python under the same 16-field projection used in
 `receipt` field is explicitly mapped as retained activation evidence during post-activation terminal
 cleanup, because the Python controller may clear its live receipt object.
 
-Separate checks for `DIVERGED`, `AVAILABLE_UNSAFE`, and `LOCKED` are expected to complete without a witness.
-Those outcomes have zero assignments in the current transition relation, so their diagnosis is
-`ABSENT_FROM_CURRENT_TRANSITION_ASSIGNMENTS`. Their status remains
+Separate checks for `DIVERGED`, `AVAILABLE_UNSAFE`, and `LOCKED` are expected to complete without a witness
+in the preserved baseline. Those outcomes have zero assignments in `T1Recovery.tla`, so their Phase 12
+diagnosis is `ABSENT_FROM_CURRENT_TRANSITION_ASSIGNMENTS`. Their status remains
 `NOT_REACHED_WITHIN_RECORDED_BOUND`; they are not described as impossible.
+
+## Phase 13 opt-in outcome expansion
+
+`T1Recovery.tla` remains the preserved baseline for the Phase 10–12 results. Phase 13 enforces its exact
+SHA-256 and reproduces the recorded 50-generated / 28-distinct / depth-10 absence state space.
+
+`T1RecoveryOutcomeExpansion.tla` is a separate opt-in diagnostic module. It extends the baseline with the
+expansion-only variable `gapCause` and one explicit transition path for each previously absent outcome:
+
+- `DIVERGED` through confirmation loss followed by unilateral ground activation;
+- `AVAILABLE_UNSAFE` through an explicitly adversary-known candidate that is activated and verified; and
+- `LOCKED` through sender advancement after explicit prior sender-state deletion.
+
+The configurations in `formal/tla/expansion/` use testing-only false reachability properties to obtain one
+bounded witness for each path. Each trace is compared against a Python simulator projection and is also
+checked against an existing canonical B1/B2 scenario with the same final outcome.
+
+The source-level assignment audit must continue to show:
+
+```text
+T1Recovery.tla:                 0 assignments for each expanded outcome
+T1RecoveryOutcomeExpansion.tla: 1 explicit assignment for each expanded outcome
+```
+
+The expansion is labeled `EXPANDED_OUTCOME_POPULATION_DIAGNOSTIC_ONLY`. It does not replace the baseline,
+and `gapCause` is a provisional diagnostic classification rather than an accepted causal model.
 
 ## Evidence boundary
 
-Phases 10 through 12 record SANY output, TLC output, finite constants, state counts, depth, tool and Java
-versions, input hashes, expected testing-only witness traces, comparison records, absence diagnostics, and
-SHA-256 manifests.
+Phases 10 through 13 record SANY output, TLC output, finite constants, state counts, depth, tool and Java
+versions, input hashes, expected testing-only witness traces, comparison records, absence or assignment
+diagnostics, baseline-regression evidence, and SHA-256 manifests.
 
 The results are not described as formal proof, cryptographic verification, implementation equivalence,
-formal-model completeness, or proof of post-compromise security. Model-checking and trace-comparison output
-remains internal diagnostic evidence until independent review accepts the abstraction, property set,
-projection, transition relation, and mapping to any concrete treatment.
+formal-model completeness, causal validation, or proof of post-compromise security. Capturing one explicit
+path for each expanded outcome does not establish that the outcome population, cause vocabulary,
+transition relation, or witness set is complete, realistic, necessary, sufficient, or exhaustive.
 
-Any state, outcome, or behavior not observed in the recorded finite model must remain labeled
+Model-checking and trace-comparison output remains internal diagnostic evidence until independent review
+accepts the abstraction, property set, projection, transition relation, cause vocabulary, and mapping to
+any concrete treatment.
+
+Any state, outcome, or behavior not observed in a recorded finite model must remain labeled
 `NOT_REACHED_WITHIN_RECORDED_BOUND` or `NOT_REACHED_WITHIN_PROVISIONAL_BOUND`, never impossible.
