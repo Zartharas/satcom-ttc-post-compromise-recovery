@@ -1,5 +1,25 @@
 # Changelog
 
+## Unreleased — Phase 14 independent review package
+
+- Added a reviewer-facing package with status `READY_FOR_OUTREACH_NOT_REVIEWED`.
+- Added an integrated response template covering all 24 review questions and all 21 baseline scenario oracles.
+- Restored the omitted B1 endpoint-knowledge question as `B1-R5` without rewriting the historical Phase 05
+  response template.
+- Added a 20-entry claims traceability matrix with explicit qualifiers, evidence paths, reviewer questions, and
+  prohibited overstatements.
+- Added a 21-entry evidence index pinned by the exact review-target commit.
+- Added four open governance findings covering response-template mismatch, retrospective Phase 6-13 work,
+  implementation-lock versus independent-approval ambiguity, and review-target commit drift.
+- Separated mandatory baseline cryptography review from the optional or separately staffed formal-diagnostic
+  scope.
+- Added a second-reviewer requirement when the primary reviewer does not cover formal methods or another
+  declared scope.
+- Added automated checks that issue #3 remains open, the baseline oracle candidate remains pending, no reviewer
+  approval is fabricated, and all hard claim boundaries remain `NOT_PERMITTED`.
+- Added Phase 14 unit tests, standalone validation, and CI integration.
+- Added no protocol transition, formal property, fault behavior, treatment parameter, or security claim.
+
 ## Unreleased — Phase 13 abstraction-gap outcome expansion
 
 - Preserved `formal/tla/T1Recovery.tla` byte-for-byte as the Phase 12 baseline and enforced its recorded
