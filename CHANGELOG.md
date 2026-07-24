@@ -1,5 +1,23 @@
 # Changelog
 
+## Unreleased — Phase 12 adverse-outcome witnesses
+
+- Added six testing-only outcome reachability properties and separate TLC configurations.
+- Captured bounded witnesses for `INDETERMINATE`, `SECURE_DEGRADED`, and `EXPIRED`.
+- Replayed each adverse witness through the Python T1 controller under the Phase 11 16-field projection.
+- Added explicit retained-receipt-evidence mapping for post-activation terminal cleanup.
+- Recorded 119/119 matched rows for `INDETERMINATE`, 119/119 for `SECURE_DEGRADED`, and 85/85 for
+  `EXPIRED`, with zero mismatches.
+- Added bounded absence checks for `DIVERGED`, `AVAILABLE_UNSAFE`, and `LOCKED`.
+- Added source-level transition-assignment auditing and the diagnosis
+  `ABSENT_FROM_CURRENT_TRANSITION_ASSIGNMENTS`.
+- Kept every absent outcome labeled `NOT_REACHED_WITHIN_RECORDED_BOUND`, never impossible.
+- Added JSON witness records, comparison CSV files, an unreached-outcome diagnostic CSV, raw SANY/TLC logs,
+  and a SHA-256 derived manifest.
+- Added Phase 12 tests, specification, validator, runner, documentation, and a real Java/TLC CI gate.
+- Kept the model, outcome population, projection, properties, transition semantics, interpretation, and
+  publication claims provisional and unfrozen.
+
 ## Unreleased — Phase 11 formal/Python trace cross-validation
 
 - Added the testing-only `ReachabilityWitnessNoSuccess` invariant and a separate success-witness TLC
