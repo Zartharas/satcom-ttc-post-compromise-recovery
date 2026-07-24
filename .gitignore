@@ -48,6 +48,13 @@ results/figures/*
 !results/processed/.gitkeep
 !results/figures/.gitkeep
 
+# Formal-model checker scratch output
+formal/tla/states/
+formal/tla/.toolbox/
+formal/tla/*.out
+formal/tla/*.trace
+formal/tla/*.dot
+
 # Temporary files
 *.log
 *.tmp
