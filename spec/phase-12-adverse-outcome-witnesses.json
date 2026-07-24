@@ -1,0 +1,139 @@
+{
+  "schema_version": "0.1.0",
+  "phase": "Phase 12",
+  "title": "Adverse-outcome formal witnesses and Python cross-validation",
+  "status": "PROVISIONAL_INTERNAL_REVIEW_ONLY",
+  "toolchain": {
+    "tla_tools_version": "1.7.4",
+    "official_jar_sha1": "bee4a54f3ee3d4afc347c3240ec2d9e93b075104",
+    "workers": 1
+  },
+  "projection": {
+    "field_count": 16,
+    "fields": [
+      "gMode",
+      "sMode",
+      "gEpoch",
+      "sEpoch",
+      "gPrevEpoch",
+      "sPrevEpoch",
+      "candidateEpoch",
+      "pending",
+      "receipt",
+      "attempts",
+      "activationCount",
+      "commandAccepted",
+      "statusSeen",
+      "statusDropped",
+      "verified",
+      "outcome"
+    ],
+    "match_status": "MATCH_WITHIN_DECLARED_ABSTRACTION",
+    "mismatch_status": "MISMATCH_REQUIRES_REVIEW",
+    "receipt_mapping": "The formal receipt field is projected as retained activation evidence; Python may clear the live receipt object during terminal cleanup.",
+    "claim_boundary": "A match is not a refinement proof or implementation-equivalence result."
+  },
+  "captured_witnesses": [
+    {
+      "case_id": "indeterminate",
+      "outcome": "INDETERMINATE",
+      "property": "ReachabilityWitnessNoIndeterminate",
+      "config": "formal/tla/adverse/IndeterminateWitness.cfg",
+      "expected_actions": [
+        "Init",
+        "Prepare",
+        "SelectCandidate",
+        "Commit",
+        "Confirm",
+        "AcceptCommand",
+        "DropStatus"
+      ]
+    },
+    {
+      "case_id": "secure-degraded",
+      "outcome": "SECURE_DEGRADED",
+      "property": "ReachabilityWitnessNoSecureDegraded",
+      "config": "formal/tla/adverse/SecureDegradedWitness.cfg",
+      "expected_actions": [
+        "Init",
+        "Prepare",
+        "SelectCandidate",
+        "Commit",
+        "Retry",
+        "Retry",
+        "ExpireAfterSpacecraftActivation"
+      ]
+    },
+    {
+      "case_id": "expired",
+      "outcome": "EXPIRED",
+      "property": "ReachabilityWitnessNoExpired",
+      "config": "formal/tla/adverse/ExpiredWitness.cfg",
+      "expected_actions": [
+        "Init",
+        "Prepare",
+        "Retry",
+        "Retry",
+        "ExpireBeforeActivation"
+      ]
+    }
+  ],
+  "absence_diagnostics": [
+    {
+      "case_id": "diverged",
+      "outcome": "DIVERGED",
+      "property": "ReachabilityWitnessNoDiverged",
+      "config": "formal/tla/adverse/DivergedAbsence.cfg",
+      "expected_status": "NOT_REACHED_WITHIN_RECORDED_BOUND",
+      "expected_diagnosis": "ABSENT_FROM_CURRENT_TRANSITION_ASSIGNMENTS"
+    },
+    {
+      "case_id": "available-unsafe",
+      "outcome": "AVAILABLE_UNSAFE",
+      "property": "ReachabilityWitnessNoAvailableUnsafe",
+      "config": "formal/tla/adverse/AvailableUnsafeAbsence.cfg",
+      "expected_status": "NOT_REACHED_WITHIN_RECORDED_BOUND",
+      "expected_diagnosis": "ABSENT_FROM_CURRENT_TRANSITION_ASSIGNMENTS"
+    },
+    {
+      "case_id": "locked",
+      "outcome": "LOCKED",
+      "property": "ReachabilityWitnessNoLocked",
+      "config": "formal/tla/adverse/LockedAbsence.cfg",
+      "expected_status": "NOT_REACHED_WITHIN_RECORDED_BOUND",
+      "expected_diagnosis": "ABSENT_FROM_CURRENT_TRANSITION_ASSIGNMENTS"
+    }
+  ],
+  "required_outputs": [
+    "phase12-adverse-outcome-validation.json",
+    "phase12-witness-indeterminate.json",
+    "phase12-witness-secure-degraded.json",
+    "phase12-witness-expired.json",
+    "phase12-comparison-indeterminate.csv",
+    "phase12-comparison-secure-degraded.csv",
+    "phase12-comparison-expired.csv",
+    "phase12-unreached-outcomes.csv",
+    "phase12-java-version.log",
+    "phase12-sany.log",
+    "phase12-tlc-indeterminate.log",
+    "phase12-tlc-secure-degraded.log",
+    "phase12-tlc-expired.log",
+    "phase12-tlc-diverged.log",
+    "phase12-tlc-available-unsafe.log",
+    "phase12-tlc-locked.log",
+    "phase12-derived-bundle.sha256"
+  ],
+  "external_review_stop_points": [
+    "claiming refinement proof or implementation equivalence",
+    "claiming formal-model completeness",
+    "treating bounded non-reachability as impossibility",
+    "adding concrete cryptographic or operational interpretation",
+    "freezing the property set, projection, or outcome population",
+    "using Phase 12 output as publication evidence"
+  ],
+  "formal_model_completeness_claim": "NOT_PERMITTED",
+  "implementation_equivalence_claim": "NOT_PERMITTED",
+  "cryptographic_security_claim": "NOT_PERMITTED",
+  "publication_evidence_status": "NOT_PERMITTED",
+  "baseline_review_status": "PENDING_INDEPENDENT_REVIEW"
+}
