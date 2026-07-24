@@ -1,0 +1,103 @@
+{
+  "schema_version": "0.1.0",
+  "status": "PROVISIONAL_INTERNAL_REVIEW_ONLY",
+  "objective": "Expand explicit adversarial schedule coverage, report bounded reachability, map invariants to implementation evidence, and prepare a provisional formal-model scaffold without freezing properties or making concrete security claims.",
+  "coverage_requirements": {
+    "explicit_schedule_count": 24,
+    "required_fault_kinds": [
+      "DROP",
+      "DELAY",
+      "DUPLICATE",
+      "REORDER",
+      "CONTACT_CLOSE",
+      "ENDPOINT_RESTART",
+      "STALE_COUNTER",
+      "STALE_REPLAY"
+    ],
+    "required_phases": [
+      "RECOVERY_PREPARE",
+      "RECOVERY_RESPONSE",
+      "RECOVERY_COMMIT",
+      "RECOVERY_CONFIRM",
+      "TEST_COMMAND",
+      "STATUS_TELEMETRY"
+    ],
+    "required_boundaries": [
+      "retry_budget_minus_one",
+      "retry_budget_equal",
+      "retry_budget_plus_one",
+      "candidate_lifetime_equal",
+      "candidate_lifetime_plus_one",
+      "spacecraft_ahead",
+      "authority_epoch_floor",
+      "multi_fault"
+    ]
+  },
+  "reachability_rules": [
+    "retain the shortest known explicit schedule as a witness for every reached state or outcome",
+    "order equal-length witnesses deterministically by schedule SHA-256 and scenario ID",
+    "label an unreached state or outcome NOT_REACHED_WITHIN_PROVISIONAL_BOUND",
+    "never convert bounded non-reachability into an impossibility claim"
+  ],
+  "abstract_states": [
+    "NORMAL",
+    "RECOVERING",
+    "CANDIDATE",
+    "ACTIVATED",
+    "VERIFIED",
+    "EXPIRED"
+  ],
+  "tracked_outcomes": [
+    "SUCCESS",
+    "INDETERMINATE",
+    "SECURE_DEGRADED",
+    "EXPIRED",
+    "DIVERGED",
+    "AVAILABLE_UNSAFE",
+    "LOCKED"
+  ],
+  "traceability_requirements": [
+    "machine-readable invariant identifier",
+    "implementation guard or transition",
+    "unit test",
+    "explicit Phase 09 witness schedule",
+    "formal-property identifier",
+    "provisional status"
+  ],
+  "formal_model": {
+    "language": "TLA+",
+    "module": "formal/tla/T1Recovery.tla",
+    "configuration": "formal/tla/MC.cfg",
+    "status": "SCAFFOLD_NOT_FORMALLY_REVIEWED",
+    "scope": "abstract recovery-control state only",
+    "excluded_claims": [
+      "cryptographic proof",
+      "CCSDS or SDLS conformance",
+      "flight-software correctness",
+      "RF or operational-satellite behavior",
+      "post-compromise-security proof"
+    ]
+  },
+  "required_outputs": [
+    "phase09-coverage-reachability.json",
+    "phase09-coverage-results.csv",
+    "phase09-reachability.csv",
+    "phase09-invariant-traceability.csv",
+    "phase09-derived-bundle.sha256"
+  ],
+  "mandatory_external_review_stop_points": [
+    "before freezing the formal property set as complete",
+    "before claiming model checking proves concrete cryptographic security",
+    "before mapping the model to a concrete protocol implementation",
+    "before freezing retry or candidate-lifetime values",
+    "before selecting T1 as the final treatment",
+    "before using reachability or model-checking output as publication evidence",
+    "before any external security claim"
+  ],
+  "review_status": {
+    "independent_cryptography_review": "NOT_YET_PERFORMED",
+    "baseline_oracles": "PENDING_INDEPENDENT_REVIEW",
+    "phase09_property_status": "PROVISIONAL_ONLY",
+    "publication_evidence_status": "NOT_PERMITTED"
+  }
+}
