@@ -7,25 +7,30 @@ for the Space Data Link Security Protocol*, CANS 2025 proceedings.
 
 ## Points used by this project
 
-- The proposal is a pure key exchange that outputs keys at the end rather than a messaging
-  protocol.
+- The proposal is a standalone key exchange that outputs a key for SDLS rather than a complete
+  secure-channel protocol.
 - Final keys are derived only after the handshake is complete for the party in question.
-- Key confirmation is always required.
+- Key confirmation is mandatory.
 - Triple-KEM uses three exchanged messages and can optionally update long-term KEM keys.
-- By completion, the entire transcript is authenticated.
-- The paper claims forward secrecy and post-compromise security in its model.
 - Missing or out-of-order fragments cause the presented protocol to drop the connection unless
-  a fragmentation layer provides ordering and re-requesting.
+  another layer provides ordering and re-requesting.
+- The proposal claims forward secrecy and post-compromise security in its stated model.
 
-## Modeling boundary
+## What the source does not specify
 
-The source does not define when an SDLS implementation should activate the newly output key,
-how an endpoint should roll back after unilateral completion, or how mission control should
-verify that the peer installed the key. Those are treated as explicit integration policies in
-this repository.
+The source does not define:
 
-## Phase 04 decision
+- when an SDLS security association becomes operational;
+- how the initiator learns that the responder received the final confirmation;
+- rollback after unilateral completion; or
+- a post-handshake operational-key installation acknowledgment.
 
-The simulator records cryptographic completion separately from active SDLS epoch. Final
-confirmation loss expires the default conservative attempt without operational divergence.
-A unilateral local-activation policy is retained only as a negative control.
+## Corrected Phase 04 mapping
+
+`ACTIVATE_ON_LOCAL_COMPLETION` is the primary minimal-assumption baseline. Ground activates
+after its local completion; spacecraft activates after receiving and validating the final
+confirmation. Loss of that confirmation therefore produces one-sided activation.
+
+`DEFER_UNTIL_AUTHENTICATED_STATUS` is an enhanced four-message integration variant supplied
+by this project. It adds spacecraft status after Triple-KEM completion and must separately test
+status loss. It is not attributed to the paper.
