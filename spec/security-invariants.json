@@ -1,87 +1,35 @@
 {
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "safety": [
-    {
-      "id": "I-S01",
-      "statement": "Each endpoint has exactly one authoritative active epoch."
-    },
-    {
-      "id": "I-S02",
-      "statement": "Accepted epoch numbers never decrease."
-    },
-    {
-      "id": "I-S03",
-      "statement": "Candidate or pending keys cannot authorize normal commands."
-    },
-    {
-      "id": "I-S04",
-      "statement": "A recovery request alone cannot activate a new operational key."
-    },
-    {
-      "id": "I-S05",
-      "statement": "Replayed identifiers and lower epochs are rejected."
-    },
-    {
-      "id": "I-S06",
-      "statement": "After VERIFIED, compromised key references cannot authenticate accepted commands."
-    },
-    {
-      "id": "I-S07",
-      "statement": "Conflicting epochs cannot be simultaneously authoritative."
-    },
-    {
-      "id": "I-S08",
-      "statement": "Recovery messages bind spacecraft identity, recovery ID, target epoch, counter, and transcript."
-    },
-    {
-      "id": "I-S09",
-      "statement": "Pending states and skipped epochs are bounded by count and lifetime."
-    },
-    {
-      "id": "I-S10",
-      "statement": "No automatic fallback to a prior compromised epoch."
-    }
+    {"id": "I-S01", "statement": "Each endpoint has exactly one authoritative active epoch."},
+    {"id": "I-S02", "statement": "Accepted epoch numbers never decrease during normal protocol execution."},
+    {"id": "I-S03", "statement": "Candidate or pending keys cannot authorize normal commands."},
+    {"id": "I-S04", "statement": "Cryptographic completion and operational SDLS activation are distinct state transitions."},
+    {"id": "I-S05", "statement": "Replayed identifiers and non-forward epochs are rejected."},
+    {"id": "I-S06", "statement": "After VERIFIED, compromised key references cannot authenticate accepted commands."},
+    {"id": "I-S07", "statement": "Conflicting epochs cannot be simultaneously authoritative at one endpoint."},
+    {"id": "I-S08", "statement": "Recovery messages bind spacecraft identity, recovery ID, target epoch, counter, and transcript."},
+    {"id": "I-S09", "statement": "Pending states and skipped epochs are bounded by count and lifetime."},
+    {"id": "I-S10", "statement": "No automatic fallback to a prior compromised epoch is permitted."}
   ],
   "liveness": [
-    {
-      "id": "I-L01",
-      "statement": "Under a finite passive interval and bounded delivery, a recoverable treatment terminates in an explicit outcome."
-    },
-    {
-      "id": "I-L02",
-      "statement": "No protocol receives a liveness claim against indefinite suppression."
-    },
-    {
-      "id": "I-L03",
-      "statement": "Retry cannot reopen stale or replayed state."
-    }
+    {"id": "I-L01", "statement": "Under a finite passive interval and bounded delivery, a recoverable treatment terminates in an explicit outcome."},
+    {"id": "I-L02", "statement": "No protocol receives a liveness claim against indefinite suppression."},
+    {"id": "I-L03", "statement": "Retry cannot reopen stale or replayed state."}
   ],
   "evidence": [
-    {
-      "id": "I-E01",
-      "statement": "Every state-changing transition produces an append-only event."
-    },
-    {
-      "id": "I-E02",
-      "statement": "SUCCESS requires matching ground, spacecraft, and evidence completion records."
-    },
-    {
-      "id": "I-E03",
-      "statement": "Ordering uses simulator event sequence, not wall-clock timestamps."
-    }
+    {"id": "I-E01", "statement": "Every state-changing transition produces an append-only event."},
+    {"id": "I-E02", "statement": "SUCCESS requires endpoint convergence and complete verification evidence."},
+    {"id": "I-E03", "statement": "Loss of status telemetry after endpoint convergence produces INDETERMINATE, not cryptographic divergence."},
+    {"id": "I-E04", "statement": "Ordering uses simulator event sequence, not wall-clock timestamps."}
   ],
   "baseline_expectations": [
-    {
-      "id": "I-B0",
-      "statement": "B0 cannot claim PCS after compromise of the OTAR-protecting master key."
-    },
-    {
-      "id": "I-B1",
-      "statement": "B1 requires transcript completion and key confirmation; missing or reordered required material aborts the baseline exchange."
-    },
-    {
-      "id": "I-B2",
-      "statement": "B2 offers the strongest modeled healing family but may lock out after one-sided state advancement."
-    }
+    {"id": "I-B0", "statement": "B0 cannot claim PCS after compromise of the OTAR-protecting master key."},
+    {"id": "I-B1A", "statement": "B1 requires party-specific transcript completion and mandatory key confirmation."},
+    {"id": "I-B1B", "statement": "Under the default activation policy, final-confirmation loss expires the attempt without changing the active SDLS epoch."},
+    {"id": "I-B1C", "statement": "Unilateral activation after local cryptographic completion is a negative-control integration policy, not a Triple-KEM requirement."},
+    {"id": "I-B2A", "statement": "B2 is the Poettering-Roesler URKE state-evolution pattern adapted as a ground-to-space strict baseline."},
+    {"id": "I-B2B", "statement": "The B2 sender evolves on send and the receiver evolves on accepted receipt; no application acknowledgment is required for cryptographic convergence."},
+    {"id": "I-B2C", "statement": "A dropped update after sender evolution can permanently lock the strict baseline because it retains no prior state or recovery checkpoint."}
   ]
 }
