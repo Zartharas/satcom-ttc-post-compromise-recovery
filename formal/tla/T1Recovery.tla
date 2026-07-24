@@ -79,7 +79,7 @@ SelectCandidate ==
     /\ pending
     /\ gMode = "RECOVERING"
     /\ candidateEpoch = Null
-    /\ candidateEpoch' = Max({gEpoch + 1, sEpoch + 1})
+    /\ candidateEpoch' = IF gEpoch >= sEpoch THEN gEpoch + 1 ELSE sEpoch + 1
     /\ candidateEpoch' <= MaxEpoch
     /\ gMode' = "CANDIDATE"
     /\ sMode' = "CANDIDATE"
