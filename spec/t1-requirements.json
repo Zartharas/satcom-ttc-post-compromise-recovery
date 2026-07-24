@@ -1,0 +1,74 @@
+{
+  "schema_version": "0.1.0",
+  "status": "requirements only; no protocol implementation",
+  "objective": "Reduce B2 lockout after bounded state divergence without reopening compromised or replayed state.",
+  "mandatory": [
+    {
+      "id": "T1-R01",
+      "requirement": "Use an established cryptographic core; T1 adds recovery control and state management only."
+    },
+    {
+      "id": "T1-R02",
+      "requirement": "Bind every recovery message to spacecraft identity, recovery ID, target epoch, monotonic counter, and transcript."
+    },
+    {
+      "id": "T1-R03",
+      "requirement": "Use two-phase activation or equivalent confirmation so candidate state cannot authorize normal commands."
+    },
+    {
+      "id": "T1-R04",
+      "requirement": "Retain at most N skipped or candidate states for at most H contact windows; N and H are experiment parameters."
+    },
+    {
+      "id": "T1-R05",
+      "requirement": "Never automatically reactivate a lower epoch or key marked compromised."
+    },
+    {
+      "id": "T1-R06",
+      "requirement": "Require a fresh post-recovery command and authenticated telemetry exchange before SUCCESS."
+    },
+    {
+      "id": "T1-R07",
+      "requirement": "Define deterministic behavior for loss of prepare, response, commit, confirmation, and status messages."
+    },
+    {
+      "id": "T1-R08",
+      "requirement": "Every attempt terminates in exactly one defined outcome class."
+    },
+    {
+      "id": "T1-R09",
+      "requirement": "Bound denial-of-service cost from repeated recovery triggers, cache exhaustion, and replay floods."
+    },
+    {
+      "id": "T1-R10",
+      "requirement": "Produce independent ground, spacecraft, and evidence-service records."
+    },
+    {
+      "id": "T1-R11",
+      "requirement": "State the passive-adversary interval required for any PCS claim."
+    },
+    {
+      "id": "T1-R12",
+      "requirement": "Report security and availability separately, not as a hidden composite score."
+    }
+  ],
+  "prohibited_shortcuts": [
+    "fallback to a prior compromised epoch",
+    "unbounded grace windows",
+    "unbounded pending-state cache",
+    "multiple authoritative epochs",
+    "treating key generation as recovery completion",
+    "claiming proof from simulation",
+    "claiming availability against indefinite suppression",
+    "importing unrelated one-message stateless recovery designs"
+  ],
+  "candidate_controls_for_later_review": [
+    "bounded skipped-epoch cache",
+    "two-phase activation",
+    "commit/acknowledgment recovery",
+    "single-use recovery checkpoint",
+    "separate emergency recovery security association",
+    "attested epoch restoration",
+    "strict expiry and monotonic counters"
+  ]
+}

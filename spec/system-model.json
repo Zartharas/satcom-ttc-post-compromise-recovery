@@ -1,0 +1,108 @@
+{
+  "schema_version": "0.1.0",
+  "paper_scope": {
+    "topology": "one authoritative ground security domain and one spacecraft",
+    "entities": [
+      "ground",
+      "spacecraft",
+      "recovery_authority",
+      "link",
+      "adversary",
+      "evidence_service"
+    ],
+    "traffic": [
+      "telecommand",
+      "telemetry",
+      "key_management",
+      "recovery_control"
+    ],
+    "contact_model": "discrete intermittent windows; no reliable transport assumed"
+  },
+  "endpoint_modes": [
+    "NORMAL",
+    "SUSPECTED",
+    "PREPARED",
+    "REQUEST_SENT",
+    "CANDIDATE",
+    "COMMIT_PENDING",
+    "VERIFIED",
+    "EXPIRED",
+    "LOCKED"
+  ],
+  "endpoint_state": {
+    "endpoint_id": "string",
+    "mode": "endpoint_modes",
+    "epoch": "nonnegative integer",
+    "active_sa": "opaque identifier",
+    "active_key_ref": "opaque identifier",
+    "pending": {
+      "nullable": true,
+      "fields": {
+        "recovery_id": "unique string",
+        "target_epoch": "integer greater than current epoch",
+        "method": "B0|B1|B2|T1",
+        "phase": "PREPARE|RESPONSE|CONFIRM|COMMIT|VERIFY",
+        "candidate_key_ref": "opaque identifier",
+        "created_contact": "nonnegative integer",
+        "expires_after_contact": "nonnegative integer",
+        "transcript_ref": "opaque identifier",
+        "authorized_by": "recovery authority identifier"
+      }
+    },
+    "replay_cache": "bounded set",
+    "monotonic_counter": "nonnegative integer",
+    "last_confirmed_peer_epoch": "nonnegative integer",
+    "attacker_known_key_refs": "set",
+    "retired_key_refs": "set"
+  },
+  "joint_states": {
+    "SYNC": "same active epoch, SA, and key state",
+    "G_AHEAD": "ground epoch greater than spacecraft epoch",
+    "S_AHEAD": "spacecraft epoch greater than ground epoch",
+    "DIVERGED": "incompatible branch or state",
+    "RECOVERING": "at least one pending recovery",
+    "VERIFIED": "new state tested and old compromised state rejected",
+    "LOCKED": "no authorized modeled transition can restore communication"
+  },
+  "outcomes": [
+    "SUCCESS",
+    "SECURE_DEGRADED",
+    "AVAILABLE_UNSAFE",
+    "DIVERGED",
+    "EXPIRED",
+    "LOCKED",
+    "INDETERMINATE"
+  ],
+  "recovery_success_conditions": [
+    "ground and spacecraft agree on active epoch and SA",
+    "fresh authorized command under new state is accepted",
+    "all compromised key references are rejected",
+    "replayed or lower-epoch recovery messages are rejected",
+    "authenticated telemetry confirms active epoch and status",
+    "ground, spacecraft, and evidence records agree on completion"
+  ],
+  "message_classes": [
+    "OTAR_UPLOAD",
+    "KEY_ACTIVATE",
+    "KEM_INIT",
+    "KEM_RESPONSE",
+    "KEM_CONFIRM",
+    "RATCHET_ADVANCE",
+    "RATCHET_ACK",
+    "RECOVERY_PREPARE",
+    "RECOVERY_COMMIT",
+    "RECOVERY_CONFIRM",
+    "TEST_COMMAND",
+    "STATUS_TELEMETRY"
+  ],
+  "fault_classes": [
+    "DROP",
+    "DELAY",
+    "DUPLICATE",
+    "REORDER",
+    "CORRUPT",
+    "CONTACT_CLOSE",
+    "STALE_GROUND_RESTORE",
+    "ENDPOINT_RESTART"
+  ]
+}

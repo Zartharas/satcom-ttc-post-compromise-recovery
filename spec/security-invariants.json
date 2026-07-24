@@ -1,0 +1,87 @@
+{
+  "schema_version": "0.1.0",
+  "safety": [
+    {
+      "id": "I-S01",
+      "statement": "Each endpoint has exactly one authoritative active epoch."
+    },
+    {
+      "id": "I-S02",
+      "statement": "Accepted epoch numbers never decrease."
+    },
+    {
+      "id": "I-S03",
+      "statement": "Candidate or pending keys cannot authorize normal commands."
+    },
+    {
+      "id": "I-S04",
+      "statement": "A recovery request alone cannot activate a new operational key."
+    },
+    {
+      "id": "I-S05",
+      "statement": "Replayed identifiers and lower epochs are rejected."
+    },
+    {
+      "id": "I-S06",
+      "statement": "After VERIFIED, compromised key references cannot authenticate accepted commands."
+    },
+    {
+      "id": "I-S07",
+      "statement": "Conflicting epochs cannot be simultaneously authoritative."
+    },
+    {
+      "id": "I-S08",
+      "statement": "Recovery messages bind spacecraft identity, recovery ID, target epoch, counter, and transcript."
+    },
+    {
+      "id": "I-S09",
+      "statement": "Pending states and skipped epochs are bounded by count and lifetime."
+    },
+    {
+      "id": "I-S10",
+      "statement": "No automatic fallback to a prior compromised epoch."
+    }
+  ],
+  "liveness": [
+    {
+      "id": "I-L01",
+      "statement": "Under a finite passive interval and bounded delivery, a recoverable treatment terminates in an explicit outcome."
+    },
+    {
+      "id": "I-L02",
+      "statement": "No protocol receives a liveness claim against indefinite suppression."
+    },
+    {
+      "id": "I-L03",
+      "statement": "Retry cannot reopen stale or replayed state."
+    }
+  ],
+  "evidence": [
+    {
+      "id": "I-E01",
+      "statement": "Every state-changing transition produces an append-only event."
+    },
+    {
+      "id": "I-E02",
+      "statement": "SUCCESS requires matching ground, spacecraft, and evidence completion records."
+    },
+    {
+      "id": "I-E03",
+      "statement": "Ordering uses simulator event sequence, not wall-clock timestamps."
+    }
+  ],
+  "baseline_expectations": [
+    {
+      "id": "I-B0",
+      "statement": "B0 cannot claim PCS after compromise of the OTAR-protecting master key."
+    },
+    {
+      "id": "I-B1",
+      "statement": "B1 requires transcript completion and key confirmation; missing or reordered required material aborts the baseline exchange."
+    },
+    {
+      "id": "I-B2",
+      "statement": "B2 offers the strongest modeled healing family but may lock out after one-sided state advancement."
+    }
+  ]
+}

@@ -1,0 +1,136 @@
+{
+  "schema_version": "0.1.0",
+  "global_guards": [
+    {
+      "id": "G-001",
+      "name": "contact_open",
+      "expression": "link.contact_open == true"
+    },
+    {
+      "id": "G-002",
+      "name": "future_epoch_only",
+      "expression": "message.target_epoch > receiver.epoch"
+    },
+    {
+      "id": "G-003",
+      "name": "replay_identifier_unused",
+      "expression": "message.message_id not in receiver.replay_cache"
+    },
+    {
+      "id": "G-004",
+      "name": "recovery_identifier_consistent",
+      "expression": "pending == null or message.recovery_id == pending.recovery_id"
+    },
+    {
+      "id": "G-005",
+      "name": "authority_allowed",
+      "expression": "message.authorized_by in receiver.allowed_recovery_authorities"
+    },
+    {
+      "id": "G-006",
+      "name": "not_expired",
+      "expression": "current_contact <= pending.expires_after_contact"
+    },
+    {
+      "id": "G-007",
+      "name": "bounded_pending_capacity",
+      "expression": "count(receiver.pending_states) < configured_pending_limit"
+    },
+    {
+      "id": "G-008",
+      "name": "candidate_cannot_execute_commands",
+      "expression": "command.key_ref == receiver.active_key_ref and receiver.mode in ['NORMAL','VERIFIED']"
+    },
+    {
+      "id": "G-009",
+      "name": "no_compromised_key_after_verification",
+      "expression": "command.key_ref not in receiver.compromised_key_refs"
+    },
+    {
+      "id": "G-010",
+      "name": "monotonic_counter",
+      "expression": "message.counter > receiver.monotonic_counter"
+    }
+  ],
+  "baseline_specific": {
+    "B0": [
+      {
+        "transition": "receive_otar",
+        "guards": [
+          "G-001",
+          "G-003"
+        ],
+        "action": "stage uploaded session key; attacker learns it if protecting master key is compromised"
+      },
+      {
+        "transition": "activate_uploaded_key",
+        "guards": [
+          "G-002",
+          "G-003"
+        ],
+        "action": "activate uploaded session key and increment epoch"
+      }
+    ],
+    "B1": [
+      {
+        "transition": "receive_kem_init",
+        "guards": [
+          "G-001",
+          "G-002",
+          "G-003",
+          "G-004"
+        ],
+        "action": "create transcript-bound candidate; do not activate"
+      },
+      {
+        "transition": "receive_kem_response",
+        "guards": [
+          "G-001",
+          "G-003",
+          "G-004"
+        ],
+        "action": "complete initiator-side transcript and emit confirmation"
+      },
+      {
+        "transition": "receive_kem_confirm",
+        "guards": [
+          "G-001",
+          "G-003",
+          "G-004"
+        ],
+        "action": "complete responder-side transcript and activate at party-specific completion point"
+      },
+      {
+        "transition": "missing_or_out_of_order_required_material",
+        "guards": [],
+        "action": "abort exchange and record connection-drop outcome"
+      }
+    ],
+    "B2": [
+      {
+        "transition": "receive_ratchet_advance",
+        "guards": [
+          "G-001",
+          "G-002",
+          "G-003",
+          "G-010"
+        ],
+        "action": "derive next state, advance spacecraft, delete prior state according to strict policy, emit ack"
+      },
+      {
+        "transition": "receive_ratchet_ack",
+        "guards": [
+          "G-001",
+          "G-003",
+          "G-004"
+        ],
+        "action": "advance ground and delete prior state"
+      },
+      {
+        "transition": "stale_state_restore",
+        "guards": [],
+        "action": "restore ground to older epoch; strict peer rejects lower-epoch traffic"
+      }
+    ]
+  }
+}

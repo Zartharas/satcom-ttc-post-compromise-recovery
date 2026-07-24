@@ -1,0 +1,256 @@
+{
+  "schema_version": "0.1.0",
+  "note": "Expected outcomes are design oracles to validate simulator semantics, not empirical findings.",
+  "tests": [
+    {
+      "id": "B0-01",
+      "baseline": "B0",
+      "initial_state": "SYNC(0), keys secret",
+      "compromise": "none",
+      "faults": [],
+      "expected_joint_state": "SYNC(1)",
+      "expected_outcome": "SUCCESS",
+      "properties": [
+        "normal OTAR",
+        "activation"
+      ]
+    },
+    {
+      "id": "B0-02",
+      "baseline": "B0",
+      "initial_state": "SYNC(0)",
+      "compromise": "session key only",
+      "faults": [],
+      "expected_joint_state": "SYNC(1)",
+      "expected_outcome": "SUCCESS",
+      "properties": [
+        "master key survives"
+      ]
+    },
+    {
+      "id": "B0-03",
+      "baseline": "B0",
+      "initial_state": "SYNC(0)",
+      "compromise": "master and session keys",
+      "faults": [],
+      "expected_joint_state": "SYNC(1)",
+      "expected_outcome": "AVAILABLE_UNSAFE",
+      "properties": [
+        "absence of PCS"
+      ]
+    },
+    {
+      "id": "B0-04",
+      "baseline": "B0",
+      "initial_state": "SYNC(0)",
+      "compromise": "session key",
+      "faults": [
+        "DROP:OTAR_UPLOAD"
+      ],
+      "expected_joint_state": "SYNC(0)",
+      "expected_outcome": "AVAILABLE_UNSAFE",
+      "properties": [
+        "lost update"
+      ]
+    },
+    {
+      "id": "B0-05",
+      "baseline": "B0",
+      "initial_state": "SYNC(0)",
+      "compromise": "none",
+      "faults": [
+        "DROP:KEY_ACTIVATE asymmetrically"
+      ],
+      "expected_joint_state": "G_AHEAD or S_AHEAD",
+      "expected_outcome": "DIVERGED",
+      "properties": [
+        "one-sided activation"
+      ]
+    },
+    {
+      "id": "B0-06",
+      "baseline": "B0",
+      "initial_state": "SYNC(1)",
+      "compromise": "none",
+      "faults": [
+        "REPLAY:old OTAR/activation"
+      ],
+      "expected_joint_state": "SYNC(1)",
+      "expected_outcome": "SUCCESS",
+      "properties": [
+        "replay rejection"
+      ]
+    },
+    {
+      "id": "B1-01",
+      "baseline": "B1",
+      "initial_state": "SYNC(0), valid long-term KEM keys",
+      "compromise": "none",
+      "faults": [],
+      "expected_joint_state": "SYNC(1)",
+      "expected_outcome": "SUCCESS",
+      "properties": [
+        "three-message completion",
+        "key confirmation"
+      ]
+    },
+    {
+      "id": "B1-02",
+      "baseline": "B1",
+      "initial_state": "SYNC(0)",
+      "compromise": "operational keys",
+      "faults": [
+        "eventually passive attacker",
+        "long-term update enabled"
+      ],
+      "expected_joint_state": "SYNC(1)",
+      "expected_outcome": "SUCCESS",
+      "properties": [
+        "PCS under baseline assumptions"
+      ]
+    },
+    {
+      "id": "B1-03",
+      "baseline": "B1",
+      "initial_state": "SYNC(0)",
+      "compromise": "none",
+      "faults": [
+        "DROP:KEM_INIT"
+      ],
+      "expected_joint_state": "SYNC(0)",
+      "expected_outcome": "EXPIRED",
+      "properties": [
+        "clean abort"
+      ]
+    },
+    {
+      "id": "B1-04",
+      "baseline": "B1",
+      "initial_state": "SYNC(0)",
+      "compromise": "none",
+      "faults": [
+        "REORDER:required fragments"
+      ],
+      "expected_joint_state": "SYNC(0)",
+      "expected_outcome": "EXPIRED",
+      "properties": [
+        "published abort/drop behavior"
+      ]
+    },
+    {
+      "id": "B1-05",
+      "baseline": "B1",
+      "initial_state": "SYNC(0)",
+      "compromise": "none",
+      "faults": [
+        "DROP:KEM_CONFIRM"
+      ],
+      "expected_joint_state": "G_AHEAD or RECOVERING",
+      "expected_outcome": "DIVERGED",
+      "properties": [
+        "confirmation loss"
+      ]
+    },
+    {
+      "id": "B1-06",
+      "baseline": "B1",
+      "initial_state": "SYNC(0)",
+      "compromise": "all operational state",
+      "faults": [
+        "active attacker throughout"
+      ],
+      "expected_joint_state": "RECOVERING or EXPIRED",
+      "expected_outcome": "EXPIRED",
+      "properties": [
+        "no indefinite-interference liveness claim"
+      ]
+    },
+    {
+      "id": "B2-01",
+      "baseline": "B2",
+      "initial_state": "SYNC(0)",
+      "compromise": "none",
+      "faults": [],
+      "expected_joint_state": "SYNC(1)",
+      "expected_outcome": "SUCCESS",
+      "properties": [
+        "normal evolution",
+        "old-state deletion"
+      ]
+    },
+    {
+      "id": "B2-02",
+      "baseline": "B2",
+      "initial_state": "SYNC(0)",
+      "compromise": "current state",
+      "faults": [
+        "eventually passive attacker",
+        "fresh entropy"
+      ],
+      "expected_joint_state": "SYNC(1)",
+      "expected_outcome": "SUCCESS",
+      "properties": [
+        "strong-PCS family behavior"
+      ]
+    },
+    {
+      "id": "B2-03",
+      "baseline": "B2",
+      "initial_state": "SYNC(0)",
+      "compromise": "current state",
+      "faults": [
+        "DROP:RATCHET_ADVANCE"
+      ],
+      "expected_joint_state": "SYNC(0)",
+      "expected_outcome": "AVAILABLE_UNSAFE",
+      "properties": [
+        "no healing if update never arrives"
+      ]
+    },
+    {
+      "id": "B2-04",
+      "baseline": "B2",
+      "initial_state": "SYNC(0)",
+      "compromise": "current state",
+      "faults": [
+        "DROP:RATCHET_ACK after spacecraft advances"
+      ],
+      "expected_joint_state": "S_AHEAD",
+      "expected_outcome": "LOCKED",
+      "properties": [
+        "one-sided advancement",
+        "lockout"
+      ]
+    },
+    {
+      "id": "B2-05",
+      "baseline": "B2",
+      "initial_state": "SYNC(3)",
+      "compromise": "none",
+      "faults": [
+        "STALE_GROUND_RESTORE to epoch 1"
+      ],
+      "expected_joint_state": "S_AHEAD",
+      "expected_outcome": "LOCKED",
+      "properties": [
+        "rollback resistance",
+        "backup restoration"
+      ]
+    },
+    {
+      "id": "B2-06",
+      "baseline": "B2",
+      "initial_state": "SYNC(2)",
+      "compromise": "none",
+      "faults": [
+        "REPLAY:RATCHET_ADVANCE epoch 2"
+      ],
+      "expected_joint_state": "SYNC(2)",
+      "expected_outcome": "SUCCESS",
+      "properties": [
+        "replay rejection",
+        "monotonic counters"
+      ]
+    }
+  ]
+}
