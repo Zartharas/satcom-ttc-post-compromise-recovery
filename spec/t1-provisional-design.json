@@ -1,0 +1,112 @@
+{
+  "schema_version": "0.1.0",
+  "status": "PROVISIONAL_INTERNAL_REVIEW_ONLY",
+  "objective": "Restore synchronized operational state after bounded ground-space divergence without reactivating a compromised epoch or relying on hidden peer-state knowledge.",
+  "scope": {
+    "implemented": [
+      "abstract recovery-control state machine",
+      "bounded retransmission and candidate retention",
+      "exact-binding replay and conflict checks",
+      "deterministic outcome classification",
+      "post-activation test-command and telemetry verification"
+    ],
+    "not_implemented": [
+      "cryptographic primitives",
+      "wire encoding",
+      "CCSDS or SDLS conformance",
+      "flight software",
+      "radio-frequency or operational-satellite testing"
+    ]
+  },
+  "assumptions": [
+    "Recovery-control messages are authenticated by an established cryptographic core abstracted as an allowed recovery authority.",
+    "The recovery authority counter survives endpoint rollback and is not derived from the compromised operational traffic key.",
+    "The adversary becomes passive for a finite interval long enough for the configured bounded-delivery condition.",
+    "At most one recovery candidate is pending at each endpoint.",
+    "Candidate and activation-receipt retention are bounded by transmission count and contact lifetime."
+  ],
+  "no_hidden_oracle_rule": {
+    "ground_proposal": "max(ground active epoch, recovery-authority epoch floor) + 1",
+    "spacecraft_selection": "max(proposed epoch, spacecraft active epoch + 1)",
+    "meaning": "The ground does not read simulator-only spacecraft state; the spacecraft returns the selected forward epoch in RECOVERY_RESPONSE."
+  },
+  "message_flow": [
+    {
+      "phase": "RECOVERY_PREPARE",
+      "sender": "ground",
+      "receiver": "spacecraft",
+      "effect": "reserve one bounded recovery attempt; no candidate key becomes authoritative"
+    },
+    {
+      "phase": "RECOVERY_RESPONSE",
+      "sender": "spacecraft",
+      "receiver": "ground",
+      "effect": "select a target epoch above spacecraft state and bind an opaque candidate key reference"
+    },
+    {
+      "phase": "RECOVERY_COMMIT",
+      "sender": "ground",
+      "receiver": "spacecraft",
+      "effect": "activate the exact selected candidate at the spacecraft and retain a bounded activation receipt"
+    },
+    {
+      "phase": "RECOVERY_CONFIRM",
+      "sender": "spacecraft",
+      "receiver": "ground",
+      "effect": "activate the exact selected candidate at the ground; exact commit retries may re-emit confirmation"
+    },
+    {
+      "phase": "TEST_COMMAND_AND_STATUS",
+      "sender": "bidirectional",
+      "receiver": "bidirectional",
+      "effect": "verify command acceptance, telemetry evidence, convergence, and rejection of compromised state before SUCCESS"
+    }
+  ],
+  "binding_fields": [
+    "spacecraft identity",
+    "recovery ID",
+    "proposed or selected target epoch",
+    "recovery-authority counter",
+    "transcript reference",
+    "authorized recovery authority",
+    "candidate key reference after response"
+  ],
+  "bounded_controls": {
+    "default_max_transmissions_per_phase": 3,
+    "default_candidate_lifetime_contacts": 3,
+    "pending_candidates_per_endpoint": 1,
+    "activation_receipts_per_endpoint": 1,
+    "replay_cache": "bounded by implementation profile; abstract model records message identifiers"
+  },
+  "provisional_outcomes": {
+    "SUCCESS": "endpoints converge, fresh test command is accepted, status telemetry is received, and active candidate is not marked compromised",
+    "INDETERMINATE": "endpoints converge but test or status evidence is incomplete",
+    "EXPIRED": "bounded delivery is exhausted before either endpoint activates the candidate",
+    "SECURE_DEGRADED": "spacecraft activation occurred but confirmation budget expired; recovery control remains modeled, so permanent LOCKED is not asserted",
+    "DIVERGED": "bindings or state are incompatible and no provisional recovery transition completed",
+    "AVAILABLE_UNSAFE": "the active candidate or recovery authority is marked attacker-known or compromised",
+    "LOCKED": "reserved for a modeled state in which no authorized recovery transition remains"
+  },
+  "mandatory_external_review_stop_points": [
+    "before changing the Phase 05 oracle candidate to ACCEPTED or FROZEN",
+    "before labeling T1 as the final treatment rather than a provisional candidate",
+    "before freezing the final experiment protocol or parameter ranges",
+    "before interpreting simulation results as evidence of post-compromise security",
+    "before implementing real cryptographic primitives or claiming protocol conformance",
+    "before NOS3/cFS integration intended to support publication claims",
+    "before manuscript submission or external security claims"
+  ],
+  "work_allowed_before_external_review": [
+    "abstract controller implementation",
+    "deterministic fault tests",
+    "scenario and metric design",
+    "seeded simulation scaffolding",
+    "internal red-team review",
+    "non-cryptographic performance instrumentation"
+  ],
+  "review_status": {
+    "independent_cryptography_review": "NOT_YET_PERFORMED",
+    "baseline_oracles": "PENDING_INDEPENDENT_REVIEW",
+    "t1_claim_status": "PROVISIONAL_ONLY"
+  }
+}
