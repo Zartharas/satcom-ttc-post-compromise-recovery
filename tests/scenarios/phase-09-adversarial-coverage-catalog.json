@@ -1,0 +1,31 @@
+{
+  "schema_version": "0.1.0",
+  "status": "PROVISIONAL_INTERNAL_REVIEW_ONLY",
+  "scenario_count": 24,
+  "scenarios": [
+    {"id": "P09-001", "purpose": "no-fault verified recovery"},
+    {"id": "P09-002", "purpose": "prepare drop with retry"},
+    {"id": "P09-003", "purpose": "response delay"},
+    {"id": "P09-004", "purpose": "duplicate commit"},
+    {"id": "P09-005", "purpose": "reordered response"},
+    {"id": "P09-006", "purpose": "prepare contact closure"},
+    {"id": "P09-007", "purpose": "spacecraft restart before commit"},
+    {"id": "P09-008", "purpose": "stale authority counter"},
+    {"id": "P09-009", "purpose": "stale commit replay"},
+    {"id": "P09-010", "purpose": "status loss after convergence"},
+    {"id": "P09-011", "purpose": "test-command loss after convergence"},
+    {"id": "P09-012", "purpose": "confirmation budget exhaustion"},
+    {"id": "P09-013", "purpose": "prepare budget exhaustion"},
+    {"id": "P09-014", "purpose": "retry budget minus one"},
+    {"id": "P09-015", "purpose": "retry budget plus one and unreachable action accounting"},
+    {"id": "P09-016", "purpose": "candidate lifetime equality boundary"},
+    {"id": "P09-017", "purpose": "candidate lifetime plus one"},
+    {"id": "P09-018", "purpose": "spacecraft-ahead target selection without hidden oracle"},
+    {"id": "P09-019", "purpose": "recovery-authority epoch floor"},
+    {"id": "P09-020", "purpose": "combined delay and contact closure"},
+    {"id": "P09-021", "purpose": "duplicate prepare"},
+    {"id": "P09-022", "purpose": "reordered confirmation"},
+    {"id": "P09-023", "purpose": "ground restart during confirmation"},
+    {"id": "P09-024", "purpose": "confirmation contact closure with receipt retry"}
+  ]
+}
