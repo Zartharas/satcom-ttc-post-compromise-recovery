@@ -26,8 +26,16 @@ class Outcome(str, Enum):
 
 
 class B1ActivationPolicy(str, Enum):
-    DEFER_UNTIL_BILATERAL_COMPLETION = "DEFER_UNTIL_BILATERAL_COMPLETION"
     ACTIVATE_ON_LOCAL_COMPLETION = "ACTIVATE_ON_LOCAL_COMPLETION"
+    DEFER_UNTIL_AUTHENTICATED_STATUS = "DEFER_UNTIL_AUTHENTICATED_STATUS"
+
+
+class B2CompromiseScope(str, Enum):
+    NONE = "NONE"
+    TRAFFIC_KEY = "TRAFFIC_KEY"
+    SENDER_STATE = "SENDER_STATE"
+    RECEIVER_STATE = "RECEIVER_STATE"
+    BOTH_ENDPOINT_STATES = "BOTH_ENDPOINT_STATES"
 
 
 @dataclass
@@ -39,6 +47,7 @@ class Endpoint:
     pending_key: Optional[str] = None
     pending_epoch: Optional[int] = None
     crypto_complete_epoch: Optional[int] = None
+    state_exposed: bool = False
     attacker_known_keys: Set[str] = field(default_factory=set)
     replay_seen: Set[str] = field(default_factory=set)
     retired_keys: Set[str] = field(default_factory=set)
@@ -85,6 +94,8 @@ class Simulation:
     completion_ambiguous: bool = False
     verification_complete: bool = True
     lockout_reason: Optional[str] = None
+    b2_compromise_scope: B2CompromiseScope = B2CompromiseScope.NONE
+    attacker_impersonated_sender: bool = False
     _queue: List[ScheduledEvent] = field(default_factory=list)
     _sequence: int = 0
 
@@ -148,7 +159,6 @@ class Simulation:
 
 
 def b0_otar(sim: Simulation, master_compromised: bool = False, drop_upload: bool = False) -> None:
-    """Abstract SDLS EP-style OTAR; no cryptographic operations."""
     target = sim.ground.epoch + 1
     new_key = f"K{target}"
     if master_compromised:
@@ -168,9 +178,9 @@ def b1_triple_kem(
     sim: Simulation,
     drop_confirm: bool = False,
     out_of_order: bool = False,
-    activation_policy: B1ActivationPolicy = B1ActivationPolicy.DEFER_UNTIL_BILATERAL_COMPLETION,
+    activation_policy: B1ActivationPolicy = B1ActivationPolicy.ACTIVATE_ON_LOCAL_COMPLETION,
+    drop_status: bool = False,
 ) -> None:
-    """Model Triple-KEM completion separately from operational SDLS activation."""
     target = sim.ground.epoch + 1
     new_key = f"TK{target}"
 
@@ -195,40 +205,76 @@ def b1_triple_kem(
 
     if drop_confirm:
         sim.log("b1_confirm_dropped", key_ref=new_key)
-        if activation_policy == B1ActivationPolicy.DEFER_UNTIL_BILATERAL_COMPLETION:
+        sim.spacecraft.expire_pending()
+        if activation_policy == B1ActivationPolicy.DEFER_UNTIL_AUTHENTICATED_STATUS:
             sim.ground.expire_pending()
-            sim.spacecraft.expire_pending()
             sim.attempt_expired = True
-        else:
-            sim.spacecraft.expire_pending()
         return
 
     sim.spacecraft.crypto_complete_epoch = target
     sim.completion_ambiguous = False
     sim.log("b1_responder_crypto_complete", key_ref=new_key)
 
-    if activation_policy == B1ActivationPolicy.DEFER_UNTIL_BILATERAL_COMPLETION:
-        sim.ground.activate(target, new_key)
+    if activation_policy == B1ActivationPolicy.ACTIVATE_ON_LOCAL_COMPLETION:
+        sim.spacecraft.activate(target, new_key)
+        sim.log("b1_responder_activated_locally", key_ref=new_key)
+        return
+
     sim.spacecraft.activate(target, new_key)
-    sim.log("b1_operational_activation_complete", key_ref=new_key)
+    sim.log("b1_authenticated_status_sent", key_ref=new_key)
+
+    if drop_status:
+        sim.ground.expire_pending()
+        sim.log("b1_authenticated_status_dropped", key_ref=new_key)
+        return
+
+    sim.ground.activate(target, new_key)
+    sim.log("b1_authenticated_status_received", key_ref=new_key)
+
+
+def _apply_b2_compromise(sim: Simulation, scope: B2CompromiseScope) -> None:
+    sim.b2_compromise_scope = scope
+    if scope == B2CompromiseScope.TRAFFIC_KEY:
+        sim.ground.attacker_known_keys.add(sim.ground.active_key)
+        sim.spacecraft.attacker_known_keys.add(sim.spacecraft.active_key)
+    elif scope == B2CompromiseScope.SENDER_STATE:
+        sim.ground.state_exposed = True
+    elif scope == B2CompromiseScope.RECEIVER_STATE:
+        sim.spacecraft.state_exposed = True
+    elif scope == B2CompromiseScope.BOTH_ENDPOINT_STATES:
+        sim.ground.state_exposed = True
+        sim.spacecraft.state_exposed = True
 
 
 def b2_urke_strict(
     sim: Simulation,
     drop_update: bool = False,
-    compromise_current: bool = False,
+    compromise_scope: B2CompromiseScope = B2CompromiseScope.NONE,
     lose_status: bool = False,
+    active_sender_impersonation: bool = False,
 ) -> None:
-    """URKE-inspired strict sender evolution with no rollback or skipped-state cache."""
-    if compromise_current:
-        sim.ground.attacker_known_keys.add(sim.ground.active_key)
-        sim.spacecraft.attacker_known_keys.add(sim.spacecraft.active_key)
+    _apply_b2_compromise(sim, compromise_scope)
+
+    if active_sender_impersonation:
+        if compromise_scope not in {B2CompromiseScope.SENDER_STATE, B2CompromiseScope.BOTH_ENDPOINT_STATES}:
+            raise ValueError("Active sender impersonation requires exposed sender state.")
+        target = sim.spacecraft.epoch + 1
+        attacker_key = f"A{target}"
+        sim.spacecraft.activate(target, attacker_key, retire_old=True)
+        sim.spacecraft.attacker_known_keys.add(attacker_key)
+        sim.attacker_impersonated_sender = True
+        sim.lockout_reason = "exposed sender state was used to advance the receiver on an attacker-known branch"
+        sim.log("b2_sender_state_impersonation_lockout", key_ref=attacker_key)
+        return
 
     target = sim.ground.epoch + 1
     new_key = f"R{target}"
-
     sim.ground.activate(target, new_key, retire_old=True)
     sim.log("b2_sender_advanced", key_ref=new_key)
+
+    receiver_exposed = compromise_scope in {B2CompromiseScope.RECEIVER_STATE, B2CompromiseScope.BOTH_ENDPOINT_STATES}
+    if receiver_exposed:
+        sim.ground.attacker_known_keys.add(new_key)
 
     if drop_update:
         sim.lockout_reason = "sender advanced and deleted prior state before receiver processed update"
@@ -236,6 +282,8 @@ def b2_urke_strict(
         return
 
     sim.spacecraft.activate(target, new_key, retire_old=True)
+    if receiver_exposed:
+        sim.spacecraft.attacker_known_keys.add(new_key)
     sim.log("b2_receiver_advanced", key_ref=new_key)
 
     if lose_status:
@@ -246,7 +294,6 @@ def b2_urke_strict(
 
 
 def restore_ground_snapshot(sim: Simulation, epoch: int, key_ref: str) -> None:
-    """Restore a stale ground snapshot after evolution and record strict lockout."""
     if epoch >= sim.ground.epoch:
         raise ValueError("The restored snapshot must be older than the current ground state.")
     sim.ground.epoch = epoch
@@ -260,7 +307,6 @@ def restore_ground_snapshot(sim: Simulation, epoch: int, key_ref: str) -> None:
 
 
 def replay_b2_update(sim: Simulation, target_epoch: int, message_id: str) -> bool:
-    """Reject a replayed or non-forward B2 update without changing endpoint state."""
     if message_id in sim.spacecraft.replay_seen or target_epoch <= sim.spacecraft.epoch:
         sim.log("b2_replay_rejected", target_epoch=target_epoch, message_id=message_id)
         return False
@@ -269,28 +315,4 @@ def replay_b2_update(sim: Simulation, target_epoch: int, message_id: str) -> boo
     return True
 
 
-# Backward-compatible name retained for early notebooks.
 b2_strict_rke = b2_urke_strict
-
-
-def demo() -> None:
-    cases = [
-        ("B0 safe", lambda s: b0_otar(s)),
-        ("B0 master compromised", lambda s: b0_otar(s, master_compromised=True)),
-        ("B1 normal", lambda s: b1_triple_kem(s)),
-        ("B1 confirm lost", lambda s: b1_triple_kem(s, drop_confirm=True)),
-        ("B2 normal", lambda s: b2_urke_strict(s)),
-        ("B2 update lost", lambda s: b2_urke_strict(s, drop_update=True)),
-    ]
-    for label, action in cases:
-        sim = Simulation(label)
-        sim.schedule(0, label, lambda a=action, s=sim: a(s))
-        sim.run()
-        print(
-            f"{label:24s} alignment={sim.alignment_state():10s} "
-            f"joint={sim.joint_state():10s} outcome={sim.evaluate().value}"
-        )
-
-
-if __name__ == "__main__":
-    demo()
