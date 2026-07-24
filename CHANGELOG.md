@@ -1,5 +1,26 @@
 # Changelog
 
+## Unreleased — Phase 11 formal/Python trace cross-validation
+
+- Added the testing-only `ReachabilityWitnessNoSuccess` invariant and a separate success-witness TLC
+  configuration.
+- Captured the shortest bounded eight-state path from initialization through successful verification.
+- Added TLA+ scalar and transition-label normalization for TLC traces.
+- Added Python T1 controller replay under an explicit macro-step and evidence mapping.
+- Compared 16 abstract fields at every witness step and retained per-field CSV evidence.
+- Added `MATCH_WITHIN_DECLARED_ABSTRACTION` and `MISMATCH_REQUIRES_REVIEW` statuses without claiming
+  refinement proof or implementation equivalence.
+- Added a five-case finite bound panel for lower/higher retry and epoch bounds plus exact Phase 10 baseline
+  reproduction.
+- Recorded the first successful comparison: 136 matched rows, zero mismatches, and exact reproduction of
+  the 50-generated / 28-distinct / depth-10 baseline.
+- Recorded the provisional bound panel: attempts 1 produced 18/12/depth 8; attempts 5 produced
+  82/44/depth 12; epoch ceilings 4 and 8 retained the baseline counts under the current initial condition.
+- Added JSON, CSV, raw SANY/TLC logs, and a SHA-256 derived manifest.
+- Added Phase 11 tests, specification, validator, runner, documentation, and a real Java/TLC CI gate.
+- Kept the projection, properties, bounds, parameters, interpretation, and publication claims provisional
+  and unfrozen.
+
 ## Unreleased — Phase 10 formal model execution
 
 - Pinned the stable TLA+ command-line tools release `1.7.4` and verified the official published JAR
