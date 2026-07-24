@@ -93,6 +93,12 @@ jobs:
             python experiments/scripts/validate_phase12_adverse_outcomes.py
           fi
 
+      - name: Validate Phase 13 outcome expansion
+        run: |
+          if [ -f experiments/scripts/validate_phase13_outcome_expansion.py ]; then
+            python experiments/scripts/validate_phase13_outcome_expansion.py
+          fi
+
       - name: Run Phase 07 export smoke test
         if: matrix.python-version == '3.13'
         env:
@@ -160,7 +166,7 @@ jobs:
   formal:
     name: TLA+ TLC 1.7.4
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 25
 
     steps:
       - name: Check out repository
@@ -271,5 +277,36 @@ jobs:
         with:
           name: phase12-adverse-outcome-validation
           path: /tmp/phase12-adverse-validation/phase12-*
+          if-no-files-found: warn
+          retention-days: 7
+
+      - name: Validate Phase 13 design
+        run: python experiments/scripts/validate_phase13_outcome_expansion.py
+
+      - name: Run Phase 13 baseline and expansion gates
+        env:
+          PYTHONPATH: src
+        run: |
+          python experiments/scripts/run_phase13_outcome_expansion.py \
+            --jar /tmp/tla2tools.jar \
+            --output-dir /tmp/phase13-outcome-expansion
+
+      - name: Verify Phase 13 derived bundle
+        run: |
+          cd /tmp/phase13-outcome-expansion
+          sha256sum -c phase13-derived-bundle.sha256
+          test -s phase13-outcome-expansion-validation.json
+          test -s phase13-baseline-regression.csv
+          test -s phase13-expansion-assignment-audit.csv
+          test -s phase13-witness-diverged.json
+          test -s phase13-witness-available-unsafe.json
+          test -s phase13-witness-locked.json
+
+      - name: Upload Phase 13 outcome-expansion evidence
+        if: always()
+        uses: actions/upload-artifact@v5
+        with:
+          name: phase13-outcome-expansion-validation
+          path: /tmp/phase13-outcome-expansion/phase13-*
           if-no-files-found: warn
           retention-days: 7
