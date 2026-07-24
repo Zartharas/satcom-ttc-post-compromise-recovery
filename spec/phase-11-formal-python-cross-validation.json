@@ -1,0 +1,138 @@
+{
+  "schema_version": "0.1.0",
+  "phase": "Phase 11",
+  "title": "Formal/Python Trace Cross-Validation and Bound Expansion",
+  "status": "PROVISIONAL_INTERNAL_REVIEW_ONLY",
+  "purpose": "Capture a shortest bounded formal SUCCESS witness, replay its declared macro-steps through the Python T1 controller, compare the abstract state projection, and run a small finite bound panel without freezing parameters or claims.",
+  "source_phase": {
+    "phase": "Phase 10",
+    "source_commit": "a020615ed5c3a9cbe45073c2e4afce8812a2fb6e",
+    "positive_status": "NO_COUNTEREXAMPLE_WITHIN_RECORDED_BOUND",
+    "generated_states": 50,
+    "distinct_states": 28,
+    "queued_states": 0,
+    "search_depth": 10
+  },
+  "toolchain": {
+    "tool": "tla2tools.jar",
+    "version": "1.7.4",
+    "official_sha1": "bee4a54f3ee3d4afc347c3240ec2d9e93b075104",
+    "worker_count": 1,
+    "java_minimum_major": 11
+  },
+  "success_witness": {
+    "configuration": "formal/tla/SuccessWitness.cfg",
+    "testing_only_false_invariant": "ReachabilityWitnessNoSuccess",
+    "expected_status": "EXPECTED_SUCCESS_REACHABILITY_WITNESS_CAPTURED",
+    "expected_actions": [
+      "Init",
+      "Prepare",
+      "SelectCandidate",
+      "Commit",
+      "Confirm",
+      "AcceptCommand",
+      "ReceiveStatus",
+      "Verify"
+    ],
+    "interpretation": "The false invariant is a reachability witness mechanism, not a claimed safety property or protocol defect."
+  },
+  "trace_projection": {
+    "status_on_match": "MATCH_WITHIN_DECLARED_ABSTRACTION",
+    "status_on_mismatch": "MISMATCH_REQUIRES_REVIEW",
+    "comparison_fields": [
+      "gMode",
+      "sMode",
+      "gEpoch",
+      "sEpoch",
+      "gPrevEpoch",
+      "sPrevEpoch",
+      "candidateEpoch",
+      "pending",
+      "receipt",
+      "attempts",
+      "activationCount",
+      "commandAccepted",
+      "statusSeen",
+      "statusDropped",
+      "verified",
+      "outcome"
+    ],
+    "macro_step_mapping": {
+      "SelectCandidate": "Python spacecraft prepare acceptance followed by ground response acceptance",
+      "AcceptCommand": "Projected command-evidence substep before Python verify_recovery",
+      "ReceiveStatus": "Projected telemetry-evidence substep before Python verify_recovery"
+    },
+    "equivalence_claim": "NOT_PERMITTED"
+  },
+  "bound_panel": {
+    "status_wording": "NO_COUNTEREXAMPLE_WITHIN_RECORDED_BOUND",
+    "cases": [
+      {
+        "id": "attempts-1",
+        "config": "formal/tla/bounds/Attempts1.cfg",
+        "max_attempts": 1,
+        "max_epoch": 6
+      },
+      {
+        "id": "base-3-6",
+        "config": "formal/tla/MC.cfg",
+        "max_attempts": 3,
+        "max_epoch": 6
+      },
+      {
+        "id": "attempts-5",
+        "config": "formal/tla/bounds/Attempts5.cfg",
+        "max_attempts": 5,
+        "max_epoch": 6
+      },
+      {
+        "id": "epoch-4",
+        "config": "formal/tla/bounds/Epoch4.cfg",
+        "max_attempts": 3,
+        "max_epoch": 4
+      },
+      {
+        "id": "epoch-8",
+        "config": "formal/tla/bounds/Epoch8.cfg",
+        "max_attempts": 3,
+        "max_epoch": 8
+      }
+    ],
+    "baseline_reproduction_required": {
+      "generated_states": 50,
+      "distinct_states": 28,
+      "queued_states": 0,
+      "search_depth": 10
+    },
+    "parameter_selection_status": "UNFROZEN"
+  },
+  "required_outputs": [
+    "phase11-cross-validation.json",
+    "phase11-success-witness.json",
+    "phase11-trace-comparison.csv",
+    "phase11-bound-expansion.csv",
+    "phase11-java-version.log",
+    "phase11-sany.log",
+    "phase11-tlc-success-witness.log",
+    "phase11-tlc-bound-attempts-1.log",
+    "phase11-tlc-bound-base-3-6.log",
+    "phase11-tlc-bound-attempts-5.log",
+    "phase11-tlc-bound-epoch-4.log",
+    "phase11-tlc-bound-epoch-8.log",
+    "phase11-derived-bundle.sha256"
+  ],
+  "review_status": {
+    "independent_cryptography_review": "PENDING",
+    "formal_property_review": "PENDING",
+    "implementation_equivalence_claim": "NOT_PERMITTED",
+    "publication_evidence_status": "NOT_PERMITTED"
+  },
+  "mandatory_external_review_stop_points": [
+    "freezing the formal property set or bound panel",
+    "claiming formal and Python trace agreement establishes implementation equivalence",
+    "mapping the abstraction to a concrete cryptographic protocol",
+    "selecting retry, epoch, lifetime, or treatment parameters",
+    "using trace agreement or bound expansion as publication evidence",
+    "making a post-compromise-security or external security claim"
+  ]
+}
