@@ -11,6 +11,7 @@ from pathlib import Path
 from typing import Iterable, Sequence
 
 
+FORMAL_EXECUTION_GATES_PASSED = "FORMAL_EXECUTION_GATES_PASSED"
 NO_COUNTEREXAMPLE_STATUS = "NO_COUNTEREXAMPLE_WITHIN_RECORDED_BOUND"
 EXPECTED_NEGATIVE_STATUS = "EXPECTED_NEGATIVE_CONTROL_COUNTEREXAMPLE_CAPTURED"
 COUNTEREXAMPLE_STATUS = "COUNTEREXAMPLE_FOUND"
@@ -231,16 +232,17 @@ def execute_formal_model(
     negative_summary = parse_tlc_summary(negative.output, negative.returncode)
     negative_trace = extract_counterexample_trace(negative.output)
 
-    if sany.returncode != 0:
-        overall_status = TOOL_ERROR_STATUS
-    elif positive_summary.status != NO_COUNTEREXAMPLE_STATUS:
-        overall_status = TOOL_ERROR_STATUS
-    elif (
+    negative_gate_passed = (
         negative_summary.status == COUNTEREXAMPLE_STATUS
         and negative_summary.violated_invariant == "NegativeControlNoActivation"
-        and negative_trace
+        and bool(negative_trace)
+    )
+    if (
+        sany.returncode == 0
+        and positive_summary.status == NO_COUNTEREXAMPLE_STATUS
+        and negative_gate_passed
     ):
-        overall_status = EXPECTED_NEGATIVE_STATUS
+        overall_status = FORMAL_EXECUTION_GATES_PASSED
     else:
         overall_status = TOOL_ERROR_STATUS
 
@@ -255,9 +257,7 @@ def execute_formal_model(
 
     counterexample_record = {
         "schema_version": "0.1.0",
-        "status": EXPECTED_NEGATIVE_STATUS
-        if negative_summary.status == COUNTEREXAMPLE_STATUS
-        else negative_summary.status,
+        "status": EXPECTED_NEGATIVE_STATUS if negative_gate_passed else negative_summary.status,
         "testing_role": "INTENTIONAL_PIPELINE_NEGATIVE_CONTROL",
         "violated_invariant": negative_summary.violated_invariant,
         "trace_state_count": len(negative_trace),
@@ -336,7 +336,7 @@ def execute_formal_model(
     derived_names = [report_name, counterexample_name, *logs.keys()]
     _write_manifest(output_dir, derived_names)
 
-    if overall_status != EXPECTED_NEGATIVE_STATUS:
+    if overall_status != FORMAL_EXECUTION_GATES_PASSED:
         raise RuntimeError(
             "Phase 10 formal execution did not satisfy parse, positive-model, and negative-control gates."
         )
@@ -347,6 +347,7 @@ __all__ = [
     "COUNTEREXAMPLE_STATUS",
     "CommandResult",
     "EXPECTED_NEGATIVE_STATUS",
+    "FORMAL_EXECUTION_GATES_PASSED",
     "NO_COUNTEREXAMPLE_STATUS",
     "TOOL_ERROR_STATUS",
     "TlcSummary",
