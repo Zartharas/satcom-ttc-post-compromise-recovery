@@ -99,6 +99,12 @@ jobs:
             python experiments/scripts/validate_phase13_outcome_expansion.py
           fi
 
+      - name: Validate Phase 14 review package
+        run: |
+          if [ -f experiments/scripts/validate_phase14_review_package.py ]; then
+            python experiments/scripts/validate_phase14_review_package.py
+          fi
+
       - name: Run Phase 07 export smoke test
         if: matrix.python-version == '3.13'
         env:
