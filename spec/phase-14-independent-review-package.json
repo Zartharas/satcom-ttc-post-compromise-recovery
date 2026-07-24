@@ -1,0 +1,787 @@
+{
+  "schema_version": "0.1.0",
+  "phase": "Phase 14",
+  "title": "Independent review package and claims traceability matrix",
+  "status": "READY_FOR_OUTREACH_NOT_REVIEWED",
+  "source_base": {
+    "branch": "phase-13/abstraction-gap-outcomes",
+    "commit": "fee83236c12f19226a1b0de404a965cc8fbba005",
+    "baseline_review_status": "PENDING_INDEPENDENT_REVIEW",
+    "phase13_status": "PROVISIONAL_INTERNAL_REVIEW_ONLY"
+  },
+  "review_issue": {
+    "number": 3,
+    "status": "OPEN",
+    "completion_boxes_must_remain_unchecked_until_evidence_exists": true
+  },
+  "review_scope": {
+    "mandatory_primary_scope": "Phase 04/05 source-to-model mapping and 21 baseline scenario oracles",
+    "extended_diagnostic_scope": "Phases 10-13 formal abstraction, projection, witness, and claim boundaries",
+    "scope_separation_rule": "A reviewer may accept the baseline scope while declining the formal-diagnostic scope; uncovered scope requires a second qualified reviewer.",
+    "primary_reviewer_required_expertise_count": 2,
+    "primary_expertise_options": [
+      "authenticated key exchange or secure-channel protocols",
+      "KEM-based or post-quantum protocol design",
+      "ratcheted key exchange or post-compromise security",
+      "formal or provable analysis of cryptographic protocols",
+      "secure communication in disrupted or constrained environments"
+    ],
+    "conflict_rule": "Authors of a primary source construction may clarify their work but cannot alone satisfy the independent-review gate."
+  },
+  "decision_scale": [
+    "ACCEPT",
+    "ACCEPT WITH CORRECTION",
+    "REJECT"
+  ],
+  "confidence_scale": [
+    "HIGH",
+    "MEDIUM",
+    "LOW"
+  ],
+  "question_groups": [
+    {
+      "group_id": "B1",
+      "title": "B1 Triple-KEM operational integration",
+      "required_reviewer_scope": "cryptography",
+      "questions": [
+        {
+          "id": "B1-R1",
+          "text": "Is ACTIVATE_ON_LOCAL_COMPLETION the fairest minimum-assumption operational baseline when the cited three-message exchange does not define an SDLS activation acknowledgment?"
+        },
+        {
+          "id": "B1-R2",
+          "text": "Does loss of KEM_CONFIRM correctly produce ground-ahead operational divergence under that policy?"
+        },
+        {
+          "id": "B1-R3",
+          "text": "Is DEFER_UNTIL_AUTHENTICATED_STATUS clearly separated as a project-added four-message integration rather than attributed to Triple-KEM?"
+        },
+        {
+          "id": "B1-R4",
+          "text": "Are confirmation-loss and status-loss outcomes assigned consistently for the enhanced integration?"
+        },
+        {
+          "id": "B1-R5",
+          "text": "Does any B1 test or transition rely on information unavailable to the modeled endpoint?"
+        }
+      ]
+    },
+    {
+      "group_id": "B2",
+      "title": "B2 URKE-inspired strict baseline",
+      "required_reviewer_scope": "cryptography",
+      "questions": [
+        {
+          "id": "B2-R1",
+          "text": "Is the ground-sender and spacecraft-receiver role mapping faithful enough for the stated ground-to-space recovery experiment?"
+        },
+        {
+          "id": "B2-R2",
+          "text": "Is sender-on-send evolution with prior-state deletion and receiver-on-accept evolution a defensible strict recoverability lower bound?"
+        },
+        {
+          "id": "B2-R3",
+          "text": "Are TRAFFIC_KEY, SENDER_STATE, RECEIVER_STATE, and BOTH_ENDPOINT_STATES sufficiently distinct compromise scopes?"
+        },
+        {
+          "id": "B2-R4",
+          "text": "Is passive sender-state exposure treated consistently with the selected source model?"
+        },
+        {
+          "id": "B2-R5",
+          "text": "Is receiver-state exposure conservatively classified when it permits future-key tracing?"
+        },
+        {
+          "id": "B2-R6",
+          "text": "Does active sender-state impersonation model an attacker-known divergent receiver branch without overstating a source-paper theorem?"
+        },
+        {
+          "id": "B2-R7",
+          "text": "Are dropped update, replay, stale restore, and lost-status outcomes mutually consistent?"
+        }
+      ]
+    },
+    {
+      "group_id": "C",
+      "title": "Claim boundaries",
+      "required_reviewer_scope": "cryptography",
+      "questions": [
+        {
+          "id": "C-R1",
+          "text": "Do repository statements clearly distinguish deterministic model behavior from cryptographic implementation or proof?"
+        },
+        {
+          "id": "C-R2",
+          "text": "Are source-paper proofs and PCS guarantees not inherited by the simulator or TLA+ models?"
+        },
+        {
+          "id": "C-R3",
+          "text": "Are SUCCESS, AVAILABLE_UNSAFE, LOCKED, and other outcomes interpreted as model classifications rather than cryptographic proof results?"
+        },
+        {
+          "id": "C-R4",
+          "text": "Are the baselines fair enough for comparative experiments against provisional T1 without importing unavailable recovery assistance?"
+        }
+      ]
+    },
+    {
+      "group_id": "G",
+      "title": "Governance and retrospective validation",
+      "required_reviewer_scope": "cryptography_and_research_governance",
+      "questions": [
+        {
+          "id": "G-R1",
+          "text": "Is retrospective review acceptable given that provisional Phases 6-13 proceeded after the Phase 04 gate stated that T1 work was blocked?"
+        },
+        {
+          "id": "G-R2",
+          "text": "Which later phases, tests, formal properties, traces, or evidence bundles must be repeated if the reviewer changes any baseline mapping or oracle?"
+        },
+        {
+          "id": "G-R3",
+          "text": "Is the distinction between internal implementation lock, independent approval, oracle freeze, and publication permission sufficiently explicit?"
+        }
+      ]
+    },
+    {
+      "group_id": "F",
+      "title": "Formal-model and cross-validation diagnostics",
+      "required_reviewer_scope": "formal_methods_or_protocol_modeling",
+      "questions": [
+        {
+          "id": "F-R1",
+          "text": "Is the T1Recovery.tla abstraction suitable as an internal control model for the stated recovery questions, while remaining non-cryptographic and finite?"
+        },
+        {
+          "id": "F-R2",
+          "text": "Is the declared 16-field projection adequate for the limited trace-comparison purpose, and what relevant state is omitted?"
+        },
+        {
+          "id": "F-R3",
+          "text": "Are the macro-step mapping and retained receipt-evidence projection acceptable diagnostic mappings?"
+        },
+        {
+          "id": "F-R4",
+          "text": "Are the Phase 13 DIVERGED, AVAILABLE_UNSAFE, and LOCKED expansion paths and gapCause labels reasonable diagnostic proposals, or should they be split, renamed, or rejected?"
+        },
+        {
+          "id": "F-R5",
+          "text": "Which exact statements, if any, may be used externally after review, and which claims must remain prohibited?"
+        }
+      ]
+    }
+  ],
+  "scenario_oracle_review": {
+    "status": "PENDING",
+    "oracle_ids": [
+      "B0-01",
+      "B0-02",
+      "B0-03",
+      "B0-04",
+      "B1-01",
+      "B1-02",
+      "B1-03",
+      "B1-04",
+      "B1-05",
+      "B1-06",
+      "B1-07",
+      "B2-01",
+      "B2-02",
+      "B2-03",
+      "B2-04",
+      "B2-05",
+      "B2-06",
+      "B2-07",
+      "B2-08",
+      "B2-09",
+      "B2-10"
+    ],
+    "required_decision_for_every_oracle": true,
+    "source_path": "spec/baseline-oracle-freeze-candidate.json"
+  },
+  "governance_findings": [
+    {
+      "id": "GOV-01",
+      "status": "OPEN_REQUIRES_REVIEW",
+      "finding": "The Phase 04 gate contains 16 required questions, while the Phase 05 response template contains 15 and omits the endpoint-knowledge question now identified as B1-R5.",
+      "evidence_paths": [
+        "governance/phase-04-independent-review-gate.md",
+        "governance/phase-05-reviewer-response-template.md"
+      ],
+      "required_resolution": "Use the Phase 14 integrated response template and do not declare the review complete unless B1-R5 is answered."
+    },
+    {
+      "id": "GOV-02",
+      "status": "OPEN_REQUIRES_REVIEW",
+      "finding": "The Phase 04 gate states that T1 work is blocked pending review, but Phases 6-13 proceeded as provisional internal work.",
+      "evidence_paths": [
+        "governance/phase-04-independent-review-gate.md",
+        "PROJECT_STATUS.md",
+        "CHANGELOG.md"
+      ],
+      "required_resolution": "The reviewer must state whether retrospective review is acceptable and identify every phase requiring revalidation after any baseline correction."
+    },
+    {
+      "id": "GOV-03",
+      "status": "OPEN_REQUIRES_REVIEW",
+      "finding": "The baseline decision uses corrected-and-locked language while the oracle candidate and independent-review gate remain pending.",
+      "evidence_paths": [
+        "docs/baseline-semantics-decision.md",
+        "spec/baseline-semantics.json",
+        "spec/baseline-oracle-freeze-candidate.json"
+      ],
+      "required_resolution": "Interpret locked only as an internal implementation decision unless the reviewer explicitly approves and the oracle-freeze record is completed."
+    },
+    {
+      "id": "GOV-04",
+      "status": "OPEN_REQUIRES_REVIEW",
+      "finding": "The original response template points to an older review candidate commit than the later issue comment and current stacked branch.",
+      "evidence_paths": [
+        "governance/phase-05-reviewer-response-template.md"
+      ],
+      "required_resolution": "Record the exact Phase 14 review-target commit at outreach and require the reviewer to repeat it in the signed response."
+    }
+  ],
+  "claims": [
+    {
+      "id": "CLM-01",
+      "category": "baseline_semantics",
+      "status": "PENDING_INDEPENDENT_REVIEW",
+      "permitted_wording": "The repository deterministically implements the documented B0, B1, and B2 abstract outcome rules.",
+      "required_qualifier": "Describe these as design-oracle behavior under the repository abstraction, not as empirical or cryptographic findings.",
+      "evidence_paths": [
+        "docs/baseline-semantics-decision.md",
+        "spec/baseline-semantics.json",
+        "tests/scenarios/baseline-test-catalog.json",
+        "src/ttc_recovery/simulator.py",
+        "tests/test_simulator.py"
+      ],
+      "review_question_ids": [
+        "B1-R1",
+        "B1-R2",
+        "B1-R3",
+        "B1-R4",
+        "B1-R5",
+        "B2-R1",
+        "B2-R2",
+        "B2-R3",
+        "B2-R4",
+        "B2-R5",
+        "B2-R6",
+        "B2-R7"
+      ],
+      "prohibited_overstatement": "The baseline semantics are independently approved or cryptographically proven."
+    },
+    {
+      "id": "CLM-02",
+      "category": "b1_mapping",
+      "status": "PENDING_INDEPENDENT_REVIEW",
+      "permitted_wording": "ACTIVATE_ON_LOCAL_COMPLETION is a project-supplied minimum-assumption operational integration for the three-message B1 exchange.",
+      "required_qualifier": "State that the cited source does not specify SDLS activation, rollback, or an installation acknowledgment.",
+      "evidence_paths": [
+        "references/source-notes/triple-kem.md",
+        "docs/baseline-semantics-decision.md",
+        "spec/baseline-semantics.json"
+      ],
+      "review_question_ids": [
+        "B1-R1",
+        "B1-R3"
+      ],
+      "prohibited_overstatement": "The Triple-KEM source mandates this activation policy."
+    },
+    {
+      "id": "CLM-03",
+      "category": "b1_mapping",
+      "status": "PENDING_INDEPENDENT_REVIEW",
+      "permitted_wording": "Under ACTIVATE_ON_LOCAL_COMPLETION, loss of KEM_CONFIRM produces ground-ahead divergence in the abstract simulator.",
+      "required_qualifier": "Tie the result to the selected project integration and deterministic model state.",
+      "evidence_paths": [
+        "docs/baseline-semantics-decision.md",
+        "spec/baseline-semantics.json",
+        "tests/test_simulator.py"
+      ],
+      "review_question_ids": [
+        "B1-R2",
+        "B1-R5"
+      ],
+      "prohibited_overstatement": "Confirmation loss necessarily causes divergence in every Triple-KEM deployment."
+    },
+    {
+      "id": "CLM-04",
+      "category": "b1_mapping",
+      "status": "PENDING_INDEPENDENT_REVIEW",
+      "permitted_wording": "DEFER_UNTIL_AUTHENTICATED_STATUS is an explicit project-added four-message comparison variant.",
+      "required_qualifier": "Do not attribute the added status message or its activation rule to the source construction.",
+      "evidence_paths": [
+        "references/source-notes/triple-kem.md",
+        "docs/baseline-semantics-decision.md",
+        "spec/baseline-semantics.json"
+      ],
+      "review_question_ids": [
+        "B1-R3",
+        "B1-R4"
+      ],
+      "prohibited_overstatement": "The enhanced variant is the cited three-message protocol."
+    },
+    {
+      "id": "CLM-05",
+      "category": "b2_mapping",
+      "status": "PENDING_INDEPENDENT_REVIEW",
+      "permitted_wording": "The B2 baseline adapts a unidirectional ratcheted-key-exchange pattern with ground as sender and spacecraft as receiver.",
+      "required_qualifier": "Call role mapping, strict deletion, status telemetry, and lockout classification project modeling decisions.",
+      "evidence_paths": [
+        "references/source-notes/poettering-roesler-urke.md",
+        "docs/baseline-semantics-decision.md",
+        "spec/baseline-semantics.json"
+      ],
+      "review_question_ids": [
+        "B2-R1",
+        "B2-R2"
+      ],
+      "prohibited_overstatement": "The repository implements or conforms to the source construction."
+    },
+    {
+      "id": "CLM-06",
+      "category": "b2_compromise_scope",
+      "status": "PENDING_INDEPENDENT_REVIEW",
+      "permitted_wording": "The B2 abstraction separates traffic-key disclosure from sender-state, receiver-state, and both-endpoint-state exposure.",
+      "required_qualifier": "State that the classifications are abstract comparison semantics requiring source-grounding review.",
+      "evidence_paths": [
+        "references/source-notes/poettering-roesler-urke.md",
+        "spec/baseline-semantics.json",
+        "tests/test_simulator.py"
+      ],
+      "review_question_ids": [
+        "B2-R3",
+        "B2-R4",
+        "B2-R5",
+        "B2-R6"
+      ],
+      "prohibited_overstatement": "All compromise scopes have equivalent recovery guarantees."
+    },
+    {
+      "id": "CLM-07",
+      "category": "b2_outcome",
+      "status": "PENDING_INDEPENDENT_REVIEW",
+      "permitted_wording": "Receiver-state exposure is classified as AVAILABLE_UNSAFE after aligned update in the current B2 abstraction.",
+      "required_qualifier": "Interpret AVAILABLE_UNSAFE as an attacker-knowledge model outcome, not a measured security failure rate.",
+      "evidence_paths": [
+        "docs/baseline-semantics-decision.md",
+        "spec/baseline-semantics.json",
+        "tests/test_simulator.py"
+      ],
+      "review_question_ids": [
+        "B2-R5",
+        "C-R3"
+      ],
+      "prohibited_overstatement": "Receiver-state exposure always compromises every future key in an operational system."
+    },
+    {
+      "id": "CLM-08",
+      "category": "b2_outcome",
+      "status": "PENDING_INDEPENDENT_REVIEW",
+      "permitted_wording": "Active sender-state impersonation, dropped update after sender evolution, and stale restore are classified as LOCKED in the strict B2 model.",
+      "required_qualifier": "Describe LOCKED as a project operational classification under strict no-rollback/no-checkpoint assumptions.",
+      "evidence_paths": [
+        "docs/baseline-semantics-decision.md",
+        "spec/baseline-semantics.json",
+        "tests/test_simulator.py"
+      ],
+      "review_question_ids": [
+        "B2-R6",
+        "B2-R7",
+        "C-R4"
+      ],
+      "prohibited_overstatement": "The source paper proves operational lockout for these TT&C faults."
+    },
+    {
+      "id": "CLM-09",
+      "category": "formal_execution",
+      "status": "PERMITTED_WITH_QUALIFIER",
+      "permitted_wording": "The Phase 10 TLA+ model parsed successfully and TLC found no counterexample within the recorded finite configuration.",
+      "required_qualifier": "Use exactly NO_COUNTEREXAMPLE_WITHIN_RECORDED_BOUND; do not use proof or verified.",
+      "evidence_paths": [
+        "spec/phase-10-formal-model-execution.json",
+        "formal/tla/T1Recovery.tla",
+        "formal/tla/MC.cfg",
+        "docs/phase-10-formal-model-execution.md"
+      ],
+      "review_question_ids": [
+        "F-R1",
+        "F-R5"
+      ],
+      "prohibited_overstatement": "The protocol is formally verified or secure."
+    },
+    {
+      "id": "CLM-10",
+      "category": "trace_cross_validation",
+      "status": "DIAGNOSTIC_ONLY",
+      "permitted_wording": "Recorded formal and Python traces matched within the declared 16-field abstraction for the tested witness paths.",
+      "required_qualifier": "State that macro-step projection agreement is not refinement proof or implementation equivalence.",
+      "evidence_paths": [
+        "spec/phase-11-formal-python-cross-validation.json",
+        "spec/phase-12-adverse-outcome-witnesses.json",
+        "spec/phase-13-abstraction-gap-outcomes.json"
+      ],
+      "review_question_ids": [
+        "F-R2",
+        "F-R3",
+        "F-R5"
+      ],
+      "prohibited_overstatement": "The Python implementation refines or is equivalent to the TLA+ model."
+    },
+    {
+      "id": "CLM-11",
+      "category": "outcome_expansion",
+      "status": "DIAGNOSTIC_ONLY",
+      "permitted_wording": "The opt-in Phase 13 module contains one explicit bounded witness path each for DIVERGED, AVAILABLE_UNSAFE, and LOCKED while preserving the Phase 10–12 baseline module.",
+      "required_qualifier": "Call the expansion opt-in, provisional, and diagnostic-only.",
+      "evidence_paths": [
+        "spec/phase-13-abstraction-gap-outcomes.json",
+        "formal/tla/T1Recovery.tla",
+        "formal/tla/T1RecoveryOutcomeExpansion.tla",
+        "docs/phase-13-abstraction-gap-outcomes.md"
+      ],
+      "review_question_ids": [
+        "F-R4",
+        "F-R5"
+      ],
+      "prohibited_overstatement": "The expansion is complete, realistic, accepted, or a replacement baseline."
+    },
+    {
+      "id": "CLM-12",
+      "category": "causal_interpretation",
+      "status": "NOT_PERMITTED",
+      "permitted_wording": "No causal claim is permitted for the Phase 13 gapCause labels.",
+      "required_qualifier": "Treat gapCause only as a provisional diagnostic label.",
+      "evidence_paths": [
+        "spec/phase-13-abstraction-gap-outcomes.json",
+        "PROJECT_STATUS.md"
+      ],
+      "review_question_ids": [
+        "F-R4"
+      ],
+      "prohibited_overstatement": "A recorded gapCause is necessary, sufficient, likely, or exhaustive."
+    },
+    {
+      "id": "CLM-13",
+      "category": "model_completeness",
+      "status": "NOT_PERMITTED",
+      "permitted_wording": "No claim of formal-model or outcome-population completeness is permitted.",
+      "required_qualifier": "Unobserved behavior remains bounded non-reachability or outside the current abstraction.",
+      "evidence_paths": [
+        "formal/README.md",
+        "PROJECT_STATUS.md",
+        "spec/phase-13-abstraction-gap-outcomes.json"
+      ],
+      "review_question_ids": [
+        "F-R1",
+        "F-R4",
+        "F-R5"
+      ],
+      "prohibited_overstatement": "The modeled outcomes exhaust all possible recovery behavior."
+    },
+    {
+      "id": "CLM-14",
+      "category": "implementation_equivalence",
+      "status": "NOT_PERMITTED",
+      "permitted_wording": "No refinement or implementation-equivalence claim is permitted.",
+      "required_qualifier": "Trace comparison covers only declared fields and selected witness paths.",
+      "evidence_paths": [
+        "spec/phase-11-formal-python-cross-validation.json",
+        "spec/phase-12-adverse-outcome-witnesses.json",
+        "spec/phase-13-abstraction-gap-outcomes.json"
+      ],
+      "review_question_ids": [
+        "F-R2",
+        "F-R3",
+        "F-R5"
+      ],
+      "prohibited_overstatement": "The formal model and Python code are behaviorally equivalent."
+    },
+    {
+      "id": "CLM-15",
+      "category": "cryptographic_security",
+      "status": "NOT_PERMITTED",
+      "permitted_wording": "No cryptographic security, PCS, confidentiality, authenticity, or key-indistinguishability claim is permitted from the simulator or formal traces.",
+      "required_qualifier": "Source-paper guarantees are not inherited by the repository abstractions.",
+      "evidence_paths": [
+        "docs/baseline-semantics-decision.md",
+        "formal/README.md",
+        "references/source-notes/triple-kem.md",
+        "references/source-notes/poettering-roesler-urke.md"
+      ],
+      "review_question_ids": [
+        "C-R1",
+        "C-R2",
+        "C-R3",
+        "F-R5"
+      ],
+      "prohibited_overstatement": "The repository proves post-compromise security."
+    },
+    {
+      "id": "CLM-16",
+      "category": "operational_applicability",
+      "status": "NOT_PERMITTED",
+      "permitted_wording": "No CCSDS/SDLS conformance, flight-software correctness, RF behavior, or operational-spacecraft claim is permitted.",
+      "required_qualifier": "The work remains abstract and simulated.",
+      "evidence_paths": [
+        "formal/README.md",
+        "PROJECT_STATUS.md"
+      ],
+      "review_question_ids": [
+        "C-R1",
+        "F-R5"
+      ],
+      "prohibited_overstatement": "The results demonstrate operational spacecraft recovery."
+    },
+    {
+      "id": "CLM-17",
+      "category": "publication_evidence",
+      "status": "NOT_PERMITTED",
+      "permitted_wording": "Current simulation and formal outputs are internal diagnostic evidence only.",
+      "required_qualifier": "Independent review, correction closure, and revalidation are required before publication use.",
+      "evidence_paths": [
+        "PROJECT_STATUS.md",
+        "spec/phase-13-abstraction-gap-outcomes.json",
+        "governance/phase-04-independent-review-gate.md"
+      ],
+      "review_question_ids": [
+        "G-R2",
+        "F-R5"
+      ],
+      "prohibited_overstatement": "The current outputs are publication-ready security evidence."
+    },
+    {
+      "id": "CLM-18",
+      "category": "oracle_freeze",
+      "status": "NOT_PERMITTED",
+      "permitted_wording": "The 21 baseline scenario oracles remain a freeze candidate pending independent review.",
+      "required_qualifier": "Use PENDING_INDEPENDENT_REVIEW and do not mark the candidate approved.",
+      "evidence_paths": [
+        "spec/baseline-oracle-freeze-candidate.json",
+        "governance/phase-04-independent-review-gate.md",
+        "governance/phase-05-reviewer-response-template.md"
+      ],
+      "review_question_ids": [
+        "O-ALL",
+        "G-R2"
+      ],
+      "prohibited_overstatement": "The baseline oracles are frozen or independently approved."
+    },
+    {
+      "id": "CLM-19",
+      "category": "governance",
+      "status": "GOVERNANCE_EXCEPTION_REQUIRES_REVIEW",
+      "permitted_wording": "Phases 6–13 proceeded as provisional internal work even though the Phase 04 gate states that T1 work is blocked pending review.",
+      "required_qualifier": "Record this as a retrospective governance exception and ask the reviewer what revalidation is required.",
+      "evidence_paths": [
+        "governance/phase-04-independent-review-gate.md",
+        "PROJECT_STATUS.md",
+        "CHANGELOG.md"
+      ],
+      "review_question_ids": [
+        "G-R1",
+        "G-R2"
+      ],
+      "prohibited_overstatement": "Later provisional work satisfied or superseded the original gate."
+    },
+    {
+      "id": "CLM-20",
+      "category": "governance",
+      "status": "PENDING_INDEPENDENT_REVIEW",
+      "permitted_wording": "The phrase corrected and locked for abstract implementation refers to an internal implementation decision, not independent approval or oracle freeze.",
+      "required_qualifier": "Keep review approval, oracle freeze, and publication permission separate.",
+      "evidence_paths": [
+        "docs/baseline-semantics-decision.md",
+        "spec/baseline-semantics.json",
+        "spec/baseline-oracle-freeze-candidate.json"
+      ],
+      "review_question_ids": [
+        "G-R3",
+        "C-R4"
+      ],
+      "prohibited_overstatement": "Corrected and locked means independently accepted."
+    }
+  ],
+  "evidence_index": [
+    {
+      "id": "E-01",
+      "scope": "baseline_gate",
+      "path": "governance/phase-04-independent-review-gate.md",
+      "role": "Defines mandatory review questions, acceptance criteria, and freeze consequences.",
+      "reviewer_action": "Answer every required question and identify any required correction."
+    },
+    {
+      "id": "E-02",
+      "scope": "baseline_response",
+      "path": "governance/phase-05-reviewer-response-template.md",
+      "role": "Original response template; retained as historical handoff evidence.",
+      "reviewer_action": "Use Phase 14 integrated template instead because B1-R5 is missing here."
+    },
+    {
+      "id": "E-03",
+      "scope": "baseline_decision",
+      "path": "docs/baseline-semantics-decision.md",
+      "role": "Human-readable B1/B2 mapping decisions and claim boundaries.",
+      "reviewer_action": "Verify each source-to-model interpretation."
+    },
+    {
+      "id": "E-04",
+      "scope": "baseline_spec",
+      "path": "spec/baseline-semantics.json",
+      "role": "Machine-readable B1/B2 semantic decisions.",
+      "reviewer_action": "Check consistency with sources and simulator."
+    },
+    {
+      "id": "E-05",
+      "scope": "oracle_candidate",
+      "path": "spec/baseline-oracle-freeze-candidate.json",
+      "role": "Twenty-one pending baseline outcome oracles.",
+      "reviewer_action": "Decide ACCEPT, ACCEPT WITH CORRECTION, or REJECT for every oracle."
+    },
+    {
+      "id": "E-06",
+      "scope": "scenario_catalog",
+      "path": "tests/scenarios/baseline-test-catalog.json",
+      "role": "Implemented baseline scenario catalog and expected outcomes.",
+      "reviewer_action": "Check that catalog and oracle candidate agree and are source-fair."
+    },
+    {
+      "id": "E-07",
+      "scope": "implementation",
+      "path": "src/ttc_recovery/simulator.py",
+      "role": "Abstract B0/B1/B2 simulator implementation.",
+      "reviewer_action": "Identify hidden information, unsupported assistance, or semantic drift."
+    },
+    {
+      "id": "E-08",
+      "scope": "implementation_tests",
+      "path": "tests/test_simulator.py",
+      "role": "Deterministic baseline tests.",
+      "reviewer_action": "Check test assumptions and outcome assertions."
+    },
+    {
+      "id": "E-09",
+      "scope": "source_navigation",
+      "path": "references/source-notes/triple-kem.md",
+      "role": "Navigation note for the Triple-KEM source paper.",
+      "reviewer_action": "Consult the paper directly; do not rely on the note alone."
+    },
+    {
+      "id": "E-10",
+      "scope": "source_navigation",
+      "path": "references/source-notes/poettering-roesler-urke.md",
+      "role": "Navigation note for the Poettering-Rösler URKE source paper.",
+      "reviewer_action": "Consult the paper directly; do not rely on the note alone."
+    },
+    {
+      "id": "E-11",
+      "scope": "formal_execution",
+      "path": "spec/phase-10-formal-model-execution.json",
+      "role": "Phase 10 toolchain, bounds, outputs, and claim restrictions.",
+      "reviewer_action": "Review finite-model wording and positive/negative-control interpretation."
+    },
+    {
+      "id": "E-12",
+      "scope": "formal_trace",
+      "path": "spec/phase-11-formal-python-cross-validation.json",
+      "role": "Phase 11 success-witness projection and bound panel.",
+      "reviewer_action": "Review macro-step and field projection limitations."
+    },
+    {
+      "id": "E-13",
+      "scope": "formal_adverse",
+      "path": "spec/phase-12-adverse-outcome-witnesses.json",
+      "role": "Phase 12 adverse witnesses and bounded absence diagnostics.",
+      "reviewer_action": "Review adverse-outcome mappings and retained receipt-evidence projection."
+    },
+    {
+      "id": "E-14",
+      "scope": "formal_expansion",
+      "path": "spec/phase-13-abstraction-gap-outcomes.json",
+      "role": "Phase 13 baseline preservation and opt-in outcome expansion.",
+      "reviewer_action": "Review expansion paths and gapCause labels as proposals only."
+    },
+    {
+      "id": "E-15",
+      "scope": "formal_baseline",
+      "path": "formal/tla/T1Recovery.tla",
+      "role": "Preserved Phase 10–12 TLA+ baseline.",
+      "reviewer_action": "Assess abstraction scope and omitted behavior."
+    },
+    {
+      "id": "E-16",
+      "scope": "formal_expansion",
+      "path": "formal/tla/T1RecoveryOutcomeExpansion.tla",
+      "role": "Opt-in Phase 13 diagnostic expansion.",
+      "reviewer_action": "Do not treat as accepted or complete; assess each added transition separately."
+    },
+    {
+      "id": "E-17",
+      "scope": "project_governance",
+      "path": "PROJECT_STATUS.md",
+      "role": "Current status, mandatory stop points, and prohibited claims.",
+      "reviewer_action": "Identify inconsistencies or missing stop points."
+    },
+    {
+      "id": "E-18",
+      "scope": "project_history",
+      "path": "CHANGELOG.md",
+      "role": "Chronological record of provisional phases and evidence additions.",
+      "reviewer_action": "Use to determine retrospective revalidation scope."
+    },
+    {
+      "id": "E-19",
+      "scope": "phase14_package",
+      "path": "governance/phase-14-independent-review-package.md",
+      "role": "Integrated reviewer instructions and scope.",
+      "reviewer_action": "Follow the declared review order and sign-off requirements."
+    },
+    {
+      "id": "E-20",
+      "scope": "phase14_response",
+      "path": "governance/phase-14-reviewer-response-template.md",
+      "role": "Complete response form covering all 24 questions and 21 oracles.",
+      "reviewer_action": "Complete without deleting unresolved items."
+    },
+    {
+      "id": "E-21",
+      "scope": "phase14_claims",
+      "path": "governance/phase-14-claims-traceability.csv",
+      "role": "Reviewer-facing claim status matrix.",
+      "reviewer_action": "Accept, narrow, correct, or reject proposed wording."
+    }
+  ],
+  "review_completion_requirements": [
+    "reviewer identity, expertise, affiliation or independent status, conflict statement, date, and exact commit SHA are recorded",
+    "all 24 review questions have a decision, rationale, source locator, required change if any, and confidence",
+    "all 21 scenario oracles have a decision",
+    "no unresolved REJECT remains",
+    "every ACCEPT WITH CORRECTION has linked corrective commits and complete revalidation evidence",
+    "the reviewer explicitly states whether the baselines are suitable for comparative experiments",
+    "the reviewer explicitly states whether the oracle candidate may be frozen",
+    "retrospective revalidation scope for Phases 6-13 is recorded",
+    "any formal-diagnostic scope not covered by the primary reviewer is assigned to a second qualified reviewer",
+    "publication and external security claims remain prohibited until all mandatory corrections and revalidation are complete"
+  ],
+  "required_outputs": [
+    "governance/phase-14-independent-review-package.md",
+    "governance/phase-14-reviewer-response-template.md",
+    "governance/phase-14-claims-traceability.csv",
+    "governance/phase-14-evidence-index.csv",
+    "docs/phase-14-claims-traceability.md",
+    "spec/phase-14-independent-review-package.json"
+  ],
+  "claim_boundaries": {
+    "baseline_oracle_freeze": "NOT_PERMITTED",
+    "formal_model_completeness": "NOT_PERMITTED",
+    "implementation_equivalence": "NOT_PERMITTED",
+    "cryptographic_security_or_PCS": "NOT_PERMITTED",
+    "causal_interpretation": "NOT_PERMITTED",
+    "CCSDS_SDLS_conformance": "NOT_PERMITTED",
+    "flight_software_RF_or_operational_spacecraft": "NOT_PERMITTED",
+    "publication_evidence": "NOT_PERMITTED"
+  },
+  "next_action": "Contact a qualified independent reviewer using issue #3 only after the Phase 14 branch and review target commit pass CI and manifest validation."
+}
