@@ -1,12 +1,26 @@
 # Changelog
 
+## Unreleased — Phase 06 provisional T1 design
+
+- Added an abstract bounded-resynchronization controller for T1.
+- Added prepare, response, commit, confirmation, command, and status transitions.
+- Added forward epoch negotiation that does not use simulator-only peer state.
+- Added one bounded pending candidate and one bounded activation receipt.
+- Added exact-binding prepare and commit retransmission behavior.
+- Added deterministic loss, replay, conflict, authorization, and cache-bound tests.
+- Added provisional `SECURE_DEGRADED` handling when confirmation delivery is exhausted after
+  spacecraft activation.
+- Added explicit external-review stop points before oracle freeze, final experiments, concrete
+  cryptography, integration evidence, or manuscript claims.
+- Kept all T1 security and outcome claims provisional.
+
 ## Unreleased — Phase 05 review handoff
 
-- Added an independent-review response template with source-locator and conflict-of-interest fields.
-- Added a machine-readable candidate freeze record for all 21 baseline scenario oracles.
-- Added a standard-library validator that compares the freeze candidate with the scenario catalog.
-- Added automated tests for oracle identity, consistency, and pending-review status.
-- Kept T1 blocked until independent review and formal oracle acceptance.
+- Added the independent-review response template.
+- Added the 21-scenario baseline-oracle freeze candidate.
+- Added automated review-handoff consistency validation.
+- Added deterministic tests preventing silent oracle drift or unsupported acceptance.
+- Extended CI to all pull-request base branches and added handoff validation.
 
 ## Unreleased — Phase 04 semantic hardening
 
@@ -20,7 +34,7 @@
 - Renamed the B2 traffic-key test so it no longer implies generic state-compromise recovery.
 - Added passive sender-state, receiver-state tracing, both-state tracing, and active sender
   impersonation tests.
-- Expanded deterministic unit coverage from 13 to 19 tests.
+- Expanded deterministic baseline unit coverage from 13 to 19 tests.
 
 ## Unreleased — Phase 04 initial mapping
 
