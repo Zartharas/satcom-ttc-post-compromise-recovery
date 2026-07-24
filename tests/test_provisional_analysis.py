@@ -183,7 +183,8 @@ class ProvisionalAnalysisTests(unittest.TestCase):
                 Path(directory) / "results.json",
                 csv_path,
             )
-            rows = list(csv.DictReader(csv_path.open("r", encoding="utf-8")))
+            with csv_path.open("r", encoding="utf-8", newline="") as handle:
+                rows = list(csv.DictReader(handle))
             rows[0]["outcome"] = "DIVERGED"
             with csv_path.open("w", encoding="utf-8", newline="") as handle:
                 writer = csv.DictWriter(handle, fieldnames=list(rows[0]))
