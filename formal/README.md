@@ -8,7 +8,7 @@ They model:
 - forward epoch selection;
 - one pending candidate and one activation receipt;
 - prepare, candidate selection, commit, confirmation, command, status, verification, retry, and expiry transitions;
-- bounded attempts and one spacecraft activation;
+- bounded attempts and one spacecraft activation; and
 - explicit `SUCCESS`, `INDETERMINATE`, `SECURE_DEGRADED`, and `EXPIRED` outcomes.
 
 They do not model or prove:
@@ -17,7 +17,7 @@ They do not model or prove:
 - CCSDS or SDLS conformance;
 - packet or wire encoding;
 - flight-software behavior;
-- RF behavior or an operational spacecraft;
+- RF behavior or an operational spacecraft; or
 - post-compromise security for a concrete protocol.
 
 ## Phase 10 toolchain
@@ -37,7 +37,7 @@ Phase 10 executes the model with the command-line TLA+ tools rather than relying
 purpose is to demonstrate that the execution pipeline captures a TLC counterexample and serializes the
 trace. That expected counterexample is not a discovered defect in the recovery treatment.
 
-Terminal states are expected in this finite state machine, so both configurations explicitly set
+Terminal states are expected in this finite state machine, so the finite configurations explicitly set
 `CHECK_DEADLOCK FALSE`. This prevents normal terminal completion from being mislabeled as a model error;
 it does not create a liveness claim.
 
@@ -55,15 +55,35 @@ The bound configurations in `formal/tla/bounds/` vary one finite constant at a t
 configurations, not selected treatment parameters. Every clean run retains the wording
 `NO_COUNTEREXAMPLE_WITHIN_RECORDED_BOUND`.
 
+## Phase 12 adverse-outcome witnesses
+
+The configurations in `formal/tla/adverse/` use testing-only reachability properties.
+
+Expected witnesses are captured for:
+
+- `INDETERMINATE` after status loss;
+- `SECURE_DEGRADED` after spacecraft activation followed by confirmation-budget exhaustion; and
+- `EXPIRED` after retry exhaustion before activation.
+
+Each trace is replayed through Python under the same 16-field projection used in Phase 11. The formal
+`receipt` field is explicitly mapped as retained activation evidence during post-activation terminal
+cleanup, because the Python controller may clear its live receipt object.
+
+Separate checks for `DIVERGED`, `AVAILABLE_UNSAFE`, and `LOCKED` are expected to complete without a witness.
+Those outcomes have zero assignments in the current transition relation, so their diagnosis is
+`ABSENT_FROM_CURRENT_TRANSITION_ASSIGNMENTS`. Their status remains
+`NOT_REACHED_WITHIN_RECORDED_BOUND`; they are not described as impossible.
+
 ## Evidence boundary
 
-Phases 10 and 11 record SANY output, TLC output, finite constants, state counts, depth, tool and Java versions,
-input hashes, expected testing-only witness traces, comparison records, and SHA-256 manifests.
+Phases 10 through 12 record SANY output, TLC output, finite constants, state counts, depth, tool and Java
+versions, input hashes, expected testing-only witness traces, comparison records, absence diagnostics, and
+SHA-256 manifests.
 
-The results are not described as formal proof, cryptographic verification, implementation equivalence, or
-proof of post-compromise security. Model-checking and trace-comparison output remains internal diagnostic
-evidence until independent review accepts the abstraction, property set, projection, and mapping to any
-concrete treatment.
+The results are not described as formal proof, cryptographic verification, implementation equivalence,
+formal-model completeness, or proof of post-compromise security. Model-checking and trace-comparison output
+remains internal diagnostic evidence until independent review accepts the abstraction, property set,
+projection, transition relation, and mapping to any concrete treatment.
 
 Any state, outcome, or behavior not observed in the recorded finite model must remain labeled
-`NOT_REACHED_WITHIN_PROVISIONAL_BOUND`, never impossible.
+`NOT_REACHED_WITHIN_RECORDED_BOUND` or `NOT_REACHED_WITHIN_PROVISIONAL_BOUND`, never impossible.
