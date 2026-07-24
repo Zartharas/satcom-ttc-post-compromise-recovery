@@ -20,26 +20,37 @@
 - preserved-run checksum and provenance workflow outside the Git repository
 - provisional Phase 08 aggregation, trace-audit, and sensitivity analysis layer
 - Phase 09 explicit adversarial coverage, bounded reachability, and formal-model scaffold
+- Phase 10 command-line SANY/TLC execution and counterexample-capture workflow
 
 ## Current phase
 
-Phase 09 expands deterministic adversarial coverage and prepares a provisional formal model while the
-Phase 04/05 independent-review gate remains open.
+Phase 10 executes the provisional formal recovery-control model with a pinned command-line TLA+ toolchain
+while the Phase 04/05 independent-review gate remains open.
 
-The Phase 09 layer now provides:
+The Phase 10 layer now provides:
 
-- 24 explicit adversarial schedules;
-- coverage of every supported fault kind and every modeled protocol phase;
-- retry-budget minus-one, equality, and plus-one boundaries;
-- candidate-lifetime equality and plus-one boundaries;
-- spacecraft-ahead and authority-epoch-floor recovery cases;
-- multi-fault, restart, replay, stale-counter, and evidence-loss schedules;
-- bounded reachability reports for six abstract states and seven outcomes;
-- deterministic shortest known witness schedules;
-- explicit `NOT_REACHED_WITHIN_PROVISIONAL_BOUND` labels for unreached states or outcomes;
-- 13 invariant-to-implementation/test/schedule/formal-property mappings;
-- a provisional TLA+ recovery-control module and model-check configuration; and
-- JSON/CSV output with a SHA-256 derived bundle manifest.
+- pinned stable TLA+ command-line tools release `1.7.4`;
+- official release SHA-1 verification before execution;
+- recorded JAR SHA-256, Java version, platform, commands, worker count, and input hashes;
+- a real SANY parse gate;
+- a bounded positive TLC model-check gate;
+- mandatory `NO_COUNTEREXAMPLE_WITHIN_RECORDED_BOUND` wording;
+- an intentional false invariant used only to verify counterexample capture;
+- structured JSON serialization of the negative-control trace;
+- raw Java, SANY, positive-TLC, and negative-control logs;
+- a SHA-256 manifest for every derived Phase 10 output; and
+- a separate CI formal job with short-lived evidence artifacts.
+
+The first successful CI execution at the current finite constants recorded:
+
+- SANY: `PARSE_SUCCESS`;
+- positive TLC: 50 generated states, 28 distinct states, zero queued states, search depth 10;
+- positive status: `NO_COUNTEREXAMPLE_WITHIN_RECORDED_BOUND`;
+- negative control: four-state counterexample to `NegativeControlNoActivation`;
+- tool: TLA+ command-line tools `1.7.4`;
+- Java: Temurin `17.0.19`;
+- TLC workers: one; and
+- JAR SHA-256: `936a262061c914694dfd669a543be24573c45d5aa0ff20a8b96b23d01e050e88`.
 
 ## Review status
 
@@ -49,13 +60,15 @@ The Phase 09 layer now provides:
 - Phase 07 seed and parameter status: `UNFROZEN`
 - Phase 08 denominator and grid status: `UNFROZEN`
 - Phase 09 scenario population: `PROVISIONAL_EXPLICIT_REGRESSION_SET`
-- Phase 09 formal property set: `PROVISIONAL_ONLY`
-- Formal model status: `SCAFFOLD_NOT_FORMALLY_REVIEWED`
-- Model-checking result status: no publication evidence permitted
+- Phase 09/10 formal property set: `PROVISIONAL_ONLY`
+- Formal model review status: `NOT_INDEPENDENTLY_REVIEWED`
+- Phase 10 execution status: `FORMAL_EXECUTION_GATES_PASSED`
+- Positive TLC interpretation: `NO_COUNTEREXAMPLE_WITHIN_RECORDED_BOUND`
+- Phase 10 publication-evidence status: `NOT_PERMITTED`
 - Publication, treatment-effectiveness, causal, or PCS claim status: not permitted
 
-Development may continue on internal schedule expansion, bounded reachability, invariant traceability,
-formal-model refinement, syntax/tooling checks, and counterexample capture.
+Development may continue on internal counterexample review, bounded configuration expansion, model-to-Python
+trace comparison, parser and toolchain reproducibility, and external-review preparation.
 
 ## Mandatory stop point
 
@@ -63,57 +76,57 @@ Independent cryptography review becomes mandatory before:
 
 - accepting or freezing baseline or T1 outcome oracles;
 - freezing the experiment population, fault distribution, scenario exclusions, or formal property set;
-- freezing retry budgets, candidate lifetimes, passive intervals, or other treatment parameters;
+- freezing retry budgets, candidate lifetimes, passive intervals, model constants, or other parameters;
 - adopting denominator exclusions, success thresholds, or a statistical analysis plan;
 - selecting T1 as the final treatment;
 - mapping the abstract model to a concrete cryptographic protocol or implementation;
+- treating bounded non-reachability or a clean TLC run as proof;
 - interpreting reachability or model-checking output as post-compromise-security evidence;
 - claiming CCSDS/SDLS conformance, flight-software correctness, or operational-spacecraft behavior;
-- using Phase 08/09, NOS3/cFS, or formal-model output as publication evidence; or
+- using Phase 08/09/10, NOS3/cFS, or formal-model output as publication evidence; or
 - manuscript submission or any external security claim.
 
 At that point, development must pause until the review record is complete and all corrections are
 revalidated.
 
-## Provisional Phase 09 decisions
+## Provisional Phase 10 decisions
 
-- Explicit schedules are regression witnesses, not a statistical sample.
-- Schedule SHA-256 identity and scenario ID are retained for every witness.
-- The shortest known witness is selected by schedule length, then digest, then scenario ID.
-- Fault actions beyond a configured retry budget remain recorded as unreachable schedule actions.
-- An unreached state or outcome is not called impossible.
-- Invariant traceability exposes the implementation guard, unit test, explicit witness, and formal
-  property identifier.
-- The TLA+ module models recovery-control state only.
-- The TLA+ scaffold does not inherit or provide a cryptographic proof.
-- The current repository validates scaffold consistency but does not yet claim a successful TLC or
-  equivalent model-checking result.
-- No scenario set, property set, bound, parameter, or interpretation is frozen.
+- The stable v1.7.4 command-line release is pinned instead of the newer pre-release.
+- The official release checksum is verified before execution; SHA-256 is also recorded in each run.
+- CI uses Temurin Java 17 and one TLC worker for reproducible trace ordering and state reporting.
+- Terminal deadlocks are disabled in the finite TLC configurations and do not create a liveness claim.
+- SANY parse success, positive TLC completion, negative-control capture, and bundle verification are
+  separate mandatory gates.
+- The positive result is never called proof or formal verification of a concrete protocol.
+- `NegativeControlNoActivation` is intentionally false and exists only to verify trace capture.
+- The expected negative-control counterexample is not a discovered protocol flaw.
+- Generated execution evidence is preserved outside Git or as short-lived CI artifacts.
+- No property set, model constant, treatment parameter, or interpretation is frozen.
 
-## Phase 09 artifacts
+## Phase 10 artifacts
 
-- `src/ttc_recovery/formal_coverage.py`
-- `spec/phase-09-adversarial-coverage-formal-model.json`
-- `experiments/scripts/run_phase09_coverage.py`
-- `experiments/scripts/validate_phase09_formal_coverage.py`
-- `tests/scenarios/phase-09-adversarial-coverage-catalog.json`
-- `tests/test_formal_coverage.py`
-- `tests/test_phase09_spec.py`
+- `src/ttc_recovery/formal_execution.py`
+- `spec/phase-10-formal-model-execution.json`
+- `experiments/scripts/run_phase10_formal_execution.py`
+- `experiments/scripts/validate_phase10_formal_execution.py`
+- `tests/test_formal_execution.py`
+- `tests/test_phase10_spec.py`
 - `formal/tla/T1Recovery.tla`
 - `formal/tla/MC.cfg`
+- `formal/tla/NegativeControl.cfg`
 - `formal/README.md`
-- `docs/phase-09-adversarial-coverage-formal-model.md`
+- `docs/phase-10-formal-model-execution.md`
+- `.github/workflows/python-tests.yml`
 
 ## Next internal work
 
-- run the complete Phase 09 local and CI gate;
-- preserve a Phase 09 output bundle outside the Git repository;
-- inspect every reached and bounded-unreached state and outcome;
-- review shortest witnesses for accidental abstraction artifacts;
-- run a real TLA+ parser/model checker when tooling is available, while keeping results internal;
-- capture and classify any counterexamples;
-- identify properties that require cryptographic or space-systems review; and
-- prepare the external review package before any property or claim freeze.
+- run the complete Phase 10 local gate and preserve an external evidence bundle;
+- compare the four-state negative-control trace with the intended model transitions;
+- add model-to-Python trace correspondence without claiming refinement proof;
+- run additional finite constant configurations as explicitly separate records;
+- capture any unexpected counterexample without reclassifying it before analysis;
+- identify properties and abstractions requiring cryptography or space-systems review; and
+- prepare the independent-review package before any property or claim freeze.
 
 ## Deferred
 
@@ -122,8 +135,9 @@ revalidated.
 - frozen baseline and T1 oracles
 - frozen experiment population, parameters, thresholds, and statistical analysis plan
 - frozen and independently reviewed formal property set
-- publication-grade formal model checking results
-- real cryptography
+- publication-grade formal evidence
+- concrete cryptographic implementation
+- CCSDS/SDLS conformance testing
 - NOS3/cFS integration
 - pilot experiment
 - frozen full experiment protocol
