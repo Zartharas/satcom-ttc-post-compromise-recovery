@@ -24,131 +24,130 @@
 - Phase 11 formal/Python success-trace cross-validation and finite bound panel
 - Phase 12 adverse-outcome witnesses and abstraction-gap diagnostics
 - Phase 13 opt-in abstraction-gap outcome expansion and baseline-preservation diagnostics
+- Phase 14 independent-review package and claims-traceability preparation
 
 ## Current phase
 
-Phase 13 preserves the Phase 12 `T1Recovery.tla` module as the exact baseline and adds a separate opt-in
-module with one provisional path each for `DIVERGED`, `AVAILABLE_UNSAFE`, and `LOCKED`, while the Phase
-04/05 independent-review gate remains open.
+Phase 14 prepares a reviewer-facing package without changing baseline or T1 transition semantics. Its status is
+`READY_FOR_OUTREACH_NOT_REVIEWED`.
 
-The Phase 13 layer provides:
+The package provides:
 
-- an exact SHA-256 gate for the preserved baseline module;
-- mandatory reproduction of the 50-generated / 28-distinct / depth-10 Phase 12 absence state space;
-- separate `T1RecoveryOutcomeExpansion.tla` diagnostic modeling;
-- expansion-only `gapCause` values for confirmation loss, an adversary-known candidate, and prior sender-state
-  deletion;
-- one testing-only TLC witness for each previously absent outcome;
-- Python replay under the existing 16-field projection;
-- an independent canonical B1/B2 simulator scenario check for each final outcome;
-- a source-level assignment audit distinguishing zero baseline assignments from one opt-in expansion
-  assignment;
-- JSON, CSV, raw SANY/TLC logs, and a SHA-256 derived manifest; and
-- a real Java/TLC CI gate with a short-lived evidence artifact.
+- 24 required review questions covering B1, B2, claim boundaries, governance, and formal diagnostics;
+- a complete response template that restores the previously omitted `B1-R5` endpoint-knowledge question;
+- mandatory decisions for all 21 pending baseline scenario oracles;
+- a 20-entry claims traceability matrix;
+- a 21-entry evidence index pinned by the exact review-target commit;
+- four explicit governance findings that remain open;
+- scope separation between mandatory baseline cryptography review and extended formal-diagnostic review;
+- a second-reviewer requirement for any expertise scope not covered by the primary reviewer; and
+- automated validation that no review, approval, oracle freeze, or publication permission is inferred.
 
-The first successful Phase 13 CI execution recorded:
-
-- baseline and expanded SANY status: `PARSE_SUCCESS`;
-- all three preserved baseline checks: 50 generated states, 28 distinct states, zero queued states, depth 10,
-  zero outcome assignments, and `BASELINE_PRESERVED`;
-- `DIVERGED`: four-state witness, 7 generated states, 7 distinct states, depth 4;
-- `DIVERGED` comparison: 68 matched rows, zero mismatches;
-- `AVAILABLE_UNSAFE`: seven-state witness, 16 generated states, 16 distinct states, depth 7;
-- `AVAILABLE_UNSAFE` comparison: 119 matched rows, zero mismatches;
-- `LOCKED`: five-state witness, 10 generated states, 10 distinct states, depth 5;
-- `LOCKED` comparison: 85 matched rows, zero mismatches;
-- combined expansion comparison: 272 matched rows and zero mismatches;
-- all three canonical Python baseline checks: expected final outcome reproduced; and
-- assignment diagnosis: `EXPLICITLY_ADDED_IN_OPT_IN_EXPANSION` for all three outcomes.
+Phase 14 adds no protocol transition, fault behavior, formal property, treatment parameter, or security claim.
 
 ## Review status
 
-- Baseline oracle candidate: `PENDING_INDEPENDENT_REVIEW`
+- Phase 14 package status: `READY_FOR_OUTREACH_NOT_REVIEWED`
+- Reviewer issue: `#3`, open
+- Primary reviewer contacted: no
+- Backup reviewer contacted: no
+- Conflict statement received: no
 - Independent cryptography review: not yet performed
+- Baseline oracle candidate: `PENDING_INDEPENDENT_REVIEW`
+- Oracle freeze: `NOT_PERMITTED`
 - T1 treatment status: `PROVISIONAL_INTERNAL_REVIEW_ONLY`
-- Phase 07 seed and parameter status: `UNFROZEN`
-- Phase 08 denominator and grid status: `UNFROZEN`
-- Phase 09 scenario population: `PROVISIONAL_EXPLICIT_REGRESSION_SET`
-- Phase 09/10/11/12/13 formal property set: `PROVISIONAL_ONLY`
 - Formal model review status: `NOT_INDEPENDENTLY_REVIEWED`
+- Phase 09/10/11/12/13 formal property set: `PROVISIONAL_ONLY`
 - Phase 10 execution status: `FORMAL_EXECUTION_GATES_PASSED`
 - Phase 11 success-trace status: `MATCH_WITHIN_DECLARED_ABSTRACTION`
 - Phase 12 adverse-trace status: `MATCH_WITHIN_DECLARED_ABSTRACTION`
 - Phase 13 baseline status: `BASELINE_PRESERVED`
 - Phase 13 expansion status: `EXPANDED_OUTCOME_POPULATION_DIAGNOSTIC_ONLY`
 - Phase 13 expansion-trace status: `MATCH_WITHIN_DECLARED_ABSTRACTION`
-- Phase 13 formal-model-completeness claim: `NOT_PERMITTED`
-- Phase 13 implementation-equivalence claim: `NOT_PERMITTED`
-- Phase 13 publication-evidence status: `NOT_PERMITTED`
-- Publication, treatment-effectiveness, causal, or PCS claim status: not permitted
+- Formal-model-completeness claim: `NOT_PERMITTED`
+- Implementation-equivalence claim: `NOT_PERMITTED`
+- Cryptographic-security or PCS claim: `NOT_PERMITTED`
+- Causal interpretation of `gapCause`: `NOT_PERMITTED`
+- CCSDS/SDLS conformance claim: `NOT_PERMITTED`
+- Flight-software, RF, or operational-spacecraft claim: `NOT_PERMITTED`
+- Publication-evidence status: `NOT_PERMITTED`
 
-Development may continue on internal witness review, expansion-cause review, mismatch regression handling,
-toolchain reproducibility, and external-review preparation.
+## Open governance findings
+
+### GOV-01 — incomplete historical response template
+
+The Phase 04 gate contains 16 required questions. The Phase 05 response template contains only 15 and omits
+the endpoint-knowledge question now identified as `B1-R5`. The Phase 14 template restores the question without
+rewriting the historical file.
+
+### GOV-02 — retrospective provisional T1 work
+
+The Phase 04 gate states that T1 work is blocked pending independent review, while Phases 6-13 proceeded as
+provisional internal work. The reviewer must decide whether retrospective review is acceptable and identify
+all later phases that require revalidation after a baseline correction.
+
+### GOV-03 — implementation lock versus independent approval
+
+The phrase corrected and locked for abstract implementation is treated as an internal implementation decision.
+It is not independent approval, oracle freeze, or publication permission.
+
+### GOV-04 — review-target commit drift
+
+Earlier handoff records point to older candidate commits. Outreach must identify the exact Phase 14 commit,
+and the signed response must repeat the reviewed SHA.
 
 ## Mandatory stop point
 
-Independent cryptography review becomes mandatory before:
+Independent review and correction closure are mandatory before:
 
 - accepting or freezing baseline or T1 outcome oracles;
-- freezing the experiment population, fault distribution, scenario exclusions, or formal property set;
+- changing the baseline review status from `PENDING_INDEPENDENT_REVIEW`;
+- treating any source-to-model mapping as independently accepted;
+- accepting or freezing a Phase 13 expansion transition or `gapCause` label;
 - freezing the formal/Python projection or claiming refinement or implementation equivalence;
 - treating the baseline or expanded formal outcome population as complete or realistic;
-- accepting, replacing the baseline with, or freezing any Phase 13 expansion transition or cause;
-- treating a single captured witness as evidence that a cause is necessary, sufficient, likely, or exhaustive;
-- freezing retry budgets, candidate lifetimes, passive intervals, model constants, or other parameters;
+- treating a captured witness as evidence that a cause is necessary, sufficient, likely, or exhaustive;
+- freezing the experiment population, fault distribution, exclusions, parameters, thresholds, or formal
+  property set;
 - selecting T1 as the final treatment;
 - mapping the abstract model to a concrete cryptographic protocol or implementation;
-- interpreting formal or simulation output as post-compromise-security evidence;
-- claiming CCSDS/SDLS conformance, flight-software correctness, or operational-spacecraft behavior;
-- using Phase 08/09/10/11/12/13, NOS3/cFS, or formal-model output as publication evidence; or
+- interpreting simulation or formal output as PCS or cryptographic-security evidence;
+- claiming CCSDS/SDLS conformance, flight-software correctness, RF behavior, or operational-spacecraft
+  applicability;
+- using Phase 08-13 output as publication evidence; or
 - manuscript submission or any external security claim.
 
-At that point, development must pause until the review record is complete and all corrections are
-revalidated.
+Any `ACCEPT WITH CORRECTION` requires linked corrective commits and complete revalidation. No unresolved
+`REJECT` may remain.
 
-## Provisional Phase 13 decisions
+## Phase 14 artifacts
 
-- `T1Recovery.tla` remains the authoritative preserved baseline for the Phase 10–12 results.
-- `T1RecoveryOutcomeExpansion.tla` is opt-in and diagnostic-only.
-- The three expanded reachability properties are intentionally false testing properties.
-- Their expected TLC counterexamples are witnesses, not discovered violations of claimed safety properties.
-- `gapCause` is a provisional diagnostic classification and not a validated causal model.
-- Every expanded witness is compared under the existing Phase 11 16-field projection.
-- Each final outcome is also checked against an existing canonical B1/B2 Python scenario.
-- A future mismatch remains `MISMATCH_REQUIRES_REVIEW`; it is not automatically reconciled.
-- One explicit assignment per expanded outcome does not establish outcome or transition completeness.
-- No expansion transition, cause, witness, projection, property, parameter, or interpretation is frozen.
-
-## Phase 13 artifacts
-
-- `src/ttc_recovery/formal_outcome_expansion.py`
-- `spec/phase-13-abstraction-gap-outcomes.json`
-- `experiments/scripts/run_phase13_outcome_expansion.py`
-- `experiments/scripts/validate_phase13_outcome_expansion.py`
-- `tests/test_formal_outcome_expansion.py`
-- `tests/test_phase13_spec.py`
-- `formal/tla/T1RecoveryOutcomeExpansion.tla`
-- `formal/tla/expansion/DivergedWitness.cfg`
-- `formal/tla/expansion/AvailableUnsafeWitness.cfg`
-- `formal/tla/expansion/LockedWitness.cfg`
-- `formal/tla/T1Recovery.tla` as the unchanged baseline
-- `docs/phase-13-abstraction-gap-outcomes.md`
+- `spec/phase-14-independent-review-package.json`
+- `governance/phase-14-independent-review-package.md`
+- `governance/phase-14-reviewer-response-template.md`
+- `governance/phase-14-claims-traceability.csv`
+- `governance/phase-14-evidence-index.csv`
+- `docs/phase-14-claims-traceability.md`
+- `experiments/scripts/validate_phase14_review_package.py`
+- `tests/test_phase14_review_package.py`
 - `.github/workflows/python-tests.yml`
 
 ## Next internal work
 
-- run the complete Phase 13 local gate and preserve an external evidence bundle;
-- inspect all 272 formal/Python comparison rows and the raw expansion traces;
-- review whether the three cause labels are defensible abstractions or should be split or renamed;
-- identify which expansion assumptions require cryptography, protocol, or space-systems review;
-- add reviewer-facing baseline-versus-expansion summaries; and
-- prepare the independent-review package before any expansion transition, cause, property, projection,
-  parameter, or claim freeze.
+- complete Phase 14 CI and tracked-manifest validation;
+- record the final review-target commit and validation evidence on draft PR #12;
+- keep issue #3 completion boxes unchecked;
+- prepare reviewer outreach text only after explicit authorization to contact a named candidate;
+- record the exact scope covered by each reviewer;
+- implement and revalidate every accepted correction; and
+- update the oracle candidate only after the complete signed review record exists.
 
 ## Deferred
 
+- reviewer outreach and acceptance
+- completed conflict screening
 - completed independent cryptography review
-- completed space-systems review
+- completed formal-methods review where required
 - frozen baseline and T1 oracles
 - accepted or frozen Phase 13 expansion transitions or causes
 - frozen formal/Python projection or implementation-equivalence argument
