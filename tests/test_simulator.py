@@ -2,6 +2,7 @@ import unittest
 
 from ttc_recovery.simulator import (
     B1ActivationPolicy,
+    B2CompromiseScope,
     Outcome,
     Simulation,
     b0_otar,
@@ -32,31 +33,54 @@ class BaselineSemanticTests(unittest.TestCase):
         sim = self.run_case("b0-drop", lambda s: b0_otar(s, drop_upload=True))
         self.assertEqual(sim.joint_state(), "SYNC(0)")
 
-    def test_b1_normal_bilateral_completion(self):
+    def test_b1_normal_local_completion_activation(self):
         sim = self.run_case("b1-normal", lambda s: b1_triple_kem(s))
         self.assertEqual(sim.joint_state(), "SYNC(1)")
         self.assertEqual(sim.ground.crypto_complete_epoch, 1)
         self.assertEqual(sim.spacecraft.crypto_complete_epoch, 1)
         self.assertEqual(sim.evaluate(), Outcome.SUCCESS)
 
-    def test_b1_confirm_loss_expires_without_operational_divergence(self):
+    def test_b1_confirm_loss_local_completion_diverges(self):
         sim = self.run_case("b1-confirm-loss", lambda s: b1_triple_kem(s, drop_confirm=True))
-        self.assertEqual(sim.alignment_state(), "SYNC(0)")
+        self.assertEqual(sim.alignment_state(), "G_AHEAD")
         self.assertEqual(sim.ground.crypto_complete_epoch, 1)
         self.assertIsNone(sim.spacecraft.crypto_complete_epoch)
         self.assertTrue(sim.completion_ambiguous)
-        self.assertEqual(sim.evaluate(), Outcome.EXPIRED)
+        self.assertEqual(sim.evaluate(), Outcome.DIVERGED)
 
-    def test_b1_local_activation_policy_can_diverge(self):
+    def test_b1_status_gated_activation_normal(self):
         sim = self.run_case(
-            "b1-local-activation",
+            "b1-status-normal",
+            lambda s: b1_triple_kem(
+                s,
+                activation_policy=B1ActivationPolicy.DEFER_UNTIL_AUTHENTICATED_STATUS,
+            ),
+        )
+        self.assertEqual(sim.alignment_state(), "SYNC(1)")
+        self.assertEqual(sim.evaluate(), Outcome.SUCCESS)
+
+    def test_b1_status_gated_confirm_loss_expires_without_activation(self):
+        sim = self.run_case(
+            "b1-status-confirm-loss",
             lambda s: b1_triple_kem(
                 s,
                 drop_confirm=True,
-                activation_policy=B1ActivationPolicy.ACTIVATE_ON_LOCAL_COMPLETION,
+                activation_policy=B1ActivationPolicy.DEFER_UNTIL_AUTHENTICATED_STATUS,
             ),
         )
-        self.assertEqual(sim.alignment_state(), "G_AHEAD")
+        self.assertEqual(sim.alignment_state(), "SYNC(0)")
+        self.assertEqual(sim.evaluate(), Outcome.EXPIRED)
+
+    def test_b1_status_gated_status_loss_diverges(self):
+        sim = self.run_case(
+            "b1-status-loss",
+            lambda s: b1_triple_kem(
+                s,
+                activation_policy=B1ActivationPolicy.DEFER_UNTIL_AUTHENTICATED_STATUS,
+                drop_status=True,
+            ),
+        )
+        self.assertEqual(sim.alignment_state(), "S_AHEAD")
         self.assertEqual(sim.evaluate(), Outcome.DIVERGED)
 
     def test_b1_reorder_aborts(self):
@@ -69,14 +93,57 @@ class BaselineSemanticTests(unittest.TestCase):
         self.assertEqual(sim.joint_state(), "SYNC(1)")
         self.assertEqual(sim.evaluate(), Outcome.SUCCESS)
 
-    def test_b2_fresh_update_heals_current_key_exposure(self):
+    def test_b2_fresh_update_replaces_exposed_traffic_key(self):
         sim = self.run_case(
-            "b2-heal-current-exposure",
-            lambda s: b2_urke_strict(s, compromise_current=True),
+            "b2-traffic-key-exposure",
+            lambda s: b2_urke_strict(s, compromise_scope=B2CompromiseScope.TRAFFIC_KEY),
         )
         self.assertIn("K0", sim.ground.attacker_known_keys)
         self.assertNotIn("R1", sim.ground.attacker_known_keys)
         self.assertEqual(sim.evaluate(), Outcome.SUCCESS)
+
+    def test_b2_sender_state_exposure_passive_interval_recovers(self):
+        sim = self.run_case(
+            "b2-sender-state-passive",
+            lambda s: b2_urke_strict(s, compromise_scope=B2CompromiseScope.SENDER_STATE),
+        )
+        self.assertTrue(sim.ground.state_exposed)
+        self.assertNotIn("R1", sim.ground.attacker_known_keys)
+        self.assertEqual(sim.evaluate(), Outcome.SUCCESS)
+
+    def test_b2_receiver_state_exposure_traces_future_key(self):
+        sim = self.run_case(
+            "b2-receiver-state",
+            lambda s: b2_urke_strict(s, compromise_scope=B2CompromiseScope.RECEIVER_STATE),
+        )
+        self.assertTrue(sim.spacecraft.state_exposed)
+        self.assertIn("R1", sim.ground.attacker_known_keys)
+        self.assertIn("R1", sim.spacecraft.attacker_known_keys)
+        self.assertEqual(sim.evaluate(), Outcome.AVAILABLE_UNSAFE)
+
+    def test_b2_both_endpoint_states_exposed_remains_unsafe(self):
+        sim = self.run_case(
+            "b2-both-states",
+            lambda s: b2_urke_strict(s, compromise_scope=B2CompromiseScope.BOTH_ENDPOINT_STATES),
+        )
+        self.assertTrue(sim.ground.state_exposed)
+        self.assertTrue(sim.spacecraft.state_exposed)
+        self.assertIn("R1", sim.spacecraft.attacker_known_keys)
+        self.assertEqual(sim.evaluate(), Outcome.AVAILABLE_UNSAFE)
+
+    def test_b2_sender_state_active_impersonation_locks(self):
+        sim = self.run_case(
+            "b2-sender-impersonation",
+            lambda s: b2_urke_strict(
+                s,
+                compromise_scope=B2CompromiseScope.SENDER_STATE,
+                active_sender_impersonation=True,
+            ),
+        )
+        self.assertTrue(sim.attacker_impersonated_sender)
+        self.assertEqual(sim.alignment_state(), "S_AHEAD")
+        self.assertIn("A1", sim.spacecraft.attacker_known_keys)
+        self.assertEqual(sim.evaluate(), Outcome.LOCKED)
 
     def test_b2_dropped_update_locks_after_sender_evolution(self):
         sim = self.run_case("b2-update-loss", lambda s: b2_urke_strict(s, drop_update=True))
