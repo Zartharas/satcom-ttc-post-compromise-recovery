@@ -1,4 +1,4 @@
-name: Python tests
+name: Python and formal-model tests
 
 on:
   push:
@@ -75,6 +75,12 @@ jobs:
             python experiments/scripts/validate_phase09_formal_coverage.py
           fi
 
+      - name: Validate Phase 10 formal execution
+        run: |
+          if [ -f experiments/scripts/validate_phase10_formal_execution.py ]; then
+            python experiments/scripts/validate_phase10_formal_execution.py
+          fi
+
       - name: Run Phase 07 export smoke test
         if: matrix.python-version == '3.13'
         env:
@@ -138,3 +144,58 @@ jobs:
 
       - name: Validate tracked-file manifest
         run: python experiments/scripts/validate_repository_manifest.py
+
+  formal:
+    name: TLA+ TLC 1.7.4
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.13"
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - name: Download pinned TLA+ tools
+        run: |
+          curl --fail --location --retry 3 \
+            --output /tmp/tla2tools.jar \
+            https://github.com/tlaplus/tlaplus/releases/download/v1.7.4/tla2tools.jar
+          echo "bee4a54f3ee3d4afc347c3240ec2d9e93b075104  /tmp/tla2tools.jar" | sha1sum -c -
+
+      - name: Validate Phase 10 design
+        run: python experiments/scripts/validate_phase10_formal_execution.py
+
+      - name: Run SANY and TLC gates
+        env:
+          PYTHONPATH: src
+        run: |
+          python experiments/scripts/run_phase10_formal_execution.py \
+            --jar /tmp/tla2tools.jar \
+            --output-dir /tmp/phase10-formal
+
+      - name: Verify Phase 10 derived bundle
+        run: |
+          cd /tmp/phase10-formal
+          sha256sum -c phase10-derived-bundle.sha256
+          test -s phase10-formal-execution.json
+          test -s phase10-negative-control-counterexample.json
+          test -s phase10-sany.log
+          test -s phase10-tlc-positive.log
+          test -s phase10-tlc-negative-control.log
+
+      - name: Upload Phase 10 execution evidence
+        uses: actions/upload-artifact@v5
+        with:
+          name: phase10-formal-execution
+          path: /tmp/phase10-formal/phase10-*
+          retention-days: 7
