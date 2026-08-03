@@ -105,6 +105,24 @@ jobs:
             python experiments/scripts/validate_phase14_review_package.py
           fi
 
+      - name: Validate Phase 15 protocol
+        run: |
+          if [ -f experiments/scripts/validate_phase15_protocol.py ]; then
+            python experiments/scripts/validate_phase15_protocol.py
+          fi
+
+      - name: Run Phase 15 pilot smoke test
+        if: matrix.python-version == '3.13'
+        env:
+          PYTHONPATH: src
+        run: |
+          python experiments/scripts/run_seeded_fault_experiments.py \
+            --config experiments/configs/phase-15-pilot.json \
+            --json-output /tmp/phase15-pilot-results.json \
+            --csv-output /tmp/phase15-pilot-metrics.csv
+          test -s /tmp/phase15-pilot-results.json
+          test -s /tmp/phase15-pilot-metrics.csv
+
       - name: Run Phase 07 export smoke test
         if: matrix.python-version == '3.13'
         env:
