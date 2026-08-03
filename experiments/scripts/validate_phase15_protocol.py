@@ -8,6 +8,10 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 SPEC_PATH = ROOT / "spec" / "phase-15-experiment-protocol-candidate.json"
 CONFIG_PATH = ROOT / "experiments" / "configs" / "phase-15-pilot.json"
+BASELINE_CONFIG_PATH = (
+    ROOT / "experiments" / "configs" / "phase-15-baseline-parity.json"
+)
+BASELINE_CATALOG_PATH = ROOT / "tests" / "scenarios" / "baseline-test-catalog.json"
 PROTOCOL_DOC = ROOT / "docs" / "phase-15-experiment-protocol.md"
 DATA_DICTIONARY = ROOT / "docs" / "phase-15-data-dictionary.md"
 CAPTURE_CONTROLS = ROOT / "governance" / "phase-15-data-capture-controls.md"
@@ -28,6 +32,7 @@ EXPECTED_FAULTS = {
     "STALE_REPLAY",
 }
 EXPECTED_TREATMENTS = {"B0", "B1", "B2", "T1"}
+EXPECTED_PARITY_STATUS = "IMPLEMENTED_PENDING_VALIDATION"
 EXPECTED_METRICS = {
     "seed",
     "schedule_sha256",
@@ -56,6 +61,29 @@ EXPECTED_METRICS = {
     "verification_complete",
     "active_key_compromised",
 }
+EXPECTED_BASELINE_IDS = [
+    "B0-01",
+    "B0-02",
+    "B0-03",
+    "B0-04",
+    "B1-01",
+    "B1-02",
+    "B1-03",
+    "B1-04",
+    "B1-05",
+    "B1-06",
+    "B1-07",
+    "B2-01",
+    "B2-02",
+    "B2-03",
+    "B2-04",
+    "B2-05",
+    "B2-06",
+    "B2-07",
+    "B2-08",
+    "B2-09",
+    "B2-10",
+]
 
 
 def fail(message: str) -> None:
@@ -78,6 +106,8 @@ def main() -> None:
     for path in (
         SPEC_PATH,
         CONFIG_PATH,
+        BASELINE_CONFIG_PATH,
+        BASELINE_CATALOG_PATH,
         PROTOCOL_DOC,
         DATA_DICTIONARY,
         CAPTURE_CONTROLS,
@@ -88,6 +118,8 @@ def main() -> None:
 
     spec = load_json(SPEC_PATH)
     config = load_json(CONFIG_PATH)
+    baseline_config = load_json(BASELINE_CONFIG_PATH)
+    baseline_catalog = load_json(BASELINE_CATALOG_PATH)
     phase14 = load_json(PHASE14_SPEC)
     oracle = load_json(ORACLE_CANDIDATE)
 
@@ -116,10 +148,22 @@ def main() -> None:
     if set(treatments) != EXPECTED_TREATMENTS:
         fail("treatment set must remain B0, B1, B2, and T1")
     for treatment in ("B0", "B1", "B2"):
-        if treatments[treatment]["publication_metric_parity"] != "MISSING":
-            fail(f"{treatment} metric parity cannot be marked complete yet")
+        if treatments[treatment]["publication_metric_parity"] != EXPECTED_PARITY_STATUS:
+            fail(f"{treatment} metric parity must remain pending validation")
+        if treatments[treatment]["current_execution_support"] != (
+            "DETERMINISTIC_CATALOG_METRIC_ADAPTER"
+        ):
+            fail(f"{treatment} execution-support label drifted")
     if treatments["T1"]["publication_metric_parity"] != "AVAILABLE_PROVISIONALLY":
         fail("T1 metric support must remain provisional")
+
+    parity = spec["baseline_metric_parity"]
+    if parity["status"] != EXPECTED_PARITY_STATUS:
+        fail("baseline parity status drifted")
+    if parity["scenario_count"] != len(EXPECTED_BASELINE_IDS):
+        fail("baseline parity scenario count drifted")
+    if "does not establish" not in " ".join(parity["limits"]):
+        fail("baseline parity limits must reject comparability inference")
 
     pilot = spec["pilot_scope"]
     if pilot["label"] != "PILOT_INTERNAL_VALIDATION_ONLY":
@@ -130,6 +174,10 @@ def main() -> None:
         fail("pilot cannot authorize comparative claims")
     if pilot["pilot_config"] != "experiments/configs/phase-15-pilot.json":
         fail("pilot config path drifted")
+    if pilot["baseline_parity_config"] != (
+        "experiments/configs/phase-15-baseline-parity.json"
+    ):
+        fail("baseline parity config path drifted")
 
     if config.get("status") != "PROVISIONAL_INTERNAL_REVIEW_ONLY":
         fail("pilot config must remain compatible with the provisional runner")
@@ -170,6 +218,24 @@ def main() -> None:
     controls = config["capture_controls"]
     if not controls or set(controls.values()) != {True}:
         fail("all pilot capture controls must be enabled")
+
+    if baseline_config.get("status") != "PROVISIONAL_INTERNAL_REVIEW_ONLY":
+        fail("baseline parity config must remain provisional")
+    if baseline_config.get("run_class") != "PILOT_INTERNAL_VALIDATION_ONLY":
+        fail("baseline parity run class drifted")
+    if baseline_config.get("metric_parity_status") != EXPECTED_PARITY_STATUS:
+        fail("baseline parity configuration status drifted")
+    if baseline_config["scenario_ids"] != EXPECTED_BASELINE_IDS:
+        fail("baseline parity scenario population or order drifted")
+    catalog_ids = [row["id"] for row in baseline_catalog["tests"]]
+    if catalog_ids != EXPECTED_BASELINE_IDS:
+        fail("baseline test catalog population or order drifted")
+    if set(baseline_config["shared_metric_fields"]) != EXPECTED_METRICS:
+        fail("baseline shared metric field set drifted")
+    if baseline_config["treatments"] != ["B0", "B1", "B2"]:
+        fail("baseline treatment order drifted")
+    if set(baseline_config["claim_boundary"].values()) != {"NOT_PERMITTED"}:
+        fail("baseline parity claim boundary was relaxed")
 
     for rule in (
         "Include every successfully parsed run produced from the exact recorded configuration and serialized schedule.",
@@ -231,7 +297,8 @@ def main() -> None:
         "Phase 15 protocol valid: "
         f"research_questions={len(rq_ids)}, treatments={len(treatments)}, "
         f"pilot_seeds={len(config['seeds'])}, faults={len(EXPECTED_FAULTS)}, "
-        "baseline_metric_parity=3_missing, "
+        f"baseline_scenarios={len(EXPECTED_BASELINE_IDS)}, "
+        "baseline_metric_parity=3_implemented_pending_validation, "
         f"status={spec['status']}."
     )
 
