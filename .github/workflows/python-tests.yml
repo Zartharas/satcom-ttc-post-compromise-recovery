@@ -111,17 +111,24 @@ jobs:
             python experiments/scripts/validate_phase15_protocol.py
           fi
 
-      - name: Run Phase 15 pilot smoke test
+      - name: Run Phase 15 capture smoke test
         if: matrix.python-version == '3.13'
         env:
           PYTHONPATH: src
         run: |
-          python experiments/scripts/run_seeded_fault_experiments.py \
-            --config experiments/configs/phase-15-pilot.json \
-            --json-output /tmp/phase15-pilot-results.json \
-            --csv-output /tmp/phase15-pilot-metrics.csv
-          test -s /tmp/phase15-pilot-results.json
-          test -s /tmp/phase15-pilot-metrics.csv
+          python experiments/scripts/run_phase15_pilot_capture.py \
+            --output-root /tmp \
+            --run-id phase15-ci-smoke
+          test -s /tmp/phase15-ci-smoke/raw/phase15-pilot-results.json
+          test -s /tmp/phase15-ci-smoke/raw/phase15-pilot-metrics.csv
+          test -s /tmp/phase15-ci-smoke/analysis/phase08-analysis.json
+          test -s /tmp/phase15-ci-smoke/governance/run-metadata.json
+          (
+            cd /tmp/phase15-ci-smoke
+            sha256sum -c manifests/raw.sha256
+            sha256sum -c manifests/analysis.sha256
+            sha256sum -c manifests/run-bundle.sha256
+          )
 
       - name: Run Phase 07 export smoke test
         if: matrix.python-version == '3.13'
