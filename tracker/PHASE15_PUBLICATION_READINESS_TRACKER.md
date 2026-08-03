@@ -15,6 +15,8 @@ Percentages are project-management estimates. They are not scientific confidence
 
 The repository has completed the major implementation, deterministic testing, and bounded formal-model preparation through Phase 14. The external-review gate remains open in Issue #3. Phase 15 may continue with manuscript preparation, experiment-protocol design, pilot execution, data-capture controls, and internal revalidation, but it must not convert pending baseline mappings into independently approved claims.
 
+The first Phase 15 protocol and data-capture package is now present. It authorizes a T1 pipeline pilot only. B0, B1, and B2 still lack contact-window and metric-capture parity with T1, so comparative publication execution remains blocked until equivalent baseline instrumentation is implemented or a narrower comparison is justified before results are viewed.
+
 ## Master phase tracker
 
 | Phase | Workstream | Status | Estimated completion | Remaining work |
@@ -33,7 +35,7 @@ The repository has completed the major implementation, deterministic testing, an
 | 12 | Adverse-outcome witnesses | Complete internally | 90% | Review mapping and retained-evidence assumptions |
 | 13 | Diagnostic outcome expansion | Complete internally | 85% | Accept, revise, or reject expansion paths |
 | 14 | Independent-review package | Ready; review open | 90% | Reviewer acceptance, review, correction closure |
-| 15 | Publication preparation and internal revalidation | In progress | 10% | Protocol, pilot, capture, analysis, and manuscript work |
+| 15 | Publication preparation and internal revalidation | In progress | 35% | Baseline metric parity, pilot execution, audit, and manuscript work |
 | 16 | Publication-candidate experiment execution | Not started | 0% | Execute frozen candidate protocol and preserve evidence |
 | 17 | Results, discussion, and final manuscript | Not started | 10% | Final tables, interpretation, limitations, and prose |
 | 18 | Pre-submission audit and submission | Not started | 0% | Reproducibility audit, formatting, release, and submission |
@@ -50,47 +52,55 @@ The repository has completed the major implementation, deterministic testing, an
 - [x] Create an engineering issue and disclosure tracker.
 - [ ] Update `PROJECT_STATUS.md` for the non-blocking provisional-work rule.
 - [ ] Update `CHANGELOG.md`.
-- [ ] Add Phase 15 machine-readable contract and validator.
-- [ ] Add Phase 15 unit tests.
-- [ ] Refresh the tracked-file manifest.
+- [x] Add Phase 15 machine-readable contract and validator.
+- [x] Add Phase 15 unit tests.
+- [x] Integrate Phase 15 validation and a pilot-config smoke run into CI.
+- [ ] Refresh the tracked-file manifest after all Phase 15 protocol files settle.
 - [ ] Open a draft Phase 15 pull request.
 - [ ] Complete local and CI validation.
 
 ### WP15-B — Experiment protocol candidate
 
-**Status:** `NOT_STARTED`
+**Status:** `IN_PROGRESS`
 
-- [ ] Define research questions and hypotheses mapped to measurable outputs.
-- [ ] Define baseline and T1 treatment matrix.
-- [ ] Define inclusion and exclusion rules.
-- [ ] Define candidate retry budgets and lifetime parameters.
-- [ ] Define fixed seed and serialized fault-schedule policy.
-- [ ] Define sensitivity-analysis grid.
-- [ ] Define adverse-outcome handling.
-- [ ] Define rerun policy before viewing aggregate outcomes.
-- [ ] Version the protocol candidate.
-- [ ] Mark all protocol elements as provisional until internal freeze.
+- [x] Define candidate research questions mapped to measurable outputs.
+- [x] Define baseline and T1 treatment matrix.
+- [x] Define inclusion and exclusion rules.
+- [x] Define candidate retry budgets and lifetime parameters.
+- [x] Define pilot seed and serialized fault-schedule policy.
+- [ ] Define and freeze a publication sensitivity-analysis grid.
+- [x] Define adverse-outcome handling.
+- [x] Define rerun policy before viewing publication aggregates.
+- [x] Version the protocol candidate.
+- [x] Mark all protocol elements as provisional until internal freeze.
+- [ ] Implement B0/B1/B2 metric and capture parity with T1.
 
 **Required outputs:**
 
-- `spec/phase-15-experiment-protocol-candidate.json`
-- `experiments/configs/phase-15-pilot.json`
-- `docs/phase-15-experiment-protocol.md`
+- [x] `spec/phase-15-experiment-protocol-candidate.json`
+- [x] `experiments/configs/phase-15-pilot.json`
+- [x] `docs/phase-15-experiment-protocol.md`
 
 ### WP15-C — Data dictionary and capture controls
 
-**Status:** `NOT_STARTED`
+**Status:** `IN_PROGRESS`
 
-- [ ] Define every raw event field.
-- [ ] Define every per-run metric.
-- [ ] Define aggregate denominators.
-- [ ] Define missing-value and failed-run representation.
-- [ ] Define provenance fields.
-- [ ] Define run identifier and directory naming.
-- [ ] Define immutable raw-data rules.
-- [ ] Define derived-data lineage.
-- [ ] Define checksum and manifest policy.
-- [ ] Define archive and retention policy.
+- [x] Define raw event-field expectations.
+- [x] Define every current per-run T1 metric.
+- [ ] Define final aggregate denominators for publication analysis.
+- [x] Define technical exclusion and failed-run representation.
+- [x] Define provenance fields.
+- [x] Define run identifier and directory naming.
+- [x] Define immutable raw-data rules.
+- [x] Define derived-data lineage.
+- [x] Define checksum and manifest policy.
+- [ ] Define final archive location and retention period.
+- [ ] Extend the dictionary for baseline metric-parity fields.
+
+**Current outputs:**
+
+- [x] `docs/phase-15-data-dictionary.md`
+- [x] `governance/phase-15-data-capture-controls.md`
 
 **Minimum provenance fields:**
 
@@ -109,16 +119,17 @@ The repository has completed the major implementation, deterministic testing, an
 
 ### WP15-D — Pilot execution
 
-**Status:** `NOT_STARTED`
+**Status:** `NOT_STARTED_GATE_P1_PENDING`
 
 **Pilot label:** `PILOT_INTERNAL_VALIDATION_ONLY`
 
-- [ ] Run no-fault controls.
-- [ ] Run one representative case for every supported fault kind.
+- [ ] Run the 12-seed T1 capture-pipeline pilot.
+- [ ] Run existing no-fault and deterministic baseline controls.
+- [ ] Confirm every supported fault kind appears across pilot or explicit regression evidence.
 - [ ] Run retry-budget boundary cases.
 - [ ] Run candidate-lifetime boundary cases.
 - [ ] Run replay, stale-state, restart, and evidence-loss cases.
-- [ ] Run baseline and T1 comparison cases.
+- [ ] Keep cross-treatment comparison disabled until baseline metric parity exists.
 - [ ] Capture raw event traces and metrics.
 - [ ] Preserve failures rather than deleting or silently rerunning them.
 - [ ] Generate checksums and provenance.
@@ -136,12 +147,12 @@ The repository has completed the major implementation, deterministic testing, an
 - [ ] Confirm no post-outcome parameter tuning occurred.
 - [ ] Record every excluded or failed run.
 - [ ] Resolve pilot defects.
-- [ ] Rerun the complete pilot after corrections.
+- [ ] Rerun the complete pilot after corrections when required.
 - [ ] Decide whether the protocol is ready for publication-candidate execution.
 
 ### WP15-F — Publication-candidate data capture
 
-**Status:** `BLOCKED_BY_WP15-E`
+**Status:** `BLOCKED_BY_WP15-B_PARITY_AND_WP15-E`
 
 **Candidate label:** `PUBLICATION_CANDIDATE_NOT_EXTERNALLY_VALIDATED`
 
@@ -205,7 +216,7 @@ The following remain prohibited until supported by the required evidence:
 
 ### Gate P1 — Pilot ready
 
-All WP15-B and WP15-C items complete, configuration parses, unit tests pass, validators pass, and no unresolved critical internal defect affects capture.
+All required WP15-B and WP15-C pilot items complete, configuration parses, unit tests pass, validators pass, the tracked manifest verifies, and no unresolved critical internal defect affects capture. Baseline metric parity is not required for the T1 pipeline pilot, but comparative claims remain disabled.
 
 ### Gate P2 — Pilot accepted
 
@@ -213,7 +224,7 @@ Pilot is reproducible, manifests verify, failures are retained, coverage gaps ar
 
 ### Gate P3 — Publication-candidate execution authorized
 
-Protocol candidate is internally frozen, outcome labels remain appropriately qualified, no parameters are changed after viewing final aggregate outcomes, and the reviewer issue is accurately disclosed as open if still unresolved.
+Protocol candidate is internally frozen, baseline metric parity exists, outcome labels remain appropriately qualified, no parameters are changed after viewing final aggregate outcomes, and the reviewer issue is accurately disclosed as open if still unresolved.
 
 ### Gate P4 — Manuscript results ready
 
@@ -225,10 +236,10 @@ Claims audit passes, AI-use disclosure matches venue policy, references are veri
 
 ## Immediate next actions
 
-1. Complete WP15-A repository governance.
-2. Build the experiment protocol candidate.
-3. Build the data dictionary and capture schema.
-4. Execute the pilot only after Gate P1 passes.
+1. Update `PROJECT_STATUS.md` and `CHANGELOG.md` for the Phase 15 protocol package.
+2. Refresh the tracked-file manifest and run all local validators and tests.
+3. Implement baseline metric/capture parity as the next engineering work package.
+4. Execute the T1 pilot only after Gate P1 passes.
 5. Keep Issue #3 open without blocking provisional manuscript and pilot preparation.
 
 ## Update rule
