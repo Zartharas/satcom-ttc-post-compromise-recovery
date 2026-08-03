@@ -27,7 +27,8 @@
 - Phase 14 independent-review package and claims-traceability preparation
 - Phase 15 publication-readiness and engineering-issue trackers
 - Phase 15 protocol candidate, pilot configuration, data dictionary, and capture controls
-- Phase 15 validator, unit tests, and CI smoke-test integration
+- Phase 15 pilot capture wrapper with immutable run directories and layered manifests
+- Phase 15 validator, unit tests, and CI capture-smoke integration
 
 ## Current phase
 
@@ -74,13 +75,13 @@ Comparative publication execution is blocked until equivalent baseline instrumen
 
 ### Pilot capture wrapper
 
-The existing seeded runner writes result JSON and metrics CSV. It does not yet create the complete Phase 15 run directory, metadata record, stdout/stderr logs, exclusion and rerun records, or layered checksum manifests.
+A dedicated wrapper now creates a new run directory, copies the exact protocol and configuration, records Git and environment state, executes the existing seeded runner and analysis script, preserves stdout and stderr, creates empty exclusion and rerun records, writes run metadata, and verifies raw, analysis, and complete-bundle SHA-256 manifests.
 
 Status:
 
-`PHASE15_CAPTURE_WRAPPER_NOT_IMPLEMENTED`
+`PHASE15_CAPTURE_WRAPPER_IMPLEMENTED_PENDING_VALIDATION`
 
-A pilot must not be accepted as valid pipeline evidence until this wrapper and its tests are complete.
+The wrapper must pass local tests, the Phase 15 validator, end-to-end smoke execution, and checksum verification before Gate P1 is complete.
 
 ## Review status
 
@@ -173,18 +174,19 @@ Any `ACCEPT WITH CORRECTION` from a future reviewer requires linked corrective c
 - `docs/phase-15-data-dictionary.md`
 - `governance/phase-15-data-capture-controls.md`
 - `experiments/scripts/validate_phase15_protocol.py`
+- `experiments/scripts/run_phase15_pilot_capture.py`
 - `tests/test_phase15_protocol.py`
+- `tests/test_phase15_capture.py`
 - `.github/workflows/python-tests.yml`
 
 ## Next internal work
 
-1. Implement the Phase 15 pilot capture wrapper with immutable run directories and layered manifests.
+1. Validate the Phase 15 capture wrapper through local unit, validator, smoke, and manifest checks.
 2. Implement B0/B1/B2 metric and capture parity with T1.
-3. Complete local unit, validator, smoke, and manifest checks.
-4. Refresh the tracked-file manifest after the Phase 15 files stabilize.
-5. Open a draft Phase 15 pull request only after explicit authorization.
-6. Execute the T1 pipeline pilot only after Gate P1 passes.
-7. Keep Issue #3 open and report its status accurately without blocking provisional preparation.
+3. Refresh the tracked-file manifest after the Phase 15 files stabilize.
+4. Open a draft Phase 15 pull request only after explicit authorization.
+5. Execute the retained T1 pipeline pilot only after Gate P1 passes.
+6. Keep Issue #3 open and report its status accurately without blocking provisional preparation.
 
 ## Deferred
 
