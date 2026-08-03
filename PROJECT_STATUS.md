@@ -25,32 +25,70 @@
 - Phase 12 adverse-outcome witnesses and abstraction-gap diagnostics
 - Phase 13 opt-in abstraction-gap outcome expansion and baseline-preservation diagnostics
 - Phase 14 independent-review package and claims-traceability preparation
+- Phase 15 publication-readiness and engineering-issue trackers
+- Phase 15 protocol candidate, pilot configuration, data dictionary, and capture controls
+- Phase 15 validator, unit tests, and CI smoke-test integration
 
 ## Current phase
 
-Phase 14 prepares a reviewer-facing package without changing baseline or T1 transition semantics. Its status is
-`READY_FOR_OUTREACH_NOT_REVIEWED`.
+Phase 15 prepares the experiment protocol, data-capture controls, pilot workflow, treatment-parity work, and manuscript structure needed before a defensible publication-candidate run.
 
-The package provides:
+Current status:
 
-- 24 required review questions covering B1, B2, claim boundaries, governance, and formal diagnostics;
-- a complete response template that restores the previously omitted `B1-R5` endpoint-knowledge question;
-- mandatory decisions for all 21 pending baseline scenario oracles;
-- a 20-entry claims traceability matrix;
-- a 21-entry evidence index pinned by the exact review-target commit;
-- four explicit governance findings that remain open;
-- scope separation between mandatory baseline cryptography review and extended formal-diagnostic review;
-- a second-reviewer requirement for any expertise scope not covered by the primary reviewer; and
-- automated validation that no review, approval, oracle freeze, or publication permission is inferred.
+`PROVISIONAL_PROTOCOL_CANDIDATE_NOT_PUBLICATION_EVIDENCE`
 
-Phase 14 adds no protocol transition, fault behavior, formal property, treatment parameter, or security claim.
+Phase 15 does not change the Phase 14 review outcome, baseline oracles, T1 transition semantics, or hard claim boundaries.
+
+## Phase 15 protocol position
+
+The protocol candidate currently defines:
+
+- three candidate research questions;
+- B0, B1, B2, and provisional T1 treatment roles;
+- a 12-seed T1 pipeline pilot using seeds 7001 through 7012;
+- eight supported fault kinds;
+- inclusion, exclusion, and rerun rules;
+- immutable raw-data and derived-lineage controls;
+- provenance, run-ID, checksum, and directory requirements;
+- a field-level data dictionary for current T1 outputs;
+- a publication-candidate entry gate; and
+- explicit non-claim boundaries.
+
+The pilot label is:
+
+`PILOT_INTERNAL_VALIDATION_ONLY`
+
+The pilot may validate schedule generation, T1 execution, output capture, analysis handoff, provenance, and checksums. It may not support comparative treatment, effectiveness, cryptographic-security, causal, or publication-grade claims.
+
+## Experiment-readiness gaps
+
+### Baseline metric parity
+
+B0, B1, and B2 currently have deterministic scenario tests but do not emit the same contact-window, retry, event-log, provenance, exclusion, and checksum fields as the T1 seeded pipeline.
+
+Status:
+
+`BASELINE_METRIC_PARITY_MISSING`
+
+Comparative publication execution is blocked until equivalent baseline instrumentation is implemented or a narrower comparison is justified and versioned before aggregate outcomes are viewed.
+
+### Pilot capture wrapper
+
+The existing seeded runner writes result JSON and metrics CSV. It does not yet create the complete Phase 15 run directory, metadata record, stdout/stderr logs, exclusion and rerun records, or layered checksum manifests.
+
+Status:
+
+`PHASE15_CAPTURE_WRAPPER_NOT_IMPLEMENTED`
+
+A pilot must not be accepted as valid pipeline evidence until this wrapper and its tests are complete.
 
 ## Review status
 
 - Phase 14 package status: `READY_FOR_OUTREACH_NOT_REVIEWED`
 - Reviewer issue: `#3`, open
-- Primary reviewer contacted: no
-- Backup reviewer contacted: no
+- Initial reviewer outreach: sent
+- Reviewer accepted a defined scope: no
+- Permission to identify a reviewer publicly: no
 - Conflict statement received: no
 - Independent cryptography review: not yet performed
 - Baseline oracle candidate: `PENDING_INDEPENDENT_REVIEW`
@@ -70,94 +108,96 @@ Phase 14 adds no protocol transition, fault behavior, formal property, treatment
 - Causal interpretation of `gapCause`: `NOT_PERMITTED`
 - CCSDS/SDLS conformance claim: `NOT_PERMITTED`
 - Flight-software, RF, or operational-spacecraft claim: `NOT_PERMITTED`
-- Publication-evidence status: `NOT_PERMITTED`
+- Phase 15 pilot publication-evidence status: `NOT_PERMITTED`
 
 ## Open governance findings
 
 ### GOV-01 — incomplete historical response template
 
-The Phase 04 gate contains 16 required questions. The Phase 05 response template contains only 15 and omits
-the endpoint-knowledge question now identified as `B1-R5`. The Phase 14 template restores the question without
-rewriting the historical file.
+The Phase 04 gate contains 16 required questions. The Phase 05 response template contains only 15 and omits the endpoint-knowledge question now identified as `B1-R5`. The Phase 14 template restores the question without rewriting the historical file.
 
 ### GOV-02 — retrospective provisional T1 work
 
-The Phase 04 gate states that T1 work is blocked pending independent review, while Phases 6-13 proceeded as
-provisional internal work. The reviewer must decide whether retrospective review is acceptable and identify
-all later phases that require revalidation after a baseline correction.
+The Phase 04 gate states that T1 work is blocked pending independent review, while Phases 6-13 proceeded as provisional internal work. A future reviewer must decide whether retrospective review is acceptable and identify all later phases requiring revalidation after a baseline correction.
+
+Phase 15 permits additional provisional preparation and pilot-pipeline work, but it does not convert the earlier work into independently approved or publication-grade evidence.
 
 ### GOV-03 — implementation lock versus independent approval
 
-The phrase corrected and locked for abstract implementation is treated as an internal implementation decision.
-It is not independent approval, oracle freeze, or publication permission.
+The phrase corrected and locked for abstract implementation is treated as an internal implementation decision. It is not independent approval, oracle freeze, or publication permission.
 
 ### GOV-04 — review-target commit drift
 
-Earlier handoff records point to older candidate commits. Outreach must identify the exact Phase 14 commit,
-and the signed response must repeat the reviewed SHA.
+Earlier handoff records point to older candidate commits. Any future review must identify the exact commit reviewed, and the completed response must repeat that SHA.
 
-## Mandatory stop point
+## Allowed Phase 15 work while review remains open
 
-Independent review and correction closure are mandatory before:
+- protocol and data-dictionary development;
+- capture-wrapper and baseline-instrumentation implementation;
+- unit, regression, validator, and formal testing;
+- T1 pipeline pilot execution after Gate P1 passes;
+- internal reproducibility and checksum validation;
+- exploratory analysis labeled provisional;
+- manuscript structure, methods, limitations, and disclosure drafting; and
+- preparation of a concise mature manuscript for possible later review.
 
-- accepting or freezing baseline or T1 outcome oracles;
-- changing the baseline review status from `PENDING_INDEPENDENT_REVIEW`;
-- treating any source-to-model mapping as independently accepted;
-- accepting or freezing a Phase 13 expansion transition or `gapCause` label;
-- freezing the formal/Python projection or claiming refinement or implementation equivalence;
-- treating the baseline or expanded formal outcome population as complete or realistic;
-- treating a captured witness as evidence that a cause is necessary, sufficient, likely, or exhaustive;
-- freezing the experiment population, fault distribution, exclusions, parameters, thresholds, or formal
-  property set;
-- selecting T1 as the final treatment;
-- mapping the abstract model to a concrete cryptographic protocol or implementation;
-- interpreting simulation or formal output as PCS or cryptographic-security evidence;
-- claiming CCSDS/SDLS conformance, flight-software correctness, RF behavior, or operational-spacecraft
-  applicability;
-- using Phase 08-13 output as publication evidence; or
-- manuscript submission or any external security claim.
+## Mandatory stop points
 
-Any `ACCEPT WITH CORRECTION` requires linked corrective commits and complete revalidation. No unresolved
-`REJECT` may remain.
+Independent review and correction closure remain mandatory before:
 
-## Phase 14 artifacts
+- claiming that baseline mappings or oracle decisions are independently accepted;
+- freezing baseline or T1 outcome oracles as externally approved;
+- accepting or freezing a Phase 13 expansion transition or `gapCause` label as externally validated;
+- claiming refinement, implementation equivalence, formal completeness, or cryptographic security;
+- mapping the abstract model to a concrete protocol implementation;
+- claiming CCSDS/SDLS conformance, flight-software correctness, RF behavior, or operational-spacecraft applicability; or
+- representing the study as independently validated.
 
-- `spec/phase-14-independent-review-package.json`
-- `governance/phase-14-independent-review-package.md`
-- `governance/phase-14-reviewer-response-template.md`
-- `governance/phase-14-claims-traceability.csv`
-- `governance/phase-14-evidence-index.csv`
-- `docs/phase-14-claims-traceability.md`
-- `experiments/scripts/validate_phase14_review_package.py`
-- `tests/test_phase14_review_package.py`
+Separate internal protocol and parity gates are mandatory before:
+
+- beginning the comparative publication-candidate experiment;
+- freezing the final experiment population, fault distribution, exclusions, parameters, thresholds, or statistical plan;
+- treating T1 seeded metrics as directly comparable with baseline deterministic-test counts;
+- extracting final manuscript result values; or
+- describing Phase 15 pilot outputs as publication evidence.
+
+Any `ACCEPT WITH CORRECTION` from a future reviewer requires linked corrective commits and complete affected revalidation. No unresolved `REJECT` may remain in a scope described as reviewed.
+
+## Phase 15 artifacts
+
+- `tracker/PHASE15_PUBLICATION_READINESS_TRACKER.md`
+- `tracker/RESEARCH_ISSUES_AND_DISCLOSURES.md`
+- `spec/phase-15-experiment-protocol-candidate.json`
+- `experiments/configs/phase-15-pilot.json`
+- `docs/phase-15-experiment-protocol.md`
+- `docs/phase-15-data-dictionary.md`
+- `governance/phase-15-data-capture-controls.md`
+- `experiments/scripts/validate_phase15_protocol.py`
+- `tests/test_phase15_protocol.py`
 - `.github/workflows/python-tests.yml`
 
 ## Next internal work
 
-- complete Phase 14 CI and tracked-manifest validation;
-- record the final review-target commit and validation evidence on draft PR #12;
-- keep issue #3 completion boxes unchecked;
-- prepare reviewer outreach text only after explicit authorization to contact a named candidate;
-- record the exact scope covered by each reviewer;
-- implement and revalidate every accepted correction; and
-- update the oracle candidate only after the complete signed review record exists.
+1. Implement the Phase 15 pilot capture wrapper with immutable run directories and layered manifests.
+2. Implement B0/B1/B2 metric and capture parity with T1.
+3. Complete local unit, validator, smoke, and manifest checks.
+4. Refresh the tracked-file manifest after the Phase 15 files stabilize.
+5. Open a draft Phase 15 pull request only after explicit authorization.
+6. Execute the T1 pipeline pilot only after Gate P1 passes.
+7. Keep Issue #3 open and report its status accurately without blocking provisional preparation.
 
 ## Deferred
 
-- reviewer outreach and acceptance
-- completed conflict screening
 - completed independent cryptography review
 - completed formal-methods review where required
 - frozen baseline and T1 oracles
 - accepted or frozen Phase 13 expansion transitions or causes
 - frozen formal/Python projection or implementation-equivalence argument
 - frozen formal outcome population or completeness argument
-- frozen experiment population, parameters, thresholds, and statistical analysis plan
-- frozen and independently reviewed formal property set
-- publication-grade formal evidence
+- frozen final experiment population, parameters, thresholds, and statistical analysis plan
+- publication-grade comparative evidence
 - concrete cryptographic implementation
 - CCSDS/SDLS conformance testing
 - NOS3/cFS integration
-- pilot experiment
-- frozen full experiment protocol
-- journal manuscript results
+- publication-candidate experiment
+- final journal manuscript results
