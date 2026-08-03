@@ -16,6 +16,14 @@ CONFIG = json.loads(
         encoding="utf-8"
     )
 )
+BASELINE_CONFIG = json.loads(
+    (
+        ROOT
+        / "experiments"
+        / "configs"
+        / "phase-15-baseline-parity.json"
+    ).read_text(encoding="utf-8")
+)
 
 
 class Phase15ProtocolTests(unittest.TestCase):
@@ -25,6 +33,9 @@ class Phase15ProtocolTests(unittest.TestCase):
             "PROVISIONAL_PROTOCOL_CANDIDATE_NOT_PUBLICATION_EVIDENCE",
         )
         self.assertEqual(CONFIG["run_class"], "PILOT_INTERNAL_VALIDATION_ONLY")
+        self.assertEqual(
+            BASELINE_CONFIG["run_class"], "PILOT_INTERNAL_VALIDATION_ONLY"
+        )
         self.assertFalse(SPEC["pilot_scope"]["publication_evidence"])
         self.assertFalse(SPEC["pilot_scope"]["comparative_claims_allowed"])
 
@@ -46,17 +57,38 @@ class Phase15ProtocolTests(unittest.TestCase):
         self.assertEqual(len(ids), len(set(ids)))
         self.assertNotIn("FROZEN", {row["status"] for row in questions})
 
-    def test_baseline_metric_parity_gap_is_explicit(self) -> None:
+    def test_baseline_metric_parity_is_implemented_but_unvalidated(self) -> None:
         treatments = {row["id"]: row for row in SPEC["treatments"]}
         self.assertEqual(set(treatments), {"B0", "B1", "B2", "T1"})
         for treatment in ("B0", "B1", "B2"):
             self.assertEqual(
-                treatments[treatment]["publication_metric_parity"], "MISSING"
+                treatments[treatment]["publication_metric_parity"],
+                "IMPLEMENTED_PENDING_VALIDATION",
+            )
+            self.assertEqual(
+                treatments[treatment]["current_execution_support"],
+                "DETERMINISTIC_CATALOG_METRIC_ADAPTER",
             )
         self.assertEqual(
             treatments["T1"]["publication_metric_parity"],
             "AVAILABLE_PROVISIONALLY",
         )
+        self.assertEqual(
+            SPEC["baseline_metric_parity"]["status"],
+            "IMPLEMENTED_PENDING_VALIDATION",
+        )
+        self.assertEqual(
+            BASELINE_CONFIG["metric_parity_status"],
+            "IMPLEMENTED_PENDING_VALIDATION",
+        )
+
+    def test_baseline_parity_population_is_complete(self) -> None:
+        scenario_ids = BASELINE_CONFIG["scenario_ids"]
+        self.assertEqual(len(scenario_ids), 21)
+        self.assertEqual(len(scenario_ids), len(set(scenario_ids)))
+        self.assertEqual(scenario_ids[:4], ["B0-01", "B0-02", "B0-03", "B0-04"])
+        self.assertEqual(scenario_ids[-2:], ["B2-09", "B2-10"])
+        self.assertEqual(BASELINE_CONFIG["treatments"], ["B0", "B1", "B2"])
 
     def test_pilot_parameters_match_config(self) -> None:
         candidate = SPEC["candidate_parameters"]
@@ -105,12 +137,22 @@ class Phase15ProtocolTests(unittest.TestCase):
         self.assertEqual(set(CONFIG["capture_controls"].values()), {True})
         self.assertTrue(CONFIG["outputs"]["json"].startswith("results/raw/"))
         self.assertTrue(CONFIG["outputs"]["csv"].startswith("results/processed/"))
+        self.assertTrue(
+            BASELINE_CONFIG["outputs"]["json"].startswith("results/raw/")
+        )
+        self.assertTrue(
+            BASELINE_CONFIG["outputs"]["csv"].startswith("results/processed/")
+        )
 
     def test_hard_claim_boundaries_remain_prohibited(self) -> None:
         allowed = {"NOT_PERMITTED", "NOT_PERMITTED_FOR_PILOT"}
         self.assertFalse(set(SPEC["hard_claim_boundaries"].values()) - allowed)
         self.assertEqual(
             CONFIG["claim_boundary"]["publication_evidence"], "NOT_PERMITTED"
+        )
+        self.assertEqual(
+            BASELINE_CONFIG["claim_boundary"]["publication_evidence"],
+            "NOT_PERMITTED",
         )
         self.assertEqual(
             CONFIG["claim_boundary"]["cryptographic_security_or_pcs"],
