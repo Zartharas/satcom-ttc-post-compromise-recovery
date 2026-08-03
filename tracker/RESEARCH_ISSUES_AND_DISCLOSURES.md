@@ -76,7 +76,7 @@ Do not place undisclosed vulnerability details, proof-of-concept exploit code, c
 | RIT-009 | ENHANCEMENT | MEDIUM | FIXED_PENDING_VALIDATION | 15 | Project lacked a consolidated publication-readiness tracker. | Phase 15 tracker added and updated with protocol, parity, pilot, and publication gates; CI validation remains pending. |
 | RIT-010 | ENHANCEMENT | MEDIUM | FIXED_PENDING_VALIDATION | 15 | Project lacked a consolidated engineering issue and disclosure register. | This file establishes the register and responsible-disclosure workflow; final branch validation remains pending. |
 | RIT-011 | REPRODUCIBILITY | HIGH | OPEN | 15 | B0, B1, and B2 have deterministic scenario tests but do not emit contact-window, retry, event-log, and provenance fields equivalent to the T1 seeded pipeline. | Comparative publication execution is blocked until baseline metric/capture parity is implemented or a narrower comparison is justified before aggregate results are viewed. |
-| RIT-012 | REPRODUCIBILITY | HIGH | OPEN | 15 | The existing seeded runner writes result JSON and metrics CSV but does not yet create the complete Phase 15 run directory, metadata record, logs, exclusions, or layered checksum manifests. | Implement a dedicated pilot capture wrapper before Gate P1 and before retaining a pilot as valid pipeline evidence. |
+| RIT-012 | REPRODUCIBILITY | HIGH | FIXED_PENDING_VALIDATION | 15 | The existing seeded runner wrote result JSON and metrics CSV but did not create the complete Phase 15 run directory, metadata record, logs, exclusions, or layered checksum manifests. | A dedicated capture wrapper and focused tests now implement the required structure; local and CI end-to-end validation remain pending. |
 
 ## New issue template
 
@@ -229,7 +229,7 @@ Issue-tracker data may support the paper only when:
 
 - [ ] Link every current issue to evidence or a repository commit.
 - [ ] Implement baseline metric/capture parity for RIT-011.
-- [ ] Implement the dedicated pilot capture wrapper for RIT-012.
+- [ ] Validate the dedicated pilot capture wrapper for RIT-012.
 - [ ] Add labels or GitHub issues only when public disclosure is appropriate.
 - [ ] Review upstream dependencies for published contribution and security policies.
 - [ ] Add regression tests for all code defects fixed during Phase 15.
