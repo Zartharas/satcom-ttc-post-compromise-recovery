@@ -1,0 +1,65 @@
+{
+  "schema_version": "0.1.0",
+  "phase": "Phase 15",
+  "status": "PROVISIONAL_INTERNAL_REVIEW_ONLY",
+  "run_class": "PILOT_INTERNAL_VALIDATION_ONLY",
+  "description": "Pilot configuration for validating the T1 experiment and capture pipeline. It is not a publication dataset and does not freeze seeds, parameters, denominators, thresholds, or interpretations.",
+  "protocol": "spec/phase-15-experiment-protocol-candidate.json",
+  "seeds": [7001, 7002, 7003, 7004, 7005, 7006, 7007, 7008, 7009, 7010, 7011, 7012],
+  "ground_epoch": 2,
+  "spacecraft_epoch": 1,
+  "authority_epoch_floor": 0,
+  "max_transmissions": 3,
+  "candidate_lifetime_contacts": 3,
+  "max_faults": 4,
+  "compromise_active_keys": true,
+  "allowed_faults": [
+    "DROP",
+    "DELAY",
+    "DUPLICATE",
+    "REORDER",
+    "CONTACT_CLOSE",
+    "ENDPOINT_RESTART",
+    "STALE_COUNTER",
+    "STALE_REPLAY"
+  ],
+  "outputs": {
+    "json": "results/raw/phase-15-pilot-results.json",
+    "csv": "results/processed/phase-15-pilot-metrics.csv"
+  },
+  "analysis_handoff": {
+    "config": "experiments/configs/phase-08-provisional.json",
+    "scope": "DESCRIPTIVE_AND_PIPELINE_VALIDATION_ONLY",
+    "publication_comparison_allowed": false
+  },
+  "capture_controls": {
+    "require_exact_git_commit": true,
+    "require_git_status_record": true,
+    "require_config_sha256": true,
+    "require_serialized_schedule": true,
+    "require_schedule_sha256": true,
+    "require_stdout_stderr_logs": true,
+    "require_run_manifest": true,
+    "raw_outputs_immutable": true,
+    "synthetic_data_only": true
+  },
+  "parameter_status": {
+    "seeds": "PILOT_CANDIDATE_UNFROZEN",
+    "initial_epochs": "PILOT_CANDIDATE_UNFROZEN",
+    "authority_epoch_floor": "PILOT_CANDIDATE_UNFROZEN",
+    "max_transmissions": "PILOT_CANDIDATE_UNFROZEN",
+    "candidate_lifetime_contacts": "PILOT_CANDIDATE_UNFROZEN",
+    "max_faults": "PILOT_CANDIDATE_UNFROZEN",
+    "allowed_faults": "PILOT_CANDIDATE_UNFROZEN",
+    "fault_selection_distribution": "UNFROZEN",
+    "success_thresholds": "NOT_DEFINED",
+    "statistical_analysis_plan": "NOT_DEFINED"
+  },
+  "claim_boundary": {
+    "comparative_treatment_claim": "NOT_PERMITTED",
+    "causal_inference": "NOT_PERMITTED",
+    "cryptographic_security_or_pcs": "NOT_PERMITTED",
+    "independent_validation": "NOT_PERMITTED",
+    "publication_evidence": "NOT_PERMITTED"
+  }
+}
