@@ -81,7 +81,9 @@
     "primary_goal": "Validate T1 schedule generation, event capture, metrics, analysis handoff, provenance, checksum, exclusion, and rerun controls.",
     "comparative_claims_allowed": false,
     "baseline_activity": "Run existing deterministic baseline regressions only; do not compare their counts directly with T1 seeded metrics.",
-    "pilot_config": "experiments/configs/phase-15-pilot.json"
+    "pilot_config": "experiments/configs/phase-15-pilot.json",
+    "capture_wrapper": "experiments/scripts/run_phase15_pilot_capture.py",
+    "capture_wrapper_status": "IMPLEMENTED_PENDING_VALIDATION"
   },
   "candidate_parameters": {
     "seeds": [7001, 7002, 7003, 7004, 7005, 7006, 7007, 7008, 7009, 7010, 7011, 7012],
@@ -155,14 +157,26 @@
     ],
     "raw_data_rule": "Raw generated outputs are immutable after capture; corrections produce a new run directory.",
     "processed_data_rule": "Every processed artifact must identify its source files, script, commit, and checksum.",
-    "synthetic_data_only": true
+    "synthetic_data_only": true,
+    "implementation_status": "IMPLEMENTED_PENDING_LOCAL_AND_CI_VALIDATION"
   },
   "required_outputs": [
     "spec/phase-15-experiment-protocol-candidate.json",
     "experiments/configs/phase-15-pilot.json",
     "docs/phase-15-experiment-protocol.md",
     "docs/phase-15-data-dictionary.md",
-    "governance/phase-15-data-capture-controls.md"
+    "governance/phase-15-data-capture-controls.md",
+    "experiments/scripts/validate_phase15_protocol.py",
+    "experiments/scripts/run_phase15_pilot_capture.py",
+    "tests/test_phase15_protocol.py",
+    "tests/test_phase15_capture.py"
+  ],
+  "pilot_entry_gate": [
+    "All Phase 15 required outputs exist.",
+    "Unit tests and the Phase 15 validator pass.",
+    "The tracked-file manifest verifies.",
+    "The capture wrapper completes a disposable smoke run and verifies all layered manifests.",
+    "No unresolved critical internal defect affects capture."
   ],
   "publication_candidate_entry_gate": [
     "Pilot run and analysis pipeline reproduce from retained configuration and checksums.",
