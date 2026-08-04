@@ -1,7 +1,7 @@
 # WP15-D4 Freeze Candidate Tracker
 
 **Branch:** `phase-15/publication-preparation`  
-**Status:** `IMPLEMENTED_PENDING_LOCAL_AND_CI_VALIDATION_NOT_ANALYSIS_EVIDENCE`  
+**Status:** `LOCALLY_VALIDATED_CI_AND_FREEZE_REVIEW_PENDING_NOT_ANALYSIS_EVIDENCE`  
 **Publication evidence:** `false`
 
 ## Objective
@@ -75,20 +75,23 @@ publication_evidence=false
 
 The member registry contains no outcome column and no projected-metric value field.
 
-## Local validation required
+## Local validation evidence
 
-- [ ] Parse the D4 JSON contract.
-- [ ] Run the 10 focused D4 tests.
-- [ ] Run the D4 validator.
-- [ ] Generate a standalone D4 candidate bundle.
-- [ ] Verify 4 families, 13 member rows, 12 analysis units, and 4 cutoffs.
-- [ ] Verify the outcome-blind mutation test.
-- [ ] Verify the four-file D4 manifest.
-- [ ] Run the Phase 15 protocol tests and validator.
-- [ ] Run the complete regression suite.
-- [ ] Refresh and validate the tracked-file manifest.
+- [x] D4 JSON contract parsed.
+- [x] Exact D2/D4 allowed-field membership and order verified.
+- [x] Ten focused D4 tests passed.
+- [x] D4 validator passed.
+- [x] Standalone D4 candidate bundle generated.
+- [x] Four families, 13 member rows, 12 analysis units, and 4 cutoffs verified.
+- [x] Outcome-blind mutation test passed.
+- [x] Four-file D4 manifest verified.
+- [x] Phase 15 protocol tests and validator passed.
+- [x] Complete 236-test regression suite passed.
+- [x] Tracked-file manifest validated at 185 entries.
+- [ ] CI validation remains pending.
+- [ ] Explicit freeze review remains pending.
 
-## Acceptance state after successful local validation
+## Current validated state
 
 ```text
 WP15-D4_LOCAL_VALIDATION=PASS
@@ -97,6 +100,7 @@ OBSERVATION_CUTOFF_FREEZE=CANDIDATE_NOT_FROZEN
 DENOMINATOR_FREEZE=CANDIDATE_NOT_FROZEN
 FAMILY_VALUE_DISPLAY=NOT_YET_AUTHORIZED
 RIT-017=FIXED_PENDING_CI_AND_FREEZE_REVIEW
+RIT-018=FIXED_PENDING_CI
 PUBLICATION_EVIDENCE=false
 ```
 

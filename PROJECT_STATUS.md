@@ -36,7 +36,7 @@ WP15-D1_LOCAL_VALIDATION=PASS
 WP15-D2_LOCAL_VALIDATION=PASS
 WP15-D3_LOCAL_VALIDATION=PASS
 WP15-D3B_LOCAL_VALIDATION=PASS
-WP15-D4_IMPLEMENTATION=COMPLETE_PENDING_LOCAL_AND_CI_VALIDATION
+WP15-D4_LOCAL_VALIDATION=PASS
 OBSERVATION_CUTOFF_FREEZE=CANDIDATE_NOT_FROZEN
 DENOMINATOR_FREEZE=CANDIDATE_NOT_FROZEN
 FAMILY_SPECIFIC_DESCRIPTIVE_COMPARISON=NOT_YET_AUTHORIZED
@@ -155,9 +155,19 @@ outcome_dependent_branching=false
 
 The generator uses only identity, family membership, allowed-field names, analysis-unit membership, source-execution digests, coverage, and closed authorization flags. It does not emit member values or outcome aggregates.
 
-Current D4 status:
+D4 local validation evidence:
 
-`IMPLEMENTED_PENDING_LOCAL_AND_CI_VALIDATION_NOT_ANALYSIS_EVIDENCE`
+- authoritative D2/D4 allowed-field parity passed for all four qualified families;
+- 10 focused D4 tests passed;
+- standalone D4 candidate generation completed;
+- the four-file D4 checksum manifest verified;
+- D2, D3, D3B, D4, and Phase 15 validators passed;
+- 236 total tests passed; and
+- the repository manifest verified at 185 entries before closeout-status reconciliation.
+
+Status:
+
+`FAMILY_ANALYSIS_FREEZE_CANDIDATE_LOCALLY_VALIDATED_CI_PENDING`
 
 Freeze state:
 
@@ -308,20 +318,16 @@ Separate explicit internal gates remain mandatory before:
 
 ## Immediate next work
 
-1. Pull the D4 implementation checkpoint.
-2. Parse the D4 and Phase 15 JSON contracts.
-3. Run focused D4 and protocol tests.
-4. Run D2, D3, D3B, D4, and Phase 15 validators.
-5. Generate a disposable D4 freeze-candidate bundle.
-6. Audit 4 families, 13 member rows, 12 units, 4 cutoffs, outcome blindness, and closed gates.
-7. Verify the D4 four-file checksum manifest.
-8. Run the complete Python regression suite.
-9. Refresh the tracked-file manifest only after every D4 check passes.
-10. Keep the Phase 15 pull request unopened until explicit authorization.
+1. Record the validated D4 checkpoint and refreshed repository manifest.
+2. Preserve the disposable D4 bundle in the ignored compliance archive.
+3. Keep D4 cutoffs, denominators, and displays candidate-only.
+4. Run CI only after explicit pull-request authorization.
+5. Prepare the separate accept, revise, or reject decision for the D4 freeze candidate.
+6. Keep the Phase 15 pull request unopened until explicit authorization.
 
 ## Deferred
 
-- D4 local and CI validation
+- D4 CI validation
 - explicit D4 cutoff/denominator freeze decision
 - completed independent cryptography review
 - completed formal-methods review where required

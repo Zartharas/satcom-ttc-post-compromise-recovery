@@ -16,7 +16,7 @@ WP15-D1_LOCAL_VALIDATION=PASS
 WP15-D2_LOCAL_VALIDATION=PASS
 WP15-D3_LOCAL_VALIDATION=PASS
 WP15-D3B_LOCAL_VALIDATION=PASS
-WP15-D4=IMPLEMENTED_PENDING_LOCAL_AND_CI_VALIDATION
+WP15-D4_LOCAL_VALIDATION=PASS
 OBSERVATION_CUTOFF_FREEZE=CANDIDATE_NOT_FROZEN
 DENOMINATOR_FREEZE=CANDIDATE_NOT_FROZEN
 FAMILY_SPECIFIC_DESCRIPTIVE_COMPARISON=NOT_YET_AUTHORIZED
@@ -43,7 +43,7 @@ Issue #3 remains open. Review delay does not block provisional engineering, repr
 | 12 | Adverse-outcome witnesses | Complete internally | 90% | Review evidence assumptions |
 | 13 | Diagnostic outcome expansion | Complete internally | 85% | Accept, revise, or reject expansion |
 | 14 | Independent-review package | Ready; review open | 90% | Reviewer acceptance and closure |
-| 15 | Publication preparation and revalidation | In progress | 80% | Validate D4 and decide whether to freeze it |
+| 15 | Publication preparation and revalidation | In progress | 83% | Complete D4 CI and make a separate freeze decision |
 | 16 | Publication-candidate experiment | Not started | 0% | Execute frozen protocol |
 | 17 | Results and final manuscript | Not started | 10% | Final analysis and prose |
 | 18 | Pre-submission audit and submission | Not started | 0% | Audit, release, formatting, submission |
@@ -64,8 +64,8 @@ Issue #3 remains open. Review delay does not block provisional engineering, repr
 - [x] Commit validated D3B manifest at `05f114f`.
 - [x] Create ignored local compliance archive and commit manifest at `7af4f02`.
 - [x] Record D4 implementation and freeze gates.
-- [ ] Validate D4 locally.
-- [ ] Refresh the manifest after D4 validation.
+- [x] Validate D4 locally.
+- [ ] Commit the refreshed 185-entry manifest after D4 status reconciliation.
 - [ ] Update `CHANGELOG.md` before pull-request preparation.
 - [ ] Open a draft pull request only after explicit authorization.
 - [ ] Complete CI validation.
@@ -84,7 +84,7 @@ Issue #3 remains open. Review delay does not block provisional engineering, repr
 - [x] Integrate D2/D3 contracts into immutable capture.
 - [x] Define outcome-blind D4 observation cutoffs and denominator candidates.
 - [x] Define post-observation revision controls.
-- [ ] Validate D4 identities, cutoffs, denominator rules, and manifest.
+- [x] Validate D4 identities, cutoffs, denominator rules, and manifest.
 - [ ] Decide whether to accept, revise, or reject the D4 freeze candidate.
 - [ ] Freeze sensitivity and statistical plan only after a separate decision.
 
@@ -167,7 +167,7 @@ Issue #3 remains open. Review delay does not block provisional engineering, repr
 
 ### WP15-D4 — Outcome-blind family analysis freeze candidate
 
-**Status:** `IMPLEMENTED_PENDING_LOCAL_AND_CI_VALIDATION`
+**Status:** `LOCALLY_VALIDATED_CI_AND_FREEZE_REVIEW_PENDING`
 
 #### Population and cutoffs
 
@@ -201,17 +201,19 @@ Issue #3 remains open. Review delay does not block provisional engineering, repr
 - [x] Reject tampering and incomplete manifest coverage.
 - [x] Add D4 validator, 10 focused tests, protocol checks, CI smoke, documentation, tracker, and RIT-017.
 
-#### Validation pending
+#### Local validation evidence
 
-- [ ] Parse D4 and Phase 15 contracts locally.
-- [ ] Run 10 focused D4 tests.
-- [ ] Run 16 Phase 15 protocol tests.
-- [ ] Run D2, D3, D3B, D4, and protocol validators.
-- [ ] Generate one disposable D4 candidate bundle.
-- [ ] Audit 4 families, 13 rows, 12 units, 4 cutoffs, and closed gates.
-- [ ] Verify the D4 manifest.
-- [ ] Run the complete regression suite.
-- [ ] Refresh and commit the tracked-file manifest.
+- [x] Parse D4 and Phase 15 contracts locally.
+- [x] Verify exact D2/D4 allowed-field membership and order.
+- [x] Run 10 focused D4 tests.
+- [x] Run 16 Phase 15 protocol tests.
+- [x] Run D2, D3, D3B, D4, and protocol validators.
+- [x] Generate one disposable D4 candidate bundle.
+- [x] Audit 4 families, 13 rows, 12 units, 4 cutoffs, and closed gates.
+- [x] Verify the four-file D4 manifest.
+- [x] Run 236 complete regression tests.
+- [x] Refresh and validate the 185-entry tracked-file manifest.
+- [ ] Commit the reconciled tracked-file manifest.
 - [ ] Run CI after draft-PR authorization.
 
 #### Freeze decision deferred
@@ -223,7 +225,7 @@ Local and CI validation do not freeze D4. A separate explicit decision must acce
 **Status:** `NOT_STARTED_GATE_P1_PENDING`
 
 - [x] Complete D3B local validation.
-- [ ] Complete D4 local validation.
+- [x] Complete D4 local validation.
 - [ ] Run retained 12-seed T1 pilot under the selected protocol version.
 - [ ] Run all 21 baseline scenarios.
 - [ ] Run the four qualified D3 families in the same bundle.
@@ -294,7 +296,7 @@ Still candidate-only:
 
 ### Gate P1 — Pilot ready
 
-D1–D3B are locally validated. D4 tests, validator, smoke bundle, audit, and manifest must also pass.
+D1–D4 are locally validated. CI and the separate D4 freeze decision remain pending.
 
 ### Gate P2 — Pilot accepted
 

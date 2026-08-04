@@ -53,8 +53,8 @@ Security candidates use a private coordinated-disclosure workflow.
 | RIT-014 | REPRODUCIBILITY | HIGH | FIXED_PENDING_CI | 15 | A semantic matrix did not provide an executable qualified-family population with controlled analysis units and denominators. | D3 passed local validation with four qualified families, 13 member rows, 12 analysis units, strict projections, and an internal derived manifest. CI pending. |
 | RIT-015 | DEFECT | LOW | FIXED_PENDING_CI | 15 | A D2 test searched for a noncontiguous phrase despite a correct matrix rule. | Assertion corrected; focused and complete local suites passed. CI pending. |
 | RIT-016 | REPRODUCIBILITY | HIGH | FIXED_PENDING_CI | 15 | Standalone D3 outputs were not retained with exact D2/D3 inputs inside the immutable pilot bundle. | D3B passed integrated local validation with retained D2/D3 contracts and catalogs, metadata schema 0.2.0, fail-closed semantic checks, and four verified manifest layers. CI pending. |
-| RIT-017 | REPRODUCIBILITY | HIGH | FIXED_PENDING_VALIDATION | 15 | The qualified-family population lacked predeclared observation cutoffs, denominator membership, allowed-display boundaries, and post-observation revision controls. | D4 implements an outcome-blind freeze candidate for 4 families, 13 member rows, 12 treatment-within-family units, and 4 explicit cutoffs. Local validation, CI, and a separate freeze decision remain pending. |
-| RIT-018 | DEFECT | HIGH | FIXED_PENDING_VALIDATION | 15 | The initial D4 configuration widened four family `expected_allowed_fields` lists beyond the authoritative D2 matrix. | D4 was corrected at `968af687` to use the exact D2 field membership and order. The strict builder correctly prevented output generation; focused, full-suite, bundle, and manifest revalidation remain pending. |
+| RIT-017 | REPRODUCIBILITY | HIGH | FIXED_PENDING_CI_AND_FREEZE_REVIEW | 15 | The qualified-family population lacked predeclared observation cutoffs, denominator membership, allowed-display boundaries, and post-observation revision controls. | D4 passed local validation with exact 4-family, 13-row, 12-unit membership, 4 cutoffs, outcome-blind construction, closed gates, and a verified four-file manifest. CI and a separate freeze decision remain pending. |
+| RIT-018 | DEFECT | HIGH | FIXED_PENDING_CI | 15 | The initial D4 configuration widened four family `expected_allowed_fields` lists beyond the authoritative D2 matrix. | D4 was corrected at `968af687`; exact field parity, 10 focused tests, the generated bundle, all validators, 236 total tests, and the four-file manifest passed locally. CI remains pending. |
 
 ## WP15-D4 evidence paths
 
@@ -86,7 +86,7 @@ The fix removes those additions and preserves the D2 matrix as the exact source 
 
 ## D4 acceptance conditions
 
-RIT-017 and RIT-018 cannot close because corrected files exist. Validation requires evidence that:
+RIT-017 and RIT-018 passed the required local validation. CI remains pending, and RIT-017 additionally requires a separate freeze review. Local evidence confirmed that:
 
 - the exact qualified family order remains CF-01, CF-02, CF-05, and CF-06;
 - the member registry contains 13 unique rows;
@@ -166,15 +166,17 @@ Absent those elements, classify it as a defect, reproducibility issue, enhanceme
 
 ## Immediate actions
 
-- [ ] Pull the D4 field-contract correction.
-- [ ] Parse the D4 contract and rerun its focused tests.
-- [ ] Run D2, D3, D3B, D4, and Phase 15 validators.
-- [ ] Generate one disposable outcome-blind D4 candidate bundle.
-- [ ] Audit 4 families, 13 rows, 12 units, 4 cutoffs, and closed gates.
-- [ ] Verify that projected values cannot alter the D4 identity contract.
-- [ ] Verify the D4 four-file manifest.
-- [ ] Run the complete regression suite.
-- [ ] Refresh the tracked-file manifest only after D4 passes.
+- [x] Pull the D4 field-contract correction.
+- [x] Parse the D4 contract and rerun its focused tests.
+- [x] Run D2, D3, D3B, D4, and Phase 15 validators.
+- [x] Generate one disposable outcome-blind D4 candidate bundle.
+- [x] Audit 4 families, 13 rows, 12 units, 4 cutoffs, and closed gates.
+- [x] Verify that projected values cannot alter the D4 identity contract.
+- [x] Verify the D4 four-file manifest.
+- [x] Run the complete 236-test regression suite.
+- [x] Refresh and validate the 185-entry tracked-file manifest.
+- [ ] Commit the D4 closeout status and manifest.
 - [ ] Run CI only after draft-PR authorization.
+- [ ] Conduct a separate D4 freeze review before any family-value display.
 - [ ] Keep Issue #3 and publication boundaries accurate.
 - [ ] Keep sensitive security candidates outside the public repository.
