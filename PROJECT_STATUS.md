@@ -28,12 +28,13 @@
 - Phase 15 publication-readiness and engineering-issue trackers
 - Phase 15 protocol candidate, pilot configuration, data dictionary, and capture controls
 - Phase 15 pilot capture wrapper with immutable run directories and layered manifests
-- Phase 15 validator, unit tests, and CI capture-smoke integration
 - WP15-D1 B0/B1/B2 shared metric-field adapter and capture integration
+- WP15-D1 local validation: 199 tests, 21 baseline scenarios, retained-catalog capture, and 163-entry manifest
+- WP15-D2 matched treatment-scenario matrix and semantic comparability contract
 
 ## Current phase
 
-Phase 15 prepares the experiment protocol, data-capture controls, pilot workflow, treatment-parity work, and manuscript structure needed before a defensible publication-candidate run.
+Phase 15 prepares the experiment protocol, data-capture controls, pilot workflow, treatment comparability, and manuscript structure needed before a defensible publication-candidate run.
 
 Current status:
 
@@ -49,11 +50,11 @@ The protocol candidate currently defines:
 - B0, B1, B2, and provisional T1 treatment roles;
 - a 12-seed T1 pipeline pilot using seeds 7001 through 7012;
 - all 21 deterministic B0/B1/B2 catalog scenarios;
-- eight supported T1 fault kinds plus one retained adapter-specific active-impersonation action;
-- inclusion, exclusion, and rerun rules;
-- immutable raw-data and derived-lineage controls;
-- provenance, run-ID, checksum, and directory requirements;
-- shared metric fields across T1 and baseline-adapter outputs;
+- eight treatment-comparison families;
+- dispositions for all 21 baseline and 15 T1 catalog scenarios;
+- two explicit T1 regression tests used only in diagnostic families;
+- family-specific metric authorization and prohibited metrics;
+- inclusion, exclusion, rerun, provenance, checksum, and immutability controls;
 - a publication-candidate entry gate; and
 - explicit non-claim boundaries.
 
@@ -61,58 +62,105 @@ The pilot label is:
 
 `PILOT_INTERNAL_VALIDATION_ONLY`
 
-The pilot may validate T1 schedule generation, baseline catalog adaptation, oracle preservation, output capture, analysis handoff, provenance, and checksums. It may not support comparative treatment, effectiveness, cryptographic-security, causal, timing-equivalence, or publication-grade claims.
+The pilot may validate T1 schedule generation, baseline catalog adaptation, oracle preservation, treatment-family classification, output capture, analysis handoff, provenance, and checksums. It may not support comparative effectiveness, pooled treatment percentages, inferential statistics, cryptographic-security, causal, timing-equivalence, or publication-grade claims.
 
 ## WP15-D1 status
 
 ### Baseline metric and capture parity
 
-B0, B1, and B2 now execute through a deterministic adapter that:
+B0, B1, and B2 execute through a deterministic adapter that:
 
 - runs all 21 existing catalog scenarios;
 - checks existing alignment, joint-state when declared, and outcome design oracles;
 - emits every shared `RecoveryMetrics` field;
-- retains normalized treatment, baseline variant, and scenario ID;
+- retains treatment, baseline variant, and scenario ID;
 - uses null seeds for deterministic catalog rows;
 - creates canonical scenario/schedule SHA-256 identities;
-- preserves simulator event logs and adapter-completion evidence;
+- preserves event logs and adapter-completion evidence;
 - writes JSON and CSV outputs; and
-- is included in the immutable Phase 15 capture bundle with configuration, catalog, logs, provenance, and checksums.
+- is included in the immutable Phase 15 capture bundle.
 
 Status:
 
-`BASELINE_METRIC_PARITY_IMPLEMENTED_PENDING_VALIDATION`
+`BASELINE_METRIC_CAPTURE_PARITY_LOCALLY_VALIDATED_CI_PENDING`
 
-Metric-field and capture parity do not establish matched treatment scenarios, equivalent fault distributions, equivalent contact-window semantics, equivalent command/telemetry transitions, or operational transmission comparability.
+Local evidence:
 
-### Remaining matched-scenario gap
+- 199 tests passed;
+- all Phase 4–15 validators passed;
+- all 21 baseline scenarios matched their retained design oracles;
+- 21 unique scenario hashes were retained;
+- JSON/CSV consistency passed;
+- T1, baseline, and analysis processes exited zero;
+- raw, analysis, and complete-bundle manifests verified; and
+- the repository manifest verified at 163 entries.
 
-The B0/B1/B2 population consists of 21 named deterministic design-oracle scenarios. T1 currently uses a 12-seed generated fault population plus explicit regression schedules.
+Metric-field and capture parity do not establish matched treatment semantics.
+
+## WP15-D2 status
+
+### Matched treatment-scenario matrix
+
+WP15-D2 defines eight comparison families:
+
+- four `QUALIFIED_MATCH` families;
+- four `DIAGNOSTIC_FAMILY_ONLY` families;
+- no full-equivalence family.
+
+The matrix classifies every existing catalog scenario exactly once as:
+
+- assigned to one comparison family;
+- treatment-specific; or
+- a non-outcome guard.
 
 Status:
 
-`MATCHED_TREATMENT_SCENARIO_MATRIX_NOT_DEFINED`
+`TREATMENT_COMPARABILITY_MATRIX_DEFINED_PENDING_VALIDATION`
 
-Comparative publication execution remains blocked until the project versions a matched treatment-scenario matrix or predeclares why specific cases cannot be matched and how they will be excluded from cross-treatment inference.
+The matrix permits only family-specific categorical fields. It prohibits raw alignment, contact duration, divergent/degraded window counts, total transmissions, retry overhead, and other treatment-specific units from cross-treatment comparison.
 
-### Pilot capture wrapper
+It also prohibits:
 
-The Phase 15 wrapper now:
+- pooling 21 curated baseline rows with 12 seeded T1 rows;
+- computing treatment success percentages from unequal curated catalogs;
+- counting B1 policy variants as independent replications;
+- quantitative aggregation of diagnostic-only families; and
+- any field not explicitly authorized by the family.
 
-- creates a new immutable run directory;
-- copies the exact protocol, T1 configuration, baseline configuration, analysis configuration, and baseline catalog;
-- records Git and environment state;
-- executes the T1 seeded runner;
-- executes the B0/B1/B2 baseline parity runner from the retained catalog copy;
-- executes the T1 analysis script;
-- preserves separate stdout, stderr, and command records;
-- creates empty exclusion and rerun records;
-- records every configuration/catalog hash and process exit code; and
-- verifies raw, analysis, and complete-bundle SHA-256 manifests.
+### Remaining executable-population gap
+
+The matrix is a semantic contract, not a completed comparative experiment.
 
 Status:
 
-`PHASE15_CAPTURE_WRAPPER_EXTENDED_FOR_BASELINES_PENDING_VALIDATION`
+`EXECUTABLE_MATCHED_FAMILY_POPULATION_NOT_IMPLEMENTED`
+
+Comparative publication execution remains blocked until the project:
+
+- instantiates the qualified families with equivalent treatment-specific inputs;
+- validates equivalent fault opportunities and observation cutoffs;
+- emits the normalized `alignment_class` in derived capture;
+- defines family-specific denominators;
+- freezes the descriptive and statistical plan before viewing comparative aggregates; and
+- preserves treatment-specific exceptions without forcing false symmetry.
+
+## Capture status
+
+The Phase 15 wrapper currently captures:
+
+- exact protocol, T1 configuration, baseline configuration, analysis configuration, and baseline catalog;
+- Git and environment state;
+- T1 seeded outputs;
+- B0/B1/B2 baseline adapter outputs;
+- T1 analysis outputs;
+- commands, stdout, stderr, exclusions, reruns, and metadata; and
+- raw, analysis, and complete-bundle SHA-256 manifests.
+
+Status:
+
+`PHASE15_CAPTURE_WRAPPER_LOCALLY_VALIDATED_CI_PENDING`
+
+The WP15-D2 matrix remains a tracked repository contract. Retaining it in a future comparative run bundle is required before publication-candidate execution.
 
 ## Review status
 
@@ -127,16 +175,10 @@ Status:
 - Oracle freeze: `NOT_PERMITTED`
 - T1 treatment status: `PROVISIONAL_INTERNAL_REVIEW_ONLY`
 - Formal model review status: `NOT_INDEPENDENTLY_REVIEWED`
-- Phase 09/10/11/12/13 formal property set: `PROVISIONAL_ONLY`
-- Phase 10 execution status: `FORMAL_EXECUTION_GATES_PASSED`
-- Phase 11 success-trace status: `MATCH_WITHIN_DECLARED_ABSTRACTION`
-- Phase 12 adverse-trace status: `MATCH_WITHIN_DECLARED_ABSTRACTION`
-- Phase 13 baseline status: `BASELINE_PRESERVED`
-- Phase 13 expansion status: `EXPANDED_OUTCOME_POPULATION_DIAGNOSTIC_ONLY`
-- Phase 13 expansion-trace status: `MATCH_WITHIN_DECLARED_ABSTRACTION`
 - Formal-model-completeness claim: `NOT_PERMITTED`
 - Implementation-equivalence claim: `NOT_PERMITTED`
 - Cryptographic-security or PCS claim: `NOT_PERMITTED`
+- Treatment-superiority claim: `NOT_PERMITTED`
 - Causal interpretation of `gapCause`: `NOT_PERMITTED`
 - CCSDS/SDLS conformance claim: `NOT_PERMITTED`
 - Flight-software, RF, or operational-spacecraft claim: `NOT_PERMITTED`
@@ -150,13 +192,13 @@ The Phase 04 gate contains 16 required questions. The Phase 05 response template
 
 ### GOV-02 — retrospective provisional T1 work
 
-The Phase 04 gate states that T1 work is blocked pending independent review, while Phases 6-13 proceeded as provisional internal work. A future reviewer must decide whether retrospective review is acceptable and identify all later phases requiring revalidation after a baseline correction.
+The Phase 04 gate states that T1 work is blocked pending independent review, while Phases 6–13 proceeded as provisional internal work. A future reviewer must decide whether retrospective review is acceptable and identify all later phases requiring revalidation after a baseline correction.
 
-Phase 15 permits provisional preparation, adapter development, and pilot-pipeline work, but it does not convert the earlier work into independently approved or publication-grade evidence.
+Phase 15 permits provisional preparation, adapter development, comparability design, and pilot-pipeline work, but it does not convert earlier work into independently approved or publication-grade evidence.
 
 ### GOV-03 — implementation lock versus independent approval
 
-The phrase corrected and locked for abstract implementation is treated as an internal implementation decision. It is not independent approval, oracle freeze, or publication permission.
+The phrase corrected and locked for abstract implementation is an internal implementation decision. It is not independent approval, oracle freeze, or publication permission.
 
 ### GOV-04 — review-target commit drift
 
@@ -164,12 +206,12 @@ Earlier handoff records point to older candidate commits. Any future review must
 
 ## Allowed Phase 15 work while review remains open
 
-- protocol and data-dictionary development;
+- protocol, matrix, and data-dictionary development;
 - capture-wrapper and baseline-instrumentation implementation;
 - unit, regression, validator, and formal testing;
 - T1 and deterministic baseline pipeline pilot execution after Gate P1 passes;
 - internal reproducibility and checksum validation;
-- matched-scenario matrix design before comparative aggregate review;
+- executable matched-family population design before comparative aggregate review;
 - exploratory analysis labeled provisional;
 - manuscript structure, methods, limitations, and disclosure drafting; and
 - preparation of a concise mature manuscript for possible later review.
@@ -178,52 +220,54 @@ Earlier handoff records point to older candidate commits. Any future review must
 
 Independent review and correction closure remain mandatory before:
 
-- claiming that baseline mappings or oracle decisions are independently accepted;
+- claiming baseline mappings or oracle decisions are independently accepted;
 - freezing baseline or T1 outcome oracles as externally approved;
-- accepting or freezing a Phase 13 expansion transition or `gapCause` label as externally validated;
+- accepting a Phase 13 expansion transition or `gapCause` label as externally validated;
 - claiming refinement, implementation equivalence, formal completeness, or cryptographic security;
 - mapping the abstract model to a concrete protocol implementation;
 - claiming CCSDS/SDLS conformance, flight-software correctness, RF behavior, or operational-spacecraft applicability; or
 - representing the study as independently validated.
 
-Separate internal protocol, parity, and population gates remain mandatory before:
+Separate internal protocol, parity, comparability, and population gates remain mandatory before:
 
 - beginning the comparative publication-candidate experiment;
 - freezing the final experiment population, fault distribution, exclusions, parameters, thresholds, or statistical plan;
 - treating baseline adapter contact or transmission values as directly comparable with T1;
+- computing treatment percentages from curated scenario catalogs;
 - extracting final manuscript result values; or
 - describing Phase 15 pilot outputs as publication evidence.
-
-Any `ACCEPT WITH CORRECTION` from a future reviewer requires linked corrective commits and complete affected revalidation. No unresolved `REJECT` may remain in a scope described as reviewed.
 
 ## Phase 15 artifacts
 
 - `tracker/PHASE15_PUBLICATION_READINESS_TRACKER.md`
 - `tracker/RESEARCH_ISSUES_AND_DISCLOSURES.md`
 - `spec/phase-15-experiment-protocol-candidate.json`
+- `spec/phase-15-treatment-comparability-matrix.json`
 - `experiments/configs/phase-15-pilot.json`
 - `experiments/configs/phase-15-baseline-parity.json`
 - `docs/phase-15-experiment-protocol.md`
 - `docs/phase-15-data-dictionary.md`
 - `docs/phase-15-baseline-metric-parity.md`
+- `docs/phase-15-treatment-comparability.md`
 - `governance/phase-15-data-capture-controls.md`
 - `src/ttc_recovery/baseline_metrics.py`
+- `src/ttc_recovery/treatment_comparability.py`
 - `experiments/scripts/validate_phase15_protocol.py`
+- `experiments/scripts/validate_phase15_treatment_comparability.py`
 - `experiments/scripts/run_phase15_baseline_parity.py`
 - `experiments/scripts/run_phase15_pilot_capture.py`
 - `tests/test_baseline_metrics.py`
-- `tests/test_phase15_baseline_runner.py`
-- `tests/test_phase15_protocol.py`
-- `tests/test_phase15_capture.py`
+- `tests/test_phase15_treatment_comparability.py`
 - `.github/workflows/python-tests.yml`
+- `.github/workflows/phase15-comparability.yml`
 
 ## Next internal work
 
-1. Validate WP15-D1 through unit tests, the Phase 15 validator, a standalone baseline run, and an end-to-end capture smoke run.
-2. Confirm all 21 baseline rows match the retained catalog and shared field schema.
-3. Refresh the tracked-file manifest after the WP15-D1 files stabilize.
-4. Design the matched treatment-scenario matrix as the next scientific task.
-5. Open a draft Phase 15 pull request only after explicit authorization.
+1. Validate WP15-D2 JSON, unit tests, standalone validator, and complete regression suite.
+2. Confirm all 36 catalog scenarios have one correct disposition and all eight family contracts pass.
+3. Refresh and validate the tracked-file manifest after the D2 files stabilize.
+4. Keep the Phase 15 pull request unopened until explicit authorization.
+5. Begin WP15-D3 only after D2 validation: executable matched-family population and derived comparison dataset.
 6. Keep Issue #3 open and report its status accurately without blocking provisional preparation.
 
 ## Deferred
@@ -233,9 +277,8 @@ Any `ACCEPT WITH CORRECTION` from a future reviewer requires linked corrective c
 - frozen baseline and T1 oracles
 - accepted or frozen Phase 13 expansion transitions or causes
 - frozen formal/Python projection or implementation-equivalence argument
-- frozen formal outcome population or completeness argument
-- frozen final experiment population, parameters, thresholds, and statistical analysis plan
-- matched comparative experiment population
+- executable matched-family population
+- frozen family-specific denominators and analysis plan
 - publication-grade comparative evidence
 - concrete cryptographic implementation
 - CCSDS/SDLS conformance testing
