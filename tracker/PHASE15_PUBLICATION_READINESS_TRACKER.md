@@ -7,7 +7,7 @@
 
 ## Purpose
 
-This tracker separates engineering completion, scientific comparability, immutable evidence capture, external review, and publication authorization. Percentages are project-management estimates, not confidence scores or security guarantees.
+This tracker separates engineering completion, scientific comparability, immutable evidence capture, analysis-plan freezing, external review, and publication authorization. Percentages are project-management estimates, not confidence scores or security guarantees.
 
 ## Current position
 
@@ -15,12 +15,15 @@ This tracker separates engineering completion, scientific comparability, immutab
 WP15-D1_LOCAL_VALIDATION=PASS
 WP15-D2_LOCAL_VALIDATION=PASS
 WP15-D3_LOCAL_VALIDATION=PASS
-WP15-D3B=IMPLEMENTED_PENDING_LOCAL_AND_CI_VALIDATION
+WP15-D3B_LOCAL_VALIDATION=PASS
+WP15-D4=IMPLEMENTED_PENDING_LOCAL_AND_CI_VALIDATION
+OBSERVATION_CUTOFF_FREEZE=CANDIDATE_NOT_FROZEN
+DENOMINATOR_FREEZE=CANDIDATE_NOT_FROZEN
 FAMILY_SPECIFIC_DESCRIPTIVE_COMPARISON=NOT_YET_AUTHORIZED
 PUBLICATION_EVIDENCE=false
 ```
 
-Issue #3 remains open. Review delay does not block provisional engineering, pilot capture, reproducibility testing, or manuscript methods work. It still blocks independent-approval, oracle-freeze, cryptographic-security, and publication-grade claims.
+Issue #3 remains open. Review delay does not block provisional engineering, reproducibility testing, immutable pilot capture, outcome-blind plan development, or manuscript methods work. It still blocks independent approval, oracle freeze, cryptographic-security claims, and publication-grade conclusions.
 
 ## Master phase tracker
 
@@ -40,7 +43,7 @@ Issue #3 remains open. Review delay does not block provisional engineering, pilo
 | 12 | Adverse-outcome witnesses | Complete internally | 90% | Review evidence assumptions |
 | 13 | Diagnostic outcome expansion | Complete internally | 85% | Accept, revise, or reject expansion |
 | 14 | Independent-review package | Ready; review open | 90% | Reviewer acceptance and closure |
-| 15 | Publication preparation and revalidation | In progress | 74% | Validate D3B, execute/audit pilot, freeze candidate protocol |
+| 15 | Publication preparation and revalidation | In progress | 80% | Validate D4 and decide whether to freeze it |
 | 16 | Publication-candidate experiment | Not started | 0% | Execute frozen protocol |
 | 17 | Results and final manuscript | Not started | 10% | Final analysis and prose |
 | 18 | Pre-submission audit and submission | Not started | 0% | Audit, release, formatting, submission |
@@ -58,10 +61,12 @@ Issue #3 remains open. Review delay does not block provisional engineering, pilo
 - [x] Commit validated D1 manifest at `fe93689`.
 - [x] Commit validated D2 manifest at `0cd96a8`.
 - [x] Commit validated D3 manifest at `8500cb5`.
-- [x] Record D3B implementation and validation gates.
-- [ ] Validate D3B locally.
-- [ ] Refresh the manifest after D3B validation.
-- [ ] Update `CHANGELOG.md`.
+- [x] Commit validated D3B manifest at `05f114f`.
+- [x] Create ignored local compliance archive and commit manifest at `7af4f02`.
+- [x] Record D4 implementation and freeze gates.
+- [ ] Validate D4 locally.
+- [ ] Refresh the manifest after D4 validation.
+- [ ] Update `CHANGELOG.md` before pull-request preparation.
 - [ ] Open a draft pull request only after explicit authorization.
 - [ ] Complete CI validation.
 
@@ -77,9 +82,11 @@ Issue #3 remains open. Review delay does not block provisional engineering, pilo
 - [x] Implement four qualified executable families.
 - [x] Define member-row and analysis-unit semantics.
 - [x] Integrate D2/D3 contracts into immutable capture.
-- [ ] Validate D3B execution ordering and metadata.
-- [ ] Freeze observation cutoffs and final denominators.
-- [ ] Freeze sensitivity and statistical plan.
+- [x] Define outcome-blind D4 observation cutoffs and denominator candidates.
+- [x] Define post-observation revision controls.
+- [ ] Validate D4 identities, cutoffs, denominator rules, and manifest.
+- [ ] Decide whether to accept, revise, or reject the D4 freeze candidate.
+- [ ] Freeze sensitivity and statistical plan only after a separate decision.
 
 ### WP15-C — Data dictionary and capture controls
 
@@ -91,9 +98,10 @@ Issue #3 remains open. Review delay does not block provisional engineering, pilo
 - [x] Define immutable raw data and lineage.
 - [x] Define exclusions, reruns, and layered manifests.
 - [x] Define D3B metadata schema `0.2.0`.
-- [x] Define the derived D3 capture layer.
-- [ ] Validate retained-input SHA-256 parity.
-- [ ] Define final archive and retention period.
+- [x] Define the protected D3 derived layer.
+- [x] Validate retained-input SHA-256 parity locally.
+- [x] Preserve a local checksum-verified compliance archive under ignored `review_document/`.
+- [ ] Define final external backup and retention period.
 
 ### WP15-D1 — Baseline metric and capture parity
 
@@ -141,70 +149,86 @@ Issue #3 remains open. Review delay does not block provisional engineering, pilo
 
 ### WP15-D3B — Immutable pilot-bundle integration
 
-**Status:** `IMPLEMENTED_PENDING_LOCAL_AND_CI_VALIDATION`
+**Status:** `LOCALLY_VALIDATED_CI_PENDING`
 
-#### Retained inputs
-
-- [x] Retain T1 pilot configuration.
-- [x] Retain baseline-parity configuration.
-- [x] Retain D3 matched-family configuration.
-- [x] Retain D2 comparability matrix.
-- [x] Retain Phase 15 protocol and Phase 08 analysis configuration.
-- [x] Retain baseline and T1 catalogs.
-- [x] Record every retained path and SHA-256 in metadata.
-
-#### Execution and fail-closed behavior
-
+- [x] Retain exact T1, baseline, D2, D3, protocol, analysis, and catalog inputs.
+- [x] Record retained paths and SHA-256 values in metadata schema `0.2.0`.
 - [x] Run D3 only after T1 and baseline exit zero.
-- [x] Record `SKIPPED_PREREQUISITE_FAILURE` when prerequisites fail.
-- [x] Record `PROCESS_FAILED` for a D3 process failure.
-- [x] Record `OUTPUT_VALIDATION_FAILED` for rejected zero-exit output.
-- [x] Record `COMPLETED_AND_VERIFIED` only after capture-side validation.
-- [x] Propagate D3 failure into `overall_exit_code`.
-
-#### Derived capture and validation
-
+- [x] Implement fail-closed prerequisite, process, and output-validation statuses.
 - [x] Capture D3 JSON, member CSV, denominator CSV, and internal manifest.
 - [x] Require exact 4-family, 13-row, 12-unit population.
 - [x] Require 13 source executions and unique row identifiers.
-- [x] Require only `QUALIFIED_MATCH` rows.
-- [x] Require complete family coverage.
-- [x] Require `success_rate_denominator=NOT_DEFINED`.
-- [x] Require `aggregate_authorized=false`.
-- [x] Verify JSON/CSV member and denominator identity.
-- [x] Reject byte tampering.
-- [x] Reject re-checksummed semantic gate relaxation.
+- [x] Reject byte tampering and re-checksummed semantic gate relaxation.
+- [x] Add and verify raw, derived, analysis, and complete-bundle manifests.
+- [x] Pass 10 focused capture tests, 13 protocol tests, and 223 total tests.
+- [x] Complete clean integrated local smoke with all process exit codes zero.
+- [x] Commit 178-entry manifest.
+- [ ] Run CI after draft-PR authorization.
 
-#### Manifest hierarchy
+### WP15-D4 — Outcome-blind family analysis freeze candidate
 
-- [x] Preserve D3 internal manifest.
-- [x] Add `manifests/derived.sha256`.
-- [x] Preserve `raw.sha256` and `analysis.sha256`.
-- [x] Include all layers in `run-bundle.sha256`.
-- [x] Verify all manifests before returning success.
+**Status:** `IMPLEMENTED_PENDING_LOCAL_AND_CI_VALIDATION`
+
+#### Population and cutoffs
+
+- [x] Fix family order as CF-01, CF-02, CF-05, and CF-06.
+- [x] Fix 13 member identities and 12 treatment-within-family analysis units.
+- [x] Preserve two CF-02 B1 policy rows under one `CF-02:B1` unit.
+- [x] Define 4 unique terminal observation cutoffs.
+- [x] Match each family’s allowed-field names to the D2 matrix.
+
+#### Outcome-blind construction
+
+- [x] Set `projected_metric_values_read=false`.
+- [x] Set `raw_execution_values_read=false`.
+- [x] Prohibit outcome-dependent branching, filtering, or cutoff extension.
+- [x] Add a mutation test requiring projected-value changes to leave the identity contract unchanged.
+- [x] Omit outcome and projected-value columns from the member registry.
+
+#### Denominator candidate
+
+- [x] Use treatment-within-family as the candidate denominator unit.
+- [x] Keep member rows as traceability records only.
+- [x] Block family display when an expected unit is missing.
+- [x] Reject undeclared units rather than expanding the denominator.
+- [x] Keep `success_rate_denominator=NOT_DEFINED`.
+- [x] Keep cross-family denominator and aggregation prohibited.
+
+#### Outputs and controls
+
+- [x] Generate plan JSON, member registry CSV, analysis-unit CSV, family-cutoff CSV, and manifest.
+- [x] Require exact four-file manifest coverage.
+- [x] Reject tampering and incomplete manifest coverage.
+- [x] Add D4 validator, 10 focused tests, protocol checks, CI smoke, documentation, tracker, and RIT-017.
 
 #### Validation pending
 
-- [ ] Parse D3B contract locally.
-- [ ] Run focused capture and protocol tests.
-- [ ] Run D2, D3, D3B, and protocol validators.
-- [ ] Run complete regression suite.
-- [ ] Run disposable integrated capture from a clean Git state.
-- [ ] Verify retained-source and captured SHA-256 equality.
-- [ ] Verify D3 internal and all run-level manifests.
+- [ ] Parse D4 and Phase 15 contracts locally.
+- [ ] Run 10 focused D4 tests.
+- [ ] Run 16 Phase 15 protocol tests.
+- [ ] Run D2, D3, D3B, D4, and protocol validators.
+- [ ] Generate one disposable D4 candidate bundle.
+- [ ] Audit 4 families, 13 rows, 12 units, 4 cutoffs, and closed gates.
+- [ ] Verify the D4 manifest.
+- [ ] Run the complete regression suite.
 - [ ] Refresh and commit the tracked-file manifest.
 - [ ] Run CI after draft-PR authorization.
+
+#### Freeze decision deferred
+
+Local and CI validation do not freeze D4. A separate explicit decision must accept, revise, or reject the exact cutoffs, denominator units, and allowed display registry before any family member values are viewed side by side.
 
 ### WP15-D — Pilot execution
 
 **Status:** `NOT_STARTED_GATE_P1_PENDING`
 
-- [ ] Complete D3B validation.
-- [ ] Run retained 12-seed T1 pilot.
+- [x] Complete D3B local validation.
+- [ ] Complete D4 local validation.
+- [ ] Run retained 12-seed T1 pilot under the selected protocol version.
 - [ ] Run all 21 baseline scenarios.
 - [ ] Run the four qualified D3 families in the same bundle.
 - [ ] Preserve raw, derived, analysis, logs, governance records, and manifests.
-- [ ] Keep family-level comparison disabled.
+- [ ] Keep family-level comparison disabled until separately authorized.
 
 ### WP15-E — Pilot audit and protocol-freeze candidate
 
@@ -215,13 +239,13 @@ Issue #3 remains open. Review delay does not block provisional engineering, pilo
 - [ ] Audit missing and weakly represented groups.
 - [ ] Confirm no post-outcome tuning.
 - [ ] Record failures, exclusions, and reruns.
-- [ ] Resolve defects and rerun where required.
+- [ ] Decide whether D4 can be frozen before comparative display.
 
 ### WP15-F — Publication-candidate capture
 
-**Status:** `BLOCKED_BY_D3B_VALIDATION_AND_PILOT_AUDIT`
+**Status:** `BLOCKED_BY_D4_VALIDATION_FREEZE_DECISION_AND_PILOT_AUDIT`
 
-- [ ] Freeze protocol, population, cutoffs, and analysis plan.
+- [ ] Freeze protocol, population, cutoffs, denominators, and analysis plan.
 - [ ] Execute candidate and sensitivity panel.
 - [ ] Preserve raw, derived, audit, and formal evidence.
 - [ ] Reproduce every manuscript value from retained artifacts.
@@ -230,7 +254,7 @@ Issue #3 remains open. Review delay does not block provisional engineering, pilo
 
 **Status:** `IN_PROGRESS`
 
-- [ ] Draft core methods using D2/D3/D3B constraints.
+- [ ] Draft core methods using D2–D4 constraints.
 - [ ] Prepare result placeholders without conclusions.
 - [ ] Draft limitations, AI-use disclosure, reproducibility, and availability.
 
@@ -258,11 +282,19 @@ Still prohibited:
 - CCSDS/SDLS, flight, RF, or operational applicability; and
 - publication-grade evidence before final audit.
 
+Still candidate-only:
+
+- D4 observation cutoffs;
+- D4 treatment-within-family denominators;
+- D4 member registry;
+- D4 allowed display registry; and
+- publication analysis plan.
+
 ## Readiness gates
 
 ### Gate P1 — Pilot ready
 
-D1–D3 are locally validated; D3B integrated capture, tests, validators, smoke run, and manifest must also pass.
+D1–D3B are locally validated. D4 tests, validator, smoke bundle, audit, and manifest must also pass.
 
 ### Gate P2 — Pilot accepted
 
@@ -270,7 +302,7 @@ Pilot outputs reproduce, all manifests verify, failures remain retained, and cor
 
 ### Gate P3 — Comparative publication-candidate execution authorized
 
-D2/D3/D3B are validated, observation cutoffs and denominators are frozen, and the analysis plan is versioned before aggregate review.
+D2–D4 are validated, D4 receives a separate explicit freeze decision, and the analysis plan is versioned before any comparative display or aggregate review.
 
 ### Gate P4 — Manuscript results ready
 
@@ -282,13 +314,15 @@ Claims, references, disclosure, availability, formatting, and unresolved limitat
 
 ## Immediate next actions
 
-1. Pull the D3B implementation checkpoint.
-2. Run focused and complete validation.
-3. Execute and audit one disposable integrated bundle.
-4. Refresh the repository manifest only after D3B passes.
-5. Keep the pull request unopened until explicit authorization.
-6. Keep Issue #3 and all publication boundaries accurate.
+1. Pull the D4 implementation checkpoint.
+2. Run focused D4 and protocol tests.
+3. Run D2–D4 and Phase 15 validators.
+4. Generate and audit one outcome-blind D4 candidate bundle.
+5. Run the complete regression suite.
+6. Refresh the repository manifest only after D4 passes.
+7. Keep the pull request unopened until explicit authorization.
+8. Keep Issue #3 and all freeze/publication boundaries accurate.
 
 ## Update rule
 
-Update this tracker after every material change to protocol state, capture behavior, validation evidence, review status, or manuscript readiness. Never mark a gate complete from intention or an unverified run.
+Update this tracker after every material change to protocol state, capture behavior, validation evidence, freeze state, review status, or manuscript readiness. Never mark a gate complete from intention, an unverified run, or a candidate-only configuration.
