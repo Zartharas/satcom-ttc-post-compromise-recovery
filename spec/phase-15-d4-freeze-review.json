@@ -1,0 +1,235 @@
+{
+  "schema_version": "0.1.0",
+  "phase": "Phase 15",
+  "work_package": "WP15-D4R",
+  "title": "Separate WP15-D4 freeze review",
+  "status": "REVIEW_PACKAGE_DEFINED_DECISION_PENDING_NOT_FROZEN",
+  "review_class": "OUTCOME_BLIND_INTERNAL_PROTOCOL_REVIEW",
+  "review_target": {
+    "branch": "phase-15/publication-preparation",
+    "validated_checkpoint": "34d63a5",
+    "candidate_contract": "experiments/configs/phase-15-family-descriptive-plan.json",
+    "authoritative_comparability_matrix": "spec/phase-15-treatment-comparability-matrix.json",
+    "candidate_tracker": "tracker/WP15_D4_FREEZE_CANDIDATE_TRACKER.md",
+    "candidate_status": "LOCALLY_VALIDATED_CI_AND_FREEZE_REVIEW_PENDING_NOT_ANALYSIS_EVIDENCE"
+  },
+  "review_scope": {
+    "eligible_family_ids": [
+      "CF-01",
+      "CF-02",
+      "CF-05",
+      "CF-06"
+    ],
+    "expected_family_count": 4,
+    "expected_member_row_count": 13,
+    "expected_analysis_unit_count": 12,
+    "expected_cutoff_count": 4,
+    "reviewed_objects": [
+      "family membership and order",
+      "member-row identity",
+      "treatment-within-family analysis-unit identity",
+      "family-specific observation cutoffs",
+      "D2-authorized field-name lists",
+      "missing-unit and extra-unit behavior",
+      "allowed display registry",
+      "post-observation revision controls"
+    ]
+  },
+  "outcome_blindness": {
+    "required": true,
+    "projected_metric_values_read": false,
+    "raw_execution_values_read": false,
+    "family_outcome_values_read": false,
+    "aggregate_results_read": false,
+    "permitted_evidence": [
+      "D2 and D4 machine-readable contracts",
+      "member and analysis-unit identifiers",
+      "family cutoff text and cutoff identifiers",
+      "allowed-field names without values",
+      "validation results and checksum status",
+      "issue and governance records",
+      "source commit and file hashes"
+    ],
+    "prohibited_evidence": [
+      "projected metric values",
+      "raw execution values",
+      "family outcome distributions",
+      "success counts or percentages",
+      "treatment rankings",
+      "effect estimates",
+      "confidence intervals",
+      "hypothesis-test results"
+    ]
+  },
+  "decision_options": [
+    "ACCEPT",
+    "REVISE",
+    "REJECT",
+    "DEFER"
+  ],
+  "current_decision": {
+    "decision": "PENDING",
+    "decision_authorized": false,
+    "reviewer": "PENDING",
+    "reviewed_commit": "PENDING",
+    "decision_date_utc": "PENDING",
+    "rationale": "PENDING",
+    "conditions": [],
+    "superseded_candidate_preserved": true
+  },
+  "decision_effects": {
+    "ACCEPT": "Freeze only the exact reviewed observation cutoffs, member registry, analysis-unit denominators, and allowed planning-display registry at the reviewed commit. This does not authorize member-value display, success rates, aggregation, inference, superiority, or publication evidence.",
+    "REVISE": "Keep every freeze state open, preserve the reviewed candidate, make a versioned pre-observation revision, and repeat local validation and this review before any value display.",
+    "REJECT": "Keep family comparison closed and preserve the rejected candidate and rationale.",
+    "DEFER": "Keep the candidate unchanged and all freeze and display gates closed pending additional non-outcome evidence."
+  },
+  "review_questions": [
+    {
+      "id": "FR-01",
+      "subject": "review target",
+      "criterion": "The review target is the exact locally validated D4 checkpoint and no later unreviewed candidate mutation is included.",
+      "response": "PENDING",
+      "rationale": "PENDING"
+    },
+    {
+      "id": "FR-02",
+      "subject": "outcome blindness",
+      "criterion": "The reviewer has not inspected projected values, raw values, family outcomes, aggregate results, or ranking information.",
+      "response": "PENDING",
+      "rationale": "PENDING"
+    },
+    {
+      "id": "FR-03",
+      "subject": "family population",
+      "criterion": "The exact qualified family order CF-01, CF-02, CF-05, and CF-06 is justified for the candidate review scope.",
+      "response": "PENDING",
+      "rationale": "PENDING"
+    },
+    {
+      "id": "FR-04",
+      "subject": "member registry",
+      "criterion": "The 13 declared member rows are complete, unique, and traceable to the D2/D3 contracts.",
+      "response": "PENDING",
+      "rationale": "PENDING"
+    },
+    {
+      "id": "FR-05",
+      "subject": "analysis units",
+      "criterion": "The 12 treatment-within-family analysis units are complete and do not treat member rows as independent denominator units.",
+      "response": "PENDING",
+      "rationale": "PENDING"
+    },
+    {
+      "id": "FR-06",
+      "subject": "CF-02 policy variants",
+      "criterion": "B1-01 and B1-05 remain separate traceability rows under the single CF-02:B1 analysis unit.",
+      "response": "PENDING",
+      "rationale": "PENDING"
+    },
+    {
+      "id": "FR-07",
+      "subject": "CF-01 cutoff",
+      "criterion": "OC-CF01-TERMINAL-ORACLE is terminal, non-adaptive, and does not permit a post-terminal message or additional recovery attempt.",
+      "response": "PENDING",
+      "rationale": "PENDING"
+    },
+    {
+      "id": "FR-08",
+      "subject": "CF-02 cutoff",
+      "criterion": "OC-CF02-NO-FAULT-COMPLETION is terminal, applies consistently to both B1 policy variants, and does not extend observation after a result.",
+      "response": "PENDING",
+      "rationale": "PENDING"
+    },
+    {
+      "id": "FR-09",
+      "subject": "CF-05 cutoff",
+      "criterion": "OC-CF05-STATUS-OPPORTUNITY stops after the declared telemetry opportunity and prohibits a replacement opportunity or recovery extension.",
+      "response": "PENDING",
+      "rationale": "PENDING"
+    },
+    {
+      "id": "FR-10",
+      "subject": "CF-06 cutoff",
+      "criterion": "OC-CF06-SINGLE-REPLAY permits exactly one declared replay evaluation after successful advancement and no additional replay, retry, or recovery action.",
+      "response": "PENDING",
+      "rationale": "PENDING"
+    },
+    {
+      "id": "FR-11",
+      "subject": "allowed fields",
+      "criterion": "Every family allowed-field list matches the authoritative D2 matrix in membership and order without widening.",
+      "response": "PENDING",
+      "rationale": "PENDING"
+    },
+    {
+      "id": "FR-12",
+      "subject": "missing units",
+      "criterion": "A missing declared analysis unit blocks the family display and never shrinks the denominator.",
+      "response": "PENDING",
+      "rationale": "PENDING"
+    },
+    {
+      "id": "FR-13",
+      "subject": "extra units",
+      "criterion": "An undeclared analysis unit is rejected and never expands the denominator.",
+      "response": "PENDING",
+      "rationale": "PENDING"
+    },
+    {
+      "id": "FR-14",
+      "subject": "display registry",
+      "criterion": "Only identity, membership, cutoff, allowed-field-name, and coverage-completeness planning displays are currently allowed; side-by-side member values remain separately gated.",
+      "response": "PENDING",
+      "rationale": "PENDING"
+    },
+    {
+      "id": "FR-15",
+      "subject": "revision control",
+      "criterion": "Any pre-display change requires a versioned candidate and repeated validation; any post-display change must be labeled post-observation and preserve the superseded plan.",
+      "response": "PENDING",
+      "rationale": "PENDING"
+    },
+    {
+      "id": "FR-16",
+      "subject": "claim boundary",
+      "criterion": "The review cannot authorize success rates, pooled aggregation, inference, superiority, causal interpretation, cryptographic claims, independent validation, or publication evidence.",
+      "response": "PENDING",
+      "rationale": "PENDING"
+    }
+  ],
+  "decision_prerequisites": {
+    "required_question_count": 16,
+    "allowed_responses": [
+      "PASS",
+      "FAIL",
+      "NEEDS_REVISION",
+      "DEFER"
+    ],
+    "accept_requires_all_questions_pass": true,
+    "accept_requires_exact_reviewed_commit": true,
+    "accept_requires_local_validation": true,
+    "accept_requires_ci_validation": true,
+    "accept_requires_explicit_decision_record": true,
+    "implicit_acceptance": "NOT_PERMITTED"
+  },
+  "freeze_state": {
+    "observation_cutoffs": "CANDIDATE_NOT_FROZEN",
+    "analysis_unit_denominators": "CANDIDATE_NOT_FROZEN",
+    "member_registry": "CANDIDATE_NOT_FROZEN",
+    "allowed_displays": "CANDIDATE_NOT_FROZEN",
+    "publication_analysis_plan": "NOT_FROZEN"
+  },
+  "claim_boundary": {
+    "family_member_value_display": "NOT_YET_AUTHORIZED",
+    "family_specific_descriptive_comparison": "NOT_YET_AUTHORIZED",
+    "success_rate_denominator": "NOT_DEFINED",
+    "pooled_cross_treatment_aggregation": "NOT_PERMITTED",
+    "success_rate_or_percentage": "NOT_PERMITTED",
+    "inferential_statistics": "NOT_PERMITTED",
+    "treatment_superiority": "NOT_PERMITTED",
+    "causal_interpretation": "NOT_PERMITTED",
+    "cryptographic_security_or_pcs": "NOT_PERMITTED",
+    "independent_validation": "NOT_PERMITTED",
+    "publication_evidence": "NOT_PERMITTED"
+  }
+}
