@@ -4,231 +4,286 @@
 
 `PROVISIONAL_CAPTURE_SCHEMA_NOT_FROZEN`
 
-This dictionary defines the fields expected from the Phase 15 T1 pilot, deterministic B0/B1/B2 metric adapter, and later publication-candidate workflow. It is descriptive of the current abstract simulator and capture design. It does not authorize a security, causal, timing, or treatment-effectiveness claim.
+This dictionary covers the Phase 15 T1 pilot, deterministic B0/B1/B2 adapter, WP15-D2 matrix, WP15-D3 qualified-family dataset, and WP15-D3B immutable capture bundle. It describes the current abstract simulator and capture design. It does not authorize security, causal, timing-equivalence, treatment-effectiveness, or publication claims.
 
 ## Dataset layers
 
 | Layer | Purpose | Editing rule |
 |---|---|---|
-| Configuration | Declares exact T1 and baseline-adapter inputs | Versioned; never edited after a run begins |
-| Catalog | Declares the 21 baseline design-oracle scenarios | Retained byte-for-byte in each capture bundle |
-| Run metadata | Records environment, commands, commit, timing, and provenance | Immutable after capture |
-| Raw result JSON | Preserves config, schedule, metrics, and event log per seed or scenario | Immutable |
-| Metrics CSV | Provides flat analysis-ready values | Regenerated from raw data only |
-| Processed analysis | Contains T1 summaries, audits, and sensitivity outputs | Must identify sources and script commit |
-| Exclusion/rerun record | Explains technical exclusions or superseded attempts | Append-only |
-| Checksum manifests | Verifies retained file bytes | Regenerated only for a new run directory |
+| Configuration | Declares exact T1, baseline, D2, D3, and analysis inputs | Versioned; never edited after run start |
+| Catalog | Declares retained baseline and T1 internal design-oracle scenarios | Retained byte-for-byte |
+| Run metadata | Records environment, commands, commits, statuses, and provenance | Immutable after capture |
+| Raw T1/baseline JSON | Preserves per-seed or per-scenario execution evidence | Immutable |
+| Raw T1/baseline CSV | Flat analysis-ready values for each source pipeline | Regenerated from raw JSON only |
+| D3 derived JSON | Preserves 13 member rows, denominators, and source executions | Immutable |
+| D3 member CSV | Flat member-level projections | Regenerated from D3 JSON only |
+| D3 denominator CSV | Family coverage and analysis-unit counts | Regenerated from D3 JSON only |
+| Phase 08 analysis | T1 descriptive outputs and audits | Must identify source and script |
+| Exclusion/rerun records | Documents technical exclusions and superseded attempts | Append-only through new run records |
+| Checksum manifests | Verify retained bytes at multiple layers | Regenerated only for a new run directory |
 
-## Run metadata fields
+## Run metadata schema
 
-| Field | Type | Required | Meaning |
-|---|---|---:|---|
-| `run_id` | string | yes | Unique identifier in the form `phase15-pilot-YYYYMMDDTHHMMSSZ-g<short_commit>` |
-| `run_class` | enum | yes | `PILOT_INTERNAL_VALIDATION_ONLY` or a later explicitly authorized class |
-| `start_time_utc` | RFC 3339 string | yes | UTC run start time |
-| `end_time_utc` | RFC 3339 string | yes | UTC run completion time |
-| `repository` | string | yes | Repository owner and name |
-| `branch` | string | yes | Branch checked out at execution |
-| `commit_sha` | 40-character hex string | yes | Exact source commit |
-| `git_status` | string | yes | Exact recorded porcelain status or `CLEAN` |
-| `config_path` | path string | yes | T1 pilot configuration used for the run |
-| `config_sha256` | SHA-256 | yes | Digest of exact T1 configuration bytes |
-| `baseline_config_path` | path string | yes | Retained baseline-parity configuration |
-| `baseline_config_sha256` | SHA-256 | yes | Digest of exact baseline-parity configuration bytes |
-| `baseline_catalog_path` | path string | yes | Retained baseline scenario catalog |
-| `baseline_catalog_sha256` | SHA-256 | yes | Digest of exact retained catalog bytes |
-| `protocol_path` | path string | yes | Machine-readable Phase 15 protocol candidate |
-| `protocol_sha256` | SHA-256 | yes | Digest of protocol bytes |
-| `analysis_config_path` | path string | yes | T1 descriptive-analysis configuration |
-| `analysis_config_sha256` | SHA-256 | yes | Digest of analysis configuration bytes |
-| `python_version` | string | yes | Interpreter version |
-| `platform` | string | yes | Operating system and architecture |
-| `runner_command` | string array | yes | Exact T1 executable and arguments |
-| `runner_exit_code` | integer | yes | T1 runner exit code |
-| `baseline_command` | string array | yes | Exact baseline-adapter executable and arguments |
-| `baseline_exit_code` | integer | yes | Baseline runner exit code |
-| `analysis_command` | string array/null | yes | Exact T1 analysis command when executed |
-| `analysis_exit_code` | integer/null | yes | T1 analysis exit code when executed |
-| `overall_exit_code` | integer | yes | First nonzero pipeline exit, otherwise zero |
-| `stdout_paths` | path-string array | yes | Retained standard-output logs |
-| `stderr_paths` | path-string array | yes | Retained standard-error logs |
-| `claim_boundary` | object | yes | Prohibited interpretation flags |
+D3B-integrated captures use metadata schema `0.2.0`.
 
-## Raw experiment-result objects
-
-A T1 seed produces one logical experiment result. A baseline catalog scenario produces one deterministic adapter result.
-
-Shared result fields are:
-
-| Field | Type | Required | Meaning |
-|---|---|---:|---|
-| `schema_version` | string | yes | Result schema version |
-| `status` | enum | yes | Provisional internal status recorded by the runner |
-| `config` | object | yes | Per-result execution inputs or adapter context |
-| `schedule` | array | yes | Canonically ordered fault actions |
-| `metrics` | object | yes | Outcome and measurement fields |
-| `event_log` | array | yes | Ordered abstract execution events |
-
-Baseline results additionally retain:
-
-| Field | Type | Required | Meaning |
-|---|---|---:|---|
-| `metric_parity_status` | enum | yes | `IMPLEMENTED_PENDING_VALIDATION` during WP15-D1 |
-| `treatment` | enum | yes | Normalized `B0`, `B1`, or `B2` treatment |
-| `baseline_variant` | string | yes | Original catalog variant, including `B1-STATUS-ENHANCED` |
-| `scenario_id` | string | yes | Catalog ID from `B0-01` through `B2-10` |
-
-## T1 per-result configuration
-
-| Field | Type | Required | Meaning |
-|---|---|---:|---|
-| `seed` | integer | yes | Input to deterministic T1 schedule generation |
-| `ground_epoch` | integer | yes | Initial abstract ground epoch |
-| `spacecraft_epoch` | integer | yes | Initial abstract spacecraft epoch |
-| `authority_epoch_floor` | integer | yes | Minimum authority epoch used by the controller |
-| `max_transmissions` | integer | yes | Maximum bounded transmissions per recovery phase |
-| `candidate_lifetime_contacts` | integer | yes | Candidate lifetime in discrete contact windows |
-| `max_faults` | integer | yes | Upper bound supplied to schedule generation |
-| `compromise_active_keys` | boolean | yes | Whether initial active keys are marked compromised |
-| `allowed_faults` | string array | yes | Fault kinds available to the generator |
-
-## Baseline adapter configuration context
-
-| Field | Type | Required | Meaning |
-|---|---|---:|---|
-| `initial_state` | string | yes | Catalog initial-state description |
-| `compromise` | string | yes | Catalog compromise scope |
-| `activation_policy` | string/null | yes | B1 policy when declared |
-| `properties` | string array | yes | Catalog property labels |
-| `adapter_semantics` | string | yes | Explicit reminder that timing and transmission counts are provisional adapter values |
-
-## Schedule-action fields
-
-| Field | Type | Required | Meaning |
-|---|---|---:|---|
-| `phase` | enum/string | yes | Protocol or adapter phase receiving the fault action |
-| `attempt` | integer | yes | One-based phase attempt index |
-| `kind` | enum/string | yes | Fault kind |
-| `target` | enum/string | yes | Abstract target such as `ground`, `spacecraft`, `link`, or `exchange` |
-| `contacts` | integer | yes | Contact-window duration used by delay-like actions; baseline adapter actions currently use zero |
-| `detail` | string | no | Additional normalized adapter detail, such as `STALE_GROUND_RESTORE` |
-
-T1 phases are `RECOVERY_PREPARE`, `RECOVERY_RESPONSE`, `RECOVERY_COMMIT`, `RECOVERY_CONFIRM`, `TEST_COMMAND`, and `STATUS_TELEMETRY`.
-
-Baseline adapter phases include `OTAR_UPLOAD`, `REQUIRED_FRAGMENT`, `KEM_CONFIRM`, `AUTHENTICATED_STATUS`, `RATCHET_UPDATE`, `RATCHET_STATE`, and `STATUS_TELEMETRY`.
-
-Shared T1 fault kinds are `DROP`, `DELAY`, `DUPLICATE`, `REORDER`, `CONTACT_CLOSE`, `ENDPOINT_RESTART`, `STALE_COUNTER`, and `STALE_REPLAY`. The adapter-specific `ACTIVE_SENDER_IMPERSONATION` action is retained through `other_fault_count` and must not be silently relabeled as a T1 fault kind.
-
-## Shared metric fields
-
-The following fields are emitted by both the T1 runner and baseline adapter:
-
-| Field | Type | Unit/domain | Interpretation boundary |
-|---|---|---|---|
-| `seed` | integer/null | identifier | T1 reproduction input; null for deterministic baseline catalog scenarios |
-| `schedule_sha256` | string | SHA-256 | T1 schedule identity or canonical deterministic baseline-scenario identity |
-| `outcome` | enum | model classification | Abstract outcome, not proof of cryptographic security |
-| `alignment` | string | abstract joint state | Ground/spacecraft state relation under the model |
-| `security_state` | string | abstract category | Must remain separate from availability |
-| `availability_state` | string | abstract category | Must remain separate from security |
-| `recovery_duration_contacts` | integer | contact windows | T1 modeled contacts; baseline currently one adapter contact per catalog case |
-| `divergent_contact_windows` | integer | contact windows | T1 observed windows or baseline terminal adapter indicator |
-| `degraded_contact_windows` | integer | contact windows | Windows marked degraded by the current model/adapter rule |
-| `total_transmissions` | integer | count | Abstract attempted messages; baseline values are declared adapter counts |
-| `retry_overhead` | integer | count | Attempts beyond the treatment-specific no-retry reference |
-| `fault_count` | integer | count | Number of normalized fault actions |
-| `drop_count` | integer | count | Drop actions |
-| `delay_count` | integer | count | Delay actions |
-| `duplicate_count` | integer | count | Duplicate actions |
-| `reorder_count` | integer | count | Reorder actions |
-| `contact_close_count` | integer | count | Contact-close actions |
-| `restart_count` | integer | count | Endpoint-restart or stale-restore adapter actions |
-| `replay_count` | integer | count | Replay-related actions |
-| `rejection_count` | integer | count | Total modeled message or state rejections |
-| `replay_rejection_count` | integer | count | Rejections attributed to replay handling |
-| `stale_state_rejection_count` | integer | count | Rejections attributed to stale state or counters |
-| `command_accepted` | boolean | true/false | T1 observed command evidence or baseline adapter-derived final-state evidence |
-| `telemetry_complete` | boolean | true/false | T1 observed telemetry evidence or baseline adapter-derived verification evidence |
-| `verification_complete` | boolean | true/false | Whether the current model/adapter verification condition completed |
-| `active_key_compromised` | boolean | true/false | Whether an active abstract endpoint key remains attacker-known |
-
-## Baseline-specific metric fields
+### Core fields
 
 | Field | Type | Meaning |
 |---|---|---|
-| `treatment` | enum | Normalized `B0`, `B1`, or `B2` grouping |
-| `baseline_variant` | string | Original catalog baseline label |
-| `scenario_id` | string | Deterministic catalog scenario |
-| `other_fault_count` | integer | Normalized adapter actions without a direct T1 fault-count field |
+| `run_id` | string | Unique immutable run identifier |
+| `run_class` | enum | `PILOT_INTERNAL_VALIDATION_ONLY` |
+| `publication_evidence` | boolean | Must be false |
+| `repository` | string | Repository owner/name |
+| `branch` | string | Checked-out branch |
+| `commit_sha` | 40-character hex/string | Exact source commit |
+| `git_status` | string | `CLEAN` or exact porcelain output |
+| `start_time_utc` | RFC 3339 string | UTC start |
+| `end_time_utc` | RFC 3339 string | UTC completion |
+| `python_version` | string | Interpreter version |
+| `platform` | string | Operating system and architecture |
+| `overall_exit_code` | integer | First nonzero stage result, otherwise zero |
+| `claim_boundary` | object | Closed interpretation and publication gates |
+
+### Retained input paths and hashes
+
+| Field | Meaning |
+|---|---|
+| `config_path` / `config_sha256` | T1 pilot configuration |
+| `baseline_config_path` / `baseline_config_sha256` | Baseline-parity configuration |
+| `baseline_catalog_path` / `baseline_catalog_sha256` | Retained baseline catalog |
+| `t1_catalog_path` / `t1_catalog_sha256` | Retained T1 catalog |
+| `comparability_matrix_path` / `comparability_matrix_sha256` | Retained WP15-D2 matrix |
+| `matched_family_config_path` / `matched_family_config_sha256` | Retained WP15-D3 configuration |
+| `protocol_path` / `protocol_sha256` | Retained Phase 15 protocol candidate |
+| `analysis_config_path` / `analysis_config_sha256` | Retained Phase 08 analysis configuration |
+
+All SHA-256 fields are lowercase 64-character hexadecimal digests of exact retained bytes.
+
+### Process and log fields
+
+| Field | Type | Meaning |
+|---|---|---|
+| `runner_command` | string array | Exact T1 command |
+| `runner_exit_code` | integer | T1 process result |
+| `baseline_command` | string array | Exact baseline command |
+| `baseline_exit_code` | integer | Baseline process result |
+| `matched_family_command` | string array/null | Exact D3 command or null when skipped |
+| `matched_family_process_exit_code` | integer/null | D3 subprocess result |
+| `matched_family_exit_code` | integer/null | D3 process plus capture-validation result |
+| `matched_family_status` | enum | D3B execution/capture status |
+| `analysis_command` | string array/null | Exact Phase 08 command |
+| `analysis_exit_code` | integer/null | Phase 08 process result |
+| `stdout_paths` | path array | Retained stdout logs |
+| `stderr_paths` | path array | Retained stderr logs |
+
+`matched_family_status` values:
+
+- `SKIPPED_PREREQUISITE_FAILURE`
+- `PROCESS_FAILED`
+- `OUTPUT_VALIDATION_FAILED`
+- `COMPLETED_AND_VERIFIED`
+
+### D3B provenance fields
+
+| Field | Type | Meaning |
+|---|---|---|
+| `matched_family_output_paths` | path array | Existing D3 files retained in `derived/` |
+| `matched_family_internal_manifest_sha256` | SHA-256/null | Digest of D3 internal manifest when present |
+| `matched_family_population_counts` | object/null | Family/member/analysis-unit counts after verified D3 completion |
+
+Verified counts are:
+
+```text
+family_count=4
+member_row_count=13
+analysis_unit_count=12
+```
+
+## Raw source result objects
+
+A T1 seed produces one logical T1 result. A baseline catalog scenario produces one deterministic adapter result.
+
+Shared top-level fields:
+
+| Field | Type | Meaning |
+|---|---|---|
+| `schema_version` | string | Result schema version |
+| `status` | enum | Provisional internal status |
+| `config` | object | Per-result execution input/context |
+| `schedule` | array | Canonically ordered fault actions |
+| `metrics` | object | Outcome and measurement fields |
+| `event_log` | array | Ordered abstract execution events |
+
+Baseline results also retain `metric_parity_status`, `treatment`, `baseline_variant`, and `scenario_id`.
+
+## T1 per-result configuration
+
+| Field | Type | Meaning |
+|---|---|---|
+| `seed` | integer | Deterministic schedule-generation input |
+| `ground_epoch` | integer | Initial ground epoch |
+| `spacecraft_epoch` | integer | Initial spacecraft epoch |
+| `authority_epoch_floor` | integer | Minimum authority epoch |
+| `max_transmissions` | integer | Bounded attempts per recovery phase |
+| `candidate_lifetime_contacts` | integer | Candidate lifetime in contacts |
+| `max_faults` | integer | Schedule-generation fault bound |
+| `compromise_active_keys` | boolean | Initial active-key compromise marker |
+| `allowed_faults` | string array | Generator fault vocabulary |
+
+## Baseline adapter context
+
+| Field | Type | Meaning |
+|---|---|---|
+| `initial_state` | string | Catalog initial-state description |
+| `compromise` | string | Catalog compromise scope |
+| `activation_policy` | string/null | B1 policy when declared |
+| `properties` | string array | Catalog property labels |
+| `adapter_semantics` | string | Explicit timing/transmission limitation |
+
+## Schedule-action fields
+
+| Field | Type | Meaning |
+|---|---|---|
+| `phase` | string | Protocol or adapter phase |
+| `attempt` | integer | One-based attempt index |
+| `kind` | string | Fault kind |
+| `target` | string | Abstract target |
+| `contacts` | integer | Delay/contact duration when applicable |
+| `detail` | string/null | Additional normalized adapter detail |
+
+T1 fault kinds are `DROP`, `DELAY`, `DUPLICATE`, `REORDER`, `CONTACT_CLOSE`, `ENDPOINT_RESTART`, `STALE_COUNTER`, and `STALE_REPLAY`.
+
+The baseline-only `ACTIVE_SENDER_IMPERSONATION` action remains treatment-specific and is not silently relabeled as a T1 fault.
+
+## Shared metric fields
+
+| Field | Type | Interpretation boundary |
+|---|---|---|
+| `seed` | integer/null | T1 reproduction input; null for deterministic baselines |
+| `schedule_sha256` | SHA-256 | Schedule or canonical scenario identity, not a comparison value |
+| `outcome` | enum | Abstract classification, not security proof |
+| `alignment` | string | Raw epoch-bearing state; not cross-treatment comparable |
+| `security_state` | string | Abstract category separate from availability |
+| `availability_state` | string | Abstract category separate from security |
+| `recovery_duration_contacts` | integer | Treatment-specific contact meaning; not cross-treatment comparable |
+| `divergent_contact_windows` | integer | Treatment-specific modeled windows |
+| `degraded_contact_windows` | integer | Treatment-specific modeled windows |
+| `total_transmissions` | integer | Treatment-specific attempted-message count |
+| `retry_overhead` | integer | Attempts beyond treatment-specific reference |
+| `fault_count` | integer | Normalized fault-action count |
+| `drop_count` | integer | Drop actions |
+| `delay_count` | integer | Delay actions |
+| `duplicate_count` | integer | Duplicate actions |
+| `reorder_count` | integer | Reorder actions |
+| `contact_close_count` | integer | Contact-close actions |
+| `restart_count` | integer | Restart/stale-restore actions |
+| `replay_count` | integer | Replay-related actions |
+| `rejection_count` | integer | Total modeled rejections |
+| `replay_rejection_count` | integer | Replay-attributed rejections |
+| `stale_state_rejection_count` | integer | Stale-state/counter rejections |
+| `command_accepted` | boolean | Abstract command evidence |
+| `telemetry_complete` | boolean | Abstract telemetry evidence |
+| `verification_complete` | boolean | Current model verification condition |
+| `active_key_compromised` | boolean | Whether active abstract endpoint key remains attacker-known |
+
+Baseline-specific fields include `treatment`, `baseline_variant`, `scenario_id`, and `other_fault_count`.
+
+## D3 member rows
+
+Each D3 row contains:
+
+| Field | Type | Meaning |
+|---|---|---|
+| `row_id` | string | Unique `<family>:<treatment>:<source>` identity |
+| `family_id` | enum | CF-01, CF-02, CF-05, or CF-06 |
+| `family_name` | string | D2 family name |
+| `family_classification` | enum | Must be `QUALIFIED_MATCH` |
+| `analysis_unit_id` | string | `<family>:<treatment>`; B1 variants share one CF-02 unit |
+| `treatment` | enum | B0, B1, B2, or T1 |
+| `source_type` | enum | Current qualified members are catalog-backed |
+| `source_id` | string | Baseline or T1 scenario ID |
+| `role` | string | D2 member role |
+| `allowed_fields` | string array | Exact D2-authorized projection fields |
+| `projected_metrics` | object | Only allowed fields; includes derived `alignment_class` where permitted |
+| `source_execution_sha256` | SHA-256 | Canonical source-execution evidence digest |
+| `publication_evidence` | boolean | Must be false |
+
+Raw `alignment`, timing, transmissions, retries, seed, schedule identity, and all other unauthorized fields are omitted from D3 member projections.
+
+## D3 denominator rows
+
+| Field | Type | Meaning |
+|---|---|---|
+| `family_id` | enum | Qualified family |
+| `member_row_count` | integer | Retained source-member rows |
+| `analysis_unit_count` | integer | Unique treatment-family units |
+| `treatment_count` | integer | Treatments represented |
+| `policy_variant_row_count` | integer | Additional policy rows sharing an analysis unit |
+| `family_coverage_status` | enum | Must be `COMPLETE` |
+| `success_rate_denominator` | enum | Must be `NOT_DEFINED` |
+| `aggregate_authorized` | boolean | Must be false |
+| `publication_evidence` | boolean | Must be false |
+
+Denominator rows record coverage only. They do not authorize percentages.
+
+## D3 comparison authorization
+
+The D3 JSON must retain:
+
+```text
+member_level_projection=AUTHORIZED_FOR_INTERNAL_VALIDATION
+family_specific_descriptive_comparison=NOT_YET_AUTHORIZED
+pooled_cross_treatment_aggregation=NOT_PERMITTED
+success_rate_or_percentage=NOT_PERMITTED
+inferential_statistics=NOT_PERMITTED
+treatment_superiority=NOT_PERMITTED
+publication_evidence=false
+```
 
 ## Event-log fields
 
-Event entries differ by event type. Every entry retains all fields emitted by the simulator or controller.
+Event entries retain all fields emitted by the simulator/controller. Common fields include `event_seq`, `event`, `contact`, `logical_time`, `phase`, `attempt`, `kind`, `target`, `alignment`, `reason`, and `publication_evidence`.
 
-| Field | Type | Required when available | Meaning |
-|---|---|---:|---|
-| `event_seq` | integer | baseline events | Zero-based event order |
-| `event` | string | yes | Event label |
-| `contact` | integer | contact-specific | Current contact index or adapter contact |
-| `logical_time` | integer | scheduled baseline events | Simulator logical dispatch time |
-| `phase` | string | phase-specific | Recovery or adapter phase |
-| `attempt` | integer | attempt-specific | Attempt number |
-| `kind` | string | fault-specific | Applied fault kind |
-| `target` | string | fault/restart-specific | Abstract target |
-| `alignment` | string | state-specific | Joint state after or during event |
-| `reason` | string | terminal/rejection-specific | Machine-readable reason |
-| `publication_evidence` | boolean | adapter completion event | Must remain false for the pilot |
+Event logs are diagnostic evidence, not causal findings.
 
-The event log is diagnostic evidence. Event labels are not causal findings and must not be converted into real-world operational claims.
+## Exclusion and rerun records
 
-## Exclusion record
+Exclusion records identify run/row, reason code, description, evidence, whether outcome was known, disposition, and linked rerun. Allowed reasons are execution failure, corrupt output, schema failure, checksum failure, configuration mismatch, catalog-oracle mismatch, or predeclared protocol correction.
 
-| Field | Type | Required | Meaning |
-|---|---|---:|---|
-| `exclusion_id` | string | yes | Unique exclusion record |
-| `run_id` | string | yes | Affected run |
-| `seed` | integer/null | yes | Affected T1 seed or null |
-| `scenario_id` | string/null | yes | Affected baseline scenario or null |
-| `recorded_at_utc` | RFC 3339 string | yes | Time exclusion was documented |
-| `reason_code` | enum | yes | `EXECUTION_FAILURE`, `CORRUPT_OUTPUT`, `SCHEMA_FAILURE`, `CHECKSUM_FAILURE`, `CONFIG_MISMATCH`, `CATALOG_ORACLE_MISMATCH`, or `PROTOCOL_CORRECTION` |
-| `description` | string | yes | Factual explanation |
-| `evidence_paths` | string array | yes | Logs or validation records supporting the exclusion |
-| `outcome_known_before_decision` | boolean | yes | Transparency field; does not authorize outcome-based exclusion |
-| `disposition` | enum | yes | `EXCLUDED`, `RETAINED_WITH_WARNING`, or `SUPERSEDED_BY_RERUN` |
-| `rerun_id` | string/null | yes | Linked rerun when applicable |
+Rerun records identify the superseded run, authorized reason, corrective commit/input changes, and rule separating old/new data.
 
-## Rerun record
+Outcome-seeking exclusion or rerun is prohibited.
 
-| Field | Type | Required | Meaning |
-|---|---|---:|---|
-| `rerun_id` | string | yes | New immutable run identifier |
-| `supersedes_run_id` | string | yes | Earlier attempt |
-| `authorized_reason` | string | yes | Reason allowed by the protocol |
-| `correction_commit` | string/null | yes | Corrective commit when code or configuration changed |
-| `comparison_rule` | string | yes | How old and new attempts are separated analytically |
+## Manifest layers
+
+| Manifest | Scope |
+|---|---|
+| `derived/phase-15-matched-family-derived.sha256` | D3 JSON and two CSV files |
+| `manifests/raw.sha256` | Retained inputs and raw T1/baseline outputs |
+| `manifests/derived.sha256` | Complete D3 derived directory, including internal manifest |
+| `manifests/analysis.sha256` | Phase 08 analysis outputs |
+| `manifests/run-bundle.sha256` | Every retained run file except itself |
+
+Checksum verification establishes byte identity only.
 
 ## Outcome vocabulary
 
 The repository may produce `SUCCESS`, `INDETERMINATE`, `SECURE_DEGRADED`, `EXPIRED`, `DIVERGED`, `AVAILABLE_UNSAFE`, and `LOCKED`.
 
-These terms are model classifications. They do not establish formal security, real-world recoverability, protocol conformance, or operational-spacecraft behavior.
+These are model classifications. They do not establish formal security, real-world recoverability, conformance, or operational-spacecraft behavior.
 
-## Current parity status
+## Current status boundaries
 
-B0, B1, and B2 now emit the complete shared metric field set and are included in the Phase 15 immutable capture bundle. The status remains:
+D1–D3 are locally validated, CI pending. D3B is implemented pending local and CI validation.
 
-`IMPLEMENTED_PENDING_VALIDATION`
-
-This closes metric-field and capture-structure gaps only. It does not establish matched treatment scenarios, equivalent contact semantics, equivalent fault distributions, operational transmission comparability, or publication-grade evidence.
-
-A matched treatment-scenario matrix or a predeclared justification for unmatched cases remains mandatory before comparative aggregate analysis.
+Metric parity does not establish semantic parity. Semantic family membership does not establish causal equivalence. Executable D3 rows do not authorize family-level interpretation. Immutable D3B capture does not create publication evidence.
 
 ## Schema-change rule
 
-Any field addition, removal, rename, unit change, or interpretation change requires:
+Any field addition, removal, rename, unit change, interpretation change, or manifest-scope change requires:
 
-1. a schema-version increment;
-2. a documented migration or incompatibility note;
+1. schema-version review;
+2. migration or incompatibility note;
 3. validator and test updates;
-4. a new run directory for affected captures; and
-5. an updated manuscript data-availability description.
+4. a new immutable run directory; and
+5. updated manuscript data-availability language.
