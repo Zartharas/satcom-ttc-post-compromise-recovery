@@ -1,7 +1,7 @@
 # WP15-D4 Freeze Candidate Tracker
 
 **Branch:** `phase-15/publication-preparation`  
-**Status:** `LOCALLY_VALIDATED_CI_AND_FREEZE_REVIEW_PENDING_NOT_ANALYSIS_EVIDENCE`
+**Status:** `EXPLICIT_ACCEPT_DECISION_RECORDED_DECISION_COMMIT_CI_PENDING_NOT_ANALYSIS_EVIDENCE`
 **Publication evidence:** `false`
 
 ## Objective
@@ -88,28 +88,28 @@ The member registry contains no outcome column and no projected-metric value fie
 - [x] Phase 15 protocol tests and validator passed.
 - [x] Complete 236-test regression suite passed.
 - [x] Tracked-file manifest validated at 185 entries.
-- [ ] CI validation remains pending.
-- [ ] Explicit freeze review remains pending.
+- [x] D4R review-package CI validation passed at `d321f927aff20636490ae8c8cf407410e42c6fbe`.
+- [x] Separate outcome-blind review completed with FR-01 through FR-16 `PASS`.
+- [x] Explicit `ACCEPT` decision record created.
+- [ ] Decision-record commit CI validation remains pending; freeze is not effective.
 
 ## Current validated state
 
 ```text
 WP15-D4_LOCAL_VALIDATION=PASS
-FAMILY_ANALYSIS_FREEZE_CANDIDATE=LOCALLY_VALIDATED
+D4R_REVIEW_QUESTIONS=FR01_THROUGH_FR16_PASS
+D4R_REVIEW_PACKAGE_CI=PASS
+D4R_EXPLICIT_DECISION=ACCEPT
+DECISION_COMMIT_CI=PENDING
+FREEZE_EFFECTIVE=false
 OBSERVATION_CUTOFF_FREEZE=CANDIDATE_NOT_FROZEN
 DENOMINATOR_FREEZE=CANDIDATE_NOT_FROZEN
 FAMILY_VALUE_DISPLAY=NOT_YET_AUTHORIZED
-RIT-017=FIXED_PENDING_CI_AND_FREEZE_REVIEW
-RIT-018=FIXED_PENDING_CI
+RIT-017=FIXED_PENDING_DECISION_COMMIT_CI
+RIT-018=FIXED
 PUBLICATION_EVIDENCE=false
 ```
 
 ## Future decision gate
 
-D4 local and CI validation does not freeze the candidate. A separate, explicit review must decide whether to:
-
-1. accept the exact cutoffs and denominator units;
-2. revise them before any comparative display is viewed; or
-3. keep family comparison closed.
-
-No implicit freeze is permitted.
+The separate outcome-blind review answered FR-01 through FR-16 `PASS`, and the explicit formal decision is `ACCEPT`. The decision is not yet freeze-effective. Both required pull-request workflows must succeed for the exact Git commit containing the completed decision record. No implicit freeze or comparative display is permitted before that evidence is recorded.

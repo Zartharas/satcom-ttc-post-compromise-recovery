@@ -2,7 +2,7 @@
 
 **Branch:** `phase-15/publication-preparation`
 **Review target:** `34d63a5`
-**Status:** `REVIEW_PACKAGE_DEFINED_DECISION_PENDING_NOT_FROZEN`
+**Status:** `EXPLICIT_ACCEPT_DECISION_RECORDED_DECISION_COMMIT_CI_PENDING_NOT_FROZEN`
 **Publication evidence:** `false`
 
 ## Objective
@@ -25,7 +25,10 @@ member_rows=13
 analysis_units=12
 cutoffs=4
 review_questions=16
-current_decision=PENDING
+review_package_current_decision=PENDING_IMMUTABLE
+formal_decision=ACCEPT
+decision_commit_ci=PENDING
+freeze_effective=false
 ```
 
 The review covers identity, cutoff, denominator, display-registry, and revision-control decisions only.
@@ -48,19 +51,20 @@ The reviewer must not inspect family outcome distributions, success counts, perc
 - `REJECT`
 - `DEFER`
 
-No option is selected in the review package.
+The review package remains immutable with no preselected option. The separate completed decision record selects `ACCEPT`.
 
 ## Acceptance prerequisites
 
-- [ ] Exact reviewed commit recorded.
-- [ ] All 16 questions answered.
-- [ ] All questions are `PASS` for acceptance.
+- [x] Exact reviewed commit recorded.
+- [x] All 16 questions answered.
+- [x] All questions are `PASS` for acceptance.
 - [x] D4 local validation passed at `34d63a5`.
-- [ ] Freeze-review package local validation passed.
-- [ ] Complete regression suite passed after review-package implementation.
-- [ ] Repository manifest verified after review-package implementation.
-- [ ] CI validation passed.
-- [ ] Completed explicit decision record committed.
+- [x] Freeze-review package local validation passed.
+- [x] Complete regression suite passed after review-package implementation.
+- [x] Repository manifest verified after review-package implementation.
+- [x] Review-package CI validation passed.
+- [x] Completed explicit decision record committed using containing-commit binding.
+- [ ] Decision-record commit CI validation pending.
 
 ## Freeze state
 
@@ -101,8 +105,12 @@ publication_evidence=false
 
 ## Decision stage
 
-After engineering validation, complete a separate decision record using:
+The completed decision record is:
 
-`governance/phase-15-d4-freeze-review-decision-template.md`
+`governance/phase-15-d4-freeze-review-decision.md`
 
-The decision record must identify the exact reviewed commit and document every FR-01 through FR-16 response. Engineering validation alone cannot select `ACCEPT`.
+The machine-readable decision is:
+
+`spec/phase-15-d4-freeze-decision.json`
+
+The formal decision is `ACCEPT`. Freeze effectiveness remains false until both required workflows succeed for the exact containing decision-record commit.

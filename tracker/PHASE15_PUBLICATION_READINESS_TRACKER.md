@@ -17,6 +17,11 @@ WP15-D2_LOCAL_VALIDATION=PASS
 WP15-D3_LOCAL_VALIDATION=PASS
 WP15-D3B_LOCAL_VALIDATION=PASS
 WP15-D4_LOCAL_VALIDATION=PASS
+WP15-D4R_REVIEW_QUESTIONS=FR01_THROUGH_FR16_PASS
+WP15-D4R_REVIEW_PACKAGE_CI=PASS
+WP15-D4F_FORMAL_DECISION=ACCEPT
+WP15-D4F_DECISION_COMMIT_CI=PENDING
+WP15-D4F_FREEZE_EFFECTIVE=false
 OBSERVATION_CUTOFF_FREEZE=CANDIDATE_NOT_FROZEN
 DENOMINATOR_FREEZE=CANDIDATE_NOT_FROZEN
 FAMILY_SPECIFIC_DESCRIPTIVE_COMPARISON=NOT_YET_AUTHORIZED
@@ -43,7 +48,7 @@ Issue #3 remains open. Review delay does not block provisional engineering, repr
 | 12 | Adverse-outcome witnesses | Complete internally | 90% | Review evidence assumptions |
 | 13 | Diagnostic outcome expansion | Complete internally | 85% | Accept, revise, or reject expansion |
 | 14 | Independent-review package | Ready; review open | 90% | Reviewer acceptance and closure |
-| 15 | Publication preparation and revalidation | In progress | 83% | Complete D4 CI and make a separate freeze decision |
+| 15 | Publication preparation and revalidation | In progress | 88% | Validate the explicit D4 decision commit in CI and record freeze effectiveness |
 | 16 | Publication-candidate experiment | Not started | 0% | Execute frozen protocol |
 | 17 | Results and final manuscript | Not started | 10% | Final analysis and prose |
 | 18 | Pre-submission audit and submission | Not started | 0% | Audit, release, formatting, submission |
@@ -67,8 +72,9 @@ Issue #3 remains open. Review delay does not block provisional engineering, repr
 - [x] Validate D4 locally.
 - [ ] Commit the refreshed 185-entry manifest after D4 status reconciliation.
 - [ ] Update `CHANGELOG.md` before pull-request preparation.
-- [ ] Open a draft pull request only after explicit authorization.
-- [ ] Complete CI validation.
+- [x] Open draft pull request #13 after explicit authorization.
+- [x] Complete review-package CI validation.
+- [ ] Complete decision-record commit CI validation.
 
 ### WP15-B — Protocol candidate
 
@@ -85,8 +91,9 @@ Issue #3 remains open. Review delay does not block provisional engineering, repr
 - [x] Define outcome-blind D4 observation cutoffs and denominator candidates.
 - [x] Define post-observation revision controls.
 - [x] Validate D4 identities, cutoffs, denominator rules, and manifest.
-- [ ] Decide whether to accept, revise, or reject the D4 freeze candidate.
-- [ ] Freeze sensitivity and statistical plan only after a separate decision.
+- [x] Record the explicit `ACCEPT` decision for the D4 freeze candidate.
+- [ ] Make the accepted freeze effective only after decision-record commit CI succeeds.
+- [ ] Freeze sensitivity and statistical plan only under a later separate authorization.
 
 ### WP15-C — Data dictionary and capture controls
 
@@ -167,7 +174,7 @@ Issue #3 remains open. Review delay does not block provisional engineering, repr
 
 ### WP15-D4 — Outcome-blind family analysis freeze candidate
 
-**Status:** `LOCALLY_VALIDATED_CI_AND_FREEZE_REVIEW_PENDING`
+**Status:** `EXPLICIT_ACCEPT_DECISION_RECORDED_DECISION_COMMIT_CI_PENDING`
 
 #### Population and cutoffs
 
@@ -213,12 +220,15 @@ Issue #3 remains open. Review delay does not block provisional engineering, repr
 - [x] Verify the four-file D4 manifest.
 - [x] Run 236 complete regression tests.
 - [x] Refresh and validate the 185-entry tracked-file manifest.
-- [ ] Commit the reconciled tracked-file manifest.
-- [ ] Run CI after draft-PR authorization.
+- [x] Commit and validate the reconciled 191-entry review-package manifest.
+- [x] Run review-package CI in draft PR #13.
+- [x] Complete FR-01 through FR-16 with `PASS`.
+- [x] Record the explicit formal decision as `ACCEPT`.
+- [ ] Run CI for the containing decision-record commit.
 
-#### Freeze decision deferred
+#### Explicit decision recorded; effect pending CI
 
-Local and CI validation do not freeze D4. A separate explicit decision must accept, revise, or reject the exact cutoffs, denominator units, and allowed display registry before any family member values are viewed side by side.
+The formal decision is `ACCEPT`, based on 16 `PASS` responses and successful review-package CI. The freeze is not effective until both required workflows succeed for the exact Git commit containing the completed decision record. Family-member values remain closed.
 
 ### WP15-D — Pilot execution
 
@@ -296,7 +306,7 @@ Still candidate-only:
 
 ### Gate P1 — Pilot ready
 
-D1–D4 are locally validated. CI and the separate D4 freeze decision remain pending.
+D1–D4 and the separate D4R package are validated. The explicit `ACCEPT` decision is recorded; decision-record commit CI remains pending and the freeze is not effective.
 
 ### Gate P2 — Pilot accepted
 
@@ -316,14 +326,11 @@ Claims, references, disclosure, availability, formatting, and unresolved limitat
 
 ## Immediate next actions
 
-1. Pull the D4 implementation checkpoint.
-2. Run focused D4 and protocol tests.
-3. Run D2–D4 and Phase 15 validators.
-4. Generate and audit one outcome-blind D4 candidate bundle.
-5. Run the complete regression suite.
-6. Refresh the repository manifest only after D4 passes.
-7. Keep the pull request unopened until explicit authorization.
-8. Keep Issue #3 and all freeze/publication boundaries accurate.
+1. Commit the explicit WP15-D4 `ACCEPT` decision record.
+2. Push the exact decision-record commit to draft PR #13 only after explicit authorization.
+3. Require both pull-request workflows to succeed for that exact commit.
+4. Record freeze effectiveness in a separate audited post-CI action without viewing comparative values.
+5. Keep member-value display, rates, aggregation, inference, ranking, causal, cryptographic, independent-validation, and publication gates closed.
 
 ## Update rule
 

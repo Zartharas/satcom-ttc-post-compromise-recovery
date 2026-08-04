@@ -53,9 +53,9 @@ Security candidates use a private coordinated-disclosure workflow.
 | RIT-014 | REPRODUCIBILITY | HIGH | FIXED_PENDING_CI | 15 | A semantic matrix did not provide an executable qualified-family population with controlled analysis units and denominators. | D3 passed local validation with four qualified families, 13 member rows, 12 analysis units, strict projections, and an internal derived manifest. CI pending. |
 | RIT-015 | DEFECT | LOW | FIXED_PENDING_CI | 15 | A D2 test searched for a noncontiguous phrase despite a correct matrix rule. | Assertion corrected; focused and complete local suites passed. CI pending. |
 | RIT-016 | REPRODUCIBILITY | HIGH | FIXED_PENDING_CI | 15 | Standalone D3 outputs were not retained with exact D2/D3 inputs inside the immutable pilot bundle. | D3B passed integrated local validation with retained D2/D3 contracts and catalogs, metadata schema 0.2.0, fail-closed semantic checks, and four verified manifest layers. CI pending. |
-| RIT-017 | REPRODUCIBILITY | HIGH | FIXED_PENDING_CI_AND_FREEZE_REVIEW | 15 | The qualified-family population lacked predeclared observation cutoffs, denominator membership, allowed-display boundaries, and post-observation revision controls. | D4 passed local validation with exact 4-family, 13-row, 12-unit membership, 4 cutoffs, outcome-blind construction, closed gates, and a verified four-file manifest. CI and a separate freeze decision remain pending. |
-| RIT-018 | DEFECT | HIGH | FIXED_PENDING_CI | 15 | The initial D4 configuration widened four family `expected_allowed_fields` lists beyond the authoritative D2 matrix. | D4 was corrected at `968af687`; exact field parity, 10 focused tests, the generated bundle, all validators, 236 total tests, and the four-file manifest passed locally. CI remains pending. |
-| RIT-019 | REPRODUCIBILITY | HIGH | FIX_IN_PROGRESS | 15 | The initial separate D4 freeze-review preflight continued after repository-manifest failure, and the ignored review packet labeled review-package HEAD `40edf80` as the candidate instead of validated D4 checkpoint `34d63a5`. | Substantive review stopped before CF-01. Preserve and invalidate the first packet, refresh the tracked manifest, run the dedicated D4R tests and validator fail-closed, and regenerate a packet with separate `review_target_commit` and `review_package_commit` fields. |
+| RIT-017 | REPRODUCIBILITY | HIGH | FIXED_PENDING_DECISION_COMMIT_CI | 15 | The qualified-family population lacked predeclared observation cutoffs, denominator membership, allowed-display boundaries, and post-observation revision controls. | D4 and D4R passed local validation; FR-01 through FR-16 passed; both review-package CI workflows succeeded; and an explicit `ACCEPT` decision record was created. Freeze effectiveness remains blocked until CI succeeds on the containing decision-record commit. |
+| RIT-018 | DEFECT | HIGH | FIXED | 15 | The initial D4 configuration widened four family `expected_allowed_fields` lists beyond the authoritative D2 matrix. | D4 was corrected at `968af687`; exact field parity remained enforced; local regression passed; and both required pull-request CI workflows succeeded for review-package commit `d321f92`. |
+| RIT-019 | REPRODUCIBILITY | HIGH | FIXED | 15 | The initial separate D4 freeze-review preflight continued after repository-manifest failure, and the ignored review packet labeled review-package HEAD `40edf80` as the candidate instead of validated D4 checkpoint `34d63a5`. | The flawed packet was preserved and invalidated; the corrected packet separated target `34d63a5` from package `d321f92`; three outcome-blind review rounds passed; failed automation attempts and recoveries were retained; and CI runs `30938748822` and `30938748747` completed successfully. |
 
 ## WP15-D4 evidence paths
 
@@ -123,6 +123,15 @@ The first packet remains preserved with a separate invalidation
 record. No comparative values were viewed, no family review began,
 and every freeze, comparison, inference, and publication gate
 remains closed.
+
+## WP15-D4R review and CI closure
+
+The corrected separate review completed all 16 questions with `PASS`. Review-package commit `d321f92` passed both required pull-request workflows:
+
+- `Phase 15 treatment comparability` — run `30938748822`, `success`;
+- `Python and formal-model tests` — run `30938748747`, `success`.
+
+The formal decision is `ACCEPT`, but freeze effectiveness remains false until CI succeeds for the exact Git commit containing the completed decision record. No comparative values were viewed, and all analytical and publication gates remain closed.
 
 ## Reproducibility rules
 
