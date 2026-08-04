@@ -55,6 +55,7 @@ Security candidates use a private coordinated-disclosure workflow.
 | RIT-016 | REPRODUCIBILITY | HIGH | FIXED_PENDING_CI | 15 | Standalone D3 outputs were not retained with exact D2/D3 inputs inside the immutable pilot bundle. | D3B passed integrated local validation with retained D2/D3 contracts and catalogs, metadata schema 0.2.0, fail-closed semantic checks, and four verified manifest layers. CI pending. |
 | RIT-017 | REPRODUCIBILITY | HIGH | FIXED_PENDING_CI_AND_FREEZE_REVIEW | 15 | The qualified-family population lacked predeclared observation cutoffs, denominator membership, allowed-display boundaries, and post-observation revision controls. | D4 passed local validation with exact 4-family, 13-row, 12-unit membership, 4 cutoffs, outcome-blind construction, closed gates, and a verified four-file manifest. CI and a separate freeze decision remain pending. |
 | RIT-018 | DEFECT | HIGH | FIXED_PENDING_CI | 15 | The initial D4 configuration widened four family `expected_allowed_fields` lists beyond the authoritative D2 matrix. | D4 was corrected at `968af687`; exact field parity, 10 focused tests, the generated bundle, all validators, 236 total tests, and the four-file manifest passed locally. CI remains pending. |
+| RIT-019 | REPRODUCIBILITY | HIGH | FIX_IN_PROGRESS | 15 | The initial separate D4 freeze-review preflight continued after repository-manifest failure, and the ignored review packet labeled review-package HEAD `40edf80` as the candidate instead of validated D4 checkpoint `34d63a5`. | Substantive review stopped before CF-01. Preserve and invalidate the first packet, refresh the tracked manifest, run the dedicated D4R tests and validator fail-closed, and regenerate a packet with separate `review_target_commit` and `review_package_commit` fields. |
 
 ## WP15-D4 evidence paths
 
@@ -105,6 +106,23 @@ RIT-017 and RIT-018 passed the required local validation. CI remains pending, an
 - local and CI validation pass at exact commits.
 
 A successful D4 engineering validation does not itself freeze the candidate. Freeze requires a separate explicit decision before any comparative display is viewed.
+
+## WP15-D4 freeze-review preflight defect
+
+The first separate freeze-review attempt was stopped before any
+family-level substantive decision. Two issues were observed:
+
+- repository manifest validation failed after the seven D4R package
+  files were added, but a later unconditional shell `echo` printed
+  a misleading PASS marker; and
+- the ignored packet used current review-package HEAD `40edf80` as
+  `candidate_commit`, although the machine-readable D4R contract
+  identifies validated D4 checkpoint `34d63a5` as the review target.
+
+The first packet remains preserved with a separate invalidation
+record. No comparative values were viewed, no family review began,
+and every freeze, comparison, inference, and publication gate
+remains closed.
 
 ## Reproducibility rules
 
