@@ -13,9 +13,9 @@ concurrency:
 
 jobs:
   validate:
-    name: Validate WP15-D2 and WP15-D3
+    name: Validate WP15-D2, WP15-D3, and WP15-D3B
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 8
 
     steps:
       - name: Check out repository
@@ -30,9 +30,10 @@ jobs:
         run: |
           python -m json.tool spec/phase-15-experiment-protocol-candidate.json >/dev/null
           python -m json.tool spec/phase-15-treatment-comparability-matrix.json >/dev/null
+          python -m json.tool spec/phase-15-d3b-capture-integration.json >/dev/null
           python -m json.tool experiments/configs/phase-15-matched-family-population.json >/dev/null
 
-      - name: Run comparability and population unit tests
+      - name: Run comparability, population, and capture unit tests
         env:
           PYTHONPATH: src
           PYTHONWARNINGS: error::ResourceWarning
@@ -45,6 +46,10 @@ jobs:
             -s tests \
             -p "test_phase15_matched_family_population.py" \
             -v
+          python -m unittest discover \
+            -s tests \
+            -p "test_phase15_capture.py" \
+            -v
 
       - name: Validate treatment comparability
         env:
@@ -55,6 +60,11 @@ jobs:
         env:
           PYTHONPATH: src
         run: python experiments/scripts/validate_phase15_matched_family_population.py
+
+      - name: Validate D3B capture integration
+        env:
+          PYTHONPATH: src
+        run: python experiments/scripts/validate_phase15_d3b_capture_integration.py
 
       - name: Run matched-family population smoke
         env:
@@ -85,6 +95,86 @@ jobs:
           )
           print("wp15_d3_smoke=PASS")
           PY
+          (
+            cd "$output_dir"
+            sha256sum -c phase-15-matched-family-derived.sha256
+          )
+
+      - name: Run integrated D3B capture smoke
+        env:
+          PYTHONPATH: src
+        run: |
+          output_root="$(mktemp -d)"
+          python experiments/scripts/run_phase15_pilot_capture.py \
+            --output-root "$output_root" \
+            --run-id phase15-d3b-ci-smoke
+          run_dir="$output_root/phase15-d3b-ci-smoke"
+          test -s "$run_dir/config/phase-15-treatment-comparability-matrix.json"
+          test -s "$run_dir/config/phase-15-matched-family-population.json"
+          test -s "$run_dir/config/t1-provisional-test-catalog.json"
+          test -s "$run_dir/derived/phase-15-matched-family-population.json"
+          test -s "$run_dir/derived/phase-15-matched-family-members.csv"
+          test -s "$run_dir/derived/phase-15-matched-family-denominators.csv"
+          test -s "$run_dir/derived/phase-15-matched-family-derived.sha256"
+          test -s "$run_dir/manifests/derived.sha256"
+          python - "$run_dir" <<'PY'
+          import json
+          import sys
+          from pathlib import Path
+
+          root = Path(sys.argv[1])
+          metadata = json.loads(
+              (root / "governance/run-metadata.json").read_text(
+                  encoding="utf-8"
+              )
+          )
+          payload = json.loads(
+              (
+                  root
+                  / "derived/phase-15-matched-family-population.json"
+              ).read_text(encoding="utf-8")
+          )
+          assert metadata["schema_version"] == "0.2.0"
+          assert metadata["git_status"] == "CLEAN"
+          assert metadata["runner_exit_code"] == 0
+          assert metadata["baseline_exit_code"] == 0
+          assert metadata["matched_family_process_exit_code"] == 0
+          assert metadata["matched_family_exit_code"] == 0
+          assert metadata["matched_family_status"] == "COMPLETED_AND_VERIFIED"
+          assert metadata["analysis_exit_code"] == 0
+          assert metadata["overall_exit_code"] == 0
+          assert metadata["matched_family_population_counts"] == {
+              "family_count": 4,
+              "member_row_count": 13,
+              "analysis_unit_count": 12,
+          }
+          assert len(metadata["comparability_matrix_sha256"]) == 64
+          assert len(metadata["matched_family_config_sha256"]) == 64
+          assert len(metadata["t1_catalog_sha256"]) == 64
+          assert payload["publication_evidence"] is False
+          assert (
+              metadata["claim_boundary"]
+              ["family_specific_descriptive_comparison"]
+              == "NOT_YET_AUTHORIZED"
+          )
+          assert (
+              metadata["claim_boundary"]
+              ["pooled_cross_treatment_aggregation"]
+              == "NOT_PERMITTED"
+          )
+          print("wp15_d3b_ci_smoke=PASS")
+          PY
+          (
+            cd "$run_dir/derived"
+            sha256sum -c phase-15-matched-family-derived.sha256
+          )
+          (
+            cd "$run_dir"
+            sha256sum -c manifests/raw.sha256
+            sha256sum -c manifests/derived.sha256
+            sha256sum -c manifests/analysis.sha256
+            sha256sum -c manifests/run-bundle.sha256
+          )
 
       - name: Validate Phase 15 protocol
         run: python experiments/scripts/validate_phase15_protocol.py
