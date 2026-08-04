@@ -94,10 +94,12 @@ class Phase15TreatmentComparabilityTests(unittest.TestCase):
                 self.assertEqual(family["allowed_fields"], [])
 
     def test_all_catalog_scenarios_have_exactly_one_disposition(self) -> None:
-        expected = {
-            *(f"{str(row['baseline']).split('-')[0]}:{row['id']}" for row in BASELINE["tests"]),
-            *(f"T1:{row['id']}" for row in T1["tests"]),
+        expected_baseline = {
+            f"{str(row['baseline']).split('-')[0]}:{row['id']}"
+            for row in BASELINE["tests"]
         }
+        expected_t1 = {f"T1:{row['id']}" for row in T1["tests"]}
+        expected = expected_baseline | expected_t1
         actual = [
             f"{row['treatment']}:{row['scenario_id']}"
             for row in MATRIX["scenario_disposition"]
