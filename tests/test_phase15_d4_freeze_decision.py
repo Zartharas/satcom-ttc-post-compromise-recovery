@@ -18,6 +18,13 @@ EXPECTED_TARGET = (
 EXPECTED_PACKAGE = (
     "d321f927aff20636490ae8c8cf407410e42c6fbe"
 )
+EXPECTED_DECISION_COMMIT = (
+    "307f685389d799fb5b22d481763bd171393085db"
+)
+EXPECTED_DECISION_RUN_IDS = {
+    "Phase 15 treatment comparability": 30942565654,
+    "Python and formal-model tests": 30942565653,
+}
 
 
 class Phase15D4FreezeDecisionTests(
@@ -59,6 +66,12 @@ class Phase15D4FreezeDecisionTests(
                 "commit"
             ],
             EXPECTED_PACKAGE,
+        )
+        self.assertEqual(
+            self.decision["decision_commit"][
+                "commit"
+            ],
+            EXPECTED_DECISION_COMMIT,
         )
 
     def test_all_sixteen_questions_pass(
@@ -134,28 +147,68 @@ class Phase15D4FreezeDecisionTests(
         ):
             self.assertFalse(attestation[field])
 
-    def test_freeze_is_not_yet_effective(
+    def test_decision_commit_ci_is_exact_and_effective(
         self,
     ) -> None:
+        ci = self.decision["decision_commit"][
+            "ci_validation"
+        ]
+        self.assertEqual(ci["result"], "PASS")
+        self.assertEqual(
+            {
+                row["name"]: row["id"]
+                for row in ci["selected_runs"]
+            },
+            EXPECTED_DECISION_RUN_IDS,
+        )
+        self.assertTrue(
+            all(
+                row["status"] == "completed"
+                and row["conclusion"] == "success"
+                and row["head_sha"]
+                == EXPECTED_DECISION_COMMIT
+                for row in ci["selected_runs"]
+            )
+        )
+
         effectiveness = self.decision[
             "freeze_effectiveness"
         ]
         self.assertEqual(
             effectiveness["state"],
-            "NOT_EFFECTIVE",
-        )
-        self.assertEqual(
-            effectiveness["reason"],
-            "DECISION_COMMIT_CI_PENDING",
+            "EFFECTIVE",
         )
         self.assertEqual(
             effectiveness[
                 "decision_commit_ci_validation"
             ],
-            "PENDING",
+            "PASS",
+        )
+        self.assertTrue(
+            effectiveness[
+                "effectiveness_rule_satisfied"
+            ]
         )
 
-    def test_commit_binding_avoids_self_reference(
+        effects = self.decision[
+            "decision_effects_on_effectiveness"
+        ]
+        for field in (
+            "observation_cutoffs",
+            "analysis_unit_denominators",
+            "member_registry",
+            "allowed_planning_displays",
+        ):
+            self.assertEqual(
+                effects[field],
+                "EXACT_REVIEWED_OBJECT_FROZEN",
+            )
+        self.assertEqual(
+            effects["publication_analysis_plan"],
+            "NOT_FROZEN",
+        )
+
+    def test_decision_commit_binding_is_explicit(
         self,
     ) -> None:
         binding = self.decision[
@@ -163,14 +216,16 @@ class Phase15D4FreezeDecisionTests(
         ]
         self.assertEqual(
             binding["mode"],
-            "CONTAINING_GIT_COMMIT",
+            "EXPLICIT_DECISION_COMMIT_REFERENCE",
         )
         self.assertEqual(
-            binding["embedded_commit_sha"],
-            (
-                "NOT_EMBEDDED_TO_AVOID_"
-                "SELF_REFERENTIAL_HASH"
-            ),
+            binding["decision_commit"],
+            EXPECTED_DECISION_COMMIT,
+        )
+        self.assertTrue(
+            binding[
+                "decision_record_present_in_decision_commit"
+            ]
         )
 
     def test_claim_and_publication_gates_remain_closed(

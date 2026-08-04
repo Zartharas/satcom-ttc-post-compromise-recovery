@@ -20,10 +20,10 @@ WP15-D4_LOCAL_VALIDATION=PASS
 WP15-D4R_REVIEW_QUESTIONS=FR01_THROUGH_FR16_PASS
 WP15-D4R_REVIEW_PACKAGE_CI=PASS
 WP15-D4F_FORMAL_DECISION=ACCEPT
-WP15-D4F_DECISION_COMMIT_CI=PENDING
-WP15-D4F_FREEZE_EFFECTIVE=false
-OBSERVATION_CUTOFF_FREEZE=CANDIDATE_NOT_FROZEN
-DENOMINATOR_FREEZE=CANDIDATE_NOT_FROZEN
+WP15-D4F_DECISION_COMMIT_CI=PASS
+WP15-D4F_FREEZE_EFFECTIVE=true
+OBSERVATION_CUTOFF_FREEZE=EXACT_REVIEWED_OBJECT_FROZEN
+DENOMINATOR_FREEZE=EXACT_REVIEWED_OBJECT_FROZEN
 FAMILY_SPECIFIC_DESCRIPTIVE_COMPARISON=NOT_YET_AUTHORIZED
 PUBLICATION_EVIDENCE=false
 ```
@@ -48,7 +48,7 @@ Issue #3 remains open. Review delay does not block provisional engineering, repr
 | 12 | Adverse-outcome witnesses | Complete internally | 90% | Review evidence assumptions |
 | 13 | Diagnostic outcome expansion | Complete internally | 85% | Accept, revise, or reject expansion |
 | 14 | Independent-review package | Ready; review open | 90% | Reviewer acceptance and closure |
-| 15 | Publication preparation and revalidation | In progress | 88% | Validate the explicit D4 decision commit in CI and record freeze effectiveness |
+| 15 | Publication preparation and revalidation | In progress | 90% | Integrate the effective D4 freeze and define the next separately authorized pilot gate |
 | 16 | Publication-candidate experiment | Not started | 0% | Execute frozen protocol |
 | 17 | Results and final manuscript | Not started | 10% | Final analysis and prose |
 | 18 | Pre-submission audit and submission | Not started | 0% | Audit, release, formatting, submission |
@@ -74,7 +74,7 @@ Issue #3 remains open. Review delay does not block provisional engineering, repr
 - [ ] Update `CHANGELOG.md` before pull-request preparation.
 - [x] Open draft pull request #13 after explicit authorization.
 - [x] Complete review-package CI validation.
-- [ ] Complete decision-record commit CI validation.
+- [x] Complete decision-record commit CI validation.
 
 ### WP15-B — Protocol candidate
 
@@ -92,7 +92,7 @@ Issue #3 remains open. Review delay does not block provisional engineering, repr
 - [x] Define post-observation revision controls.
 - [x] Validate D4 identities, cutoffs, denominator rules, and manifest.
 - [x] Record the explicit `ACCEPT` decision for the D4 freeze candidate.
-- [ ] Make the accepted freeze effective only after decision-record commit CI succeeds.
+- [x] Make the accepted freeze effective after exact decision-record commit CI succeeds.
 - [ ] Freeze sensitivity and statistical plan only under a later separate authorization.
 
 ### WP15-C — Data dictionary and capture controls
@@ -174,7 +174,7 @@ Issue #3 remains open. Review delay does not block provisional engineering, repr
 
 ### WP15-D4 — Outcome-blind family analysis freeze candidate
 
-**Status:** `EXPLICIT_ACCEPT_DECISION_RECORDED_DECISION_COMMIT_CI_PENDING`
+**Status:** `EXPLICIT_ACCEPT_DECISION_EFFECTIVE_EXACT_OBJECTS_FROZEN`
 
 #### Population and cutoffs
 
@@ -224,11 +224,11 @@ Issue #3 remains open. Review delay does not block provisional engineering, repr
 - [x] Run review-package CI in draft PR #13.
 - [x] Complete FR-01 through FR-16 with `PASS`.
 - [x] Record the explicit formal decision as `ACCEPT`.
-- [ ] Run CI for the containing decision-record commit.
+- [x] Run CI for exact decision commit `307f685`; runs `30942565654` and `30942565653` passed.
 
-#### Explicit decision recorded; effect pending CI
+#### Explicit decision effective after exact-commit CI
 
-The formal decision is `ACCEPT`, based on 16 `PASS` responses and successful review-package CI. The freeze is not effective until both required workflows succeed for the exact Git commit containing the completed decision record. Family-member values remain closed.
+The formal decision is `ACCEPT`, based on 16 `PASS` responses. Both required workflows succeeded for exact decision commit `307f685`. The reviewed cutoffs, analysis-unit denominators, member registry, and allowed planning displays are frozen. Family-member values, rates, aggregation, inference, ranking, causal, cryptographic, independent-validation, and publication claims remain closed.
 
 ### WP15-D — Pilot execution
 
@@ -294,19 +294,22 @@ Still prohibited:
 - CCSDS/SDLS, flight, RF, or operational applicability; and
 - publication-grade evidence before final audit.
 
-Still candidate-only:
+Frozen exact reviewed D4 planning objects:
 
 - D4 observation cutoffs;
 - D4 treatment-within-family denominators;
-- D4 member registry;
-- D4 allowed display registry; and
+- D4 member registry; and
+- D4 allowed planning-display registry.
+
+Still not frozen:
+
 - publication analysis plan.
 
 ## Readiness gates
 
 ### Gate P1 — Pilot ready
 
-D1–D4 and the separate D4R package are validated. The explicit `ACCEPT` decision is recorded; decision-record commit CI remains pending and the freeze is not effective.
+D1–D4 and the separate D4R package are validated. The explicit `ACCEPT` decision is effective after exact decision-commit CI. The four reviewed D4 planning-object classes are frozen; comparative-value and publication gates remain closed.
 
 ### Gate P2 — Pilot accepted
 
@@ -326,11 +329,11 @@ Claims, references, disclosure, availability, formatting, and unresolved limitat
 
 ## Immediate next actions
 
-1. Commit the explicit WP15-D4 `ACCEPT` decision record.
-2. Push the exact decision-record commit to draft PR #13 only after explicit authorization.
-3. Require both pull-request workflows to succeed for that exact commit.
-4. Record freeze effectiveness in a separate audited post-CI action without viewing comparative values.
-5. Keep member-value display, rates, aggregation, inference, ranking, causal, cryptographic, independent-validation, and publication gates closed.
+1. Commit this post-CI tracked-state reconciliation.
+2. Push the exact reconciliation commit to draft PR #13 only after explicit authorization.
+3. Update the PR description from the preserved proposed body without marking the PR ready or merging it.
+4. Define the next pilot-execution gate separately before running or displaying family outcomes.
+5. Keep values, rates, aggregation, inference, ranking, causal, cryptographic, independent-validation, and publication gates closed.
 
 ## Update rule
 

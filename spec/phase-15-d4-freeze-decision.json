@@ -4,7 +4,7 @@
   "work_package": "WP15-D4F",
   "record_class": "WP15_D4_EXPLICIT_FREEZE_DECISION",
   "title": "WP15-D4 explicit freeze decision",
-  "status": "EXPLICIT_DECISION_RECORDED_FREEZE_NOT_EFFECTIVE_DECISION_COMMIT_CI_PENDING",
+  "status": "EXPLICIT_ACCEPT_DECISION_EFFECTIVE_EXACT_REVIEWED_OBJECTS_FROZEN",
   "formal_decision": "ACCEPT",
   "decision_authorized": true,
   "decision_date_utc": "2026-08-04T19:05:53Z",
@@ -209,29 +209,64 @@
     "tracked_file_manifest_verified": true,
     "review_package_ci_validation_passed": true,
     "outcome_blind_attestation_completed": true,
-    "explicit_decision_record_created": true
+    "explicit_decision_record_created": true,
+    "decision_commit_ci_validation_passed": true
   },
   "decision_record_commit_binding": {
-    "mode": "CONTAINING_GIT_COMMIT",
-    "embedded_commit_sha": "NOT_EMBEDDED_TO_AVOID_SELF_REFERENTIAL_HASH",
-    "verification_rule": "The decision record is bound to the Git commit that contains this exact file. CI and the post-CI audit must identify that containing commit SHA."
+    "mode": "EXPLICIT_DECISION_COMMIT_REFERENCE",
+    "decision_commit": "307f685389d799fb5b22d481763bd171393085db",
+    "decision_commit_short": "307f685",
+    "decision_record_present_in_decision_commit": true,
+    "verification_rule": "The completed decision record is present in exact Git commit 307f685389d799fb5b22d481763bd171393085db. The freeze became effective after both required pull-request workflows succeeded for that exact commit."
   },
   "freeze_effectiveness": {
-    "state": "NOT_EFFECTIVE",
-    "reason": "DECISION_COMMIT_CI_PENDING",
-    "decision_commit_ci_validation": "PENDING",
+    "state": "EFFECTIVE",
+    "reason": "ACCEPT_DECISION_AND_EXACT_DECISION_COMMIT_CI_PASS",
+    "effective_utc": "20260804T192205Z",
+    "decision_commit": "307f685389d799fb5b22d481763bd171393085db",
+    "decision_commit_ci_validation": "PASS",
     "required_event": "pull_request",
     "required_workflows": [
       "Phase 15 treatment comparability",
       "Python and formal-model tests"
     ],
-    "effectiveness_rule": "The ACCEPT decision becomes effective only when both required workflows complete successfully for the exact containing decision-record commit."
+    "ci_evidence": {
+      "required_workflow_count": 2,
+      "successful_workflow_count": 2,
+      "selected_runs": [
+        {
+          "id": 30942565654,
+          "name": "Phase 15 treatment comparability",
+          "status": "completed",
+          "conclusion": "success",
+          "event": "pull_request",
+          "head_sha": "307f685389d799fb5b22d481763bd171393085db",
+          "run_number": 2,
+          "html_url": "https://github.com/Zartharas/satcom-ttc-post-compromise-recovery/actions/runs/30942565654",
+          "created_at": "2026-08-04T19:17:04Z",
+          "updated_at": "2026-08-04T19:17:13Z"
+        },
+        {
+          "id": 30942565653,
+          "name": "Python and formal-model tests",
+          "status": "completed",
+          "conclusion": "success",
+          "event": "pull_request",
+          "head_sha": "307f685389d799fb5b22d481763bd171393085db",
+          "run_number": 89,
+          "html_url": "https://github.com/Zartharas/satcom-ttc-post-compromise-recovery/actions/runs/30942565653",
+          "created_at": "2026-08-04T19:17:04Z",
+          "updated_at": "2026-08-04T19:17:51Z"
+        }
+      ]
+    },
+    "effectiveness_rule_satisfied": true
   },
   "decision_effects_on_effectiveness": {
-    "observation_cutoffs": "FREEZE_EXACT_REVIEWED_OBJECT",
-    "analysis_unit_denominators": "FREEZE_EXACT_REVIEWED_OBJECT",
-    "member_registry": "FREEZE_EXACT_REVIEWED_OBJECT",
-    "allowed_planning_displays": "FREEZE_EXACT_REVIEWED_OBJECT",
+    "observation_cutoffs": "EXACT_REVIEWED_OBJECT_FROZEN",
+    "analysis_unit_denominators": "EXACT_REVIEWED_OBJECT_FROZEN",
+    "member_registry": "EXACT_REVIEWED_OBJECT_FROZEN",
+    "allowed_planning_displays": "EXACT_REVIEWED_OBJECT_FROZEN",
     "publication_analysis_plan": "NOT_FROZEN"
   },
   "claim_boundary": {
@@ -247,5 +282,60 @@
     "independent_validation": "NOT_PERMITTED",
     "publication_evidence": "NOT_PERMITTED"
   },
-  "publication_evidence": false
+  "publication_evidence": false,
+  "decision_commit": {
+    "commit": "307f685389d799fb5b22d481763bd171393085db",
+    "short_commit": "307f685",
+    "formal_decision": "ACCEPT",
+    "local_validation": {
+      "d4f_decision_tests": {
+        "tests_run": 9,
+        "result": "PASS"
+      },
+      "complete_regression": {
+        "tests_run": 254,
+        "result": "PASS"
+      },
+      "tracked_file_manifest": {
+        "entries": 195,
+        "result": "PASS"
+      }
+    },
+    "ci_validation": {
+      "result": "PASS",
+      "required_workflow_count": 2,
+      "successful_workflow_count": 2,
+      "selected_runs": [
+        {
+          "id": 30942565654,
+          "name": "Phase 15 treatment comparability",
+          "status": "completed",
+          "conclusion": "success",
+          "event": "pull_request",
+          "head_sha": "307f685389d799fb5b22d481763bd171393085db",
+          "run_number": 2,
+          "html_url": "https://github.com/Zartharas/satcom-ttc-post-compromise-recovery/actions/runs/30942565654",
+          "created_at": "2026-08-04T19:17:04Z",
+          "updated_at": "2026-08-04T19:17:13Z"
+        },
+        {
+          "id": 30942565653,
+          "name": "Python and formal-model tests",
+          "status": "completed",
+          "conclusion": "success",
+          "event": "pull_request",
+          "head_sha": "307f685389d799fb5b22d481763bd171393085db",
+          "run_number": 89,
+          "html_url": "https://github.com/Zartharas/satcom-ttc-post-compromise-recovery/actions/runs/30942565653",
+          "created_at": "2026-08-04T19:17:04Z",
+          "updated_at": "2026-08-04T19:17:51Z"
+        }
+      ]
+    }
+  },
+  "conditions_satisfied": {
+    "decision_commit_ci_passed": true,
+    "exact_reviewed_objects_frozen": true,
+    "closed_claim_gates_preserved": true
+  }
 }

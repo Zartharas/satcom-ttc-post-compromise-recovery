@@ -53,7 +53,7 @@ Security candidates use a private coordinated-disclosure workflow.
 | RIT-014 | REPRODUCIBILITY | HIGH | FIXED_PENDING_CI | 15 | A semantic matrix did not provide an executable qualified-family population with controlled analysis units and denominators. | D3 passed local validation with four qualified families, 13 member rows, 12 analysis units, strict projections, and an internal derived manifest. CI pending. |
 | RIT-015 | DEFECT | LOW | FIXED_PENDING_CI | 15 | A D2 test searched for a noncontiguous phrase despite a correct matrix rule. | Assertion corrected; focused and complete local suites passed. CI pending. |
 | RIT-016 | REPRODUCIBILITY | HIGH | FIXED_PENDING_CI | 15 | Standalone D3 outputs were not retained with exact D2/D3 inputs inside the immutable pilot bundle. | D3B passed integrated local validation with retained D2/D3 contracts and catalogs, metadata schema 0.2.0, fail-closed semantic checks, and four verified manifest layers. CI pending. |
-| RIT-017 | REPRODUCIBILITY | HIGH | FIXED_PENDING_DECISION_COMMIT_CI | 15 | The qualified-family population lacked predeclared observation cutoffs, denominator membership, allowed-display boundaries, and post-observation revision controls. | D4 and D4R passed local validation; FR-01 through FR-16 passed; both review-package CI workflows succeeded; and an explicit `ACCEPT` decision record was created. Freeze effectiveness remains blocked until CI succeeds on the containing decision-record commit. |
+| RIT-017 | REPRODUCIBILITY | HIGH | FIXED | 15 | The qualified-family population lacked predeclared observation cutoffs, denominator membership, allowed-display boundaries, and post-observation revision controls. | D4 and D4R passed local validation; FR-01 through FR-16 passed; the formal decision is `ACCEPT`; and decision-commit runs `30942565654` and `30942565653` succeeded for exact commit `307f685`. The reviewed cutoffs, analysis-unit denominators, member registry, and planning displays are freeze-effective. |
 | RIT-018 | DEFECT | HIGH | FIXED | 15 | The initial D4 configuration widened four family `expected_allowed_fields` lists beyond the authoritative D2 matrix. | D4 was corrected at `968af687`; exact field parity remained enforced; local regression passed; and both required pull-request CI workflows succeeded for review-package commit `d321f92`. |
 | RIT-019 | REPRODUCIBILITY | HIGH | FIXED | 15 | The initial separate D4 freeze-review preflight continued after repository-manifest failure, and the ignored review packet labeled review-package HEAD `40edf80` as the candidate instead of validated D4 checkpoint `34d63a5`. | The flawed packet was preserved and invalidated; the corrected packet separated target `34d63a5` from package `d321f92`; three outcome-blind review rounds passed; failed automation attempts and recoveries were retained; and CI runs `30938748822` and `30938748747` completed successfully. |
 
@@ -87,7 +87,7 @@ The fix removes those additions and preserves the D2 matrix as the exact source 
 
 ## D4 acceptance conditions
 
-RIT-017 and RIT-018 passed the required local validation. CI remains pending, and RIT-017 additionally requires a separate freeze review. Local evidence confirmed that:
+RIT-017 and RIT-018 passed local validation. The separate D4R review completed all 16 questions with `PASS`, the formal decision is `ACCEPT`, and exact decision commit `307f685` passed both required workflows. Local and CI evidence confirmed that:
 
 - the exact qualified family order remains CF-01, CF-02, CF-05, and CF-06;
 - the member registry contains 13 unique rows;
@@ -105,7 +105,7 @@ RIT-017 and RIT-018 passed the required local validation. CI remains pending, an
 - the D4 output manifest covers exactly the four data artifacts and detects tampering; and
 - local and CI validation pass at exact commits.
 
-A successful D4 engineering validation does not itself freeze the candidate. Freeze requires a separate explicit decision before any comparative display is viewed.
+D4 engineering validation alone did not freeze the candidate. The separate explicit `ACCEPT` decision and successful exact decision-commit CI now freeze only the reviewed planning objects. Comparative display and all analytical or publication claims remain separately gated.
 
 ## WP15-D4 freeze-review preflight defect
 
@@ -131,7 +131,23 @@ The corrected separate review completed all 16 questions with `PASS`. Review-pac
 - `Phase 15 treatment comparability` — run `30938748822`, `success`;
 - `Python and formal-model tests` — run `30938748747`, `success`.
 
-The formal decision is `ACCEPT`, but freeze effectiveness remains false until CI succeeds for the exact Git commit containing the completed decision record. No comparative values were viewed, and all analytical and publication gates remain closed.
+The formal decision is `ACCEPT`. Exact decision commit `307f685389d799fb5b22d481763bd171393085db` passed both required workflows:
+
+- `Phase 15 treatment comparability` — run `30942565654`, `success`;
+- `Python and formal-model tests` — run `30942565653`, `success`.
+
+Freeze effectiveness is now true for the exact reviewed cutoffs, analysis-unit denominators, member registry, and allowed planning displays. No comparative values were viewed, and all analytical and publication gates remain closed.
+
+## WP15-D4F freeze-effectiveness closure
+
+The explicit decision record is bound to exact decision commit `307f685389d799fb5b22d481763bd171393085db`. Both required pull-request workflows completed successfully for that SHA. The effective freeze covers only:
+
+- the four exact reviewed observation cutoffs;
+- the 12 treatment-within-family analysis-unit denominator identities;
+- the 13-member traceability registry; and
+- the allowed planning-display registry.
+
+The publication analysis plan is not frozen. Member-value display, family comparison, rates, pooled aggregation, inference, ranking, causal interpretation, cryptographic claims, independent validation, and publication evidence remain prohibited.
 
 ## Reproducibility rules
 
@@ -202,8 +218,9 @@ Absent those elements, classify it as a defect, reproducibility issue, enhanceme
 - [x] Verify the D4 four-file manifest.
 - [x] Run the complete 236-test regression suite.
 - [x] Refresh and validate the 185-entry tracked-file manifest.
-- [ ] Commit the D4 closeout status and manifest.
-- [ ] Run CI only after draft-PR authorization.
-- [ ] Conduct a separate D4 freeze review before any family-value display.
+- [x] Commit the D4 closeout status and manifest.
+- [x] Run review-package and decision-commit CI under draft PR #13 authorization.
+- [x] Conduct the separate D4 freeze review before any family-value display.
+- [x] Record the effective freeze for the exact reviewed planning objects.
 - [ ] Keep Issue #3 and publication boundaries accurate.
 - [ ] Keep sensitive security candidates outside the public repository.

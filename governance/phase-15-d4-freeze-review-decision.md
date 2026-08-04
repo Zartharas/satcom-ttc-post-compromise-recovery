@@ -2,9 +2,9 @@
 
 ## Record status
 
-`EXPLICIT_DECISION_RECORDED_FREEZE_NOT_EFFECTIVE_DECISION_COMMIT_CI_PENDING`
+`EXPLICIT_ACCEPT_DECISION_EFFECTIVE_EXACT_REVIEWED_OBJECTS_FROZEN`
 
-This is the explicit internal decision record required by WP15-D4R. The formal decision is complete. Its freeze effect remains inactive until CI succeeds for the Git commit containing this record.
+This is the explicit internal decision record required by WP15-D4R. The formal decision is `ACCEPT`, both required workflows succeeded for exact decision commit `307f685`, and the exact reviewed planning objects are now frozen. Comparative-value and publication gates remain closed.
 
 ## Review identity
 
@@ -13,8 +13,9 @@ This is the explicit internal decision record required by WP15-D4R. The formal d
 - Validated candidate checkpoint: `34d63a554646baddd9fadf58678cfe70392fc41d`
 - Review-package commit: `d321f927aff20636490ae8c8cf407410e42c6fbe`
 - Draft pull request: `#13`
-- Decision-record commit binding: `CONTAINING_GIT_COMMIT`
-- Embedded decision-record commit SHA: `NOT_EMBEDDED_TO_AVOID_SELF_REFERENTIAL_HASH`
+- Decision-record commit binding: `EXPLICIT_DECISION_COMMIT_REFERENCE`
+- Decision-record commit: `307f685389d799fb5b22d481763bd171393085db`
+- Freeze effective UTC: `20260804T192205Z`
 - Reviewer: `Aman Singh`
 - Authenticated identity: `GitHub:Zartharas`
 - Reviewer role: `INTERNAL_REPOSITORY_OWNER_AND_RESEARCH_AUTHOR`
@@ -35,7 +36,7 @@ All 16 outcome-blind review questions passed for the exact validated WP15-D4 che
 
 Conditions:
 
-1. The decision becomes freeze-effective only after both required pull-request workflows succeed for the exact Git commit containing this record.
+1. Satisfied: both required pull-request workflows succeeded for exact decision commit `307f685`.
 2. Acceptance freezes only the exact reviewed cutoffs, member registry, treatment-within-family analysis-unit denominators, and planning-display registry.
 3. No value display, success rate, aggregation, inference, superiority, causal, cryptographic, independent-validation, or publication claim is authorized.
 
@@ -149,18 +150,31 @@ Rationale: This internal review cannot authorize success rates, pooled aggregati
 - [x] All questions are `PASS`.
 - [x] Outcome-blind attestation completed.
 - [x] No family-member values or aggregate results were viewed.
-- [ ] Decision-record commit CI validation pending.
+- [x] Decision-record commit CI validation passed for `307f685389d799fb5b22d481763bd171393085db`.
 
 ## Freeze effectiveness
 
 ```text
 formal_decision=ACCEPT
-freeze_effective=false
-decision_commit_ci_validation=PENDING
-decision_record_commit_binding=CONTAINING_GIT_COMMIT
+decision_commit=307f685389d799fb5b22d481763bd171393085db
+decision_commit_ci_validation=PASS
+freeze_effective=true
+decision_record_commit_binding=EXPLICIT_DECISION_COMMIT_REFERENCE
+observation_cutoffs=EXACT_REVIEWED_OBJECT_FROZEN
+analysis_unit_denominators=EXACT_REVIEWED_OBJECT_FROZEN
+member_registry=EXACT_REVIEWED_OBJECT_FROZEN
+allowed_planning_displays=EXACT_REVIEWED_OBJECT_FROZEN
+publication_analysis_plan=NOT_FROZEN
 ```
 
-After both required workflows succeed for the exact containing commit, the ACCEPT decision freezes only the reviewed planning objects. The decision record does not need to embed its own commit SHA; the containing Git commit and CI evidence provide the non-self-referential binding.
+Both required workflows succeeded for exact decision commit `307f685389d799fb5b22d481763bd171393085db`. The `ACCEPT` decision therefore freezes only the exact reviewed cutoffs, analysis-unit denominators, member registry, and allowed planning displays. The publication analysis plan and every comparative or publication claim remain outside this freeze.
+
+## Decision-commit CI evidence
+
+- `Phase 15 treatment comparability` — run `30942565654`, `completed/success`;
+- `Python and formal-model tests` — run `30942565653`, `completed/success`;
+- Exact head SHA — `307f685389d799fb5b22d481763bd171393085db`;
+- Freeze effective UTC — `20260804T192205Z`.
 
 ## Closed claim gates
 
@@ -182,5 +196,7 @@ publication_evidence=false
 
 - Reviewer signature or authenticated identity: `GitHub:Zartharas`
 - Repository owner acknowledgment: `Aman Singh`
-- Completed record commit binding: `CONTAINING_GIT_COMMIT`
-- Decision-record CI status: `PENDING`
+- Completed record commit binding: `EXPLICIT_DECISION_COMMIT_REFERENCE`
+- Decision-record commit: `307f685389d799fb5b22d481763bd171393085db`
+- Decision-record CI status: `PASS`
+- Freeze effectiveness: `EFFECTIVE`

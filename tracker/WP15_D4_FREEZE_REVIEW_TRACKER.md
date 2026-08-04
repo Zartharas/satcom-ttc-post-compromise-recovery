@@ -2,7 +2,7 @@
 
 **Branch:** `phase-15/publication-preparation`
 **Review target:** `34d63a5`
-**Status:** `EXPLICIT_ACCEPT_DECISION_RECORDED_DECISION_COMMIT_CI_PENDING_NOT_FROZEN`
+**Status:** `EXPLICIT_ACCEPT_DECISION_EFFECTIVE_EXACT_OBJECTS_FROZEN`
 **Publication evidence:** `false`
 
 ## Objective
@@ -27,8 +27,8 @@ cutoffs=4
 review_questions=16
 review_package_current_decision=PENDING_IMMUTABLE
 formal_decision=ACCEPT
-decision_commit_ci=PENDING
-freeze_effective=false
+decision_commit_ci=PASS
+freeze_effective=true
 ```
 
 The review covers identity, cutoff, denominator, display-registry, and revision-control decisions only.
@@ -64,15 +64,15 @@ The review package remains immutable with no preselected option. The separate co
 - [x] Repository manifest verified after review-package implementation.
 - [x] Review-package CI validation passed.
 - [x] Completed explicit decision record committed using containing-commit binding.
-- [ ] Decision-record commit CI validation pending.
+- [x] Decision-record commit CI validation passed for `307f685389d799fb5b22d481763bd171393085db`.
 
 ## Freeze state
 
 ```text
-observation_cutoffs=CANDIDATE_NOT_FROZEN
-analysis_unit_denominators=CANDIDATE_NOT_FROZEN
-member_registry=CANDIDATE_NOT_FROZEN
-allowed_displays=CANDIDATE_NOT_FROZEN
+observation_cutoffs=EXACT_REVIEWED_OBJECT_FROZEN
+analysis_unit_denominators=EXACT_REVIEWED_OBJECT_FROZEN
+member_registry=EXACT_REVIEWED_OBJECT_FROZEN
+allowed_displays=EXACT_REVIEWED_OBJECT_FROZEN
 publication_analysis_plan=NOT_FROZEN
 ```
 
@@ -94,14 +94,14 @@ publication_evidence=false
 
 ## Local validation plan
 
-- [ ] Parse the review JSON contract.
-- [ ] Run focused freeze-review tests.
-- [ ] Run the freeze-review validator.
-- [ ] Re-run D4 and Phase 15 protocol validators.
-- [ ] Run the complete regression suite.
-- [ ] Confirm no outcome or aggregate input is referenced.
-- [ ] Refresh and verify the repository manifest.
-- [ ] Preserve validation evidence in ignored `review_document/`.
+- [x] Parse the review JSON contract.
+- [x] Run focused freeze-review tests.
+- [x] Run the freeze-review validator.
+- [x] Re-run D4 and Phase 15 protocol validators.
+- [x] Run the complete regression suite.
+- [x] Confirm no outcome or aggregate input is referenced.
+- [x] Refresh and verify the repository manifest.
+- [x] Preserve validation evidence in ignored `review_document/`.
 
 ## Decision stage
 
@@ -113,4 +113,4 @@ The machine-readable decision is:
 
 `spec/phase-15-d4-freeze-decision.json`
 
-The formal decision is `ACCEPT`. Freeze effectiveness remains false until both required workflows succeed for the exact containing decision-record commit.
+The formal decision is `ACCEPT`. Both required workflows passed for exact decision commit `307f685`, so the exact reviewed cutoffs, analysis-unit denominators, member registry, and allowed planning displays are frozen. The publication analysis plan and every comparative or claim gate remain closed.

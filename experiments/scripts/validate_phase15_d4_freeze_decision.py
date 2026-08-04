@@ -20,9 +20,16 @@ EXPECTED_TARGET = (
 EXPECTED_PACKAGE = (
     "d321f927aff20636490ae8c8cf407410e42c6fbe"
 )
+EXPECTED_DECISION_COMMIT = (
+    "307f685389d799fb5b22d481763bd171393085db"
+)
+EXPECTED_DECISION_RUN_IDS = {
+    "Phase 15 treatment comparability": 30942565654,
+    "Python and formal-model tests": 30942565653,
+}
 EXPECTED_STATUS = (
-    "EXPLICIT_DECISION_RECORDED_"
-    "FREEZE_NOT_EFFECTIVE_DECISION_COMMIT_CI_PENDING"
+    "EXPLICIT_ACCEPT_DECISION_EFFECTIVE_"
+    "EXACT_REVIEWED_OBJECTS_FROZEN"
 )
 EXPECTED_IDS = [
     f"FR-{index:02d}"
@@ -208,38 +215,133 @@ def main() -> None:
         "decision_record_commit_binding"
     ]
     require(
-        binding["mode"] == "CONTAINING_GIT_COMMIT",
+        binding["mode"]
+        == "EXPLICIT_DECISION_COMMIT_REFERENCE",
         "Decision-record binding drifted",
     )
     require(
-        binding["embedded_commit_sha"]
-        == "NOT_EMBEDDED_TO_AVOID_SELF_REFERENTIAL_HASH",
-        "Self-reference handling drifted",
+        binding["decision_commit"]
+        == EXPECTED_DECISION_COMMIT,
+        "Decision-record commit reference drifted",
     )
+    require(
+        binding["decision_record_present_in_decision_commit"]
+        is True,
+        "Decision record is not bound to decision commit",
+    )
+
+    decision_commit = decision["decision_commit"]
+    require(
+        decision_commit["commit"]
+        == EXPECTED_DECISION_COMMIT,
+        "Decision commit drifted",
+    )
+    require(
+        decision_commit["formal_decision"] == "ACCEPT",
+        "Decision-commit decision drifted",
+    )
+    require(
+        decision_commit["local_validation"][
+            "d4f_decision_tests"
+        ]
+        == {"tests_run": 9, "result": "PASS"},
+        "Decision-test evidence drifted",
+    )
+    require(
+        decision_commit["local_validation"][
+            "complete_regression"
+        ]
+        == {"tests_run": 254, "result": "PASS"},
+        "Decision regression evidence drifted",
+    )
+    require(
+        decision_commit["local_validation"][
+            "tracked_file_manifest"
+        ]
+        == {"entries": 195, "result": "PASS"},
+        "Decision manifest evidence drifted",
+    )
+
+    decision_ci = decision_commit["ci_validation"]
+    require(
+        decision_ci["result"] == "PASS",
+        "Decision-commit CI is not PASS",
+    )
+    require(
+        decision_ci["required_workflow_count"] == 2,
+        "Decision workflow count drifted",
+    )
+    require(
+        decision_ci["successful_workflow_count"] == 2,
+        "Decision successful count drifted",
+    )
+    require(
+        {
+            row["name"]: row["id"]
+            for row in decision_ci["selected_runs"]
+        }
+        == EXPECTED_DECISION_RUN_IDS,
+        "Decision workflow identities drifted",
+    )
+    for row in decision_ci["selected_runs"]:
+        require(
+            row["status"] == "completed",
+            f"Decision CI run incomplete: {row['name']}",
+        )
+        require(
+            row["conclusion"] == "success",
+            f"Decision CI run unsuccessful: {row['name']}",
+        )
+        require(
+            row["head_sha"] == EXPECTED_DECISION_COMMIT,
+            f"Decision CI head drifted: {row['name']}",
+        )
 
     effectiveness = decision[
         "freeze_effectiveness"
     ]
     require(
-        effectiveness["state"] == "NOT_EFFECTIVE",
-        "Freeze became effective before decision CI",
+        effectiveness["state"] == "EFFECTIVE",
+        "Freeze is not effective",
     )
     require(
         effectiveness["reason"]
-        == "DECISION_COMMIT_CI_PENDING",
+        == (
+            "ACCEPT_DECISION_AND_EXACT_"
+            "DECISION_COMMIT_CI_PASS"
+        ),
         "Freeze-effectiveness reason drifted",
+    )
+    require(
+        effectiveness["decision_commit"]
+        == EXPECTED_DECISION_COMMIT,
+        "Effectiveness commit drifted",
     )
     require(
         effectiveness[
             "decision_commit_ci_validation"
         ]
-        == "PENDING",
-        "Decision-commit CI was predeclared",
+        == "PASS",
+        "Effectiveness CI is not PASS",
     )
     require(
-        set(effectiveness["required_workflows"])
-        == REQUIRED_WORKFLOWS,
-        "Effectiveness workflow registry drifted",
+        effectiveness["effectiveness_rule_satisfied"]
+        is True,
+        "Effectiveness rule is not satisfied",
+    )
+    require(
+        bool(effectiveness["effective_utc"]),
+        "Effective UTC is empty",
+    )
+    require(
+        {
+            row["name"]: row["id"]
+            for row in effectiveness[
+                "ci_evidence"
+            ]["selected_runs"]
+        }
+        == EXPECTED_DECISION_RUN_IDS,
+        "Effectiveness CI identities drifted",
     )
 
     effects = decision[
@@ -253,7 +355,7 @@ def main() -> None:
     ):
         require(
             effects[field]
-            == "FREEZE_EXACT_REVIEWED_OBJECT",
+            == "EXACT_REVIEWED_OBJECT_FROZEN",
             f"Decision effect drifted: {field}",
         )
     require(
@@ -317,8 +419,8 @@ def main() -> None:
         "Phase 15 D4 explicit decision valid: "
         "decision=ACCEPT, questions=16_PASS, "
         "review_package_ci=PASS, "
-        "decision_commit_ci=PENDING, "
-        "freeze=NOT_EFFECTIVE, "
+        "decision_commit_ci=PASS, "
+        "freeze=EFFECTIVE, "
         "publication_evidence=false."
     )
 
