@@ -13,7 +13,7 @@ concurrency:
 
 jobs:
   validate:
-    name: Validate WP15-D2
+    name: Validate WP15-D2 and WP15-D3
     runs-on: ubuntu-latest
     timeout-minutes: 5
 
@@ -30,8 +30,9 @@ jobs:
         run: |
           python -m json.tool spec/phase-15-experiment-protocol-candidate.json >/dev/null
           python -m json.tool spec/phase-15-treatment-comparability-matrix.json >/dev/null
+          python -m json.tool experiments/configs/phase-15-matched-family-population.json >/dev/null
 
-      - name: Run comparability unit tests
+      - name: Run comparability and population unit tests
         env:
           PYTHONPATH: src
           PYTHONWARNINGS: error::ResourceWarning
@@ -40,11 +41,50 @@ jobs:
             -s tests \
             -p "test_phase15_treatment_comparability.py" \
             -v
+          python -m unittest discover \
+            -s tests \
+            -p "test_phase15_matched_family_population.py" \
+            -v
 
       - name: Validate treatment comparability
         env:
           PYTHONPATH: src
         run: python experiments/scripts/validate_phase15_treatment_comparability.py
+
+      - name: Validate matched-family population
+        env:
+          PYTHONPATH: src
+        run: python experiments/scripts/validate_phase15_matched_family_population.py
+
+      - name: Run matched-family population smoke
+        env:
+          PYTHONPATH: src
+        run: |
+          output_dir="$(mktemp -d)"
+          python experiments/scripts/run_phase15_matched_family_population.py \
+            --output-dir "$output_dir"
+          python - "$output_dir" <<'PY'
+          import json
+          import sys
+          from pathlib import Path
+
+          root = Path(sys.argv[1])
+          payload = json.loads(
+              (root / "phase-15-matched-family-population.json").read_text(
+                  encoding="utf-8"
+              )
+          )
+          assert payload["family_count"] == 4
+          assert payload["member_row_count"] == 13
+          assert payload["analysis_unit_count"] == 12
+          assert payload["publication_evidence"] is False
+          assert (
+              payload["comparison_authorization"]
+              ["pooled_cross_treatment_aggregation"]
+              == "NOT_PERMITTED"
+          )
+          print("wp15_d3_smoke=PASS")
+          PY
 
       - name: Validate Phase 15 protocol
         run: python experiments/scripts/validate_phase15_protocol.py
