@@ -1,5 +1,5 @@
 {
-  "schema_version": "0.1.1",
+  "schema_version": "0.1.2",
   "phase": "Phase 15",
   "title": "Publication preparation, pilot protocol, and data-capture controls",
   "status": "PROVISIONAL_PROTOCOL_CANDIDATE_NOT_PUBLICATION_EVIDENCE",
@@ -20,6 +20,7 @@
       "treatment-comparability matrix development",
       "executable matched-family population development",
       "matched-family immutable capture integration",
+      "outcome-blind family analysis-plan development",
       "T1 and baseline pipeline pilot runs",
       "internal reproducibility testing",
       "manuscript structure and limitations drafting"
@@ -32,7 +33,7 @@
       "publication-grade comparative conclusions"
     ]
   },
-  "purpose": "Prepare and pilot a reproducible synthetic experiment pipeline without converting provisional mappings, parameters, or outputs into publication evidence.",
+  "purpose": "Prepare and pilot a reproducible synthetic experiment pipeline without converting provisional mappings, parameters, outputs, or analysis-plan candidates into publication evidence.",
   "research_questions": [
     {
       "id": "RQ-1",
@@ -101,7 +102,7 @@
     "documentation": "docs/phase-15-treatment-comparability.md",
     "projection_module": "src/ttc_recovery/treatment_comparability.py",
     "validator": "experiments/scripts/validate_phase15_treatment_comparability.py",
-    "tests": "tests/test_phase15-treatment-comparability.py",
+    "tests": "tests/test_phase15_treatment_comparability.py",
     "family_count": 8,
     "qualified_family_count": 4,
     "diagnostic_family_count": 4,
@@ -139,19 +140,43 @@
     "capture_documentation": "docs/phase-15-d3b-capture-integration.md",
     "publication_evidence": false
   },
+  "family_descriptive_analysis_plan": {
+    "status": "PREDECLARED_FAMILY_ANALYSIS_PLAN_CANDIDATE_PENDING_VALIDATION_NOT_ANALYSIS_EVIDENCE",
+    "config": "experiments/configs/phase-15-family-descriptive-plan.json",
+    "documentation": "docs/phase-15-d4-family-descriptive-analysis-plan.md",
+    "module": "src/ttc_recovery/family_descriptive_plan.py",
+    "runner": "experiments/scripts/run_phase15_family_descriptive_plan.py",
+    "validator": "experiments/scripts/validate_phase15_family_descriptive_plan.py",
+    "tests": "tests/test_phase15_family_descriptive_plan.py",
+    "outcome_blind_generation": true,
+    "projected_metric_values_read": false,
+    "family_count": 4,
+    "member_row_count": 13,
+    "analysis_unit_count": 12,
+    "observation_cutoff_count": 4,
+    "denominator_candidate_count": 4,
+    "observation_cutoff_freeze": "CANDIDATE_NOT_FROZEN",
+    "denominator_freeze": "CANDIDATE_NOT_FROZEN",
+    "success_rate_denominator": "NOT_DEFINED",
+    "family_specific_descriptive_comparison": "NOT_YET_AUTHORIZED",
+    "pooled_cross_treatment_aggregation": "NOT_PERMITTED",
+    "publication_evidence": false
+  },
   "pilot_scope": {
     "label": "PILOT_INTERNAL_VALIDATION_ONLY",
     "publication_evidence": false,
-    "primary_goal": "Validate T1 schedule generation, B0/B1/B2 catalog adaptation, the treatment-comparability contract, the executable qualified-family population, immutable D2/D3 capture, event capture, shared metrics, analysis handoff, provenance, checksum, exclusion, and rerun controls.",
+    "primary_goal": "Validate T1 schedule generation, B0/B1/B2 catalog adaptation, treatment comparability, the executable qualified-family population, immutable D2/D3 capture, and an outcome-blind candidate registry for observation cutoffs and denominators without producing comparative results.",
     "comparative_claims_allowed": false,
     "baseline_activity": "Execute all 21 deterministic baseline catalog scenarios through the metric adapter and verify their existing design oracles; do not treat adapter rows as matched seeded treatment evidence.",
-    "comparability_activity": "Validate scenario classification, execute member-level rows for the four qualified families, and enforce family-specific metric authorization; do not calculate pooled rates or perform inferential comparison.",
+    "comparability_activity": "Validate scenario classification, execute member-level rows for the four qualified families, enforce family-specific metric authorization, and generate outcome-blind observation and denominator candidates; do not display member values, calculate pooled rates, or perform inferential comparison.",
     "pilot_config": "experiments/configs/phase-15-pilot.json",
     "baseline_parity_config": "experiments/configs/phase-15-baseline-parity.json",
     "matched_family_population_config": "experiments/configs/phase-15-matched-family-population.json",
+    "family_descriptive_plan_config": "experiments/configs/phase-15-family-descriptive-plan.json",
     "capture_wrapper": "experiments/scripts/run_phase15_pilot_capture.py",
     "capture_wrapper_status": "IMPLEMENTED_PENDING_VALIDATION",
-    "matched_family_capture_status": "IMPLEMENTED_PENDING_LOCAL_AND_CI_VALIDATION_NOT_COMPARATIVE_EVIDENCE"
+    "matched_family_capture_status": "IMPLEMENTED_PENDING_LOCAL_AND_CI_VALIDATION_NOT_COMPARATIVE_EVIDENCE",
+    "family_descriptive_plan_status": "IMPLEMENTED_PENDING_LOCAL_AND_CI_VALIDATION_NOT_ANALYSIS_EVIDENCE"
   },
   "candidate_parameters": {
     "seeds": [
@@ -191,6 +216,7 @@
     "Include every successfully parsed run produced from the exact recorded configuration and serialized schedule.",
     "Include every baseline catalog scenario in its declared order.",
     "Include every qualified-family matrix member in the executable D3 population.",
+    "Include every declared D4 member and analysis-unit identity without reading projected values.",
     "Include adverse, indeterminate, degraded, expired, locked, unsafe, divergent, and success outcomes without outcome-based filtering.",
     "Retain zero-fault schedules generated by the declared seed process.",
     "Retain low-count groups and label them descriptive-only."
@@ -198,6 +224,7 @@
   "exclusion_rules": [
     "Exclude only runs with documented technical execution failure, corrupted output, schema failure, checksum failure, configuration mismatch, or catalog-oracle mismatch.",
     "Do not exclude a run because its outcome is unexpected, unfavorable, or inconvenient.",
+    "Do not shrink or expand a family denominator after any member value is observed.",
     "Record every exclusion with run ID, reason, evidence path, and disposition before aggregate interpretation."
   ],
   "rerun_policy": {
@@ -215,7 +242,10 @@
   "analysis_boundary": {
     "pilot_analysis": "DESCRIPTIVE_AND_PIPELINE_VALIDATION_ONLY",
     "member_level_family_projection": "AUTHORIZED_FOR_INTERNAL_VALIDATION",
+    "outcome_blind_plan_generation": "AUTHORIZED_FOR_INTERNAL_VALIDATION",
     "family_specific_descriptive_comparison": "NOT_YET_AUTHORIZED",
+    "observation_cutoff_freeze": "CANDIDATE_NOT_FROZEN",
+    "denominator_freeze": "CANDIDATE_NOT_FROZEN",
     "hypothesis_testing": "NOT_AUTHORIZED",
     "causal_inference": "NOT_PERMITTED",
     "confidence_intervals": "NOT_DEFINED",
@@ -262,27 +292,33 @@
     "experiments/configs/phase-15-pilot.json",
     "experiments/configs/phase-15-baseline-parity.json",
     "experiments/configs/phase-15-matched-family-population.json",
+    "experiments/configs/phase-15-family-descriptive-plan.json",
     "docs/phase-15-experiment-protocol.md",
     "docs/phase-15-data-dictionary.md",
     "docs/phase-15-treatment-comparability.md",
     "docs/phase-15-matched-family-population.md",
     "docs/phase-15-d3b-capture-integration.md",
+    "docs/phase-15-d4-family-descriptive-analysis-plan.md",
     "governance/phase-15-data-capture-controls.md",
     "src/ttc_recovery/baseline_metrics.py",
     "src/ttc_recovery/treatment_comparability.py",
     "src/ttc_recovery/matched_family_population.py",
+    "src/ttc_recovery/family_descriptive_plan.py",
     "experiments/scripts/validate_phase15_protocol.py",
     "experiments/scripts/validate_phase15_treatment_comparability.py",
     "experiments/scripts/validate_phase15_matched_family_population.py",
     "experiments/scripts/validate_phase15_d3b_capture_integration.py",
+    "experiments/scripts/validate_phase15_family_descriptive_plan.py",
     "experiments/scripts/run_phase15_baseline_parity.py",
     "experiments/scripts/run_phase15_matched_family_population.py",
+    "experiments/scripts/run_phase15_family_descriptive_plan.py",
     "experiments/scripts/run_phase15_pilot_capture.py",
     "tests/test_baseline_metrics.py",
     "tests/test_phase15_protocol.py",
     "tests/test_phase15_capture.py",
     "tests/test_phase15_treatment_comparability.py",
-    "tests/test_phase15_matched_family_population.py"
+    "tests/test_phase15_matched_family_population.py",
+    "tests/test_phase15_family_descriptive_plan.py"
   ],
   "pilot_entry_gate": [
     "All Phase 15 required outputs exist.",
@@ -294,13 +330,16 @@
     "The integrated disposable capture retains exact D2 and D3 inputs, executes D3 only after T1 and baseline success, and records completed-and-verified D3 metadata.",
     "The D3 internal manifest and run-level raw, derived, analysis, and complete-bundle manifests verify.",
     "The capture wrapper completes a disposable smoke run and rejects missing, tampered, or semantically relaxed D3 output.",
-    "No unresolved critical internal defect affects capture."
+    "The D4 generator reproduces 4 family cutoffs, 13 member identities, 12 analysis-unit identities, and 4 candidate denominators without reading projected or raw values.",
+    "The D4 member registry contains no outcome or projected-metric value column and its manifest verifies.",
+    "No unresolved critical internal defect affects capture or plan generation."
   ],
   "publication_candidate_entry_gate": [
     "Pilot run and analysis pipeline reproduce from retained configuration and checksums.",
     "Baseline B0, B1, and B2 runners provide validated metric-field and capture parity with T1.",
     "The matched treatment-scenario matrix is validated and every treatment-specific exception remains explicit.",
     "The executable qualified-family population is validated and retained in the immutable capture bundle.",
+    "The D4 observation cutoffs, analysis-unit denominators, member registry, and allowed-display plan are separately reviewed and frozen before any comparative display is viewed.",
     "Adapter contact and transmission semantics are accepted, replaced, or explicitly excluded before comparative analysis.",
     "Family-specific denominators and observation cutoffs are versioned before viewing comparative aggregates.",
     "Final seed, parameter, exclusion, threshold, and statistical-analysis decisions are versioned before viewing publication aggregates.",
