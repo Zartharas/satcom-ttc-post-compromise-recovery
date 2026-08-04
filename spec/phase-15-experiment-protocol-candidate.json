@@ -1,5 +1,5 @@
 {
-  "schema_version": "0.1.0",
+  "schema_version": "0.1.1",
   "phase": "Phase 15",
   "title": "Publication preparation, pilot protocol, and data-capture controls",
   "status": "PROVISIONAL_PROTOCOL_CANDIDATE_NOT_PUBLICATION_EVIDENCE",
@@ -19,6 +19,7 @@
       "baseline metric-adapter development",
       "treatment-comparability matrix development",
       "executable matched-family population development",
+      "matched-family immutable capture integration",
       "T1 and baseline pipeline pilot runs",
       "internal reproducibility testing",
       "manuscript structure and limitations drafting"
@@ -100,7 +101,7 @@
     "documentation": "docs/phase-15-treatment-comparability.md",
     "projection_module": "src/ttc_recovery/treatment_comparability.py",
     "validator": "experiments/scripts/validate_phase15_treatment_comparability.py",
-    "tests": "tests/test_phase15_treatment_comparability.py",
+    "tests": "tests/test_phase15-treatment-comparability.py",
     "family_count": 8,
     "qualified_family_count": 4,
     "diagnostic_family_count": 4,
@@ -120,7 +121,12 @@
     "runner": "experiments/scripts/run_phase15_matched_family_population.py",
     "validator": "experiments/scripts/validate_phase15_matched_family_population.py",
     "tests": "tests/test_phase15_matched_family_population.py",
-    "eligible_family_ids": ["CF-01", "CF-02", "CF-05", "CF-06"],
+    "eligible_family_ids": [
+      "CF-01",
+      "CF-02",
+      "CF-05",
+      "CF-06"
+    ],
     "family_count": 4,
     "member_row_count": 13,
     "analysis_unit_count": 12,
@@ -128,13 +134,15 @@
     "family_specific_descriptive_comparison": "NOT_YET_AUTHORIZED",
     "success_rate_denominator": "NOT_DEFINED",
     "pooled_cross_treatment_aggregation": "NOT_PERMITTED",
-    "capture_integration": "DEFERRED_PENDING_STANDALONE_LOCAL_VALIDATION",
+    "capture_integration": "IMPLEMENTED_PENDING_LOCAL_AND_CI_VALIDATION_NOT_COMPARATIVE_EVIDENCE",
+    "capture_contract": "spec/phase-15-d3b-capture-integration.json",
+    "capture_documentation": "docs/phase-15-d3b-capture-integration.md",
     "publication_evidence": false
   },
   "pilot_scope": {
     "label": "PILOT_INTERNAL_VALIDATION_ONLY",
     "publication_evidence": false,
-    "primary_goal": "Validate T1 schedule generation, B0/B1/B2 catalog adaptation, the treatment-comparability contract, the executable qualified-family population, event capture, shared metrics, analysis handoff, provenance, checksum, exclusion, and rerun controls.",
+    "primary_goal": "Validate T1 schedule generation, B0/B1/B2 catalog adaptation, the treatment-comparability contract, the executable qualified-family population, immutable D2/D3 capture, event capture, shared metrics, analysis handoff, provenance, checksum, exclusion, and rerun controls.",
     "comparative_claims_allowed": false,
     "baseline_activity": "Execute all 21 deterministic baseline catalog scenarios through the metric adapter and verify their existing design oracles; do not treat adapter rows as matched seeded treatment evidence.",
     "comparability_activity": "Validate scenario classification, execute member-level rows for the four qualified families, and enforce family-specific metric authorization; do not calculate pooled rates or perform inferential comparison.",
@@ -143,10 +151,23 @@
     "matched_family_population_config": "experiments/configs/phase-15-matched-family-population.json",
     "capture_wrapper": "experiments/scripts/run_phase15_pilot_capture.py",
     "capture_wrapper_status": "IMPLEMENTED_PENDING_VALIDATION",
-    "matched_family_capture_status": "DEFERRED_PENDING_STANDALONE_LOCAL_VALIDATION"
+    "matched_family_capture_status": "IMPLEMENTED_PENDING_LOCAL_AND_CI_VALIDATION_NOT_COMPARATIVE_EVIDENCE"
   },
   "candidate_parameters": {
-    "seeds": [7001, 7002, 7003, 7004, 7005, 7006, 7007, 7008, 7009, 7010, 7011, 7012],
+    "seeds": [
+      7001,
+      7002,
+      7003,
+      7004,
+      7005,
+      7006,
+      7007,
+      7008,
+      7009,
+      7010,
+      7011,
+      7012
+    ],
     "ground_epoch": 2,
     "spacecraft_epoch": 1,
     "authority_epoch_floor": 0,
@@ -221,9 +242,11 @@
       "T1 and baseline analysis-ready CSV",
       "treatment-comparability matrix and SHA-256",
       "matched-family population configuration and SHA-256",
+      "baseline and T1 catalogs and SHA-256 values",
       "member-level source-execution SHA-256 values",
       "derived matched-family JSON and CSV files",
       "derived matched-family checksum manifest",
+      "run-level raw, derived, analysis, and bundle manifests",
       "stdout and stderr logs",
       "checksum manifests"
     ],
@@ -235,6 +258,7 @@
   "required_outputs": [
     "spec/phase-15-experiment-protocol-candidate.json",
     "spec/phase-15-treatment-comparability-matrix.json",
+    "spec/phase-15-d3b-capture-integration.json",
     "experiments/configs/phase-15-pilot.json",
     "experiments/configs/phase-15-baseline-parity.json",
     "experiments/configs/phase-15-matched-family-population.json",
@@ -242,6 +266,7 @@
     "docs/phase-15-data-dictionary.md",
     "docs/phase-15-treatment-comparability.md",
     "docs/phase-15-matched-family-population.md",
+    "docs/phase-15-d3b-capture-integration.md",
     "governance/phase-15-data-capture-controls.md",
     "src/ttc_recovery/baseline_metrics.py",
     "src/ttc_recovery/treatment_comparability.py",
@@ -249,6 +274,7 @@
     "experiments/scripts/validate_phase15_protocol.py",
     "experiments/scripts/validate_phase15_treatment_comparability.py",
     "experiments/scripts/validate_phase15_matched_family_population.py",
+    "experiments/scripts/validate_phase15_d3b_capture_integration.py",
     "experiments/scripts/run_phase15_baseline_parity.py",
     "experiments/scripts/run_phase15_matched_family_population.py",
     "experiments/scripts/run_phase15_pilot_capture.py",
@@ -265,8 +291,9 @@
     "The baseline adapter executes all 21 catalog scenarios and matches every existing design oracle.",
     "The treatment-comparability validator accounts for all 21 baseline and 15 T1 catalog scenarios exactly once.",
     "The matched-family population runner executes 13 qualified-family member rows and 12 analysis units with no aggregate authorization.",
-    "The standalone matched-family derived manifest verifies before capture integration is attempted.",
-    "The capture wrapper completes a disposable smoke run and verifies all layered manifests.",
+    "The integrated disposable capture retains exact D2 and D3 inputs, executes D3 only after T1 and baseline success, and records completed-and-verified D3 metadata.",
+    "The D3 internal manifest and run-level raw, derived, analysis, and complete-bundle manifests verify.",
+    "The capture wrapper completes a disposable smoke run and rejects missing, tampered, or semantically relaxed D3 output.",
     "No unresolved critical internal defect affects capture."
   ],
   "publication_candidate_entry_gate": [
