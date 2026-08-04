@@ -8,14 +8,14 @@
 
 This file tracks defects, research-governance gaps, reproducibility problems, upstream contribution opportunities, and potential security findings discovered during the study.
 
-The objective is to improve the public repository and create a transparent record of engineering maturity. Recognition may result from accepted fixes, upstream pull requests, acknowledged responsible disclosures, reproducible artifacts, or assigned vulnerability identifiers, but none of these outcomes is guaranteed.
+The objective is to improve the public repository and maintain a transparent engineering record. Recognition may result from accepted fixes, upstream pull requests, acknowledged responsible disclosures, reproducible artifacts, or assigned vulnerability identifiers, but none is guaranteed.
 
 ## Scope and authorization
 
 Allowed work is limited to:
 
 - this repository and its controlled local test environment;
-- dependencies and open-source projects examined under their published contribution and security policies;
+- dependencies and open-source projects examined under published contribution and security policies;
 - synthetic inputs, bounded formal models, and authorized test systems;
 - documentation, reproducibility, validation, and defensive security analysis.
 
@@ -25,19 +25,19 @@ Prohibited work includes:
 - transmitting commands or malformed traffic to systems not owned or explicitly authorized;
 - accessing private data, credentials, or restricted environments;
 - publishing exploit details before coordinated disclosure;
-- describing an ordinary software defect as a security vulnerability without validated security impact;
-- claiming a CVE, advisory, bounty, or external recognition before it is formally assigned or acknowledged.
+- describing an ordinary software defect as a security vulnerability without validated impact; and
+- claiming a CVE, advisory, bounty, or external recognition before formal assignment or acknowledgment.
 
 ## Classification
 
 | Type | Meaning |
 |---|---|
 | `DEFECT` | Incorrect repository behavior, implementation, test, or documentation |
-| `REPRODUCIBILITY` | Missing provenance, non-determinism, manifest failure, or evidence gap |
+| `REPRODUCIBILITY` | Missing provenance, non-determinism, manifest failure, evidence gap, or noncomparable measurement |
 | `GOVERNANCE` | Consent, disclosure, review, claims, or process-control problem |
 | `UPSTREAM_BUG` | Defect in an external open-source dependency or tool |
 | `SECURITY_CANDIDATE` | Plausible security impact requiring validation and private triage |
-| `SECURITY_CONFIRMED` | Reproduced security impact accepted for coordinated disclosure |
+| `SECURITY_CONFIRMED` | Reproduced impact accepted for coordinated disclosure |
 | `ENHANCEMENT` | Improvement that is not a defect |
 | `FALSE_POSITIVE` | Investigated concern with no reproducible issue |
 
@@ -66,21 +66,32 @@ Do not place undisclosed vulnerability details, proof-of-concept exploit code, c
 | ID | Type | Severity | Status | Phase | Summary | Current disposition |
 |---|---|---|---|---|---|---|
 | RIT-001 | GOVERNANCE | MEDIUM | FIXED_PENDING_VALIDATION | 4–14 | Historical Phase 05 response template omitted the B1 endpoint-knowledge question later identified as `B1-R5`. | Phase 14 restores the question without rewriting historical evidence; external disposition remains pending. |
-| RIT-002 | GOVERNANCE | HIGH | OPEN | 6–15 | Provisional Phases 6–13 proceeded after an earlier gate stated that T1 work was blocked pending review. | Work remains explicitly provisional; reviewer must determine retrospective revalidation scope. |
+| RIT-002 | GOVERNANCE | HIGH | OPEN | 6–15 | Provisional Phases 6–13 proceeded after an earlier gate stated that T1 work was blocked pending review. | Work remains explicitly provisional; a future reviewer must determine retrospective revalidation scope. |
 | RIT-003 | GOVERNANCE | MEDIUM | FIXED_PENDING_VALIDATION | 4–14 | “Corrected and locked” could be misread as independent approval rather than an internal implementation decision. | Phase 14 separates implementation lock, approval, oracle freeze, and publication permission. |
 | RIT-004 | REPRODUCIBILITY | MEDIUM | FIXED_PENDING_VALIDATION | 5–14 | Earlier reviewer handoff records referenced older review-target commits. | Exact Phase 14 commit pinning and evidence-index rules added. |
-| RIT-005 | REPRODUCIBILITY | LOW | CLOSED | 13 | Initial checksum verification was attempted before the derived bundle had been generated. | Run order corrected; final bundle and run-level manifests verified after generation. |
-| RIT-006 | DEFECT | LOW | TRIAGED | 14 | GitHub `/tree/<commit>` link could return or appear to return the repository landing view, confusing reviewers. | Use immutable commit and direct blob links in outreach and documentation. |
+| RIT-005 | REPRODUCIBILITY | LOW | CLOSED | 13 | Checksum verification was initially attempted before the derived bundle existed. | Run order corrected; final bundle and run-level manifests verified after generation. |
+| RIT-006 | DEFECT | LOW | TRIAGED | 14 | A GitHub `/tree/<commit>` link could appear as a repository landing view and confuse reviewers. | Use immutable commit and direct blob links in outreach and documentation. |
 | RIT-007 | GOVERNANCE | HIGH | FIXED_PENDING_VALIDATION | 14 | Prospective reviewer names were published in an outreach-planning issue before consent. | Names removed; Issue #3 now prohibits implying participation or publishing identity without permission. |
-| RIT-008 | GOVERNANCE | HIGH | OPEN | 14–15 | AI assistance was not clearly disclosed in the initial external-review request. | Future outreach and publication materials require context-appropriate AI-use disclosure; exact venue policy still to be selected. |
-| RIT-009 | ENHANCEMENT | MEDIUM | FIXED_PENDING_VALIDATION | 15 | Project lacked a consolidated publication-readiness tracker. | Phase 15 tracker added and updated with protocol, parity, pilot, and publication gates; CI validation remains pending. |
-| RIT-010 | ENHANCEMENT | MEDIUM | FIXED_PENDING_VALIDATION | 15 | Project lacked a consolidated engineering issue and disclosure register. | This file establishes the register and responsible-disclosure workflow; final branch validation remains pending. |
-| RIT-011 | REPRODUCIBILITY | HIGH | OPEN | 15 | B0, B1, and B2 have deterministic scenario tests but do not emit contact-window, retry, event-log, and provenance fields equivalent to the T1 seeded pipeline. | Comparative publication execution is blocked until baseline metric/capture parity is implemented or a narrower comparison is justified before aggregate results are viewed. |
-| RIT-012 | REPRODUCIBILITY | HIGH | FIXED_PENDING_VALIDATION | 15 | The existing seeded runner wrote result JSON and metrics CSV but did not create the complete Phase 15 run directory, metadata record, logs, exclusions, or layered checksum manifests. | A dedicated capture wrapper and focused tests now implement the required structure; local and CI end-to-end validation remain pending. |
+| RIT-008 | GOVERNANCE | HIGH | OPEN | 14–15 | AI assistance was not clearly disclosed in the initial external-review request. | Future outreach and publication materials require context-appropriate AI-use disclosure; the venue policy remains to be selected. |
+| RIT-009 | ENHANCEMENT | MEDIUM | FIXED_PENDING_VALIDATION | 15 | Project lacked a consolidated publication-readiness tracker. | Tracker now covers protocol, parity, pilot, population, manuscript, and publication gates; branch validation remains pending. |
+| RIT-010 | ENHANCEMENT | MEDIUM | FIXED_PENDING_VALIDATION | 15 | Project lacked a consolidated engineering issue and disclosure register. | This file establishes the register and disclosure workflow; final branch validation remains pending. |
+| RIT-011 | REPRODUCIBILITY | HIGH | FIXED_PENDING_VALIDATION | 15 | B0, B1, and B2 did not emit the shared T1 metric fields or equivalent capture artifacts. | WP15-D1 adds a 21-scenario adapter, shared fields, JSON/CSV, event logs, retained-catalog execution, provenance, logs, and checksum coverage. Local and CI validation remain pending. |
+| RIT-012 | REPRODUCIBILITY | HIGH | FIXED_PENDING_VALIDATION | 15 | The seeded runner did not create a complete immutable Phase 15 run directory. | The wrapper now captures T1, baseline adapter, analysis, metadata, exclusions, reruns, commands, logs, and layered manifests; extended local and CI validation remain pending. |
+| RIT-013 | REPRODUCIBILITY | HIGH | OPEN | 15 | Shared metric fields do not by themselves make the 21 deterministic baseline cases comparable with the 12-seed T1 population. | Define and version a matched treatment-scenario matrix, contact/transmission semantics, and treatment-specific exceptions before comparative aggregates are viewed. |
+
+## Current WP15-D1 evidence paths
+
+- `src/ttc_recovery/baseline_metrics.py`
+- `experiments/configs/phase-15-baseline-parity.json`
+- `experiments/scripts/run_phase15_baseline_parity.py`
+- `experiments/scripts/run_phase15_pilot_capture.py`
+- `tests/test_baseline_metrics.py`
+- `tests/test_phase15_baseline_runner.py`
+- `docs/phase-15-baseline-metric-parity.md`
+- `docs/phase-15-data-dictionary.md`
+- `governance/phase-15-data-capture-controls.md`
 
 ## New issue template
-
-Copy the block below for every new item.
 
 ```text
 ### RIT-XXX — Short title
@@ -114,124 +125,97 @@ Copy the block below for every new item.
 1. Reproduce the issue from a clean state.
 2. Preserve raw logs before modifying the system.
 3. Separate observed facts from hypotheses.
-4. Determine whether the impact is functional, scientific, security-related, or only cosmetic.
+4. Determine whether impact is functional, scientific, security-related, or cosmetic.
 5. Check authorization before testing beyond this repository.
-6. Search the upstream project's existing issues and security policy before reporting.
+6. Search the upstream project’s existing issues and security policy before reporting.
 7. Avoid duplicate public reports for a suspected security issue.
 8. Keep sensitive details private until the maintainer confirms a disclosure path.
 9. Add a regression test before calling a code defect fixed.
 10. Record the exact validating commit and CI run.
 
+## Reproducibility issue rules
+
+A parity or comparability issue is not closed merely because files share column names.
+
+Closure requires evidence appropriate to the issue:
+
+- metric-field parity requires identical declared shared fields and successful JSON/CSV generation;
+- capture parity requires equivalent provenance, logs, exclusion/rerun handling, and checksums;
+- scenario parity requires matched inputs or predeclared justified exceptions;
+- semantic parity requires compatible measurement meanings, not only compatible types;
+- publication readiness requires a frozen population and analysis plan before aggregate interpretation.
+
 ## Upstream contribution path
 
-An issue may become a public upstream contribution when:
+A public upstream contribution is appropriate when:
 
-- the defect is reproduced against the upstream project's supported version;
+- the defect is reproduced against a supported upstream version;
 - the report contains a minimal reproducer;
-- no secrets, private data, or unauthorized system details are included;
+- no secrets, private data, or unauthorized-system details are included;
 - the proposed fix is narrowly scoped;
-- tests demonstrate the failure before and success after the fix;
-- contributor guidance and licensing requirements are followed;
+- tests demonstrate failure before and success after the fix;
+- contributor and licensing requirements are followed; and
 - the report does not exaggerate security impact.
 
-Useful public outcomes include:
-
-- accepted issue report;
-- merged documentation correction;
-- merged regression test;
-- merged bug fix;
-- maintainer acknowledgment;
-- release-note credit.
-
-These outcomes may support a résumé or research-impact narrative, but they must be described factually.
+Useful public outcomes include an accepted issue report, merged documentation correction, merged regression test, merged bug fix, maintainer acknowledgment, or release-note credit. Any résumé or research-impact statement must describe the outcome factually.
 
 ## Responsible security-disclosure path
 
 ### Step 1 — Private validation
 
-- Confirm the behavior in an authorized environment.
+- Confirm behavior in an authorized environment.
 - Record affected versions and prerequisites.
-- Determine whether confidentiality, integrity, availability, authentication, authorization, or isolation is affected.
+- Identify the violated confidentiality, integrity, availability, authentication, authorization, or isolation property.
 - Rule out configuration error and expected behavior.
 - Create the smallest non-destructive reproducer.
 
 ### Step 2 — Find the disclosure channel
 
-Prefer, in order:
+Prefer:
 
-1. the repository `SECURITY.md`;
-2. the vendor security portal;
-3. the maintainer's published security email;
+1. repository `SECURITY.md`;
+2. vendor security portal;
+3. published maintainer security email; or
 4. a relevant CNA or coordination body when the vendor is unresponsive.
 
-Do not open a public GitHub issue for an undisclosed vulnerability unless the project's policy explicitly instructs that approach.
+Do not open a public GitHub issue for an undisclosed vulnerability unless the project’s policy explicitly requires it.
 
-### Step 3 — Submit a precise report
+### Step 3 — Submit and coordinate
 
-Include:
+Include affected product/version, environment, prerequisites, impact, reproduction steps, minimal evidence, suggested remediation when known, a disclosure-timeline request, and preferred credit name.
 
-- affected product and version;
-- environment and prerequisites;
-- clear impact;
-- reproduction steps;
-- minimal evidence;
-- suggested remediation when known;
-- disclosure timeline request;
-- preferred credit name and identifier.
+Allow reasonable remediation time, retest the fix, and do not pressure the vendor for a CVE. Preserve the final advisory and acknowledgment.
 
-### Step 4 — Coordinate
+### Step 4 — Record recognition accurately
 
-- Allow reasonable remediation time.
-- Retest the vendor's fix.
-- Do not pressure the vendor for a CVE.
-- Do not publicly claim severity or exploitation beyond reproduced evidence.
-- Preserve the vendor's acknowledgment and final advisory.
-
-### Step 5 — Record public recognition accurately
-
-Only after publication may this tracker record:
-
-- advisory identifier;
-- CVE identifier assigned by a CNA;
-- vendor acknowledgment;
-- release containing the fix;
-- credited researcher name;
-- public disclosure date.
+Only after publication may this tracker record an advisory identifier, CVE assigned by a CNA, vendor acknowledgment, fixed release, credited researcher name, and public disclosure date.
 
 ## Security-candidate decision test
 
-A suspected issue should remain `SECURITY_CANDIDATE` unless all of the following are answered:
+A concern remains `SECURITY_CANDIDATE` unless the record answers:
 
 - What protected security property is violated?
 - Which attacker capability is required?
 - Which supported version is affected?
 - Is the behavior reproducible?
 - Does it cross a trust boundary?
-- Is the impact more than a crash in a local test harness?
+- Is the impact more than a local test-harness crash?
 - Is the test authorized?
 - Is there a private disclosure route?
 
-If these questions cannot be answered, classify the item as `DEFECT`, `REPRODUCIBILITY`, `ENHANCEMENT`, or `FALSE_POSITIVE` instead.
+If these cannot be answered, classify the item as `DEFECT`, `REPRODUCIBILITY`, `ENHANCEMENT`, or `FALSE_POSITIVE`.
 
 ## Research-paper use
 
-Issue-tracker data may support the paper only when:
-
-- the issue is relevant to the research method or validity;
-- the record is complete and reproducible;
-- disclosure restrictions permit publication;
-- the manuscript distinguishes internal defects from external vulnerabilities;
-- counts are not inflated by duplicates or cosmetic observations;
-- unresolved security details are omitted or generalized;
-- contributions are described without implying endorsement.
+Tracker data may support the paper only when the issue is relevant to validity, the record is reproducible, disclosure restrictions permit publication, internal defects are distinguished from external vulnerabilities, duplicates are removed, and contributions are described without implying endorsement.
 
 ## Immediate actions
 
+- [ ] Validate RIT-011 through the full local suite, standalone adapter run, extended capture smoke, and CI.
+- [ ] Validate the extended wrapper for RIT-012.
+- [ ] Design the matched treatment-scenario matrix for RIT-013.
 - [ ] Link every current issue to evidence or a repository commit.
-- [ ] Implement baseline metric/capture parity for RIT-011.
-- [ ] Validate the dedicated pilot capture wrapper for RIT-012.
-- [ ] Add labels or GitHub issues only when public disclosure is appropriate.
-- [ ] Review upstream dependencies for published contribution and security policies.
-- [ ] Add regression tests for all code defects fixed during Phase 15.
+- [ ] Add public GitHub issues only when disclosure is appropriate.
+- [ ] Review upstream dependencies under their published contribution and security policies.
 - [ ] Keep sensitive security candidates outside the public repository.
-- [ ] Review this register before every publication-candidate experiment run.
+- [ ] Review this register before every publication-candidate run.
