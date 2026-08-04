@@ -1,0 +1,205 @@
+{
+  "schema_version": "0.1.0",
+  "phase": "Phase 15",
+  "work_package": "WP15-D4",
+  "status": "PREDECLARED_FAMILY_ANALYSIS_PLAN_CANDIDATE_PENDING_VALIDATION_NOT_ANALYSIS_EVIDENCE",
+  "run_class": "PILOT_INTERNAL_VALIDATION_ONLY",
+  "description": "Predeclare family-specific observation cutoffs, member identity, analysis-unit identity, denominator membership, and display boundaries without reading projected outcome values or producing comparative aggregates.",
+  "sources": {
+    "comparability_matrix": "spec/phase-15-treatment-comparability-matrix.json",
+    "matched_family_population_config": "experiments/configs/phase-15-matched-family-population.json",
+    "baseline_catalog": "tests/scenarios/baseline-test-catalog.json",
+    "t1_catalog": "tests/scenarios/t1-provisional-test-catalog.json"
+  },
+  "eligible_family_ids": [
+    "CF-01",
+    "CF-02",
+    "CF-05",
+    "CF-06"
+  ],
+  "expected_family_count": 4,
+  "expected_member_row_count": 13,
+  "expected_analysis_unit_count": 12,
+  "freeze_candidate": {
+    "observation_cutoffs": "CANDIDATE_NOT_FROZEN",
+    "analysis_unit_denominators": "CANDIDATE_NOT_FROZEN",
+    "member_registry": "CANDIDATE_NOT_FROZEN",
+    "allowed_displays": "CANDIDATE_NOT_FROZEN",
+    "publication_analysis_plan": "NOT_FROZEN"
+  },
+  "outcome_blindness": {
+    "projected_metric_values_read": false,
+    "raw_execution_values_read": false,
+    "permitted_inputs": [
+      "family and member identifiers",
+      "analysis-unit identifiers",
+      "source identifiers and roles",
+      "family allowed-field names",
+      "source-execution SHA-256 values for provenance",
+      "coverage counts and closed authorization flags"
+    ],
+    "rule": "Plan generation must not branch, filter, extend observation, revise denominators, or select displays based on any projected metric value, outcome label, security state, availability state, or other execution result."
+  },
+  "global_observation_rules": {
+    "start": "Use the exact initial state and execution recipe retained for the declared D3 member row.",
+    "single_execution": "Each declared member row contributes one retained deterministic source execution; technical reruns require a new run record and may not replace an unfavorable valid result.",
+    "oracle_gate": "The retained internal design oracle must match before a member can enter the registry.",
+    "no_adaptive_extension": "Do not add contacts, retries, replay attempts, telemetry opportunities, or post-terminal actions after observing a result.",
+    "no_outcome_filtering": "Do not exclude, merge, relabel, or duplicate a valid member because of its observed result.",
+    "cutoff_enforcement": "Stop at the family-specific cutoff and retain all evidence available at that point."
+  },
+  "family_plans": [
+    {
+      "family_id": "CF-01",
+      "cutoff_id": "OC-CF01-TERMINAL-ORACLE",
+      "observation_cutoff": "Stop after the source executor reaches its declared terminal state and the retained internal oracle check completes. Do not inject any post-terminal message or additional recovery attempt.",
+      "expected_member_row_ids": [
+        "CF-01:B0:B0-02",
+        "CF-01:B1:B1-02",
+        "CF-01:B2:B2-02",
+        "CF-01:T1:T1-15"
+      ],
+      "expected_analysis_unit_ids": [
+        "CF-01:B0",
+        "CF-01:B1",
+        "CF-01:B2",
+        "CF-01:T1"
+      ],
+      "expected_allowed_fields": [
+        "outcome",
+        "alignment_class",
+        "security_state",
+        "availability_state",
+        "verification_complete",
+        "active_key_compromised"
+      ]
+    },
+    {
+      "family_id": "CF-02",
+      "cutoff_id": "OC-CF02-NO-FAULT-COMPLETION",
+      "observation_cutoff": "Stop after the exact no-fault source transaction reaches its declared terminal state and oracle validation completes. Retain both B1 policy variants as separate member rows but do not extend either execution or count them as independent analysis units.",
+      "expected_member_row_ids": [
+        "CF-02:B0:B0-01",
+        "CF-02:B1:B1-01",
+        "CF-02:B1:B1-05",
+        "CF-02:B2:B2-01",
+        "CF-02:T1:T1-01"
+      ],
+      "expected_analysis_unit_ids": [
+        "CF-02:B0",
+        "CF-02:B1",
+        "CF-02:B2",
+        "CF-02:T1"
+      ],
+      "expected_allowed_fields": [
+        "outcome",
+        "alignment_class",
+        "security_state",
+        "availability_state",
+        "verification_complete",
+        "command_accepted",
+        "telemetry_complete"
+      ]
+    },
+    {
+      "family_id": "CF-05",
+      "cutoff_id": "OC-CF05-STATUS-OPPORTUNITY",
+      "observation_cutoff": "Stop immediately after the declared post-convergence status-telemetry opportunity is processed and the source terminal classification is recorded. Do not add a replacement telemetry opportunity or extend recovery after status loss.",
+      "expected_member_row_ids": [
+        "CF-05:B2:B2-08",
+        "CF-05:T1:T1-09"
+      ],
+      "expected_analysis_unit_ids": [
+        "CF-05:B2",
+        "CF-05:T1"
+      ],
+      "expected_allowed_fields": [
+        "outcome",
+        "alignment_class",
+        "security_state",
+        "availability_state",
+        "verification_complete",
+        "telemetry_complete",
+        "fault_count",
+        "drop_count"
+      ]
+    },
+    {
+      "family_id": "CF-06",
+      "cutoff_id": "OC-CF06-SINGLE-REPLAY",
+      "observation_cutoff": "Stop after successful state advancement and exactly one declared replay attempt is evaluated. Require the retained rejection and unchanged-state checks, then perform no further replay, retry, or recovery action.",
+      "expected_member_row_ids": [
+        "CF-06:B2:B2-10",
+        "CF-06:T1:T1-13"
+      ],
+      "expected_analysis_unit_ids": [
+        "CF-06:B2",
+        "CF-06:T1"
+      ],
+      "expected_allowed_fields": [
+        "outcome",
+        "alignment_class",
+        "security_state",
+        "availability_state",
+        "replay_count",
+        "rejection_count",
+        "replay_rejection_count"
+      ]
+    }
+  ],
+  "denominator_policy": {
+    "candidate_unit": "The exact treatment-within-family analysis_unit_id registry declared for each qualified family.",
+    "member_rows_are_denominator_units": false,
+    "policy_variant_rule": "CF-02 B1 policy variants remain two traceability rows under one CF-02:B1 analysis unit.",
+    "family_denominator_state": "CANDIDATE_NOT_FROZEN",
+    "success_rate_denominator": "NOT_DEFINED",
+    "cross_family_denominator": "NOT_PERMITTED",
+    "missing_unit_behavior": "Mark family coverage incomplete and block any family display; do not shrink the denominator after observing results.",
+    "extra_unit_behavior": "Reject undeclared analysis units; do not expand the denominator after observing results.",
+    "aggregate_authorized": false
+  },
+  "allowed_display_candidates": [
+    "member_identity_and_provenance_registry",
+    "analysis_unit_membership_registry",
+    "family_observation_cutoff_table",
+    "family_allowed_field_name_table",
+    "family_coverage_completeness_table",
+    "future_side_by_side_member_value_table_only_after_separate_authorization"
+  ],
+  "prohibited_outputs": [
+    "outcome frequency table",
+    "success count or success percentage",
+    "treatment-level rate",
+    "pooled family score",
+    "cross-family aggregate",
+    "confidence interval",
+    "hypothesis test",
+    "effect estimate",
+    "treatment ranking",
+    "superiority or effectiveness conclusion"
+  ],
+  "revision_policy": {
+    "before_future_comparative_output": "Any change requires a new versioned commit, rationale, validator update, and regenerated freeze candidate.",
+    "after_any_comparative_output_is_viewed": "Mark the change post-observation, preserve the superseded plan, create a new run, and do not combine results unless a later protocol explicitly authorizes a stratified treatment.",
+    "outcome_seeking_revision": "NOT_PERMITTED"
+  },
+  "outputs": {
+    "json": "results/processed/phase-15-family-descriptive-plan-candidate.json",
+    "member_registry_csv": "results/processed/phase-15-family-member-registry.csv",
+    "analysis_unit_registry_csv": "results/processed/phase-15-family-analysis-units.csv",
+    "family_plan_csv": "results/processed/phase-15-family-observation-plans.csv",
+    "checksum_manifest": "results/processed/phase-15-family-descriptive-plan.sha256"
+  },
+  "claim_boundary": {
+    "family_specific_descriptive_comparison": "NOT_YET_AUTHORIZED",
+    "denominator_freeze": "CANDIDATE_NOT_FROZEN",
+    "observation_cutoff_freeze": "CANDIDATE_NOT_FROZEN",
+    "pooled_cross_treatment_aggregation": "NOT_PERMITTED",
+    "success_rate_or_percentage": "NOT_PERMITTED",
+    "inferential_statistics": "NOT_PERMITTED",
+    "treatment_superiority": "NOT_PERMITTED",
+    "causal_interpretation": "NOT_PERMITTED",
+    "cryptographic_security_or_pcs": "NOT_PERMITTED",
+    "publication_evidence": "NOT_PERMITTED"
+  }
+}
