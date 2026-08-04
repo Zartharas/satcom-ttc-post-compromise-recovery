@@ -79,6 +79,7 @@ Do not place undisclosed vulnerability details, proof-of-concept exploit code, c
 | RIT-012 | REPRODUCIBILITY | HIGH | FIXED_PENDING_VALIDATION | 15 | The seeded runner did not create a complete immutable Phase 15 run directory. | The wrapper passed local end-to-end validation for T1, baseline adapter, analysis, metadata, logs, governance records, and layered manifests. CI remains pending. |
 | RIT-013 | REPRODUCIBILITY | HIGH | FIXED_PENDING_VALIDATION | 15 | Shared metric fields did not define which baseline and T1 cases were semantically comparable. | WP15-D2 defines eight conservative families, classifies all 36 catalog scenarios, identifies treatment-specific exceptions, and prohibits unsupported metrics and pooled catalog percentages. Local and CI validation remain pending. |
 | RIT-014 | REPRODUCIBILITY | HIGH | OPEN | 15 | A semantic matrix does not itself create an executable matched treatment population with equivalent fault opportunities, observation cutoffs, and denominators. | WP15-D3 must implement family-specific treatment inputs, derived comparison rows, denominator rules, and retained matrix provenance before comparative aggregates are viewed. |
+| RIT-015 | DEFECT | LOW | FIXED_PENDING_VALIDATION | 15 | The WP15-D2 population-rule test searched for a phrase that was not present contiguously even though the matrix rule itself was correct. | The assertion now checks the exact population rule. Focused and full regression reruns remain pending. |
 
 ## WP15-D1 evidence paths
 
@@ -222,6 +223,7 @@ Tracker data may support the paper only when the issue is relevant to validity, 
 
 ## Immediate actions
 
+- [ ] Pull the RIT-015 assertion correction and rerun the focused and complete test suites.
 - [ ] Validate RIT-013 through D2 JSON parsing, unit tests, standalone validation, full regression, and manifest refresh.
 - [ ] Keep RIT-014 open until an executable matched-family population and denominator plan exist.
 - [ ] Run CI for RIT-011, RIT-012, and RIT-013 after draft-PR authorization.
