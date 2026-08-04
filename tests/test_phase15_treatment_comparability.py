@@ -127,7 +127,10 @@ class Phase15TreatmentComparabilityTests(unittest.TestCase):
         rules = " ".join(MATRIX["population_rules"])
         self.assertIn("Do not pool the 21 curated baseline catalog rows", rules)
         self.assertIn("Do not calculate treatment success percentages", rules)
-        self.assertIn("not independent replicates", rules)
+        self.assertIn(
+            "Do not treat multiple B1 policy variants in one family as independent replicates.",
+            MATRIX["population_rules"],
+        )
 
     def test_treatment_specific_and_guard_cases_remain_excluded(self) -> None:
         dispositions = {
