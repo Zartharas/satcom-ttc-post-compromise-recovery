@@ -37,6 +37,14 @@ D3B_CONTRACT = json.loads(
         encoding="utf-8"
     )
 )
+D4_CONFIG = json.loads(
+    (
+        ROOT
+        / "experiments"
+        / "configs"
+        / "phase-15-family-descriptive-plan.json"
+    ).read_text(encoding="utf-8")
+)
 
 
 class Phase15ProtocolTests(unittest.TestCase):
@@ -53,6 +61,7 @@ class Phase15ProtocolTests(unittest.TestCase):
         self.assertEqual(
             D3B_CONTRACT["run_class"], "PILOT_INTERNAL_VALIDATION_ONLY"
         )
+        self.assertEqual(D4_CONFIG["run_class"], "PILOT_INTERNAL_VALIDATION_ONLY")
         self.assertFalse(SPEC["pilot_scope"]["publication_evidence"])
         self.assertFalse(SPEC["pilot_scope"]["comparative_claims_allowed"])
 
@@ -156,6 +165,86 @@ class Phase15ProtocolTests(unittest.TestCase):
             acceptance["success_rate_denominator"], "NOT_DEFINED"
         )
 
+    def test_d4_plan_is_outcome_blind_and_candidate_only(self) -> None:
+        expected = (
+            "PREDECLARED_FAMILY_ANALYSIS_PLAN_CANDIDATE_PENDING_VALIDATION_"
+            "NOT_ANALYSIS_EVIDENCE"
+        )
+        self.assertEqual(D4_CONFIG["status"], expected)
+        self.assertEqual(
+            SPEC["family_descriptive_analysis_plan"]["status"], expected
+        )
+        self.assertEqual(
+            SPEC["pilot_scope"]["family_descriptive_plan_status"],
+            "IMPLEMENTED_PENDING_LOCAL_AND_CI_VALIDATION_NOT_ANALYSIS_EVIDENCE",
+        )
+        self.assertFalse(
+            D4_CONFIG["outcome_blindness"]["projected_metric_values_read"]
+        )
+        self.assertFalse(
+            D4_CONFIG["outcome_blindness"]["raw_execution_values_read"]
+        )
+        self.assertTrue(
+            SPEC["family_descriptive_analysis_plan"]["outcome_blind_generation"]
+        )
+        self.assertFalse(
+            SPEC["family_descriptive_analysis_plan"]
+            ["projected_metric_values_read"]
+        )
+
+    def test_d4_population_cutoffs_and_denominators_are_exact(self) -> None:
+        self.assertEqual(
+            D4_CONFIG["eligible_family_ids"],
+            ["CF-01", "CF-02", "CF-05", "CF-06"],
+        )
+        self.assertEqual(D4_CONFIG["expected_family_count"], 4)
+        self.assertEqual(D4_CONFIG["expected_member_row_count"], 13)
+        self.assertEqual(D4_CONFIG["expected_analysis_unit_count"], 12)
+        plans = D4_CONFIG["family_plans"]
+        self.assertEqual(len(plans), 4)
+        self.assertEqual(
+            len({row["cutoff_id"] for row in plans}),
+            4,
+        )
+        self.assertTrue(
+            all(row["observation_cutoff"].startswith("Stop ") for row in plans)
+        )
+        cf02 = next(row for row in plans if row["family_id"] == "CF-02")
+        self.assertEqual(len(cf02["expected_member_row_ids"]), 5)
+        self.assertEqual(len(cf02["expected_analysis_unit_ids"]), 4)
+        self.assertEqual(cf02["expected_analysis_unit_ids"].count("CF-02:B1"), 1)
+
+    def test_d4_comparison_freeze_and_publication_gates_remain_closed(self) -> None:
+        boundary = D4_CONFIG["claim_boundary"]
+        self.assertEqual(
+            boundary["family_specific_descriptive_comparison"],
+            "NOT_YET_AUTHORIZED",
+        )
+        self.assertEqual(boundary["denominator_freeze"], "CANDIDATE_NOT_FROZEN")
+        self.assertEqual(
+            boundary["observation_cutoff_freeze"],
+            "CANDIDATE_NOT_FROZEN",
+        )
+        for field in (
+            "pooled_cross_treatment_aggregation",
+            "success_rate_or_percentage",
+            "inferential_statistics",
+            "treatment_superiority",
+            "causal_interpretation",
+            "cryptographic_security_or_pcs",
+            "publication_evidence",
+        ):
+            self.assertEqual(boundary[field], "NOT_PERMITTED", field)
+        denominator = D4_CONFIG["denominator_policy"]
+        self.assertFalse(denominator["member_rows_are_denominator_units"])
+        self.assertEqual(
+            denominator["success_rate_denominator"], "NOT_DEFINED"
+        )
+        self.assertEqual(
+            denominator["cross_family_denominator"], "NOT_PERMITTED"
+        )
+        self.assertFalse(denominator["aggregate_authorized"])
+
     def test_pilot_parameters_match_config(self) -> None:
         candidate = SPEC["candidate_parameters"]
         for key in (
@@ -191,6 +280,7 @@ class Phase15ProtocolTests(unittest.TestCase):
     def test_exclusions_and_reruns_cannot_be_outcome_seeking(self) -> None:
         exclusions = " ".join(SPEC["exclusion_rules"])
         self.assertIn("Do not exclude a run because its outcome", exclusions)
+        self.assertIn("Do not shrink or expand a family denominator", exclusions)
         self.assertIn(
             "preferred outcome", SPEC["rerun_policy"]["prohibited_reason"]
         )
@@ -213,6 +303,12 @@ class Phase15ProtocolTests(unittest.TestCase):
         self.assertTrue(
             D3_CONFIG["outputs"]["checksum_manifest"].endswith(".sha256")
         )
+        self.assertTrue(
+            D4_CONFIG["outputs"]["json"].startswith("results/processed/")
+        )
+        self.assertTrue(
+            D4_CONFIG["outputs"]["checksum_manifest"].endswith(".sha256")
+        )
 
     def test_hard_claim_boundaries_remain_prohibited(self) -> None:
         allowed = {"NOT_PERMITTED", "NOT_PERMITTED_FOR_PILOT"}
@@ -226,6 +322,10 @@ class Phase15ProtocolTests(unittest.TestCase):
         )
         self.assertEqual(
             D3_CONFIG["claim_boundary"]["publication_evidence"],
+            "NOT_PERMITTED",
+        )
+        self.assertEqual(
+            D4_CONFIG["claim_boundary"]["publication_evidence"],
             "NOT_PERMITTED",
         )
         self.assertEqual(
