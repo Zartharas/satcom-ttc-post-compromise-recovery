@@ -70,7 +70,6 @@
         "alignment_class",
         "security_state",
         "availability_state",
-        "verification_complete",
         "active_key_compromised"
       ]
     },
@@ -96,9 +95,7 @@
         "alignment_class",
         "security_state",
         "availability_state",
-        "verification_complete",
-        "command_accepted",
-        "telemetry_complete"
+        "verification_complete"
       ]
     },
     {
@@ -120,7 +117,6 @@
         "availability_state",
         "verification_complete",
         "telemetry_complete",
-        "fault_count",
         "drop_count"
       ]
     },
@@ -139,7 +135,6 @@
       "expected_allowed_fields": [
         "outcome",
         "alignment_class",
-        "security_state",
         "availability_state",
         "replay_count",
         "rejection_count",
