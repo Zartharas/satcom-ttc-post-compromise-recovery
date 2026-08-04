@@ -1,0 +1,280 @@
+{
+  "schema_version": "0.1.0",
+  "phase": "Phase 15",
+  "work_package": "WP15-D2",
+  "status": "DEFINED_PENDING_VALIDATION_NOT_COMPARATIVE_EVIDENCE",
+  "title": "Matched treatment-scenario matrix and semantic comparability contract",
+  "purpose": "Define conservative, auditable comparison families across B0, B1, B2, and provisional T1 without treating shared columns, curated scenario counts, or protocol-specific timing as equivalent evidence.",
+  "sources": {
+    "baseline_catalog": "tests/scenarios/baseline-test-catalog.json",
+    "t1_catalog": "tests/scenarios/t1-provisional-test-catalog.json",
+    "t1_explicit_fault_tests": "tests/test_fault_metrics.py",
+    "baseline_metric_config": "experiments/configs/phase-15-baseline-parity.json",
+    "t1_metric_implementation": "src/ttc_recovery/fault_metrics.py",
+    "baseline_metric_adapter": "src/ttc_recovery/baseline_metrics.py"
+  },
+  "comparison_authorization": {
+    "matrix_definition": "AUTHORIZED_FOR_INTERNAL_VALIDATION",
+    "family_specific_descriptive_comparison": "NOT_YET_AUTHORIZED",
+    "pooled_cross_treatment_aggregation": "NOT_PERMITTED",
+    "inferential_statistics": "NOT_PERMITTED",
+    "treatment_superiority_claim": "NOT_PERMITTED",
+    "publication_evidence": false
+  },
+  "classification_definitions": {
+    "QUALIFIED_MATCH": "At least two treatments share a high-level initial condition, fault or observation boundary, and outcome dimension, but protocol assumptions or execution semantics differ. Only the explicitly allowed fields may later be compared.",
+    "DIAGNOSTIC_FAMILY_ONLY": "Cases illuminate a related failure boundary but differ materially in attacker capability, activation timing, retry policy, initial alignment, or state-deletion behavior. They may be discussed side by side but must not be aggregated as matched treatment observations.",
+    "TREATMENT_SPECIFIC": "No defensible cross-treatment counterpart is currently defined.",
+    "NON_OUTCOME_GUARD": "A guard or rejection test that does not produce the common terminal outcome population and is excluded from treatment-effectiveness comparison."
+  },
+  "derived_fields": {
+    "alignment_class": {
+      "source_field": "alignment",
+      "rule": "Map SYNC(<epoch>) to SYNC; preserve G_AHEAD, S_AHEAD, DIVERGED, and LOCKED as categorical classes.",
+      "status": "DEFINED_NOT_IMPLEMENTED_IN_CAPTURE"
+    }
+  },
+  "metric_semantics": {
+    "categorical_candidates": [
+      "outcome",
+      "alignment_class",
+      "security_state",
+      "availability_state",
+      "verification_complete",
+      "active_key_compromised"
+    ],
+    "family_conditional_candidates": [
+      "command_accepted",
+      "telemetry_complete",
+      "fault_count",
+      "drop_count",
+      "reorder_count",
+      "replay_count",
+      "rejection_count",
+      "replay_rejection_count",
+      "stale_state_rejection_count"
+    ],
+    "not_cross_treatment_comparable": [
+      "seed",
+      "schedule_sha256",
+      "alignment",
+      "recovery_duration_contacts",
+      "divergent_contact_windows",
+      "degraded_contact_windows",
+      "total_transmissions",
+      "retry_overhead",
+      "delay_count",
+      "duplicate_count",
+      "contact_close_count",
+      "restart_count"
+    ],
+    "reason": "The current baseline adapter uses one catalog case as one adapter contact and declared scenario-level transmission counts, while T1 uses explicit contact advancement, retries, and seeded or serialized schedules. Matching field names does not make those units equivalent."
+  },
+  "comparison_families": [
+    {
+      "id": "CF-01",
+      "name": "Passive operational-key compromise followed by fresh recovery material",
+      "classification": "QUALIFIED_MATCH",
+      "shared_condition": "The currently active operational or traffic key is attacker-known, the long-term recovery root or authority remains available, and the attacker is passive during the recovery transition.",
+      "members": [
+        {"treatment": "B0", "source_type": "CATALOG", "source_id": "B0-02", "role": "surviving master-key OTAR"},
+        {"treatment": "B1", "source_type": "CATALOG", "source_id": "B1-02", "role": "operational-key compromise with long-term update enabled"},
+        {"treatment": "B2", "source_type": "CATALOG", "source_id": "B2-02", "role": "traffic-key exposure followed by fresh update"},
+        {"treatment": "T1", "source_type": "CATALOG", "source_id": "T1-15", "role": "replace compromised operational keys"}
+      ],
+      "allowed_fields": ["outcome", "alignment_class", "security_state", "availability_state", "active_key_compromised"],
+      "blocked_fields": ["recovery_duration_contacts", "total_transmissions", "retry_overhead"],
+      "qualifiers": [
+        "The treatments rely on different uncompromised roots and update assumptions.",
+        "A successful abstract outcome is not a cryptographic PCS proof.",
+        "Only categorical post-transition state may be compared after implementation validation."
+      ]
+    },
+    {
+      "id": "CF-02",
+      "name": "No-fault state transition or recovery completion",
+      "classification": "QUALIFIED_MATCH",
+      "shared_condition": "No injected delivery, ordering, replay, restart, or evidence fault occurs during the modeled transition.",
+      "members": [
+        {"treatment": "B0", "source_type": "CATALOG", "source_id": "B0-01", "role": "normal OTAR"},
+        {"treatment": "B1", "source_type": "CATALOG", "source_id": "B1-01", "role": "local-completion activation"},
+        {"treatment": "B1", "source_type": "CATALOG", "source_id": "B1-05", "role": "status-gated activation variant"},
+        {"treatment": "B2", "source_type": "CATALOG", "source_id": "B2-01", "role": "normal unidirectional update"},
+        {"treatment": "T1", "source_type": "CATALOG", "source_id": "T1-01", "role": "normal ground-ahead recovery"}
+      ],
+      "allowed_fields": ["outcome", "alignment_class", "security_state", "availability_state", "verification_complete"],
+      "blocked_fields": ["recovery_duration_contacts", "total_transmissions", "retry_overhead"],
+      "qualifiers": [
+        "T1 begins from G_AHEAD while the listed baselines begin synchronized.",
+        "B1 includes two activation-policy variants and must not be double-counted as independent treatment observations.",
+        "This family compares terminal categories, not protocol cost or latency."
+      ]
+    },
+    {
+      "id": "CF-03",
+      "name": "Delivery loss before safe shared activation or completion",
+      "classification": "DIAGNOSTIC_FAMILY_ONLY",
+      "shared_condition": "A required pre-completion delivery is absent and the treatment reaches its modeled terminal or exhausted state.",
+      "members": [
+        {"treatment": "B0", "source_type": "CATALOG", "source_id": "B0-04", "role": "OTAR upload dropped"},
+        {"treatment": "B1", "source_type": "CATALOG", "source_id": "B1-06", "role": "status-gated confirm dropped"},
+        {"treatment": "B2", "source_type": "CATALOG", "source_id": "B2-07", "role": "ratchet update dropped after sender evolution"},
+        {"treatment": "T1", "source_type": "CATALOG", "source_id": "T1-08", "role": "prepare retry budget exhausted"}
+      ],
+      "allowed_fields": [],
+      "blocked_fields": ["all_cross_treatment_aggregates"],
+      "qualifiers": [
+        "Initial alignment, compromise state, retry policy, and sender-state deletion differ materially.",
+        "B2 has already advanced and deleted prior sender state, unlike the other cases.",
+        "Use only as a structured qualitative boundary comparison."
+      ]
+    },
+    {
+      "id": "CF-04",
+      "name": "Post-local or post-spacecraft activation confirmation evidence loss",
+      "classification": "DIAGNOSTIC_FAMILY_ONLY",
+      "shared_condition": "One endpoint may have completed or activated while final confirmation or authenticated completion evidence is unavailable.",
+      "members": [
+        {"treatment": "B1", "source_type": "CATALOG", "source_id": "B1-04", "role": "local-completion confirm loss"},
+        {"treatment": "B1", "source_type": "CATALOG", "source_id": "B1-07", "role": "status-gated authenticated-status loss"},
+        {"treatment": "T1", "source_type": "CATALOG", "source_id": "T1-07", "role": "confirmation budget exhausted after spacecraft activation"}
+      ],
+      "allowed_fields": [],
+      "blocked_fields": ["all_cross_treatment_aggregates"],
+      "qualifiers": [
+        "B1 and T1 place activation and retained evidence at different protocol boundaries.",
+        "The B1 variants are alternative policies, not independent samples.",
+        "Outcome labels may differ because the models encode different evidence-retention semantics."
+      ]
+    },
+    {
+      "id": "CF-05",
+      "name": "Post-convergence status telemetry loss",
+      "classification": "QUALIFIED_MATCH",
+      "shared_condition": "Both endpoints have converged on the new abstract key state, but expected status telemetry is absent.",
+      "members": [
+        {"treatment": "B2", "source_type": "CATALOG", "source_id": "B2-08", "role": "status telemetry lost after both endpoints evolve"},
+        {"treatment": "T1", "source_type": "CATALOG", "source_id": "T1-09", "role": "status telemetry lost after convergence"}
+      ],
+      "allowed_fields": ["outcome", "alignment_class", "security_state", "availability_state", "verification_complete", "telemetry_complete", "drop_count"],
+      "blocked_fields": ["recovery_duration_contacts", "total_transmissions", "retry_overhead"],
+      "qualifiers": [
+        "The status messages and verification procedures are abstract and treatment-specific.",
+        "The comparison is limited to convergence-versus-evidence separation."
+      ]
+    },
+    {
+      "id": "CF-06",
+      "name": "Replay after successful state advancement",
+      "classification": "QUALIFIED_MATCH",
+      "shared_condition": "A stale or duplicate state-advancing control message is presented after the treatment has already reached its new state.",
+      "members": [
+        {"treatment": "B2", "source_type": "CATALOG", "source_id": "B2-10", "role": "replayed ratchet update"},
+        {"treatment": "T1", "source_type": "CATALOG", "source_id": "T1-13", "role": "replayed recovery commit"}
+      ],
+      "allowed_fields": ["outcome", "alignment_class", "availability_state", "replay_count", "rejection_count", "replay_rejection_count"],
+      "blocked_fields": ["total_transmissions", "retry_overhead", "stale_state_rejection_count"],
+      "qualifiers": [
+        "The replayed message types and replay-cache semantics differ.",
+        "Counts may be compared only after the D2 validator confirms one injected replay per member."
+      ]
+    },
+    {
+      "id": "CF-07",
+      "name": "Ordering fault at a required exchange boundary",
+      "classification": "DIAGNOSTIC_FAMILY_ONLY",
+      "shared_condition": "A message or fragment is observed outside the expected protocol order.",
+      "members": [
+        {"treatment": "B1", "source_type": "CATALOG", "source_id": "B1-03", "role": "required fragments reordered"},
+        {"treatment": "T1", "source_type": "EXPLICIT_TEST", "source_id": "T1-EX-REORDER-RESPONSE", "evidence": "tests/test_fault_metrics.py::test_reordered_response_is_rejected_then_normal_response_succeeds", "role": "reordered response rejected before normal response succeeds"}
+      ],
+      "allowed_fields": [],
+      "blocked_fields": ["all_cross_treatment_aggregates"],
+      "qualifiers": [
+        "B1 aborts the exchange while T1 injects and rejects a malformed-order message before continuing.",
+        "The fault opportunities and retry behavior are not equivalent."
+      ]
+    },
+    {
+      "id": "CF-08",
+      "name": "Persisted-state rollback or endpoint restart during transition",
+      "classification": "DIAGNOSTIC_FAMILY_ONLY",
+      "shared_condition": "An endpoint loses or restores state in a way that invalidates the in-progress or recently advanced transition.",
+      "members": [
+        {"treatment": "B2", "source_type": "CATALOG", "source_id": "B2-09", "role": "stale ground snapshot restored"},
+        {"treatment": "T1", "source_type": "EXPLICIT_TEST", "source_id": "T1-EX-SPACECRAFT-RESTART-BEFORE-COMMIT", "evidence": "tests/test_fault_metrics.py::test_spacecraft_restart_before_commit_prevents_activation", "role": "spacecraft pending state lost before commit"}
+      ],
+      "allowed_fields": [],
+      "blocked_fields": ["all_cross_treatment_aggregates"],
+      "qualifiers": [
+        "A stale persistent rollback and a volatile pending-state restart are not the same fault.",
+        "This family records a shared state-loss theme only."
+      ]
+    }
+  ],
+  "scenario_disposition": [
+    {"treatment": "B0", "scenario_id": "B0-01", "disposition": "COMPARISON_FAMILY", "family_id": "CF-02"},
+    {"treatment": "B0", "scenario_id": "B0-02", "disposition": "COMPARISON_FAMILY", "family_id": "CF-01"},
+    {"treatment": "B0", "scenario_id": "B0-03", "disposition": "TREATMENT_SPECIFIC", "reason": "Master and traffic-key compromise has no matched B1, B2, or T1 scenario under the current abstractions."},
+    {"treatment": "B0", "scenario_id": "B0-04", "disposition": "COMPARISON_FAMILY", "family_id": "CF-03"},
+    {"treatment": "B1", "scenario_id": "B1-01", "disposition": "COMPARISON_FAMILY", "family_id": "CF-02"},
+    {"treatment": "B1", "scenario_id": "B1-02", "disposition": "COMPARISON_FAMILY", "family_id": "CF-01"},
+    {"treatment": "B1", "scenario_id": "B1-03", "disposition": "COMPARISON_FAMILY", "family_id": "CF-07"},
+    {"treatment": "B1", "scenario_id": "B1-04", "disposition": "COMPARISON_FAMILY", "family_id": "CF-04"},
+    {"treatment": "B1", "scenario_id": "B1-05", "disposition": "COMPARISON_FAMILY", "family_id": "CF-02"},
+    {"treatment": "B1", "scenario_id": "B1-06", "disposition": "COMPARISON_FAMILY", "family_id": "CF-03"},
+    {"treatment": "B1", "scenario_id": "B1-07", "disposition": "COMPARISON_FAMILY", "family_id": "CF-04"},
+    {"treatment": "B2", "scenario_id": "B2-01", "disposition": "COMPARISON_FAMILY", "family_id": "CF-02"},
+    {"treatment": "B2", "scenario_id": "B2-02", "disposition": "COMPARISON_FAMILY", "family_id": "CF-01"},
+    {"treatment": "B2", "scenario_id": "B2-03", "disposition": "TREATMENT_SPECIFIC", "reason": "Passive sender-state exposure has no current counterpart with the same attacker capability."},
+    {"treatment": "B2", "scenario_id": "B2-04", "disposition": "TREATMENT_SPECIFIC", "reason": "Receiver-state exposure and future-key traceability are specific to the B2 abstraction."},
+    {"treatment": "B2", "scenario_id": "B2-05", "disposition": "TREATMENT_SPECIFIC", "reason": "Both-endpoint state exposure has no matched current scenario."},
+    {"treatment": "B2", "scenario_id": "B2-06", "disposition": "TREATMENT_SPECIFIC", "reason": "Active sender-state impersonation assumes a treatment-specific attacker capability."},
+    {"treatment": "B2", "scenario_id": "B2-07", "disposition": "COMPARISON_FAMILY", "family_id": "CF-03"},
+    {"treatment": "B2", "scenario_id": "B2-08", "disposition": "COMPARISON_FAMILY", "family_id": "CF-05"},
+    {"treatment": "B2", "scenario_id": "B2-09", "disposition": "COMPARISON_FAMILY", "family_id": "CF-08"},
+    {"treatment": "B2", "scenario_id": "B2-10", "disposition": "COMPARISON_FAMILY", "family_id": "CF-06"},
+    {"treatment": "T1", "scenario_id": "T1-01", "disposition": "COMPARISON_FAMILY", "family_id": "CF-02"},
+    {"treatment": "T1", "scenario_id": "T1-02", "disposition": "TREATMENT_SPECIFIC", "reason": "Spacecraft-ahead target negotiation has no current baseline counterpart."},
+    {"treatment": "T1", "scenario_id": "T1-03", "disposition": "TREATMENT_SPECIFIC", "reason": "Single prepare-loss retry is a T1 retry-policy test, not matched to no-retry baseline cases."},
+    {"treatment": "T1", "scenario_id": "T1-04", "disposition": "TREATMENT_SPECIFIC", "reason": "Single response-loss retry is a T1 retry-policy test."},
+    {"treatment": "T1", "scenario_id": "T1-05", "disposition": "TREATMENT_SPECIFIC", "reason": "Single commit-loss retry is a T1 retry-policy test."},
+    {"treatment": "T1", "scenario_id": "T1-06", "disposition": "TREATMENT_SPECIFIC", "reason": "Single confirmation-loss retry is a T1 retry-policy test."},
+    {"treatment": "T1", "scenario_id": "T1-07", "disposition": "COMPARISON_FAMILY", "family_id": "CF-04"},
+    {"treatment": "T1", "scenario_id": "T1-08", "disposition": "COMPARISON_FAMILY", "family_id": "CF-03"},
+    {"treatment": "T1", "scenario_id": "T1-09", "disposition": "COMPARISON_FAMILY", "family_id": "CF-05"},
+    {"treatment": "T1", "scenario_id": "T1-10", "disposition": "NON_OUTCOME_GUARD", "reason": "Candidate command-isolation test does not enter the common terminal outcome population."},
+    {"treatment": "T1", "scenario_id": "T1-11", "disposition": "NON_OUTCOME_GUARD", "reason": "Unauthorized-authority rejection is a guard test."},
+    {"treatment": "T1", "scenario_id": "T1-12", "disposition": "NON_OUTCOME_GUARD", "reason": "Pending-capacity rejection is a guard test."},
+    {"treatment": "T1", "scenario_id": "T1-13", "disposition": "COMPARISON_FAMILY", "family_id": "CF-06"},
+    {"treatment": "T1", "scenario_id": "T1-14", "disposition": "NON_OUTCOME_GUARD", "reason": "Conflicting-commit rejection is a guard test."},
+    {"treatment": "T1", "scenario_id": "T1-15", "disposition": "COMPARISON_FAMILY", "family_id": "CF-01"}
+  ],
+  "population_rules": [
+    "Do not pool the 21 curated baseline catalog rows with the 12 seeded T1 pilot rows.",
+    "Do not treat multiple B1 policy variants in one family as independent replicates.",
+    "Do not calculate treatment success percentages from unequal, curated scenario catalogs.",
+    "Do not use a diagnostic-only family in quantitative cross-treatment aggregation.",
+    "Any future matched execution must instantiate the same family condition separately for each treatment and preserve treatment-specific exceptions.",
+    "Any field not explicitly allowed by a family is excluded from that family comparison."
+  ],
+  "remaining_blockers": [
+    "Implement an executable matched-family population rather than relying only on catalog cross-references.",
+    "Implement alignment_class derivation and validation.",
+    "Define family-specific denominators before viewing comparative aggregates.",
+    "Validate equivalent fault opportunities and observation cutoffs for every quantitative family.",
+    "Freeze the statistical and descriptive analysis plan before publication-candidate execution.",
+    "Resolve or transparently retain the open external-review limitation."
+  ],
+  "hard_claim_boundaries": {
+    "independent_validation": "NOT_PERMITTED",
+    "baseline_oracle_freeze": "NOT_PERMITTED",
+    "cryptographic_security_or_pcs": "NOT_PERMITTED",
+    "treatment_superiority": "NOT_PERMITTED",
+    "causal_inference": "NOT_PERMITTED",
+    "operational_timing": "NOT_PERMITTED",
+    "ccsds_sdls_conformance": "NOT_PERMITTED",
+    "flight_rf_or_operational_spacecraft_applicability": "NOT_PERMITTED",
+    "publication_evidence": "NOT_PERMITTED"
+  }
+}
