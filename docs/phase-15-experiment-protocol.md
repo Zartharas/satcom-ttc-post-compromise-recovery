@@ -4,19 +4,26 @@
 
 `PROVISIONAL_PROTOCOL_CANDIDATE_NOT_PUBLICATION_EVIDENCE`
 
-This document defines the first publication-preparation protocol candidate. It permits pilot execution and data-capture validation while preserving every unresolved Phase 14 review gate.
+This protocol permits pilot execution and data-capture validation while preserving every unresolved Phase 14 review gate.
 
-The machine-readable source is `spec/phase-15-experiment-protocol-candidate.json`. T1 pilot parameters are in `experiments/configs/phase-15-pilot.json`. The B0/B1/B2 adapter configuration is in `experiments/configs/phase-15-baseline-parity.json`.
+Machine-readable sources:
+
+- `spec/phase-15-experiment-protocol-candidate.json`
+- `spec/phase-15-treatment-comparability-matrix.json`
+- `experiments/configs/phase-15-pilot.json`
+- `experiments/configs/phase-15-baseline-parity.json`
+- `experiments/configs/phase-15-matched-family-population.json`
 
 ## Purpose
 
-Phase 15 moves the project from internally validated software toward a reproducible research-paper experiment. It separates three activities that must not be conflated:
+Phase 15 separates four activities that must not be conflated:
 
-1. **engineering validation** — unit tests, validators, formal gates, deterministic regression checks, and catalog-oracle preservation;
-2. **pilot data capture** — testing T1 and baseline-adapter execution, provenance, schema, checksum, exclusion, and analysis pipelines; and
-3. **publication-candidate execution** — a later, versioned run using matched-treatment controls and a protocol frozen before aggregate results are interpreted.
+1. **engineering validation** — tests, validators, formal gates, catalog-oracle preservation, and checksums;
+2. **pilot data capture** — validating T1, baseline-adapter, provenance, schema, and immutable-bundle behavior;
+3. **qualified-family population validation** — executing only the four D2 qualified families and enforcing member-level projection and denominator discipline; and
+4. **publication-candidate execution** — a later versioned run using frozen controls and an analysis plan fixed before comparative aggregates are viewed.
 
-The Phase 15 pilot belongs only to the second category.
+The current work belongs only to the first three categories. It is not publication evidence.
 
 ## Research questions
 
@@ -24,13 +31,13 @@ The Phase 15 pilot belongs only to the second category.
 
 Within the declared abstract model, how do B0, B1, B2, and provisional T1 classify recovery outcomes under matched fault scenarios?
 
-This question cannot be answered comparatively until treatment scenarios are matched or unmatched cases are justified before aggregate results are viewed.
+This question cannot support comparative conclusions until the matched-family population, observation boundaries, and analysis plan are validated and frozen.
 
 ### RQ-2 — Contact-window recovery behavior
 
 Within discrete contact windows, how do recovery duration, retry overhead, security state, and availability state vary across matched fault schedules?
 
-The metric definitions, denominators, exclusions, treatment population, and analysis rules remain unfrozen. Baseline adapter contact and transmission values are not yet accepted as comparative measurement semantics.
+Current baseline adapter contact and transmission values are not accepted as cross-treatment timing or cost units. Duration, transmission, retry, and raw epoch-bearing alignment fields remain excluded from D3 projections.
 
 ### RQ-3 — Formal and Python diagnostics
 
@@ -42,37 +49,93 @@ Any result remains bounded and diagnostic. It is not a refinement proof, impleme
 
 | Treatment | Current support | Publication-metric parity |
 |---|---|---|
-| B0 | Deterministic catalog metric adapter | Implemented, pending validation |
-| B1 | Deterministic catalog metric adapter | Implemented, pending validation |
-| B2 | Deterministic catalog metric adapter | Implemented, pending validation |
-| T1 | Seeded and explicit fault pipeline | Available provisionally |
+| B0 | Deterministic catalog metric adapter | Implemented, locally validated, CI pending |
+| B1 | Deterministic catalog metric adapter | Implemented, locally validated, CI pending |
+| B2 | Deterministic catalog metric adapter | Implemented, locally validated, CI pending |
+| T1 | Seeded, explicit-fault, and catalog-behavior execution | Available provisionally |
 
-Metric-field parity is not treatment comparability. The B0/B1/B2 adapter now emits the shared T1 metric fields and is included in the immutable capture bundle, but the 21 deterministic catalog cases are not a matched seeded fault population.
+Metric parity is not treatment comparability.
 
-The pilot must not infer effectiveness or superiority from differences between baseline adapter rows and T1 seeded rows.
+## WP15-D1 — Baseline metric and capture parity
 
-## WP15-D1 baseline adapter
+WP15-D1 executes all 21 retained baseline catalog scenarios without changing baseline transition logic or expected design oracles.
 
-WP15-D1 executes all 21 scenarios in `tests/scenarios/baseline-test-catalog.json` without changing baseline transition logic or expected design oracles.
-
-Before emitting a row, the adapter validates:
+Before emitting a row, it validates:
 
 - `expected_alignment`;
 - `expected_joint_state` when declared; and
 - `expected_outcome`.
 
-The adapter emits:
+The adapter emits shared metric fields, baseline-specific identifiers, canonical scenario SHA-256 values, complete event logs, JSON, CSV, and immutable capture evidence.
 
-- normalized treatment and retained baseline-variant identifiers;
-- deterministic scenario ID;
-- canonical scenario/schedule SHA-256;
-- the complete shared `RecoveryMetrics` field set;
-- baseline-specific `other_fault_count`;
-- complete simulator event logs;
-- JSON and CSV outputs; and
-- an explicit adapter-completion event marked `publication_evidence=false`.
+Detailed semantics are documented in `docs/phase-15-baseline-metric-parity.md`.
 
-Detailed semantics and limitations are documented in `docs/phase-15-baseline-metric-parity.md`.
+## WP15-D2 — Semantic comparability
+
+WP15-D2 defines eight conservative families:
+
+- CF-01, CF-02, CF-05, and CF-06 are `QUALIFIED_MATCH`;
+- CF-03, CF-04, CF-07, and CF-08 are `DIAGNOSTIC_FAMILY_ONLY`;
+- no family is a `FULL_MATCH`.
+
+All 21 baseline and 15 T1 catalog scenarios have exactly one disposition. The matrix defines family-specific allowed fields, treatment-specific exceptions, and non-outcome guards.
+
+The matrix prohibits:
+
+- pooling the curated baseline catalog with the seeded T1 pilot;
+- treatment success percentages from unequal scenario catalogs;
+- counting B1 policy variants as independent replications;
+- quantitative aggregation of diagnostic families;
+- raw epoch-bearing alignment comparison;
+- contact duration, divergent/degraded windows, transmissions, or retries as cross-treatment units; and
+- any field not explicitly authorized by a family.
+
+The D2 matrix passed local validation. CI remains pending.
+
+## WP15-D3 — Executable qualified-family population
+
+WP15-D3 executes only CF-01, CF-02, CF-05, and CF-06.
+
+Population:
+
+| Family | Member rows | Analysis units |
+|---|---:|---:|
+| CF-01 | 4 | 4 |
+| CF-02 | 5 | 4 |
+| CF-05 | 2 | 2 |
+| CF-06 | 2 | 2 |
+| **Total** | **13** | **12** |
+
+The two CF-02 B1 policy variants remain separate member rows but share the same B1 family analysis unit. They are not independent replicates.
+
+### Source execution
+
+- B0/B1/B2 members execute through the D1 oracle-checking adapter.
+- T1-01 executes no-fault ground-ahead recovery.
+- T1-09 executes post-convergence status loss.
+- T1-13 executes successful recovery followed by replay of the retained commit.
+- T1-15 executes equal-epoch recovery with compromised active operational keys.
+
+Every source member must match its retained internal design oracle before projection.
+
+### Projection
+
+Each row contains only the fields authorized by its D2 family. `alignment_class` is derived from raw alignment. Raw `alignment`, contact-duration fields, transmissions, retries, seed identity, schedule identity, and every other unauthorized field are omitted from the member projection.
+
+### Denominators
+
+The D3 denominator table records coverage only:
+
+- member rows;
+- unique treatment-family analysis units;
+- policy-variant rows; and
+- family coverage status.
+
+`success_rate_denominator` remains `NOT_DEFINED`, and `aggregate_authorized` remains `false`.
+
+Family-specific descriptive comparison remains `NOT_YET_AUTHORIZED`.
+
+Detailed D3 semantics are documented in `docs/phase-15-matched-family-population.md`.
 
 ## Pilot scope
 
@@ -80,23 +143,21 @@ The pilot label is:
 
 `PILOT_INTERNAL_VALIDATION_ONLY`
 
-The pilot validates:
+The pilot may validate:
 
-- deterministic T1 schedule generation from recorded seeds;
-- canonical T1 schedule serialization and SHA-256 identity;
-- execution of all 21 baseline catalog scenarios;
-- preservation of existing baseline catalog design oracles;
-- canonical baseline scenario/schedule identity;
-- shared metric-field generation;
-- raw T1 and baseline JSON and analysis-ready CSV generation;
-- event-log completeness;
-- T1 analysis handoff;
-- run-directory and provenance capture;
-- exclusion and rerun controls;
-- checksum manifests; and
-- reproducibility from retained configurations and the retained catalog.
+- deterministic T1 schedule generation;
+- all 21 baseline catalog scenarios and retained design oracles;
+- the eight-family D2 semantic matrix;
+- the four-family D3 executable population;
+- member-level field projection;
+- family coverage denominators;
+- source-execution SHA-256 values;
+- JSON and CSV generation;
+- provenance and event retention;
+- exclusion and rerun controls; and
+- checksum manifests.
 
-The pilot does not establish treatment effectiveness, matched scenario coverage, statistical significance, security guarantees, baseline fairness, independent validation, operational timing, or publication-ready evidence.
+The pilot does not establish treatment effectiveness, statistical significance, cryptographic security, baseline fairness, independent validation, operational timing, or publication-ready evidence.
 
 ## Candidate T1 pilot parameters
 
@@ -113,101 +174,100 @@ The pilot does not establish treatment effectiveness, matched scenario coverage,
 
 Allowed T1 fault kinds are `DROP`, `DELAY`, `DUPLICATE`, `REORDER`, `CONTACT_CLOSE`, `ENDPOINT_RESTART`, `STALE_COUNTER`, and `STALE_REPLAY`.
 
-These values reproduce the existing Phase 07 development population so that Phase 15 initially tests capture controls rather than silently changing the experiment at the same time.
-
-## Baseline adapter rules
-
-- All 21 catalog scenarios are mandatory.
-- `seed` is null because the catalog is deterministic.
-- Each scenario is represented as one adapter contact.
-- Transmission counts are declared abstract attempted-message counts.
-- Catalog assumptions and conditions are not counted as delivery faults.
-- Concrete disruptions are normalized into structured actions.
-- Active sender impersonation remains an adapter-specific fault and is retained through `other_fault_count`.
-- Metric-field parity must not be described as timing, scenario, or causal equivalence.
+These values reproduce the existing Phase 07 development population. They do not define the D3 family population or a final publication population.
 
 ## Inclusion rules
 
-Include every successfully parsed T1 run generated from the exact recorded configuration and serialized schedule. Include all 21 baseline catalog scenarios in their declared order. This includes zero-fault schedules and every adverse or unfavorable outcome.
+Include:
 
-Retain low-count groups and mark them descriptive-only. Do not suppress a run because its outcome is unexpected, inconvenient, or inconsistent with a preferred narrative.
+- every successfully parsed T1 run from the exact recorded configuration and schedule;
+- all 21 baseline catalog scenarios in declared order;
+- every member of the four D3 qualified families;
+- zero-fault and adverse outcomes; and
+- low-count groups labeled descriptive-only.
+
+Do not suppress a run because its outcome is unexpected, inconvenient, or unfavorable.
 
 ## Exclusion rules
 
-A run or scenario may be excluded only for a documented technical reason:
+A run or member may be excluded only for a documented technical reason:
 
 - execution failure;
 - corrupted or incomplete output;
 - schema failure;
 - checksum failure;
 - configuration mismatch;
-- baseline catalog-oracle mismatch; or
+- catalog-oracle mismatch; or
 - a predeclared protocol correction.
 
-Every exclusion must record the run ID, seed or scenario ID, reason, supporting evidence, date, and disposition before aggregate interpretation.
-
-A catalog-oracle mismatch terminates the adapter run. It must not be resolved by silently changing the captured expected value.
+Every exclusion must record the run or row identifier, reason, evidence, date, and disposition before interpretation.
 
 ## Rerun rules
 
-A rerun is allowed only after a documented software, environment, schema, checksum, catalog, or protocol problem. The original attempt must be retained and linked to the rerun.
+A rerun is allowed only after a documented software, environment, schema, checksum, catalog, or protocol problem. Preserve and link the original attempt.
 
-Do not rerun solely to obtain a preferred outcome. Do not combine pre-correction and post-correction runs unless the analysis protocol explicitly defines a stratified comparison.
+Do not rerun solely to obtain a preferred outcome. Do not combine pre-correction and post-correction outputs unless the protocol explicitly defines a stratified analysis.
 
 ## Analysis boundary
 
-Pilot analysis is limited to descriptive summaries and pipeline validation.
+Authorized now:
 
-The following are not authorized in the pilot:
+- engineering validation;
+- member-level family projection for internal validation;
+- family coverage and analysis-unit counting; and
+- checksum and reproducibility auditing.
 
+Not authorized:
+
+- family-specific descriptive conclusions;
+- success rates or percentages;
+- pooled cross-treatment aggregation;
 - hypothesis testing;
-- causal inference;
-- confidence-interval claims;
+- confidence intervals;
 - effect-size claims;
-- treatment-superiority claims;
-- direct aggregate comparison between the current baseline catalog and T1 seed population; or
-- cryptographic-security or post-compromise-security claims.
+- causal inference;
+- treatment superiority; or
+- cryptographic-security or PCS claims.
 
 ## Required capture record
 
-Each retained pilot run must identify:
+Each retained pilot bundle must ultimately identify:
 
 - exact Git commit and branch;
 - clean or dirty Git status;
-- T1 configuration path and SHA-256;
-- baseline configuration path and SHA-256;
-- retained baseline catalog path and SHA-256;
-- protocol and analysis configuration hashes;
+- T1, baseline, D2, and D3 configuration paths and SHA-256 values;
+- retained baseline and T1 catalogs;
 - Python and platform versions;
-- exact T1, baseline, and analysis command lines;
-- UTC start and end timestamps;
-- T1 serialized schedules and SHA-256 values;
-- baseline canonical scenario/schedule SHA-256 values;
-- raw T1 and baseline result JSON;
-- analysis-ready T1 and baseline CSV;
+- exact command lines and UTC timestamps;
+- raw T1 and baseline outputs;
+- D3 member and denominator outputs;
+- source-execution SHA-256 values;
 - stdout and stderr logs;
-- exclusion or rerun records, where applicable; and
-- checksum manifests.
+- exclusion and rerun records; and
+- raw, derived, analysis, and complete-bundle manifests.
 
-Raw outputs are immutable. Corrections produce a new run directory rather than editing the original capture.
+Raw outputs are immutable. Corrections produce a new run directory.
+
+D3 immutable-bundle integration is deferred until the standalone D3 runner, tests, validator, and derived manifest pass locally.
 
 ## Publication-candidate entry gate
 
 A publication-candidate run must not begin until:
 
-1. the T1 and baseline pilot pipelines reproduce from retained configurations, retained catalog, and checksums;
-2. B0, B1, and B2 metric-field and capture parity is validated;
-3. treatment scenarios are matched or differences are justified explicitly;
-4. adapter contact and transmission semantics are accepted, replaced, or excluded from comparative inference;
-5. seeds, parameters, exclusions, denominators, thresholds, and the statistical plan are versioned before publication aggregates are viewed;
-6. scientific-validity defects are closed or accepted transparently as limitations; and
-7. the external-review status is represented accurately.
+1. the T1 and baseline pilot pipelines reproduce from retained configurations and checksums;
+2. D1 metric and capture parity is validated;
+3. D2 semantic comparability is validated;
+4. D3 execution, projection, denominators, and immutable capture are validated;
+5. observation cutoffs and treatment-specific exceptions are versioned;
+6. the descriptive and statistical plan is fixed before comparative aggregates are viewed;
+7. scientific-validity defects are closed or accepted transparently as limitations; and
+8. the external-review status is represented accurately.
 
 ## External-review relationship
 
-Issue #3 remains open. The review delay does not block protocol drafting, parity implementation, or pilot execution, but it does block claims that the baseline mappings or 21 oracle candidates are independently approved.
+Issue #3 remains open. The delay does not block provisional protocol, parity, matrix, population, pilot, or manuscript work. It does block claims that baseline mappings or candidate oracles are independently approved.
 
-A later reviewer correction may require rerunning affected treatment groups. The retained schedule, catalog, configuration, and provenance design is intended to make that impact traceable.
+A later reviewer correction may require rerunning affected family members. Retained source executions, digests, configurations, and manifests are intended to make that impact traceable.
 
 ## Hard boundaries
 
@@ -219,6 +279,7 @@ The pilot does not permit claims of:
 - formal completeness;
 - refinement or implementation equivalence;
 - causal validity;
+- treatment superiority;
 - operational timing equivalence;
 - CCSDS/SDLS conformance;
 - flight-software, RF, or operational-spacecraft applicability; or
