@@ -31,7 +31,7 @@ def parse_args() -> argparse.Namespace:
         default=None,
         help=(
             "Optional explicit catalog path. The Phase 15 capture wrapper "
-            "uses this to execute the retained immutable catalog copy."
+            "uses a retained immutable catalog copy."
         ),
     )
     parser.add_argument("--json-output", type=Path, default=None)
@@ -50,16 +50,25 @@ def load_config(path: Path) -> dict:
     return payload
 
 
+def resolve_catalog_path(
+    config_path: Path,
+    config: dict,
+    explicit: Path | None,
+) -> Path:
+    if explicit is not None:
+        return explicit.expanduser().resolve()
+    retained = config_path.parent / "baseline-test-catalog.json"
+    if retained.is_file():
+        return retained.resolve()
+    return (ROOT / str(config["catalog"])).resolve()
+
+
 def main() -> int:
     args = parse_args()
     config_path = args.config.expanduser().resolve()
     config = load_config(config_path)
 
-    catalog_path = (
-        args.catalog.expanduser().resolve()
-        if args.catalog is not None
-        else ROOT / str(config["catalog"])
-    )
+    catalog_path = resolve_catalog_path(config_path, config, args.catalog)
     catalog = json.loads(catalog_path.read_text(encoding="utf-8"))
     entries = catalog["tests"]
     expected_ids = [str(value) for value in config["scenario_ids"]]
