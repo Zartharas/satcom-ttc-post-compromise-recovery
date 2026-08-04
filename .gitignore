@@ -55,6 +55,9 @@ formal/tla/*.out
 formal/tla/*.trace
 formal/tla/*.dot
 
+# Local review and compliance evidence
+review_document/
+
 # Temporary files
 *.log
 *.tmp
