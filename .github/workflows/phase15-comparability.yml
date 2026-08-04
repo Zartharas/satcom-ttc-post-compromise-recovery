@@ -13,7 +13,7 @@ concurrency:
 
 jobs:
   validate:
-    name: Validate WP15-D2 through WP15-D4
+    name: Validate WP15-D2 through WP15-D4R
     runs-on: ubuntu-latest
     timeout-minutes: 10
 
@@ -31,10 +31,11 @@ jobs:
           python -m json.tool spec/phase-15-experiment-protocol-candidate.json >/dev/null
           python -m json.tool spec/phase-15-treatment-comparability-matrix.json >/dev/null
           python -m json.tool spec/phase-15-d3b-capture-integration.json >/dev/null
+          python -m json.tool spec/phase-15-d4-freeze-review.json >/dev/null
           python -m json.tool experiments/configs/phase-15-matched-family-population.json >/dev/null
           python -m json.tool experiments/configs/phase-15-family-descriptive-plan.json >/dev/null
 
-      - name: Run comparability, population, capture, and plan unit tests
+      - name: Run comparability, population, capture, plan, and review unit tests
         env:
           PYTHONPATH: src
           PYTHONWARNINGS: error::ResourceWarning
@@ -54,6 +55,10 @@ jobs:
           python -m unittest discover \
             -s tests \
             -p "test_phase15_family_descriptive_plan.py" \
+            -v
+          python -m unittest discover \
+            -s tests \
+            -p "test_phase15_d4_freeze_review.py" \
             -v
 
       - name: Validate treatment comparability
@@ -75,6 +80,9 @@ jobs:
         env:
           PYTHONPATH: src
         run: python experiments/scripts/validate_phase15_family_descriptive_plan.py
+
+      - name: Validate D4 freeze review package
+        run: python experiments/scripts/validate_phase15_d4_freeze_review.py
 
       - name: Run matched-family population smoke
         env:
