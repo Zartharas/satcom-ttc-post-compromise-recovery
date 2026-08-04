@@ -1,7 +1,7 @@
 # Research Engineering Issues and Responsible Disclosure Tracker
 
 **Branch:** `phase-15/publication-preparation`  
-**Last updated:** 2026-08-03  
+**Last updated:** 2026-08-04  
 **Status:** `ACTIVE`
 
 ## Purpose
@@ -77,9 +77,9 @@ Do not place undisclosed vulnerability details, proof-of-concept exploit code, c
 | RIT-010 | ENHANCEMENT | MEDIUM | FIXED_PENDING_VALIDATION | 15 | Project lacked a consolidated engineering issue and disclosure register. | This file establishes the register and disclosure workflow; final branch validation remains pending. |
 | RIT-011 | REPRODUCIBILITY | HIGH | FIXED_PENDING_VALIDATION | 15 | B0, B1, and B2 did not emit the shared T1 metric fields or equivalent capture artifacts. | WP15-D1 passed local validation with 199 tests, 21 retained catalog cases, JSON/CSV checks, extended capture, and manifests. CI remains pending. |
 | RIT-012 | REPRODUCIBILITY | HIGH | FIXED_PENDING_VALIDATION | 15 | The seeded runner did not create a complete immutable Phase 15 run directory. | The wrapper passed local end-to-end validation for T1, baseline adapter, analysis, metadata, logs, governance records, and layered manifests. CI remains pending. |
-| RIT-013 | REPRODUCIBILITY | HIGH | FIXED_PENDING_VALIDATION | 15 | Shared metric fields did not define which baseline and T1 cases were semantically comparable. | WP15-D2 defines eight conservative families, classifies all 36 catalog scenarios, identifies treatment-specific exceptions, and prohibits unsupported metrics and pooled catalog percentages. Local and CI validation remain pending. |
-| RIT-014 | REPRODUCIBILITY | HIGH | OPEN | 15 | A semantic matrix does not itself create an executable matched treatment population with equivalent fault opportunities, observation cutoffs, and denominators. | WP15-D3 must implement family-specific treatment inputs, derived comparison rows, denominator rules, and retained matrix provenance before comparative aggregates are viewed. |
-| RIT-015 | DEFECT | LOW | FIXED_PENDING_VALIDATION | 15 | The WP15-D2 population-rule test searched for a phrase that was not present contiguously even though the matrix rule itself was correct. | The assertion now checks the exact population rule. Focused and full regression reruns remain pending. |
+| RIT-013 | REPRODUCIBILITY | HIGH | FIXED_PENDING_VALIDATION | 15 | Shared metric fields did not define which baseline and T1 cases were semantically comparable. | WP15-D2 passed local validation with 207 tests, eight families, 36 unique catalog dispositions, prohibited pooled percentages, and a 169-entry manifest. CI remains pending. |
+| RIT-014 | REPRODUCIBILITY | HIGH | FIX_IN_PROGRESS | 15 | A semantic matrix does not itself create an executable matched treatment population with controlled projection and denominators. | WP15-D3 now implements four qualified families, 13 member rows, 12 treatment-family analysis units, exact T1 recipes, member-level projections, coverage denominators, and derived checksums. Standalone validation and later immutable-bundle integration remain pending. |
+| RIT-015 | DEFECT | LOW | FIXED_PENDING_VALIDATION | 15 | The WP15-D2 population-rule test searched for a phrase that was not present contiguously even though the matrix rule itself was correct. | The assertion now checks the exact population rule; 8 focused and 207 complete tests passed locally. CI remains pending. |
 
 ## WP15-D1 evidence paths
 
@@ -100,6 +100,16 @@ Do not place undisclosed vulnerability details, proof-of-concept exploit code, c
 - `src/ttc_recovery/treatment_comparability.py`
 - `experiments/scripts/validate_phase15_treatment_comparability.py`
 - `tests/test_phase15_treatment_comparability.py`
+- `.github/workflows/phase15-comparability.yml`
+
+## WP15-D3 evidence paths
+
+- `experiments/configs/phase-15-matched-family-population.json`
+- `docs/phase-15-matched-family-population.md`
+- `src/ttc_recovery/matched_family_population.py`
+- `experiments/scripts/run_phase15_matched_family_population.py`
+- `experiments/scripts/validate_phase15_matched_family_population.py`
+- `tests/test_phase15_matched_family_population.py`
 - `.github/workflows/phase15-comparability.yml`
 
 ## New issue template
@@ -154,7 +164,7 @@ Closure requires evidence appropriate to the issue:
 - capture parity requires equivalent provenance, logs, exclusion/rerun handling, and checksums;
 - scenario parity requires matched inputs or predeclared justified exceptions;
 - semantic parity requires compatible measurement meanings, not only compatible types;
-- executable comparability requires equivalent fault opportunities and observation cutoffs;
+- executable comparability requires family-specific execution, exact source traceability, controlled projection, denominator discipline, and immutable capture;
 - publication readiness requires a frozen population and analysis plan before aggregate interpretation.
 
 ## Upstream contribution path
@@ -223,12 +233,11 @@ Tracker data may support the paper only when the issue is relevant to validity, 
 
 ## Immediate actions
 
-- [ ] Pull the RIT-015 assertion correction and rerun the focused and complete test suites.
-- [ ] Validate RIT-013 through D2 JSON parsing, unit tests, standalone validation, full regression, and manifest refresh.
-- [ ] Keep RIT-014 open until an executable matched-family population and denominator plan exist.
-- [ ] Run CI for RIT-011, RIT-012, and RIT-013 after draft-PR authorization.
-- [ ] Link every current issue to evidence or a repository commit.
+- [ ] Validate WP15-D3 JSON, focused tests, standalone validator, runner outputs, and derived manifest.
+- [ ] Run the complete regression suite after D3 implementation.
+- [ ] Refresh the repository manifest only after D3 local validation passes.
+- [ ] Integrate the validated D3 artifacts into the immutable Phase 15 pilot bundle.
+- [ ] Keep family-specific comparison and all pooled aggregation unauthorized.
+- [ ] Run CI for RIT-011 through RIT-015 only after draft-PR authorization.
 - [ ] Add public GitHub issues only when disclosure is appropriate.
-- [ ] Review upstream dependencies under published contribution and security policies.
 - [ ] Keep sensitive security candidates outside the public repository.
-- [ ] Review this register before every publication-candidate run.
