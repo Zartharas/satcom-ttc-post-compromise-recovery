@@ -73,13 +73,14 @@ Do not place undisclosed vulnerability details, proof-of-concept exploit code, c
 | RIT-006 | DEFECT | LOW | TRIAGED | 14 | A GitHub `/tree/<commit>` link could appear as a repository landing view and confuse reviewers. | Use immutable commit and direct blob links in outreach and documentation. |
 | RIT-007 | GOVERNANCE | HIGH | FIXED_PENDING_VALIDATION | 14 | Prospective reviewer names were published in an outreach-planning issue before consent. | Names removed; Issue #3 now prohibits implying participation or publishing identity without permission. |
 | RIT-008 | GOVERNANCE | HIGH | OPEN | 14–15 | AI assistance was not clearly disclosed in the initial external-review request. | Future outreach and publication materials require context-appropriate AI-use disclosure; the venue policy remains to be selected. |
-| RIT-009 | ENHANCEMENT | MEDIUM | FIXED_PENDING_VALIDATION | 15 | Project lacked a consolidated publication-readiness tracker. | Tracker now covers protocol, parity, pilot, population, manuscript, and publication gates; branch validation remains pending. |
+| RIT-009 | ENHANCEMENT | MEDIUM | FIXED_PENDING_VALIDATION | 15 | Project lacked a consolidated publication-readiness tracker. | Tracker now covers protocol, parity, comparability, pilot, manuscript, and publication gates; branch validation remains pending. |
 | RIT-010 | ENHANCEMENT | MEDIUM | FIXED_PENDING_VALIDATION | 15 | Project lacked a consolidated engineering issue and disclosure register. | This file establishes the register and disclosure workflow; final branch validation remains pending. |
-| RIT-011 | REPRODUCIBILITY | HIGH | FIXED_PENDING_VALIDATION | 15 | B0, B1, and B2 did not emit the shared T1 metric fields or equivalent capture artifacts. | WP15-D1 adds a 21-scenario adapter, shared fields, JSON/CSV, event logs, retained-catalog execution, provenance, logs, and checksum coverage. Local and CI validation remain pending. |
-| RIT-012 | REPRODUCIBILITY | HIGH | FIXED_PENDING_VALIDATION | 15 | The seeded runner did not create a complete immutable Phase 15 run directory. | The wrapper now captures T1, baseline adapter, analysis, metadata, exclusions, reruns, commands, logs, and layered manifests; extended local and CI validation remain pending. |
-| RIT-013 | REPRODUCIBILITY | HIGH | OPEN | 15 | Shared metric fields do not by themselves make the 21 deterministic baseline cases comparable with the 12-seed T1 population. | Define and version a matched treatment-scenario matrix, contact/transmission semantics, and treatment-specific exceptions before comparative aggregates are viewed. |
+| RIT-011 | REPRODUCIBILITY | HIGH | FIXED_PENDING_VALIDATION | 15 | B0, B1, and B2 did not emit the shared T1 metric fields or equivalent capture artifacts. | WP15-D1 passed local validation with 199 tests, 21 retained catalog cases, JSON/CSV checks, extended capture, and manifests. CI remains pending. |
+| RIT-012 | REPRODUCIBILITY | HIGH | FIXED_PENDING_VALIDATION | 15 | The seeded runner did not create a complete immutable Phase 15 run directory. | The wrapper passed local end-to-end validation for T1, baseline adapter, analysis, metadata, logs, governance records, and layered manifests. CI remains pending. |
+| RIT-013 | REPRODUCIBILITY | HIGH | FIXED_PENDING_VALIDATION | 15 | Shared metric fields did not define which baseline and T1 cases were semantically comparable. | WP15-D2 defines eight conservative families, classifies all 36 catalog scenarios, identifies treatment-specific exceptions, and prohibits unsupported metrics and pooled catalog percentages. Local and CI validation remain pending. |
+| RIT-014 | REPRODUCIBILITY | HIGH | OPEN | 15 | A semantic matrix does not itself create an executable matched treatment population with equivalent fault opportunities, observation cutoffs, and denominators. | WP15-D3 must implement family-specific treatment inputs, derived comparison rows, denominator rules, and retained matrix provenance before comparative aggregates are viewed. |
 
-## Current WP15-D1 evidence paths
+## WP15-D1 evidence paths
 
 - `src/ttc_recovery/baseline_metrics.py`
 - `experiments/configs/phase-15-baseline-parity.json`
@@ -90,6 +91,15 @@ Do not place undisclosed vulnerability details, proof-of-concept exploit code, c
 - `docs/phase-15-baseline-metric-parity.md`
 - `docs/phase-15-data-dictionary.md`
 - `governance/phase-15-data-capture-controls.md`
+
+## WP15-D2 evidence paths
+
+- `spec/phase-15-treatment-comparability-matrix.json`
+- `docs/phase-15-treatment-comparability.md`
+- `src/ttc_recovery/treatment_comparability.py`
+- `experiments/scripts/validate_phase15_treatment_comparability.py`
+- `tests/test_phase15_treatment_comparability.py`
+- `.github/workflows/phase15-comparability.yml`
 
 ## New issue template
 
@@ -143,6 +153,7 @@ Closure requires evidence appropriate to the issue:
 - capture parity requires equivalent provenance, logs, exclusion/rerun handling, and checksums;
 - scenario parity requires matched inputs or predeclared justified exceptions;
 - semantic parity requires compatible measurement meanings, not only compatible types;
+- executable comparability requires equivalent fault opportunities and observation cutoffs;
 - publication readiness requires a frozen population and analysis plan before aggregate interpretation.
 
 ## Upstream contribution path
@@ -211,11 +222,11 @@ Tracker data may support the paper only when the issue is relevant to validity, 
 
 ## Immediate actions
 
-- [ ] Validate RIT-011 through the full local suite, standalone adapter run, extended capture smoke, and CI.
-- [ ] Validate the extended wrapper for RIT-012.
-- [ ] Design the matched treatment-scenario matrix for RIT-013.
+- [ ] Validate RIT-013 through D2 JSON parsing, unit tests, standalone validation, full regression, and manifest refresh.
+- [ ] Keep RIT-014 open until an executable matched-family population and denominator plan exist.
+- [ ] Run CI for RIT-011, RIT-012, and RIT-013 after draft-PR authorization.
 - [ ] Link every current issue to evidence or a repository commit.
 - [ ] Add public GitHub issues only when disclosure is appropriate.
-- [ ] Review upstream dependencies under their published contribution and security policies.
+- [ ] Review upstream dependencies under published contribution and security policies.
 - [ ] Keep sensitive security candidates outside the public repository.
 - [ ] Review this register before every publication-candidate run.
