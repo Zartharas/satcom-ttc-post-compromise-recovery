@@ -7,55 +7,45 @@
 
 ## Purpose
 
-This tracker separates engineering completion, scientific comparability, publication evidence, and external review. Percentages are project-management estimates, not confidence scores, proof, or security guarantees.
+This tracker separates engineering completion, scientific comparability, immutable evidence capture, external review, and publication authorization. Percentages are project-management estimates, not confidence scores or security guarantees.
 
 ## Current position
 
-Issue #3 remains open. The review delay does not block provisional implementation, validation, or manuscript preparation, but it still blocks claims of independent approval, frozen baseline oracles, cryptographic security, or externally validated publication conclusions.
-
 ```text
 WP15-D1_LOCAL_VALIDATION=PASS
-WP15-D1_CI_VALIDATION=PENDING
 WP15-D2_LOCAL_VALIDATION=PASS
-WP15-D2_CI_VALIDATION=PENDING
-WP15-D3_IMPLEMENTATION=COMPLETE_PENDING_LOCAL_VALIDATION
-WP15-D3_CAPTURE_INTEGRATION=DEFERRED_PENDING_STANDALONE_VALIDATION
+WP15-D3_LOCAL_VALIDATION=PASS
+WP15-D3B=IMPLEMENTED_PENDING_LOCAL_AND_CI_VALIDATION
 FAMILY_SPECIFIC_DESCRIPTIVE_COMPARISON=NOT_YET_AUTHORIZED
 PUBLICATION_EVIDENCE=false
 ```
 
-Validated checkpoints:
-
-- WP15-D1: 199 tests, 21 baseline scenarios, retained-catalog capture, layered manifests, 163-entry repository manifest.
-- WP15-D2: 207 tests, 8 comparison families, 36 unique catalog dispositions, no `FULL_MATCH`, 169-entry repository manifest at commit `0cd96a8`.
-- RIT-015 assertion defect: corrected and locally validated without changing the comparability matrix.
-
-WP15-D3 now implements an executable member-level population for the four qualified families. It emits 13 member rows and 12 analysis units. The two CF-02 B1 policy variants remain separate rows but share one B1 analysis unit.
+Issue #3 remains open. Review delay does not block provisional engineering, pilot capture, reproducibility testing, or manuscript methods work. It still blocks independent-approval, oracle-freeze, cryptographic-security, and publication-grade claims.
 
 ## Master phase tracker
 
 | Phase | Workstream | Status | Estimated completion | Remaining work |
 |---|---|---|---:|---|
 | 1 | Related work and novelty framing | Complete | 100% | Refresh citations before submission |
-| 2 | System and threat model | Complete | 100% | Final consistency review |
+| 2 | System and threat model | Complete | 100% | Final manuscript consistency review |
 | 3 | Machine-readable abstract design | Complete | 100% | No major work expected |
 | 4 | Baseline semantic mapping | Internally complete; externally pending | 85% | Independent review and corrections |
 | 5 | Oracle-freeze candidate and handoff | Package complete; freeze pending | 80% | Decisions for 21 candidate oracles |
-| 6 | Provisional T1 controller | Implemented and tested | 90% | Revalidate after any baseline correction |
-| 7 | Seeded faults and metrics | Implemented and tested | 85% | Freeze final schedules and population |
+| 6 | Provisional T1 controller | Implemented and tested | 90% | Revalidate after baseline corrections |
+| 7 | Seeded faults and metrics | Implemented and tested | 85% | Freeze schedules and metric population |
 | 8 | Analysis and sensitivity framework | Implemented and tested | 85% | Freeze denominators and analysis grid |
-| 9 | Adversarial coverage and formal scaffold | Implemented and tested | 90% | Review coverage |
+| 9 | Adversarial coverage and formal scaffold | Implemented and tested | 90% | Review coverage assumptions |
 | 10 | SANY/TLC execution | Complete internally | 95% | Preserve bounded interpretation |
 | 11 | Formal/Python success comparison | Complete internally | 90% | Review projection assumptions |
 | 12 | Adverse-outcome witnesses | Complete internally | 90% | Review evidence assumptions |
 | 13 | Diagnostic outcome expansion | Complete internally | 85% | Accept, revise, or reject expansion |
 | 14 | Independent-review package | Ready; review open | 90% | Reviewer acceptance and closure |
-| 15 | Publication preparation | In progress | 70% | Validate D3, integrate capture, run pilot, audit, draft manuscript |
-| 16 | Publication-candidate execution | Not started | 0% | Execute frozen protocol |
+| 15 | Publication preparation and revalidation | In progress | 74% | Validate D3B, execute/audit pilot, freeze candidate protocol |
+| 16 | Publication-candidate experiment | Not started | 0% | Execute frozen protocol |
 | 17 | Results and final manuscript | Not started | 10% | Final analysis and prose |
-| 18 | Pre-submission audit | Not started | 0% | Audit, release, formatting, submission |
+| 18 | Pre-submission audit and submission | Not started | 0% | Audit, release, formatting, submission |
 
-## Phase 15 work packages
+## Work packages
 
 ### WP15-A — Governance and tracking
 
@@ -63,170 +53,186 @@ WP15-D3 now implements an executable member-level population for the four qualif
 
 - [x] Create Phase 15 branch.
 - [x] Keep Issue #3 open.
-- [x] Create publication-readiness and issue trackers.
-- [x] Add Phase 15 protocol, validators, tests, and CI workflows.
-- [x] Refresh the manifest after WP15-D1 validation.
-- [x] Refresh the manifest after WP15-D2 validation.
-- [ ] Refresh the manifest after WP15-D3 validation.
+- [x] Create readiness and issue trackers.
+- [x] Add protocol, data dictionary, capture controls, validators, and tests.
+- [x] Commit validated D1 manifest at `fe93689`.
+- [x] Commit validated D2 manifest at `0cd96a8`.
+- [x] Commit validated D3 manifest at `8500cb5`.
+- [x] Record D3B implementation and validation gates.
+- [ ] Validate D3B locally.
+- [ ] Refresh the manifest after D3B validation.
 - [ ] Update `CHANGELOG.md`.
 - [ ] Open a draft pull request only after explicit authorization.
 - [ ] Complete CI validation.
 
-### WP15-B — Experiment protocol candidate
+### WP15-B — Protocol candidate
 
 **Status:** `IN_PROGRESS`
 
 - [x] Define research questions and treatment roles.
 - [x] Define inclusion, exclusion, and rerun rules.
-- [x] Define T1 pilot parameters and schedule identity.
-- [x] Define baseline scenario identity.
-- [x] Implement metric and capture parity.
-- [x] Define matched scenario families and treatment-specific exclusions.
-- [x] Define prohibited pooled comparisons.
-- [x] Implement the executable qualified-family population.
-- [x] Define family coverage denominators and B1 variant handling.
-- [ ] Validate the D3 population locally and in CI.
-- [ ] Freeze final observation cutoffs and descriptive-analysis plan.
+- [x] Define T1 and baseline pilot populations.
+- [x] Define shared metric and capture parity.
+- [x] Define eight comparison families and treatment-specific exclusions.
+- [x] Implement four qualified executable families.
+- [x] Define member-row and analysis-unit semantics.
+- [x] Integrate D2/D3 contracts into immutable capture.
+- [ ] Validate D3B execution ordering and metadata.
+- [ ] Freeze observation cutoffs and final denominators.
 - [ ] Freeze sensitivity and statistical plan.
 
 ### WP15-C — Data dictionary and capture controls
 
 **Status:** `IN_PROGRESS`
 
-- [x] Define T1 and baseline fields.
-- [x] Define null-seed and scenario-hash semantics.
-- [x] Define immutable raw-data and lineage controls.
-- [x] Define provenance, checksum, exclusion, and rerun records.
-- [x] Define semantic comparison categories.
-- [x] Define and implement derived `alignment_class` projection.
-- [x] Define member rows, analysis units, policy variants, and family coverage denominators.
-- [ ] Integrate D3 artifacts into the immutable pilot bundle.
+- [x] Define T1, baseline, D2, and D3 fields.
+- [x] Define null-seed and source-hash semantics.
+- [x] Define `alignment_class` normalization.
+- [x] Define immutable raw data and lineage.
+- [x] Define exclusions, reruns, and layered manifests.
+- [x] Define D3B metadata schema `0.2.0`.
+- [x] Define the derived D3 capture layer.
+- [ ] Validate retained-input SHA-256 parity.
 - [ ] Define final archive and retention period.
 
-### WP15-D1 — B0/B1/B2 metric and capture parity
+### WP15-D1 — Baseline metric and capture parity
 
 **Status:** `LOCALLY_VALIDATED_CI_PENDING`
 
-- [x] Execute all 21 baseline scenarios and preserve design oracles.
-- [x] Emit shared metric fields, JSON, CSV, events, provenance, and checksums.
-- [x] Pass 199 tests and complete local capture validation.
-- [x] Commit the 163-entry manifest at `fe93689`.
+- [x] Execute 21 baseline scenarios.
+- [x] Preserve retained design oracles.
+- [x] Emit shared metric fields and identifiers.
+- [x] Generate JSON and CSV.
+- [x] Capture retained configuration/catalog, logs, and manifests.
+- [x] Pass 199 local tests and all validators.
+- [x] Verify extended capture smoke.
 - [ ] Run CI after draft-PR authorization.
 
-### WP15-D2 — Treatment-scenario matrix and semantic comparability
+### WP15-D2 — Semantic comparability matrix
 
 **Status:** `LOCALLY_VALIDATED_CI_PENDING`
 
-- [x] Define four `QUALIFIED_MATCH` families.
-- [x] Define four `DIAGNOSTIC_FAMILY_ONLY` families.
-- [x] Prohibit a `FULL_MATCH` classification.
-- [x] Classify all 21 baseline and 15 T1 catalog scenarios.
+- [x] Define four qualified and four diagnostic-only families.
+- [x] Classify all 36 catalog scenarios exactly once.
+- [x] Prohibit `FULL_MATCH`.
 - [x] Define family-specific allowed fields.
-- [x] Prohibit timing, transmission, retry, and raw epoch-bearing alignment comparisons.
-- [x] Prohibit pooled catalog percentages and diagnostic-family aggregation.
-- [x] Prevent B1 policy variants from being counted as independent replications.
+- [x] Prohibit pooled catalogs, raw timing, transmissions, retries, and epoch-bearing alignment.
+- [x] Prevent B1 variants from becoming independent replications.
 - [x] Pass 8 focused tests and 207 total tests.
-- [x] Pass standalone D2 validation and independent matrix audit.
-- [x] Commit the 169-entry manifest at `0cd96a8`.
+- [x] Commit 169-entry manifest.
 - [ ] Run CI after draft-PR authorization.
 
-#### Family register
+### WP15-D3 — Executable qualified-family population
 
-| Family | Theme | Class | Executed by D3 |
-|---|---|---|---|
-| CF-01 | Passive operational-key compromise and fresh recovery | Qualified | Yes |
-| CF-02 | No-fault completion | Qualified | Yes |
-| CF-03 | Pre-completion delivery loss | Diagnostic | No |
-| CF-04 | Confirmation evidence loss | Diagnostic | No |
-| CF-05 | Post-convergence status loss | Qualified | Yes |
-| CF-06 | Replay after successful advancement | Qualified | Yes |
-| CF-07 | Ordering fault | Diagnostic | No |
-| CF-08 | Rollback or restart | Diagnostic | No |
+**Status:** `LOCALLY_VALIDATED_CI_PENDING`
 
-### WP15-D3 — Executable matched-family population
+- [x] Execute CF-01, CF-02, CF-05, and CF-06.
+- [x] Produce 13 member rows and 12 analysis units.
+- [x] Preserve the shared B1 analysis unit for two CF-02 policy variants.
+- [x] Execute exact T1 catalog behaviors.
+- [x] Preserve baseline and T1 internal design oracles.
+- [x] Emit strict allowed-field projections and `alignment_class`.
+- [x] Emit source-execution SHA-256 values.
+- [x] Generate JSON, member CSV, denominator CSV, and internal manifest.
+- [x] Keep rates, aggregation, inference, and superiority disabled.
+- [x] Pass 9 focused tests and 216 total tests.
+- [x] Commit 175-entry manifest.
+- [ ] Run CI after draft-PR authorization.
 
-**Status:** `IMPLEMENTED_PENDING_LOCAL_VALIDATION`
+### WP15-D3B — Immutable pilot-bundle integration
 
-#### Contract and execution
+**Status:** `IMPLEMENTED_PENDING_LOCAL_AND_CI_VALIDATION`
 
-- [x] Add `experiments/configs/phase-15-matched-family-population.json`.
-- [x] Restrict execution to CF-01, CF-02, CF-05, and CF-06.
-- [x] Pin the expected population to 4 families, 13 member rows, and 12 analysis units.
-- [x] Execute B0/B1/B2 members through the oracle-checking baseline adapter.
-- [x] Execute T1-01, T1-09, T1-13, and T1-15 through exact catalog behavior recipes.
-- [x] Perform T1-13 replay only after successful recovery and verify no state change.
-- [x] Retain provenance seeds while marking them noncomparable.
+#### Retained inputs
 
-#### Projection and denominator controls
+- [x] Retain T1 pilot configuration.
+- [x] Retain baseline-parity configuration.
+- [x] Retain D3 matched-family configuration.
+- [x] Retain D2 comparability matrix.
+- [x] Retain Phase 15 protocol and Phase 08 analysis configuration.
+- [x] Retain baseline and T1 catalogs.
+- [x] Record every retained path and SHA-256 in metadata.
 
-- [x] Project only each family’s explicit `allowed_fields`.
-- [x] Derive `alignment_class` and omit raw alignment.
-- [x] Omit timing, transmission, retry, and other unauthorized fields.
-- [x] Keep the two CF-02 B1 variants as separate rows sharing one analysis unit.
-- [x] Define family coverage denominators only.
-- [x] Keep success-rate denominators `NOT_DEFINED`.
-- [x] Keep every aggregate authorization `false`.
-- [x] Keep family-specific descriptive comparison `NOT_YET_AUTHORIZED`.
+#### Execution and fail-closed behavior
 
-#### Outputs and validation
+- [x] Run D3 only after T1 and baseline exit zero.
+- [x] Record `SKIPPED_PREREQUISITE_FAILURE` when prerequisites fail.
+- [x] Record `PROCESS_FAILED` for a D3 process failure.
+- [x] Record `OUTPUT_VALIDATION_FAILED` for rejected zero-exit output.
+- [x] Record `COMPLETED_AND_VERIFIED` only after capture-side validation.
+- [x] Propagate D3 failure into `overall_exit_code`.
 
-- [x] Add `src/ttc_recovery/matched_family_population.py`.
-- [x] Add `experiments/scripts/run_phase15_matched_family_population.py`.
-- [x] Add `experiments/scripts/validate_phase15_matched_family_population.py`.
-- [x] Add `tests/test_phase15_matched_family_population.py`.
-- [x] Add `docs/phase-15-matched-family-population.md`.
-- [x] Extend `.github/workflows/phase15-comparability.yml` for D3.
-- [x] Generate JSON, member CSV, denominator CSV, and a derived SHA-256 manifest.
-- [x] Add deterministic source-digest and manifest-tamper tests.
-- [ ] Parse D3 JSON locally.
-- [ ] Run focused D3 tests.
-- [ ] Run the D3 validator.
-- [ ] Run a standalone D3 output smoke.
-- [ ] Verify 13 rows, 12 units, and all derived checksums.
-- [ ] Run the complete regression suite.
-- [ ] Refresh and validate the repository manifest.
-- [ ] Integrate D3 into the immutable pilot bundle after standalone validation.
+#### Derived capture and validation
+
+- [x] Capture D3 JSON, member CSV, denominator CSV, and internal manifest.
+- [x] Require exact 4-family, 13-row, 12-unit population.
+- [x] Require 13 source executions and unique row identifiers.
+- [x] Require only `QUALIFIED_MATCH` rows.
+- [x] Require complete family coverage.
+- [x] Require `success_rate_denominator=NOT_DEFINED`.
+- [x] Require `aggregate_authorized=false`.
+- [x] Verify JSON/CSV member and denominator identity.
+- [x] Reject byte tampering.
+- [x] Reject re-checksummed semantic gate relaxation.
+
+#### Manifest hierarchy
+
+- [x] Preserve D3 internal manifest.
+- [x] Add `manifests/derived.sha256`.
+- [x] Preserve `raw.sha256` and `analysis.sha256`.
+- [x] Include all layers in `run-bundle.sha256`.
+- [x] Verify all manifests before returning success.
+
+#### Validation pending
+
+- [ ] Parse D3B contract locally.
+- [ ] Run focused capture and protocol tests.
+- [ ] Run D2, D3, D3B, and protocol validators.
+- [ ] Run complete regression suite.
+- [ ] Run disposable integrated capture from a clean Git state.
+- [ ] Verify retained-source and captured SHA-256 equality.
+- [ ] Verify D3 internal and all run-level manifests.
+- [ ] Refresh and commit the tracked-file manifest.
 - [ ] Run CI after draft-PR authorization.
 
 ### WP15-D — Pilot execution
 
 **Status:** `NOT_STARTED_GATE_P1_PENDING`
 
-- [ ] Run the retained 12-seed T1 pilot.
-- [ ] Run all 21 baseline scenarios in the same immutable bundle.
-- [ ] Retain the D2 matrix and D3 configuration.
-- [ ] Execute and retain the D3 member-level derived dataset.
-- [ ] Preserve raw traces, metrics, logs, governance records, and manifests.
-- [ ] Keep family comparison and all cross-treatment aggregation disabled.
+- [ ] Complete D3B validation.
+- [ ] Run retained 12-seed T1 pilot.
+- [ ] Run all 21 baseline scenarios.
+- [ ] Run the four qualified D3 families in the same bundle.
+- [ ] Preserve raw, derived, analysis, logs, governance records, and manifests.
+- [ ] Keep family-level comparison disabled.
 
-### WP15-E — Pilot audit and protocol freeze candidate
+### WP15-E — Pilot audit and protocol-freeze candidate
 
 **Status:** `NOT_STARTED`
 
-- [ ] Verify all JSON/CSV files and manifests.
-- [ ] Audit outcome, schedule, scenario, projection, denominator, and event consistency.
+- [ ] Verify JSON/CSV consistency and all manifests.
+- [ ] Audit source identity, outcomes, schedules, and events.
+- [ ] Audit missing and weakly represented groups.
 - [ ] Confirm no post-outcome tuning.
-- [ ] Record every failure, exclusion, and rerun.
-- [ ] Resolve defects and rerun when required.
-- [ ] Decide whether family-specific descriptive comparison can be authorized.
+- [ ] Record failures, exclusions, and reruns.
+- [ ] Resolve defects and rerun where required.
 
-### WP15-F — Publication-candidate data capture
+### WP15-F — Publication-candidate capture
 
-**Status:** `BLOCKED_BY_WP15-D3_CAPTURE_AND_WP15-E`
+**Status:** `BLOCKED_BY_D3B_VALIDATION_AND_PILOT_AUDIT`
 
-- [ ] Freeze candidate configuration, observation cutoffs, and analysis plan.
-- [ ] Execute the matched population and sensitivity panel.
-- [ ] Preserve raw, processed, audit, and formal evidence.
+- [ ] Freeze protocol, population, cutoffs, and analysis plan.
+- [ ] Execute candidate and sensitivity panel.
+- [ ] Preserve raw, derived, audit, and formal evidence.
 - [ ] Reproduce every manuscript value from retained artifacts.
 
 ### WP15-G — Manuscript preparation
 
 **Status:** `IN_PROGRESS`
 
-- [ ] Expand the outline and draft core sections.
-- [ ] Draft the experimental method using D2 and D3 constraints.
-- [ ] Prepare result placeholders without provisional conclusions.
-- [ ] Draft limitations, AI-use disclosure, reproducibility, and availability statements.
+- [ ] Draft core methods using D2/D3/D3B constraints.
+- [ ] Prepare result placeholders without conclusions.
+- [ ] Draft limitations, AI-use disclosure, reproducibility, and availability.
 
 ### WP15-H — External review
 
@@ -234,12 +240,12 @@ WP15-D3 now implements an executable member-level population for the four qualif
 
 - [x] Initial outreach sent.
 - [x] Public prospective-reviewer list removed.
-- [ ] Reviewer accepts scope and provides a conflict statement.
+- [ ] Reviewer accepts scope and provides conflict statement.
 - [ ] Review completed and corrections revalidated.
 - [ ] Baseline oracle outcomes frozen.
 - [ ] Publication-facing claims authorized.
 
-## Publication claim gates
+## Claim gates
 
 Still prohibited:
 
@@ -247,25 +253,24 @@ Still prohibited:
 - cryptographic proof or PCS;
 - model completeness or implementation equivalence;
 - causal or treatment-superiority claims;
+- family success rates or pooled percentages;
 - operational timing or transmission equivalence;
-- pooled catalog success percentages;
-- family-level success rates before a predeclared denominator exists;
-- CCSDS/SDLS, flight, RF, or operational-spacecraft applicability;
-- publication evidence before the final capture audit.
+- CCSDS/SDLS, flight, RF, or operational applicability; and
+- publication-grade evidence before final audit.
 
 ## Readiness gates
 
 ### Gate P1 — Pilot ready
 
-All Phase 15 files exist, tests and validators pass, manifests verify, baseline oracles are preserved, the D3 standalone dataset verifies, and no critical capture defect remains.
+D1–D3 are locally validated; D3B integrated capture, tests, validators, smoke run, and manifest must also pass.
 
 ### Gate P2 — Pilot accepted
 
-Pilot outputs reproduce, the D3 artifacts are retained in the immutable bundle, manifests verify, failures remain preserved, and corrections are closed.
+Pilot outputs reproduce, all manifests verify, failures remain retained, and corrections close.
 
 ### Gate P3 — Comparative publication-candidate execution authorized
 
-D2 and D3 are validated, observation cutoffs and denominators are frozen, and the analysis plan is versioned before comparative aggregates are viewed.
+D2/D3/D3B are validated, observation cutoffs and denominators are frozen, and the analysis plan is versioned before aggregate review.
 
 ### Gate P4 — Manuscript results ready
 
@@ -277,12 +282,13 @@ Claims, references, disclosure, availability, formatting, and unresolved limitat
 
 ## Immediate next actions
 
-1. Validate WP15-D3 locally.
-2. Correct any execution, projection, denominator, or checksum defect.
-3. Refresh the repository manifest only after D3 passes.
-4. Integrate the validated D3 outputs into the immutable pilot wrapper.
+1. Pull the D3B implementation checkpoint.
+2. Run focused and complete validation.
+3. Execute and audit one disposable integrated bundle.
+4. Refresh the repository manifest only after D3B passes.
 5. Keep the pull request unopened until explicit authorization.
+6. Keep Issue #3 and all publication boundaries accurate.
 
 ## Update rule
 
-Update this tracker with every material change to readiness, capture behavior, review status, or manuscript progress. Never mark a gate complete based only on intention or an unverified run.
+Update this tracker after every material change to protocol state, capture behavior, validation evidence, review status, or manuscript readiness. Never mark a gate complete from intention or an unverified run.
