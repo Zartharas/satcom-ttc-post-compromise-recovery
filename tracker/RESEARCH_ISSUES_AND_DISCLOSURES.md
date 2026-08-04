@@ -54,6 +54,7 @@ Security candidates use a private coordinated-disclosure workflow.
 | RIT-015 | DEFECT | LOW | FIXED_PENDING_CI | 15 | A D2 test searched for a noncontiguous phrase despite a correct matrix rule. | Assertion corrected; focused and complete local suites passed. CI pending. |
 | RIT-016 | REPRODUCIBILITY | HIGH | FIXED_PENDING_CI | 15 | Standalone D3 outputs were not retained with exact D2/D3 inputs inside the immutable pilot bundle. | D3B passed integrated local validation with retained D2/D3 contracts and catalogs, metadata schema 0.2.0, fail-closed semantic checks, and four verified manifest layers. CI pending. |
 | RIT-017 | REPRODUCIBILITY | HIGH | FIXED_PENDING_VALIDATION | 15 | The qualified-family population lacked predeclared observation cutoffs, denominator membership, allowed-display boundaries, and post-observation revision controls. | D4 implements an outcome-blind freeze candidate for 4 families, 13 member rows, 12 treatment-within-family units, and 4 explicit cutoffs. Local validation, CI, and a separate freeze decision remain pending. |
+| RIT-018 | DEFECT | HIGH | FIXED_PENDING_VALIDATION | 15 | The initial D4 configuration widened four family `expected_allowed_fields` lists beyond the authoritative D2 matrix. | D4 was corrected at `968af687` to use the exact D2 field membership and order. The strict builder correctly prevented output generation; focused, full-suite, bundle, and manifest revalidation remain pending. |
 
 ## WP15-D4 evidence paths
 
@@ -66,16 +67,33 @@ Security candidates use a private coordinated-disclosure workflow.
 - `tracker/WP15_D4_FREEZE_CANDIDATE_TRACKER.md`
 - `.github/workflows/phase15-comparability.yml`
 
+## WP15-D4 defect record
+
+The first local D4 execution failed before producing a bundle with:
+
+```text
+ValueError: Allowed-field order drifted for CF-01
+```
+
+The failure exposed an over-broad D4 configuration rather than a D2 matrix defect. The initial D4 lists added fields that the authoritative D2 families did not authorize:
+
+- CF-01 added `verification_complete`;
+- CF-02 added `command_accepted` and `telemetry_complete`;
+- CF-05 added `fault_count`; and
+- CF-06 added `security_state`.
+
+The fix removes those additions and preserves the D2 matrix as the exact source of allowed-field membership and order. The builder remains fail-closed. No D4 output bundle or comparative result was generated before the correction.
+
 ## D4 acceptance conditions
 
-RIT-017 cannot close because a plan file exists. Validation requires evidence that:
+RIT-017 and RIT-018 cannot close because corrected files exist. Validation requires evidence that:
 
 - the exact qualified family order remains CF-01, CF-02, CF-05, and CF-06;
 - the member registry contains 13 unique rows;
 - the candidate denominator registry contains 12 unique treatment-within-family units;
 - CF-02 B1-01 and B1-05 remain separate rows under one `CF-02:B1` unit;
 - all 4 observation cutoffs are explicit, unique, terminal, and non-adaptive;
-- family allowed-field names exactly match the D2 matrix;
+- family allowed-field names exactly match the D2 matrix in membership and order;
 - projected metric and raw execution values are not read;
 - changing projected values cannot change the D4 identity contract;
 - the member registry exposes no outcome or projected-value column;
@@ -148,8 +166,8 @@ Absent those elements, classify it as a defect, reproducibility issue, enhanceme
 
 ## Immediate actions
 
-- [ ] Pull and validate the D4 checkpoint.
-- [ ] Parse the D4 contract and run its focused tests.
+- [ ] Pull the D4 field-contract correction.
+- [ ] Parse the D4 contract and rerun its focused tests.
 - [ ] Run D2, D3, D3B, D4, and Phase 15 validators.
 - [ ] Generate one disposable outcome-blind D4 candidate bundle.
 - [ ] Audit 4 families, 13 rows, 12 units, 4 cutoffs, and closed gates.
