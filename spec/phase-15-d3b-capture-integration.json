@@ -1,0 +1,134 @@
+{
+  "schema_version": "0.1.0",
+  "phase": "Phase 15",
+  "work_package": "WP15-D3B",
+  "status": "IMPLEMENTED_PENDING_LOCAL_AND_CI_VALIDATION_NOT_COMPARATIVE_EVIDENCE",
+  "run_class": "PILOT_INTERNAL_VALIDATION_ONLY",
+  "wrapper": "experiments/scripts/run_phase15_pilot_capture.py",
+  "documentation": "docs/phase-15-d3b-capture-integration.md",
+  "execution_order": [
+    "RETAIN_INPUTS",
+    "RUN_T1_PILOT",
+    "RUN_BASELINE_PARITY",
+    "RUN_D3_IF_T1_AND_BASELINE_SUCCEED",
+    "VALIDATE_D3_OUTPUTS",
+    "RUN_T1_DESCRIPTIVE_ANALYSIS",
+    "WRITE_GOVERNANCE_METADATA",
+    "WRITE_AND_VERIFY_LAYERED_MANIFESTS"
+  ],
+  "d3_prerequisite": {
+    "t1_runner_exit_code": 0,
+    "baseline_runner_exit_code": 0,
+    "failure_status": "SKIPPED_PREREQUISITE_FAILURE"
+  },
+  "retained_inputs": [
+    {
+      "source": "experiments/configs/phase-15-pilot.json",
+      "retained_path": "config/phase-15-pilot.json"
+    },
+    {
+      "source": "experiments/configs/phase-15-baseline-parity.json",
+      "retained_path": "config/phase-15-baseline-parity.json"
+    },
+    {
+      "source": "experiments/configs/phase-15-matched-family-population.json",
+      "retained_path": "config/phase-15-matched-family-population.json"
+    },
+    {
+      "source": "spec/phase-15-treatment-comparability-matrix.json",
+      "retained_path": "config/phase-15-treatment-comparability-matrix.json"
+    },
+    {
+      "source": "spec/phase-15-experiment-protocol-candidate.json",
+      "retained_path": "config/phase-15-experiment-protocol-candidate.json"
+    },
+    {
+      "source": "experiments/configs/phase-08-provisional.json",
+      "retained_path": "config/phase-08-provisional.json"
+    },
+    {
+      "source": "tests/scenarios/baseline-test-catalog.json",
+      "retained_path": "config/baseline-test-catalog.json"
+    },
+    {
+      "source": "tests/scenarios/t1-provisional-test-catalog.json",
+      "retained_path": "config/t1-provisional-test-catalog.json"
+    }
+  ],
+  "derived_outputs": [
+    "derived/phase-15-matched-family-population.json",
+    "derived/phase-15-matched-family-members.csv",
+    "derived/phase-15-matched-family-denominators.csv",
+    "derived/phase-15-matched-family-derived.sha256"
+  ],
+  "matched_family_acceptance": {
+    "status": "EXECUTABLE_POPULATION_IMPLEMENTED_PENDING_VALIDATION_NOT_COMPARATIVE_EVIDENCE",
+    "eligible_family_ids": [
+      "CF-01",
+      "CF-02",
+      "CF-05",
+      "CF-06"
+    ],
+    "family_count": 4,
+    "member_row_count": 13,
+    "analysis_unit_count": 12,
+    "source_execution_count": 13,
+    "member_classification": "QUALIFIED_MATCH",
+    "family_coverage_status": "COMPLETE",
+    "success_rate_denominator": "NOT_DEFINED",
+    "aggregate_authorized": false,
+    "publication_evidence": false
+  },
+  "metadata": {
+    "schema_version": "0.2.0",
+    "required_fields": [
+      "t1_catalog_path",
+      "t1_catalog_sha256",
+      "comparability_matrix_path",
+      "comparability_matrix_sha256",
+      "matched_family_config_path",
+      "matched_family_config_sha256",
+      "matched_family_command",
+      "matched_family_process_exit_code",
+      "matched_family_exit_code",
+      "matched_family_status",
+      "matched_family_output_paths",
+      "matched_family_internal_manifest_sha256",
+      "matched_family_population_counts"
+    ]
+  },
+  "manifest_layers": [
+    {
+      "path": "manifests/raw.sha256",
+      "scope": "retained inputs and raw T1/baseline outputs"
+    },
+    {
+      "path": "manifests/derived.sha256",
+      "scope": "complete D3 derived directory including internal manifest"
+    },
+    {
+      "path": "manifests/analysis.sha256",
+      "scope": "Phase 08 descriptive-analysis outputs"
+    },
+    {
+      "path": "manifests/run-bundle.sha256",
+      "scope": "all run files except itself"
+    }
+  ],
+  "failure_statuses": [
+    "SKIPPED_PREREQUISITE_FAILURE",
+    "PROCESS_FAILED",
+    "OUTPUT_VALIDATION_FAILED"
+  ],
+  "success_status": "COMPLETED_AND_VERIFIED",
+  "claim_boundary": {
+    "family_specific_descriptive_comparison": "NOT_YET_AUTHORIZED",
+    "pooled_cross_treatment_aggregation": "NOT_PERMITTED",
+    "success_rate_or_percentage": "NOT_PERMITTED",
+    "inferential_statistics": "NOT_PERMITTED",
+    "treatment_superiority": "NOT_PERMITTED",
+    "cryptographic_security_or_pcs": "NOT_PERMITTED",
+    "independent_validation": "NOT_PERMITTED",
+    "publication_evidence": "NOT_PERMITTED"
+  }
+}
