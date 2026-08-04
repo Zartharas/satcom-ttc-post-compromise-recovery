@@ -1,7 +1,7 @@
 # WP15-D4 Freeze Candidate Tracker
 
 **Branch:** `phase-15/publication-preparation`  
-**Status:** `LOCALLY_VALIDATED_CI_AND_FREEZE_REVIEW_PENDING_NOT_ANALYSIS_EVIDENCE`  
+**Status:** `LOCALLY_VALIDATED_CI_AND_FREEZE_REVIEW_PENDING_NOT_ANALYSIS_EVIDENCE`
 **Publication evidence:** `false`
 
 ## Objective
