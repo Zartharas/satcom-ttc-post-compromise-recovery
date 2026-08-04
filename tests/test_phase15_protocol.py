@@ -24,6 +24,19 @@ BASELINE_CONFIG = json.loads(
         / "phase-15-baseline-parity.json"
     ).read_text(encoding="utf-8")
 )
+D3_CONFIG = json.loads(
+    (
+        ROOT
+        / "experiments"
+        / "configs"
+        / "phase-15-matched-family-population.json"
+    ).read_text(encoding="utf-8")
+)
+D3B_CONTRACT = json.loads(
+    (ROOT / "spec" / "phase-15-d3b-capture-integration.json").read_text(
+        encoding="utf-8"
+    )
+)
 
 
 class Phase15ProtocolTests(unittest.TestCase):
@@ -35,6 +48,10 @@ class Phase15ProtocolTests(unittest.TestCase):
         self.assertEqual(CONFIG["run_class"], "PILOT_INTERNAL_VALIDATION_ONLY")
         self.assertEqual(
             BASELINE_CONFIG["run_class"], "PILOT_INTERNAL_VALIDATION_ONLY"
+        )
+        self.assertEqual(D3_CONFIG["run_class"], "PILOT_INTERNAL_VALIDATION_ONLY")
+        self.assertEqual(
+            D3B_CONTRACT["run_class"], "PILOT_INTERNAL_VALIDATION_ONLY"
         )
         self.assertFalse(SPEC["pilot_scope"]["publication_evidence"])
         self.assertFalse(SPEC["pilot_scope"]["comparative_claims_allowed"])
@@ -90,6 +107,55 @@ class Phase15ProtocolTests(unittest.TestCase):
         self.assertEqual(scenario_ids[-2:], ["B2-09", "B2-10"])
         self.assertEqual(BASELINE_CONFIG["treatments"], ["B0", "B1", "B2"])
 
+    def test_d3b_capture_integration_is_implemented_but_non_evidentiary(self) -> None:
+        expected = (
+            "IMPLEMENTED_PENDING_LOCAL_AND_CI_VALIDATION_"
+            "NOT_COMPARATIVE_EVIDENCE"
+        )
+        self.assertEqual(D3B_CONTRACT["status"], expected)
+        self.assertEqual(
+            SPEC["matched_family_population"]["capture_integration"],
+            expected,
+        )
+        self.assertEqual(
+            SPEC["pilot_scope"]["matched_family_capture_status"],
+            expected,
+        )
+        self.assertEqual(
+            D3B_CONTRACT["d3_prerequisite"],
+            {
+                "t1_runner_exit_code": 0,
+                "baseline_runner_exit_code": 0,
+                "failure_status": "SKIPPED_PREREQUISITE_FAILURE",
+            },
+        )
+        self.assertEqual(len(D3B_CONTRACT["retained_inputs"]), 8)
+        self.assertEqual(len(D3B_CONTRACT["derived_outputs"]), 4)
+        self.assertEqual(len(D3B_CONTRACT["manifest_layers"]), 4)
+
+    def test_d3b_comparison_and_publication_gates_remain_closed(self) -> None:
+        boundary = D3B_CONTRACT["claim_boundary"]
+        self.assertEqual(
+            boundary["family_specific_descriptive_comparison"],
+            "NOT_YET_AUTHORIZED",
+        )
+        for field in (
+            "pooled_cross_treatment_aggregation",
+            "success_rate_or_percentage",
+            "inferential_statistics",
+            "treatment_superiority",
+            "cryptographic_security_or_pcs",
+            "independent_validation",
+            "publication_evidence",
+        ):
+            self.assertEqual(boundary[field], "NOT_PERMITTED", field)
+        acceptance = D3B_CONTRACT["matched_family_acceptance"]
+        self.assertFalse(acceptance["aggregate_authorized"])
+        self.assertFalse(acceptance["publication_evidence"])
+        self.assertEqual(
+            acceptance["success_rate_denominator"], "NOT_DEFINED"
+        )
+
     def test_pilot_parameters_match_config(self) -> None:
         candidate = SPEC["candidate_parameters"]
         for key in (
@@ -143,6 +209,10 @@ class Phase15ProtocolTests(unittest.TestCase):
         self.assertTrue(
             BASELINE_CONFIG["outputs"]["csv"].startswith("results/processed/")
         )
+        self.assertTrue(D3_CONFIG["outputs"]["json"].startswith("results/processed/"))
+        self.assertTrue(
+            D3_CONFIG["outputs"]["checksum_manifest"].endswith(".sha256")
+        )
 
     def test_hard_claim_boundaries_remain_prohibited(self) -> None:
         allowed = {"NOT_PERMITTED", "NOT_PERMITTED_FOR_PILOT"}
@@ -152,6 +222,10 @@ class Phase15ProtocolTests(unittest.TestCase):
         )
         self.assertEqual(
             BASELINE_CONFIG["claim_boundary"]["publication_evidence"],
+            "NOT_PERMITTED",
+        )
+        self.assertEqual(
+            D3_CONFIG["claim_boundary"]["publication_evidence"],
             "NOT_PERMITTED",
         )
         self.assertEqual(
