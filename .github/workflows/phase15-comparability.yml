@@ -13,9 +13,9 @@ concurrency:
 
 jobs:
   validate:
-    name: Validate WP15-D2, WP15-D3, and WP15-D3B
+    name: Validate WP15-D2 through WP15-D4
     runs-on: ubuntu-latest
-    timeout-minutes: 8
+    timeout-minutes: 10
 
     steps:
       - name: Check out repository
@@ -32,8 +32,9 @@ jobs:
           python -m json.tool spec/phase-15-treatment-comparability-matrix.json >/dev/null
           python -m json.tool spec/phase-15-d3b-capture-integration.json >/dev/null
           python -m json.tool experiments/configs/phase-15-matched-family-population.json >/dev/null
+          python -m json.tool experiments/configs/phase-15-family-descriptive-plan.json >/dev/null
 
-      - name: Run comparability, population, and capture unit tests
+      - name: Run comparability, population, capture, and plan unit tests
         env:
           PYTHONPATH: src
           PYTHONWARNINGS: error::ResourceWarning
@@ -50,6 +51,10 @@ jobs:
             -s tests \
             -p "test_phase15_capture.py" \
             -v
+          python -m unittest discover \
+            -s tests \
+            -p "test_phase15_family_descriptive_plan.py" \
+            -v
 
       - name: Validate treatment comparability
         env:
@@ -65,6 +70,11 @@ jobs:
         env:
           PYTHONPATH: src
         run: python experiments/scripts/validate_phase15_d3b_capture_integration.py
+
+      - name: Validate D4 descriptive-analysis plan
+        env:
+          PYTHONPATH: src
+        run: python experiments/scripts/validate_phase15_family_descriptive_plan.py
 
       - name: Run matched-family population smoke
         env:
@@ -98,6 +108,64 @@ jobs:
           (
             cd "$output_dir"
             sha256sum -c phase-15-matched-family-derived.sha256
+          )
+
+      - name: Run D4 outcome-blind plan smoke
+        env:
+          PYTHONPATH: src
+        run: |
+          output_dir="$(mktemp -d)"
+          python experiments/scripts/run_phase15_family_descriptive_plan.py \
+            --output-dir "$output_dir"
+          test -s "$output_dir/phase-15-family-descriptive-plan-candidate.json"
+          test -s "$output_dir/phase-15-family-member-registry.csv"
+          test -s "$output_dir/phase-15-family-analysis-units.csv"
+          test -s "$output_dir/phase-15-family-observation-plans.csv"
+          test -s "$output_dir/phase-15-family-descriptive-plan.sha256"
+          python - "$output_dir" <<'PY'
+          import csv
+          import json
+          import sys
+          from pathlib import Path
+
+          root = Path(sys.argv[1])
+          payload = json.loads(
+              (root / "phase-15-family-descriptive-plan-candidate.json").read_text(
+                  encoding="utf-8"
+              )
+          )
+          assert payload["family_count"] == 4
+          assert payload["member_row_count"] == 13
+          assert payload["analysis_unit_count"] == 12
+          assert payload["observation_cutoff_count"] == 4
+          assert payload["denominator_candidate_count"] == 4
+          assert payload["publication_evidence"] is False
+          assert payload["outcome_blindness"] == {
+              "outcome_dependent_branching": False,
+              "projected_metric_values_read": False,
+              "raw_execution_values_read": False,
+          }
+          assert (
+              payload["claim_boundary"]
+              ["family_specific_descriptive_comparison"]
+              == "NOT_YET_AUTHORIZED"
+          )
+          assert (
+              payload["claim_boundary"]["success_rate_or_percentage"]
+              == "NOT_PERMITTED"
+          )
+          with (root / "phase-15-family-member-registry.csv").open(
+              "r", encoding="utf-8", newline=""
+          ) as handle:
+              rows = list(csv.DictReader(handle))
+          assert len(rows) == 13
+          assert "outcome" not in rows[0]
+          assert "projected_metrics_json" not in rows[0]
+          print("wp15_d4_smoke=PASS")
+          PY
+          (
+            cd "$output_dir"
+            sha256sum -c phase-15-family-descriptive-plan.sha256
           )
 
       - name: Run integrated D3B capture smoke
