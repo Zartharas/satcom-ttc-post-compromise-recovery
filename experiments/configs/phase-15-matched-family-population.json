@@ -1,0 +1,117 @@
+{
+  "schema_version": "0.1.0",
+  "phase": "Phase 15",
+  "work_package": "WP15-D3",
+  "status": "EXECUTABLE_POPULATION_CANDIDATE_NOT_COMPARATIVE_EVIDENCE",
+  "run_class": "PILOT_INTERNAL_VALIDATION_ONLY",
+  "description": "Execute only the four WP15-D2 qualified comparison families and emit member-level descriptive rows with family-specific allowed fields. The output is a pipeline-validation dataset, not comparative or publication evidence.",
+  "comparability_matrix": "spec/phase-15-treatment-comparability-matrix.json",
+  "baseline_catalog": "tests/scenarios/baseline-test-catalog.json",
+  "t1_catalog": "tests/scenarios/t1-provisional-test-catalog.json",
+  "eligible_family_ids": [
+    "CF-01",
+    "CF-02",
+    "CF-05",
+    "CF-06"
+  ],
+  "expected_family_count": 4,
+  "expected_member_row_count": 13,
+  "expected_analysis_unit_count": 12,
+  "analysis_unit_rule": "Within a family, treatment is the analysis-unit identifier. Multiple policy variants for the same treatment remain separate member rows but share one analysis unit and must not be counted as independent replicates.",
+  "baseline_execution": {
+    "executor": "src/ttc_recovery/baseline_metrics.py:run_baseline_scenario",
+    "oracle_rule": "Every baseline member must match its retained catalog alignment, joint-state when declared, and outcome oracle before projection."
+  },
+  "t1_execution_recipes": {
+    "T1-15": {
+      "executor": "run_bounded_recovery",
+      "parameters": {
+        "ground_epoch": 1,
+        "spacecraft_epoch": 1,
+        "compromise_active_keys": true
+      },
+      "post_action": "NONE",
+      "injected_faults": [],
+      "provenance_seed": 1515,
+      "seed_is_comparable": false
+    },
+    "T1-01": {
+      "executor": "run_bounded_recovery",
+      "parameters": {
+        "ground_epoch": 2,
+        "spacecraft_epoch": 1,
+        "compromise_active_keys": false
+      },
+      "post_action": "NONE",
+      "injected_faults": [],
+      "provenance_seed": 1501,
+      "seed_is_comparable": false
+    },
+    "T1-09": {
+      "executor": "run_bounded_recovery",
+      "parameters": {
+        "ground_epoch": 1,
+        "spacecraft_epoch": 0,
+        "compromise_active_keys": false,
+        "drop_status": true
+      },
+      "post_action": "NONE",
+      "injected_faults": [
+        {
+          "kind": "DROP",
+          "phase": "STATUS_TELEMETRY",
+          "count": 1
+        }
+      ],
+      "provenance_seed": 1509,
+      "seed_is_comparable": false
+    },
+    "T1-13": {
+      "executor": "run_bounded_recovery",
+      "parameters": {
+        "ground_epoch": 1,
+        "spacecraft_epoch": 0,
+        "compromise_active_keys": false
+      },
+      "post_action": "REPLAY_LAST_COMMIT_AFTER_SUCCESS",
+      "injected_faults": [
+        {
+          "kind": "STALE_REPLAY",
+          "phase": "RECOVERY_COMMIT",
+          "count": 1
+        }
+      ],
+      "provenance_seed": 1513,
+      "seed_is_comparable": false
+    }
+  },
+  "denominator_policy": {
+    "member_row": "One executed source member retained in the derived dataset.",
+    "analysis_unit": "One treatment within one comparison family; policy variants share the treatment analysis unit.",
+    "family_coverage_denominator": "Unique treatment analysis units expected by the qualified family definition.",
+    "success_rate_denominator": "NOT_DEFINED",
+    "cross_family_denominator": "NOT_PERMITTED",
+    "aggregate_authorized": false
+  },
+  "projection_policy": {
+    "allowed_fields_source": "The allowed_fields array of each qualified family in the WP15-D2 matrix.",
+    "blocked_field_behavior": "Omit every field not explicitly allowed by the family from the member-level projection.",
+    "alignment_rule": "Derive alignment_class and never expose raw epoch-bearing alignment as a cross-treatment comparison field.",
+    "diagnostic_family_behavior": "Do not execute or emit diagnostic-only families in the derived comparison dataset."
+  },
+  "outputs": {
+    "json": "results/processed/phase-15-matched-family-population.json",
+    "member_csv": "results/processed/phase-15-matched-family-members.csv",
+    "denominator_csv": "results/processed/phase-15-matched-family-denominators.csv",
+    "checksum_manifest": "results/processed/phase-15-matched-family-derived.sha256"
+  },
+  "claim_boundary": {
+    "family_specific_descriptive_comparison": "NOT_YET_AUTHORIZED",
+    "pooled_cross_treatment_aggregation": "NOT_PERMITTED",
+    "success_rate_or_percentage": "NOT_PERMITTED",
+    "inferential_statistics": "NOT_PERMITTED",
+    "treatment_superiority": "NOT_PERMITTED",
+    "cryptographic_security_or_pcs": "NOT_PERMITTED",
+    "publication_evidence": "NOT_PERMITTED"
+  }
+}
