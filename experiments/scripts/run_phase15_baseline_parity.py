@@ -25,6 +25,15 @@ def parse_args() -> argparse.Namespace:
         )
     )
     parser.add_argument("--config", type=Path, default=DEFAULT_CONFIG)
+    parser.add_argument(
+        "--catalog",
+        type=Path,
+        default=None,
+        help=(
+            "Optional explicit catalog path. The Phase 15 capture wrapper "
+            "uses this to execute the retained immutable catalog copy."
+        ),
+    )
     parser.add_argument("--json-output", type=Path, default=None)
     parser.add_argument("--csv-output", type=Path, default=None)
     return parser.parse_args()
@@ -46,7 +55,11 @@ def main() -> int:
     config_path = args.config.expanduser().resolve()
     config = load_config(config_path)
 
-    catalog_path = ROOT / str(config["catalog"])
+    catalog_path = (
+        args.catalog.expanduser().resolve()
+        if args.catalog is not None
+        else ROOT / str(config["catalog"])
+    )
     catalog = json.loads(catalog_path.read_text(encoding="utf-8"))
     entries = catalog["tests"]
     expected_ids = [str(value) for value in config["scenario_ids"]]
@@ -66,6 +79,7 @@ def main() -> int:
         f"scenarios={len(results)}, treatments={dict(sorted(treatments.items()))}, "
         f"outcomes={dict(sorted(outcomes.items()))}."
     )
+    print(f"Catalog: {catalog_path}")
     print(f"JSON: {json_output}")
     print(f"CSV: {csv_output}")
     print(f"metric_parity_status={PARITY_STATUS}")
