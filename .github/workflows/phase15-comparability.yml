@@ -1,0 +1,49 @@
+name: Phase 15 treatment comparability
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: phase15-comparability-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    name: Validate WP15-D2
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.13"
+
+      - name: Parse machine-readable contracts
+        run: |
+          python -m json.tool spec/phase-15-experiment-protocol-candidate.json >/dev/null
+          python -m json.tool spec/phase-15-treatment-comparability-matrix.json >/dev/null
+
+      - name: Run comparability unit tests
+        env:
+          PYTHONPATH: src
+          PYTHONWARNINGS: error::ResourceWarning
+        run: python -m unittest tests.test_phase15_treatment_comparability -v
+
+      - name: Validate treatment comparability
+        env:
+          PYTHONPATH: src
+        run: python experiments/scripts/validate_phase15_treatment_comparability.py
+
+      - name: Validate Phase 15 protocol
+        run: python experiments/scripts/validate_phase15_protocol.py
+
+      - name: Validate tracked-file manifest
+        run: python experiments/scripts/validate_repository_manifest.py
