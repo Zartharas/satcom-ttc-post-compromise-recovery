@@ -47,37 +47,46 @@ Security candidates use a private coordinated-disclosure workflow.
 | RIT-008 | GOVERNANCE | HIGH | OPEN | 14–15 | AI assistance was not clearly disclosed in the initial review request. | Future outreach and publication materials require context-appropriate disclosure after venue selection. |
 | RIT-009 | ENHANCEMENT | MEDIUM | FIXED_PENDING_VALIDATION | 15 | Project lacked a consolidated publication-readiness tracker. | Tracker now covers protocol, parity, comparability, capture, manuscript, and claim gates. |
 | RIT-010 | ENHANCEMENT | MEDIUM | FIXED_PENDING_VALIDATION | 15 | Project lacked a consolidated issue/disclosure register. | This register establishes the workflow; final branch validation remains pending. |
-| RIT-011 | REPRODUCIBILITY | HIGH | FIXED_PENDING_VALIDATION | 15 | B0/B1/B2 lacked shared T1 metrics and equivalent capture artifacts. | D1 passed local validation with 199 tests, 21 retained scenarios, JSON/CSV checks, immutable capture, and manifests. CI pending. |
-| RIT-012 | REPRODUCIBILITY | HIGH | FIXED_PENDING_VALIDATION | 15 | Seeded execution lacked a complete immutable Phase 15 run directory. | Wrapper passed local D1 validation for raw, analysis, governance, logs, and layered manifests. CI pending. |
-| RIT-013 | REPRODUCIBILITY | HIGH | FIXED_PENDING_VALIDATION | 15 | Shared fields did not identify semantically comparable baseline/T1 cases. | D2 passed local validation with eight conservative families, 36 unique dispositions, restricted fields, and no pooled catalog percentages. CI pending. |
-| RIT-014 | REPRODUCIBILITY | HIGH | FIXED_PENDING_VALIDATION | 15 | A semantic matrix did not provide an executable qualified-family population with controlled analysis units and denominators. | D3 passed local validation with four qualified families, 13 member rows, 12 analysis units, strict projections, and an internal derived manifest. D3B integration validation and CI remain pending. |
-| RIT-015 | DEFECT | LOW | FIXED_PENDING_VALIDATION | 15 | A D2 test searched for a noncontiguous phrase despite a correct matrix rule. | Assertion corrected; focused and complete local suites passed. CI pending. |
-| RIT-016 | REPRODUCIBILITY | HIGH | FIXED_PENDING_VALIDATION | 15 | Standalone D3 outputs were not retained with exact D2/D3 inputs inside the immutable pilot bundle. | D3B now retains D2/D3 contracts and both catalogs, gates D3 on T1/baseline success, validates output semantics, records metadata schema 0.2.0, and adds a protected derived layer. Integrated local smoke and CI remain pending. |
+| RIT-011 | REPRODUCIBILITY | HIGH | FIXED_PENDING_CI | 15 | B0/B1/B2 lacked shared T1 metrics and equivalent capture artifacts. | D1 passed local validation with 199 tests, 21 retained scenarios, JSON/CSV checks, immutable capture, and manifests. CI pending. |
+| RIT-012 | REPRODUCIBILITY | HIGH | FIXED_PENDING_CI | 15 | Seeded execution lacked a complete immutable Phase 15 run directory. | Wrapper passed local D1 validation for raw, analysis, governance, logs, and layered manifests. CI pending. |
+| RIT-013 | REPRODUCIBILITY | HIGH | FIXED_PENDING_CI | 15 | Shared fields did not identify semantically comparable baseline/T1 cases. | D2 passed local validation with eight conservative families, 36 unique dispositions, restricted fields, and no pooled catalog percentages. CI pending. |
+| RIT-014 | REPRODUCIBILITY | HIGH | FIXED_PENDING_CI | 15 | A semantic matrix did not provide an executable qualified-family population with controlled analysis units and denominators. | D3 passed local validation with four qualified families, 13 member rows, 12 analysis units, strict projections, and an internal derived manifest. CI pending. |
+| RIT-015 | DEFECT | LOW | FIXED_PENDING_CI | 15 | A D2 test searched for a noncontiguous phrase despite a correct matrix rule. | Assertion corrected; focused and complete local suites passed. CI pending. |
+| RIT-016 | REPRODUCIBILITY | HIGH | FIXED_PENDING_CI | 15 | Standalone D3 outputs were not retained with exact D2/D3 inputs inside the immutable pilot bundle. | D3B passed integrated local validation with retained D2/D3 contracts and catalogs, metadata schema 0.2.0, fail-closed semantic checks, and four verified manifest layers. CI pending. |
+| RIT-017 | REPRODUCIBILITY | HIGH | FIXED_PENDING_VALIDATION | 15 | The qualified-family population lacked predeclared observation cutoffs, denominator membership, allowed-display boundaries, and post-observation revision controls. | D4 implements an outcome-blind freeze candidate for 4 families, 13 member rows, 12 treatment-within-family units, and 4 explicit cutoffs. Local validation, CI, and a separate freeze decision remain pending. |
 
-## WP15-D3B evidence paths
+## WP15-D4 evidence paths
 
-- `spec/phase-15-d3b-capture-integration.json`
-- `docs/phase-15-d3b-capture-integration.md`
-- `experiments/scripts/run_phase15_pilot_capture.py`
-- `experiments/scripts/validate_phase15_d3b_capture_integration.py`
-- `tests/test_phase15_capture.py`
-- `tests/test_phase15_protocol.py`
+- `experiments/configs/phase-15-family-descriptive-plan.json`
+- `docs/phase-15-d4-family-descriptive-analysis-plan.md`
+- `src/ttc_recovery/family_descriptive_plan.py`
+- `experiments/scripts/run_phase15_family_descriptive_plan.py`
+- `experiments/scripts/validate_phase15_family_descriptive_plan.py`
+- `tests/test_phase15_family_descriptive_plan.py`
+- `tracker/WP15_D4_FREEZE_CANDIDATE_TRACKER.md`
 - `.github/workflows/phase15-comparability.yml`
 
-## D3B acceptance conditions
+## D4 acceptance conditions
 
-RIT-016 cannot close merely because D3 files appear in a directory. Closure requires evidence that:
+RIT-017 cannot close because a plan file exists. Validation requires evidence that:
 
-- the exact D2 matrix, D3 configuration, baseline catalog, and T1 catalog are retained;
-- retained source and captured SHA-256 values match;
-- D3 executes only after successful T1 and baseline stages;
-- incomplete, tampered, or semantically relaxed D3 output fails closed;
-- 4 families, 13 member rows, 12 analysis units, and 13 source executions are preserved;
-- family coverage remains complete;
+- the exact qualified family order remains CF-01, CF-02, CF-05, and CF-06;
+- the member registry contains 13 unique rows;
+- the candidate denominator registry contains 12 unique treatment-within-family units;
+- CF-02 B1-01 and B1-05 remain separate rows under one `CF-02:B1` unit;
+- all 4 observation cutoffs are explicit, unique, terminal, and non-adaptive;
+- family allowed-field names exactly match the D2 matrix;
+- projected metric and raw execution values are not read;
+- changing projected values cannot change the D4 identity contract;
+- the member registry exposes no outcome or projected-value column;
+- missing units block a family display rather than shrinking the denominator;
+- undeclared units are rejected rather than expanding the denominator;
 - success-rate denominators remain undefined;
-- aggregation, inference, superiority, and publication gates remain closed;
-- D3 internal, run-level derived, raw, analysis, and complete-bundle manifests verify; and
+- comparison, aggregation, inference, superiority, causal, cryptographic, and publication gates remain closed;
+- the D4 output manifest covers exactly the four data artifacts and detects tampering; and
 - local and CI validation pass at exact commits.
+
+A successful D4 engineering validation does not itself freeze the candidate. Freeze requires a separate explicit decision before any comparative display is viewed.
 
 ## Reproducibility rules
 
@@ -90,8 +99,9 @@ Closure requires evidence appropriate to the issue:
 - scenario parity requires matched inputs or predeclared exceptions;
 - semantic parity requires compatible meanings, not only compatible types;
 - executable comparability requires predeclared family membership and observation controls;
-- immutable integration requires retained inputs, metadata, fail-closed validation, and layered manifests; and
-- publication readiness requires a frozen population and analysis plan before aggregate interpretation.
+- immutable integration requires retained inputs, metadata, fail-closed validation, and layered manifests;
+- analysis-plan reproducibility requires outcome-blind cutoffs, fixed candidate units, allowed-display rules, and post-observation revision controls; and
+- publication readiness requires a separately reviewed and frozen population and analysis plan before comparative interpretation.
 
 ## Triage rules
 
@@ -138,13 +148,15 @@ Absent those elements, classify it as a defect, reproducibility issue, enhanceme
 
 ## Immediate actions
 
-- [ ] Pull and validate the D3B checkpoint.
-- [ ] Run focused capture and protocol tests.
-- [ ] Run D2, D3, D3B, and Phase 15 validators.
+- [ ] Pull and validate the D4 checkpoint.
+- [ ] Parse the D4 contract and run its focused tests.
+- [ ] Run D2, D3, D3B, D4, and Phase 15 validators.
+- [ ] Generate one disposable outcome-blind D4 candidate bundle.
+- [ ] Audit 4 families, 13 rows, 12 units, 4 cutoffs, and closed gates.
+- [ ] Verify that projected values cannot alter the D4 identity contract.
+- [ ] Verify the D4 four-file manifest.
 - [ ] Run the complete regression suite.
-- [ ] Execute one clean disposable integrated capture.
-- [ ] Audit retained-input hashes, metadata, D3 counts, claim gates, and manifests.
-- [ ] Refresh the tracked-file manifest only after D3B passes.
-- [ ] Run CI after draft-PR authorization.
+- [ ] Refresh the tracked-file manifest only after D4 passes.
+- [ ] Run CI only after draft-PR authorization.
 - [ ] Keep Issue #3 and publication boundaries accurate.
 - [ ] Keep sensitive security candidates outside the public repository.
