@@ -16,8 +16,12 @@ from typing import Iterable
 
 ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_CONFIG = ROOT / "experiments" / "configs" / "phase-15-pilot.json"
+DEFAULT_BASELINE_CONFIG = (
+    ROOT / "experiments" / "configs" / "phase-15-baseline-parity.json"
+)
 DEFAULT_PROTOCOL = ROOT / "spec" / "phase-15-experiment-protocol-candidate.json"
 ANALYSIS_CONFIG = ROOT / "experiments" / "configs" / "phase-08-provisional.json"
+BASELINE_CATALOG = ROOT / "tests" / "scenarios" / "baseline-test-catalog.json"
 
 
 def utc_now() -> datetime:
@@ -76,7 +80,10 @@ def write_manifest(base: Path, paths: Iterable[Path], destination: Path) -> None
         relative = path.relative_to(base).as_posix()
         lines.append(f"{sha256_file(path)}  {relative}")
     destination.parent.mkdir(parents=True, exist_ok=True)
-    destination.write_text("\n".join(lines) + ("\n" if lines else ""), encoding="utf-8")
+    destination.write_text(
+        "\n".join(lines) + ("\n" if lines else ""),
+        encoding="utf-8",
+    )
 
 
 def verify_manifest(base: Path, manifest: Path) -> None:
@@ -106,7 +113,10 @@ def run_command(command: list[str], stdout_path: Path, stderr_path: Path) -> int
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
-        description="Execute and preserve a Phase 15 T1 pipeline pilot run."
+        description=(
+            "Execute and preserve a Phase 15 T1 pipeline and deterministic "
+            "B0/B1/B2 metric-parity pilot run."
+        )
     )
     parser.add_argument(
         "--output-root",
@@ -115,6 +125,11 @@ def parse_args() -> argparse.Namespace:
         help="Parent directory under which a new immutable run directory is created.",
     )
     parser.add_argument("--config", type=Path, default=DEFAULT_CONFIG)
+    parser.add_argument(
+        "--baseline-config",
+        type=Path,
+        default=DEFAULT_BASELINE_CONFIG,
+    )
     parser.add_argument("--protocol", type=Path, default=DEFAULT_PROTOCOL)
     parser.add_argument("--run-id", default=None)
     return parser.parse_args()
@@ -128,15 +143,33 @@ def main() -> int:
     git_status = git_text("status", "--porcelain")
 
     config_source = args.config.expanduser().resolve()
+    baseline_config_source = args.baseline_config.expanduser().resolve()
     protocol_source = args.protocol.expanduser().resolve()
-    for source in (config_source, protocol_source, ANALYSIS_CONFIG):
+    for source in (
+        config_source,
+        baseline_config_source,
+        protocol_source,
+        ANALYSIS_CONFIG,
+        BASELINE_CATALOG,
+    ):
         if not source.is_file():
             raise FileNotFoundError(source)
 
     config_payload = json.loads(config_source.read_text(encoding="utf-8"))
+    baseline_config_payload = json.loads(
+        baseline_config_source.read_text(encoding="utf-8")
+    )
     protocol_payload = json.loads(protocol_source.read_text(encoding="utf-8"))
     if config_payload.get("run_class") != "PILOT_INTERNAL_VALIDATION_ONLY":
         raise ValueError("Phase 15 capture requires PILOT_INTERNAL_VALIDATION_ONLY.")
+    if baseline_config_payload.get("run_class") != (
+        "PILOT_INTERNAL_VALIDATION_ONLY"
+    ):
+        raise ValueError("Baseline parity capture requires the pilot run class.")
+    if baseline_config_payload.get("metric_parity_status") != (
+        "IMPLEMENTED_PENDING_VALIDATION"
+    ):
+        raise ValueError("Unexpected baseline metric-parity status.")
     if protocol_payload.get("status") != (
         "PROVISIONAL_PROTOCOL_CANDIDATE_NOT_PUBLICATION_EVIDENCE"
     ):
@@ -155,11 +188,15 @@ def main() -> int:
         directory.mkdir(parents=True, exist_ok=True)
 
     retained_config = config_dir / "phase-15-pilot.json"
+    retained_baseline_config = config_dir / "phase-15-baseline-parity.json"
     retained_protocol = config_dir / "phase-15-experiment-protocol-candidate.json"
     retained_analysis_config = config_dir / "phase-08-provisional.json"
+    retained_baseline_catalog = config_dir / "baseline-test-catalog.json"
     shutil.copyfile(config_source, retained_config)
+    shutil.copyfile(baseline_config_source, retained_baseline_config)
     shutil.copyfile(protocol_source, retained_protocol)
     shutil.copyfile(ANALYSIS_CONFIG, retained_analysis_config)
+    shutil.copyfile(BASELINE_CATALOG, retained_baseline_catalog)
 
     environment_lines = [
         f"python={sys.version.replace(chr(10), ' ')}",
@@ -194,6 +231,27 @@ def main() -> int:
         runner_command,
         logs_dir / "runner-stdout.log",
         logs_dir / "runner-stderr.log",
+    )
+
+    baseline_results_json = raw_dir / "phase15-baseline-parity-results.json"
+    baseline_metrics_csv = raw_dir / "phase15-baseline-parity-metrics.csv"
+    baseline_command = [
+        sys.executable,
+        str(ROOT / "experiments" / "scripts" / "run_phase15_baseline_parity.py"),
+        "--config",
+        str(retained_baseline_config),
+        "--json-output",
+        str(baseline_results_json),
+        "--csv-output",
+        str(baseline_metrics_csv),
+    ]
+    (logs_dir / "command-baseline.txt").write_text(
+        json.dumps(baseline_command) + "\n", encoding="utf-8"
+    )
+    baseline_exit = run_command(
+        baseline_command,
+        logs_dir / "baseline-stdout.log",
+        logs_dir / "baseline-stderr.log",
     )
 
     analysis_exit = None
@@ -241,7 +299,7 @@ def main() -> int:
     )
 
     end = utc_now()
-    overall_exit = runner_exit if runner_exit != 0 else int(analysis_exit or 0)
+    overall_exit = runner_exit or baseline_exit or int(analysis_exit or 0)
     metadata = {
         "schema_version": "0.1.0",
         "run_id": run_id,
@@ -255,6 +313,14 @@ def main() -> int:
         "end_time_utc": utc_text(end),
         "config_path": retained_config.relative_to(run_dir).as_posix(),
         "config_sha256": sha256_file(retained_config),
+        "baseline_config_path": retained_baseline_config.relative_to(
+            run_dir
+        ).as_posix(),
+        "baseline_config_sha256": sha256_file(retained_baseline_config),
+        "baseline_catalog_path": retained_baseline_catalog.relative_to(
+            run_dir
+        ).as_posix(),
+        "baseline_catalog_sha256": sha256_file(retained_baseline_catalog),
         "protocol_path": retained_protocol.relative_to(run_dir).as_posix(),
         "protocol_sha256": sha256_file(retained_protocol),
         "analysis_config_path": retained_analysis_config.relative_to(run_dir).as_posix(),
@@ -263,15 +329,19 @@ def main() -> int:
         "platform": platform.platform(),
         "runner_command": runner_command,
         "runner_exit_code": runner_exit,
+        "baseline_command": baseline_command,
+        "baseline_exit_code": baseline_exit,
         "analysis_command": analysis_command,
         "analysis_exit_code": analysis_exit,
         "overall_exit_code": overall_exit,
         "stdout_paths": [
             "logs/runner-stdout.log",
+            "logs/baseline-stdout.log",
             "logs/analysis-stdout.log" if analysis_command else None,
         ],
         "stderr_paths": [
             "logs/runner-stderr.log",
+            "logs/baseline-stderr.log",
             "logs/analysis-stderr.log" if analysis_command else None,
         ],
         "claim_boundary": {
@@ -308,6 +378,7 @@ def main() -> int:
     print(f"run_id={run_id}")
     print(f"run_directory={run_dir}")
     print(f"runner_exit_code={runner_exit}")
+    print(f"baseline_exit_code={baseline_exit}")
     print(f"analysis_exit_code={analysis_exit}")
     print(f"overall_exit_code={overall_exit}")
     print("publication_evidence=false")
