@@ -4,7 +4,7 @@
 
 `PROVISIONAL_CONTROLS_ACTIVE_FOR_PILOT`
 
-These controls govern Phase 15 pilot execution and preservation. They are designed to prevent silent parameter drift, outcome-based exclusions, manual alteration of raw data, and unsupported publication claims.
+These controls govern Phase 15 T1 and B0/B1/B2 pilot execution and preservation. They prevent silent parameter drift, catalog drift, outcome-based exclusions, manual alteration of raw data, and unsupported publication claims.
 
 ## Scope
 
@@ -21,7 +21,7 @@ The pilot uses synthetic data and abstract models only. It does not authorize:
 
 A pilot run is authorized only when:
 
-1. the exact protocol and configuration paths are recorded;
+1. the exact protocol, T1 configuration, baseline configuration, and baseline catalog paths are recorded;
 2. the repository commit is known;
 3. Git status is recorded before execution;
 4. the intended run class is `PILOT_INTERNAL_VALIDATION_ONLY`;
@@ -38,12 +38,6 @@ Use:
 phase15-pilot-YYYYMMDDTHHMMSSZ-g<short_commit>
 ```
 
-Example:
-
-```text
-phase15-pilot-20260804T021530Z-g10148d0
-```
-
 Run IDs are immutable and must not be reused.
 
 ## Required directory structure
@@ -54,17 +48,28 @@ Each retained run should use a dedicated directory outside the Git repository or
 <run_id>/
   config/
     phase-15-pilot.json
+    phase-15-baseline-parity.json
     phase-15-experiment-protocol-candidate.json
+    phase-08-provisional.json
+    baseline-test-catalog.json
   raw/
     phase15-pilot-results.json
     phase15-pilot-metrics.csv
+    phase15-baseline-parity-results.json
+    phase15-baseline-parity-metrics.csv
   analysis/
     phase08-analysis.json
     phase08-*.csv
   logs/
-    command.txt
-    stdout.log
-    stderr.log
+    command-runner.txt
+    command-baseline.txt
+    command-analysis.txt
+    runner-stdout.log
+    runner-stderr.log
+    baseline-stdout.log
+    baseline-stderr.log
+    analysis-stdout.log
+    analysis-stderr.log
     environment.txt
     git-status.txt
   governance/
@@ -87,27 +92,29 @@ Before execution, record:
 - repository and branch;
 - full commit SHA;
 - `git status --porcelain` output;
-- exact configuration and protocol copies;
+- exact T1, baseline, protocol, analysis, and catalog copies;
 - SHA-256 of those copies;
 - Python version;
 - operating system and architecture;
-- exact command line;
+- exact T1, baseline, and analysis commands;
 - dependency information required to reproduce the run; and
 - destination directory.
 
-The configuration copies inside the run directory are authoritative for that run.
+The configuration and catalog copies inside the run directory are authoritative for that run. The baseline runner must prefer the retained catalog copy over the live repository path.
 
 ## Execution logging
 
-Capture stdout and stderr separately. Record the process exit code.
+Capture stdout and stderr separately for T1 execution, baseline execution, and T1 analysis. Record every process exit code.
 
 A successful process exit does not prove scientific validity. A failed process exit does not permit deletion of the run record when any output was produced; preserve it as a failed attempt and document the disposition.
+
+A baseline catalog-oracle mismatch must terminate the baseline runner. It may not be converted into a pass by changing the captured expected result after execution.
 
 ## Raw-data immutability
 
 After the raw manifest is created:
 
-- do not edit raw JSON, CSV, logs, configuration copies, or metadata;
+- do not edit raw JSON, CSV, logs, configuration copies, catalog copies, or metadata;
 - do not overwrite files in place;
 - do not reuse the directory for a corrected run;
 - do not manually fix malformed rows;
@@ -118,25 +125,37 @@ Corrections require a new run ID and, when applicable, a corrective commit.
 
 Read-only filesystem permissions may be used after validation. Permission changes do not replace checksum verification.
 
-## Configuration control
+## Configuration and catalog control
 
-Every parameter must come from the retained configuration. Command-line overrides are prohibited unless the exact override is predeclared, recorded, and represented in the metadata.
+Every T1 parameter must come from the retained T1 configuration. Every baseline scenario must come from the retained baseline configuration and retained catalog. Command-line overrides are prohibited unless the exact override is predeclared, recorded, and represented in metadata.
 
-The Phase 15 pilot parameters are candidates only. Running them does not freeze them for the publication study.
+The Phase 15 parameters, adapter contact convention, and adapter transmission counts are candidates only. Running them does not freeze them for the publication study.
 
-## Schedule identity
+The catalog contains design oracles pending independent review. Metric adaptation does not convert those values into empirical findings or approved ground truth.
 
-The integer seed is not sufficient to identify a schedule. Preserve:
+## Schedule and scenario identity
+
+For T1, preserve:
 
 - the seed;
 - the complete canonical serialized schedule; and
 - its SHA-256 digest.
 
-Any schedule-generation code change can alter the schedule even when the seed is unchanged. A later run must therefore compare schedule digests, not seeds alone.
+For B0/B1/B2, preserve:
+
+- the scenario ID;
+- baseline variant;
+- initial state;
+- compromise scope;
+- activation policy when present;
+- normalized fault actions; and
+- the canonical scenario/schedule SHA-256 digest.
+
+The integer seed alone is not sufficient for T1 identity. The baseline scenario ID alone is not sufficient for adapter identity.
 
 ## Inclusion control
 
-Include all valid generated runs, including:
+Include all valid generated T1 runs and all 21 baseline catalog scenarios, including:
 
 - zero-fault schedules;
 - success outcomes;
@@ -152,7 +171,8 @@ Do not filter by outcome after results are known.
 An exclusion requires a record containing:
 
 - unique exclusion ID;
-- run ID and seed, when applicable;
+- run ID;
+- seed or baseline scenario ID, when applicable;
 - UTC timestamp;
 - allowed reason code;
 - factual description;
@@ -168,6 +188,7 @@ Allowed reason codes are limited to:
 - `SCHEMA_FAILURE`
 - `CHECKSUM_FAILURE`
 - `CONFIG_MISMATCH`
+- `CATALOG_ORACLE_MISMATCH`
 - `PROTOCOL_CORRECTION`
 
 An unexpected or unfavorable outcome is not an exclusion reason.
@@ -179,8 +200,8 @@ A rerun must:
 1. use a new run ID;
 2. preserve the earlier attempt;
 3. cite the authorized reason;
-4. identify any corrective commit or configuration change;
-5. state whether the schedules remained byte-identical; and
+4. identify any corrective commit, configuration, or catalog change;
+5. state whether T1 schedules and baseline scenario digests remained byte-identical; and
 6. prevent accidental aggregation of pre-correction and post-correction data.
 
 Repeated execution solely to obtain a preferred result is prohibited.
@@ -198,6 +219,8 @@ Processed outputs must be generated from retained raw files by versioned scripts
 
 Manual spreadsheet edits are not permitted as the authoritative analysis source. Human-readable tables for the manuscript must be reproducible from tracked scripts or documented transformations.
 
+The current Phase 08 analysis consumes T1 rows only. Baseline metric rows must not be silently inserted into that analysis because the scenario populations and contact semantics are not yet matched.
+
 ## Checksum control
 
 Create separate manifests for raw, analysis, and complete run bundles. Manifest paths must be relative and deterministic.
@@ -210,36 +233,46 @@ Verify manifests:
 - before manuscript value extraction; and
 - before public release.
 
-A checksum pass proves byte identity only. It does not prove correctness, completeness, or scientific validity.
+A checksum pass proves byte identity only. It does not prove correctness, completeness, comparability, or scientific validity.
 
 ## Data-quality gates
 
 Before accepting a pilot run as a valid pipeline test, confirm:
 
-- JSON parses successfully;
-- CSV headers and row counts match expectations;
-- every result has a seed and schedule digest;
-- schedule digests are unique where schedules differ;
-- JSON and CSV metrics agree;
-- event ordering passes the existing trace audit;
+- all JSON files parse successfully;
+- T1 and baseline CSV headers and row counts match expectations;
+- every T1 result has a seed and schedule digest;
+- every baseline result has a scenario ID, null seed, and scenario/schedule digest;
+- baseline scenario IDs exactly match the 21-entry retained catalog order;
+- every baseline alignment, declared joint state, and outcome matches the existing catalog oracle;
+- T1 and baseline JSON/CSV metrics agree within their respective outputs;
+- T1 event ordering passes the existing trace audit;
+- baseline event order and adapter-completion records are retained;
 - no undeclared output file is treated as authoritative;
 - checksum manifests verify; and
 - all exclusions and reruns are documented.
 
 ## Treatment-parity gate
 
-The pilot may validate T1 capture. It may not support comparative publication conclusions until B0, B1, and B2 provide equivalent or explicitly justified:
+WP15-D1 implements shared metric-field and capture parity for B0, B1, and B2. Its status remains:
 
-- scenario inputs;
-- contact-window accounting;
-- retry accounting;
-- event logs;
-- security and availability fields;
+`IMPLEMENTED_PENDING_VALIDATION`
+
+The pilot may state only that all four treatments emit a common captured metric field set after successful validation.
+
+Comparative publication conclusions remain blocked until the project provides equivalent or explicitly justified:
+
+- matched scenario inputs;
+- contact-window semantics;
+- retry semantics;
+- fault distributions;
+- command and telemetry evidence transitions;
+- event interpretation;
 - exclusion handling;
 - provenance; and
 - checksum preservation.
 
-This gap must remain visible in the Phase 15 tracker and issue register.
+Metric-field parity is not semantic equivalence, timing equivalence, or treatment comparability. The remaining matched-scenario gap must remain visible in the Phase 15 tracker and issue register.
 
 ## Reviewer and claim controls
 
