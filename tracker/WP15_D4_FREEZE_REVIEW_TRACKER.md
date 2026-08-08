@@ -2,7 +2,7 @@
 
 **Branch:** `phase-15/publication-preparation`
 **Review target:** `34d63a5`
-**Status:** `REVIEW_PACKAGE_DEFINED_DECISION_PENDING_NOT_FROZEN`
+**Status:** `EXPLICIT_ACCEPT_DECISION_EFFECTIVE_EXACT_OBJECTS_FROZEN`
 **Publication evidence:** `false`
 
 ## Objective
@@ -25,7 +25,10 @@ member_rows=13
 analysis_units=12
 cutoffs=4
 review_questions=16
-current_decision=PENDING
+review_package_current_decision=PENDING_IMMUTABLE
+formal_decision=ACCEPT
+decision_commit_ci=PASS
+freeze_effective=true
 ```
 
 The review covers identity, cutoff, denominator, display-registry, and revision-control decisions only.
@@ -48,27 +51,28 @@ The reviewer must not inspect family outcome distributions, success counts, perc
 - `REJECT`
 - `DEFER`
 
-No option is selected in the review package.
+The review package remains immutable with no preselected option. The separate completed decision record selects `ACCEPT`.
 
 ## Acceptance prerequisites
 
-- [ ] Exact reviewed commit recorded.
-- [ ] All 16 questions answered.
-- [ ] All questions are `PASS` for acceptance.
+- [x] Exact reviewed commit recorded.
+- [x] All 16 questions answered.
+- [x] All questions are `PASS` for acceptance.
 - [x] D4 local validation passed at `34d63a5`.
-- [ ] Freeze-review package local validation passed.
-- [ ] Complete regression suite passed after review-package implementation.
-- [ ] Repository manifest verified after review-package implementation.
-- [ ] CI validation passed.
-- [ ] Completed explicit decision record committed.
+- [x] Freeze-review package local validation passed.
+- [x] Complete regression suite passed after review-package implementation.
+- [x] Repository manifest verified after review-package implementation.
+- [x] Review-package CI validation passed.
+- [x] Completed explicit decision record committed using containing-commit binding.
+- [x] Decision-record commit CI validation passed for `307f685389d799fb5b22d481763bd171393085db`.
 
 ## Freeze state
 
 ```text
-observation_cutoffs=CANDIDATE_NOT_FROZEN
-analysis_unit_denominators=CANDIDATE_NOT_FROZEN
-member_registry=CANDIDATE_NOT_FROZEN
-allowed_displays=CANDIDATE_NOT_FROZEN
+observation_cutoffs=EXACT_REVIEWED_OBJECT_FROZEN
+analysis_unit_denominators=EXACT_REVIEWED_OBJECT_FROZEN
+member_registry=EXACT_REVIEWED_OBJECT_FROZEN
+allowed_displays=EXACT_REVIEWED_OBJECT_FROZEN
 publication_analysis_plan=NOT_FROZEN
 ```
 
@@ -90,19 +94,23 @@ publication_evidence=false
 
 ## Local validation plan
 
-- [ ] Parse the review JSON contract.
-- [ ] Run focused freeze-review tests.
-- [ ] Run the freeze-review validator.
-- [ ] Re-run D4 and Phase 15 protocol validators.
-- [ ] Run the complete regression suite.
-- [ ] Confirm no outcome or aggregate input is referenced.
-- [ ] Refresh and verify the repository manifest.
-- [ ] Preserve validation evidence in ignored `review_document/`.
+- [x] Parse the review JSON contract.
+- [x] Run focused freeze-review tests.
+- [x] Run the freeze-review validator.
+- [x] Re-run D4 and Phase 15 protocol validators.
+- [x] Run the complete regression suite.
+- [x] Confirm no outcome or aggregate input is referenced.
+- [x] Refresh and verify the repository manifest.
+- [x] Preserve validation evidence in ignored `review_document/`.
 
 ## Decision stage
 
-After engineering validation, complete a separate decision record using:
+The completed decision record is:
 
-`governance/phase-15-d4-freeze-review-decision-template.md`
+`governance/phase-15-d4-freeze-review-decision.md`
 
-The decision record must identify the exact reviewed commit and document every FR-01 through FR-16 response. Engineering validation alone cannot select `ACCEPT`.
+The machine-readable decision is:
+
+`spec/phase-15-d4-freeze-decision.json`
+
+The formal decision is `ACCEPT`. Both required workflows passed for exact decision commit `307f685`, so the exact reviewed cutoffs, analysis-unit denominators, member registry, and allowed planning displays are frozen. The publication analysis plan and every comparative or claim gate remain closed.

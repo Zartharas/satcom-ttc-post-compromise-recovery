@@ -13,7 +13,7 @@ concurrency:
 
 jobs:
   validate:
-    name: Validate WP15-D2 through WP15-D4R
+    name: Validate WP15-D2 through WP15-D4F
     runs-on: ubuntu-latest
     timeout-minutes: 10
 
@@ -32,6 +32,7 @@ jobs:
           python -m json.tool spec/phase-15-treatment-comparability-matrix.json >/dev/null
           python -m json.tool spec/phase-15-d3b-capture-integration.json >/dev/null
           python -m json.tool spec/phase-15-d4-freeze-review.json >/dev/null
+          python -m json.tool spec/phase-15-d4-freeze-decision.json >/dev/null
           python -m json.tool experiments/configs/phase-15-matched-family-population.json >/dev/null
           python -m json.tool experiments/configs/phase-15-family-descriptive-plan.json >/dev/null
 
@@ -60,6 +61,10 @@ jobs:
             -s tests \
             -p "test_phase15_d4_freeze_review.py" \
             -v
+          python -m unittest discover \
+            -s tests \
+            -p "test_phase15_d4_freeze_decision.py" \
+            -v
 
       - name: Validate treatment comparability
         env:
@@ -83,6 +88,9 @@ jobs:
 
       - name: Validate D4 freeze review package
         run: python experiments/scripts/validate_phase15_d4_freeze_review.py
+
+      - name: Validate D4 explicit freeze decision
+        run: python experiments/scripts/validate_phase15_d4_freeze_decision.py
 
       - name: Run matched-family population smoke
         env:

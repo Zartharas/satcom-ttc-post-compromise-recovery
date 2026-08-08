@@ -1,0 +1,341 @@
+{
+  "schema_version": "0.1.0",
+  "phase": "Phase 15",
+  "work_package": "WP15-D4F",
+  "record_class": "WP15_D4_EXPLICIT_FREEZE_DECISION",
+  "title": "WP15-D4 explicit freeze decision",
+  "status": "EXPLICIT_ACCEPT_DECISION_EFFECTIVE_EXACT_REVIEWED_OBJECTS_FROZEN",
+  "formal_decision": "ACCEPT",
+  "decision_authorized": true,
+  "decision_date_utc": "2026-08-04T19:05:53Z",
+  "reviewer": {
+    "name": "Aman Singh",
+    "authenticated_identity": "GitHub:Zartharas",
+    "role": "INTERNAL_REPOSITORY_OWNER_AND_RESEARCH_AUTHOR",
+    "conflict_statement": "The reviewer is the repository owner and research author. This is an internal protocol decision and is not independent validation.",
+    "independent_validation_claimed": false
+  },
+  "review_target": {
+    "branch": "phase-15/publication-preparation",
+    "validated_checkpoint_short": "34d63a5",
+    "validated_checkpoint_full": "34d63a554646baddd9fadf58678cfe70392fc41d",
+    "candidate_contract": "experiments/configs/phase-15-family-descriptive-plan.json",
+    "authoritative_comparability_matrix": "spec/phase-15-treatment-comparability-matrix.json"
+  },
+  "review_package": {
+    "branch": "phase-15/wp15-d4-freeze-review",
+    "commit": "d321f927aff20636490ae8c8cf407410e42c6fbe",
+    "pull_request_number": 13,
+    "contract": "spec/phase-15-d4-freeze-review.json",
+    "local_focused_tests": {
+      "tests_run": 9,
+      "result": "PASS"
+    },
+    "local_complete_regression": {
+      "tests_run": 245,
+      "result": "PASS"
+    },
+    "tracked_file_manifest": {
+      "entries": 191,
+      "result": "PASS"
+    },
+    "ci_validation": {
+      "result": "PASS",
+      "required_workflow_count": 2,
+      "successful_workflow_count": 2,
+      "selected_runs": [
+        {
+          "id": 30938748822,
+          "name": "Phase 15 treatment comparability",
+          "status": "completed",
+          "conclusion": "success",
+          "event": "pull_request",
+          "head_sha": "d321f927aff20636490ae8c8cf407410e42c6fbe",
+          "run_number": 1,
+          "html_url": "https://github.com/Zartharas/satcom-ttc-post-compromise-recovery/actions/runs/30938748822",
+          "created_at": "2026-08-04T18:28:09Z",
+          "updated_at": "2026-08-04T18:28:25Z"
+        },
+        {
+          "id": 30938748747,
+          "name": "Python and formal-model tests",
+          "status": "completed",
+          "conclusion": "success",
+          "event": "pull_request",
+          "head_sha": "d321f927aff20636490ae8c8cf407410e42c6fbe",
+          "run_number": 88,
+          "html_url": "https://github.com/Zartharas/satcom-ttc-post-compromise-recovery/actions/runs/30938748747",
+          "created_at": "2026-08-04T18:28:09Z",
+          "updated_at": "2026-08-04T18:28:47Z"
+        }
+      ]
+    }
+  },
+  "outcome_blind_attestation": {
+    "attested": true,
+    "projected_metric_values_viewed": false,
+    "raw_execution_values_viewed": false,
+    "family_outcome_values_viewed": false,
+    "aggregate_results_viewed": false,
+    "comparative_values_viewed": false
+  },
+  "question_responses": [
+    {
+      "id": "FR-01",
+      "subject": "review target",
+      "criterion": "The review target is the exact locally validated D4 checkpoint and no later unreviewed candidate mutation is included.",
+      "response": "PASS",
+      "rationale": "The locally validated D4 candidate is pinned to 34d63a554646baddd9fadf58678cfe70392fc41d. The D4R review package is separately pinned to d321f927aff20636490ae8c8cf407410e42c6fbe."
+    },
+    {
+      "id": "FR-02",
+      "subject": "outcome blindness",
+      "criterion": "The reviewer has not inspected projected values, raw values, family outcomes, aggregate results, or ranking information.",
+      "response": "PASS",
+      "rationale": "The review used contracts, identifiers, hashes, field names, validation results, and governance records only. No projected values, raw values, family outcomes, aggregates, rates, or rankings were viewed."
+    },
+    {
+      "id": "FR-03",
+      "subject": "family population",
+      "criterion": "The exact qualified family order CF-01, CF-02, CF-05, and CF-06 is justified for the candidate review scope.",
+      "response": "PASS",
+      "rationale": "The exact review population is CF-01, CF-02, CF-05, and CF-06. Each is classified as QUALIFIED_MATCH by D2; diagnostic-only families remain excluded."
+    },
+    {
+      "id": "FR-04",
+      "subject": "member registry",
+      "criterion": "The 13 declared member rows are complete, unique, and traceable to the D2/D3 contracts.",
+      "response": "PASS",
+      "rationale": "The D2, D3, and D4 contracts identify 13 unique member rows. Focused tests and validators confirmed exact identity and traceability."
+    },
+    {
+      "id": "FR-05",
+      "subject": "analysis units",
+      "criterion": "The 12 treatment-within-family analysis units are complete and do not treat member rows as independent denominator units.",
+      "response": "PASS",
+      "rationale": "The registry contains 12 unique treatment-within-family analysis units. Member rows are traceability records and are not independent denominator units."
+    },
+    {
+      "id": "FR-06",
+      "subject": "CF-02 policy variants",
+      "criterion": "B1-01 and B1-05 remain separate traceability rows under the single CF-02:B1 analysis unit.",
+      "response": "PASS",
+      "rationale": "CF-02 B1-01 and B1-05 remain separate member rows under the single CF-02:B1 analysis unit and cannot be double-counted."
+    },
+    {
+      "id": "FR-07",
+      "subject": "CF-01 cutoff",
+      "criterion": "OC-CF01-TERMINAL-ORACLE is terminal, non-adaptive, and does not permit a post-terminal message or additional recovery attempt.",
+      "response": "PASS",
+      "rationale": "OC-CF01-TERMINAL-ORACLE stops at the declared source executor terminal state and prohibits any post-terminal message or additional recovery. Oracle validation is registry-admission control only and cannot extend observation or authorize a result-selective rerun."
+    },
+    {
+      "id": "FR-08",
+      "subject": "CF-02 cutoff",
+      "criterion": "OC-CF02-NO-FAULT-COMPLETION is terminal, applies consistently to both B1 policy variants, and does not extend observation after a result.",
+      "response": "PASS",
+      "rationale": "OC-CF02-NO-FAULT-COMPLETION stops after each exact no-fault source transaction reaches its declared terminal state and oracle validation completes. The two B1 policy variants remain separate traceability rows under one CF-02:B1 analysis unit. No execution is extended after its result is known."
+    },
+    {
+      "id": "FR-09",
+      "subject": "CF-05 cutoff",
+      "criterion": "OC-CF05-STATUS-OPPORTUNITY stops after the declared telemetry opportunity and prohibits a replacement opportunity or recovery extension.",
+      "response": "PASS",
+      "rationale": "OC-CF05-STATUS-OPPORTUNITY stops immediately after the single declared post-convergence status-telemetry opportunity is processed and the terminal classification is recorded. No replacement telemetry opportunity or recovery extension is allowed."
+    },
+    {
+      "id": "FR-10",
+      "subject": "CF-06 cutoff",
+      "criterion": "OC-CF06-SINGLE-REPLAY permits exactly one declared replay evaluation after successful advancement and no additional replay, retry, or recovery action.",
+      "response": "PASS",
+      "rationale": "OC-CF06-SINGLE-REPLAY permits exactly one declared replay evaluation after successful state advancement. Rejection and unchanged-state checks must complete, after which no additional replay, retry, or recovery action is permitted."
+    },
+    {
+      "id": "FR-11",
+      "subject": "allowed fields",
+      "criterion": "Every family allowed-field list matches the authoritative D2 matrix in membership and order without widening.",
+      "response": "PASS",
+      "rationale": "Every family allowed-field list matches the authoritative D2 matrix in exact membership and order. The earlier widening defect was corrected, the builder remains fail-closed, and no field outside the family registry is permitted."
+    },
+    {
+      "id": "FR-12",
+      "subject": "missing units",
+      "criterion": "A missing declared analysis unit blocks the family display and never shrinks the denominator.",
+      "response": "PASS",
+      "rationale": "A missing declared treatment-within-family analysis unit marks coverage incomplete and blocks the family display. The denominator cannot shrink to exclude a missing or unfavorable unit."
+    },
+    {
+      "id": "FR-13",
+      "subject": "extra units",
+      "criterion": "An undeclared analysis unit is rejected and never expands the denominator.",
+      "response": "PASS",
+      "rationale": "An undeclared analysis unit is rejected and cannot expand the denominator. New members require a versioned pre-observation candidate and repeated validation."
+    },
+    {
+      "id": "FR-14",
+      "subject": "display registry",
+      "criterion": "Only identity, membership, cutoff, allowed-field-name, and coverage-completeness planning displays are currently allowed; side-by-side member values remain separately gated.",
+      "response": "PASS",
+      "rationale": "The current registry permits planning displays for identity, membership, cutoffs, allowed field names, and coverage completeness only. Side-by-side member values, rates, and aggregates remain separately gated."
+    },
+    {
+      "id": "FR-15",
+      "subject": "revision control",
+      "criterion": "Any pre-display change requires a versioned candidate and repeated validation; any post-display change must be labeled post-observation and preserve the superseded plan.",
+      "response": "PASS",
+      "rationale": "Any pre-display change requires a versioned candidate, rationale, validator update, and repeated review. Any post-display change must be labeled post-observation, preserve the superseded plan and outputs, and cannot be combined absent a later authorized protocol."
+    },
+    {
+      "id": "FR-16",
+      "subject": "claim boundary",
+      "criterion": "The review cannot authorize success rates, pooled aggregation, inference, superiority, causal interpretation, cryptographic claims, independent validation, or publication evidence.",
+      "response": "PASS",
+      "rationale": "This internal review cannot authorize success rates, pooled aggregation, inference, treatment ranking or superiority, causal interpretation, cryptographic claims, independent validation, or publication evidence."
+    }
+  ],
+  "decision_rationale": "All 16 outcome-blind review questions passed for the exact validated WP15-D4 checkpoint. The family population, member registry, treatment-within-family analysis units, four terminal cutoffs, exact D2-authorized field lists, missing-unit and extra-unit behavior, planning-display registry, and revision controls were reviewed without viewing family outcomes or comparative values. Local validation, the complete regression suite, the tracked-file manifest, and both required pull-request CI workflows passed for the review-package commit.",
+  "conditions": [
+    "The decision does not become freeze-effective until both required pull-request workflows succeed on the Git commit containing this decision record.",
+    "Acceptance freezes only the exact reviewed cutoffs, member registry, treatment-within-family analysis-unit denominators, and planning-display registry.",
+    "No family-member value display, success rate, pooled aggregation, inference, superiority, causal, cryptographic, independent-validation, or publication claim is authorized."
+  ],
+  "acceptance_prerequisites": {
+    "exact_reviewed_commit_recorded": true,
+    "all_16_questions_answered": true,
+    "all_16_questions_pass": true,
+    "d4_local_validation_passed": true,
+    "freeze_review_local_validation_passed": true,
+    "complete_regression_passed": true,
+    "tracked_file_manifest_verified": true,
+    "review_package_ci_validation_passed": true,
+    "outcome_blind_attestation_completed": true,
+    "explicit_decision_record_created": true,
+    "decision_commit_ci_validation_passed": true
+  },
+  "decision_record_commit_binding": {
+    "mode": "EXPLICIT_DECISION_COMMIT_REFERENCE",
+    "decision_commit": "307f685389d799fb5b22d481763bd171393085db",
+    "decision_commit_short": "307f685",
+    "decision_record_present_in_decision_commit": true,
+    "verification_rule": "The completed decision record is present in exact Git commit 307f685389d799fb5b22d481763bd171393085db. The freeze became effective after both required pull-request workflows succeeded for that exact commit."
+  },
+  "freeze_effectiveness": {
+    "state": "EFFECTIVE",
+    "reason": "ACCEPT_DECISION_AND_EXACT_DECISION_COMMIT_CI_PASS",
+    "effective_utc": "20260804T192205Z",
+    "decision_commit": "307f685389d799fb5b22d481763bd171393085db",
+    "decision_commit_ci_validation": "PASS",
+    "required_event": "pull_request",
+    "required_workflows": [
+      "Phase 15 treatment comparability",
+      "Python and formal-model tests"
+    ],
+    "ci_evidence": {
+      "required_workflow_count": 2,
+      "successful_workflow_count": 2,
+      "selected_runs": [
+        {
+          "id": 30942565654,
+          "name": "Phase 15 treatment comparability",
+          "status": "completed",
+          "conclusion": "success",
+          "event": "pull_request",
+          "head_sha": "307f685389d799fb5b22d481763bd171393085db",
+          "run_number": 2,
+          "html_url": "https://github.com/Zartharas/satcom-ttc-post-compromise-recovery/actions/runs/30942565654",
+          "created_at": "2026-08-04T19:17:04Z",
+          "updated_at": "2026-08-04T19:17:13Z"
+        },
+        {
+          "id": 30942565653,
+          "name": "Python and formal-model tests",
+          "status": "completed",
+          "conclusion": "success",
+          "event": "pull_request",
+          "head_sha": "307f685389d799fb5b22d481763bd171393085db",
+          "run_number": 89,
+          "html_url": "https://github.com/Zartharas/satcom-ttc-post-compromise-recovery/actions/runs/30942565653",
+          "created_at": "2026-08-04T19:17:04Z",
+          "updated_at": "2026-08-04T19:17:51Z"
+        }
+      ]
+    },
+    "effectiveness_rule_satisfied": true
+  },
+  "decision_effects_on_effectiveness": {
+    "observation_cutoffs": "EXACT_REVIEWED_OBJECT_FROZEN",
+    "analysis_unit_denominators": "EXACT_REVIEWED_OBJECT_FROZEN",
+    "member_registry": "EXACT_REVIEWED_OBJECT_FROZEN",
+    "allowed_planning_displays": "EXACT_REVIEWED_OBJECT_FROZEN",
+    "publication_analysis_plan": "NOT_FROZEN"
+  },
+  "claim_boundary": {
+    "family_member_value_display": "NOT_YET_AUTHORIZED",
+    "family_specific_descriptive_comparison": "NOT_YET_AUTHORIZED",
+    "success_rate_denominator": "NOT_DEFINED",
+    "pooled_cross_treatment_aggregation": "NOT_PERMITTED",
+    "success_rate_or_percentage": "NOT_PERMITTED",
+    "inferential_statistics": "NOT_PERMITTED",
+    "treatment_superiority": "NOT_PERMITTED",
+    "causal_interpretation": "NOT_PERMITTED",
+    "cryptographic_security_or_pcs": "NOT_PERMITTED",
+    "independent_validation": "NOT_PERMITTED",
+    "publication_evidence": "NOT_PERMITTED"
+  },
+  "publication_evidence": false,
+  "decision_commit": {
+    "commit": "307f685389d799fb5b22d481763bd171393085db",
+    "short_commit": "307f685",
+    "formal_decision": "ACCEPT",
+    "local_validation": {
+      "d4f_decision_tests": {
+        "tests_run": 9,
+        "result": "PASS"
+      },
+      "complete_regression": {
+        "tests_run": 254,
+        "result": "PASS"
+      },
+      "tracked_file_manifest": {
+        "entries": 195,
+        "result": "PASS"
+      }
+    },
+    "ci_validation": {
+      "result": "PASS",
+      "required_workflow_count": 2,
+      "successful_workflow_count": 2,
+      "selected_runs": [
+        {
+          "id": 30942565654,
+          "name": "Phase 15 treatment comparability",
+          "status": "completed",
+          "conclusion": "success",
+          "event": "pull_request",
+          "head_sha": "307f685389d799fb5b22d481763bd171393085db",
+          "run_number": 2,
+          "html_url": "https://github.com/Zartharas/satcom-ttc-post-compromise-recovery/actions/runs/30942565654",
+          "created_at": "2026-08-04T19:17:04Z",
+          "updated_at": "2026-08-04T19:17:13Z"
+        },
+        {
+          "id": 30942565653,
+          "name": "Python and formal-model tests",
+          "status": "completed",
+          "conclusion": "success",
+          "event": "pull_request",
+          "head_sha": "307f685389d799fb5b22d481763bd171393085db",
+          "run_number": 89,
+          "html_url": "https://github.com/Zartharas/satcom-ttc-post-compromise-recovery/actions/runs/30942565653",
+          "created_at": "2026-08-04T19:17:04Z",
+          "updated_at": "2026-08-04T19:17:51Z"
+        }
+      ]
+    }
+  },
+  "conditions_satisfied": {
+    "decision_commit_ci_passed": true,
+    "exact_reviewed_objects_frozen": true,
+    "closed_claim_gates_preserved": true
+  }
+}
