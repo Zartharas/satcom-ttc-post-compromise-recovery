@@ -2,7 +2,7 @@
 
 **Branch:** `phase-15/publication-preparation`  
 **Source baseline:** `04c086bc8f75fe6a7bf8e3eede3e24a8ebdf19a4`  
-**Last updated:** 2026-08-04  
+**Last updated:** 2026-08-07
 **Overall status:** `IN_PROGRESS_PROVISIONAL_PUBLICATION_PREPARATION`
 
 ## Purpose
@@ -21,6 +21,7 @@ WP15-D4R_REVIEW_QUESTIONS=FR01_THROUGH_FR16_PASS
 WP15-D4R_REVIEW_PACKAGE_CI=PASS
 WP15-D4F_FORMAL_DECISION=ACCEPT
 WP15-D4F_DECISION_COMMIT_CI=PASS
+WP15-D4F_RECONCILIATION_COMMIT_CI=PASS
 WP15-D4F_FREEZE_EFFECTIVE=true
 OBSERVATION_CUTOFF_FREEZE=EXACT_REVIEWED_OBJECT_FROZEN
 DENOMINATOR_FREEZE=EXACT_REVIEWED_OBJECT_FROZEN
@@ -70,11 +71,12 @@ Issue #3 remains open. Review delay does not block provisional engineering, repr
 - [x] Create ignored local compliance archive and commit manifest at `7af4f02`.
 - [x] Record D4 implementation and freeze gates.
 - [x] Validate D4 locally.
-- [ ] Commit the refreshed 185-entry manifest after D4 status reconciliation.
-- [ ] Update `CHANGELOG.md` before pull-request preparation.
+- [x] Reconcile and validate the tracked-file manifest through the 195-entry D4F state.
+- [x] Update `CHANGELOG.md` for D4R/D4F readiness before the final PR readiness decision.
 - [x] Open draft pull request #13 after explicit authorization.
 - [x] Complete review-package CI validation.
 - [x] Complete decision-record commit CI validation.
+- [x] Complete reconciliation-commit CI validation at `771730b` with runs `30955849832` and `30955849545`.
 
 ### WP15-B — Protocol candidate
 
@@ -112,7 +114,7 @@ Issue #3 remains open. Review delay does not block provisional engineering, repr
 
 ### WP15-D1 — Baseline metric and capture parity
 
-**Status:** `LOCALLY_VALIDATED_CI_PENDING`
+**Status:** `LOCALLY_VALIDATED_EXACT_CI_CLOSURE_NOT_RECONCILED`
 
 - [x] Execute 21 baseline scenarios.
 - [x] Preserve retained design oracles.
@@ -121,11 +123,11 @@ Issue #3 remains open. Review delay does not block provisional engineering, repr
 - [x] Capture retained configuration/catalog, logs, and manifests.
 - [x] Pass 199 local tests and all validators.
 - [x] Verify extended capture smoke.
-- [ ] Run CI after draft-PR authorization.
+- [ ] Reconcile exact historical D1 CI evidence separately; do not infer closure from later broad PR CI.
 
 ### WP15-D2 — Semantic comparability matrix
 
-**Status:** `LOCALLY_VALIDATED_CI_PENDING`
+**Status:** `LOCALLY_VALIDATED_EXACT_CI_CLOSURE_NOT_RECONCILED`
 
 - [x] Define four qualified and four diagnostic-only families.
 - [x] Classify all 36 catalog scenarios exactly once.
@@ -135,11 +137,11 @@ Issue #3 remains open. Review delay does not block provisional engineering, repr
 - [x] Prevent B1 variants from becoming independent replications.
 - [x] Pass 8 focused tests and 207 total tests.
 - [x] Commit 169-entry manifest.
-- [ ] Run CI after draft-PR authorization.
+- [ ] Reconcile exact historical D2 CI evidence separately; do not infer closure from later broad PR CI.
 
 ### WP15-D3 — Executable qualified-family population
 
-**Status:** `LOCALLY_VALIDATED_CI_PENDING`
+**Status:** `LOCALLY_VALIDATED_EXACT_CI_CLOSURE_NOT_RECONCILED`
 
 - [x] Execute CF-01, CF-02, CF-05, and CF-06.
 - [x] Produce 13 member rows and 12 analysis units.
@@ -152,11 +154,11 @@ Issue #3 remains open. Review delay does not block provisional engineering, repr
 - [x] Keep rates, aggregation, inference, and superiority disabled.
 - [x] Pass 9 focused tests and 216 total tests.
 - [x] Commit 175-entry manifest.
-- [ ] Run CI after draft-PR authorization.
+- [ ] Reconcile exact historical D3 CI evidence separately; do not infer closure from later broad PR CI.
 
 ### WP15-D3B — Immutable pilot-bundle integration
 
-**Status:** `LOCALLY_VALIDATED_CI_PENDING`
+**Status:** `LOCALLY_VALIDATED_EXACT_CI_CLOSURE_NOT_RECONCILED`
 
 - [x] Retain exact T1, baseline, D2, D3, protocol, analysis, and catalog inputs.
 - [x] Record retained paths and SHA-256 values in metadata schema `0.2.0`.
@@ -170,7 +172,7 @@ Issue #3 remains open. Review delay does not block provisional engineering, repr
 - [x] Pass 10 focused capture tests, 13 protocol tests, and 223 total tests.
 - [x] Complete clean integrated local smoke with all process exit codes zero.
 - [x] Commit 178-entry manifest.
-- [ ] Run CI after draft-PR authorization.
+- [ ] Reconcile exact historical D3B CI evidence separately; do not infer closure from later broad PR CI.
 
 ### WP15-D4 — Outcome-blind family analysis freeze candidate
 
@@ -251,11 +253,11 @@ The formal decision is `ACCEPT`, based on 16 `PASS` responses. Both required wor
 - [ ] Audit missing and weakly represented groups.
 - [ ] Confirm no post-outcome tuning.
 - [ ] Record failures, exclusions, and reruns.
-- [ ] Decide whether D4 can be frozen before comparative display.
+- [ ] Confirm during pilot audit that the effective D4 freeze remained intact; do not reopen frozen objects without a versioned, separately reviewed protocol change.
 
 ### WP15-F — Publication-candidate capture
 
-**Status:** `BLOCKED_BY_D4_VALIDATION_FREEZE_DECISION_AND_PILOT_AUDIT`
+**Status:** `BLOCKED_BY_PILOT_AUDIT_ANALYSIS_PLAN_FREEZE_AND_SEPARATE_AUTHORIZATION`
 
 - [ ] Freeze protocol, population, cutoffs, denominators, and analysis plan.
 - [ ] Execute candidate and sensitivity panel.
@@ -317,7 +319,7 @@ Pilot outputs reproduce, all manifests verify, failures remain retained, and cor
 
 ### Gate P3 — Comparative publication-candidate execution authorized
 
-D2–D4 are validated, D4 receives a separate explicit freeze decision, and the analysis plan is versioned before any comparative display or aggregate review.
+D2–D4 are validated and the D4 freeze remains effective. The publication analysis plan must be versioned and separately authorized before any comparative display or aggregate review.
 
 ### Gate P4 — Manuscript results ready
 
@@ -329,11 +331,11 @@ Claims, references, disclosure, availability, formatting, and unresolved limitat
 
 ## Immediate next actions
 
-1. Commit this post-CI tracked-state reconciliation.
-2. Push the exact reconciliation commit to draft PR #13 only after explicit authorization.
-3. Update the PR description from the preserved proposed body without marking the PR ready or merging it.
-4. Define the next pilot-execution gate separately before running or displaying family outcomes.
-5. Keep values, rates, aggregation, inference, ranking, causal, cryptographic, independent-validation, and publication gates closed.
+1. Commit this outcome-blind PR-readiness bookkeeping cleanup and refresh the 195-entry tracked-file manifest.
+2. Push the exact cleanup commit to existing draft PR #13 only after separate explicit authorization.
+3. Require both existing PR workflows to succeed on the exact cleanup commit.
+4. Perform one final zero-change PR audit before any Draft → Ready for review transition.
+5. Keep family values, rates, aggregation, inference, ranking, causal, cryptographic, independent-validation, and publication gates closed.
 
 ## Update rule
 

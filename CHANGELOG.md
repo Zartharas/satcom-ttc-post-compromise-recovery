@@ -1,5 +1,16 @@
 # Changelog
 
+## Unreleased — Phase 15 D4 review and freeze readiness
+
+- Added the separate outcome-blind WP15-D4R review package pinned to validated D4 target `34d63a5` and repaired the preflight defect recorded as RIT-019.
+- Completed FR-01 through FR-16 with `PASS` without viewing projected values, raw family outcomes, aggregates, rates, or rankings.
+- Recorded the explicit internal `ACCEPT` decision at commit `307f685389d799fb5b22d481763bd171393085db`; the record explicitly does not claim independent validation.
+- Recorded successful exact-decision-commit CI in runs `30942565654` and `30942565653`, making the reviewed D4 planning-object freeze effective.
+- Reconciled the tracked effective-freeze state at commit `771730bd0cd0401a2098c6e3fdd9b85e0727c4ff`; exact-head runs `30955849832` and `30955849545` also completed successfully.
+- Froze only the exact reviewed observation cutoffs, treatment-within-family analysis-unit denominators, member registry, and allowed planning-display registry.
+- Kept the publication analysis plan unfrozen and kept family-value display, rates, pooled aggregation, inference, superiority, causal interpretation, cryptographic claims, independent-validation claims, and publication evidence closed.
+- Kept Issue #3 open for the separate external baseline-review gate; the internal D4 review does not satisfy that independent-review requirement.
+
 ## Unreleased — Phase 14 independent review package
 
 - Added a reviewer-facing package with status `READY_FOR_OUTREACH_NOT_REVIEWED`.
