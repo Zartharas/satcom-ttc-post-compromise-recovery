@@ -86,6 +86,8 @@ Figure 1: experimental architecture and evidence flow.
 
 ## 6. Results
 
+Draft: `paper/manuscript/results.md`
+
 ### 6.1 Matched-family categorical parity — Table 1
 - CF-01: B0/B1/B2/T1 all SUCCESS/SYNC/AVAILABLE/SECURE_PROVISIONAL.
 - CF-02: all four analysis units SUCCESS/SYNC/AVAILABLE/SECURE_PROVISIONAL with verification
@@ -125,6 +127,8 @@ Keep bounded and diagnostic; detailed evidence moves to supplement.
 
 ## 7. Discussion
 
+Draft: `paper/manuscript/discussion.md`
+
 ### 7.1 Recovery versus verification evidence
 ### 7.2 Bounded retransmission and the value of a third transmission opportunity
 ### 7.3 Endpoint-state persistence as a recovery boundary
@@ -136,6 +140,8 @@ Keep bounded and diagnostic; detailed evidence moves to supplement.
 Avoid universal superiority, causal, cryptographic-proof, or prevalence claims.
 
 ## 8. Threats to Validity and Limitations
+
+Draft: `paper/manuscript/threats-to-validity.md`
 
 ### 8.1 Construct validity
 ### 8.2 Simulator/internal validity

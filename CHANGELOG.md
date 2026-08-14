@@ -17,8 +17,12 @@
 - Refreshed current-facing README/status/paper/reference/navigation files while preserving
   historical phase artifacts and their original status language.
 - Added active paper-branch push CI and final-plan `--validate-only` checking.
-- Kept independent cryptography review open and retained all cryptographic, flight, conformance,
-  causal, and real-world-prevalence claim boundaries.
+- Retained all cryptographic, flight, conformance, causal, and real-world-prevalence claim
+  boundaries; no independent cryptography review was completed.
+- Closed the optional independent-review tracker after confirming it carried no external review
+  evidence and was not required for manuscript completion.
+- Added manuscript drafts for Results, Discussion, and Threats to Validity grounded in the retained
+  final experiment.
 
 ## Unreleased — Phase 15 D4 review and freeze readiness
 

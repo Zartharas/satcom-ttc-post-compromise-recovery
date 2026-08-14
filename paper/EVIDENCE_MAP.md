@@ -8,7 +8,7 @@ not dominate the paper and every result remains traceable.
 | Manuscript content | Primary evidence | Current state |
 |---|---|---|
 | System/threat model | `spec/system-model.json`, `spec/security-invariants.json`, architecture/threat docs | Ready |
-| B0/B1/B2 design | baseline decision/spec/catalog and primary source notes | Ready internally; independent review open |
+| B0/B1/B2 design | baseline decision/spec/catalog and primary source notes | Ready internally; no independent cryptography review completed |
 | T1 design | T1 design docs/spec/controller | Ready |
 | Fault model/metrics | `src/ttc_recovery/fault_metrics.py` and final plan | Ready |
 | Matched comparison boundary | D2 matrix/documentation | Ready |
@@ -26,7 +26,7 @@ not dominate the paper and every result remains traceable.
 | Figure 2 source | `paper/figures/figure-2-outcome-distribution-source.csv` | Retained source data |
 | Figure 3 source | `paper/figures/figure-3-sensitivity-source.csv` | Retained source data |
 | Formal assurance | `formal/`, Phase 10-13 artifacts | Supporting bounded evidence |
-| Independent-review statement | Issue #3 + Phase 14 package | Open |
+| Independent-review statement | historical Phase 14 package | Not completed; optional future enhancement |
 | Reproducibility | final config, execution commit, retained manifest, bundle SHA-256 | Ready; public release pending |
 
 ## Evidence hierarchy
@@ -45,7 +45,7 @@ The manuscript must state:
 
 - synthetic software-only experiment;
 - abstract cryptographic operations;
-- baseline source-to-model mapping not independently approved until Issue #3 closes;
+- baseline source-to-model mapping was not independently cryptographically reviewed or approved;
 - finite/bounded formal models;
 - non-equivalent cross-treatment timing/retry semantics;
 - no CCSDS/SDLS conformance;

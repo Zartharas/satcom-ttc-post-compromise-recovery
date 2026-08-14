@@ -19,9 +19,9 @@ FINAL_RETAINED_EXPERIMENT=PASS
 RETAINED_RUN_ID=20260814T022506Z-gc630fb4
 RETAINED_BUNDLE_INTEGRITY=16_OF_16_PASS
 INITIAL_RESULTS_ANALYSIS=COMPLETE
-MANUSCRIPT=IN_PROGRESS
+MANUSCRIPT=RESULTS_DISCUSSION_VALIDITY_DRAFTED
 INTERNAL_EXPERIMENTAL_EVIDENCE=RETAINED_AND_ANALYZED
-INDEPENDENT_CRYPTOGRAPHY_REVIEW=OPEN_PARALLEL_ACTIVITY
+INDEPENDENT_CRYPTOGRAPHY_REVIEW=NOT_COMPLETED_NOT_ACTIVE_REQUIREMENT
 INDEPENDENT_VALIDATION=false
 PUBLICATION_EVIDENCE=false
 ```
@@ -102,13 +102,11 @@ current project state.
 
 ## Active workstreams
 
-1. Draft Results, Discussion, Threats to Validity, and Reproducibility from the retained
-   evidence.
-2. Complete the submission-stage literature/standards verification.
-3. Render publication figures from tracked figure-source data.
-4. Prepare a compact reproducibility release/archive without changing the retained result.
-5. Continue independent baseline cryptography review in parallel and scope any resulting
-   correction transparently.
+1. Integrate and polish the drafted Results, Discussion, and Threats to Validity sections.
+2. Draft Reproducibility/Artifact Availability and complete the full manuscript.
+3. Complete the submission-stage literature/standards verification.
+4. Render publication figures from tracked figure-source data.
+5. Prepare a compact reproducibility release/archive without changing the retained result.
 6. Select/final-check venue formatting and submit.
 
 ## Process rule

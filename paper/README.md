@@ -20,5 +20,6 @@ Primary navigation:
 The raw retained bundle is not committed to Git. Its SHA-256 and execution identity are recorded
 in `RESULTS_SUMMARY.md`.
 
-Independent cryptography review remains open in parallel. It is not represented as completed or
-as a prerequisite for ordinary manuscript drafting.
+Independent cryptography review was not completed and is not an active manuscript prerequisite.
+The paper retains `independent_validation=false` and describes the baseline mappings as project-defined
+abstractions.

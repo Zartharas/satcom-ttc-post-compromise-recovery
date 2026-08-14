@@ -38,8 +38,9 @@ The retained final experiment was executed once from:
   `b3b8c55a9e522ffe3f7898d7b786583e46a4dc3db0aba9d3947fd6ebdaeecaa1`.
 
 The retained bundle's 16-file checksum manifest verified completely. Result analysis is now
-active manuscript evidence, while independent cryptography review remains a parallel open
-activity.
+active manuscript evidence. No independent cryptography review was completed; the manuscript
+retains `independent_validation=false` and treats the source-to-model mappings as project-defined
+abstractions rather than independently approved cryptographic mappings.
 
 See `paper/RESULTS_SUMMARY.md` for the post-execution findings and interpretation boundaries.
 

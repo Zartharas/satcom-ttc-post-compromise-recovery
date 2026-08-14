@@ -121,4 +121,5 @@ model. It does not establish:
 - flight/RF/operational-spacecraft applicability; or
 - independent validation.
 
-Independent baseline cryptography review remains a parallel open activity.
+No independent baseline cryptography review was completed. The manuscript therefore retains
+`independent_validation=false` and treats the baseline mappings as project-defined abstractions.

@@ -52,11 +52,9 @@ Historical status strings are not rewritten after the fact.
 ## Remaining manuscript work
 
 ### Results and discussion
-- Convert `paper/RESULTS_SUMMARY.md` and tracked tables into polished Results prose.
-- Explain deterministic fault mechanisms and endpoint-restart boundary.
-- Explain Study C runtime-reachability limitation.
-- Discuss retry-budget sensitivity without claiming universal optimum.
-- Select a small number of representative adverse traces.
+- Results, Discussion, and Threats to Validity drafts are now present under `paper/manuscript/`.
+- Integrate those drafts into the full manuscript and tighten table/figure callouts.
+- Select a small number of representative adverse traces for the final narrative.
 
 ### Literature and positioning
 - Perform one submission-stage literature search for novelty/related-work completeness.
@@ -67,7 +65,7 @@ Historical status strings are not rewritten after the fact.
 - Render final publication figures from tracked source CSVs.
 - Complete Introduction, Related Work, Results, Discussion, Threats to Validity,
   Reproducibility, and Conclusion.
-- Keep source-to-model and independent-review limitations explicit.
+- Keep source-to-model limitations and the absence of independent cryptography review explicit.
 
 ### Release/submission
 - Create a compact reproducibility release/archive using the retained bundle identity.
