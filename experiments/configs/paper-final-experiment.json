@@ -1,0 +1,3505 @@
+{
+  "base_t1_parameters": {
+    "allowed_faults": [
+      "DROP",
+      "DELAY",
+      "DUPLICATE",
+      "REORDER",
+      "CONTACT_CLOSE",
+      "ENDPOINT_RESTART",
+      "STALE_COUNTER",
+      "STALE_REPLAY"
+    ],
+    "authority_epoch_floor": 0,
+    "candidate_lifetime_contacts": 3,
+    "compromise_active_keys": true,
+    "ground_epoch": 2,
+    "max_faults": 4,
+    "max_transmissions": 3,
+    "spacecraft_epoch": 1
+  },
+  "claim_boundaries": {
+    "causal_superiority": false,
+    "ccsds_sdls_conformance": false,
+    "cross_treatment_timing_or_retry_equivalence": false,
+    "cryptographic_security_or_pcs": false,
+    "flight_or_rf_validation": false,
+    "independent_validation": false,
+    "pooled_cross_family_score": false,
+    "publication_evidence_before_final_retained_execution": false,
+    "real_world_fault_prevalence": false
+  },
+  "fault_phase_applicability": [
+    {
+      "fault_kind": "DROP",
+      "phase": "RECOVERY_PREPARE"
+    },
+    {
+      "fault_kind": "DROP",
+      "phase": "RECOVERY_RESPONSE"
+    },
+    {
+      "fault_kind": "DROP",
+      "phase": "RECOVERY_COMMIT"
+    },
+    {
+      "fault_kind": "DROP",
+      "phase": "RECOVERY_CONFIRM"
+    },
+    {
+      "fault_kind": "DROP",
+      "phase": "TEST_COMMAND"
+    },
+    {
+      "fault_kind": "DROP",
+      "phase": "STATUS_TELEMETRY"
+    },
+    {
+      "fault_kind": "DELAY",
+      "phase": "RECOVERY_PREPARE"
+    },
+    {
+      "fault_kind": "DELAY",
+      "phase": "RECOVERY_RESPONSE"
+    },
+    {
+      "fault_kind": "DELAY",
+      "phase": "RECOVERY_COMMIT"
+    },
+    {
+      "fault_kind": "DELAY",
+      "phase": "RECOVERY_CONFIRM"
+    },
+    {
+      "fault_kind": "DELAY",
+      "phase": "TEST_COMMAND"
+    },
+    {
+      "fault_kind": "DELAY",
+      "phase": "STATUS_TELEMETRY"
+    },
+    {
+      "fault_kind": "DUPLICATE",
+      "phase": "RECOVERY_PREPARE"
+    },
+    {
+      "fault_kind": "DUPLICATE",
+      "phase": "RECOVERY_RESPONSE"
+    },
+    {
+      "fault_kind": "DUPLICATE",
+      "phase": "RECOVERY_COMMIT"
+    },
+    {
+      "fault_kind": "DUPLICATE",
+      "phase": "RECOVERY_CONFIRM"
+    },
+    {
+      "fault_kind": "REORDER",
+      "phase": "RECOVERY_PREPARE"
+    },
+    {
+      "fault_kind": "REORDER",
+      "phase": "RECOVERY_RESPONSE"
+    },
+    {
+      "fault_kind": "REORDER",
+      "phase": "RECOVERY_COMMIT"
+    },
+    {
+      "fault_kind": "REORDER",
+      "phase": "RECOVERY_CONFIRM"
+    },
+    {
+      "fault_kind": "CONTACT_CLOSE",
+      "phase": "RECOVERY_PREPARE"
+    },
+    {
+      "fault_kind": "CONTACT_CLOSE",
+      "phase": "RECOVERY_RESPONSE"
+    },
+    {
+      "fault_kind": "CONTACT_CLOSE",
+      "phase": "RECOVERY_COMMIT"
+    },
+    {
+      "fault_kind": "CONTACT_CLOSE",
+      "phase": "RECOVERY_CONFIRM"
+    },
+    {
+      "fault_kind": "CONTACT_CLOSE",
+      "phase": "TEST_COMMAND"
+    },
+    {
+      "fault_kind": "CONTACT_CLOSE",
+      "phase": "STATUS_TELEMETRY"
+    },
+    {
+      "fault_kind": "ENDPOINT_RESTART",
+      "phase": "RECOVERY_COMMIT"
+    },
+    {
+      "fault_kind": "ENDPOINT_RESTART",
+      "phase": "RECOVERY_CONFIRM"
+    },
+    {
+      "fault_kind": "STALE_COUNTER",
+      "phase": "RECOVERY_PREPARE"
+    },
+    {
+      "fault_kind": "STALE_REPLAY",
+      "phase": "RECOVERY_COMMIT"
+    },
+    {
+      "fault_kind": "STALE_REPLAY",
+      "phase": "RECOVERY_CONFIRM"
+    }
+  ],
+  "outcomes_read_during_plan_generation": false,
+  "paper_artifacts": {
+    "figure_2": {
+      "name": "fixed 100-schedule T1 outcome distribution",
+      "source_study": "study_c_mixed_fault_t1",
+      "value": "outcome_count"
+    },
+    "figure_3": {
+      "name": "retry-retention sensitivity",
+      "source_study": "study_d_sensitivity_t1",
+      "value": "verification_complete_count"
+    },
+    "table_1": {
+      "columns": [
+        "family_id",
+        "treatment_or_policy_variant",
+        "source_id",
+        "outcome",
+        "alignment_class",
+        "availability_state",
+        "family_specific_authorized_evidence"
+      ],
+      "name": "matched-family member outcomes"
+    },
+    "table_2": {
+      "columns": [
+        "schedule_id",
+        "schedule_class",
+        "fault_kind_or_control",
+        "phase_or_control",
+        "outcome",
+        "alignment",
+        "security_state",
+        "availability_state",
+        "verification_complete",
+        "rejection_evidence"
+      ],
+      "name": "deterministic T1 fault coverage"
+    }
+  },
+  "plan_parent_commit": "18b09cb60c8a11e309874ffc8a2cb3322610d37f",
+  "protected_inputs_sha256": {
+    "experiments/configs/phase-15-family-descriptive-plan.json": "aa159f05e6b51e9d822744d85aeb7f816d41fa2d2eb9b8e4109e1e9bc5be8413",
+    "experiments/configs/phase-15-matched-family-population.json": "46b1b8f994f863af30c8801073c465c2484bbe55257eb16e0c7facb5f16678fd",
+    "spec/phase-15-d4-freeze-decision.json": "c075000686de4cf66b289100b1de9cdde29627fb03999b45e4e5d8b68abba1d0",
+    "spec/phase-15-d4-freeze-review.json": "b6ed70fca0d1067fb891c2245e7da204652aa846e1a9c947b3c5462ed48c7f70",
+    "spec/phase-15-treatment-comparability-matrix.json": "aaa3ded6e877427e49ea3580097665658dbadda98ae914c1f1ea602f29eb076a",
+    "src/ttc_recovery/baseline_metrics.py": "4affa9aecdc104ac896b6554e503bf9cd1bce4e29d4baa7755de2d9c8a6f21b0",
+    "src/ttc_recovery/fault_metrics.py": "053020ac30c8d1a6e1651990aa4eb9d3b880e57449dfcdc596c112f039c2f3bf",
+    "src/ttc_recovery/matched_family_population.py": "05382fee4530dd2390846ca1e64571a6128d0be74db56f484b5176adba9764a6",
+    "src/ttc_recovery/t1_controller.py": "d808314be899ca29ec5733d544c16b29fcc9c01efc913d3eab2a816c49bed4ec",
+    "src/ttc_recovery/treatment_comparability.py": "2bd327533f6a8cf91d9de324bbd177170cc201c5f570161a40160b0a43d93620",
+    "tests/scenarios/baseline-test-catalog.json": "af1c7249f4e532f16516773569e6cb3d9de5fa23d6e8666c619addecc2ecb065",
+    "tests/scenarios/t1-provisional-test-catalog.json": "9d6ed7ff2ee1091c2224481e0f2bd85e8690b86616a0a45d1757b603b4c69fa6"
+  },
+  "schema_version": "1.0.0",
+  "status": "PREDECLARED_PRE_RUN_NOT_EXECUTED",
+  "studies": {
+    "study_a_matched_families": {
+      "analysis_unit_count": 12,
+      "family_ids": [
+        "CF-01",
+        "CF-02",
+        "CF-05",
+        "CF-06"
+      ],
+      "inferential_statistics": false,
+      "member_row_count": 13,
+      "member_value_display": "AUTHORIZED_ONLY_AFTER_COMMITTED_PLAN_AND_FINAL_RETAINED_EXECUTION",
+      "pooled_cross_family_aggregation": false,
+      "source_plan": "experiments/configs/phase-15-family-descriptive-plan.json"
+    },
+    "study_b_deterministic_t1": {
+      "analysis": {
+        "no_inferential_statistics": true,
+        "table": "Table 2",
+        "type": "DESCRIPTIVE_T1_ONLY"
+      },
+      "schedule_count": 40,
+      "schedules": [
+        {
+          "actions": [],
+          "id": "DET-000-NO-FAULT",
+          "schedule_class": "CONTROL",
+          "schedule_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "actions": [
+            {
+              "attempt": 1,
+              "contacts": 1,
+              "kind": "DROP",
+              "phase": "RECOVERY_PREPARE",
+              "target": "spacecraft"
+            }
+          ],
+          "fault_kind": "DROP",
+          "id": "DET-CELL-DROP-PREP",
+          "phase": "RECOVERY_PREPARE",
+          "schedule_class": "CANONICAL_CELL",
+          "schedule_sha256": "f695c60768dfe53b8e23fc2a2d486e059ffc1446285c2b6bf3962c96247e2bde"
+        },
+        {
+          "actions": [
+            {
+              "attempt": 1,
+              "contacts": 1,
+              "kind": "DROP",
+              "phase": "RECOVERY_RESPONSE",
+              "target": "ground"
+            }
+          ],
+          "fault_kind": "DROP",
+          "id": "DET-CELL-DROP-RESP",
+          "phase": "RECOVERY_RESPONSE",
+          "schedule_class": "CANONICAL_CELL",
+          "schedule_sha256": "b24fe67b1af605d152509bcbdb40109219c649a347f5dd94a84df333ee1ef468"
+        },
+        {
+          "actions": [
+            {
+              "attempt": 1,
+              "contacts": 1,
+              "kind": "DROP",
+              "phase": "RECOVERY_COMMIT",
+              "target": "spacecraft"
+            }
+          ],
+          "fault_kind": "DROP",
+          "id": "DET-CELL-DROP-COMM",
+          "phase": "RECOVERY_COMMIT",
+          "schedule_class": "CANONICAL_CELL",
+          "schedule_sha256": "d9fe54fc99b154a9a29f8fe715030e9fc6e5a9d7c24b1379408d5815bfe62e67"
+        },
+        {
+          "actions": [
+            {
+              "attempt": 1,
+              "contacts": 1,
+              "kind": "DROP",
+              "phase": "RECOVERY_CONFIRM",
+              "target": "ground"
+            }
+          ],
+          "fault_kind": "DROP",
+          "id": "DET-CELL-DROP-CONF",
+          "phase": "RECOVERY_CONFIRM",
+          "schedule_class": "CANONICAL_CELL",
+          "schedule_sha256": "8c1d805f97c9ceba111a15b8228dcbbad3944bf3bb943d7cc7d82c79db88df87"
+        },
+        {
+          "actions": [
+            {
+              "attempt": 1,
+              "contacts": 1,
+              "kind": "DROP",
+              "phase": "TEST_COMMAND",
+              "target": "spacecraft"
+            }
+          ],
+          "fault_kind": "DROP",
+          "id": "DET-CELL-DROP-TEST",
+          "phase": "TEST_COMMAND",
+          "schedule_class": "CANONICAL_CELL",
+          "schedule_sha256": "a532a193a20a5fbfb00c793a1b4cf4cc69ae511ed64cdc603b88e61bf6fd734d"
+        },
+        {
+          "actions": [
+            {
+              "attempt": 1,
+              "contacts": 1,
+              "kind": "DROP",
+              "phase": "STATUS_TELEMETRY",
+              "target": "ground"
+            }
+          ],
+          "fault_kind": "DROP",
+          "id": "DET-CELL-DROP-STAT",
+          "phase": "STATUS_TELEMETRY",
+          "schedule_class": "CANONICAL_CELL",
+          "schedule_sha256": "242edb058a4ddcc10dafa9d15e2a18a53bf5df3cb9ed1f3b3186878eea5cf023"
+        },
+        {
+          "actions": [
+            {
+              "attempt": 1,
+              "contacts": 1,
+              "kind": "DELAY",
+              "phase": "RECOVERY_PREPARE",
+              "target": "spacecraft"
+            }
+          ],
+          "fault_kind": "DELAY",
+          "id": "DET-CELL-DLY-PREP",
+          "phase": "RECOVERY_PREPARE",
+          "schedule_class": "CANONICAL_CELL",
+          "schedule_sha256": "33da8432c849e756780aa4627bb750cf41a638a0599147a0f1847a853b818338"
+        },
+        {
+          "actions": [
+            {
+              "attempt": 1,
+              "contacts": 1,
+              "kind": "DELAY",
+              "phase": "RECOVERY_RESPONSE",
+              "target": "ground"
+            }
+          ],
+          "fault_kind": "DELAY",
+          "id": "DET-CELL-DLY-RESP",
+          "phase": "RECOVERY_RESPONSE",
+          "schedule_class": "CANONICAL_CELL",
+          "schedule_sha256": "7051bc8f5222b10c7a887e624b4d714503f2050dd6f1fef44e5aed9ab3e4a748"
+        },
+        {
+          "actions": [
+            {
+              "attempt": 1,
+              "contacts": 1,
+              "kind": "DELAY",
+              "phase": "RECOVERY_COMMIT",
+              "target": "spacecraft"
+            }
+          ],
+          "fault_kind": "DELAY",
+          "id": "DET-CELL-DLY-COMM",
+          "phase": "RECOVERY_COMMIT",
+          "schedule_class": "CANONICAL_CELL",
+          "schedule_sha256": "0afd6ae72b08d69781d54d57d378cfbd832a6768c2f8b3e0708adfded9a78223"
+        },
+        {
+          "actions": [
+            {
+              "attempt": 1,
+              "contacts": 1,
+              "kind": "DELAY",
+              "phase": "RECOVERY_CONFIRM",
+              "target": "ground"
+            }
+          ],
+          "fault_kind": "DELAY",
+          "id": "DET-CELL-DLY-CONF",
+          "phase": "RECOVERY_CONFIRM",
+          "schedule_class": "CANONICAL_CELL",
+          "schedule_sha256": "867672acf2a4bb8d155fb71d2a4c04adf365cbfc9745194f1010365480c1daee"
+        },
+        {
+          "actions": [
+            {
+              "attempt": 1,
+              "contacts": 1,
+              "kind": "DELAY",
+              "phase": "TEST_COMMAND",
+              "target": "spacecraft"
+            }
+          ],
+          "fault_kind": "DELAY",
+          "id": "DET-CELL-DLY-TEST",
+          "phase": "TEST_COMMAND",
+          "schedule_class": "CANONICAL_CELL",
+          "schedule_sha256": "9e6d91c0da5fc679e501497dc2c1bf7685f11a06c06aa4ea61cf97b9f9fec2f8"
+        },
+        {
+          "actions": [
+            {
+              "attempt": 1,
+              "contacts": 1,
+              "kind": "DELAY",
+              "phase": "STATUS_TELEMETRY",
+              "target": "ground"
+            }
+          ],
+          "fault_kind": "DELAY",
+          "id": "DET-CELL-DLY-STAT",
+          "phase": "STATUS_TELEMETRY",
+          "schedule_class": "CANONICAL_CELL",
+          "schedule_sha256": "cad3572e1ebb4e5ebdc102b9e274f358f95b83feff4e46b56a7bd112b017696b"
+        },
+        {
+          "actions": [
+            {
+              "attempt": 1,
+              "contacts": 1,
+              "kind": "DUPLICATE",
+              "phase": "RECOVERY_PREPARE",
+              "target": "spacecraft"
+            }
+          ],
+          "fault_kind": "DUPLICATE",
+          "id": "DET-CELL-DUP-PREP",
+          "phase": "RECOVERY_PREPARE",
+          "schedule_class": "CANONICAL_CELL",
+          "schedule_sha256": "9f93023b0f43ec73cc95bb7c9d8f8daf9dd578e2ddd3512121677fbe85cb93ec"
+        },
+        {
+          "actions": [
+            {
+              "attempt": 1,
+              "contacts": 1,
+              "kind": "DUPLICATE",
+              "phase": "RECOVERY_RESPONSE",
+              "target": "ground"
+            }
+          ],
+          "fault_kind": "DUPLICATE",
+          "id": "DET-CELL-DUP-RESP",
+          "phase": "RECOVERY_RESPONSE",
+          "schedule_class": "CANONICAL_CELL",
+          "schedule_sha256": "ed11c699bf8f58ab495e6c8577921fb4c92f29312f007dec3d6e129491f6a9df"
+        },
+        {
+          "actions": [
+            {
+              "attempt": 1,
+              "contacts": 1,
+              "kind": "DUPLICATE",
+              "phase": "RECOVERY_COMMIT",
+              "target": "spacecraft"
+            }
+          ],
+          "fault_kind": "DUPLICATE",
+          "id": "DET-CELL-DUP-COMM",
+          "phase": "RECOVERY_COMMIT",
+          "schedule_class": "CANONICAL_CELL",
+          "schedule_sha256": "0d3d3389a566d04e1307abafa78116da108b84c8e89917885ab651c9bec2abd3"
+        },
+        {
+          "actions": [
+            {
+              "attempt": 1,
+              "contacts": 1,
+              "kind": "DUPLICATE",
+              "phase": "RECOVERY_CONFIRM",
+              "target": "ground"
+            }
+          ],
+          "fault_kind": "DUPLICATE",
+          "id": "DET-CELL-DUP-CONF",
+          "phase": "RECOVERY_CONFIRM",
+          "schedule_class": "CANONICAL_CELL",
+          "schedule_sha256": "bbd586b7dded2d3f1f65c7cb36c81688f1eafc811225c818a995c6f6fb63045e"
+        },
+        {
+          "actions": [
+            {
+              "attempt": 1,
+              "contacts": 1,
+              "kind": "REORDER",
+              "phase": "RECOVERY_PREPARE",
+              "target": "spacecraft"
+            }
+          ],
+          "fault_kind": "REORDER",
+          "id": "DET-CELL-REO-PREP",
+          "phase": "RECOVERY_PREPARE",
+          "schedule_class": "CANONICAL_CELL",
+          "schedule_sha256": "499a8b94fb57dc214e875b7055cee00a6fff26e423b0f2e983c8d7c775c5aeeb"
+        },
+        {
+          "actions": [
+            {
+              "attempt": 1,
+              "contacts": 1,
+              "kind": "REORDER",
+              "phase": "RECOVERY_RESPONSE",
+              "target": "ground"
+            }
+          ],
+          "fault_kind": "REORDER",
+          "id": "DET-CELL-REO-RESP",
+          "phase": "RECOVERY_RESPONSE",
+          "schedule_class": "CANONICAL_CELL",
+          "schedule_sha256": "b1e8001bf38a1eff1d62115886dcbe4044ff18eb3dff89cb23101146a7026e07"
+        },
+        {
+          "actions": [
+            {
+              "attempt": 1,
+              "contacts": 1,
+              "kind": "REORDER",
+              "phase": "RECOVERY_COMMIT",
+              "target": "spacecraft"
+            }
+          ],
+          "fault_kind": "REORDER",
+          "id": "DET-CELL-REO-COMM",
+          "phase": "RECOVERY_COMMIT",
+          "schedule_class": "CANONICAL_CELL",
+          "schedule_sha256": "bc042c078078836c6b1bcb1f2d0af8b8dc0291f543fe2a8c6c733d4e23e99e1c"
+        },
+        {
+          "actions": [
+            {
+              "attempt": 1,
+              "contacts": 1,
+              "kind": "REORDER",
+              "phase": "RECOVERY_CONFIRM",
+              "target": "ground"
+            }
+          ],
+          "fault_kind": "REORDER",
+          "id": "DET-CELL-REO-CONF",
+          "phase": "RECOVERY_CONFIRM",
+          "schedule_class": "CANONICAL_CELL",
+          "schedule_sha256": "affa1e9e0be990f3ee33189c5f6a00d84ad9e88e527fa4745897714617d67a98"
+        },
+        {
+          "actions": [
+            {
+              "attempt": 1,
+              "contacts": 1,
+              "kind": "CONTACT_CLOSE",
+              "phase": "RECOVERY_PREPARE",
+              "target": "spacecraft"
+            }
+          ],
+          "fault_kind": "CONTACT_CLOSE",
+          "id": "DET-CELL-CLOSE-PREP",
+          "phase": "RECOVERY_PREPARE",
+          "schedule_class": "CANONICAL_CELL",
+          "schedule_sha256": "a956980f64ea6faeca3adda3caa5cd6a4d0e63b1352fb3b4eb612e31faadee65"
+        },
+        {
+          "actions": [
+            {
+              "attempt": 1,
+              "contacts": 1,
+              "kind": "CONTACT_CLOSE",
+              "phase": "RECOVERY_RESPONSE",
+              "target": "ground"
+            }
+          ],
+          "fault_kind": "CONTACT_CLOSE",
+          "id": "DET-CELL-CLOSE-RESP",
+          "phase": "RECOVERY_RESPONSE",
+          "schedule_class": "CANONICAL_CELL",
+          "schedule_sha256": "2e04e6e4f075072c38cdfac28d140e6486f26f05dcc3e2714c915768f4825eb7"
+        },
+        {
+          "actions": [
+            {
+              "attempt": 1,
+              "contacts": 1,
+              "kind": "CONTACT_CLOSE",
+              "phase": "RECOVERY_COMMIT",
+              "target": "spacecraft"
+            }
+          ],
+          "fault_kind": "CONTACT_CLOSE",
+          "id": "DET-CELL-CLOSE-COMM",
+          "phase": "RECOVERY_COMMIT",
+          "schedule_class": "CANONICAL_CELL",
+          "schedule_sha256": "c4167ae7e3b205ef8b3d98bb2d221295a681906df3c60365ad6af7fca156089e"
+        },
+        {
+          "actions": [
+            {
+              "attempt": 1,
+              "contacts": 1,
+              "kind": "CONTACT_CLOSE",
+              "phase": "RECOVERY_CONFIRM",
+              "target": "ground"
+            }
+          ],
+          "fault_kind": "CONTACT_CLOSE",
+          "id": "DET-CELL-CLOSE-CONF",
+          "phase": "RECOVERY_CONFIRM",
+          "schedule_class": "CANONICAL_CELL",
+          "schedule_sha256": "b2830e0f19c367590c63bac07f2d9c60c5e7cb96e66efd9d3ed5e4a8bcb027e7"
+        },
+        {
+          "actions": [
+            {
+              "attempt": 1,
+              "contacts": 1,
+              "kind": "CONTACT_CLOSE",
+              "phase": "TEST_COMMAND",
+              "target": "spacecraft"
+            }
+          ],
+          "fault_kind": "CONTACT_CLOSE",
+          "id": "DET-CELL-CLOSE-TEST",
+          "phase": "TEST_COMMAND",
+          "schedule_class": "CANONICAL_CELL",
+          "schedule_sha256": "41c22dd81eadb89c2a11d3107e3b5aab8f714e2632aacdd67059007eb77f187f"
+        },
+        {
+          "actions": [
+            {
+              "attempt": 1,
+              "contacts": 1,
+              "kind": "CONTACT_CLOSE",
+              "phase": "STATUS_TELEMETRY",
+              "target": "ground"
+            }
+          ],
+          "fault_kind": "CONTACT_CLOSE",
+          "id": "DET-CELL-CLOSE-STAT",
+          "phase": "STATUS_TELEMETRY",
+          "schedule_class": "CANONICAL_CELL",
+          "schedule_sha256": "c4ec8998bc69bac81e4dc75661dcc8db1c709bf8449c4cb3eee7e1fcdde6036a"
+        },
+        {
+          "actions": [
+            {
+              "attempt": 1,
+              "contacts": 1,
+              "kind": "ENDPOINT_RESTART",
+              "phase": "RECOVERY_COMMIT",
+              "target": "spacecraft"
+            }
+          ],
+          "fault_kind": "ENDPOINT_RESTART",
+          "id": "DET-CELL-RST-COMM",
+          "phase": "RECOVERY_COMMIT",
+          "schedule_class": "CANONICAL_CELL",
+          "schedule_sha256": "b27b5870be78ff97ab5a54ceadd2410e8212be6ad6f4eea20277d60df9ed46c5"
+        },
+        {
+          "actions": [
+            {
+              "attempt": 1,
+              "contacts": 1,
+              "kind": "ENDPOINT_RESTART",
+              "phase": "RECOVERY_CONFIRM",
+              "target": "ground"
+            }
+          ],
+          "fault_kind": "ENDPOINT_RESTART",
+          "id": "DET-CELL-RST-CONF",
+          "phase": "RECOVERY_CONFIRM",
+          "schedule_class": "CANONICAL_CELL",
+          "schedule_sha256": "6a312b6039ad2690cb46b1f5324fced06e3f99824da7ff6e7badc391bb6099c5"
+        },
+        {
+          "actions": [
+            {
+              "attempt": 1,
+              "contacts": 1,
+              "kind": "STALE_COUNTER",
+              "phase": "RECOVERY_PREPARE",
+              "target": "spacecraft"
+            }
+          ],
+          "fault_kind": "STALE_COUNTER",
+          "id": "DET-CELL-SCTR-PREP",
+          "phase": "RECOVERY_PREPARE",
+          "schedule_class": "CANONICAL_CELL",
+          "schedule_sha256": "2a8f0c3eab2f2432a987928944a6d310d032355858dbfbb8e862533fc5008981"
+        },
+        {
+          "actions": [
+            {
+              "attempt": 1,
+              "contacts": 1,
+              "kind": "STALE_REPLAY",
+              "phase": "RECOVERY_COMMIT",
+              "target": "spacecraft"
+            }
+          ],
+          "fault_kind": "STALE_REPLAY",
+          "id": "DET-CELL-SRPL-COMM",
+          "phase": "RECOVERY_COMMIT",
+          "schedule_class": "CANONICAL_CELL",
+          "schedule_sha256": "f94aadaf705444d316d508afa6264a66256384d8121e2f3e5f2df7dea654865e"
+        },
+        {
+          "actions": [
+            {
+              "attempt": 1,
+              "contacts": 1,
+              "kind": "STALE_REPLAY",
+              "phase": "RECOVERY_CONFIRM",
+              "target": "ground"
+            }
+          ],
+          "fault_kind": "STALE_REPLAY",
+          "id": "DET-CELL-SRPL-CONF",
+          "phase": "RECOVERY_CONFIRM",
+          "schedule_class": "CANONICAL_CELL",
+          "schedule_sha256": "adcb89669856ede21972912cfaad40ff38e2867a6700c2e04aa7f50127baf003"
+        },
+        {
+          "actions": [
+            {
+              "attempt": 1,
+              "contacts": 1,
+              "kind": "DROP",
+              "phase": "RECOVERY_PREPARE",
+              "target": "spacecraft"
+            },
+            {
+              "attempt": 2,
+              "contacts": 1,
+              "kind": "DROP",
+              "phase": "RECOVERY_PREPARE",
+              "target": "spacecraft"
+            },
+            {
+              "attempt": 3,
+              "contacts": 1,
+              "kind": "DROP",
+              "phase": "RECOVERY_PREPARE",
+              "target": "spacecraft"
+            }
+          ],
+          "attempts": [
+            1,
+            2,
+            3
+          ],
+          "fault_kind": "DROP",
+          "id": "DET-EXHAUST-DROP-PREP",
+          "phase": "RECOVERY_PREPARE",
+          "schedule_class": "RETRY_EXHAUSTION",
+          "schedule_sha256": "4045eab60e1e9b55b3c0e65baeeae34dc0b454c2dd078d9327043b6b6aaef458"
+        },
+        {
+          "actions": [
+            {
+              "attempt": 1,
+              "contacts": 1,
+              "kind": "DROP",
+              "phase": "RECOVERY_RESPONSE",
+              "target": "ground"
+            },
+            {
+              "attempt": 2,
+              "contacts": 1,
+              "kind": "DROP",
+              "phase": "RECOVERY_RESPONSE",
+              "target": "ground"
+            },
+            {
+              "attempt": 3,
+              "contacts": 1,
+              "kind": "DROP",
+              "phase": "RECOVERY_RESPONSE",
+              "target": "ground"
+            }
+          ],
+          "attempts": [
+            1,
+            2,
+            3
+          ],
+          "fault_kind": "DROP",
+          "id": "DET-EXHAUST-DROP-RESP",
+          "phase": "RECOVERY_RESPONSE",
+          "schedule_class": "RETRY_EXHAUSTION",
+          "schedule_sha256": "26090204314c5752aabacc12148971a04083781b7f42727135970eacf08f629a"
+        },
+        {
+          "actions": [
+            {
+              "attempt": 1,
+              "contacts": 1,
+              "kind": "DROP",
+              "phase": "RECOVERY_COMMIT",
+              "target": "spacecraft"
+            },
+            {
+              "attempt": 2,
+              "contacts": 1,
+              "kind": "DROP",
+              "phase": "RECOVERY_COMMIT",
+              "target": "spacecraft"
+            },
+            {
+              "attempt": 3,
+              "contacts": 1,
+              "kind": "DROP",
+              "phase": "RECOVERY_COMMIT",
+              "target": "spacecraft"
+            }
+          ],
+          "attempts": [
+            1,
+            2,
+            3
+          ],
+          "fault_kind": "DROP",
+          "id": "DET-EXHAUST-DROP-COMM",
+          "phase": "RECOVERY_COMMIT",
+          "schedule_class": "RETRY_EXHAUSTION",
+          "schedule_sha256": "fdcf779c9a6717ee3d77af0d61f344f5f9c3e214238521e67788e5a14edf3040"
+        },
+        {
+          "actions": [
+            {
+              "attempt": 1,
+              "contacts": 1,
+              "kind": "DROP",
+              "phase": "RECOVERY_CONFIRM",
+              "target": "ground"
+            },
+            {
+              "attempt": 2,
+              "contacts": 1,
+              "kind": "DROP",
+              "phase": "RECOVERY_CONFIRM",
+              "target": "ground"
+            },
+            {
+              "attempt": 3,
+              "contacts": 1,
+              "kind": "DROP",
+              "phase": "RECOVERY_CONFIRM",
+              "target": "ground"
+            }
+          ],
+          "attempts": [
+            1,
+            2,
+            3
+          ],
+          "fault_kind": "DROP",
+          "id": "DET-EXHAUST-DROP-CONF",
+          "phase": "RECOVERY_CONFIRM",
+          "schedule_class": "RETRY_EXHAUSTION",
+          "schedule_sha256": "f70e55a6a93589ea67032616a7114bf6b61be54a5c8c20e7bf23c395e9e8ff8c"
+        },
+        {
+          "actions": [
+            {
+              "attempt": 1,
+              "contacts": 1,
+              "kind": "CONTACT_CLOSE",
+              "phase": "RECOVERY_PREPARE",
+              "target": "spacecraft"
+            },
+            {
+              "attempt": 2,
+              "contacts": 1,
+              "kind": "CONTACT_CLOSE",
+              "phase": "RECOVERY_PREPARE",
+              "target": "spacecraft"
+            },
+            {
+              "attempt": 3,
+              "contacts": 1,
+              "kind": "CONTACT_CLOSE",
+              "phase": "RECOVERY_PREPARE",
+              "target": "spacecraft"
+            }
+          ],
+          "attempts": [
+            1,
+            2,
+            3
+          ],
+          "fault_kind": "CONTACT_CLOSE",
+          "id": "DET-EXHAUST-CLOSE-PREP",
+          "phase": "RECOVERY_PREPARE",
+          "schedule_class": "RETRY_EXHAUSTION",
+          "schedule_sha256": "7cc3ef2dde7f2adb41e8435ab19b07aafc9737b2176214f8a9efa0602d878bf2"
+        },
+        {
+          "actions": [
+            {
+              "attempt": 1,
+              "contacts": 1,
+              "kind": "CONTACT_CLOSE",
+              "phase": "RECOVERY_RESPONSE",
+              "target": "ground"
+            },
+            {
+              "attempt": 2,
+              "contacts": 1,
+              "kind": "CONTACT_CLOSE",
+              "phase": "RECOVERY_RESPONSE",
+              "target": "ground"
+            },
+            {
+              "attempt": 3,
+              "contacts": 1,
+              "kind": "CONTACT_CLOSE",
+              "phase": "RECOVERY_RESPONSE",
+              "target": "ground"
+            }
+          ],
+          "attempts": [
+            1,
+            2,
+            3
+          ],
+          "fault_kind": "CONTACT_CLOSE",
+          "id": "DET-EXHAUST-CLOSE-RESP",
+          "phase": "RECOVERY_RESPONSE",
+          "schedule_class": "RETRY_EXHAUSTION",
+          "schedule_sha256": "4ef6bdf1a4a0a196c15484c40e87bfe7d92b14bf3bebade536bdf7c9656260e8"
+        },
+        {
+          "actions": [
+            {
+              "attempt": 1,
+              "contacts": 1,
+              "kind": "CONTACT_CLOSE",
+              "phase": "RECOVERY_COMMIT",
+              "target": "spacecraft"
+            },
+            {
+              "attempt": 2,
+              "contacts": 1,
+              "kind": "CONTACT_CLOSE",
+              "phase": "RECOVERY_COMMIT",
+              "target": "spacecraft"
+            },
+            {
+              "attempt": 3,
+              "contacts": 1,
+              "kind": "CONTACT_CLOSE",
+              "phase": "RECOVERY_COMMIT",
+              "target": "spacecraft"
+            }
+          ],
+          "attempts": [
+            1,
+            2,
+            3
+          ],
+          "fault_kind": "CONTACT_CLOSE",
+          "id": "DET-EXHAUST-CLOSE-COMM",
+          "phase": "RECOVERY_COMMIT",
+          "schedule_class": "RETRY_EXHAUSTION",
+          "schedule_sha256": "9eb81270996efe42f1414ef235b40488ef94e976ba2b38447aceec6a7e203149"
+        },
+        {
+          "actions": [
+            {
+              "attempt": 1,
+              "contacts": 1,
+              "kind": "CONTACT_CLOSE",
+              "phase": "RECOVERY_CONFIRM",
+              "target": "ground"
+            },
+            {
+              "attempt": 2,
+              "contacts": 1,
+              "kind": "CONTACT_CLOSE",
+              "phase": "RECOVERY_CONFIRM",
+              "target": "ground"
+            },
+            {
+              "attempt": 3,
+              "contacts": 1,
+              "kind": "CONTACT_CLOSE",
+              "phase": "RECOVERY_CONFIRM",
+              "target": "ground"
+            }
+          ],
+          "attempts": [
+            1,
+            2,
+            3
+          ],
+          "fault_kind": "CONTACT_CLOSE",
+          "id": "DET-EXHAUST-CLOSE-CONF",
+          "phase": "RECOVERY_CONFIRM",
+          "schedule_class": "RETRY_EXHAUSTION",
+          "schedule_sha256": "d6bcb3aac3020a47553b79468c36ba34efc06ebc50fb9a1cd9cfad235c821fa8"
+        }
+      ],
+      "valid_fault_phase_cell_count": 31
+    },
+    "study_c_mixed_fault_t1": {
+      "analysis": {
+        "confidence_intervals": false,
+        "denominator": 100,
+        "fault_distribution_counts": true,
+        "hypothesis_tests": false,
+        "outcome_count_and_percentage": true,
+        "real_world_prevalence_inference": false,
+        "security_and_availability_counts": true,
+        "t1_duration_transmission_retry_descriptives": [
+          "median",
+          "min",
+          "max"
+        ],
+        "verification_complete_count": true
+      },
+      "covered_valid_fault_phase_cells": 31,
+      "generator_rules": {
+        "deduplication_key": [
+          "phase",
+          "attempt",
+          "kind"
+        ],
+        "delay_contacts": "uniform integer 1..2",
+        "fault_count": "uniform integer 0..4",
+        "fault_kind": "uniform over eight supported kinds",
+        "handshake_attempt": "uniform integer 1..3",
+        "phase": "uniform over valid phases for selected kind"
+      },
+      "schedule_count": 100,
+      "schedules": [
+        {
+          "actions": [
+            {
+              "attempt": 2,
+              "contacts": 2,
+              "kind": "DELAY",
+              "phase": "RECOVERY_PREPARE",
+              "target": "spacecraft"
+            },
+            {
+              "attempt": 1,
+              "contacts": 2,
+              "kind": "DELAY",
+              "phase": "TEST_COMMAND",
+              "target": "spacecraft"
+            }
+          ],
+          "id": "MIX-10001",
+          "schedule_class": "FIXED_SEEDED_MIXED_FAULT",
+          "schedule_sha256": "af9e96861526419183b671f17c869ff27efb78b9b3aacb5f12e50bb5acc7c416",
+          "seed": 10001
+        },
+        {
+          "actions": [
+            {
+              "attempt": 3,
+              "contacts": 1,
+              "kind": "REORDER",
+              "phase": "RECOVERY_PREPARE",
+              "target": "spacecraft"
+            },
+            {
+              "attempt": 3,
+              "contacts": 1,
+              "kind": "ENDPOINT_RESTART",
+              "phase": "RECOVERY_COMMIT",
+              "target": "spacecraft"
+            },
+            {
+              "attempt": 1,
+              "contacts": 1,
+              "kind": "DROP",
+              "phase": "STATUS_TELEMETRY",
+              "target": "ground"
+            }
+          ],
+          "id": "MIX-10002",
+          "schedule_class": "FIXED_SEEDED_MIXED_FAULT",
+          "schedule_sha256": "d115026b2611f1db6b06cc7c743da27ce8687b681dd4917bcbfeee6e0aec9bc1",
+          "seed": 10002
+        },
+        {
+          "actions": [
+            {
+              "attempt": 1,
+              "contacts": 1,
+              "kind": "DROP",
+              "phase": "RECOVERY_CONFIRM",
+              "target": "ground"
+            }
+          ],
+          "id": "MIX-10003",
+          "schedule_class": "FIXED_SEEDED_MIXED_FAULT",
+          "schedule_sha256": "8c1d805f97c9ceba111a15b8228dcbbad3944bf3bb943d7cc7d82c79db88df87",
+          "seed": 10003
+        },
+        {
+          "actions": [
+            {
+              "attempt": 3,
+              "contacts": 1,
+              "kind": "STALE_COUNTER",
+              "phase": "RECOVERY_PREPARE",
+              "target": "spacecraft"
+            },
+            {
+              "attempt": 1,
+              "contacts": 1,
+              "kind": "DUPLICATE",
+              "phase": "RECOVERY_RESPONSE",
+              "target": "ground"
+            },
+            {
+              "attempt": 3,
+              "contacts": 1,
+              "kind": "STALE_REPLAY",
+              "phase": "RECOVERY_COMMIT",
+              "target": "spacecraft"
+            },
+            {
+              "attempt": 1,
+              "contacts": 1,
+              "kind": "CONTACT_CLOSE",
+              "phase": "STATUS_TELEMETRY",
+              "target": "ground"
+            }
+          ],
+          "id": "MIX-10004",
+          "schedule_class": "FIXED_SEEDED_MIXED_FAULT",
+          "schedule_sha256": "c59d7fed27ef3202e519bbcacef25ebce37e33d5aa37482f096d4295d81a7ea4",
+          "seed": 10004
+        },
+        {
+          "actions": [
+            {
+              "attempt": 1,
+              "contacts": 1,
+              "kind": "DELAY",
+              "phase": "RECOVERY_COMMIT",
+              "target": "spacecraft"
+            },
+            {
+              "attempt": 2,
+              "contacts": 1,
+              "kind": "STALE_REPLAY",
+              "phase": "RECOVERY_COMMIT",
+              "target": "spacecraft"
+            },
+            {
+              "attempt": 3,
+              "contacts": 1,
+              "kind": "DROP",
+              "phase": "RECOVERY_COMMIT",
+              "target": "spacecraft"
+            },
+            {
+              "attempt": 3,
+              "contacts": 1,
+              "kind": "STALE_REPLAY",
+              "phase": "RECOVERY_CONFIRM",
+              "target": "ground"
+            }
+          ],
+          "id": "MIX-10005",
+          "schedule_class": "FIXED_SEEDED_MIXED_FAULT",
+          "schedule_sha256": "8c3c7a4be3c7d1e24d906e8233cf1b513d623b15bd9b2c09187602199cb3da3d",
+          "seed": 10005
+        },
+        {
+          "actions": [
+            {
+              "attempt": 3,
+              "contacts": 1,
+              "kind": "DROP",
+              "phase": "RECOVERY_RESPONSE",
+              "target": "ground"
+            }
+          ],
+          "id": "MIX-10006",
+          "schedule_class": "FIXED_SEEDED_MIXED_FAULT",
+          "schedule_sha256": "83e2ccf535a24acbd46424b05672c5b60f66af6e7d686c70c36cb59c87034e3a",
+          "seed": 10006
+        },
+        {
+          "actions": [
+            {
+              "attempt": 3,
+              "contacts": 1,
+              "kind": "CONTACT_CLOSE",
+              "phase": "RECOVERY_RESPONSE",
+              "target": "ground"
+            },
+            {
+              "attempt": 2,
+              "contacts": 1,
+              "kind": "DUPLICATE",
+              "phase": "RECOVERY_COMMIT",
+              "target": "spacecraft"
+            }
+          ],
+          "id": "MIX-10007",
+          "schedule_class": "FIXED_SEEDED_MIXED_FAULT",
+          "schedule_sha256": "0ac15af614374681c9229212452954dad9a905c906339342f405f07d31b76657",
+          "seed": 10007
+        },
+        {
+          "actions": [
+            {
+              "attempt": 2,
+              "contacts": 1,
+              "kind": "STALE_REPLAY",
+              "phase": "RECOVERY_CONFIRM",
+              "target": "ground"
+            }
+          ],
+          "id": "MIX-10008",
+          "schedule_class": "FIXED_SEEDED_MIXED_FAULT",
+          "schedule_sha256": "91c877c6dcd2425a3a1b9ea5177486ad48d0c3cebea8affcf9845301d4de2c50",
+          "seed": 10008
+        },
+        {
+          "actions": [
+            {
+              "attempt": 1,
+              "contacts": 1,
+              "kind": "REORDER",
+              "phase": "RECOVERY_COMMIT",
+              "target": "spacecraft"
+            },
+            {
+              "attempt": 1,
+              "contacts": 2,
+              "kind": "DELAY",
+              "phase": "STATUS_TELEMETRY",
+              "target": "ground"
+            }
+          ],
+          "id": "MIX-10009",
+          "schedule_class": "FIXED_SEEDED_MIXED_FAULT",
+          "schedule_sha256": "22aa2fe0566e5d479f43eb924f4d824c90d5b41e043162a7497e769940827a45",
+          "seed": 10009
+        },
+        {
+          "actions": [
+            {
+              "attempt": 2,
+              "contacts": 1,
+              "kind": "CONTACT_CLOSE",
+              "phase": "RECOVERY_PREPARE",
+              "target": "spacecraft"
+            },
+            {
+              "attempt": 1,
+              "contacts": 1,
+              "kind": "CONTACT_CLOSE",
+              "phase": "RECOVERY_COMMIT",
+              "target": "spacecraft"
+            },
+            {
+              "attempt": 1,
+              "contacts": 1,
+              "kind": "STALE_REPLAY",
+              "phase": "RECOVERY_COMMIT",
+              "target": "spacecraft"
+            },
+            {
+              "attempt": 1,
+              "contacts": 1,
+              "kind": "DROP",
+              "phase": "RECOVERY_CONFIRM",
+              "target": "ground"
+            }
+          ],
+          "id": "MIX-10010",
+          "schedule_class": "FIXED_SEEDED_MIXED_FAULT",
+          "schedule_sha256": "45180d49ad0389ae2559fb5f3a905464f856a471170e04a66d98539ce35e1e0f",
+          "seed": 10010
+        },
+        {
+          "actions": [
+            {
+              "attempt": 1,
+              "contacts": 1,
+              "kind": "CONTACT_CLOSE",
+              "phase": "STATUS_TELEMETRY",
+              "target": "ground"
+            }
+          ],
+          "id": "MIX-10011",
+          "schedule_class": "FIXED_SEEDED_MIXED_FAULT",
+          "schedule_sha256": "c4ec8998bc69bac81e4dc75661dcc8db1c709bf8449c4cb3eee7e1fcdde6036a",
+          "seed": 10011
+        },
+        {
+          "actions": [
+            {
+              "attempt": 1,
+              "contacts": 1,
+              "kind": "STALE_COUNTER",
+              "phase": "RECOVERY_PREPARE",
+              "target": "spacecraft"
+            },
+            {
+              "attempt": 2,
+              "contacts": 1,
+              "kind": "DELAY",
+              "phase": "RECOVERY_PREPARE",
+              "target": "spacecraft"
+            },
+            {
+              "attempt": 2,
+              "contacts": 1,
+              "kind": "REORDER",
+              "phase": "RECOVERY_COMMIT",
+              "target": "spacecraft"
+            }
+          ],
+          "id": "MIX-10012",
+          "schedule_class": "FIXED_SEEDED_MIXED_FAULT",
+          "schedule_sha256": "386809927a112d0cbe1287c5f0c81903faf4a5ec9b241070e46248d91966be66",
+          "seed": 10012
+        },
+        {
+          "actions": [
+            {
+              "attempt": 3,
+              "contacts": 1,
+              "kind": "STALE_COUNTER",
+              "phase": "RECOVERY_PREPARE",
+              "target": "spacecraft"
+            },
+            {
+              "attempt": 3,
+              "contacts": 1,
+              "kind": "STALE_REPLAY",
+              "phase": "RECOVERY_COMMIT",
+              "target": "spacecraft"
+            }
+          ],
+          "id": "MIX-10013",
+          "schedule_class": "FIXED_SEEDED_MIXED_FAULT",
+          "schedule_sha256": "2cfa45dba0d5a90645f71e88520cad8f2d8c54548fb920c4308ee025b6a16ee9",
+          "seed": 10013
+        },
+        {
+          "actions": [
+            {
+              "attempt": 2,
+              "contacts": 1,
+              "kind": "STALE_COUNTER",
+              "phase": "RECOVERY_PREPARE",
+              "target": "spacecraft"
+            },
+            {
+              "attempt": 3,
+              "contacts": 1,
+              "kind": "DUPLICATE",
+              "phase": "RECOVERY_RESPONSE",
+              "target": "ground"
+            },
+            {
+              "attempt": 1,
+              "contacts": 1,
+              "kind": "REORDER",
+              "phase": "RECOVERY_COMMIT",
+              "target": "spacecraft"
+            }
+          ],
+          "id": "MIX-10014",
+          "schedule_class": "FIXED_SEEDED_MIXED_FAULT",
+          "schedule_sha256": "4d7ac59b9478e37eb041a2296289be8007eeb74bdcab440e29db58a668811201",
+          "seed": 10014
+        },
+        {
+          "actions": [
+            {
+              "attempt": 2,
+              "contacts": 1,
+              "kind": "REORDER",
+              "phase": "RECOVERY_CONFIRM",
+              "target": "ground"
+            }
+          ],
+          "id": "MIX-10015",
+          "schedule_class": "FIXED_SEEDED_MIXED_FAULT",
+          "schedule_sha256": "dc6b78a8cf8c0561cae0ecfb7abf3e893cb0d3c8ee348f61f55f818834ba15c8",
+          "seed": 10015
+        },
+        {
+          "actions": [
+            {
+              "attempt": 3,
+              "contacts": 1,
+              "kind": "DROP",
+              "phase": "RECOVERY_RESPONSE",
+              "target": "ground"
+            },
+            {
+              "attempt": 3,
+              "contacts": 1,
+              "kind": "ENDPOINT_RESTART",
+              "phase": "RECOVERY_COMMIT",
+              "target": "spacecraft"
+            },
+            {
+              "attempt": 1,
+              "contacts": 1,
+              "kind": "ENDPOINT_RESTART",
+              "phase": "RECOVERY_CONFIRM",
+              "target": "ground"
+            }
+          ],
+          "id": "MIX-10016",
+          "schedule_class": "FIXED_SEEDED_MIXED_FAULT",
+          "schedule_sha256": "993baa597dd17da51871386aac43ddbaee4bb2c1b324f239e29b7680482a7de1",
+          "seed": 10016
+        },
+        {
+          "actions": [
+            {
+              "attempt": 3,
+              "contacts": 1,
+              "kind": "STALE_COUNTER",
+              "phase": "RECOVERY_PREPARE",
+              "target": "spacecraft"
+            },
+            {
+              "attempt": 3,
+              "contacts": 1,
+              "kind": "CONTACT_CLOSE",
+              "phase": "RECOVERY_RESPONSE",
+              "target": "ground"
+            },
+            {
+              "attempt": 1,
+              "contacts": 1,
+              "kind": "STALE_REPLAY",
+              "phase": "RECOVERY_COMMIT",
+              "target": "spacecraft"
+            },
+            {
+              "attempt": 2,
+              "contacts": 1,
+              "kind": "REORDER",
+              "phase": "RECOVERY_CONFIRM",
+              "target": "ground"
+            }
+          ],
+          "id": "MIX-10017",
+          "schedule_class": "FIXED_SEEDED_MIXED_FAULT",
+          "schedule_sha256": "71af50932d451845feecc355e20ab765b92805751c9c72543d69d803f22787b5",
+          "seed": 10017
+        },
+        {
+          "actions": [
+            {
+              "attempt": 1,
+              "contacts": 1,
+              "kind": "REORDER",
+              "phase": "RECOVERY_PREPARE",
+              "target": "spacecraft"
+            },
+            {
+              "attempt": 2,
+              "contacts": 1,
+              "kind": "DUPLICATE",
+              "phase": "RECOVERY_RESPONSE",
+              "target": "ground"
+            },
+            {
+              "attempt": 2,
+              "contacts": 1,
+              "kind": "REORDER",
+              "phase": "RECOVERY_RESPONSE",
+              "target": "ground"
+            },
+            {
+              "attempt": 2,
+              "contacts": 1,
+              "kind": "CONTACT_CLOSE",
+              "phase": "RECOVERY_CONFIRM",
+              "target": "ground"
+            }
+          ],
+          "id": "MIX-10018",
+          "schedule_class": "FIXED_SEEDED_MIXED_FAULT",
+          "schedule_sha256": "773f76f4a8936c191486788f8bdcbba0fe33118708038d9c09027038485264d7",
+          "seed": 10018
+        },
+        {
+          "actions": [
+            {
+              "attempt": 1,
+              "contacts": 1,
+              "kind": "REORDER",
+              "phase": "RECOVERY_RESPONSE",
+              "target": "ground"
+            },
+            {
+              "attempt": 3,
+              "contacts": 1,
+              "kind": "ENDPOINT_RESTART",
+              "phase": "RECOVERY_COMMIT",
+              "target": "spacecraft"
+            },
+            {
+              "attempt": 3,
+              "contacts": 1,
+              "kind": "STALE_REPLAY",
+              "phase": "RECOVERY_COMMIT",
+              "target": "spacecraft"
+            }
+          ],
+          "id": "MIX-10019",
+          "schedule_class": "FIXED_SEEDED_MIXED_FAULT",
+          "schedule_sha256": "2cd09ae2c470a99361c311e120246fa27f5a4d34c7fe2c7cd79c279e17b415f1",
+          "seed": 10019
+        },
+        {
+          "actions": [],
+          "id": "MIX-10020",
+          "schedule_class": "FIXED_SEEDED_MIXED_FAULT",
+          "schedule_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "seed": 10020
+        },
+        {
+          "actions": [
+            {
+              "attempt": 1,
+              "contacts": 1,
+              "kind": "STALE_COUNTER",
+              "phase": "RECOVERY_PREPARE",
+              "target": "spacecraft"
+            },
+            {
+              "attempt": 1,
+              "contacts": 1,
+              "kind": "STALE_REPLAY",
+              "phase": "RECOVERY_COMMIT",
+              "target": "spacecraft"
+            },
+            {
+              "attempt": 2,
+              "contacts": 1,
+              "kind": "ENDPOINT_RESTART",
+              "phase": "RECOVERY_COMMIT",
+              "target": "spacecraft"
+            },
+            {
+              "attempt": 3,
+              "contacts": 1,
+              "kind": "DROP",
+              "phase": "RECOVERY_CONFIRM",
+              "target": "ground"
+            }
+          ],
+          "id": "MIX-10021",
+          "schedule_class": "FIXED_SEEDED_MIXED_FAULT",
+          "schedule_sha256": "036f469048cbbe4ec314bc483aa45e76ab3fb28750c70dcbf30a80b6294418d6",
+          "seed": 10021
+        },
+        {
+          "actions": [
+            {
+              "attempt": 2,
+              "contacts": 1,
+              "kind": "CONTACT_CLOSE",
+              "phase": "RECOVERY_PREPARE",
+              "target": "spacecraft"
+            },
+            {
+              "attempt": 3,
+              "contacts": 1,
+              "kind": "REORDER",
+              "phase": "RECOVERY_RESPONSE",
+              "target": "ground"
+            },
+            {
+              "attempt": 3,
+              "contacts": 1,
+              "kind": "ENDPOINT_RESTART",
+              "phase": "RECOVERY_CONFIRM",
+              "target": "ground"
+            }
+          ],
+          "id": "MIX-10022",
+          "schedule_class": "FIXED_SEEDED_MIXED_FAULT",
+          "schedule_sha256": "1a96fc68333d0342127c27c140f4136c6ab751562267c20311b28143e4710bcf",
+          "seed": 10022
+        },
+        {
+          "actions": [
+            {
+              "attempt": 2,
+              "contacts": 1,
+              "kind": "CONTACT_CLOSE",
+              "phase": "RECOVERY_CONFIRM",
+              "target": "ground"
+            }
+          ],
+          "id": "MIX-10023",
+          "schedule_class": "FIXED_SEEDED_MIXED_FAULT",
+          "schedule_sha256": "9acf2b92ca862df11eec7f175c21130d617ff4bd56f065fa0418a9f7a275637d",
+          "seed": 10023
+        },
+        {
+          "actions": [
+            {
+              "attempt": 1,
+              "contacts": 1,
+              "kind": "DROP",
+              "phase": "TEST_COMMAND",
+              "target": "spacecraft"
+            }
+          ],
+          "id": "MIX-10024",
+          "schedule_class": "FIXED_SEEDED_MIXED_FAULT",
+          "schedule_sha256": "a532a193a20a5fbfb00c793a1b4cf4cc69ae511ed64cdc603b88e61bf6fd734d",
+          "seed": 10024
+        },
+        {
+          "actions": [
+            {
+              "attempt": 3,
+              "contacts": 2,
+              "kind": "DELAY",
+              "phase": "RECOVERY_RESPONSE",
+              "target": "ground"
+            },
+            {
+              "attempt": 1,
+              "contacts": 1,
+              "kind": "ENDPOINT_RESTART",
+              "phase": "RECOVERY_COMMIT",
+              "target": "spacecraft"
+            },
+            {
+              "attempt": 1,
+              "contacts": 1,
+              "kind": "ENDPOINT_RESTART",
+              "phase": "RECOVERY_CONFIRM",
+              "target": "ground"
+            }
+          ],
+          "id": "MIX-10025",
+          "schedule_class": "FIXED_SEEDED_MIXED_FAULT",
+          "schedule_sha256": "b7812fffa6f0a5b59f94114a15e37935590850772a29d2c71c5ec0131c110733",
+          "seed": 10025
+        },
+        {
+          "actions": [
+            {
+              "attempt": 1,
+              "contacts": 1,
+              "kind": "ENDPOINT_RESTART",
+              "phase": "RECOVERY_COMMIT",
+              "target": "spacecraft"
+            },
+            {
+              "attempt": 3,
+              "contacts": 1,
+              "kind": "REORDER",
+              "phase": "RECOVERY_COMMIT",
+              "target": "spacecraft"
+            },
+            {
+              "attempt": 1,
+              "contacts": 1,
+              "kind": "ENDPOINT_RESTART",
+              "phase": "RECOVERY_CONFIRM",
+              "target": "ground"
+            },
+            {
+              "attempt": 2,
+              "contacts": 1,
+              "kind": "STALE_REPLAY",
+              "phase": "RECOVERY_CONFIRM",
+              "target": "ground"
+            }
+          ],
+          "id": "MIX-10026",
+          "schedule_class": "FIXED_SEEDED_MIXED_FAULT",
+          "schedule_sha256": "f9a7547e011d61b946029215bfb96b50b945366060a923b97443745f217f7e40",
+          "seed": 10026
+        },
+        {
+          "actions": [
+            {
+              "attempt": 1,
+              "contacts": 1,
+              "kind": "STALE_COUNTER",
+              "phase": "RECOVERY_PREPARE",
+              "target": "spacecraft"
+            }
+          ],
+          "id": "MIX-10027",
+          "schedule_class": "FIXED_SEEDED_MIXED_FAULT",
+          "schedule_sha256": "2a8f0c3eab2f2432a987928944a6d310d032355858dbfbb8e862533fc5008981",
+          "seed": 10027
+        },
+        {
+          "actions": [
+            {
+              "attempt": 2,
+              "contacts": 1,
+              "kind": "DUPLICATE",
+              "phase": "RECOVERY_RESPONSE",
+              "target": "ground"
+            },
+            {
+              "attempt": 3,
+              "contacts": 1,
+              "kind": "DUPLICATE",
+              "phase": "RECOVERY_RESPONSE",
+              "target": "ground"
+            }
+          ],
+          "id": "MIX-10028",
+          "schedule_class": "FIXED_SEEDED_MIXED_FAULT",
+          "schedule_sha256": "7a3a1561a10c521e2fc4298f04fee7b88a2aba665946e045668c9af1dbf25edf",
+          "seed": 10028
+        },
+        {
+          "actions": [
+            {
+              "attempt": 3,
+              "contacts": 1,
+              "kind": "STALE_COUNTER",
+              "phase": "RECOVERY_PREPARE",
+              "target": "spacecraft"
+            }
+          ],
+          "id": "MIX-10029",
+          "schedule_class": "FIXED_SEEDED_MIXED_FAULT",
+          "schedule_sha256": "9a68882b24b408cb3802348f6ac90ce86a34cb404bd9bae4ca329cf09b44960b",
+          "seed": 10029
+        },
+        {
+          "actions": [
+            {
+              "attempt": 2,
+              "contacts": 1,
+              "kind": "DROP",
+              "phase": "RECOVERY_PREPARE",
+              "target": "spacecraft"
+            },
+            {
+              "attempt": 3,
+              "contacts": 1,
+              "kind": "STALE_COUNTER",
+              "phase": "RECOVERY_PREPARE",
+              "target": "spacecraft"
+            },
+            {
+              "attempt": 1,
+              "contacts": 1,
+              "kind": "REORDER",
+              "phase": "RECOVERY_COMMIT",
+              "target": "spacecraft"
+            },
+            {
+              "attempt": 1,
+              "contacts": 1,
+              "kind": "CONTACT_CLOSE",
+              "phase": "STATUS_TELEMETRY",
+              "target": "ground"
+            }
+          ],
+          "id": "MIX-10030",
+          "schedule_class": "FIXED_SEEDED_MIXED_FAULT",
+          "schedule_sha256": "33d73f08f9a4328d4447dd3c442f8113087745e721c792245c9e3986ed27a4f6",
+          "seed": 10030
+        },
+        {
+          "actions": [
+            {
+              "attempt": 1,
+              "contacts": 1,
+              "kind": "DUPLICATE",
+              "phase": "RECOVERY_CONFIRM",
+              "target": "ground"
+            },
+            {
+              "attempt": 1,
+              "contacts": 1,
+              "kind": "DELAY",
+              "phase": "TEST_COMMAND",
+              "target": "spacecraft"
+            }
+          ],
+          "id": "MIX-10031",
+          "schedule_class": "FIXED_SEEDED_MIXED_FAULT",
+          "schedule_sha256": "1605cb8965ec58883c5102f0cd43bb503dd5a2b94c65bb26e50c3a4ed2e05a55",
+          "seed": 10031
+        },
+        {
+          "actions": [],
+          "id": "MIX-10032",
+          "schedule_class": "FIXED_SEEDED_MIXED_FAULT",
+          "schedule_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "seed": 10032
+        },
+        {
+          "actions": [
+            {
+              "attempt": 3,
+              "contacts": 1,
+              "kind": "STALE_COUNTER",
+              "phase": "RECOVERY_PREPARE",
+              "target": "spacecraft"
+            },
+            {
+              "attempt": 3,
+              "contacts": 1,
+              "kind": "REORDER",
+              "phase": "RECOVERY_RESPONSE",
+              "target": "ground"
+            },
+            {
+              "attempt": 1,
+              "contacts": 1,
+              "kind": "ENDPOINT_RESTART",
+              "phase": "RECOVERY_COMMIT",
+              "target": "spacecraft"
+            },
+            {
+              "attempt": 2,
+              "contacts": 1,
+              "kind": "ENDPOINT_RESTART",
+              "phase": "RECOVERY_CONFIRM",
+              "target": "ground"
+            }
+          ],
+          "id": "MIX-10033",
+          "schedule_class": "FIXED_SEEDED_MIXED_FAULT",
+          "schedule_sha256": "6ebe4260bee3b1df9f287737f93b649b0bf363fd892b0ea10e9128fd1611b7dd",
+          "seed": 10033
+        },
+        {
+          "actions": [
+            {
+              "attempt": 2,
+              "contacts": 1,
+              "kind": "REORDER",
+              "phase": "RECOVERY_RESPONSE",
+              "target": "ground"
+            },
+            {
+              "attempt": 3,
+              "contacts": 1,
+              "kind": "STALE_REPLAY",
+              "phase": "RECOVERY_COMMIT",
+              "target": "spacecraft"
+            },
+            {
+              "attempt": 2,
+              "contacts": 1,
+              "kind": "DUPLICATE",
+              "phase": "RECOVERY_CONFIRM",
+              "target": "ground"
+            },
+            {
+              "attempt": 3,
+              "contacts": 1,
+              "kind": "REORDER",
+              "phase": "RECOVERY_CONFIRM",
+              "target": "ground"
+            }
+          ],
+          "id": "MIX-10034",
+          "schedule_class": "FIXED_SEEDED_MIXED_FAULT",
+          "schedule_sha256": "2b09df2af84c2a7d1737af4aa37d64d3d2d8d72227d4623a37b541dc1e134822",
+          "seed": 10034
+        },
+        {
+          "actions": [
+            {
+              "attempt": 3,
+              "contacts": 1,
+              "kind": "STALE_COUNTER",
+              "phase": "RECOVERY_PREPARE",
+              "target": "spacecraft"
+            },
+            {
+              "attempt": 2,
+              "contacts": 1,
+              "kind": "DROP",
+              "phase": "RECOVERY_RESPONSE",
+              "target": "ground"
+            },
+            {
+              "attempt": 3,
+              "contacts": 1,
+              "kind": "ENDPOINT_RESTART",
+              "phase": "RECOVERY_CONFIRM",
+              "target": "ground"
+            },
+            {
+              "attempt": 1,
+              "contacts": 1,
+              "kind": "DROP",
+              "phase": "TEST_COMMAND",
+              "target": "spacecraft"
+            }
+          ],
+          "id": "MIX-10035",
+          "schedule_class": "FIXED_SEEDED_MIXED_FAULT",
+          "schedule_sha256": "66d6ef09b32ec956cd2c1c00ddbfe47cbc6445062e0f458633b46a3735196c03",
+          "seed": 10035
+        },
+        {
+          "actions": [
+            {
+              "attempt": 1,
+              "contacts": 1,
+              "kind": "CONTACT_CLOSE",
+              "phase": "TEST_COMMAND",
+              "target": "spacecraft"
+            },
+            {
+              "attempt": 1,
+              "contacts": 2,
+              "kind": "DELAY",
+              "phase": "TEST_COMMAND",
+              "target": "spacecraft"
+            }
+          ],
+          "id": "MIX-10036",
+          "schedule_class": "FIXED_SEEDED_MIXED_FAULT",
+          "schedule_sha256": "8130f9f2eda52e86d5760e6e5589af22e9514bd495185cd82a65ecf1caa0b0ee",
+          "seed": 10036
+        },
+        {
+          "actions": [
+            {
+              "attempt": 2,
+              "contacts": 1,
+              "kind": "DUPLICATE",
+              "phase": "RECOVERY_CONFIRM",
+              "target": "ground"
+            }
+          ],
+          "id": "MIX-10037",
+          "schedule_class": "FIXED_SEEDED_MIXED_FAULT",
+          "schedule_sha256": "3e06686661a52fca8c1a82724bc470232e997f2b6a6092b3752a883a4af80a67",
+          "seed": 10037
+        },
+        {
+          "actions": [],
+          "id": "MIX-10038",
+          "schedule_class": "FIXED_SEEDED_MIXED_FAULT",
+          "schedule_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "seed": 10038
+        },
+        {
+          "actions": [
+            {
+              "attempt": 1,
+              "contacts": 1,
+              "kind": "DUPLICATE",
+              "phase": "RECOVERY_CONFIRM",
+              "target": "ground"
+            }
+          ],
+          "id": "MIX-10039",
+          "schedule_class": "FIXED_SEEDED_MIXED_FAULT",
+          "schedule_sha256": "bbd586b7dded2d3f1f65c7cb36c81688f1eafc811225c818a995c6f6fb63045e",
+          "seed": 10039
+        },
+        {
+          "actions": [],
+          "id": "MIX-10040",
+          "schedule_class": "FIXED_SEEDED_MIXED_FAULT",
+          "schedule_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "seed": 10040
+        },
+        {
+          "actions": [
+            {
+              "attempt": 1,
+              "contacts": 1,
+              "kind": "REORDER",
+              "phase": "RECOVERY_RESPONSE",
+              "target": "ground"
+            },
+            {
+              "attempt": 2,
+              "contacts": 1,
+              "kind": "ENDPOINT_RESTART",
+              "phase": "RECOVERY_CONFIRM",
+              "target": "ground"
+            },
+            {
+              "attempt": 1,
+              "contacts": 1,
+              "kind": "CONTACT_CLOSE",
+              "phase": "TEST_COMMAND",
+              "target": "spacecraft"
+            }
+          ],
+          "id": "MIX-10041",
+          "schedule_class": "FIXED_SEEDED_MIXED_FAULT",
+          "schedule_sha256": "25260c4740ef7c25ea515085ba82b73e63ed055cce0f2faf9b293c155b3bc6a8",
+          "seed": 10041
+        },
+        {
+          "actions": [
+            {
+              "attempt": 1,
+              "contacts": 1,
+              "kind": "STALE_COUNTER",
+              "phase": "RECOVERY_PREPARE",
+              "target": "spacecraft"
+            },
+            {
+              "attempt": 2,
+              "contacts": 1,
+              "kind": "STALE_COUNTER",
+              "phase": "RECOVERY_PREPARE",
+              "target": "spacecraft"
+            }
+          ],
+          "id": "MIX-10042",
+          "schedule_class": "FIXED_SEEDED_MIXED_FAULT",
+          "schedule_sha256": "ce95fbff2d4a532e22cebe9de4c277ef6223aaef461655d58fd4b81d80b61633",
+          "seed": 10042
+        },
+        {
+          "actions": [],
+          "id": "MIX-10043",
+          "schedule_class": "FIXED_SEEDED_MIXED_FAULT",
+          "schedule_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "seed": 10043
+        },
+        {
+          "actions": [
+            {
+              "attempt": 1,
+              "contacts": 1,
+              "kind": "ENDPOINT_RESTART",
+              "phase": "RECOVERY_CONFIRM",
+              "target": "ground"
+            }
+          ],
+          "id": "MIX-10044",
+          "schedule_class": "FIXED_SEEDED_MIXED_FAULT",
+          "schedule_sha256": "6a312b6039ad2690cb46b1f5324fced06e3f99824da7ff6e7badc391bb6099c5",
+          "seed": 10044
+        },
+        {
+          "actions": [
+            {
+              "attempt": 3,
+              "contacts": 1,
+              "kind": "DROP",
+              "phase": "RECOVERY_RESPONSE",
+              "target": "ground"
+            },
+            {
+              "attempt": 3,
+              "contacts": 1,
+              "kind": "ENDPOINT_RESTART",
+              "phase": "RECOVERY_COMMIT",
+              "target": "spacecraft"
+            }
+          ],
+          "id": "MIX-10045",
+          "schedule_class": "FIXED_SEEDED_MIXED_FAULT",
+          "schedule_sha256": "c50efebd98699a6fba66c43e536c01f1dd135c8f29767b12d9d4d063a56eedf2",
+          "seed": 10045
+        },
+        {
+          "actions": [
+            {
+              "attempt": 1,
+              "contacts": 1,
+              "kind": "DELAY",
+              "phase": "RECOVERY_COMMIT",
+              "target": "spacecraft"
+            },
+            {
+              "attempt": 3,
+              "contacts": 1,
+              "kind": "STALE_REPLAY",
+              "phase": "RECOVERY_CONFIRM",
+              "target": "ground"
+            }
+          ],
+          "id": "MIX-10046",
+          "schedule_class": "FIXED_SEEDED_MIXED_FAULT",
+          "schedule_sha256": "ac70fafcbe9b629b9d040665407db1173ed8b1443fe56dc9dd1db58162b6db0f",
+          "seed": 10046
+        },
+        {
+          "actions": [
+            {
+              "attempt": 3,
+              "contacts": 1,
+              "kind": "STALE_COUNTER",
+              "phase": "RECOVERY_PREPARE",
+              "target": "spacecraft"
+            },
+            {
+              "attempt": 3,
+              "contacts": 1,
+              "kind": "REORDER",
+              "phase": "RECOVERY_COMMIT",
+              "target": "spacecraft"
+            },
+            {
+              "attempt": 2,
+              "contacts": 1,
+              "kind": "STALE_REPLAY",
+              "phase": "RECOVERY_CONFIRM",
+              "target": "ground"
+            }
+          ],
+          "id": "MIX-10047",
+          "schedule_class": "FIXED_SEEDED_MIXED_FAULT",
+          "schedule_sha256": "c832b704a6cf6b0abd434d31995fdce14b1319ee3829e3778b48ffae4860630b",
+          "seed": 10047
+        },
+        {
+          "actions": [],
+          "id": "MIX-10048",
+          "schedule_class": "FIXED_SEEDED_MIXED_FAULT",
+          "schedule_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "seed": 10048
+        },
+        {
+          "actions": [],
+          "id": "MIX-10049",
+          "schedule_class": "FIXED_SEEDED_MIXED_FAULT",
+          "schedule_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "seed": 10049
+        },
+        {
+          "actions": [
+            {
+              "attempt": 1,
+              "contacts": 1,
+              "kind": "ENDPOINT_RESTART",
+              "phase": "RECOVERY_CONFIRM",
+              "target": "ground"
+            }
+          ],
+          "id": "MIX-10050",
+          "schedule_class": "FIXED_SEEDED_MIXED_FAULT",
+          "schedule_sha256": "6a312b6039ad2690cb46b1f5324fced06e3f99824da7ff6e7badc391bb6099c5",
+          "seed": 10050
+        },
+        {
+          "actions": [
+            {
+              "attempt": 1,
+              "contacts": 1,
+              "kind": "STALE_REPLAY",
+              "phase": "RECOVERY_CONFIRM",
+              "target": "ground"
+            },
+            {
+              "attempt": 3,
+              "contacts": 1,
+              "kind": "STALE_REPLAY",
+              "phase": "RECOVERY_CONFIRM",
+              "target": "ground"
+            }
+          ],
+          "id": "MIX-10051",
+          "schedule_class": "FIXED_SEEDED_MIXED_FAULT",
+          "schedule_sha256": "7b1be1ec7610fa5b87138b52fdf42a3f755a166170390ecd53563f143c7d6303",
+          "seed": 10051
+        },
+        {
+          "actions": [
+            {
+              "attempt": 1,
+              "contacts": 1,
+              "kind": "REORDER",
+              "phase": "RECOVERY_COMMIT",
+              "target": "spacecraft"
+            },
+            {
+              "attempt": 1,
+              "contacts": 1,
+              "kind": "STALE_REPLAY",
+              "phase": "RECOVERY_COMMIT",
+              "target": "spacecraft"
+            },
+            {
+              "attempt": 3,
+              "contacts": 1,
+              "kind": "REORDER",
+              "phase": "RECOVERY_CONFIRM",
+              "target": "ground"
+            }
+          ],
+          "id": "MIX-10052",
+          "schedule_class": "FIXED_SEEDED_MIXED_FAULT",
+          "schedule_sha256": "f22e0f96e2970b0991a3e491d442bc7c235192b165b4eb88244b0ada68823dea",
+          "seed": 10052
+        },
+        {
+          "actions": [
+            {
+              "attempt": 2,
+              "contacts": 1,
+              "kind": "REORDER",
+              "phase": "RECOVERY_PREPARE",
+              "target": "spacecraft"
+            },
+            {
+              "attempt": 2,
+              "contacts": 1,
+              "kind": "STALE_REPLAY",
+              "phase": "RECOVERY_COMMIT",
+              "target": "spacecraft"
+            },
+            {
+              "attempt": 1,
+              "contacts": 1,
+              "kind": "DUPLICATE",
+              "phase": "RECOVERY_CONFIRM",
+              "target": "ground"
+            }
+          ],
+          "id": "MIX-10053",
+          "schedule_class": "FIXED_SEEDED_MIXED_FAULT",
+          "schedule_sha256": "bb3e7a4221c13e974b56026cd49c496c1f248ec9ab94517f32fff1e05450f13e",
+          "seed": 10053
+        },
+        {
+          "actions": [],
+          "id": "MIX-10054",
+          "schedule_class": "FIXED_SEEDED_MIXED_FAULT",
+          "schedule_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "seed": 10054
+        },
+        {
+          "actions": [
+            {
+              "attempt": 2,
+              "contacts": 1,
+              "kind": "STALE_COUNTER",
+              "phase": "RECOVERY_PREPARE",
+              "target": "spacecraft"
+            },
+            {
+              "attempt": 2,
+              "contacts": 1,
+              "kind": "REORDER",
+              "phase": "RECOVERY_COMMIT",
+              "target": "spacecraft"
+            },
+            {
+              "attempt": 2,
+              "contacts": 1,
+              "kind": "STALE_REPLAY",
+              "phase": "RECOVERY_COMMIT",
+              "target": "spacecraft"
+            },
+            {
+              "attempt": 1,
+              "contacts": 1,
+              "kind": "STALE_REPLAY",
+              "phase": "RECOVERY_CONFIRM",
+              "target": "ground"
+            }
+          ],
+          "id": "MIX-10055",
+          "schedule_class": "FIXED_SEEDED_MIXED_FAULT",
+          "schedule_sha256": "dacf93709bb440f2c79b50f51b49603acc6e24f9fd03fa8ed37a98fea23a5e9c",
+          "seed": 10055
+        },
+        {
+          "actions": [],
+          "id": "MIX-10056",
+          "schedule_class": "FIXED_SEEDED_MIXED_FAULT",
+          "schedule_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "seed": 10056
+        },
+        {
+          "actions": [],
+          "id": "MIX-10057",
+          "schedule_class": "FIXED_SEEDED_MIXED_FAULT",
+          "schedule_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "seed": 10057
+        },
+        {
+          "actions": [
+            {
+              "attempt": 2,
+              "contacts": 1,
+              "kind": "CONTACT_CLOSE",
+              "phase": "RECOVERY_COMMIT",
+              "target": "spacecraft"
+            }
+          ],
+          "id": "MIX-10058",
+          "schedule_class": "FIXED_SEEDED_MIXED_FAULT",
+          "schedule_sha256": "213ed6aaeab7674c7f9c8cb44120669d4df7218c041ed0937ebafed91cb3394a",
+          "seed": 10058
+        },
+        {
+          "actions": [
+            {
+              "attempt": 3,
+              "contacts": 1,
+              "kind": "STALE_COUNTER",
+              "phase": "RECOVERY_PREPARE",
+              "target": "spacecraft"
+            },
+            {
+              "attempt": 2,
+              "contacts": 1,
+              "kind": "STALE_REPLAY",
+              "phase": "RECOVERY_COMMIT",
+              "target": "spacecraft"
+            }
+          ],
+          "id": "MIX-10059",
+          "schedule_class": "FIXED_SEEDED_MIXED_FAULT",
+          "schedule_sha256": "37e3a0d95b6e735a9fd81edf7186ffbcc3493c171afb9512919fd5d4968ffa46",
+          "seed": 10059
+        },
+        {
+          "actions": [
+            {
+              "attempt": 3,
+              "contacts": 1,
+              "kind": "REORDER",
+              "phase": "RECOVERY_PREPARE",
+              "target": "spacecraft"
+            },
+            {
+              "attempt": 2,
+              "contacts": 1,
+              "kind": "STALE_REPLAY",
+              "phase": "RECOVERY_CONFIRM",
+              "target": "ground"
+            },
+            {
+              "attempt": 1,
+              "contacts": 1,
+              "kind": "DROP",
+              "phase": "TEST_COMMAND",
+              "target": "spacecraft"
+            }
+          ],
+          "id": "MIX-10060",
+          "schedule_class": "FIXED_SEEDED_MIXED_FAULT",
+          "schedule_sha256": "6af99258d7ae94f7d30024e2e88cd50e6cdb366de1ea2d134eddaf1937fe7e68",
+          "seed": 10060
+        },
+        {
+          "actions": [
+            {
+              "attempt": 2,
+              "contacts": 1,
+              "kind": "REORDER",
+              "phase": "RECOVERY_PREPARE",
+              "target": "spacecraft"
+            },
+            {
+              "attempt": 3,
+              "contacts": 1,
+              "kind": "CONTACT_CLOSE",
+              "phase": "RECOVERY_COMMIT",
+              "target": "spacecraft"
+            },
+            {
+              "attempt": 3,
+              "contacts": 1,
+              "kind": "STALE_REPLAY",
+              "phase": "RECOVERY_COMMIT",
+              "target": "spacecraft"
+            }
+          ],
+          "id": "MIX-10061",
+          "schedule_class": "FIXED_SEEDED_MIXED_FAULT",
+          "schedule_sha256": "e07cae55db285a0425945d073cb5c03fb566cdd6b93574fa124b2305bae8ed26",
+          "seed": 10061
+        },
+        {
+          "actions": [
+            {
+              "attempt": 1,
+              "contacts": 1,
+              "kind": "DUPLICATE",
+              "phase": "RECOVERY_PREPARE",
+              "target": "spacecraft"
+            },
+            {
+              "attempt": 1,
+              "contacts": 1,
+              "kind": "STALE_COUNTER",
+              "phase": "RECOVERY_PREPARE",
+              "target": "spacecraft"
+            },
+            {
+              "attempt": 2,
+              "contacts": 1,
+              "kind": "REORDER",
+              "phase": "RECOVERY_CONFIRM",
+              "target": "ground"
+            }
+          ],
+          "id": "MIX-10062",
+          "schedule_class": "FIXED_SEEDED_MIXED_FAULT",
+          "schedule_sha256": "21849e34725bff9b5f7c6607235e9df5ffdba23cf1483dd9d031e59c8af1edaf",
+          "seed": 10062
+        },
+        {
+          "actions": [
+            {
+              "attempt": 1,
+              "contacts": 1,
+              "kind": "STALE_REPLAY",
+              "phase": "RECOVERY_COMMIT",
+              "target": "spacecraft"
+            }
+          ],
+          "id": "MIX-10063",
+          "schedule_class": "FIXED_SEEDED_MIXED_FAULT",
+          "schedule_sha256": "f94aadaf705444d316d508afa6264a66256384d8121e2f3e5f2df7dea654865e",
+          "seed": 10063
+        },
+        {
+          "actions": [
+            {
+              "attempt": 1,
+              "contacts": 1,
+              "kind": "STALE_COUNTER",
+              "phase": "RECOVERY_PREPARE",
+              "target": "spacecraft"
+            },
+            {
+              "attempt": 3,
+              "contacts": 1,
+              "kind": "DUPLICATE",
+              "phase": "RECOVERY_PREPARE",
+              "target": "spacecraft"
+            },
+            {
+              "attempt": 2,
+              "contacts": 1,
+              "kind": "REORDER",
+              "phase": "RECOVERY_COMMIT",
+              "target": "spacecraft"
+            },
+            {
+              "attempt": 1,
+              "contacts": 1,
+              "kind": "CONTACT_CLOSE",
+              "phase": "TEST_COMMAND",
+              "target": "spacecraft"
+            }
+          ],
+          "id": "MIX-10064",
+          "schedule_class": "FIXED_SEEDED_MIXED_FAULT",
+          "schedule_sha256": "d329537bb172b7463a8968399d8730cffa0a623bd56e1079e1ab30d3eb2a131d",
+          "seed": 10064
+        },
+        {
+          "actions": [
+            {
+              "attempt": 1,
+              "contacts": 1,
+              "kind": "DROP",
+              "phase": "RECOVERY_PREPARE",
+              "target": "spacecraft"
+            },
+            {
+              "attempt": 1,
+              "contacts": 1,
+              "kind": "REORDER",
+              "phase": "RECOVERY_PREPARE",
+              "target": "spacecraft"
+            },
+            {
+              "attempt": 1,
+              "contacts": 1,
+              "kind": "CONTACT_CLOSE",
+              "phase": "STATUS_TELEMETRY",
+              "target": "ground"
+            },
+            {
+              "attempt": 1,
+              "contacts": 2,
+              "kind": "DELAY",
+              "phase": "STATUS_TELEMETRY",
+              "target": "ground"
+            }
+          ],
+          "id": "MIX-10065",
+          "schedule_class": "FIXED_SEEDED_MIXED_FAULT",
+          "schedule_sha256": "94bd8683585e853a5acf80168093cc040d9f822de859e0d5d91f4006ef0c5397",
+          "seed": 10065
+        },
+        {
+          "actions": [
+            {
+              "attempt": 1,
+              "contacts": 1,
+              "kind": "ENDPOINT_RESTART",
+              "phase": "RECOVERY_COMMIT",
+              "target": "spacecraft"
+            },
+            {
+              "attempt": 3,
+              "contacts": 1,
+              "kind": "ENDPOINT_RESTART",
+              "phase": "RECOVERY_COMMIT",
+              "target": "spacecraft"
+            }
+          ],
+          "id": "MIX-10066",
+          "schedule_class": "FIXED_SEEDED_MIXED_FAULT",
+          "schedule_sha256": "b20c7e14f04a08a57a551c431ab38d2d0dca4d2f473908def1306582ca56aeff",
+          "seed": 10066
+        },
+        {
+          "actions": [
+            {
+              "attempt": 3,
+              "contacts": 1,
+              "kind": "STALE_COUNTER",
+              "phase": "RECOVERY_PREPARE",
+              "target": "spacecraft"
+            },
+            {
+              "attempt": 2,
+              "contacts": 1,
+              "kind": "ENDPOINT_RESTART",
+              "phase": "RECOVERY_CONFIRM",
+              "target": "ground"
+            }
+          ],
+          "id": "MIX-10067",
+          "schedule_class": "FIXED_SEEDED_MIXED_FAULT",
+          "schedule_sha256": "4c063b5247fa1add859f5fddd1213c4d670a309025384bcedc1a1970eacd259b",
+          "seed": 10067
+        },
+        {
+          "actions": [],
+          "id": "MIX-10068",
+          "schedule_class": "FIXED_SEEDED_MIXED_FAULT",
+          "schedule_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "seed": 10068
+        },
+        {
+          "actions": [
+            {
+              "attempt": 2,
+              "contacts": 1,
+              "kind": "DELAY",
+              "phase": "RECOVERY_PREPARE",
+              "target": "spacecraft"
+            },
+            {
+              "attempt": 2,
+              "contacts": 1,
+              "kind": "REORDER",
+              "phase": "RECOVERY_RESPONSE",
+              "target": "ground"
+            }
+          ],
+          "id": "MIX-10069",
+          "schedule_class": "FIXED_SEEDED_MIXED_FAULT",
+          "schedule_sha256": "5209ae94d3a72f70e682574329c9a30b7f6b72c5bf228e38ead7845db0041a75",
+          "seed": 10069
+        },
+        {
+          "actions": [
+            {
+              "attempt": 1,
+              "contacts": 1,
+              "kind": "REORDER",
+              "phase": "RECOVERY_PREPARE",
+              "target": "spacecraft"
+            },
+            {
+              "attempt": 2,
+              "contacts": 1,
+              "kind": "DELAY",
+              "phase": "RECOVERY_PREPARE",
+              "target": "spacecraft"
+            }
+          ],
+          "id": "MIX-10070",
+          "schedule_class": "FIXED_SEEDED_MIXED_FAULT",
+          "schedule_sha256": "0fde79a70d4027bf126f5b7acc6647a6eda1697233105529a064ec462f7745f4",
+          "seed": 10070
+        },
+        {
+          "actions": [
+            {
+              "attempt": 3,
+              "contacts": 1,
+              "kind": "STALE_REPLAY",
+              "phase": "RECOVERY_CONFIRM",
+              "target": "ground"
+            }
+          ],
+          "id": "MIX-10071",
+          "schedule_class": "FIXED_SEEDED_MIXED_FAULT",
+          "schedule_sha256": "34596bd3d96553f9c1b590913631bae7dfbc45796998866ecf47bc3802a06693",
+          "seed": 10071
+        },
+        {
+          "actions": [],
+          "id": "MIX-10072",
+          "schedule_class": "FIXED_SEEDED_MIXED_FAULT",
+          "schedule_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "seed": 10072
+        },
+        {
+          "actions": [],
+          "id": "MIX-10073",
+          "schedule_class": "FIXED_SEEDED_MIXED_FAULT",
+          "schedule_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "seed": 10073
+        },
+        {
+          "actions": [],
+          "id": "MIX-10074",
+          "schedule_class": "FIXED_SEEDED_MIXED_FAULT",
+          "schedule_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "seed": 10074
+        },
+        {
+          "actions": [
+            {
+              "attempt": 2,
+              "contacts": 1,
+              "kind": "STALE_COUNTER",
+              "phase": "RECOVERY_PREPARE",
+              "target": "spacecraft"
+            },
+            {
+              "attempt": 1,
+              "contacts": 1,
+              "kind": "STALE_REPLAY",
+              "phase": "RECOVERY_COMMIT",
+              "target": "spacecraft"
+            },
+            {
+              "attempt": 2,
+              "contacts": 1,
+              "kind": "STALE_REPLAY",
+              "phase": "RECOVERY_CONFIRM",
+              "target": "ground"
+            },
+            {
+              "attempt": 1,
+              "contacts": 1,
+              "kind": "DELAY",
+              "phase": "TEST_COMMAND",
+              "target": "spacecraft"
+            }
+          ],
+          "id": "MIX-10075",
+          "schedule_class": "FIXED_SEEDED_MIXED_FAULT",
+          "schedule_sha256": "021df96dbeaa1b7c00734318fa7debac447ae280479f71937f081d0db88c82f8",
+          "seed": 10075
+        },
+        {
+          "actions": [
+            {
+              "attempt": 3,
+              "contacts": 1,
+              "kind": "DELAY",
+              "phase": "RECOVERY_PREPARE",
+              "target": "spacecraft"
+            },
+            {
+              "attempt": 3,
+              "contacts": 1,
+              "kind": "STALE_COUNTER",
+              "phase": "RECOVERY_PREPARE",
+              "target": "spacecraft"
+            },
+            {
+              "attempt": 1,
+              "contacts": 1,
+              "kind": "REORDER",
+              "phase": "RECOVERY_COMMIT",
+              "target": "spacecraft"
+            },
+            {
+              "attempt": 1,
+              "contacts": 2,
+              "kind": "DELAY",
+              "phase": "TEST_COMMAND",
+              "target": "spacecraft"
+            }
+          ],
+          "id": "MIX-10076",
+          "schedule_class": "FIXED_SEEDED_MIXED_FAULT",
+          "schedule_sha256": "f75b9a0ea2c1619e00927952fafbf7edccf9d4daa9afa287150ce31f33507b89",
+          "seed": 10076
+        },
+        {
+          "actions": [],
+          "id": "MIX-10077",
+          "schedule_class": "FIXED_SEEDED_MIXED_FAULT",
+          "schedule_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "seed": 10077
+        },
+        {
+          "actions": [
+            {
+              "attempt": 3,
+              "contacts": 1,
+              "kind": "DUPLICATE",
+              "phase": "RECOVERY_PREPARE",
+              "target": "spacecraft"
+            },
+            {
+              "attempt": 1,
+              "contacts": 1,
+              "kind": "REORDER",
+              "phase": "RECOVERY_COMMIT",
+              "target": "spacecraft"
+            },
+            {
+              "attempt": 2,
+              "contacts": 1,
+              "kind": "REORDER",
+              "phase": "RECOVERY_CONFIRM",
+              "target": "ground"
+            }
+          ],
+          "id": "MIX-10078",
+          "schedule_class": "FIXED_SEEDED_MIXED_FAULT",
+          "schedule_sha256": "a03c597104dd72943001964e38f57c184ca11f282ee2ac6d759d49ef05c36a5f",
+          "seed": 10078
+        },
+        {
+          "actions": [
+            {
+              "attempt": 1,
+              "contacts": 1,
+              "kind": "ENDPOINT_RESTART",
+              "phase": "RECOVERY_COMMIT",
+              "target": "spacecraft"
+            },
+            {
+              "attempt": 1,
+              "contacts": 1,
+              "kind": "DELAY",
+              "phase": "TEST_COMMAND",
+              "target": "spacecraft"
+            }
+          ],
+          "id": "MIX-10079",
+          "schedule_class": "FIXED_SEEDED_MIXED_FAULT",
+          "schedule_sha256": "fd7da33b92736e52d33aaefa4a6ac7fcbc8d43dd094f79d29aaaed6f82816648",
+          "seed": 10079
+        },
+        {
+          "actions": [],
+          "id": "MIX-10080",
+          "schedule_class": "FIXED_SEEDED_MIXED_FAULT",
+          "schedule_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "seed": 10080
+        },
+        {
+          "actions": [
+            {
+              "attempt": 1,
+              "contacts": 1,
+              "kind": "REORDER",
+              "phase": "RECOVERY_CONFIRM",
+              "target": "ground"
+            }
+          ],
+          "id": "MIX-10081",
+          "schedule_class": "FIXED_SEEDED_MIXED_FAULT",
+          "schedule_sha256": "affa1e9e0be990f3ee33189c5f6a00d84ad9e88e527fa4745897714617d67a98",
+          "seed": 10081
+        },
+        {
+          "actions": [],
+          "id": "MIX-10082",
+          "schedule_class": "FIXED_SEEDED_MIXED_FAULT",
+          "schedule_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "seed": 10082
+        },
+        {
+          "actions": [
+            {
+              "attempt": 2,
+              "contacts": 1,
+              "kind": "REORDER",
+              "phase": "RECOVERY_PREPARE",
+              "target": "spacecraft"
+            },
+            {
+              "attempt": 2,
+              "contacts": 1,
+              "kind": "DUPLICATE",
+              "phase": "RECOVERY_COMMIT",
+              "target": "spacecraft"
+            },
+            {
+              "attempt": 1,
+              "contacts": 1,
+              "kind": "CONTACT_CLOSE",
+              "phase": "STATUS_TELEMETRY",
+              "target": "ground"
+            }
+          ],
+          "id": "MIX-10083",
+          "schedule_class": "FIXED_SEEDED_MIXED_FAULT",
+          "schedule_sha256": "a17c46307a995c380cc02be5dc054f276a614282085f312a617a0bd28b277993",
+          "seed": 10083
+        },
+        {
+          "actions": [
+            {
+              "attempt": 1,
+              "contacts": 1,
+              "kind": "DUPLICATE",
+              "phase": "RECOVERY_RESPONSE",
+              "target": "ground"
+            },
+            {
+              "attempt": 3,
+              "contacts": 2,
+              "kind": "DELAY",
+              "phase": "RECOVERY_COMMIT",
+              "target": "spacecraft"
+            },
+            {
+              "attempt": 1,
+              "contacts": 1,
+              "kind": "ENDPOINT_RESTART",
+              "phase": "RECOVERY_CONFIRM",
+              "target": "ground"
+            },
+            {
+              "attempt": 3,
+              "contacts": 1,
+              "kind": "DROP",
+              "phase": "RECOVERY_CONFIRM",
+              "target": "ground"
+            }
+          ],
+          "id": "MIX-10084",
+          "schedule_class": "FIXED_SEEDED_MIXED_FAULT",
+          "schedule_sha256": "3aab956c29d00e5760225cba2fdfdeba0cabb075242e981278d0f3b39a81ef04",
+          "seed": 10084
+        },
+        {
+          "actions": [
+            {
+              "attempt": 1,
+              "contacts": 1,
+              "kind": "DUPLICATE",
+              "phase": "RECOVERY_PREPARE",
+              "target": "spacecraft"
+            },
+            {
+              "attempt": 3,
+              "contacts": 1,
+              "kind": "REORDER",
+              "phase": "RECOVERY_PREPARE",
+              "target": "spacecraft"
+            },
+            {
+              "attempt": 2,
+              "contacts": 1,
+              "kind": "REORDER",
+              "phase": "RECOVERY_RESPONSE",
+              "target": "ground"
+            },
+            {
+              "attempt": 1,
+              "contacts": 1,
+              "kind": "ENDPOINT_RESTART",
+              "phase": "RECOVERY_CONFIRM",
+              "target": "ground"
+            }
+          ],
+          "id": "MIX-10085",
+          "schedule_class": "FIXED_SEEDED_MIXED_FAULT",
+          "schedule_sha256": "6329def78db3a4556abbb528aac72a98a6f6869869483f65d7f5365349883679",
+          "seed": 10085
+        },
+        {
+          "actions": [],
+          "id": "MIX-10086",
+          "schedule_class": "FIXED_SEEDED_MIXED_FAULT",
+          "schedule_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "seed": 10086
+        },
+        {
+          "actions": [
+            {
+              "attempt": 3,
+              "contacts": 1,
+              "kind": "STALE_COUNTER",
+              "phase": "RECOVERY_PREPARE",
+              "target": "spacecraft"
+            },
+            {
+              "attempt": 1,
+              "contacts": 1,
+              "kind": "DUPLICATE",
+              "phase": "RECOVERY_RESPONSE",
+              "target": "ground"
+            },
+            {
+              "attempt": 2,
+              "contacts": 1,
+              "kind": "STALE_REPLAY",
+              "phase": "RECOVERY_COMMIT",
+              "target": "spacecraft"
+            },
+            {
+              "attempt": 2,
+              "contacts": 1,
+              "kind": "ENDPOINT_RESTART",
+              "phase": "RECOVERY_CONFIRM",
+              "target": "ground"
+            }
+          ],
+          "id": "MIX-10087",
+          "schedule_class": "FIXED_SEEDED_MIXED_FAULT",
+          "schedule_sha256": "6cb5e92d082261b49815e9d0462a2829ff24a4770b21c295be7ea337e9ef6e40",
+          "seed": 10087
+        },
+        {
+          "actions": [],
+          "id": "MIX-10088",
+          "schedule_class": "FIXED_SEEDED_MIXED_FAULT",
+          "schedule_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "seed": 10088
+        },
+        {
+          "actions": [],
+          "id": "MIX-10089",
+          "schedule_class": "FIXED_SEEDED_MIXED_FAULT",
+          "schedule_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "seed": 10089
+        },
+        {
+          "actions": [],
+          "id": "MIX-10090",
+          "schedule_class": "FIXED_SEEDED_MIXED_FAULT",
+          "schedule_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "seed": 10090
+        },
+        {
+          "actions": [
+            {
+              "attempt": 1,
+              "contacts": 1,
+              "kind": "ENDPOINT_RESTART",
+              "phase": "RECOVERY_CONFIRM",
+              "target": "ground"
+            },
+            {
+              "attempt": 2,
+              "contacts": 1,
+              "kind": "STALE_REPLAY",
+              "phase": "RECOVERY_CONFIRM",
+              "target": "ground"
+            }
+          ],
+          "id": "MIX-10091",
+          "schedule_class": "FIXED_SEEDED_MIXED_FAULT",
+          "schedule_sha256": "973347bdbe1565f5a68881ec3bd282de93a9a2ec58f8415c5276cce02f724ff4",
+          "seed": 10091
+        },
+        {
+          "actions": [
+            {
+              "attempt": 1,
+              "contacts": 1,
+              "kind": "DROP",
+              "phase": "RECOVERY_RESPONSE",
+              "target": "ground"
+            },
+            {
+              "attempt": 1,
+              "contacts": 1,
+              "kind": "REORDER",
+              "phase": "RECOVERY_COMMIT",
+              "target": "spacecraft"
+            },
+            {
+              "attempt": 3,
+              "contacts": 1,
+              "kind": "ENDPOINT_RESTART",
+              "phase": "RECOVERY_COMMIT",
+              "target": "spacecraft"
+            }
+          ],
+          "id": "MIX-10092",
+          "schedule_class": "FIXED_SEEDED_MIXED_FAULT",
+          "schedule_sha256": "a442fd2c95a928ee1d8f72dcdbc2045d5b73490126f6ee5dc4a9f6a52ed9f118",
+          "seed": 10092
+        },
+        {
+          "actions": [],
+          "id": "MIX-10093",
+          "schedule_class": "FIXED_SEEDED_MIXED_FAULT",
+          "schedule_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "seed": 10093
+        },
+        {
+          "actions": [
+            {
+              "attempt": 3,
+              "contacts": 1,
+              "kind": "REORDER",
+              "phase": "RECOVERY_COMMIT",
+              "target": "spacecraft"
+            },
+            {
+              "attempt": 1,
+              "contacts": 1,
+              "kind": "CONTACT_CLOSE",
+              "phase": "STATUS_TELEMETRY",
+              "target": "ground"
+            }
+          ],
+          "id": "MIX-10094",
+          "schedule_class": "FIXED_SEEDED_MIXED_FAULT",
+          "schedule_sha256": "d16513b1b082c7131ad0da0ff6ebb10456e29d59d2221b2b1a4ff8a6294d560e",
+          "seed": 10094
+        },
+        {
+          "actions": [],
+          "id": "MIX-10095",
+          "schedule_class": "FIXED_SEEDED_MIXED_FAULT",
+          "schedule_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "seed": 10095
+        },
+        {
+          "actions": [
+            {
+              "attempt": 3,
+              "contacts": 1,
+              "kind": "DELAY",
+              "phase": "RECOVERY_CONFIRM",
+              "target": "ground"
+            },
+            {
+              "attempt": 1,
+              "contacts": 1,
+              "kind": "DROP",
+              "phase": "STATUS_TELEMETRY",
+              "target": "ground"
+            }
+          ],
+          "id": "MIX-10096",
+          "schedule_class": "FIXED_SEEDED_MIXED_FAULT",
+          "schedule_sha256": "128d31a0333a155507a98f4b32e05446e0b34010891c19164702bbbcae64e216",
+          "seed": 10096
+        },
+        {
+          "actions": [],
+          "id": "MIX-10097",
+          "schedule_class": "FIXED_SEEDED_MIXED_FAULT",
+          "schedule_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "seed": 10097
+        },
+        {
+          "actions": [
+            {
+              "attempt": 1,
+              "contacts": 1,
+              "kind": "REORDER",
+              "phase": "RECOVERY_PREPARE",
+              "target": "spacecraft"
+            },
+            {
+              "attempt": 3,
+              "contacts": 1,
+              "kind": "ENDPOINT_RESTART",
+              "phase": "RECOVERY_CONFIRM",
+              "target": "ground"
+            },
+            {
+              "attempt": 1,
+              "contacts": 1,
+              "kind": "DROP",
+              "phase": "STATUS_TELEMETRY",
+              "target": "ground"
+            }
+          ],
+          "id": "MIX-10098",
+          "schedule_class": "FIXED_SEEDED_MIXED_FAULT",
+          "schedule_sha256": "b9c8d80d8b8591719fb80e5884b15b0ab24cc753845550aefd1aa874437ca37c",
+          "seed": 10098
+        },
+        {
+          "actions": [
+            {
+              "attempt": 1,
+              "contacts": 1,
+              "kind": "DELAY",
+              "phase": "RECOVERY_CONFIRM",
+              "target": "ground"
+            },
+            {
+              "attempt": 2,
+              "contacts": 2,
+              "kind": "DELAY",
+              "phase": "RECOVERY_CONFIRM",
+              "target": "ground"
+            }
+          ],
+          "id": "MIX-10099",
+          "schedule_class": "FIXED_SEEDED_MIXED_FAULT",
+          "schedule_sha256": "1b04a15dfb8c5f7e8c3750dba33eabca4aaa7f5f876099523b957c7454561755",
+          "seed": 10099
+        },
+        {
+          "actions": [
+            {
+              "attempt": 3,
+              "contacts": 1,
+              "kind": "ENDPOINT_RESTART",
+              "phase": "RECOVERY_COMMIT",
+              "target": "spacecraft"
+            },
+            {
+              "attempt": 1,
+              "contacts": 1,
+              "kind": "DUPLICATE",
+              "phase": "RECOVERY_CONFIRM",
+              "target": "ground"
+            }
+          ],
+          "id": "MIX-10100",
+          "schedule_class": "FIXED_SEEDED_MIXED_FAULT",
+          "schedule_sha256": "17be126b281aff1115985516596eaf7b6865907cafd30b4c17a9d03a4a11e4aa",
+          "seed": 10100
+        }
+      ],
+      "seeds": [
+        10001,
+        10002,
+        10003,
+        10004,
+        10005,
+        10006,
+        10007,
+        10008,
+        10009,
+        10010,
+        10011,
+        10012,
+        10013,
+        10014,
+        10015,
+        10016,
+        10017,
+        10018,
+        10019,
+        10020,
+        10021,
+        10022,
+        10023,
+        10024,
+        10025,
+        10026,
+        10027,
+        10028,
+        10029,
+        10030,
+        10031,
+        10032,
+        10033,
+        10034,
+        10035,
+        10036,
+        10037,
+        10038,
+        10039,
+        10040,
+        10041,
+        10042,
+        10043,
+        10044,
+        10045,
+        10046,
+        10047,
+        10048,
+        10049,
+        10050,
+        10051,
+        10052,
+        10053,
+        10054,
+        10055,
+        10056,
+        10057,
+        10058,
+        10059,
+        10060,
+        10061,
+        10062,
+        10063,
+        10064,
+        10065,
+        10066,
+        10067,
+        10068,
+        10069,
+        10070,
+        10071,
+        10072,
+        10073,
+        10074,
+        10075,
+        10076,
+        10077,
+        10078,
+        10079,
+        10080,
+        10081,
+        10082,
+        10083,
+        10084,
+        10085,
+        10086,
+        10087,
+        10088,
+        10089,
+        10090,
+        10091,
+        10092,
+        10093,
+        10094,
+        10095,
+        10096,
+        10097,
+        10098,
+        10099,
+        10100
+      ],
+      "total_injected_actions": 191
+    },
+    "study_d_sensitivity_t1": {
+      "analysis": {
+        "challenge_set_denominator_per_grid_cell": 12,
+        "confidence_intervals": false,
+        "hypothesis_tests": false,
+        "outcome_counts": true,
+        "t1_duration_transmission_retry_descriptives": [
+          "median",
+          "min",
+          "max"
+        ],
+        "verification_complete_count": true
+      },
+      "candidate_lifetime_contacts_grid": [
+        2,
+        3,
+        4
+      ],
+      "execution_count": 108,
+      "max_transmissions_grid": [
+        2,
+        3,
+        4
+      ],
+      "schedule_count": 12,
+      "schedules": [
+        {
+          "actions": [],
+          "id": "SENS-00-NO-FAULT",
+          "schedule_class": "SENSITIVITY_CHALLENGE",
+          "schedule_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "actions": [
+            {
+              "attempt": 1,
+              "contacts": 1,
+              "kind": "DROP",
+              "phase": "RECOVERY_PREPARE",
+              "target": "spacecraft"
+            }
+          ],
+          "id": "SENS-01-PREP-DROP-1",
+          "schedule_class": "SENSITIVITY_CHALLENGE",
+          "schedule_sha256": "f695c60768dfe53b8e23fc2a2d486e059ffc1446285c2b6bf3962c96247e2bde"
+        },
+        {
+          "actions": [
+            {
+              "attempt": 1,
+              "contacts": 1,
+              "kind": "DROP",
+              "phase": "RECOVERY_PREPARE",
+              "target": "spacecraft"
+            },
+            {
+              "attempt": 2,
+              "contacts": 1,
+              "kind": "DROP",
+              "phase": "RECOVERY_PREPARE",
+              "target": "spacecraft"
+            }
+          ],
+          "id": "SENS-02-PREP-DROP-1-2",
+          "schedule_class": "SENSITIVITY_CHALLENGE",
+          "schedule_sha256": "23c1f326f10e938d8cd8de989aeab3e98ec8f482b8cbddb79ce1847edbdb6bfa"
+        },
+        {
+          "actions": [
+            {
+              "attempt": 1,
+              "contacts": 1,
+              "kind": "DROP",
+              "phase": "RECOVERY_RESPONSE",
+              "target": "ground"
+            },
+            {
+              "attempt": 2,
+              "contacts": 1,
+              "kind": "DROP",
+              "phase": "RECOVERY_RESPONSE",
+              "target": "ground"
+            }
+          ],
+          "id": "SENS-03-RESP-DROP-1-2",
+          "schedule_class": "SENSITIVITY_CHALLENGE",
+          "schedule_sha256": "577d0d2f7815bfebc7cda7a054a75533c5f88e11cdb6a685a9630dd17846a3ff"
+        },
+        {
+          "actions": [
+            {
+              "attempt": 1,
+              "contacts": 1,
+              "kind": "DROP",
+              "phase": "RECOVERY_COMMIT",
+              "target": "spacecraft"
+            },
+            {
+              "attempt": 2,
+              "contacts": 1,
+              "kind": "DROP",
+              "phase": "RECOVERY_COMMIT",
+              "target": "spacecraft"
+            }
+          ],
+          "id": "SENS-04-COMMIT-DROP-1-2",
+          "schedule_class": "SENSITIVITY_CHALLENGE",
+          "schedule_sha256": "ff2946f5f7eaec1263f15035f16b99f8c41b039e4710f16ea23dddeb2a30e058"
+        },
+        {
+          "actions": [
+            {
+              "attempt": 1,
+              "contacts": 1,
+              "kind": "DROP",
+              "phase": "RECOVERY_CONFIRM",
+              "target": "ground"
+            },
+            {
+              "attempt": 2,
+              "contacts": 1,
+              "kind": "DROP",
+              "phase": "RECOVERY_CONFIRM",
+              "target": "ground"
+            }
+          ],
+          "id": "SENS-05-CONFIRM-DROP-1-2",
+          "schedule_class": "SENSITIVITY_CHALLENGE",
+          "schedule_sha256": "2998096ee05e65a57c3db81cbc7be15e60374ffeec33cef334b516d2de430b83"
+        },
+        {
+          "actions": [
+            {
+              "attempt": 1,
+              "contacts": 1,
+              "kind": "CONTACT_CLOSE",
+              "phase": "RECOVERY_PREPARE",
+              "target": "spacecraft"
+            },
+            {
+              "attempt": 2,
+              "contacts": 1,
+              "kind": "CONTACT_CLOSE",
+              "phase": "RECOVERY_PREPARE",
+              "target": "spacecraft"
+            }
+          ],
+          "id": "SENS-06-PREP-CLOSE-1-2",
+          "schedule_class": "SENSITIVITY_CHALLENGE",
+          "schedule_sha256": "b8211830eae554f34c715aabc043c357ce01ee940db3c81729091888ccf5374f"
+        },
+        {
+          "actions": [
+            {
+              "attempt": 1,
+              "contacts": 1,
+              "kind": "CONTACT_CLOSE",
+              "phase": "RECOVERY_CONFIRM",
+              "target": "ground"
+            },
+            {
+              "attempt": 2,
+              "contacts": 1,
+              "kind": "CONTACT_CLOSE",
+              "phase": "RECOVERY_CONFIRM",
+              "target": "ground"
+            }
+          ],
+          "id": "SENS-07-CONFIRM-CLOSE-1-2",
+          "schedule_class": "SENSITIVITY_CHALLENGE",
+          "schedule_sha256": "6db53a47814f82234687e9fe4ea3cdc61bdbd458da65d1fe8f5d4fdf6f86cd6d"
+        },
+        {
+          "actions": [
+            {
+              "attempt": 1,
+              "contacts": 2,
+              "kind": "DELAY",
+              "phase": "RECOVERY_RESPONSE",
+              "target": "ground"
+            }
+          ],
+          "id": "SENS-08-RESP-DELAY-2",
+          "schedule_class": "SENSITIVITY_CHALLENGE",
+          "schedule_sha256": "47a8c04e9baddce79f95a4ae710c8dcd3c2197cce2b351e52a3d633c6e73d9c5"
+        },
+        {
+          "actions": [
+            {
+              "attempt": 1,
+              "contacts": 2,
+              "kind": "DELAY",
+              "phase": "RECOVERY_COMMIT",
+              "target": "spacecraft"
+            }
+          ],
+          "id": "SENS-09-COMMIT-DELAY-2",
+          "schedule_class": "SENSITIVITY_CHALLENGE",
+          "schedule_sha256": "40573b14cb15d96c8ec397173de26b67be59156bf6cc99671058028e59875892"
+        },
+        {
+          "actions": [
+            {
+              "attempt": 1,
+              "contacts": 1,
+              "kind": "ENDPOINT_RESTART",
+              "phase": "RECOVERY_COMMIT",
+              "target": "spacecraft"
+            }
+          ],
+          "id": "SENS-10-COMMIT-RESTART",
+          "schedule_class": "SENSITIVITY_CHALLENGE",
+          "schedule_sha256": "b27b5870be78ff97ab5a54ceadd2410e8212be6ad6f4eea20277d60df9ed46c5"
+        },
+        {
+          "actions": [
+            {
+              "attempt": 1,
+              "contacts": 1,
+              "kind": "STALE_REPLAY",
+              "phase": "RECOVERY_COMMIT",
+              "target": "spacecraft"
+            }
+          ],
+          "id": "SENS-11-COMMIT-STALE-REPLAY",
+          "schedule_class": "SENSITIVITY_CHALLENGE",
+          "schedule_sha256": "f94aadaf705444d316d508afa6264a66256384d8121e2f3e5f2df7dea654865e"
+        }
+      ]
+    }
+  },
+  "study": "hands-on TT&C post-compromise recovery",
+  "synthetic_software_only": true
+}

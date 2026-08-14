@@ -144,7 +144,12 @@ _PHASE_ORDER = {
 _VALID_PHASES = {
     FaultKind.DROP: tuple(ExperimentPhase),
     FaultKind.DELAY: tuple(ExperimentPhase),
-    FaultKind.DUPLICATE: tuple(ExperimentPhase),
+    FaultKind.DUPLICATE: (
+        ExperimentPhase.PREPARE,
+        ExperimentPhase.RESPONSE,
+        ExperimentPhase.COMMIT,
+        ExperimentPhase.CONFIRM,
+    ),
     FaultKind.REORDER: (
         ExperimentPhase.PREPARE,
         ExperimentPhase.RESPONSE,
