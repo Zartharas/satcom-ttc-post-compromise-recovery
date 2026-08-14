@@ -3,19 +3,19 @@ message: "Please cite this research software using the metadata below."
 title: "SATCOM TT&C Post-Compromise Recovery"
 type: software
 version: 0.1.1
-date-released: 2026-07-23
 authors:
   - family-names: Singh
     given-names: Aman Kumar
 license: MIT
 repository-code: "https://github.com/Zartharas/satcom-ttc-post-compromise-recovery"
 abstract: >
-  Experimental cybersecurity research software for evaluating post-compromise
-  key recovery and ground-space state resynchronization in satellite TT&C systems.
+  Experimental cybersecurity research software for studying post-compromise
+  key recovery and ground-space security-state resynchronization in satellite
+  telemetry, tracking, and command systems using bounded synthetic models.
 keywords:
   - satellite cybersecurity
   - TT&C
-  - post-compromise security
+  - post-compromise recovery
   - SDLS
   - key recovery
   - state resynchronization

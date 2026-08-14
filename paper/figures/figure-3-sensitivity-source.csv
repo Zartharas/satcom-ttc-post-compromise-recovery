@@ -1,0 +1,10 @@
+max_transmissions,candidate_lifetime_contacts,verification_complete_count,denominator
+2,2,5,12
+2,3,5,12
+2,4,5,12
+3,2,11,12
+3,3,11,12
+3,4,11,12
+4,2,11,12
+4,3,11,12
+4,4,11,12

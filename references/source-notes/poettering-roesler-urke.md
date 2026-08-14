@@ -1,42 +1,42 @@
-# Source Note: Poettering-Rösler URKE
+# Source Note: Poettering-Rösler Ratcheted Key Exchange
 
-## Source
+## Sources
 
-Bertram Poettering and Paul Rösler, *Asynchronous Ratcheted Key Exchange*, full version
-associated with the CRYPTO 2018 work on bidirectional ratcheted key exchange.
+Bertram Poettering and Paul Rösler, *Towards Bidirectional Ratcheted Key Exchange*, in
+*Advances in Cryptology — CRYPTO 2018*, LNCS 10991, Springer, 2018, pp. 3–32.
+DOI: `10.1007/978-3-319-96884-1_1`.
+
+The project also uses the authors' extended asynchronous/unidirectional ratcheted-key-exchange
+material, Cryptology ePrint Archive Report 2018/296.
 
 ## Construction points used by this project
 
-- URKE defines separate sender and receiver states.
-- `snd` returns an updated sender state, a session key, and a ciphertext.
-- `rcv` returns an updated receiver state and matching session key or rejects.
-- The construction combines evolving chaining state, authentication state, transcripts, and a
-  fresh KEM encapsulation.
-- The sender evolves when sending; the receiver evolves when accepting the ciphertext.
+- The unidirectional construction separates sender and receiver state.
+- Sending returns updated sender state, a session key, and ciphertext.
+- Receiving returns updated receiver state and the matching session key or rejects.
+- The construction combines evolving chaining/authentication state, transcript state, and fresh
+  KEM encapsulation.
+- Sender state evolves on send; receiver state evolves on accepted receipt.
 
 ## Exposure semantics used by this project
 
-The source distinguishes key reveal from state exposure.
+The source material distinguishes traffic-key reveal from protocol-state exposure.
 
-- Revealing a traffic key does not by itself expose future ratchet state.
-- Exposing an in-sync receiver lets an adversary trace later receiver keys and corresponding
-  sender keys.
-- Exposing the sender permits impersonation with copied state; if the adversary advances the
-  receiver first, the receiver becomes out of sync on an attacker-known branch.
-- Exposing the sender without bringing the receiver out of sync does not harm later keys in the
-  source model.
-- URKE does not generally recover once receiver-state tracing or sender-state impersonation has
-  made future keys weak; the paper introduces stronger directional constructions for recovery
-  from broader state-exposure attacks.
+- Revealing a traffic key does not by itself expose all future ratchet state.
+- Exposure of receiver/sender state has stronger tracing or impersonation consequences than
+  traffic-key reveal alone.
+- Broader recovery properties depend on the construction and exposure direction; this project
+  does not collapse them into one generic “compromise” condition.
 
 ## Selection rationale
 
-The unidirectional pattern is the smallest construction matching the study's primary
-ground-to-space fresh-entropy path. It uses a generic KEM abstraction and makes one-sided
-evolution observable without importing full bidirectional concurrent-epoch machinery.
+The unidirectional pattern is the smallest source construction matching the study's primary
+ground-to-space fresh-entropy path. It makes one-sided state evolution observable without
+importing the full bidirectional concurrent-epoch machinery.
 
 ## Modeling boundary
 
-This repository does not implement the source algorithms or inherit their proof. TT&C role
-mapping, operational activation, strict deletion, status telemetry, and lockout classification are
-experimental model decisions.
+This repository does not implement the source algorithms or inherit their proofs. TT&C role
+mapping, operational activation, strict deletion, telemetry evidence, and lockout/outcome
+classification are experimental model decisions. Independent review of the source-to-model
+mapping remains open.

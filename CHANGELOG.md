@@ -1,5 +1,25 @@
 # Changelog
 
+## Unreleased — hands-on paper retained results and repository refresh
+
+- Refocused active development on the hands-on research paper rather than additional governance
+  phases.
+- Committed the outcome-blind final experiment plan at `cfb730a8191d37863e9e419823686b3c3afe18a2`.
+- Committed the plan-bound final runner at `c630fb4f65ad78211fd3ffb0391000d7ed3629b1`.
+- Executed retained run `20260814T022506Z-gc630fb4` once from a clean exact commit.
+- Verified the retained bundle SHA-256
+  `b3b8c55a9e522ffe3f7898d7b786583e46a4dc3db0aba9d3947fd6ebdaeecaa1`
+  and all 16 internal checksum-manifest entries.
+- Retained Study A (13 member rows), Study B (40 deterministic schedules), Study C (100 fixed
+  schedules), and Study D (108 sensitivity executions).
+- Added manuscript-facing result summaries and a post-execution Study C runtime-reachability
+  audit without replacing or rerunning the retained experiment.
+- Refreshed current-facing README/status/paper/reference/navigation files while preserving
+  historical phase artifacts and their original status language.
+- Added active paper-branch push CI and final-plan `--validate-only` checking.
+- Kept independent cryptography review open and retained all cryptographic, flight, conformance,
+  causal, and real-world-prevalence claim boundaries.
+
 ## Unreleased — Phase 15 D4 review and freeze readiness
 
 - Added the separate outcome-blind WP15-D4R review package pinned to validated D4 target `34d63a5` and repaired the preflight defect recorded as RIT-019.

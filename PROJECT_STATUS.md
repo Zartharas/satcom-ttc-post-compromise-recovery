@@ -1,104 +1,128 @@
-# Project Status — Paper Completion Mode
+# Project Status — Results and Manuscript Mode
 
-**Active branch:** `paper/hands-on-recovery-study`
-**Source lineage:** `phase-15/publication-preparation` through
-`ff10a51ffbd986ef875fe462472d134fdf59695d`
-**Mode:** `FINAL_EXPERIMENT_AND_MANUSCRIPT_COMPLETION`
+**Active development branch:** `paper/hands-on-recovery-study`
+**Retained experiment execution commit:** `c630fb4f65ad78211fd3ffb0391000d7ed3629b1`
+**Mode:** `RESULTS_ANALYSIS_AND_MANUSCRIPT_COMPLETION`
 
 ## Current position
 
 ```text
-MODEL_AND_IMPLEMENTATION=SUBSTANTIALLY_COMPLETE
-BASELINE_AND_T1_TESTING=SUBSTANTIALLY_COMPLETE
+MODEL_AND_IMPLEMENTATION=COMPLETE_FOR_CURRENT_PAPER
+BASELINE_AND_T1_REGRESSION=256_OF_256_PASS_AT_EXECUTION_BOUNDARY
 FORMAL_ASSURANCE=SUFFICIENT_FOR_SUPPORTING_EVIDENCE
 COMPARABILITY_DESIGN=COMPLETE_FOR_FOUR_QUALIFIED_FAMILIES
 D4_REVIEW_DECISION=ACCEPT
 D4_EXACT_REVIEWED_OBJECTS_FROZEN=true
-FINAL_EXPERIMENT_PLAN=PREDECLARED_PRE_RUN_NOT_EXECUTED
-FINAL_PUBLICATION_DATASET=NOT_EXECUTED
-RESULTS_ANALYSIS=NOT_EXECUTED
+FINAL_EXPERIMENT_PLAN=COMMITTED_PREDECLARED
+FINAL_RUNNER=COMMITTED_AND_VALIDATED
+FINAL_RETAINED_EXPERIMENT=PASS
+RETAINED_RUN_ID=20260814T022506Z-gc630fb4
+RETAINED_BUNDLE_INTEGRITY=16_OF_16_PASS
+INITIAL_RESULTS_ANALYSIS=COMPLETE
 MANUSCRIPT=IN_PROGRESS
+INTERNAL_EXPERIMENTAL_EVIDENCE=RETAINED_AND_ANALYZED
 INDEPENDENT_CRYPTOGRAPHY_REVIEW=OPEN_PARALLEL_ACTIVITY
+INDEPENDENT_VALIDATION=false
 PUBLICATION_EVIDENCE=false
 ```
 
-## Complete enough to stop expanding
+The run metadata intentionally retains `publication_evidence=false` and
+`independent_validation=false`. The retained outputs are usable as internal experimental
+evidence for the manuscript with the declared limitations; they are not self-certifying
+cryptographic or external validation.
 
-Retain the existing system/threat model, B0/B1/B2 semantics, T1 controller, fault engine,
-metrics, formal evidence, Phase 14 review package, Phase 15 comparability/capture/D4 artifacts,
-and regression/reproducibility tooling as the research foundation. Do not create new process
-phases merely to re-close already completed work.
+## Retained experiment identity
 
-## Frozen objects remain untouched
+- plan commit: `cfb730a8191d37863e9e419823686b3c3afe18a2`;
+- plan SHA-256: `3570834a70c76e020dada459e036786f690698125fe1d9e171e9f945748a1012`;
+- runner/execution commit: `c630fb4f65ad78211fd3ffb0391000d7ed3629b1`;
+- run: `20260814T022506Z-gc630fb4`;
+- bundle SHA-256:
+  `b3b8c55a9e522ffe3f7898d7b786583e46a4dc3db0aba9d3947fd6ebdaeecaa1`;
+- internal final-bundle manifest: 16/16 files verified.
 
-The paper-completion branch does not modify or reopen:
+The retained experiment is not rerun merely to obtain preferred outcomes. A proven execution or
+implementation defect would require a separately identified correction run while preserving
+this bundle.
+
+## Current findings
+
+### Study A — matched families
+
+The four qualified families showed categorical parity on the pre-authorized fields. This does
+not support a categorical-superiority claim for T1 over B0/B1/B2.
+
+### Study B — deterministic T1 faults
+
+Across 31 canonical fault-kind/phase cells:
+
+- 25 `SUCCESS`;
+- 4 `INDETERMINATE`;
+- 1 `EXPIRED`;
+- 1 `SECURE_DEGRADED`.
+
+Endpoint restart around activation/confirmation is the clearest observed hard boundary. Missing
+verification evidence is conservatively classified as `INDETERMINATE`.
+
+### Study C — fixed mixed schedules
+
+The fixed 100-schedule population produced 74 `SUCCESS`, 15 `INDETERMINATE`, 6
+`SECURE_DEGRADED`, and 5 `EXPIRED`. A post-execution reachability audit found that 77 of 191
+scheduled fault actions were actually applied, 43 schedules reached no fault action, and 24 of
+31 scheduled fault-kind/phase cells were exercised at runtime.
+
+Therefore Study C is reported as a fixed synthetic schedule-population characterization, not as
+a 74% success rate under faults.
+
+### Study D — sensitivity
+
+Across each candidate-lifetime setting:
+
+- max transmissions 2: 5/12 verification complete;
+- max transmissions 3: 11/12;
+- max transmissions 4: 11/12.
+
+Candidate lifetime from 2–4 contacts produced no observed change in this fixed challenge set.
+The persistent failure was COMMIT-stage spacecraft restart.
+
+## Frozen and preserved scientific history
+
+The paper-completion work does not rewrite:
 
 - D4 observation cutoffs;
 - D4 treatment-within-family analysis-unit denominators;
-- D4 member registry; or
-- D4 allowed planning-display registry.
+- D4 member registry;
+- D4 allowed planning-display registry;
+- the predeclared final experiment plan;
+- the retained final run; or
+- historical phase/governance status records.
 
-The final paper experiment references those byte-identical objects.
-
-## Final pre-run design
-
-`experiments/configs/paper-final-experiment.json` is the authoritative pre-run design.
-
-It fixes, before final-study outcome execution:
-
-- Study A: the existing four qualified D4 families;
-- Study B: 40 deterministic T1 schedules (control + 31 canonical cells + 8 retry-exhaustion
-  boundaries);
-- Study C: seeds `10001–10100`, 100 serialized schedules, and their SHA-256 identities;
-- Study D: 12 fixed challenge schedules across a 3 x 3 retry/retention grid (108 executions);
-- permitted descriptive summaries and paper output schemas; and
-- SHA-256 identities of protected D2/D3/D4 and execution inputs.
-
-The only modeling correction made while defining the final pre-run design is to restrict
-`DUPLICATE` to the four message-bearing recovery phases. TEST_COMMAND and STATUS_TELEMETRY are
-boolean evidence opportunities in the current simulator, so treating duplicate injection there
-as executed duplicate-message behavior would be misleading.
-
-No final-study outcomes are executed or inspected by the plan-preparation step.
+Older phase records remain historical provenance even when their status text differs from the
+current project state.
 
 ## Active workstreams
 
-1. **Final runner** — implement the lean runner against the committed pre-run config.
-2. **Retained execution** — run Studies A-D once from a clean committed tree.
-3. **Results analysis** — family-specific Study A, deterministic Study B, T1-only Study C/D.
-4. **Manuscript** — Methods/Limitations now; Results/Discussion after the retained run.
-5. **Reproducible release** — exact config, schedules, checksums, summary data, and figure data.
-6. **Independent review in parallel** — strengthens baseline mapping without stopping ordinary
-   paper preparation.
+1. Draft Results, Discussion, Threats to Validity, and Reproducibility from the retained
+   evidence.
+2. Complete the submission-stage literature/standards verification.
+3. Render publication figures from tracked figure-source data.
+4. Prepare a compact reproducibility release/archive without changing the retained result.
+5. Continue independent baseline cryptography review in parallel and scope any resulting
+   correction transparently.
+6. Select/final-check venue formatting and submit.
 
-## Process simplification rules
+## Process rule
 
-1. No new numbered phases for administrative state changes.
-2. No commits solely to record earlier CI.
-3. New gates only when they protect validity, reproducibility, safety, legality, or an
-   irreversible analysis decision.
-4. Raw final outputs remain immutable; corrections create a new run.
-5. Never rerun solely to obtain a preferred result.
-6. Changes to the committed pre-run schedules/summary definitions after viewing final outcomes
-   require a versioned, disclosed plan rather than an in-place rewrite.
-7. Keep incomparable cross-treatment metrics separate.
-8. Treat older trackers and PRs as historical provenance, not the active task queue.
-
-## Immediate next work
-
-1. Implement and validate the lean final runner using the committed machine-readable plan.
-2. Execute the retained final experiment from a clean exact commit.
-3. Generate Tables 1-2 and Figures 2-3 from retained outputs.
-4. Complete Results, Discussion, Limitations, and Reproducibility.
-5. Reconcile independent-review feedback in parallel before submission.
+No new phase, tracker, freeze package, or decision-only commit is created unless it directly
+protects scientific validity, reproducibility, safety, legality, or an irreversible result
+decision.
 
 ## Deferred from this paper
 
-Unless needed to answer the research questions or requested during peer review:
+Unless required by peer review:
 
-- new formal expansion phases;
+- new formal outcome-expansion work;
 - NOS3/cFS integration;
-- concrete cryptographic implementation;
-- live RF/operational-spacecraft testing;
-- individual cleanup/merge ceremonies for the historical PR stack; and
-- additional governance-only work packages.
+- concrete cryptographic primitive implementation;
+- live RF/operational-spacecraft testing; and
+- new cross-treatment timing/retry comparisons.

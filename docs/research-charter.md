@@ -2,33 +2,56 @@
 
 ## Article type
 
-Original experimental cybersecurity journal article using satellite TT&C as the application
-environment. This is not another dissertation and does not re-run the prior qualitative study.
+Original hands-on experimental cybersecurity journal article using satellite TT&C as the
+application environment. This is not another dissertation, a re-analysis of the prior
+interviews, or a broad SATCOM review.
 
 ## Working title
 
-**Recovering Without Lockout: Post-Compromise Key Resynchronization for SDLS-Protected Satellite TT&C**
+**Recovering Without Lockout: Post-Compromise Key Resynchronization for Satellite TT&C**
+
+The final title may change during manuscript/venue preparation. The repository does not claim
+concrete SDLS conformance.
 
 ## Problem
 
-Stateful key evolution can exclude previously compromised state, but incomplete ground-space
-transitions may leave legitimate operators unable to restore trusted command capability.
+Key update and state evolution can exclude previously compromised operational material, but
+interrupted ground-space transitions can leave legitimate operators synchronized, asymmetric,
+degraded, or unable to complete trusted recovery evidence.
 
 ## Primary objective
 
-Experimentally evaluate recovery approaches under compromise, intermittent contact, message
-loss, reordering, missed passes, and stale ground-state restoration.
+Experimentally characterize recovery behavior under bounded compromise, intermittent contact,
+message faults, stale/replayed state, and endpoint disruption, while separating matched
+cross-treatment evidence from T1-specific robustness evidence.
 
-## Primary research question
+## Research questions
 
-Under TT&C key compromise and ground-space state divergence, which recovery approach most
-reliably restores authenticated communication while excluding compromised key states?
+1. Under defensibly matched conditions, how do B0, B1, B2, and T1 compare in terminal security,
+   availability, alignment, and verification classifications?
+2. How does T1 behave under controlled loss, delay, duplication, reordering, contact closure,
+   endpoint restart, stale counters, and replay?
+3. How does T1 behavior change across bounded retry budgets and candidate-retention lifetimes?
+4. Where do bounded TLA+ witnesses and Python executions agree or differ under the declared
+   projection?
 
-## Primary venue target
+The design does not require a universal treatment ranking. Cross-treatment claims remain limited
+to the four qualified matched families and their pre-authorized fields.
 
-IEEE Transactions on Aerospace and Electronic Systems.
+## Current empirical status
+
+The final predeclared synthetic experiment was retained as
+`20260814T022506Z-gc630fb4` at execution commit
+`c630fb4f65ad78211fd3ffb0391000d7ed3629b1`. See `paper/RESULTS_SUMMARY.md`.
+
+## Working venue candidate
+
+IEEE Transactions on Aerospace and Electronic Systems remains a working venue candidate. Venue
+scope, article type, formatting, and current author instructions must be rechecked immediately
+before submission.
 
 ## Boundaries
 
 No live RF, operational satellites, proprietary mission data, classified information, new
-cryptographic primitive, flight-readiness claim, or human-subject experiment is included in the initial study.
+cryptographic primitive, flight-readiness claim, human-subject experiment, cryptographic proof,
+or real-world fault-prevalence inference is included in the current study.

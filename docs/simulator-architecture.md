@@ -111,20 +111,26 @@ simulator-only peer state.
 
 The interface specifies control-state behavior only.
 
-## Development order
+## Development history and current paper path
 
-1. Validate schemas
-2. Implement endpoint state and event queue
-3. Implement and test B0
-4. Implement and test B1
-5. Implement and test B2
-6. Freeze a provisional baseline-oracle candidate
-7. Add the provisional T1 controller
-8. Red-team T1 state transitions and outcome classes
-9. Add seeded scenario generation and metrics
-10. Stop for independent cryptography review before final oracle freeze or security claims
-11. Select the final T1 treatment and experiment parameters
-12. Integrate approved scenarios with NOS3/cFS
+The original numbered development sequence is historical. It has been completed through the
+abstract T1 implementation, seeded/deterministic faults, bounded formal assurance, Phase 15
+comparability/capture work, and the final retained synthetic experiment.
+
+Current paper state:
+
+1. The final outcome-blind experiment plan is committed at
+   `cfb730a8191d37863e9e419823686b3c3afe18a2`.
+2. The plan-bound final runner and execution code are committed at
+   `c630fb4f65ad78211fd3ffb0391000d7ed3629b1`.
+3. Retained run `20260814T022506Z-gc630fb4` completed successfully.
+4. Initial retained-result analysis is complete and feeds `paper/RESULTS_SUMMARY.md`.
+5. Independent baseline cryptography review remains a parallel open activity.
+6. NOS3/cFS, concrete cryptography, RF, and operational-spacecraft integration are deferred
+   follow-on work for this paper.
+
+The final experiment is not reopened merely because historical phase documents contain earlier
+stop points or provisional labels.
 
 ## Formal-methods path
 

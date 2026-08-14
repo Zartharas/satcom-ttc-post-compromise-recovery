@@ -1,6 +1,10 @@
 # Releases
 
-Packaged milestone archives are published through GitHub Releases rather than committed
-directly into the repository.
+Packaged research archives should be published through an explicit GitHub Release or external
+research archive rather than committed as large binary files.
 
-Local development archives should remain outside the Git working tree.
+The existence of this directory does **not** imply that a GitHub Release or tag has been
+published. Release status must be determined from the repository's actual release/tag records.
+
+The retained final experiment currently used by the paper is identified in
+`paper/RESULTS_SUMMARY.md`.

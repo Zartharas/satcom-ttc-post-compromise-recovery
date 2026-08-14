@@ -1,0 +1,5 @@
+outcome,count,percentage,denominator
+EXPIRED,5,5.0,100
+INDETERMINATE,15,15.0,100
+SECURE_DEGRADED,6,6.0,100
+SUCCESS,74,74.0,100

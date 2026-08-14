@@ -1,0 +1,10 @@
+fault_kind,canonical_cells,outcome_counts,interpretation
+DROP,6,"{""INDETERMINATE"":2,""SUCCESS"":4}",Single recovery-phase drops recover; TEST_COMMAND/STATUS_TELEMETRY drops leave synchronized but INDETERMINATE evidence.
+DELAY,6,"{""SUCCESS"":6}",All six canonical delay cells complete successfully.
+DUPLICATE,4,"{""SUCCESS"":4}",All four message-bearing duplicate cells succeed while duplicate message identifiers are rejected.
+REORDER,4,"{""SUCCESS"":4}",All four reordered-message cells succeed while injected out-of-order messages are rejected.
+CONTACT_CLOSE,6,"{""INDETERMINATE"":2,""SUCCESS"":4}",Single recovery-phase closures recover; verification-stage closures leave synchronized but INDETERMINATE evidence.
+ENDPOINT_RESTART,2,"{""EXPIRED"":1,""SECURE_DEGRADED"":1}",COMMIT restart expires before convergence; CONFIRM restart leaves a spacecraft-ahead degraded state.
+STALE_COUNTER,1,"{""SUCCESS"":1}",The stale PREPARE counter is rejected and recovery succeeds.
+STALE_REPLAY,2,"{""SUCCESS"":2}",Stale COMMIT/CONFIRM replays are rejected and recovery succeeds.
+DROP + CONTACT_CLOSE retry exhaustion,8,"{""EXPIRED"":6,""SECURE_DEGRADED"":2}",PREPARE/RESPONSE/COMMIT exhaustion expires before verified convergence; CONFIRM exhaustion leaves spacecraft-ahead degraded state.

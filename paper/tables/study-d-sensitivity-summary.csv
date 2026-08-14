@@ -1,0 +1,10 @@
+max_transmissions,candidate_lifetime_contacts,denominator,verification_complete_count,outcome_counts,recovery_duration_contacts_median,recovery_duration_contacts_min,recovery_duration_contacts_max,total_transmissions_median,total_transmissions_min,total_transmissions_max,retry_overhead_median,retry_overhead_min,retry_overhead_max,interpretation
+2,2,12,5,"{""EXPIRED"":5,""SECURE_DEGRADED"":2,""SUCCESS"":5}",1.0,1,3,6.0,2,7,0.0,0,1,DESCRIPTIVE_FIXED_CHALLENGE_SET
+2,3,12,5,"{""EXPIRED"":5,""SECURE_DEGRADED"":2,""SUCCESS"":5}",1.0,1,3,6.0,2,7,0.0,0,1,DESCRIPTIVE_FIXED_CHALLENGE_SET
+2,4,12,5,"{""EXPIRED"":5,""SECURE_DEGRADED"":2,""SUCCESS"":5}",1.0,1,3,6.0,2,7,0.0,0,1,DESCRIPTIVE_FIXED_CHALLENGE_SET
+3,2,12,11,"{""EXPIRED"":1,""SUCCESS"":11}",1.0,1,3,7.5,3,10,1.5,0,4,DESCRIPTIVE_FIXED_CHALLENGE_SET
+3,3,12,11,"{""EXPIRED"":1,""SUCCESS"":11}",1.0,1,3,7.5,3,10,1.5,0,4,DESCRIPTIVE_FIXED_CHALLENGE_SET
+3,4,12,11,"{""EXPIRED"":1,""SUCCESS"":11}",1.0,1,3,7.5,3,10,1.5,0,4,DESCRIPTIVE_FIXED_CHALLENGE_SET
+4,2,12,11,"{""EXPIRED"":1,""SUCCESS"":11}",1.0,1,3,7.5,3,10,1.5,0,4,DESCRIPTIVE_FIXED_CHALLENGE_SET
+4,3,12,11,"{""EXPIRED"":1,""SUCCESS"":11}",1.0,1,3,7.5,3,10,1.5,0,4,DESCRIPTIVE_FIXED_CHALLENGE_SET
+4,4,12,11,"{""EXPIRED"":1,""SUCCESS"":11}",1.0,1,3,7.5,3,10,1.5,0,4,DESCRIPTIVE_FIXED_CHALLENGE_SET

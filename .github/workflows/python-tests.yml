@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - paper/hands-on-recovery-study
   pull_request:
   workflow_dispatch:
 
@@ -42,6 +43,15 @@ jobs:
           PYTHONPATH: src
           PYTHONWARNINGS: error::ResourceWarning
         run: python -m unittest discover -s tests -p "test_*.py" -v
+
+      - name: Validate final paper experiment contract
+        env:
+          PYTHONPATH: src
+          PYTHONWARNINGS: error::ResourceWarning
+        run: |
+          if [ -f experiments/scripts/run_paper_final_experiment.py ]; then
+            python experiments/scripts/run_paper_final_experiment.py --validate-only
+          fi
 
       - name: Validate review handoff
         run: |

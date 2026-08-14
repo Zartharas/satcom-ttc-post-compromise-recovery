@@ -2,27 +2,32 @@
 
 ## Purpose
 
-Separate the scientific core from supporting assurance, historical provenance, and the work
-still required to finish the hands-on paper.
+Separate completed scientific evidence from supporting assurance, historical provenance, and the
+remaining work needed to submit the hands-on paper.
 
-## Scientific core
+## Scientific core — complete for current paper
 
 | Component | State | Paper use |
 |---|---|---|
 | System/threat model | Complete internally | Methods |
 | B0/B1/B2 semantics | Implemented/tested | Baseline design |
 | T1 controller | Implemented/tested | Proposed treatment |
-| Fault engine and metrics | Implemented | Robustness experiment |
+| Fault engine/metrics | Implemented | Robustness experiment |
 | Matched-family matrix | 4 qualified families | Cross-treatment comparison |
-| Matched population | 13 rows / 12 units | Primary case comparison |
-| D4 planning objects | Exact reviewed objects frozen | Predeclared boundary |
-| Capture/lineage tooling | Implemented | Reproducibility |
+| Matched population | 13 rows / 12 units | Primary matched comparison |
+| D4 planning objects | Exact reviewed objects frozen | Predeclared comparison boundary |
+| Final experiment plan | Committed outcome-blind | Methods / analysis boundary |
+| Final runner | Committed/validated | Reproducibility |
+| Retained Studies A-D | Completed | Results |
+| Retained bundle integrity | 16/16 verified | Reproducibility |
+| Initial result analysis | Complete | Results / Discussion input |
 
-No major expansion is planned unless a correctness defect is found.
+No additional experiment is required to begin or complete the current manuscript unless a
+specific correctness defect or peer-review requirement is identified.
 
-## Supporting assurance
+## Supporting assurance — preserve, do not expand by default
 
-Phase 09-13 formal work is retained as supporting evidence:
+Phase 09-13 formal work remains supporting evidence:
 
 - bounded TLA+ execution;
 - positive/negative controls;
@@ -30,55 +35,45 @@ Phase 09-13 formal work is retained as supporting evidence:
 - Python/formal projection comparison; and
 - diagnostic abstraction-gap analysis.
 
-Use it in one assurance subsection plus supplementary material. Do not keep expanding it unless
-the final experiment exposes a specific issue.
+Use this in a concise assurance subsection/supplement. Do not start another formal phase without
+a result-driven scientific reason.
 
-## Historical provenance
-
-Keep, but remove from the active critical path:
+## Historical provenance — preserve, not active work
 
 - Phase 04-15 trackers;
-- old stacked PR workflow;
+- stacked development PR history;
 - historical handoff/freeze records;
-- CI reconciliation records already completed; and
-- development compliance archives.
+- already-completed CI reconciliation records;
+- historical provisional configs/specs; and
+- ignored development compliance archives.
 
-## Work still required
+Historical status strings are not rewritten after the fact.
 
-### Final experiment plan
-- Exact deterministic T1 fault-coverage matrix.
-- Fixed 100-seed mixed-fault T1 population.
-- Fixed 12-schedule sensitivity population.
-- Final descriptive analysis fields and table/figure schemas.
-- Confirmation that frozen D4 objects are referenced unchanged.
+## Remaining manuscript work
 
-### Final execution
-- Matched-family Study A.
-- Deterministic T1 Study B.
-- Fixed mixed-fault T1 Study C.
-- Retry/retention Study D.
-- Exact provenance, logs, schedules, outputs, and checksums.
+### Results and discussion
+- Convert `paper/RESULTS_SUMMARY.md` and tracked tables into polished Results prose.
+- Explain deterministic fault mechanisms and endpoint-restart boundary.
+- Explain Study C runtime-reachability limitation.
+- Discuss retry-budget sensitivity without claiming universal optimum.
+- Select a small number of representative adverse traces.
 
-### Results
-- Matched-family categorical table.
-- Deterministic fault-coverage table.
-- Mixed-fault T1 distribution.
-- Sensitivity figure/table.
-- Representative adverse traces.
-- Reproducible source data for every manuscript value.
+### Literature and positioning
+- Perform one submission-stage literature search for novelty/related-work completeness.
+- Recheck standards/bibliographic metadata immediately before submission.
+- Avoid unverified “first” or “to our knowledge” novelty language until that search is complete.
 
-### Manuscript
-- Methods from existing artifacts.
-- Results only from retained final outputs.
-- Mechanism-focused Discussion.
-- Explicit validity/independent-review limitations.
-- Reproducibility and artifact-availability statement.
+### Figures and manuscript
+- Render final publication figures from tracked source CSVs.
+- Complete Introduction, Related Work, Results, Discussion, Threats to Validity,
+  Reproducibility, and Conclusion.
+- Keep source-to-model and independent-review limitations explicit.
 
 ### Release/submission
-- Compact reproducibility bundle/tagged release.
-- Final checksums and figure/table source data.
-- One pre-submission claim/consistency audit.
-- Venue formatting and submission.
+- Create a compact reproducibility release/archive using the retained bundle identity.
+- Perform one final claim/number consistency audit.
+- Recheck the selected journal's current author instructions and format.
+- Submit.
 
 ## Not required to finish this paper
 
@@ -87,6 +82,7 @@ Keep, but remove from the active critical path:
 - concrete cryptographic primitives;
 - CCSDS/SDLS conformance certification;
 - another formal outcome-expansion phase;
+- a replacement random experiment solely to improve Study C;
 - pooled cross-family treatment scoring; or
 - inferential statistics on non-equivalent timing/retry units.
 
