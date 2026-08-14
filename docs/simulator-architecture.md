@@ -125,7 +125,8 @@ Current paper state:
    `c630fb4f65ad78211fd3ffb0391000d7ed3629b1`.
 3. Retained run `20260814T022506Z-gc630fb4` completed successfully.
 4. Initial retained-result analysis is complete and feeds `paper/RESULTS_SUMMARY.md`.
-5. Independent baseline cryptography review remains a parallel open activity.
+5. Independent baseline cryptography review was not completed and is not an active paper requirement;
+   `independent_validation=false` remains the manuscript claim boundary.
 6. NOS3/cFS, concrete cryptography, RF, and operational-spacecraft integration are deferred
    follow-on work for this paper.
 
@@ -134,10 +135,9 @@ stop points or provisional labels.
 
 ## Formal-methods path
 
-After provisional T1 behavior stabilizes, encode the abstract state machine in TLA+ or an equivalent
-model checker, focusing on epoch monotonicity, unique authority, replay rejection, exact-binding
-retransmission, bounded pending states and receipts, no fallback to compromised state,
-bounded-delivery termination, and reachable degraded or lockout states.
+The abstract state machine has been encoded and exercised in bounded TLA+ models with positive,
+negative, success, adverse-outcome, and diagnostic expansion checks. Selected witnesses were
+projected to the Python controller under a declared 16-field mapping.
 
-Formal modeling may be prepared before external review, but any claim that it establishes security
-for a concrete protocol remains review-gated.
+Those results are supporting bounded consistency evidence only. They do not establish refinement,
+cryptographic security, completeness, CCSDS conformance, or operational spacecraft behavior.

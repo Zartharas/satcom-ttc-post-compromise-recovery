@@ -2,6 +2,17 @@
 
 ## Unreleased — hands-on paper retained results and repository refresh
 
+- Completed submission-stage related-work review against current CCSDS/NIST sources and primary
+  TT&C key-management, SDLS key-update, space key-establishment, and SpaceSec testbed literature.
+- Added evidence-linked manuscript drafts for Introduction, Background/Related Work, System/Threat
+  Model, Recovery Designs, Experimental Method, Reproducibility, and Conclusion; Sections 1-10 now
+  all have working drafts.
+- Narrowed novelty positioning to operational post-compromise TT&C resynchronization behavior and
+  explicitly avoided universal first/superiority claims.
+- Added bibliography entries for Bader 2024, Dowling et al. 2025, AegisSat 2025, and the SpaceSec
+  2025 testbed-fidelity work.
+- Corrected current-facing simulator-architecture text that still described independent review and
+  formal modeling as future/open work; historical phase artifacts remain unchanged.
 - Refocused active development on the hands-on research paper rather than additional governance
   phases.
 - Committed the outcome-blind final experiment plan at `cfb730a8191d37863e9e419823686b3c3afe18a2`.

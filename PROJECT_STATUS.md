@@ -19,7 +19,7 @@ FINAL_RETAINED_EXPERIMENT=PASS
 RETAINED_RUN_ID=20260814T022506Z-gc630fb4
 RETAINED_BUNDLE_INTEGRITY=16_OF_16_PASS
 INITIAL_RESULTS_ANALYSIS=COMPLETE
-MANUSCRIPT=RESULTS_DISCUSSION_VALIDITY_DRAFTED
+MANUSCRIPT=CORE_SECTIONS_1_TO_10_DRAFTED
 INTERNAL_EXPERIMENTAL_EVIDENCE=RETAINED_AND_ANALYZED
 INDEPENDENT_CRYPTOGRAPHY_REVIEW=NOT_COMPLETED_NOT_ACTIVE_REQUIREMENT
 INDEPENDENT_VALIDATION=false
@@ -102,12 +102,12 @@ current project state.
 
 ## Active workstreams
 
-1. Integrate and polish the drafted Results, Discussion, and Threats to Validity sections.
-2. Draft Reproducibility/Artifact Availability and complete the full manuscript.
-3. Complete the submission-stage literature/standards verification.
-4. Render publication figures from tracked figure-source data.
-5. Prepare a compact reproducibility release/archive without changing the retained result.
-6. Select/final-check venue formatting and submit.
+1. Integrate and polish the complete Sections 1-10 draft into one journal manuscript.
+2. Draft the abstract/title keywords after full-text integration.
+3. Render publication figures and select representative adverse traces.
+4. Perform the final venue-specific literature/claim/number consistency audit.
+5. Prepare and publish the immutable reproducibility bundle/archive.
+6. Apply venue formatting, perform final author review, and submit.
 
 ## Process rule
 

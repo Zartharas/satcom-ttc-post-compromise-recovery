@@ -57,14 +57,14 @@ Historical status strings are not rewritten after the fact.
 - Select a small number of representative adverse traces for the final narrative.
 
 ### Literature and positioning
-- Perform one submission-stage literature search for novelty/related-work completeness.
+- Submission-stage related-work search completed on 2026-08-14 and incorporated into Section 2.
 - Recheck standards/bibliographic metadata immediately before submission.
-- Avoid unverified “first” or “to our knowledge” novelty language until that search is complete.
+- Run one venue-specific final search and avoid unsupported “first” or “to our knowledge” claims.
 
 ### Figures and manuscript
-- Render final publication figures from tracked source CSVs.
-- Complete Introduction, Related Work, Results, Discussion, Threats to Validity,
-  Reproducibility, and Conclusion.
+- Sections 1-10 now have evidence-linked drafts under `paper/manuscript/`.
+- Integrate/polish the full manuscript, draft the abstract, and tighten cross-section transitions.
+- Render final publication figures from tracked source CSVs and choose representative traces.
 - Keep source-to-model limitations and the absence of independent cryptography review explicit.
 
 ### Release/submission

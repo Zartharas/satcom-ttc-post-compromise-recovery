@@ -2,6 +2,8 @@
 
 ## 1. Introduction
 
+Draft: `paper/manuscript/introduction.md`
+
 - TT&C security problem: operational-key compromise plus ground-space state divergence.
 - Gap between cryptographic key update and operational resynchronization/verification.
 - Safe, controlled software experiment.
@@ -9,6 +11,8 @@
   experiments, matched-family analysis, sensitivity analysis, and bounded assurance evidence.
 
 ## 2. Background and Related Work
+
+Draft: `paper/manuscript/background-related-work.md`
 
 ### 2.1 Satellite TT&C security-state recovery
 ### 2.2 B0 SDLS-style rekeying abstraction
@@ -20,6 +24,8 @@ State explicitly that source constructions/proofs are not inherited by the simul
 
 ## 3. System and Threat Model
 
+Draft: `paper/manuscript/system-threat-model.md`
+
 ### 3.1 Ground and spacecraft endpoints
 ### 3.2 Operational key state and recovery authority
 ### 3.3 Compromise scopes
@@ -28,6 +34,8 @@ State explicitly that source constructions/proofs are not inherited by the simul
 ### 3.6 Excluded threat classes
 
 ## 4. Recovery Designs
+
+Draft: `paper/manuscript/recovery-designs.md`
 
 ### 4.1 B0
 ### 4.2 B1 activation variants
@@ -38,6 +46,8 @@ State explicitly that source constructions/proofs are not inherited by the simul
 Figure 1: experimental architecture and evidence flow.
 
 ## 5. Experimental Method
+
+Draft: `paper/manuscript/experimental-method.md`
 
 ### 5.1 Research questions
 - RQ1 matched recovery behavior.
@@ -154,6 +164,8 @@ Draft: `paper/manuscript/threats-to-validity.md`
 
 ## 9. Reproducibility and Artifact Availability
 
+Draft: `paper/manuscript/reproducibility.md`
+
 - code/version and execution commit;
 - final config/schedules;
 - retained bundle SHA-256 and internal manifest;
@@ -162,6 +174,8 @@ Draft: `paper/manuscript/threats-to-validity.md`
 - archive/release location when published.
 
 ## 10. Conclusion
+
+Draft: `paper/manuscript/conclusion.md`
 
 - answer RQ1-RQ4 within the declared synthetic model;
 - emphasize deterministic operational fault findings and state-persistence boundary;

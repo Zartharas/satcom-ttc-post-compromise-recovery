@@ -14,6 +14,7 @@ Primary navigation:
 - `EXPERIMENT_EXECUTION_PLAN.md` — intentionally preserved pre-run plan;
 - `RESEARCH_COMPLETION_MAP.md` — remaining paper work;
 - `manuscript/outline.md` — current evidence-linked manuscript structure;
+- `manuscript/` — drafted Sections 1-10, with abstract/integration/final formatting pending;
 - `tables/` — tracked table and diagnostic source data derived from the retained run;
 - `figures/` — tracked figure source data.
 
