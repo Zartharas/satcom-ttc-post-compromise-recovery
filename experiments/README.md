@@ -1,6 +1,6 @@
 # Experiments
 
-The active final-paper experiment is defined by:
+The retained final-paper experiment was predeclared and executed once. Its reproducibility path is:
 
 - `configs/paper-final-experiment.json` — committed outcome-blind final plan;
 - `scripts/run_paper_final_experiment.py` — plan-bound final runner; and

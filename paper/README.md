@@ -5,7 +5,8 @@ This is the active workspace for the hands-on TT&C post-compromise recovery arti
 ## Current state
 
 The final plan and runner are committed, the retained final experiment completed successfully,
-and initial results analysis is complete.
+retained-results analysis is complete, and the integrated submission-facing manuscript with
+reproducible tables and figures is present.
 
 Primary navigation:
 

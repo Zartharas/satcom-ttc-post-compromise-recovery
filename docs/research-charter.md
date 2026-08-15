@@ -6,11 +6,11 @@ Original hands-on experimental cybersecurity journal article using satellite TT&
 application environment. This is not another dissertation, a re-analysis of the prior
 interviews, or a broad SATCOM review.
 
-## Working title
+## Current manuscript title
 
-**Recovering Without Lockout: Post-Compromise Key Resynchronization for Satellite TT&C**
+**Post-Compromise Satellite TT&C Resynchronization Under Intermittent Links: A Controlled Fault-Injection Study**
 
-The final title may change during manuscript/venue preparation. The repository does not claim
+The title may receive venue-specific editorial adjustment before submission. The repository does not claim
 concrete SDLS conformance.
 
 ## Problem

@@ -8,5 +8,5 @@ Current detailed notes:
 - `triple-kem.md` — Hülsing, Lange, and Weber SDLS key-update mechanism;
 - `poettering-roesler-urke.md` — Poettering-Rösler ratcheted key-exchange material used for B2.
 
-These notes are navigation/grounding aids. Independent cryptography review must consult the
-primary papers directly.
+These notes are navigation/grounding aids. No independent cryptography review was completed for
+the current paper; any future independent review must consult the primary papers directly.

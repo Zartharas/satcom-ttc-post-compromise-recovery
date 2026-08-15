@@ -1,6 +1,7 @@
-# Provisional formal-model execution
+# Bounded Formal-Model Evidence
 
-The files in `formal/tla/` describe abstract recovery-control state machines for internal review.
+The files in `formal/tla/` describe abstract recovery-control state machines used as bounded
+model-consistency evidence for the current paper.
 
 The preserved baseline module models:
 
@@ -30,7 +31,7 @@ Phase 10 executes the model with the command-line TLA+ tools rather than relying
 - CI Java: Temurin 17
 - TLC workers: `1`
 
-`MC.cfg` checks the provisional positive invariant set. A clean run is reported only as
+`MC.cfg` checks the recorded Phase 10 positive invariant set. A clean run is reported only as
 `NO_COUNTEREXAMPLE_WITHIN_RECORDED_BOUND`.
 
 `NegativeControl.cfg` checks the intentionally false `NegativeControlNoActivation` property. Its sole
@@ -111,9 +112,10 @@ formal-model completeness, causal validation, or proof of post-compromise securi
 path for each expanded outcome does not establish that the outcome population, cause vocabulary,
 transition relation, or witness set is complete, realistic, necessary, sufficient, or exhaustive.
 
-Model-checking and trace-comparison output remains internal diagnostic evidence until independent review
-accepts the abstraction, property set, projection, transition relation, cause vocabulary, and mapping to
-any concrete treatment.
+Model-checking and trace-comparison output is used in the current manuscript only as bounded supporting
+consistency evidence. It has not been independently validated and does not establish correctness of the
+abstraction, property set, projection, transition relation, cause vocabulary, or mapping to any concrete
+treatment.
 
 Any state, outcome, or behavior not observed in a recorded finite model must remain labeled
 `NOT_REACHED_WITHIN_RECORDED_BOUND` or `NOT_REACHED_WITHIN_PROVISIONAL_BOUND`, never impossible.

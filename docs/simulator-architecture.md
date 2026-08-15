@@ -7,7 +7,7 @@
 3. Ground Endpoint
 4. Spacecraft Endpoint
 5. Baseline Protocol Adapter for B0, B1, or B2
-6. Provisional T1 Recovery Controller
+6. T1 Recovery Controller (project-defined abstract treatment)
 7. Recovery Authority and Epoch-Floor Record
 8. Contact and Link Scheduler
 9. Adversary Model
@@ -17,8 +17,8 @@
 
 ## Determinism
 
-The first implementation uses explicit fault schedules. Later seeded scenario generation must
-serialize the generated schedule before execution.
+The implementation supports explicit fault schedules and deterministic seeded schedule generation.
+Generated seeded schedules are serialized before execution so every retained run remains replayable.
 
 ## Cryptographic abstraction
 
@@ -50,7 +50,7 @@ RATCHET_ADVANCE -> TEST_COMMAND -> STATUS_TELEMETRY
 
 Status telemetry is evidence of completion, not a cryptographic ratchet acknowledgment.
 
-## Provisional T1 sequence
+## T1 recovery sequence
 
 ```text
 RECOVERY_PREPARE
@@ -92,8 +92,9 @@ simulator-only peer state.
 - Exact retries reuse the same recovery binding while using a fresh message identifier.
 - Conflicting bindings, repeated message identifiers, and unauthorized authorities are rejected.
 - Expiry before activation yields `EXPIRED`.
-- Confirmation-budget exhaustion after spacecraft activation yields provisional
-  `SECURE_DEGRADED`, not automatic `LOCKED`.
+- Confirmation-budget exhaustion after spacecraft activation yields the retained raw
+  `SECURE_DEGRADED` outcome label, not automatic `LOCKED`; the label is not a cryptographic
+  security proof.
 - Missing command or status evidence after convergence yields `INDETERMINATE`.
 
 ## T1 interface
@@ -124,7 +125,8 @@ Current paper state:
 2. The plan-bound final runner and execution code are committed at
    `c630fb4f65ad78211fd3ffb0391000d7ed3629b1`.
 3. Retained run `20260814T022506Z-gc630fb4` completed successfully.
-4. Initial retained-result analysis is complete and feeds `paper/RESULTS_SUMMARY.md`.
+4. Retained-result analysis is complete; the integrated manuscript is available at
+   `paper/manuscript/manuscript.md`, with result lineage in `paper/RESULTS_SUMMARY.md`.
 5. Independent baseline cryptography review was not completed and is not an active paper requirement;
    `independent_validation=false` remains the manuscript claim boundary.
 6. NOS3/cFS, concrete cryptography, RF, and operational-spacecraft integration are deferred

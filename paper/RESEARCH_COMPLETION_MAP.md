@@ -52,8 +52,8 @@ Historical status strings are not rewritten after the fact.
 ## Remaining manuscript work
 
 ### Results and discussion
-- Results, Discussion, and Threats to Validity drafts are now present under `paper/manuscript/`.
-- Integrate those drafts into the full manuscript and tighten table/figure callouts.
+- Results, Discussion, and Threats to Validity are integrated in `paper/manuscript/manuscript.md`; the component section files remain editable evidence-linked sources.
+- Tighten final narrative and table/figure callouts during the venue-specific editorial pass.
 - Select a small number of representative adverse traces for the final narrative.
 
 ### Literature and positioning

@@ -2,6 +2,9 @@
 
 ## Unreleased — hands-on paper retained results and repository refresh
 
+- Completed a repository-wide hygiene audit across every tracked file and directory after manuscript integration.
+- Refreshed only current-facing status/navigation text to the integrated-manuscript and publication-preparation state; historical/frozen phase evidence remains unchanged.
+- Clarified that bounded formal results are supporting consistency evidence and that no independent cryptography review was completed for the current paper.
 - Integrated Sections 1-10 into a single submission-facing manuscript with the working final title, abstract, and keywords.
 - Inserted Table 1 and the full 40-row deterministic Table 2 from tracked retained-run CSV sources.
 - Added a standard-library vector renderer and publication-facing SVGs for the recovery architecture, Study C outcomes, and Study D sensitivity grid.

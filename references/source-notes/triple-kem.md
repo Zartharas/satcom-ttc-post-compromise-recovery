@@ -41,4 +41,6 @@ loss. It is not attributed to the source paper.
 ## Modeling boundary
 
 The simulator does not implement the source cryptographic construction and does not inherit its
-proof. Independent review of the source-to-model mapping remains open.
+proof. No independent cryptography review of this source-to-model mapping was completed for the
+current paper. The manuscript reports that limitation explicitly; any future independent review
+should evaluate the mapping against the primary source.

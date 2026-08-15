@@ -38,5 +38,6 @@ importing the full bidirectional concurrent-epoch machinery.
 
 This repository does not implement the source algorithms or inherit their proofs. TT&C role
 mapping, operational activation, strict deletion, telemetry evidence, and lockout/outcome
-classification are experimental model decisions. Independent review of the source-to-model
-mapping remains open.
+classification are experimental model decisions. No independent cryptography review of this source-to-model mapping was completed for the
+current paper. The manuscript reports that limitation explicitly; any future independent review
+should evaluate the mapping against the primary source.
