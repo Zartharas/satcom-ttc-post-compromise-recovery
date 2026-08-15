@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="760" viewBox="0 0 1400 760">
+<defs>
+  <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+    <path d="M0,0 L0,6 L9,3 z" fill="black"/>
+  </marker>
+</defs>
+<rect width="100%" height="100%" fill="white"/>
+<text x="700" y="42" font-family="Arial, Helvetica, sans-serif" font-size="24" text-anchor="middle" font-weight="bold">Figure 1. Bounded post-compromise TT&amp;C resynchronization architecture</text>
+<rect x="90" y="105" width="310" height="100" rx="10" ry="10" fill="none" stroke="black" stroke-width="2"/>
+<text x="245.0" y="143.0" font-family="Arial, Helvetica, sans-serif" font-size="17" text-anchor="middle" font-weight="normal">Recovery authority</text>
+<text x="245.0" y="167.0" font-family="Arial, Helvetica, sans-serif" font-size="17" text-anchor="middle" font-weight="normal">counter + epoch floor</text>
+<rect x="545" y="105" width="310" height="100" rx="10" ry="10" fill="none" stroke="black" stroke-width="2"/>
+<text x="700.0" y="143.0" font-family="Arial, Helvetica, sans-serif" font-size="17" text-anchor="middle" font-weight="normal">Adversary / fault model</text>
+<text x="700.0" y="167.0" font-family="Arial, Helvetica, sans-serif" font-size="17" text-anchor="middle" font-weight="normal">loss - delay - replay - restart</text>
+<rect x="70" y="300" width="330" height="135" rx="10" ry="10" fill="none" stroke="black" stroke-width="2"/>
+<text x="235.0" y="355.5" font-family="Arial, Helvetica, sans-serif" font-size="17" text-anchor="middle" font-weight="normal">Ground endpoint</text>
+<text x="235.0" y="379.5" font-family="Arial, Helvetica, sans-serif" font-size="17" text-anchor="middle" font-weight="normal">candidate / active state</text>
+<rect x="510" y="280" width="380" height="175" rx="10" ry="10" fill="none" stroke="black" stroke-width="2"/>
+<text x="700.0" y="331.5" font-family="Arial, Helvetica, sans-serif" font-size="17" text-anchor="middle" font-weight="normal">Intermittent TT&amp;C link</text>
+<text x="700.0" y="355.5" font-family="Arial, Helvetica, sans-serif" font-size="17" text-anchor="middle" font-weight="normal">fault-controlled delivery</text>
+<text x="700.0" y="379.5" font-family="Arial, Helvetica, sans-serif" font-size="17" text-anchor="middle" font-weight="normal">G-&gt;S: PREPARE - COMMIT - TEST</text>
+<text x="700.0" y="403.5" font-family="Arial, Helvetica, sans-serif" font-size="17" text-anchor="middle" font-weight="normal">S-&gt;G: RESPONSE - CONFIRM - STATUS</text>
+<rect x="1000" y="300" width="330" height="135" rx="10" ry="10" fill="none" stroke="black" stroke-width="2"/>
+<text x="1165.0" y="355.5" font-family="Arial, Helvetica, sans-serif" font-size="17" text-anchor="middle" font-weight="normal">Spacecraft endpoint</text>
+<text x="1165.0" y="379.5" font-family="Arial, Helvetica, sans-serif" font-size="17" text-anchor="middle" font-weight="normal">candidate / active state</text>
+<rect x="535" y="590" width="330" height="100" rx="10" ry="10" fill="none" stroke="black" stroke-width="2"/>
+<text x="700.0" y="628.0" font-family="Arial, Helvetica, sans-serif" font-size="17" text-anchor="middle" font-weight="normal">Append-only evidence</text>
+<text x="700.0" y="652.0" font-family="Arial, Helvetica, sans-serif" font-size="17" text-anchor="middle" font-weight="normal">+ outcome evaluator</text>
+<line x1="245" y1="205" x2="245" y2="300" stroke="black" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="270" y="255" font-family="Arial, Helvetica, sans-serif" font-size="15" text-anchor="start" font-weight="normal">authorize + monotonic state</text>
+<line x1="700" y1="205" x2="700" y2="280" stroke="black" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="725" y="248" font-family="Arial, Helvetica, sans-serif" font-size="15" text-anchor="start" font-weight="normal">controls delivery</text>
+<line x1="400" y1="338" x2="510" y2="338" stroke="black" stroke-width="2" marker-end="url(#arrow)"/>
+<line x1="510" y1="397" x2="400" y2="397" stroke="black" stroke-width="2" marker-end="url(#arrow)"/>
+<line x1="890" y1="338" x2="1000" y2="338" stroke="black" stroke-width="2" marker-end="url(#arrow)"/>
+<line x1="1000" y1="397" x2="890" y2="397" stroke="black" stroke-width="2" marker-end="url(#arrow)"/>
+<line x1="255" y1="435" x2="600" y2="590" stroke="black" stroke-width="2" marker-end="url(#arrow)"/>
+<line x1="1145" y1="435" x2="800" y2="590" stroke="black" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="700" y="520" font-family="Arial, Helvetica, sans-serif" font-size="16" text-anchor="middle" font-weight="bold">Activation: spacecraft on exact COMMIT; ground on exact CONFIRM.</text>
+<text x="700" y="548" font-family="Arial, Helvetica, sans-serif" font-size="16" text-anchor="middle" font-weight="normal">SUCCESS additionally requires post-convergence command and telemetry verification.</text>
+</svg>

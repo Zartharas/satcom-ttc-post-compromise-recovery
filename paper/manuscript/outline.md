@@ -1,5 +1,9 @@
 # Manuscript Outline — Hands-On TT&C Post-Compromise Recovery Study
 
+**Integrated manuscript:** `paper/manuscript/manuscript.md`
+
+**Working final title:** *Post-Compromise Satellite TT&C Resynchronization Under Intermittent Links: A Controlled Fault-Injection Study*
+
 ## 1. Introduction
 
 Draft: `paper/manuscript/introduction.md`

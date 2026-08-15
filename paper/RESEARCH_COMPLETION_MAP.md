@@ -62,9 +62,10 @@ Historical status strings are not rewritten after the fact.
 - Run one venue-specific final search and avoid unsupported “first” or “to our knowledge” claims.
 
 ### Figures and manuscript
-- Sections 1-10 now have evidence-linked drafts under `paper/manuscript/`.
-- Integrate/polish the full manuscript, draft the abstract, and tighten cross-section transitions.
-- Render final publication figures from tracked source CSVs and choose representative traces.
+- Sections 1-10 remain as evidence-linked component drafts under `paper/manuscript/`.
+- `paper/manuscript/manuscript.md` is now the integrated submission-facing draft with title, abstract, and keywords.
+- Figures 1-3 are reproducibly rendered as vector SVGs; Tables 1-2 are inserted from tracked retained-run CSV sources.
+- Perform the final editorial/venue-length pass and choose only a minimal representative adverse-trace supplement.
 - Keep source-to-model limitations and the absence of independent cryptography review explicit.
 
 ### Release/submission

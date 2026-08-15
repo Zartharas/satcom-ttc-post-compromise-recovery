@@ -14,9 +14,10 @@ Primary navigation:
 - `EXPERIMENT_EXECUTION_PLAN.md` — intentionally preserved pre-run plan;
 - `RESEARCH_COMPLETION_MAP.md` — remaining paper work;
 - `manuscript/outline.md` — current evidence-linked manuscript structure;
-- `manuscript/` — drafted Sections 1-10, with abstract/integration/final formatting pending;
+- `manuscript/manuscript.md` — integrated submission-facing draft with title, abstract, keywords, tables, and figures;
+- `manuscript/` — evidence-linked component Sections 1-10 retained as editable source drafts;
 - `tables/` — tracked table and diagnostic source data derived from the retained run;
-- `figures/` — tracked figure source data.
+- `figures/` — tracked figure source data plus reproducible publication SVG renderer/output.
 
 The raw retained bundle is not committed to Git. Its SHA-256 and execution identity are recorded
 in `RESULTS_SUMMARY.md`.

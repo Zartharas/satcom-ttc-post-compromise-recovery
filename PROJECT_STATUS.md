@@ -19,7 +19,7 @@ FINAL_RETAINED_EXPERIMENT=PASS
 RETAINED_RUN_ID=20260814T022506Z-gc630fb4
 RETAINED_BUNDLE_INTEGRITY=16_OF_16_PASS
 INITIAL_RESULTS_ANALYSIS=COMPLETE
-MANUSCRIPT=CORE_SECTIONS_1_TO_10_DRAFTED
+MANUSCRIPT=INTEGRATED_DRAFT_WITH_TITLE_ABSTRACT_TABLES_FIGURES
 INTERNAL_EXPERIMENTAL_EVIDENCE=RETAINED_AND_ANALYZED
 INDEPENDENT_CRYPTOGRAPHY_REVIEW=NOT_COMPLETED_NOT_ACTIVE_REQUIREMENT
 INDEPENDENT_VALIDATION=false
@@ -102,12 +102,12 @@ current project state.
 
 ## Active workstreams
 
-1. Integrate and polish the complete Sections 1-10 draft into one journal manuscript.
-2. Draft the abstract/title keywords after full-text integration.
-3. Render publication figures and select representative adverse traces.
-4. Perform the final venue-specific literature/claim/number consistency audit.
-5. Prepare and publish the immutable reproducibility bundle/archive.
-6. Apply venue formatting, perform final author review, and submit.
+1. Perform the integrated-manuscript editorial pass for concision, transitions, and venue length.
+2. Select the final journal and run its venue-specific literature/claim audit.
+3. Select a minimal representative adverse-trace supplement and finalize figure/table placement.
+4. Prepare and publish the immutable reproducibility bundle/archive.
+5. Apply venue formatting and citation style.
+6. Perform final author review and submit.
 
 ## Process rule
 

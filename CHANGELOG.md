@@ -2,6 +2,11 @@
 
 ## Unreleased — hands-on paper retained results and repository refresh
 
+- Integrated Sections 1-10 into a single submission-facing manuscript with the working final title, abstract, and keywords.
+- Inserted Table 1 and the full 40-row deterministic Table 2 from tracked retained-run CSV sources.
+- Added a standard-library vector renderer and publication-facing SVGs for the recovery architecture, Study C outcomes, and Study D sensitivity grid.
+- Applied integration-only de-duplication by removing the redundant Discussion claim-boundary tail and Threats-to-Validity summary tail from the assembled manuscript while preserving their component source drafts.
+- Added manuscript-wide numerical lineage, citation resolution, overclaim, duplicate-paragraph, and dissertation-style wording checks.
 - Completed submission-stage related-work review against current CCSDS/NIST sources and primary
   TT&C key-management, SDLS key-update, space key-establishment, and SpaceSec testbed literature.
 - Added evidence-linked manuscript drafts for Introduction, Background/Related Work, System/Threat
