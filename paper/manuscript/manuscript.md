@@ -121,6 +121,8 @@ re-evaluate SDLS conformance or prove a cryptographic post-compromise-security p
 we model what happens operationally when legitimate endpoints must re-establish a common trusted
 state after compromise and delivery/state faults occur during the transition.
 
+CCSDS already describes an emergency **Recovery Security Association (Recovery SA)** for telecommand data-link security. Section 3.5.1.2 of CCSDS 350.5-G-2 permits a separate SA on the same TC virtual channel as a last-resort path when the nominal SA can no longer support telecommanding. Section 4.5.6 discusses lost telemetry, corrupted operational-key storage, and ground/space anti-replay counter desynchronization; it calls for segregated recovery context and non-volatile, non-erasable onboard recovery keys/context capable of surviving transient power loss [@ccsds_sdls_rationale_350_5_g_2]. These are existing CCSDS recovery concepts, not contributions of T1. This Green Book is informational, and our simulation neither implements nor evaluates a compliant Recovery SA. Instead, T1 isolates transaction-level questions under intermittent contact: candidate/operational state separation, activation order, retry and replay handling, asymmetric endpoint restart, and evidence that recovery actually completed.
+
 ### 2.2 KEM-based SDLS key update
 
 Hülsing, Lange, and Weber propose a standalone key-update/establishment mechanism for SDLS based
@@ -355,6 +357,8 @@ uploaded, activated, and then tested through modeled command and telemetry evide
 B0 is intentionally an **SDLS EP-style abstraction**, not a CCSDS conformance implementation.
 The simulator does not encode every SDLS security-association procedure, key-management data unit,
 or cryptographic mechanism.
+
+The B0 recovery/master capability is a scenario assumption, not an implementation or experimental comparison of the dedicated Recovery SA described in CCSDS 350.5-G-2, Sections 3.5.1.2 and 4.5.6 [@ccsds_sdls_rationale_350_5_g_2].
 
 ### 4.2 B1 — Triple-KEM/PQNoise-inspired key update
 
@@ -1092,6 +1096,8 @@ Finally, recovery policy should expose security and availability separately to m
 logic. A controller deciding whether to resume normal TT&C operations needs to know not only
 whether keys/epochs match, but whether the state is trusted, whether command/telemetry verification
 succeeded, and whether the system has retained enough evidence to explain the transition.
+
+CCSDS 350.5-G-2 already recommends a separate last-resort Recovery SA, with isolated recovery context and non-volatile onboard storage, to restore secure telecommanding when operational SAs fail (Sections 3.5.1.2 and 4.5.6) [@ccsds_sdls_rationale_350_5_g_2]. Our observations do not establish the need for that concept or test its conformance. Rather, the COMMIT/CONFIRM restart traces illustrate a transaction-level hazard in this project-defined controller: preserving a recovery credential or SA context alone does not demonstrate that both endpoints will retain the pending transaction state and its activation evidence. Whether an implementation using CCSDS Recovery SA would encounter or mitigate such a hazard remains untested.
 
 ### 7.9 Role of the formal evidence
 
