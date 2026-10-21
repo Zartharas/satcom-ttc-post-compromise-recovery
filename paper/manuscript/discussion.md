@@ -165,6 +165,8 @@ logic. A controller deciding whether to resume normal TT&C operations needs to k
 whether keys/epochs match, but whether the state is trusted, whether command/telemetry verification
 succeeded, and whether the system has retained enough evidence to explain the transition.
 
+CCSDS 350.5-G-2 already recommends a separate last-resort Recovery SA, with isolated recovery context and non-volatile onboard storage, to restore secure telecommanding when operational SAs fail (Sections 3.5.1.2 and 4.5.6) [@ccsds_sdls_rationale_350_5_g_2]. Our observations do not establish the need for that concept or test its conformance. Rather, the COMMIT/CONFIRM restart traces illustrate a transaction-level hazard in this project-defined controller: preserving a recovery credential or SA context alone does not demonstrate that both endpoints will retain the pending transaction state and its activation evidence. Whether an implementation using CCSDS Recovery SA would encounter or mitigate such a hazard remains untested.
+
 ## 7.9 Role of the formal evidence
 
 The bounded TLA+ work strengthens the study by providing an independently encoded control-state
