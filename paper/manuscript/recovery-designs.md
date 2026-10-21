@@ -21,6 +21,8 @@ B0 is intentionally an **SDLS EP-style abstraction**, not a CCSDS conformance im
 The simulator does not encode every SDLS security-association procedure, key-management data unit,
 or cryptographic mechanism.
 
+The B0 recovery/master capability is a scenario assumption, not an implementation or experimental comparison of the dedicated Recovery SA described in CCSDS 350.5-G-2, Sections 3.5.1.2 and 4.5.6 [@ccsds_sdls_rationale_350_5_g_2].
+
 ## 4.2 B1 — Triple-KEM/PQNoise-inspired key update
 
 B1 is motivated by the three-message SDLS key-update mechanism of Hülsing, Lange, and Weber
