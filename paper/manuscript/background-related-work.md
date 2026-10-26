@@ -25,6 +25,8 @@ re-evaluate SDLS conformance or prove a cryptographic post-compromise-security p
 we model what happens operationally when legitimate endpoints must re-establish a common trusted
 state after compromise and delivery/state faults occur during the transition.
 
+CCSDS already describes an emergency **Recovery Security Association (Recovery SA)** for telecommand data-link security. Section 3.5.1.2 of CCSDS 350.5-G-2 permits a separate SA on the same TC virtual channel as a last-resort path when the nominal SA can no longer support telecommanding. Section 4.5.6 discusses lost telemetry, corrupted operational-key storage, and ground/space anti-replay counter desynchronization; it calls for segregated recovery context and non-volatile, non-erasable onboard recovery keys/context capable of surviving transient power loss [@ccsds_sdls_rationale_350_5_g_2]. These are existing CCSDS recovery concepts, not contributions of T1. This Green Book is informational, and our simulation neither implements nor evaluates a compliant Recovery SA. Instead, T1 isolates transaction-level questions under intermittent contact: candidate/operational state separation, activation order, retry and replay handling, asymmetric endpoint restart, and evidence that recovery actually completed.
+
 ## 2.2 KEM-based SDLS key update
 
 Hülsing, Lange, and Weber propose a standalone key-update/establishment mechanism for SDLS based
