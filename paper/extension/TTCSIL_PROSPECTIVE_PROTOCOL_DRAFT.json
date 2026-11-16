@@ -1,0 +1,201 @@
+{
+  "schema_version": 1,
+  "experiment_id": "TTCSIL-SA-RST-001",
+  "title": "Prospective software-in-the-loop TT&C SA transaction restart validation",
+  "date": "2026-11-16",
+  "state": "DRAFT_NOT_FROZEN_NO_EXECUTION",
+  "baseline": {
+    "repo": "Zartharas/satcom-ttc-post-compromise-recovery",
+    "sha": "e82a426ec0176059a36ca51b9b491d3c828148d6",
+    "original_studies": [
+      "A",
+      "B",
+      "C",
+      "D"
+    ],
+    "original_run": "20260814T022506Z-gc630fb4",
+    "retained_results_modified": false,
+    "results_pooling_allowed": false
+  },
+  "related_repositories": [
+    {
+      "repo": "Zartharas/mission-aware-satellite-cyber-recovery",
+      "sha": "7fd87eb1bbfb5ec811bb1f8ec29b4532ac5ff425",
+      "excluded": [
+        "mission response and evidence/selector studies",
+        "S3X ESA timing",
+        "Study 8/8E SatNOGS and PQ object-feasibility",
+        "Study 5/9 external dataset semantic mappings",
+        "S6X cFS artifact assurance"
+      ]
+    },
+    {
+      "repo": "Zartharas/verifiable-spacecraft-lifecycle",
+      "sha": "f0a26d2edd974827741a53c566b6c79ca2ebdd0b",
+      "excluded": [
+        "S0–S5 update provenance and attestation",
+        "rollback and update artifact analysis",
+        "published four-target overhead"
+      ]
+    }
+  ],
+  "research_question": "Across actual software component restarts at SA COMMIT/CONFIRM, can a bounded ground/spacecraft recovery transaction prevent false resume and establish instrumented SA convergence plus verified command and status, compared under the same fault inputs with a safe-hold reference and a volatile retry comparator?",
+  "unit_of_analysis": "One predeclared strategy-by-crash-boundary-by-case execution with independent packet and SA state event trace",
+  "upstream_candidates": [
+    {
+      "name": "nasa/CryptoLib",
+      "screened_release": "v1.5.2",
+      "role": "SDLS library",
+      "commit": "NOT_PINNED",
+      "license": "NOSA 1.3; redistributability requires legal check"
+    },
+    {
+      "name": "nasa/nos3",
+      "screened_release": "v1_07_06",
+      "role": "software spacecraft/ground environment",
+      "commit": "NOT_PINNED",
+      "license": "NOSA 1.3; dependency licenses need check"
+    },
+    {
+      "name": "nasa/cFS",
+      "screened_release": "v7.0.1",
+      "role": "onboard app/cFE integration",
+      "commit": "NOT_PINNED",
+      "license": "Apache 2.0 bundle; check included components"
+    }
+  ],
+  "candidate_interventions": [
+    {
+      "id": "H0_SAFE_HOLD",
+      "meaning": "no automatic resumption absent full independent verification; safety control without recovery-progress promise"
+    },
+    {
+      "id": "H1_VOLATILE_RETRY",
+      "meaning": "bounded retry protocol with volatile transaction state; independently implemented, fair-input comparator"
+    },
+    {
+      "id": "H2_DURABLE_OR_REINIT",
+      "meaning": "protected persistent context or authenticated reinitiation candidate; not implemented and not assumed effective"
+    }
+  ],
+  "proposed_cases": [
+    {
+      "id": "F00",
+      "stage": "NONE",
+      "case": "no fault"
+    },
+    {
+      "id": "F01",
+      "stage": "COMMIT",
+      "case": "spacecraft restart before activation"
+    },
+    {
+      "id": "F02",
+      "stage": "COMMIT",
+      "case": "spacecraft restart after activation before confirm"
+    },
+    {
+      "id": "F03",
+      "stage": "CONFIRM",
+      "case": "ground restart before confirm processing"
+    },
+    {
+      "id": "F04",
+      "stage": "CONFIRM",
+      "case": "ground restart after processing before verification"
+    },
+    {
+      "id": "F05",
+      "stage": "CONFIRM",
+      "case": "lost confirm without restart"
+    },
+    {
+      "id": "F06",
+      "stage": "POST_RESET",
+      "case": "replay prior COMMIT or CONFIRM"
+    },
+    {
+      "id": "F07",
+      "stage": "POST_RESET",
+      "case": "attempt stale/retired SA and epoch acceptance"
+    },
+    {
+      "id": "F08",
+      "stage": "POST_RESET",
+      "case": "suppress status evidence and test false-resume rejection"
+    }
+  ],
+  "planned_primary_endpoints": [
+    "false_resume_event_count",
+    "retired_or_stale_sa_acceptance_count",
+    "observed_ground_space_active_sa_and_epoch_agreement",
+    "protected_fresh_command_acceptance",
+    "authenticated_return_status_evidence",
+    "authenticated_safe_hold_or_reinitiation"
+  ],
+  "planned_secondary_endpoints": [
+    "lost_pending_state_and_receipt_evidence",
+    "asymmetric_activation",
+    "bounded_contact_attempts_only_when_semantics_match",
+    "expiry",
+    "exact stage and restart trace"
+  ],
+  "independent_oracle": {
+    "source": "instrumented state and packet acceptance events, never SUT success enum alone",
+    "requires": [
+      "ground and spacecraft SA/epoch agreement",
+      "genuine protected command acceptance",
+      "authenticated status evidence",
+      "rejection of stale and retired material",
+      "resume-or-hold state"
+    ],
+    "if_missing": "UNVERIFIED, NOT SUCCESS",
+    "implementation": "separate verifier code path and independent negative controls required; no external expert review assumed"
+  },
+  "predeclared_analysis": {
+    "same_fault_inputs_and_observations_for_comparators": true,
+    "unsafe_outcomes_retained": true,
+    "compare_safety_separately_from_progress": true,
+    "scenario_removal_after_observing_results": false,
+    "statistical_prevalence_claims": false,
+    "operational_spacecraft_reliability_claims": false,
+    "flight_or_CCSDS_conformance_claims": false
+  },
+  "assumptions": [
+    "recovery trust anchor remains independent of compromised operational key",
+    "at least one bounded unsuppressed legitimate opportunity",
+    "software-only/no operational RF",
+    "actual process restart and storage behavior must be observed"
+  ],
+  "source_and_data_firewall": {
+    "previous_study_dataset_rows_reused": false,
+    "mission_data": false,
+    "public_upstream_code_allowed_after_rights_review": true
+  },
+  "readiness_gates": [
+    "F1 upstream pin/license",
+    "F2 actual restart",
+    "F3 SA-state observability",
+    "F4 real command/status verification",
+    "F5 fair comparator",
+    "F6 negative independent oracle controls",
+    "F7 protocol freeze",
+    "F8 non-overlap refresh"
+  ],
+  "authorization": {
+    "docs_only": true,
+    "upstream_download": false,
+    "experiment_execution": false,
+    "results_publication": false,
+    "manuscript_results_integration": false,
+    "raw_bundle_release": false,
+    "publisher_submission": false
+  },
+  "current_evidence": {
+    "implementation_built": false,
+    "environment_pinned": false,
+    "tests_executed": false,
+    "independent_crypto_review": false,
+    "results_generated": false
+  }
+}
