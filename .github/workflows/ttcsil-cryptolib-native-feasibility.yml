@@ -26,7 +26,7 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y --no-install-recommends \
-            build-essential cmake git libgcrypt20-dev libgpg-error-dev libmariadb-dev
+            build-essential cmake git libgcrypt20-dev libgpg-error-dev libmariadb-dev libmariadb-dev-compat
       - name: Validate preflight source syntax
         run: |
           bash -n paper/extension/ttcsil_preflight/run_native_feasibility.sh
