@@ -1,0 +1,35 @@
+# Prospective TTCSIL-SA-RST-001 feasibility ONLY.
+# No frozen TT&C studies are executed or changed; no scientific results uploaded.
+name: TTCSIL pinned CryptoLib native feasibility
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/ttcsil-cryptolib-native-feasibility.yml'
+      - 'paper/extension/ttcsil_preflight/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  native-source-and-sa-smoke:
+    name: Pinned native CryptoLib process / SA / TC smoke
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - name: Checkout research harness without stored credentials
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - name: Install public native build prerequisites
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            build-essential cmake git libgcrypt20-dev libgpg-error-dev libmariadb-dev libmariadb-dev-compat
+      - name: Validate preflight source syntax
+        run: |
+          bash -n paper/extension/ttcsil_preflight/run_native_feasibility.sh
+          bash paper/extension/ttcsil_preflight/run_native_feasibility.sh --verify-only
+      - name: Build exactly pinned upstream and execute bounded native smoke
+        run: bash paper/extension/ttcsil_preflight/run_native_feasibility.sh
