@@ -152,13 +152,26 @@ static int tc_receive(const char *path, int tamper)
         fprintf(stderr, "Protected input length/read failed\n");
         return 1;
     }
-    if (tamper) frame[n - 6] ^= 0x01u; /* negative integrity control; can also fail FECF */
+    if (tamper)
+    {
+        /* Mutate a byte in the trailing MAC, not the FECF. Recompute the
+         * unkeyed frame checksum so CRC mismatch cannot explain rejection.
+         * The receiver must reject at its authenticator (not just FECF).
+         */
+        frame[n - 6] ^= 0x01u;
+        uint16_t fecf = Crypto_Calc_FECF(frame, (int)n - 2);
+        frame[n - 2] = (uint8_t)(fecf >> 8);
+        frame[n - 1] = (uint8_t)(fecf & 0xffu);
+    }
     TC_t *decoded = (TC_t *)calloc(1, TC_SIZE);
     if (decoded == NULL) return 1;
     int frame_len = (int)n;
     int32_t rc = Crypto_TC_ProcessSecurity(frame, &frame_len, decoded);
     free(decoded);
-    int good = tamper ? (rc != CRYPTO_LIB_SUCCESS) : (rc == CRYPTO_LIB_SUCCESS);
+    int good = tamper
+        ? (rc == CRYPTO_LIB_ERR_MAC_VALIDATION_ERROR ||
+           rc == CRYPTO_LIB_ERR_AUTHENTICATION_ERROR)
+        : (rc == CRYPTO_LIB_SUCCESS);
     printf("TTCSIL_TC_%s=%s api_status=%ld\n",
            tamper ? "TAMPER_REJECTED" : "RECEIVE_ACCEPTED",
            good ? "PASS" : "FAIL", (long)rc);
