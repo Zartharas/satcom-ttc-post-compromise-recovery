@@ -113,6 +113,23 @@ static int tc_send(const char *path)
         free(protected_frame);
         return 1;
     }
+    /*
+     * The upstream receiver's strict IV window rejects the first (IV=0)
+     * sender frame when its local initial state is also IV=0. Advance the
+     * sender once and transmit the next protected frame (IV=1). Do not
+     * disable or bypass the receiver's replay protection to get a pass.
+     */
+    free(protected_frame);
+    protected_frame = NULL;
+    protected_len = 0;
+    rc = Crypto_TC_ApplySecurity(tc_fixture, (uint16_t)sizeof(tc_fixture),
+                                 &protected_frame, &protected_len);
+    if (rc != CRYPTO_LIB_SUCCESS || protected_frame == NULL || protected_len == 0)
+    {
+        fprintf(stderr, "TC fresh-IV apply failed: %ld\\n", (long)rc);
+        free(protected_frame);
+        return 1;
+    }
     FILE *out = fopen(path, "wb");
     if (out == NULL) { perror("fopen output"); free(protected_frame); return 1; }
     size_t n = fwrite(protected_frame, 1, protected_len, out);
