@@ -25,6 +25,10 @@ A native-library probe is not the same as a spacecraft cFS restart, a CCSDS Reco
 
 The first PR #17 native run with `SA_FILE=ON` initially failed to compile because Ubuntu did not have `mysql/mysql.h`; adding `libmariadb-dev-compat` resolved that environment dependency. The next run established exact upstream SHA, native compilation, three upstream unit suites, custom native process-to-process SA metadata reload, and protected TC generation; a fresh receiver then rejected the **first sender IV=0 frame** with CryptoLib status `-23` (IV window). The new fixture uses the subsequent sender IV while keeping anti-replay checks enabled. The initial rejection is retained in GitHub Actions logs and is not a cryptographic attack finding. In the next successful native run, a simple modified-frame probe failed with `CRYPTO_LIB_ERR_INVALID_FECF (-12)`, which is checksum rejection only. The amended negative control now recomputes FECF after modifying the MAC and accepts **only** `CRYPTO_LIB_ERR_MAC_VALIDATION_ERROR` or `CRYPTO_LIB_ERR_AUTHENTICATION_ERROR`; any other rejection remains a failed authentication-isolation gate. **These fixture corrections are not evidence of increased experiment success; the canonical population has not run.**
 
+## Additional native guarded receive preflight
+
+A separate bridge source, `../ttcsil_integration/security_boundary/native_cryptolib_guard_bridge.c`, now receives a real, successfully processed synthetic CryptoLib TC frame and passes the decoded channel/selected SA to the independent C11 guard. Its positive/negative **adapter** checks are F1-only. The expected authorization is hardcoded laboratory configuration; recovery epoch 17 is not observed, there is no authenticated telemetry return, and the NOS3/cFS security hold remains. See `../ttcsil_integration/security_boundary/NATIVE_CRYPTO_GUARD_BRIDGE_REVIEW.md` for exact trust sourcing and limitations.
+
 ## Tested/untested boundaries
 
 | Gate | What native CI might establish | Still unproven |
