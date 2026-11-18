@@ -24,7 +24,8 @@ jobs:
           persist-credentials: false
       - name: Check Python and full Study B supplement
         run: |
-          python3 -m py_compile paper/supplement/build_table_s1.py
+          python3 -m py_compile paper/supplement/build_table_s0.py paper/supplement/build_table_s1.py
+          python3 paper/supplement/build_table_s0.py --check
           python3 paper/supplement/build_table_s1.py --check
       - name: Rebuild integrated manuscript and require byte-for-byte equality
         run: |
@@ -40,6 +41,8 @@ jobs:
           m=importlib.util.module_from_spec(spec)
           spec.loader.exec_module(m)
           assert len(m.ABSTRACT.split())==250, len(m.ABSTRACT.split())
+          assert m.family_evidence_cue('CF-02', '{"security_state":"SECURE_PROVISIONAL","verification_complete":true}')=='Verification complete'
+          assert 'Supplementary Table S0' in Path('paper/manuscript/manuscript.md').read_text(encoding='utf-8')
           source=Path("paper/manuscript/manuscript.md").read_text(encoding="utf-8")
           for phrase in ("The paper should therefore use Study C", "The submission/release step should publish"):
               assert phrase not in source, phrase
