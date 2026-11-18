@@ -36,8 +36,6 @@ def audit() -> dict:
     missing = sorted(citedset - keyset)
     unused = sorted(keyset - citedset)
     missing_supplements = sorted(p for p in REQUIRED if not (SUPPLEMENT / p).is_file())
-    references_in_main = {name: ("Supplementary Table " + name[-5:-3]) in manuscript
-                          for name in ("SUPPLEMENTARY_TABLE_S0.md", "SUPPLEMENTARY_TABLE_S1.md")}
     # Explicit strings avoid relying on an inferred filename-to-label mapping.
     refs = {
         "S0": "Supplementary Table S0" in manuscript,
