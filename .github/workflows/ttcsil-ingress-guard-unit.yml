@@ -1,0 +1,36 @@
+name: TTCSIL fail-closed ingress guard C11 unit tests
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/ttcsil-ingress-guard-unit.yml'
+      - 'paper/extension/ttcsil_integration/security_boundary/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  guard-unit:
+    name: C11 policy and bounds; never run NOS3 or canonical study
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Checkout without stored credentials
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - name: Source and shell validation
+        run: |
+          bash -n paper/extension/ttcsil_integration/security_boundary/run_guard_tests.sh
+          test -f paper/extension/ttcsil_integration/security_boundary/ttcsil_ingress_guard.h
+          test -f paper/extension/ttcsil_integration/security_boundary/ttcsil_ingress_guard.c
+      - name: Compile and exercise fail-closed guard under sanitizers
+        run: |
+          bash paper/extension/ttcsil_integration/security_boundary/run_guard_tests.sh
+      - name: Validate results cannot be presented as integrated tests
+        run: |
+          echo 'TTCSIL_GUARD_POLICY_UNIT=PASS_IF_ABOVE_PASSED'
+          echo 'TTCSIL_FULL_NOS3_CFE_INTEGRATION=HOLD'
+          echo 'TTCSIL_AUTHENTICATED_TM=NOT_EXECUTED'
+          echo 'TTCSIL_CANONICAL_PROTOCOL=DRAFT_NOT_FROZEN'
