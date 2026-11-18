@@ -1,0 +1,280 @@
+{
+  "schema_version": 1,
+  "study": "TTCSIL-SA-RST-001",
+  "phase": "F1_PIN_AND_SECURITY_REVIEW_ONLY",
+  "created_date": "2026-11-17",
+  "science_protocol_state": "DRAFT_NOT_FROZEN_NO_CANONICAL_EXECUTION",
+  "source_of_truth": "NASA upstream immutable commits and NOS3 gitlinks; no prior research workspace",
+  "upstream": {
+    "nos3": {
+      "repo": "nasa/nos3",
+      "tag": "v1_07_06",
+      "sha": "1dadc685effc26730603c36c7864afce3c546406",
+      "gitmodules_count": 48,
+      "gitlinks": [
+        {
+          "path": "components/arducam",
+          "sha": "88d0da57a03afc895c61434b0c12f19eeca43d45"
+        },
+        {
+          "path": "components/blackboard",
+          "sha": "953bfe372ad3cf0715fb1f974b0415a921a4d913"
+        },
+        {
+          "path": "components/cryptolib",
+          "sha": "b46879c094f1ae279c2ff04dea3d8e5ecbd4ef92"
+        },
+        {
+          "path": "components/generic_adcs",
+          "sha": "89863089a42be1eca65105e1e8ce441f0748b6b9"
+        },
+        {
+          "path": "components/generic_css",
+          "sha": "d5b7d2acf88af11664d66dd6c78b2e7694249503"
+        },
+        {
+          "path": "components/generic_eps",
+          "sha": "70c54c5da1b295a15aa85139ff58020124f4a2b4"
+        },
+        {
+          "path": "components/generic_fss",
+          "sha": "5f00a7a3db08f32cffbc3d7c12c8c6d49491ee50"
+        },
+        {
+          "path": "components/generic_imu",
+          "sha": "b7d2f6d7e9a72bc37039ad6aa3c10daabbaa66b9"
+        },
+        {
+          "path": "components/generic_mag",
+          "sha": "b802cf32141dcd30f2b26d7f12872ec4d3fbc118"
+        },
+        {
+          "path": "components/generic_radio",
+          "sha": "190588fd5fbcaf30b5ffbbb295d27cc60104949b"
+        },
+        {
+          "path": "components/generic_reaction_wheel",
+          "sha": "b4626945509e83eaa830967b47c492539a11b326"
+        },
+        {
+          "path": "components/generic_star_tracker",
+          "sha": "ae0c41ceb62491c1887c4e885e96fe82e0a1a919"
+        },
+        {
+          "path": "components/generic_thruster",
+          "sha": "819a91c16a4dabed269d519ccb3bd68890dc03a7"
+        },
+        {
+          "path": "components/generic_torquer",
+          "sha": "1f7b41e044aba67414e68551f140b77f2b76f9ec"
+        },
+        {
+          "path": "components/mgr",
+          "sha": "e4f56752df4549ffe074b79d768374f51099357b"
+        },
+        {
+          "path": "components/novatel_oem615",
+          "sha": "2441a14d2c4e68addf24ac3358f9de543ebd91fe"
+        },
+        {
+          "path": "components/onair/fsw",
+          "sha": "aa5559c0f234eba263041b6007573f16870194e5"
+        },
+        {
+          "path": "components/sample",
+          "sha": "5a7b249d8e630bd27fa11557081591883baa96e3"
+        },
+        {
+          "path": "components/spacecop",
+          "sha": "da877b94de95192c11a7518becb740950745dfd4"
+        },
+        {
+          "path": "components/syn",
+          "sha": "721c8d1756559aa3374a90c3cd2887b52405ee8d"
+        },
+        {
+          "path": "fsw/apps/cf",
+          "sha": "03bd8ad39533e1709e30fd33b6d3f0455092ce4b"
+        },
+        {
+          "path": "fsw/apps/cfdp",
+          "sha": "aa5058f32821c97b1f15edafa83c32adbb85a468"
+        },
+        {
+          "path": "fsw/apps/ci",
+          "sha": "01a9e51472454fd3f2262bf97ad5b3be861f0d22"
+        },
+        {
+          "path": "fsw/apps/ci_lab",
+          "sha": "5dd2cf50a827c4837c867a0bdc58b5295caf61c1"
+        },
+        {
+          "path": "fsw/apps/ds",
+          "sha": "568b29324ff58b3af287e5138182c817810055f8"
+        },
+        {
+          "path": "fsw/apps/fm",
+          "sha": "c5dac232f30965f011bcb31e671a4010b0ea0cfd"
+        },
+        {
+          "path": "fsw/apps/hwlib",
+          "sha": "2b327d2c4ceede65053c22afdc389a2ba628961c"
+        },
+        {
+          "path": "fsw/apps/io_lib",
+          "sha": "b98953eea7b187cebf8028eb62824f306693c135"
+        },
+        {
+          "path": "fsw/apps/lc",
+          "sha": "5daef363c95d71c1ff3c5e9dcd4dddab560e8b39"
+        },
+        {
+          "path": "fsw/apps/sbn",
+          "sha": "240f90f56641d43e5db1dae457d7ef8772a1c659"
+        },
+        {
+          "path": "fsw/apps/sbn_client",
+          "sha": "1cafda865b5f40d3fc9839b916ef5d6e0b2ff935"
+        },
+        {
+          "path": "fsw/apps/sc",
+          "sha": "4ff66c2b7f9d02eb7806bb3d085e1cfeb1f4ae72"
+        },
+        {
+          "path": "fsw/apps/sch",
+          "sha": "8e8073e4c76fe41beb82e38e54cfcda7bc661156"
+        },
+        {
+          "path": "fsw/apps/to",
+          "sha": "9b29daf36525b308bf7c32bf63650310ebb8bb90"
+        },
+        {
+          "path": "fsw/apps/to_lab",
+          "sha": "6ae88fd1c2bb931d233c0051c88b787447bd5bb6"
+        },
+        {
+          "path": "fsw/cfe",
+          "sha": "87e273743f3d07ed9216462b461e9f398ff96c87"
+        },
+        {
+          "path": "fsw/fprime/fprime-nos3",
+          "sha": "46121f9d9f988bdd1665712e4057ec4e2851131c"
+        },
+        {
+          "path": "fsw/osal",
+          "sha": "08a79bb6ac02b9ced8aa555853ecdd96e5ebc1a7"
+        },
+        {
+          "path": "fsw/psp",
+          "sha": "d0a5d6fa4093d473a929fde42a0983e489d89d4a"
+        },
+        {
+          "path": "fsw/tools/elf2cfetbl",
+          "sha": "358201af7ab296631c7118a5b0b91055d3d4ce10"
+        },
+        {
+          "path": "gsw/ait",
+          "sha": "478a6c8a0adb5066545732ce2b0f927f0be7420f"
+        },
+        {
+          "path": "gsw/cosmos",
+          "sha": "bae4d7470ef05a75a8e006f35dd448927df6a1a5"
+        },
+        {
+          "path": "gsw/OrbitInviewPowerPrediction",
+          "sha": "0eed643eeaa9bcc35020b0b38399c25b616421c2"
+        },
+        {
+          "path": "gsw/yamcs",
+          "sha": "7be44854bae51c4e4084a29ae817d1235cdc8ab2"
+        },
+        {
+          "path": "sims/nos_time_driver",
+          "sha": "0c097273431cf8a4882559518b704d8c8621b74f"
+        },
+        {
+          "path": "sims/sim_common",
+          "sha": "0dbcb2ead4e5625a2a163c0fabe04157dd7e375e"
+        },
+        {
+          "path": "sims/sim_terminal",
+          "sha": "d6603c66bd6c25c59c239a197ef915c257845df3"
+        },
+        {
+          "path": "sims/truth_42_sim",
+          "sha": "2f05258a4040e195322d8aacc51a01cb3d687a15"
+        }
+      ]
+    },
+    "cryptolib_standalone": {
+      "repo": "nasa/CryptoLib",
+      "tag": "v1.5.2",
+      "sha": "c216ede78b2f51b42838b13955602c0b481b53c2"
+    },
+    "cryptolib_nos3": {
+      "repo": "nasa/CryptoLib",
+      "sha": "b46879c094f1ae279c2ff04dea3d8e5ecbd4ef92",
+      "source": "NOS3 components/cryptolib gitlink"
+    },
+    "cfe_nos3": {
+      "repo": "nasa-itc/cFE",
+      "sha": "87e273743f3d07ed9216462b461e9f398ff96c87",
+      "source": "NOS3 fsw/cfe gitlink"
+    },
+    "cfs_standalone": {
+      "repo": "nasa/cFS",
+      "tag": "v7.0.1",
+      "sha": "088b2fa828db9ff7e00733f1908e0eeb59f66ce3",
+      "integrated_with_nos3": false
+    }
+  },
+  "security_review": [
+    {
+      "id": "CVE-2026-79954",
+      "component": "NASA CryptoLib",
+      "published": "2026-09",
+      "official_affected_statement": "1.5.0",
+      "risk": "TC receive SA selected by untrusted SPI without SA-to-GVCID binding; possible authentication downgrade",
+      "impact_to_design": "Authenticated command acceptance alone cannot prove authorized commandability across channels",
+      "code_screen_status": "SOURCE_GVCID_SA_BINDING_NOT_OBSERVED_IN_INSPECTED_CRYPTO_TC_VALIDATE_SA_AT_TWO_PINS",
+      "exact_pins_affected": "UNVERIFIED",
+      "disposition": "HOLD_AND_REVIEW",
+      "source": "https://nvd.nist.gov/vuln/detail/CVE-2026-79954"
+    },
+    {
+      "id": "CVE-2026-82480",
+      "component": "NASA cFS cFE Software Bus",
+      "published": "2026-08",
+      "official_affected_statement": "cFS 7.0.0, 7.0.1",
+      "risk": "CFE_SB_GetUserDataLength integer underflow under crafted inconsistent lengths",
+      "impact_to_design": "Do not qualify unreviewed cFS runtime as secure or accept arbitrary external traffic",
+      "exact_nos3_cfe_pin_affected": "UNVERIFIED",
+      "disposition": "HOLD_AND_REVIEW",
+      "source": "https://nvd.nist.gov/vuln/detail/CVE-2026-82480"
+    }
+  ],
+  "security_controls": [
+    "Fail closed until complete receive-path and cryptographic authorization evaluation",
+    "No operational RF, public Internet listener, live mission credentials, hardware or external command transport",
+    "No functional swap of NOS3 embedded CryptoLib with standalone v1.5.2 without validated ABI and dependency graph",
+    "Do not claim recent software version, patched status, CCSDS conformance or upstream safety without proof",
+    "No integration runtime until experimental command channels are isolated and explicit SPI-to-GVCID policy verified",
+    "Remain distinct from P2X NOS3/cFS recovery qualification experiments in mission-aware-satellite-cyber-recovery PRs 214/215"
+  ],
+  "readiness": {
+    "F1_identity": "PARTIAL_PIN_ONLY",
+    "F1_license": "HOLD",
+    "F1_security": "HOLD",
+    "F2_real_integrated_restart": "NOT_EXECUTED",
+    "F3_dual_endpoint_state": "NOT_EXECUTED",
+    "F4_end_to_end_tc_tm": "NOT_EXECUTED"
+  },
+  "prohibited": [
+    "canonical fault study",
+    "experimental results",
+    "authors' existing study data reuse",
+    "merged protocol freeze",
+    "live spacecraft or RF transmissions",
+    "publisher submission"
+  ]
+}
