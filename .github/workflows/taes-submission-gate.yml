@@ -26,6 +26,8 @@ jobs:
       - name: Validate audit source and bibliography cross-references
         run: |
           python3 -m py_compile paper/submission/check_taes_citations_and_supplements.py
+          python3 -m py_compile paper/submission/check_taes_release_gates.py
+          python3 paper/submission/check_taes_release_gates.py
           python3 paper/submission/check_taes_citations_and_supplements.py --json /tmp/taes_audit.json
           python3 - <<'PY'
           import json
