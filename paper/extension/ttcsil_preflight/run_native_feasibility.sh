@@ -94,5 +94,22 @@ mkdir -p "$ROOT/tc-sender" "$ROOT/tc-receiver" "$ROOT/tc-negative"
   "$ROOT/ttcsil_native_probe" tc-tamper "$ROOT/protected_tc.bin"
 )
 echo "TTCSIL_NATIVE_PROTECTED_TC_FRESH_ACCEPT_AND_TAMPER_REJECT=PASS"
-echo "TTCSIL_NATIVE_LIMITATIONS=No_crash_atomicity;No_T1_or_Recovery_SA_transaction;No_TM_status;No_NOS3_or_cFS_integration"
+
+# Separate F1-only bridge: actual CryptoLib decode/SA lookup -> independent
+# local authorization policy, never cFS dispatch or a recovery transaction.
+GUARD_DIR="$(dirname -- "$SCRIPT_DIR")/ttcsil_integration/security_boundary"
+cc -std=c11 -Wall -Wextra -Werror -O0 -g \
+  -I"$ROOT/cryptolib/include" -I"$GUARD_DIR" \
+  "$GUARD_DIR/native_cryptolib_guard_bridge.c" \
+  "$GUARD_DIR/ttcsil_ingress_guard.c" \
+  -L"$ROOT/build/src" -lcryptolib \
+  -Wl,-rpath,"$ROOT/build/src" \
+  -o "$ROOT/ttcsil_native_guard_bridge"
+mkdir -p "$ROOT/native-guard-adapter"
+(
+  cd "$ROOT/native-guard-adapter"
+  "$ROOT/ttcsil_native_guard_bridge" "$ROOT/protected_tc.bin"
+)
+echo "TTCSIL_NATIVE_CRYPTO_TO_GUARD_BRIDGE=PASS"
+echo "TTCSIL_NATIVE_LIMITATIONS=No_crash_atomicity;No_T1_or_Recovery_SA_transaction;No_measured_epoch;No_TM_status;No_NOS3_or_cFS_integration"
 echo "TTCSIL_F1_TO_F4_CANONICAL_GATE=NOT_PASSED"
