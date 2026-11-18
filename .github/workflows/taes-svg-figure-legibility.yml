@@ -1,0 +1,54 @@
+name: TAES SVG figure geometry and generated-source parity
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/taes-svg-figure-legibility.yml'
+      - 'paper/figures/**'
+      - 'paper/submission/TAES_VISUAL_LAYOUT_GATE_2026-11-17.md'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  figure-source:
+    name: SVG source parity and full-width physical text estimate
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Checkout without stored credentials
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - name: Generate all three figures and verify byte-for-byte parity
+        run: |
+          python3 paper/figures/render_publication_figures.py
+          git diff --exit-code -- paper/figures/rendered/figure-1-architecture.svg paper/figures/rendered/figure-2-outcome-distribution.svg paper/figures/rendered/figure-3-retry-retention-sensitivity.svg
+      - name: Check SVG minimum sizes for mandatory full-text-width display
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          from xml.etree import ElementTree as ET
+          base=Path('paper/figures/rendered')
+          names=('figure-1-architecture.svg','figure-2-outcome-distribution.svg','figure-3-retry-retention-sensitivity.svg')
+          for name in names:
+              root=ET.parse(base/name).getroot()
+              width=float(root.attrib['width'])
+              texts=[elem for elem in root.iter() if elem.tag.endswith('text')]
+              assert texts and width > 0
+              mins=min(float(x.attrib['font-size']) for x in texts)
+              physical=mins*511.2/width
+              assert physical>=6.0, (name,physical)
+              if name!='figure-1-architecture.svg':
+                  label=('Schedules (n = 100)' if 'figure-2' in name else 'Candidate lifetime (contacts)')
+                  matches=[x for x in texts if (x.text or '')==label]
+                  assert len(matches)==1 and 'rotate(-90)' in matches[0].attrib.get('transform',''), name
+              print(f'TAES_FIGURE_FULL_WIDTH_GEOMETRY=PASS {name} nominal_min_pt={physical:.2f}')
+          print('TAES_FIGURE_FINAL_PDF_VISUAL_QA=REQUIRED')
+          PY
+      - name: Validate tracked-file hashes
+        run: |
+          sha256sum -c artifacts/manifests/repository-v0.1.1.sha256
+          echo 'TAES_FIGURE_DATA_UNMODIFIED=PASS'
+          echo 'TAES_TWO_COLUMN_PDF_NOT_REBUILT=TRUE'
