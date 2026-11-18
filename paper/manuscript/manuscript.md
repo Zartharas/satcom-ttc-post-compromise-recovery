@@ -774,7 +774,7 @@ Exhaustion at `RECOVERY_PREPARE`, `RECOVERY_RESPONSE`, or `RECOVERY_COMMIT` prod
 spacecraft has advanced, whereas earlier exhaustion prevents the same terminal state from being
 established at both endpoints.
 
-**Table 2. Full deterministic T1 fault-coverage matrix.**
+**Table 2. Full deterministic T1 fault-coverage matrix; exact source fields are retained in Supplementary Table S1.**
 
 | Schedule | Class | Fault | Phase | Outcome | Alignment | Security | Availability | Verified | Reject evidence |
 |---|---|---|---|---|---|---|---|---|---|

@@ -1,0 +1,52 @@
+name: TAES bibliography and reviewer-supplement integrity (NOT submission approval)
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/taes-submission-gate.yml'
+      - 'paper/submission/**'
+      - 'paper/supplement/**'
+      - 'paper/manuscript/**'
+      - 'references/bibliography.bib'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  citation-and-reviewer-materials:
+    name: Audit citation keys, S0/S1 source provenance and manual holds
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Checkout with no retained credentials
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - name: Validate audit source and bibliography cross-references
+        run: |
+          python3 -m py_compile paper/submission/check_taes_citations_and_supplements.py
+          python3 paper/submission/check_taes_citations_and_supplements.py --json /tmp/taes_audit.json
+          python3 - <<'PY'
+          import json
+          r=json.load(open('/tmp/taes_audit.json'))
+          assert r['status']=='PASS_CITATION_AND_SUPPLEMENT_LINKAGE_ONLY'
+          assert r['unique_cited_keys'] >= 1 and r['bibliography_entry_count'] >= r['unique_cited_keys'], r
+          assert r['missing_citation_entries']==[] and r['duplicate_bibliography_keys']==[], r
+          assert r['publisher_submission_authorized'] is False
+          assert r['ai_use_disclosure_approved'] is False
+          assert r['official_taes_template_compilation_completed'] is False
+          print('TAES_CITATION_LINKAGE=PASS')
+          print('TAES_AUTHOR_AND_TEMPLATE_GATES=HOLD')
+          PY
+      - name: Recheck source-locked supplements and manuscript build
+        run: |
+          python3 paper/supplement/build_table_s0.py --check
+          python3 paper/supplement/build_table_s1.py --check
+          python3 paper/manuscript/build_integrated_manuscript.py
+          git diff --exit-code -- paper/manuscript/manuscript.md
+      - name: Verify tracked file integrity
+        run: |
+          sha256sum -c artifacts/manifests/repository-v0.1.1.sha256
+          echo 'TAES_ORIGINAL_STUDIES_FROZEN=UNCHANGED_BY_THIS_WORKFLOW'
+          echo 'TAES_PUBLISHER_READY=FALSE'
