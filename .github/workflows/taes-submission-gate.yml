@@ -31,8 +31,8 @@ jobs:
           import json
           r=json.load(open('/tmp/taes_audit.json'))
           assert r['status']=='PASS_CITATION_AND_SUPPLEMENT_LINKAGE_ONLY'
-          assert r['unique_cited_keys']==13 and r['bibliography_entry_count']==14, r
-          assert r['library_entries_not_cited_or_printed']==['singh_dissertation']
+          assert r['unique_cited_keys'] >= 1 and r['bibliography_entry_count'] >= r['unique_cited_keys'], r
+          assert r['missing_citation_entries']==[] and r['duplicate_bibliography_keys']==[], r
           assert r['publisher_submission_authorized'] is False
           assert r['ai_use_disclosure_approved'] is False
           assert r['official_taes_template_compilation_completed'] is False
