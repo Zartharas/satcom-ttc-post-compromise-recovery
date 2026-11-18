@@ -2,7 +2,7 @@
 
 ## Abstract
 
-Fresh key establishment does not by itself restore trusted telemetry, tracking, and command (TT&C) operation after compromise when intermittent contact, message loss, and endpoint state loss can leave ground and spacecraft on different recovery states. We study this operational resynchronization problem in a deterministic software model containing three project-defined baseline abstractions and a bounded resynchronization controller (T1). The final experiment was predeclared and retained without outcome-driven reruns. It includes four qualified matched families, 40 deterministic T1 schedules, a fixed 100-schedule mixed-fault population, a 3 x 3 sensitivity grid totaling 108 executions, and bounded TLA+/Python trace comparisons. The matched families showed categorical parity rather than treatment superiority. Across 31 canonical deterministic fault cells, 25 terminated successfully, four were indeterminate because post-convergence command or telemetry evidence was missing, one expired after spacecraft-state loss at COMMIT, and one produced an unsafe spacecraft-ahead state after restart at CONFIRM. Single message drops and contact closures during the recovery exchange were absorbed within the retry budget, whereas additional retransmissions could not repair destroyed endpoint protocol state. In the fixed challenge set, increasing the maximum transmission budget from two to three increased verification-complete executions from 5/12 to 11/12; a fourth transmission and candidate lifetimes from two through four contacts produced no additional observed benefit. The mixed-schedule population produced 74 successful terminations, but only 77 of 191 scheduled fault actions were reached at runtime, so those counts are descriptive rather than reliability estimates. The results support separating candidate state, activation, verification evidence, and persistent recovery state when designing post-compromise TT&C recovery.
+Fresh key establishment does not by itself restore trusted telemetry, tracking, and command (TT&C) operation after compromise when intermittent contact, message loss, and endpoint state loss can leave ground and spacecraft on different recovery states. We study this operational resynchronization problem in a deterministic software model containing three project-defined baseline abstractions and a bounded resynchronization controller (T1). The experiment was predeclared without outcome-driven reruns. It includes four qualified matched families, 40 deterministic T1 schedules, a fixed 100-schedule mixed-fault population, a 3 x 3 sensitivity grid totaling 108 executions, and bounded TLA+/Python trace comparisons. The matched families showed categorical parity rather than treatment superiority. Across 31 canonical deterministic fault cells, 25 terminated successfully, four were indeterminate because post-convergence command or telemetry evidence was missing, one expired after spacecraft-state loss at COMMIT, and one produced an unsafe spacecraft-ahead state after restart at CONFIRM. Single message drops and contact closures during the recovery exchange were absorbed within the retry budget, whereas additional retransmissions could not repair destroyed endpoint protocol state. In the fixed challenge set, increasing the maximum transmission budget from two to three increased verification-complete executions from 5/12 to 11/12; a fourth transmission and candidate lifetimes from two through four contacts produced no additional observed benefit. The mixed-schedule population produced 74 successful terminations, but only 77 of 191 scheduled fault actions were reached at runtime, so those counts are descriptive rather than reliability estimates. The results support separating candidate state, activation, verification evidence, and persistent recovery state when designing post-compromise TT&C recovery.
 
 **Keywords:** satellite cybersecurity; telemetry, tracking, and command (TT&C); post-compromise recovery; key management; resynchronization; fault injection; Space Data Link Security (SDLS); formal methods
 
@@ -1065,7 +1065,7 @@ This is not a reason to discard or replace the retained run. The schedule popula
 predeclared and executed correctly. Rather, the audit reveals a property of the generator:
 scheduling a later-attempt fault is not equivalent to forcing that fault to occur.
 
-The paper should therefore use Study C as secondary evidence about the outcome distribution of a
+Study C therefore provides secondary evidence about the outcome distribution of the
 fixed synthetic schedule population. Deterministic Study B provides the controlled cell-level
 fault evidence. A future study designed specifically to estimate outcomes conditional on an
 applied fault could use a generator that guarantees runtime reachability or samples from
@@ -1330,14 +1330,13 @@ in CI. Scientific inputs and retained outputs are not modified as part of manusc
 The source repository contains the simulator, final experiment plan, validation/derivation tools,
 tracked processed result sources, bounded formal models, and manuscript evidence mapping.
 
-The large raw retained bundle is currently kept outside ordinary Git history and identified by
-the run ID and SHA-256 above. The submission/release step should publish that immutable bundle
-through a stable research archive or explicit software release and record the resulting
-persistent identifier in the final manuscript.
+The large raw retained bundle remains outside ordinary Git history and is identified by
+the run ID and SHA-256 above. It has not been deposited in a public research archive and
+does not have a persistent archive identifier.
 
-Until that archive identifier exists, the manuscript should not claim that the raw artifact is
-publicly archived. It can accurately state that the retained artifact exists, is checksum-pinned,
-and is reproducible from the exact code/configuration identities above.
+The source code, serialized schedules, and tracked derivatives are available in the
+repository. The checksum-pinned raw record is retained separately, so a complete
+original raw-output audit currently requires access to that external bundle.
 
 ### 9.6 Reproduction boundary
 
