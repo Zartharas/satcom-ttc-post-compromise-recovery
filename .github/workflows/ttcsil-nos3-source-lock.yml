@@ -23,6 +23,7 @@ jobs:
       - name: Validate script and prospectively locked source contract
         run: |
           python3 -m py_compile paper/extension/ttcsil_integration/validate_nos3_source_lock.py
+          python3 -m unittest discover -v -s paper/extension/ttcsil_integration -p 'test_*.py'
           python3 paper/extension/ttcsil_integration/validate_nos3_source_lock.py
       - name: Verify exact upstream commit and all NOS3 gitlink SHAs
         shell: bash
