@@ -248,9 +248,10 @@
       "official_affected_statement": "cFS 7.0.0, 7.0.1",
       "risk": "CFE_SB_GetUserDataLength integer underflow under crafted inconsistent lengths",
       "impact_to_design": "Do not qualify unreviewed cFS runtime as secure or accept arbitrary external traffic",
-      "exact_nos3_cfe_pin_affected": "UNVERIFIED",
+      "exact_nos3_cfe_pin_affected": "UNVERIFIED (source underflow pattern present; reachability, defenses elsewhere and exploitability not established)",
       "disposition": "HOLD_AND_REVIEW",
-      "source": "https://nvd.nist.gov/vuln/detail/CVE-2026-82480"
+      "source": "https://nvd.nist.gov/vuln/detail/CVE-2026-82480",
+      "exact_nos3_cfe_source_observation": "At NOS3 embedded cFE SHA 87e273743f3d07ed9216462b461e9f398ff96c87, modules/sb/fsw/src/cfe_sb_util.c CFE_SB_GetUserDataLength returns TotalMsgSize - HdrSize with no local lower-bound comparison"
     }
   ],
   "security_controls": [
