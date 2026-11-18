@@ -140,7 +140,7 @@ def inspect_cfe(path: Path) -> None:
     check("return TotalMsgSize - HdrSize;" in body, "changed cFE subtraction source")
     # If a protective comparison is introduced, fail closed and require
     # a new deliberate expert adjudication, never silently report a patch.
-    check(not re.search(r"TotalMsgSize\\s*[<>]=?\\s*HdrSize|HdrSize\\s*[<>]=?\\s*TotalMsgSize", body),
+    check(not re.search(r"TotalMsgSize\s*[<>]=?\s*HdrSize|HdrSize\s*[<>]=?\s*TotalMsgSize", body),
           "cFE length guard changed; manual re-adjudication required")
     digest = hashlib.sha256(source.encode("utf-8")).hexdigest()
     print(f"TTCSIL_NOS3_CFE_SB_SOURCE_SHA256={digest}")
