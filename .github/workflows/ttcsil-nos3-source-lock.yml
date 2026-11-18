@@ -1,0 +1,53 @@
+name: TTCSIL NOS3 full source lock and security hold
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/ttcsil-nos3-source-lock.yml'
+      - 'paper/extension/ttcsil_integration/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  pinned-source-screen:
+    name: Verify NOS3 gitlinks and CryptoLib TC source gate (no runtime)
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - name: Checkout research source without retained credentials
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - name: Validate script and prospectively locked source contract
+        run: |
+          python3 -m py_compile paper/extension/ttcsil_integration/validate_nos3_source_lock.py
+          python3 paper/extension/ttcsil_integration/validate_nos3_source_lock.py
+      - name: Verify exact upstream commit and all NOS3 gitlink SHAs
+        shell: bash
+        run: |
+          set -euo pipefail
+          ROOT="$(mktemp -d)"
+          trap 'rm -rf -- "$ROOT"' EXIT
+          export GIT_TERMINAL_PROMPT=0
+          git clone --quiet --depth 1 --branch v1_07_06 https://github.com/nasa/nos3.git "$ROOT/nos3"
+          git clone --quiet --depth 1 --branch v1.5.2 https://github.com/nasa/CryptoLib.git "$ROOT/standalone"
+          mkdir "$ROOT/embedded"
+          git -C "$ROOT/embedded" init -q
+          git -C "$ROOT/embedded" remote add origin https://github.com/nasa/CryptoLib.git
+          git -C "$ROOT/embedded" fetch -q --depth 1 origin b46879c094f1ae279c2ff04dea3d8e5ecbd4ef92
+          git -C "$ROOT/embedded" checkout -q --detach FETCH_HEAD
+          test "$(git -C "$ROOT/nos3" rev-parse HEAD)" = 1dadc685effc26730603c36c7864afce3c546406
+          test "$(git -C "$ROOT/standalone" rev-parse HEAD)" = c216ede78b2f51b42838b13955602c0b481b53c2
+          test "$(git -C "$ROOT/embedded" rev-parse HEAD)" = b46879c094f1ae279c2ff04dea3d8e5ecbd4ef92
+          python3 paper/extension/ttcsil_integration/validate_nos3_source_lock.py \
+            --nos3 "$ROOT/nos3" \
+            --standalone-crypto-tc "$ROOT/standalone/src/core/crypto_tc.c" \
+            --embedded-crypto-tc "$ROOT/embedded/src/core/crypto_tc.c"
+      - name: Confirm NO integrated runtime, protocol freeze, or scientific outputs
+        run: |
+          echo 'TTCSIL_F1_FULL_COMPATIBILITY=HOLD'
+          echo 'TTCSIL_F1_GVCID_AUTHORIZATION_REVIEW=HOLD'
+          echo 'TTCSIL_F2_F3_F4_CFS_NOS3_RUNTIME=NOT_EXECUTED'
+          echo 'TTCSIL_SCIENTIFIC_FINDINGS=NONE'
