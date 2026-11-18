@@ -27,15 +27,15 @@
 <text x="700.0" y="628.0" font-family="Arial, Helvetica, sans-serif" font-size="17" text-anchor="middle" font-weight="normal">Append-only evidence</text>
 <text x="700.0" y="652.0" font-family="Arial, Helvetica, sans-serif" font-size="17" text-anchor="middle" font-weight="normal">+ outcome evaluator</text>
 <line x1="245" y1="205" x2="245" y2="300" stroke="black" stroke-width="2" marker-end="url(#arrow)"/>
-<text x="270" y="255" font-family="Arial, Helvetica, sans-serif" font-size="15" text-anchor="start" font-weight="normal">authorize + monotonic state</text>
+<text x="270" y="255" font-family="Arial, Helvetica, sans-serif" font-size="17" text-anchor="start" font-weight="normal">authorize + monotonic state</text>
 <line x1="700" y1="205" x2="700" y2="280" stroke="black" stroke-width="2" marker-end="url(#arrow)"/>
-<text x="725" y="248" font-family="Arial, Helvetica, sans-serif" font-size="15" text-anchor="start" font-weight="normal">controls delivery</text>
+<text x="725" y="248" font-family="Arial, Helvetica, sans-serif" font-size="17" text-anchor="start" font-weight="normal">controls delivery</text>
 <line x1="400" y1="338" x2="510" y2="338" stroke="black" stroke-width="2" marker-end="url(#arrow)"/>
 <line x1="510" y1="397" x2="400" y2="397" stroke="black" stroke-width="2" marker-end="url(#arrow)"/>
 <line x1="890" y1="338" x2="1000" y2="338" stroke="black" stroke-width="2" marker-end="url(#arrow)"/>
 <line x1="1000" y1="397" x2="890" y2="397" stroke="black" stroke-width="2" marker-end="url(#arrow)"/>
 <line x1="255" y1="435" x2="600" y2="590" stroke="black" stroke-width="2" marker-end="url(#arrow)"/>
 <line x1="1145" y1="435" x2="800" y2="590" stroke="black" stroke-width="2" marker-end="url(#arrow)"/>
-<text x="700" y="520" font-family="Arial, Helvetica, sans-serif" font-size="16" text-anchor="middle" font-weight="bold">Activation: spacecraft on exact COMMIT; ground on exact CONFIRM.</text>
-<text x="700" y="548" font-family="Arial, Helvetica, sans-serif" font-size="16" text-anchor="middle" font-weight="normal">SUCCESS additionally requires post-convergence command and telemetry verification.</text>
+<text x="700" y="520" font-family="Arial, Helvetica, sans-serif" font-size="17" text-anchor="middle" font-weight="bold">Activation: spacecraft on exact COMMIT; ground on exact CONFIRM.</text>
+<text x="700" y="548" font-family="Arial, Helvetica, sans-serif" font-size="17" text-anchor="middle" font-weight="normal">SUCCESS additionally requires post-convergence command and telemetry verification.</text>
 </svg>

@@ -75,9 +75,9 @@ def render_figure1():
     p.append(box(535, 590, 330, 100, ["Append-only evidence", "+ outcome evaluator"]))
 
     p.append(arrow(245, 205, 245, 300))
-    p.append(svg_text(270, 255, "authorize + monotonic state", size=15, anchor="start"))
+    p.append(svg_text(270, 255, "authorize + monotonic state", size=17, anchor="start"))
     p.append(arrow(700, 205, 700, 280))
-    p.append(svg_text(725, 248, "controls delivery", size=15, anchor="start"))
+    p.append(svg_text(725, 248, "controls delivery", size=17, anchor="start"))
     p.append(arrow(400, 338, 510, 338))
     p.append(arrow(510, 397, 400, 397))
     p.append(arrow(890, 338, 1000, 338))
@@ -88,12 +88,12 @@ def render_figure1():
     p.append(svg_text(
         700, 520,
         "Activation: spacecraft on exact COMMIT; ground on exact CONFIRM.",
-        size=16, weight="bold"
+        size=17, weight="bold"
     ))
     p.append(svg_text(
         700, 548,
         "SUCCESS additionally requires post-convergence command and telemetry verification.",
-        size=16
+        size=17
     ))
 
     (OUTPUT_DIR / "figure-1-architecture.svg").write_text(
@@ -148,7 +148,10 @@ def render_figure2():
         label = row["outcome"].replace("_", " ")
         p.append(svg_text(x + bar_w / 2, top + plot_h + 36, label, size=15))
 
-    p.append(svg_text(38, 350, "Schedules (n = 100)", size=17, anchor="middle"))
+    p.append(
+        '<text transform="translate(50 350) rotate(-90)" font-family="Arial, Helvetica, sans-serif" '
+        'font-size="17" text-anchor="middle">Schedules (n = 100)</text>'
+    )
     p.append(svg_text(
         550, 655,
         "Descriptive fixed-population counts; not a real-world fault-prevalence or reliability estimate.",
@@ -206,7 +209,10 @@ def render_figure3():
                 f"{value}/12", size=27, weight="bold"
             ))
 
-    p.append(svg_text(35, 340, "Candidate lifetime (contacts)", size=17, anchor="start"))
+    p.append(
+        '<text transform="translate(52 340) rotate(-90)" font-family="Arial, Helvetica, sans-serif" '
+        'font-size="17" text-anchor="middle">Candidate lifetime (contacts)</text>'
+    )
     p.append(svg_text(
         480, 590,
         "No observed lifetime effect over 2-4 contacts; change occurs between transmission budgets 2 and 3.",
