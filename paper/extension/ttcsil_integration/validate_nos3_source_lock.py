@@ -116,12 +116,46 @@ def inspect_crypto(path: Path, label: str) -> None:
     print(f"TTCSIL_{label}_FULL_RECEIVE_PATH_AUTHORIZATION=UNVERIFIED")
 
 
+def inspect_cfe(path: Path) -> None:
+    source = path.read_text(encoding="utf-8")
+    signature = "size_t CFE_SB_GetUserDataLength(const CFE_MSG_Message_t *MsgPtr)"
+    start = source.find(signature)
+    check(start >= 0, "pinned cFE function signature absent")
+    opening = source.find("{", start)
+    check(opening >= 0 and opening - start < 220, "pinned cFE function body absent")
+    depth = 0
+    end = None
+    for i in range(opening, len(source)):
+        if source[i] == "{":
+            depth += 1
+        elif source[i] == "}":
+            depth -= 1
+            if depth == 0:
+                end = i + 1
+                break
+    check(end is not None, "unbalanced cFE function body")
+    body = source[start:end]
+    check("CFE_MSG_GetSize(MsgPtr, &TotalMsgSize);" in body, "changed cFE message length source")
+    check("HdrSize = CFE_SB_MsgHdrSize(MsgPtr);" in body, "changed cFE header length source")
+    check("return TotalMsgSize - HdrSize;" in body, "changed cFE subtraction source")
+    # If a protective comparison is introduced, fail closed and require
+    # a new deliberate expert adjudication, never silently report a patch.
+    check(not re.search(r"TotalMsgSize\s*[<>]=?\s*HdrSize|HdrSize\s*[<>]=?\s*TotalMsgSize", body),
+          "cFE length guard changed; manual re-adjudication required")
+    digest = hashlib.sha256(source.encode("utf-8")).hexdigest()
+    print(f"TTCSIL_NOS3_CFE_SB_SOURCE_SHA256={digest}")
+    print("TTCSIL_NOS3_CFE_USER_DATA_LENGTH_UNGUARDED_SUBTRACTION=OBSERVED")
+    print("TTCSIL_NOS3_CFE_PATH_REACHABILITY_AND_EXPLOITABILITY=UNVERIFIED")
+    print("TTCSIL_NOS3_CFE_RUNTIME_ADMISSION=HOLD")
+
+
 def main() -> int:
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument("--lock", type=Path, default=Path(__file__).with_name("NOS3_SOURCE_LOCK_AND_SECURITY_HOLD_2026-11-17.json"))
     p.add_argument("--nos3", type=Path)
     p.add_argument("--standalone-crypto-tc", type=Path)
     p.add_argument("--embedded-crypto-tc", type=Path)
+    p.add_argument("--nos3-cfe-sb-source", type=Path)
     args = p.parse_args()
     data = json.loads(args.lock.read_text(encoding="utf-8"))
     validate_lock(data)
@@ -132,6 +166,8 @@ def main() -> int:
         inspect_crypto(args.standalone_crypto_tc, "STANDALONE")
     if args.embedded_crypto_tc:
         inspect_crypto(args.embedded_crypto_tc, "NOS3_EMBEDDED")
+    if args.nos3_cfe_sb_source:
+        inspect_cfe(args.nos3_cfe_sb_source)
     print("TTCSIL_F1_SECURITY_AND_COMPATIBILITY=HOLD")
     print("TTCSIL_F2_F3_F4_INTEGRATED_RUNTIME=NOT_EXECUTED")
     print("TTCSIL_CANONICAL_RESEARCH_EXECUTION=PROHIBITED")
