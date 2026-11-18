@@ -686,25 +686,25 @@ T1 categorically outperforms B0, B1, or B2. Its value is instead to establish th
 subset of conditions that can be compared conservatively, T1 reproduces the same terminal
 classifications while preserving the model's evidence and security boundaries.
 
-**Table 1. Matched-family outcomes using only family-authorized comparison fields.**
+**Table 1. Matched-family outcomes; complete authorized evidence appears in Supplementary Table S0.**
 
-| Family | Treatment / policy | Source | Outcome | Alignment | Availability | Authorized evidence |
+| Family | Treatment / policy | Source | Outcome | Alignment | Availability | Evidence cue |
 |---|---|---|---|---|---|---|
-| CF-01 | B0 | B0-02 | SUCCESS | SYNC | AVAILABLE | active_key_compromised=false; security_state=SECURE_PROVISIONAL |
-| CF-01 | B1 | B1-02 | SUCCESS | SYNC | AVAILABLE | active_key_compromised=false; security_state=SECURE_PROVISIONAL |
-| CF-01 | B2 | B2-02 | SUCCESS | SYNC | AVAILABLE | active_key_compromised=false; security_state=SECURE_PROVISIONAL |
-| CF-01 | T1 | T1-15 | SUCCESS | SYNC | AVAILABLE | active_key_compromised=false; security_state=SECURE_PROVISIONAL |
-| CF-02 | B0 | B0-01 | SUCCESS | SYNC | AVAILABLE | security_state=SECURE_PROVISIONAL; verification_complete=true |
-| CF-02 | B1 / B1-01 | B1-01 | SUCCESS | SYNC | AVAILABLE | security_state=SECURE_PROVISIONAL; verification_complete=true |
-| CF-02 | B1 / B1-05 | B1-05 | SUCCESS | SYNC | AVAILABLE | security_state=SECURE_PROVISIONAL; verification_complete=true |
-| CF-02 | B2 | B2-01 | SUCCESS | SYNC | AVAILABLE | security_state=SECURE_PROVISIONAL; verification_complete=true |
-| CF-02 | T1 | T1-01 | SUCCESS | SYNC | AVAILABLE | security_state=SECURE_PROVISIONAL; verification_complete=true |
-| CF-05 | B2 | B2-08 | INDETERMINATE | SYNC | DEGRADED | drop_count=1; security_state=NOT_ESTABLISHED; telemetry_complete=false; verification_complete=false |
-| CF-05 | T1 | T1-09 | INDETERMINATE | SYNC | DEGRADED | drop_count=1; security_state=NOT_ESTABLISHED; telemetry_complete=false; verification_complete=false |
-| CF-06 | B2 | B2-10 | SUCCESS | SYNC | AVAILABLE | rejection_count=1; replay_count=1; replay_rejection_count=1 |
-| CF-06 | T1 | T1-13 | SUCCESS | SYNC | AVAILABLE | rejection_count=1; replay_count=1; replay_rejection_count=1 |
+| CF-01 | B0 | B0-02 | SUCCESS | SYNC | AVAILABLE | Key not marked compromised |
+| CF-01 | B1 | B1-02 | SUCCESS | SYNC | AVAILABLE | Key not marked compromised |
+| CF-01 | B2 | B2-02 | SUCCESS | SYNC | AVAILABLE | Key not marked compromised |
+| CF-01 | T1 | T1-15 | SUCCESS | SYNC | AVAILABLE | Key not marked compromised |
+| CF-02 | B0 | B0-01 | SUCCESS | SYNC | AVAILABLE | Verification complete |
+| CF-02 | B1 / B1-01 | B1-01 | SUCCESS | SYNC | AVAILABLE | Verification complete |
+| CF-02 | B1 / B1-05 | B1-05 | SUCCESS | SYNC | AVAILABLE | Verification complete |
+| CF-02 | B2 | B2-01 | SUCCESS | SYNC | AVAILABLE | Verification complete |
+| CF-02 | T1 | T1-01 | SUCCESS | SYNC | AVAILABLE | Verification complete |
+| CF-05 | B2 | B2-08 | INDETERMINATE | SYNC | DEGRADED | TM/verification missing |
+| CF-05 | T1 | T1-09 | INDETERMINATE | SYNC | DEGRADED | TM/verification missing |
+| CF-06 | B2 | B2-10 | SUCCESS | SYNC | AVAILABLE | Replay rejected |
+| CF-06 | T1 | T1-13 | SUCCESS | SYNC | AVAILABLE | Replay rejected |
 
-*CF-02 contains two B1 policy traces for traceability; they constitute one B1 analysis unit rather than two independent replications.*
+*Evidence cues are family-specific summaries, not independent metrics: CF-01, active key not marked compromised and security_state=SECURE_PROVISIONAL; CF-02, verification_complete=true and security_state=SECURE_PROVISIONAL; CF-05, one drop with missing telemetry/verification and security_state=NOT_ESTABLISHED; CF-06, replay_count=1, replay_rejection_count=1, and rejection_count=1. See Supplementary Table S0 for exact authorized fields and source IDs. CF-02 contains two B1 policy traces for traceability; they constitute one B1 analysis unit rather than two independent replications.*
 
 ### 6.2 Deterministic T1 fault behavior
 
