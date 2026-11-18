@@ -1330,14 +1330,13 @@ in CI. Scientific inputs and retained outputs are not modified as part of manusc
 The source repository contains the simulator, final experiment plan, validation/derivation tools,
 tracked processed result sources, bounded formal models, and manuscript evidence mapping.
 
-The large raw retained bundle is currently kept outside ordinary Git history and identified by
-the run ID and SHA-256 above. The submission/release step should publish that immutable bundle
-through a stable research archive or explicit software release and record the resulting
-persistent identifier in the final manuscript.
+The large raw retained bundle remains outside ordinary Git history and is identified by
+the run ID and SHA-256 above. It has not been deposited in a public research archive and
+does not have a persistent archive identifier.
 
-Until that archive identifier exists, the manuscript should not claim that the raw artifact is
-publicly archived. It can accurately state that the retained artifact exists, is checksum-pinned,
-and is reproducible from the exact code/configuration identities above.
+The source code, serialized schedules, and tracked derivatives are available in the
+repository. The checksum-pinned raw record is retained separately, so a complete
+original raw-output audit currently requires access to that external bundle.
 
 ### 9.6 Reproduction boundary
 
