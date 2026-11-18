@@ -6,7 +6,7 @@
 static unsigned passed = 0;
 
 #define CHECK(cond) do { if (!(cond)) { \
-    fprintf(stderr, "FAIL at %s:%d: %s\\n", __FILE__, __LINE__, #cond); \
+    fprintf(stderr, "FAIL at %s:%d: %s\n", __FILE__, __LINE__, #cond); \
     return 1; } ++passed; } while (0)
 
 static ttcsil_policy good_policy(void)
@@ -86,7 +86,7 @@ static int test_authorization(void)
 int main(void)
 {
     if (test_length() || test_authorization()) return EXIT_FAILURE;
-    printf("TTCSIL_GUARD_UNIT_ASSERTIONS=%u PASS\\n", passed);
+    printf("TTCSIL_GUARD_UNIT_ASSERTIONS=%u PASS\n", passed);
     puts("TTCSIL_F1_GUARD_UNIT=PASS; F1_INTEGRATION=HOLD; F2_F3_F4=NOT_EXECUTED");
     return EXIT_SUCCESS;
 }
