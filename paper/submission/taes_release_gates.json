@@ -1,0 +1,22 @@
+{
+  "schema_version": "1.0",
+  "snapshot_date": "2026-11-18",
+  "reviewed_main_sha": "1bda511862f104e82bddcbf95db1ee97702e6c02",
+  "gate_purpose": "Fail-closed TAES editorial/reviewer readiness; not autonomous authorization",
+  "publisher_submission_authorized": false,
+  "author_approval_documented": false,
+  "private_author_disclosures_committed": false,
+  "publication_ready": false,
+  "gates": {
+    "official_template_and_final_pdf": "HOLD",
+    "table_i_and_float_legibility": "HOLD",
+    "supplements_reviewer_access": "HOLD",
+    "claim_level_reference_audit": "HOLD",
+    "author_identity_and_orcid": "HOLD",
+    "ai_contribution_disclosure": "HOLD",
+    "funding_conflicts_and_rights": "HOLD",
+    "originality_and_submission_overlap": "HOLD",
+    "raw_evidence_access_and_licenses": "HOLD",
+    "final_author_signoff": "HOLD"
+  }
+}
