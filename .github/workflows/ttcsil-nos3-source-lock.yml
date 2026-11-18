@@ -39,13 +39,20 @@ jobs:
           git -C "$ROOT/embedded" remote add origin https://github.com/nasa/CryptoLib.git
           git -C "$ROOT/embedded" fetch -q --depth 1 origin b46879c094f1ae279c2ff04dea3d8e5ecbd4ef92
           git -C "$ROOT/embedded" checkout -q --detach FETCH_HEAD
+          mkdir "$ROOT/cfe"
+          git -C "$ROOT/cfe" init -q
+          git -C "$ROOT/cfe" remote add origin https://github.com/nasa-itc/cFE.git
+          git -C "$ROOT/cfe" fetch -q --depth 1 origin 87e273743f3d07ed9216462b461e9f398ff96c87
+          git -C "$ROOT/cfe" checkout -q --detach FETCH_HEAD
+          test "$(git -C "$ROOT/cfe" rev-parse HEAD)" = 87e273743f3d07ed9216462b461e9f398ff96c87
           test "$(git -C "$ROOT/nos3" rev-parse HEAD)" = 1dadc685effc26730603c36c7864afce3c546406
           test "$(git -C "$ROOT/standalone" rev-parse HEAD)" = c216ede78b2f51b42838b13955602c0b481b53c2
           test "$(git -C "$ROOT/embedded" rev-parse HEAD)" = b46879c094f1ae279c2ff04dea3d8e5ecbd4ef92
           python3 paper/extension/ttcsil_integration/validate_nos3_source_lock.py \
             --nos3 "$ROOT/nos3" \
             --standalone-crypto-tc "$ROOT/standalone/src/core/crypto_tc.c" \
-            --embedded-crypto-tc "$ROOT/embedded/src/core/crypto_tc.c"
+            --embedded-crypto-tc "$ROOT/embedded/src/core/crypto_tc.c" \
+            --nos3-cfe-sb-source "$ROOT/cfe/modules/sb/fsw/src/cfe_sb_util.c"
       - name: Confirm NO integrated runtime, protocol freeze, or scientific outputs
         run: |
           echo 'TTCSIL_F1_FULL_COMPATIBILITY=HOLD'
