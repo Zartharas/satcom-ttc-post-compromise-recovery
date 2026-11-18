@@ -704,9 +704,7 @@ classifications while preserving the model's evidence and security boundaries.
 | CF-06 | B2 | B2-10 | SUCCESS | SYNC | AVAILABLE | Replay rejected |
 | CF-06 | T1 | T1-13 | SUCCESS | SYNC | AVAILABLE | Replay rejected |
 
-
 *Evidence cues are family-specific summaries, not independent metrics: CF-01, active key not marked compromised and security_state=SECURE_PROVISIONAL; CF-02, verification_complete=true and security_state=SECURE_PROVISIONAL; CF-05, one drop with missing telemetry/verification and security_state=NOT_ESTABLISHED; CF-06, replay_count=1, replay_rejection_count=1, and rejection_count=1. See Supplementary Table S0 for exact authorized fields and source IDs. CF-02 contains two B1 policy traces for traceability; they constitute one B1 analysis unit rather than two independent replications.*
-
 
 ### 6.2 Deterministic T1 fault behavior
 
