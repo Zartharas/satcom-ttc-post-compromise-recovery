@@ -133,7 +133,7 @@ This is not a reason to discard or replace the retained run. The schedule popula
 predeclared and executed correctly. Rather, the audit reveals a property of the generator:
 scheduling a later-attempt fault is not equivalent to forcing that fault to occur.
 
-The paper should therefore use Study C as secondary evidence about the outcome distribution of a
+Study C therefore provides secondary evidence about the outcome distribution of the
 fixed synthetic schedule population. Deterministic Study B provides the controlled cell-level
 fault evidence. A future study designed specifically to estimate outcomes conditional on an
 applied fault could use a generator that guarantees runtime reachability or samples from
