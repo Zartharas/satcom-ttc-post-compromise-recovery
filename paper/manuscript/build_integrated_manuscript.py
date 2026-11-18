@@ -82,6 +82,28 @@ def evidence_text(raw: str) -> str:
     return "; ".join(parts)
 
 
+def family_evidence_cue(family_id: str, raw: str) -> str:
+    # Presentation labels only; require byte-semantic parity with all authorized
+    # family fields before permitting a shortened main-paper display.
+    expected = {
+        "CF-01": {"active_key_compromised": False, "security_state": "SECURE_PROVISIONAL"},
+        "CF-02": {"security_state": "SECURE_PROVISIONAL", "verification_complete": True},
+        "CF-05": {"drop_count": 1, "security_state": "NOT_ESTABLISHED",
+                  "telemetry_complete": False, "verification_complete": False},
+        "CF-06": {"rejection_count": 1, "replay_count": 1,
+                  "replay_rejection_count": 1},
+    }
+    cues = {
+        "CF-01": "Key not marked compromised",
+        "CF-02": "Verification complete",
+        "CF-05": "TM/verification missing",
+        "CF-06": "Replay rejected",
+    }
+    if family_id not in expected or json.loads(raw) != expected[family_id]:
+        raise SystemExit("Authorized comparison evidence does not match frozen family fields: " + family_id)
+    return cues[family_id]
+
+
 def build_table1():
     path = TABLE_DIR / "table-1-matched-family-outcomes.csv"
     with path.open(newline="", encoding="utf-8") as handle:
@@ -89,10 +111,10 @@ def build_table1():
 
     headers = [
         "Family", "Treatment / policy", "Source", "Outcome",
-        "Alignment", "Availability", "Authorized evidence",
+        "Alignment", "Availability", "Evidence cue",
     ]
     lines = [
-        "**Table 1. Matched-family outcomes using only family-authorized comparison fields.**",
+        "**Table 1. Matched-family outcomes; complete authorized evidence appears in Supplementary Table S0.**",
         "",
         "| " + " | ".join(headers) + " |",
         "|" + "|".join(["---"] * len(headers)) + "|",
@@ -105,11 +127,17 @@ def build_table1():
             row["outcome"],
             row["alignment_class"],
             row["availability_state"],
-            evidence_text(row["family_specific_authorized_evidence"]),
+            family_evidence_cue(row["family_id"], row["family_specific_authorized_evidence"]),
         ]
         lines.append("| " + " | ".join(markdown_escape(v) for v in values) + " |")
     lines.append(
-        "\n*CF-02 contains two B1 policy traces for traceability; they constitute one B1 "
+        "\n*Evidence cues are family-specific summaries, not independent metrics: CF-01, "
+        "active key not marked compromised and security_state=SECURE_PROVISIONAL; CF-02, "
+        "verification_complete=true and security_state=SECURE_PROVISIONAL; CF-05, "
+        "one drop with missing telemetry/verification and security_state=NOT_ESTABLISHED; "
+        "CF-06, replay_count=1, replay_rejection_count=1, and rejection_count=1. "
+        "See Supplementary Table S0 for exact authorized fields and source IDs. "
+        "CF-02 contains two B1 policy traces for traceability; they constitute one B1 "
         "analysis unit rather than two independent replications.*"
     )
     return "\n".join(lines) + "\n", rows
