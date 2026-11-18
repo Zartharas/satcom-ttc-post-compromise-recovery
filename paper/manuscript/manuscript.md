@@ -114,7 +114,9 @@ and the possibility of ground-side key compromise [@bader_ttc_key_management]. T
 concludes that SDLS is suitable for traffic protection when configured appropriately but that
 the SDLS Extended Procedures do not by themselves satisfy the stated post-compromise-security
 requirement. It identifies stateful authenticated key agreement or ratcheted key evolution as a
-promising direction.
+promising direction. Bader also identifies secure key re-establishment after loss of
+ground/space key synchronization, while retaining strong post-compromise security, as an
+open problem [@bader_ttc_key_management].
 
 Our work adopts the same general motivation but asks a different question. We do not attempt to
 re-evaluate SDLS conformance or prove a cryptographic post-compromise-security property. Instead,
@@ -129,7 +131,11 @@ Hülsing, Lange, and Weber propose a standalone key-update/establishment mechani
 on PQNoise and KEMs [@hulsing_lange_weber_sdls_key_update]. Their construction is designed to
 produce fresh key material for SDLS while leaving the SDLS traffic-protection protocol itself
 untouched. The paper provides cryptographic security analysis in its stated model and requires
-key confirmation.
+key confirmation. The authors explicitly note that the exchange itself cannot reorder or
+re-request lost or out-of-order packet fragments: these functions must be provided by the
+fragmentation layer, or the connection is dropped [@hulsing_lange_weber_sdls_key_update].
+This limitation is distinct from T1's project-defined operational activation, retry, and
+post-recovery command/telemetry evidence semantics.
 
 This construction motivates B1. However, the source does not define the simulator's operational
 questions: exactly when an SDLS security association becomes active, whether activation should
