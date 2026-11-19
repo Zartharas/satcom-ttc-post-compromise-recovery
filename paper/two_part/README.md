@@ -12,6 +12,15 @@ Status: DRAFT. Nothing here is submitted. Part I (Studies A-D) is frozen and is 
 - `bibliography_study_e.bib`: six entries (CosmicDancePro, WetLinks, Starlink ping dataset, SatNOGS API, CCSDS 354.0-M-1, Ledin et al. accepted version). Keys do not collide with `references/bibliography.bib`.
 - `FRAMING_TEXT_PROPOSAL_v1_2026-11-19.md`: proposed abstract, introduction and conclusion changes, with author decision points.
 
+## Build
+```
+python3 -I paper/two_part/build_two_part_manuscript.py
+```
+Reads Part I read-only, refuses to run if `paper/manuscript/manuscript.md` or `references/bibliography.bib` differ from the manifest, and writes `paper/two_part/out/manuscript_two_part.md` and `bibliography_two_part.bib`. `out/` is git-ignored by its own `.gitignore`. The PDF is built privately from these two files (IEEEtaes class, pandoc, pdflatex); the build helper is not in the repository.
+
+- `abstract_candidate_250w.md`: combined abstract (candidate; author decision pending).
+- Not changed by the builder: the paper title (still Part I only) and Sections 7-9 (Discussion, Threats, Reproducibility), which do not yet mention Part II. Author decision.
+
 ## Open items before any assembly
 1. Author decision on the combined abstract (250-word rule) and the introduction and conclusion edits.
 2. Author decision whether to change the Part I locks (manifest, 250-word CI assertion) or build the two-part paper with a separate builder that reads Part I files read-only.
