@@ -8,11 +8,21 @@
   "DATA_DEPOSIT_PLAN_DRAFT_for_author.md": "9f545a4629ff366000f0f88da2e5150eb2e1fed0d5536fe0ddc172217b79577e",
   "STUDY_E_PREREGISTRATION_v5-RC_2026-11-19.md": "195e79d12aace7e426e27f7691d871f2b493769bfce8920981304cd7266cea0c",
   "anchors_report.json": "13c01457e6c4bd1750acb1ca792efe82809b737804fbfdfac3b96c8b5015bb4f",
-  "study_e_scaffold_v0.6.0-dev_freeze-candidate.tgz": "0356cadb3f1fca171701f89314b1d1a5b0d21b66937e1c37e73a2d469fca3cb2"
+  "study_e_scaffold_v0.6.0-dev_freeze-candidate-r2.tgz": "a43c25b87014282937812bffc9b6da2584f6d5254c564247e9c35fdcfffcc0e0"
  },
  "inputs": {
   "anchors_report.json (reproduced byte-identical on author Mac)": "13c01457e6c4bd1750acb1ca792efe82809b737804fbfdfac3b96c8b5015bb4f",
   "satnogs_pop002_firstpage_476.jsonl": "6f80a44fa6cfa63a70df49de3ba447de3d59efe0632208180f26552f37b46a8e"
  },
- "status": "FREEZE CANDIDATE - NOT FROZEN"
+ "revision_note": "r2 adds study_e/tla/ (TLC specs, configs, comparison scripts; no jar) that r1 omitted although the pre-registration cites the TLC support check. Python code and tests unchanged since r1 (88 tests verified on Mac and Docker).",
+ "status": "FREEZE CANDIDATE - NOT FROZEN",
+ "tla_files": {
+  "README.md": "236e7711c063d34a7d819a9b205caf6ad67e57777383cb51bc64731fd8525bf3",
+  "TtcRecovery.cfg": "5bf5c523864e1276b5d53c0d1158be61b2144a461b1d68d904b18fb4322bff87",
+  "TtcRecovery.tla": "a017d40b090fc5ebfbd7977c4fd7ee45ce68f38e2f859a2ee8fe76a9bb2b3d32",
+  "TtcRecoveryMulti.cfg": "5bf5c523864e1276b5d53c0d1158be61b2144a461b1d68d904b18fb4322bff87",
+  "TtcRecoveryMulti.tla": "2c608d580c0e0a8e66b6d49347379caa8796d730bd061f5240c9a79a65c313d3",
+  "cmp.py": "46ed53d2630623816824f32911aa595f2cf3b58422e02f9b34e2fe8e6378cd57",
+  "cmp_multi.py": "c7dae9116dc8f35aaa8eae65a058e8bf2f839d82da4bdf51fcfcdcd11f96b076"
+ }
 }
