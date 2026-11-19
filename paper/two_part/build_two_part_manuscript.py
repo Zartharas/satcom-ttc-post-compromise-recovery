@@ -78,6 +78,48 @@ FUTURE_WORK_NEW = (
     "the exchange abstraction,"
 )
 
+TITLE_TWO_PART = "Post-Compromise Satellite TT&C Resynchronization Under Intermittent Links: Fault-Injection and Parametric Studies"
+
+SECTION_7_10 = (
+    "### 7.10 Part II and the Part I mechanisms\n\n"
+    "Part II examines two of the mechanisms discussed above in a parametric abstraction. The Part I result that "
+    "retransmission cannot repair destroyed endpoint state has a counterpart in the persistence levels of Part II: "
+    "under volatile or commit-level persistence, restarts can leave the endpoints divergent, whereas journaled "
+    "progress made divergence invariant to the restart probability. The Part I distinction between convergence and "
+    "verified recovery appears in Part II as the `INDETERMINATE` outcome, which plain retries could not clear; "
+    "resumable verification could, but only under an assumption that the remaining messages are idempotent, which "
+    "neither Part I nor the cited standards establish. Part II also shows that more durable persistence can raise "
+    "ground-ahead divergence under gated activation in the abstraction, so persistence is not a monotone improvement, and that this is a "
+    "property of the model's rules rather than of a measured link. The two parts use different models, the T1 "
+    "controller and a six-message exchange, and no quantitative result is transferred between them."
+)
+
+SECTION_8_10 = (
+    "### 8.10 Part II validity\n\n"
+    "Part II states its own limitations in Section II.5; the points below bear on how far Part II supports the rest "
+    "of the paper. For construct validity, the six-message exchange is an abstraction that has not been independently "
+    "reviewed, and its loss values are stress parameters rather than TT&C uplink measurements. For external validity, "
+    "the anchors are proxies (satellite observation windows, a broadband ping dataset and published loss ranges), "
+    "and the broadband statistics were inspected before the Gilbert-Elliott rule was written, so the anchors are not "
+    "blind. For conclusion validity, the hypotheses were frozen in the repository and not in an external registry, "
+    "the analysis script was added after the freeze under a disclosed amendment, and the reading of \"fallback "
+    "required\" in H-E2c as total divergence is one operationalization of ambiguous wording. Reproduction was "
+    "performed by the same author in a second environment. The falsified hypotheses describe the rules of the model "
+    "and should not be transferred to Part I or to real links."
+)
+
+SECTION_9_7 = (
+    "### 9.7 Part II artifacts\n\n"
+    "The Part II code, tests, TLA+ specifications, frozen pre-registration, analysis-script amendment and "
+    "confirmatory results are in the same repository at the tags `study-e-prereg-v1` and "
+    "`study-e-analysis-script-v1`. Outcome probabilities are computed in exact rational arithmetic and are "
+    "deterministic; the results-table digest dfed99fa...a47d was reproduced in a second environment, and the test "
+    "suite has 99 tests. A public deposit of the summary data has been planned but has not been made, and a "
+    "SatNOGS-derived summary would carry the CC BY-SA 4.0 licence of its source. The reproduction boundary of "
+    "Section 9.6 applies: reproducing Part II establishes the arithmetic of the model, not link behavior or "
+    "cryptographic security."
+)
+
 PROHIBITED = [
     "74% success rate under faults",
     "we are the first",
@@ -96,9 +138,9 @@ DISSERTATION = [
     "interview participants",
 ]
 PENDING_DECISIONS = [
-    "combined abstract wording (paper/two_part/abstract_candidate_250w.md) and whether the descriptive-counts caveat stays",
-    "statement that the six-message exchange has not been independently reviewed (scope sentence and conclusion)",
-    "whether to keep the Part I locks (this builder assumes yes) and the abstract length rule for the journal",
+    "read-through and approval of the combined abstract text (paper/two_part/abstract_candidate_250w.md; you chose to keep the descriptive-counts caveat)",
+    "read-through of the new 7.10, 8.10 and 9.7 text and of the chosen title",
+    "journal abstract length limit: the TAES page found did not state one; IEEE-wide guidance found says 150-250 words, so 250 fits",
 ]
 
 
@@ -145,6 +187,7 @@ def bib_keys(text: str) -> list[str]:
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     parser.add_argument("--abstract", default=str(TWO / "abstract_candidate_250w.md"))
+    parser.add_argument("--title", default=TITLE_TWO_PART, help="Title of the two-part paper (author chose this default on 2026-11-19)")
     args = parser.parse_args()
 
     verify_part1_unchanged()
@@ -172,10 +215,22 @@ def main() -> None:
     k = para_index(paras, "The scope of the claims is deliberately narrow")
     paras[k] = paras[k].rstrip() + " " + SCOPE_ADDITION
 
-    # Part II before the Conclusion.
+    # Title (optional, author decision).
+    if args.title:
+        t0 = para_index(paras, "# ")
+        paras[t0] = "# " + args.title.strip()
+
+    # Discussion 7.10 and Threats 8.10, before the next top-level sections.
+    d = para_index(paras, "## 8. Threats to Validity and Limitations")
+    paras.insert(d, SECTION_7_10)
+    v = para_index(paras, "## 9. Reproducibility and Artifact Availability")
+    paras.insert(v, SECTION_8_10)
+
+    # Reproducibility 9.7 and Part II, before the Conclusion (9.7 first, then Part II).
     part2 = (TWO / "part-ii-study-e.md").read_text(encoding="utf-8").strip()
     c = para_index(paras, "## 10. Conclusion")
     paras.insert(c, part2)
+    paras.insert(c, SECTION_9_7)
 
     # Conclusion: Part II paragraph after the TLA+/Python paragraph; future-work sentence.
     t = para_index(paras, "Bounded TLA+/Python comparisons provide")
