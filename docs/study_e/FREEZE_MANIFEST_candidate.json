@@ -1,0 +1,18 @@
+{
+ "code_version": "0.6.0-dev",
+ "docker_base": "python:3.12-slim@sha256:5e2bdb1b0d542d5039cffb8181c65930093949194a65c365dfb1b0fe13a4fa5b",
+ "files": {
+  "AI_USE_STATEMENT_v2_author_stated.md": "c70281e943d40426b57611b5c44c3da55b99b6da05fcce4376cb17c40c4e10cf",
+  "ANCHORS_REPORT.md": "73e790531f502b162852bf529712bfbed6531e3ad04eda52b17053c4201fd916",
+  "AUTHOR_DECLARATIONS_checklist_BLANK.md": "3d62e840c9b2e5046cdd612efd2a020ffbc0ea3d860dbe21c7543cfddeb19682",
+  "DATA_DEPOSIT_PLAN_DRAFT_for_author.md": "9f545a4629ff366000f0f88da2e5150eb2e1fed0d5536fe0ddc172217b79577e",
+  "STUDY_E_PREREGISTRATION_v5-RC_2026-11-19.md": "195e79d12aace7e426e27f7691d871f2b493769bfce8920981304cd7266cea0c",
+  "anchors_report.json": "13c01457e6c4bd1750acb1ca792efe82809b737804fbfdfac3b96c8b5015bb4f",
+  "study_e_scaffold_v0.6.0-dev_freeze-candidate.tgz": "0356cadb3f1fca171701f89314b1d1a5b0d21b66937e1c37e73a2d469fca3cb2"
+ },
+ "inputs": {
+  "anchors_report.json (reproduced byte-identical on author Mac)": "13c01457e6c4bd1750acb1ca792efe82809b737804fbfdfac3b96c8b5015bb4f",
+  "satnogs_pop002_firstpage_476.jsonl": "6f80a44fa6cfa63a70df49de3ba447de3d59efe0632208180f26552f37b46a8e"
+ },
+ "status": "FREEZE CANDIDATE - NOT FROZEN"
+}
