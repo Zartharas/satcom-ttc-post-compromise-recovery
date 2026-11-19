@@ -3,7 +3,7 @@ Run: tag study-e-analysis-script-v1 = commit 6eb87f272444c6965e2fd9b36bbe2c4aec5
 
 | Hypothesis | Result as run | Verdict |
 |---|---|---|
-| H-E1 exact DP = enumeration | 99-test suite passes natively (1 skipped) and in the container; Docker verified 88 tests before the amendment, not yet rerun on 99 | supported (validation grid) |
+| H-E1 exact DP = enumeration | 99-test suite passes natively (1 skipped), in Docker (default and full modes, 1 skipped, no-cache rebuild at commit 5cb746e) and in the container | supported (validation grid) |
 | H-E2a SUCCESS monotone | B: 0/5,760 violations; L: 0/5,760; H (per policy): 0/46,080. K: 31/5,760 violations; p: 22/6,144 violations | PARTLY FALSIFIED (K and p) |
 | H-E2b gated: durability never raises G-ahead | 288/2,560 violations, all commit to journal, max rise 0.0815 | FALSIFIED |
 | H-E2c journal invariant to r | 0/1,920 violations | supported |
