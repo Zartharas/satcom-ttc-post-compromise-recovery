@@ -78,7 +78,8 @@ FUTURE_WORK_NEW = (
     "the exchange abstraction,"
 )
 
-TITLE_TWO_PART = "Post-Compromise Satellite TT&C Resynchronization Under Intermittent Links: Fault-Injection and Parametric Studies"
+# IEEE TAES template: no abbreviations in the title unless unavoidable. Revised 2026-11-19 on the author's instruction to follow the TAES guidelines.
+TITLE_TWO_PART = "Post-Compromise Resynchronization of Satellite Telemetry, Tracking, and Command Under Intermittent Links: Fault-Injection and Parametric Studies"
 
 SECTION_7_10 = (
     "### 7.10 Part II and the Part I mechanisms\n\n"
@@ -137,9 +138,28 @@ DISSERTATION = [
     "research participants",
     "interview participants",
 ]
+# IEEE-ready figure copies (paper/two_part/figures_ieee). Part I's SVGs stay locked and unused here.
+# The in-figure descriptive notes of Part I Figures 2 and 3 move into the captions (IEEE: no caption text inside figures).
+FIGURES_IEEE = {
+    "../figures/rendered/figure-1-architecture.svg": ("../figures_ieee/fig1.pdf", ""),
+    "../figures/rendered/figure-2-outcome-distribution.svg": (
+        "../figures_ieee/fig2.pdf",
+        " Descriptive fixed-population counts; not a real-world fault-prevalence or reliability estimate.",
+    ),
+    "../figures/rendered/figure-3-retry-retention-sensitivity.svg": (
+        "../figures_ieee/fig3.pdf",
+        " No observed lifetime effect over 2-4 contacts; change occurs between transmission budgets 2 and 3.",
+    ),
+}
+
+# IEEE TAES template: three or four keywords or phrases, alphabetical, comma-separated.
+# Part I's eight-term, semicolon-separated line is hash-locked, so it is replaced here, in the output only.
+KEYWORDS_TWO_PART = "fault injection, key management, post-compromise recovery, satellite cybersecurity"
+
 PENDING_DECISIONS = [
     "read-through and approval of the combined abstract text (paper/two_part/abstract_candidate_250w.md; you chose to keep the descriptive-counts caveat)",
     "read-through of the new 7.10, 8.10 and 9.7 text and of the chosen title",
+    "approval of the four keywords (fault injection, key management, post-compromise recovery, satellite cybersecurity); Part I keeps its own eight-term line",
     "journal abstract length limit: the TAES page found did not state one; IEEE-wide guidance found says 150-250 words, so 250 fits",
 ]
 
@@ -187,7 +207,7 @@ def bib_keys(text: str) -> list[str]:
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     parser.add_argument("--abstract", default=str(TWO / "abstract_candidate_250w.md"))
-    parser.add_argument("--title", default=TITLE_TWO_PART, help="Title of the two-part paper (author chose this default on 2026-11-19)")
+    parser.add_argument("--title", default=TITLE_TWO_PART, help="Title of the two-part paper (default revised 2026-11-19 to follow the TAES no-abbreviation guidance)")
     args = parser.parse_args()
 
     verify_part1_unchanged()
@@ -205,6 +225,13 @@ def main() -> None:
     abstract_words = len(abstract.split())
     if not 200 <= abstract_words <= 300:
         raise SystemExit(f"Abstract word count outside 200-300: {abstract_words}")
+
+    # Keywords: replace Part I's line with the template-conformant list (output only).
+    ki = para_index(paras, "**Keywords:**")
+    paras[ki] = "**Keywords:** " + KEYWORDS_TWO_PART
+    kw = [w.strip() for w in KEYWORDS_TWO_PART.split(",")]
+    if not 3 <= len(kw) <= 4 or kw != sorted(kw, key=str.lower):
+        raise SystemExit("Keywords must be 3-4 terms in alphabetical order")
 
     # Introduction: bridge paragraph, five contributions, scope sentence.
     i = para_index(paras, "The paper makes four contributions.")
@@ -242,6 +269,16 @@ def main() -> None:
     paras[f] = new
 
     manuscript = "\n\n".join(paras) + "\n"
+
+    # Figures: point at the IEEE-ready copies and add the moved notes to the captions.
+    for old_path, (new_path, note) in FIGURES_IEEE.items():
+        pat = re.compile(r"!\[([^\]]*)\]\(" + re.escape(old_path) + r"\)")
+        hits = pat.findall(manuscript)
+        if len(hits) != 1:
+            raise SystemExit(f"Expected exactly one reference to {old_path}, found {len(hits)}")
+        if not (TWO / "figures_ieee" / Path(new_path).name).is_file():
+            raise SystemExit(f"Missing IEEE figure file: {new_path}")
+        manuscript = pat.sub(lambda m: f"![{m.group(1).rstrip()}{note}]({new_path})", manuscript)
 
     # Checks mirroring the Part I builder.
     dups = exact_duplicate_paragraphs(manuscript)
