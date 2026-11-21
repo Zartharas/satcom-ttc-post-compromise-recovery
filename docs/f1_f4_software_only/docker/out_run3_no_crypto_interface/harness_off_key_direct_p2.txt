@@ -1,0 +1,85 @@
+HARNESS|dump|init status=400
+HARNESS|after_restart|SA0 state=0 ekid=0 iv_len=0 iv= arsn_len=0 arsn= arsnw=0
+HARNESS|after_restart|SA6 state=0 ekid=0 iv_len=0 iv= arsn_len=0 arsn= arsnw=0
+HARNESS|after_restart|SA7 state=0 ekid=0 iv_len=0 iv= arsn_len=0 arsn= arsnw=0
+HARNESS|after_restart|KEY132 state=0 len=32 val[0..3]=01234567
+HARNESS|after_restart|KEY140 state=0 len=0 val[0..3]=00000000
+HARNESS|after_restart|KEY141 state=0 len=0 val[0..3]=00000000
+HARNESS|after_restart|KEY142 state=0 len=0 val[0..3]=00000000
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+[33mDEBUG - Printing local copy of SA Entry for current SPI.
+[0mSA status: 
+	 spi   = 0 
+	 sa_state   = 0x0 
+	 est        = 0x0 
+	 ast        = 0x0 
+	 shivf_len  = 0 
+	 shsnf_len  = 0 
+	 shplf_len  = 0 
+	 stmacf_len = 0 
+	 ecs_len    = 0 
+	 ekid       = 0 
+	 ek_ref     =  
+	 akid       = 0 
+	 ak_ref     =  
+	 null_iv    = 0 
+	 iv_len     = 0 
+	 iv        =  
+	 acs_len    = 0 
+	 acs        = 0x00 
+	 abm_len    = 0 
+	 null_arsn   = 0 
+	 arsn_len    = 0 
+	 arsnw_len   = 0 
+	 arsnw       = 0 
+[33mDEBUG - Printing local copy of SA Entry for current SPI.
+[0mSA status: 
+	 spi   = 0 
+	 sa_state   = 0x0 
+	 est        = 0x0 
+	 ast        = 0x0 
+	 shivf_len  = 0 
+	 shsnf_len  = 0 
+	 shplf_len  = 0 
+	 stmacf_len = 0 
+	 ecs_len    = 0 
+	 ekid       = 0 
+	 ek_ref     =  
+	 akid       = 0 
+	 ak_ref     =  
+	 null_iv    = 0 
+	 iv_len     = 0 
+	 iv        =  
+	 acs_len    = 0 
+	 acs        = 0x00 
+	 abm_len    = 0 
+	 null_arsn   = 0 
+	 arsn_len    = 0 
+	 arsnw_len   = 0 
+	 arsnw       = 0 
+[33mDEBUG - Printing local copy of SA Entry for current SPI.
+[0mSA status: 
+	 spi   = 0 
+	 sa_state   = 0x0 
+	 est        = 0x0 
+	 ast        = 0x0 
+	 shivf_len  = 0 
+	 shsnf_len  = 0 
+	 shplf_len  = 0 
+	 stmacf_len = 0 
+	 ecs_len    = 0 
+	 ekid       = 0 
+	 ek_ref     =  
+	 akid       = 0 
+	 ak_ref     =  
+	 null_iv    = 0 
+	 iv_len     = 0 
+	 iv        =  
+	 acs_len    = 0 
+	 acs        = 0x00 
+	 abm_len    = 0 
+	 null_arsn   = 0 
+	 arsn_len    = 0 
+	 arsnw_len   = 0 
+	 arsnw       = 0 

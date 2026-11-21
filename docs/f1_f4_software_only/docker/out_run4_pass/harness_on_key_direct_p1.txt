@@ -1,0 +1,350 @@
+HARNESS|key_direct|init status=0
+HARNESS|baseline_after_init|SA0 state=1 ekid=0 iv_len=0 iv= arsn_len=0 arsn= arsnw=0
+HARNESS|baseline_after_init|SA6 state=2 ekid=6 iv_len=16 iv=00000000000000000000000000000000 arsn_len=2 arsn=0000 arsnw=5
+HARNESS|baseline_after_init|SA7 state=2 ekid=7 iv_len=12 iv=000000000000000000000000 arsn_len=2 arsn=0000 arsnw=5
+HARNESS|baseline_after_init|KEY132 state=0 len=32 val[0..3]=01234567
+HARNESS|baseline_after_init|KEY140 state=0 len=0 val[0..3]=00000000
+HARNESS|baseline_after_init|KEY141 state=0 len=0 val[0..3]=00000000
+HARNESS|baseline_after_init|KEY142 state=0 len=0 val[0..3]=00000000
+[32mKey internal interface intialized 
+[0m[33mInitializing Libgcrypt...
+[0mUnable to open sa_save_file!
+SA Load Failure!
+Falling back to in-memory SA!
+SA Written Successfully to file!
+[34mCrypto Lib Intialized.  Version 1.5.1
+[0m[33mDEBUG - Printing local copy of SA Entry for current SPI.
+[0mSA status: 
+	 spi   = 0 
+	 sa_state   = 0x1 
+	 est        = 0x0 
+	 ast        = 0x0 
+	 shivf_len  = 0 
+	 shsnf_len  = 0 
+	 shplf_len  = 0 
+	 stmacf_len = 0 
+	 ecs_len    = 0 
+	 ekid       = 0 
+	 ek_ref     =  
+	 akid       = 0 
+	 ak_ref     =  
+	 null_iv    = 0 
+	 iv_len     = 0 
+	 iv        =  
+	 acs_len    = 0 
+	 acs        = 0x00 
+	 abm_len    = 0 
+	 null_arsn   = 0 
+	 arsn_len    = 0 
+	 arsnw_len   = 0 
+	 arsnw       = 0 
+[33mDEBUG - Printing local copy of SA Entry for current SPI.
+[0mSA status: 
+	 spi   = 6 
+	 sa_state   = 0x2 
+	 est        = 0x1 
+	 ast        = 0x0 
+	 shivf_len  = 16 
+	 shsnf_len  = 0 
+	 shplf_len  = 1 
+	 stmacf_len = 0 
+	 ecs_len    = 1 
+	 ecs[0]     = 0x02 
+	 ekid       = 6 
+	 ek_ref     =  
+	 akid       = 6 
+	 ak_ref     =  
+	 null_iv    = 0 
+	 iv_len     = 16 
+	 iv[0]      = 0x00 
+	 iv[1]      = 0x00 
+	 iv[2]      = 0x00 
+	 iv[3]      = 0x00 
+	 iv[4]      = 0x00 
+	 iv[5]      = 0x00 
+	 iv[6]      = 0x00 
+	 iv[7]      = 0x00 
+	 iv[8]      = 0x00 
+	 iv[9]      = 0x00 
+	 iv[10]      = 0x00 
+	 iv[11]      = 0x00 
+	 iv[12]      = 0x00 
+	 iv[13]      = 0x00 
+	 iv[14]      = 0x00 
+	 iv[15]      = 0x00 
+	 acs_len    = 0 
+	 acs        = 0x00 
+	 abm_len    = 0 
+	 null_arsn   = 0 
+	 arsn_len    = 2 
+	 arsn        = 0000
+	 arsnw_len   = 1 
+	 arsnw       = 5 
+MC_Log: Error, [20261121,23:45:55], -17
+[33mDEBUG - Printing local copy of SA Entry for current SPI.
+[0mSA status: 
+	 spi   = 0 
+	 sa_state   = 0x1 
+	 est        = 0x0 
+	 ast        = 0x0 
+	 shivf_len  = 0 
+	 shsnf_len  = 0 
+	 shplf_len  = 0 
+	 stmacf_len = 0 
+	 ecs_len    = 0 
+	 ekid       = 0 
+	 ek_ref     =  
+	 akid       = 0 
+	 ak_ref     =  
+	 null_iv    = 0 
+	 iv_len     = 0 
+	 iv        =  
+	 acs_len    = 0 
+	 acs        = 0x00 
+	 abm_len    = 0 
+	 null_arsn   = 0 
+	 arsn_len    = 0 
+	 arsnw_len   = 0 
+	 arsnw       = 0 
+[33mDEBUG - Printing local copy of SA Entry for current SPI.
+[0mSA status: 
+	 spi   = 0 
+	 sa_state   = 0x1 
+	 est        = 0x0 
+	 ast        = 0x0 
+	 shivf_len  = 0 
+	 shsnf_len  = 0 
+	 shplf_len  = 0 
+	 stmacf_len = 0 
+	 ecs_len    = 0 
+	 ekid       = 0 
+	 ek_ref     =  
+	 akid       = 0 
+	 ak_ref     =  
+	 null_iv    = 0 
+	 iv_len     = 0 
+	 iv        =  
+	 acs_len    = 0 
+	 acs        = 0x00 
+	 abm_len    = 0 
+	 null_arsn   = 0 
+	 arsn_len    = 0 
+	 arsnw_len   = 0 
+	 arsnw       = 0 
+[33m
+----- Crypto_TC_ProcessSecurity START -----
+[0mvcid = 0 
+spi  = 0 
+[33mDEBUG - Printing local copy of SA Entry for current SPI.
+[0mSA status: 
+	 spi   = 0 
+	 sa_state   = 0x3 
+	 est        = 0x0 
+	 ast        = 0x0 
+	 shivf_len  = 0 
+	 shsnf_len  = 0 
+	 shplf_len  = 0 
+	 stmacf_len = 0 
+	 ecs_len    = 0 
+	 ekid       = 0 
+	 ek_ref     =  
+	 akid       = 0 
+	 ak_ref     =  
+	 null_iv    = 0 
+	 iv_len     = 12 
+	 iv[0]      = 0x00 
+	 iv[1]      = 0x00 
+	 iv[2]      = 0x00 
+	 iv[3]      = 0x00 
+	 iv[4]      = 0x00 
+	 iv[5]      = 0x00 
+	 iv[6]      = 0x00 
+	 iv[7]      = 0x00 
+	 iv[8]      = 0x00 
+	 iv[9]      = 0x00 
+	 iv[10]      = 0x00 
+	 iv[11]      = 0x00 
+	 acs_len    = 0 
+	 acs        = 0x00 
+	 abm_len    = 0 
+	 null_arsn   = 0 
+	 arsn_len    = 0 
+	 arsnw_len   = 1 
+	 arsnw       = 5 
+[33mDEBUG - Printing local copy of SA Entry for current SPI.
+[0mSA status: 
+	 spi   = 0 
+	 sa_state   = 0x3 
+	 est        = 0x0 
+	 ast        = 0x0 
+	 shivf_len  = 0 
+	 shsnf_len  = 0 
+	 shplf_len  = 0 
+	 stmacf_len = 0 
+	 ecs_len    = 0 
+	 ekid       = 0 
+	 ek_ref     =  
+	 akid       = 0 
+	 ak_ref     =  
+	 null_iv    = 0 
+	 iv_len     = 12 
+	 iv[0]      = 0x00 
+	 iv[1]      = 0x00 
+	 iv[2]      = 0x00 
+	 iv[3]      = 0x00 
+	 iv[4]      = 0x00 
+	 iv[5]      = 0x00 
+	 iv[6]      = 0x00 
+	 iv[7]      = 0x00 
+	 iv[8]      = 0x00 
+	 iv[9]      = 0x00 
+	 iv[10]      = 0x00 
+	 iv[11]      = 0x00 
+	 acs_len    = 0 
+	 acs        = 0x00 
+	 abm_len    = 0 HARNESS|frame|SA_STOP_6 (used only to trigger a frame-driven SA save) status=-57
+HARNESS|end_of_process1_in_RAM|SA0 state=3 ekid=0 iv_len=12 iv=000000000000000000000000 arsn_len=0 arsn= arsnw=5
+HARNESS|end_of_process1_in_RAM|SA6 state=2 ekid=6 iv_len=16 iv=00000000000000000000000000000000 arsn_len=2 arsn=0000 arsnw=5
+HARNESS|end_of_process1_in_RAM|SA7 state=2 ekid=7 iv_len=12 iv=000000000000000000000000 arsn_len=2 arsn=0000 arsnw=5
+HARNESS|end_of_process1_in_RAM|KEY132 state=1 len=32 val[0..3]=01234567
+HARNESS|end_of_process1_in_RAM|KEY140 state=0 len=0 val[0..3]=00000000
+HARNESS|end_of_process1_in_RAM|KEY141 state=1 len=32 val[0..3]=ab000000
+HARNESS|end_of_process1_in_RAM|KEY142 state=0 len=0 val[0..3]=00000000
+
+	 null_arsn   = 0 
+	 arsn_len    = 0 
+	 arsnw_len   = 1 
+	 arsnw       = 5 
+SA Index matches SPI
+TFVN SA(0) == FRAME(0)?
+SCID SA(3) == FRAME(3)?
+VCID SA(0) == FRAME(0)?
+[34mProcessing a TC - CLEAR!
+[0mIncremented IV is:
+000000000000000000000001
+Full IV Value from Frame and SADB (if applicable):
+000000000000000000000001
+Full ARSN Value from Frame and SADB (if applicable):
+
+[33mTC PDU Calculated Length: 19 
+[0mSA Written Successfully to file!
+[32mReceived SDLS command w/ packet header:
+	 [0mPrinting lengths for sanity check:
+	 TC Frame Header Length (bytes): 26 
+	 TC Frame Actual Length (bytes): 27 
+	 TC Frame Space Pkt Length (bytes): 19 
+	 Received TLV Length (bits): 48 
+	 Derived TLV Length (bytes): 6 
+	 Received TLV Length (bytes): 6.000000 
+Current CCSDS in memory is: 
+	 Primary Header
+		 pvn        = 0x0 
+		 type       = 0x1 
+		 shdr       = 0x1 
+		 appID      = 0x180 
+		 seq        = 0x3 
+		 pktid      = 0x10b6 
+		 pkt_length = 0x000a 
+	 PUS Header
+		 shf        = 0x0 
+		 pusv       = 0x1 
+		 ack        = 0x9 
+		 st         = 0x7f 
+		 sst        = 0x0b 
+		 sid        = 0x0 
+		 spare      = 0x0 
+	 TLV PDU 
+		 type       = 0x0 
+		 uf         = 0x0 
+		 sg         = 0x1 
+		 pid        = 0xe 
+		 pdu_len    = 0x0030 
+		 data[0]    = 0x00 
+		 data[1]    = 0x06 
+		 data[2]    = 0x93 
+
+[32mSA Stop
+[0mcontrol_spi = 0 
+spi = 6 
+[31mERROR: SPI 6 is not in the OPERATIONAL state.
+[0m	 spi = 6 
+MC_Log: Error, [20261121,23:45:55], -57
+[33mDEBUG - Printing local copy of SA Entry for current SPI.
+[0mSA status: 
+	 spi   = 0 
+	 sa_state   = 0x3 
+	 est        = 0x0 
+	 ast        = 0x0 
+	 shivf_len  = 0 
+	 shsnf_len  = 0 
+	 shplf_len  = 0 
+	 stmacf_len = 0 
+	 ecs_len    = 0 
+	 ekid       = 0 
+	 ek_ref     =  
+	 akid       = 0 
+	 ak_ref     =  
+	 null_iv    = 0 
+	 iv_len     = 12 
+	 iv[0]      = 0x00 
+	 iv[1]      = 0x00 
+	 iv[2]      = 0x00 
+	 iv[3]      = 0x00 
+	 iv[4]      = 0x00 
+	 iv[5]      = 0x00 
+	 iv[6]      = 0x00 
+	 iv[7]      = 0x00 
+	 iv[8]      = 0x00 
+	 iv[9]      = 0x00 
+	 iv[10]      = 0x00 
+	 iv[11]      = 0x00 
+	 acs_len    = 0 
+	 acs        = 0x00 
+	 abm_len    = 0 
+	 null_arsn   = 0 
+	 arsn_len    = 0 
+	 arsnw_len   = 1 
+	 arsnw       = 5 
+[33mDEBUG - Printing local copy of SA Entry for current SPI.
+[0mSA status: 
+	 spi   = 6 
+	 sa_state   = 0x2 
+	 est        = 0x1 
+	 ast        = 0x0 
+	 shivf_len  = 16 
+	 shsnf_len  = 0 
+	 shplf_len  = 1 
+	 stmacf_len = 0 
+	 ecs_len    = 1 
+	 ecs[0]     = 0x02 
+	 ekid       = 6 
+	 ek_ref     =  
+	 akid       = 6 
+	 ak_ref     =  
+	 null_iv    = 0 
+	 iv_len     = 16 
+	 iv[0]      = 0x00 
+	 iv[1]      = 0x00 
+	 iv[2]      = 0x00 
+	 iv[3]      = 0x00 
+	 iv[4]      = 0x00 
+	 iv[5]      = 0x00 
+	 iv[6]      = 0x00 
+	 iv[7]      = 0x00 
+	 iv[8]      = 0x00 
+	 iv[9]      = 0x00 
+	 iv[10]      = 0x00 
+	 iv[11]      = 0x00 
+	 iv[12]      = 0x00 
+	 iv[13]      = 0x00 
+	 iv[14]      = 0x00 
+	 iv[15]      = 0x00 
+	 acs_len    = 0 
+	 acs        = 0x00 
+	 abm_len    = 0 
+	 null_arsn   = 0 
+	 arsn_len    = 2 
+	 arsn        = 0000
+	 arsnw_len   = 1 
+	 arsnw       = 5 
+MC_Log: Error, [20261121,23:45:55], -17

@@ -8,7 +8,7 @@ cd /src/CryptoLib; git rev-parse HEAD > /out/cryptolib_sha.txt
 for cfg in on off; do
   b=/build/sa_file_$cfg; rm -rf $b; mkdir -p $b; cd $b
   flag=$([ $cfg = on ] && echo ON || echo OFF)
-  cmake /src/CryptoLib -DTEST=ON -DKEY_INTERNAL=ON -DSA_INTERNAL=ON -DSA_FILE=$flag -DCRYPTO_EPROC=ON > /out/sa_file_${cfg}_cmake.txt 2>&1
+  cmake /src/CryptoLib -DTEST=ON -DKEY_INTERNAL=ON -DSA_INTERNAL=ON -DSA_FILE=$flag -DCRYPTO_EPROC=ON -DMC_INTERNAL=ON -DDEBUG=ON -DCRYPTO_LIBGCRYPT=ON -DKEY_VALIDATION=OFF > /out/sa_file_${cfg}_cmake.txt 2>&1
   make -k -j2 > /out/sa_file_${cfg}_make.txt 2>&1
   echo "sa_file_$cfg make exit: $? (mysql/TLS targets may fail to compile)" >> /out/summary.txt
   ctest -E mysql --output-on-failure > /out/sa_file_${cfg}_ctest.txt 2>&1

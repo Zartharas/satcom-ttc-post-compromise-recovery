@@ -1,0 +1,3189 @@
+Test project /build/sa_file_off
+      Start  1: UT_TC_APPLY
+ 1/12 Test  #1: UT_TC_APPLY ......................***Failed    0.02 sec
+[==========] Running 29 test cases.
+[ RUN      ] TC_APPLY_SECURITY.NO_CRYPTO_INIT
+[33m
+----- Crypto_TC_ApplySecurity START -----
+[0m22 TF Bytes received
+DEBUG - 20030015001980D2C70008197F0B00310000B1FE3128
+Printed 22 bytes
+[31mERROR: CryptoLib Configuration Not Set! -- CRYPTO_LIB_ERR_NO_CONFIG, Will Exit
+[0m[       OK ] TC_APPLY_SECURITY.NO_CRYPTO_INIT (53090ns)
+[ RUN      ] TC_APPLY_SECURITY.NO_CONFIG
+[33m
+----- Crypto_TC_ApplySecurity START -----
+[0m22 TF Bytes received
+DEBUG - 20030015001980D2C70008197F0B00310000B1FE3128
+Printed 22 bytes
+[31mERROR: CryptoLib Configuration Not Set! -- CRYPTO_LIB_ERR_NO_CONFIG, Will Exit
+[0m[       OK ] TC_APPLY_SECURITY.NO_CONFIG (9329ns)
+[ RUN      ] TC_APPLY_SECURITY.HAPPY_PATH_CLEAR
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+[33m
+----- Crypto_TC_ApplySecurity START -----
+[0m22 TF Bytes received
+DEBUG - 20030015000080D2C70008197F0B00310000B1FE3128
+Printed 22 bytes
+[31mError - Making best attempt at a useful error code:
+	[0m[33mIncoming frame parameters:
+[0m[33m	tfvn 00
+[0m[33m	scid 3
+[0m[33m	vcid 0
+[0m[33m	mapid 00
+[0mMC_Log: Error, [20261121,23:43:52], -8
+/src/CryptoLib/test/unit/ut_tc_apply.c:119: Failure
+  Expected : 0
+    Actual : -8
+[  FAILED  ] TC_APPLY_SECURITY.HAPPY_PATH_CLEAR (648997ns)
+[ RUN      ] TC_APPLY_SECURITY.HAPPY_PATH_ENC
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+[33mDEBUG - Printing local copy of SA Entry for current SPI.
+[0mSA status: 
+	 spi   = 0 
+	 sa_state   = 0x0 
+	 est        = 0x0 
+	 ast        = 0x0 
+	 shivf_len  = 0 
+	 shsnf_len  = 0 
+	 shplf_len  = 0 
+	 stmacf_len = 0 
+	 ecs_len    = 0 
+	 ekid       = 0 
+	 ek_ref     =  
+	 akid       = 0 
+	 ak_ref     =  
+	 null_iv    = 0 
+	 iv_len     = 0 
+	 iv        =  
+	 acs_len    = 0 
+	 acs        = 0x00 
+	 abm_len    = 0 
+	 null_arsn   = 0 
+	 arsn_len    = 0 
+	 arsnw_len   = 0 
+	 arsnw       = 0 
+[33mDEBUG - Printing local copy of SA Entry for current SPI.
+[0mSA status: 
+	 spi   = 0 
+	 sa_state   = 0x0 
+	 est        = 0x0 
+	 ast        = 0x0 
+	 shivf_len  = 0 
+	 shsnf_len  = 0 
+	 shplf_len  = 0 
+	 stmacf_len = 0 
+	 ecs_len    = 0 
+	 ekid       = 0 
+	 ek_ref     =  
+	 akid       = 0 
+	 ak_ref     =  
+	 null_iv    = 0 
+	 iv_len     = 0 
+	 iv        =  
+	 acs_len    = 0 
+	 acs        = 0x00 
+	 abm_len    = 0 
+	 null_arsn   = 0 
+	 arsn_len    = 0 
+	 arsnw_len   = 0 
+	 arsnw       = 0 
+[33m
+----- Crypto_TC_ApplySecurity START -----
+[0m22 TF Bytes received
+DEBUG - 20030015000080D2C70008197F0B00310000B1FE3128
+Printed 22 bytes
+[31mError - Making best attempt at a useful error code:
+	[0m[33mIncoming frame parameters:
+[0m[33m	tfvn 00
+[0m[33m	scid 3
+[0m[33m	vcid 0
+[0m[33m	mapid 00
+[0mMC_Log: Error, [20261121,23:43:52], -8
+/src/CryptoLib/test/unit/ut_tc_apply.c:159: Failure
+  Expected : 0
+    Actual : -8
+[  FAILED  ] TC_APPLY_SECURITY.HAPPY_PATH_ENC (382349ns)
+[ RUN      ] TC_APPLY_SECURITY.HAPPY_PATH_ENC_BAD_SPI
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+[33mDEBUG - Printing local copy of SA Entry for current SPI.
+[0mSA status: 
+	 spi   = 0 
+	 sa_state   = 0x0 
+	 est        = 0x0 
+	 ast        = 0x0 
+	 shivf_len  = 0 
+	 shsnf_len  = 0 
+	 shplf_len  = 0 
+	 stmacf_len = 0 
+	 ecs_len    = 0 
+	 ekid       = 0 
+	 ek_ref     =  
+	 akid       = 0 
+	 ak_ref     =  
+	 null_iv    = 0 
+	 iv_len     = 0 
+	 iv        =  
+	 acs_len    = 0 
+	 acs        = 0x00 
+	 abm_len    = 0 
+	 null_arsn   = 0 
+	 arsn_len    = 0 
+	 arsnw_len   = 0 
+	 arsnw       = 0 
+[33mDEBUG - Printing local copy of SA Entry for current SPI.
+[0mSA status: 
+	 spi   = 0 
+	 sa_state   = 0x3 
+	 est        = 0x0 
+	 ast        = 0x0 
+	 shivf_len  = 0 
+	 shsnf_len  = 0 
+	 shplf_len  = 0 
+	 stmacf_len = 0 
+	 ecs_len    = 0 
+	 ekid       = 130 
+	 ek_ref     =  
+	 akid       = 0 
+	 ak_ref     =  
+	 null_iv    = 0 
+	 iv_len     = 0 
+	 iv        =  
+	 acs_len    = 0 
+	 acs        = 0x00 
+	 abm_len    = 0 
+	 null_arsn   = 0 
+	 arsn_len    = 0 
+	 arsnw_len   = 0 
+	 arsnw       = 0 
+[33m
+----- Crypto_TC_ApplySecurity START -----
+[0m22 TF Bytes received
+DEBUG - 20030015000080D2C70008197F0B00310000B1FE3128
+Printed 22 bytes
+[31mError - Making best attempt at a useful error code:
+	[0m[33mIncoming frame parameters:
+[0m[33m	tfvn 00
+[0m[33m	scid 3
+[0m[33m	vcid 0
+[0m[33m	mapid 00
+[0mMC_Log: Error, [20261121,23:43:52], -8
+/src/CryptoLib/test/unit/ut_tc_apply.c:200: Failure
+  Expected : -60
+    Actual : -8
+[  FAILED  ] TC_APPLY_SECURITY.HAPPY_PATH_ENC_BAD_SPI (540514ns)
+[ RUN      ] TC_APPLY_SECURITY.HAPPY_PATH_ENC_CBC
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+[33mDEBUG - Printing local copy of SA Entry for current SPI.
+[0mSA status: 
+	 spi   = 0 
+	 sa_state   = 0x0 
+	 est        = 0x0 
+	 ast        = 0x0 
+	 shivf_len  = 0 
+	 shsnf_len  = 0 
+	 shplf_len  = 0 
+	 stmacf_len = 0 
+	 ecs_len    = 0 
+	 ekid       = 0 
+	 ek_ref     =  
+	 akid       = 0 
+	 ak_ref     =  
+	 null_iv    = 0 
+	 iv_len     = 0 
+	 iv        =  
+	 acs_len    = 0 
+	 acs        = 0x00 
+	 abm_len    = 0 
+	 null_arsn   = 0 
+	 arsn_len    = 0 
+	 arsnw_len   = 0 
+	 arsnw       = 0 
+[33mDEBUG - Printing local copy of SA Entry for current SPI.
+[0mSA status: 
+	 spi   = 0 
+	 sa_state   = 0x0 
+	 est        = 0x0 
+	 ast        = 0x0 
+	 shivf_len  = 0 
+	 shsnf_len  = 0 
+	 shplf_len  = 0 
+	 stmacf_len = 0 
+	 ecs_len    = 0 
+	 ekid       = 0 
+	 ek_ref     =  
+	 akid       = 0 
+	 ak_ref     =  
+	 null_iv    = 0 
+	 iv_len     = 0 
+	 iv        =  
+	 acs_len    = 0 
+	 acs        = 0x00 
+	 abm_len    = 0 
+	 null_arsn   = 0 
+	 arsn_len    = 0 
+	 arsnw_len   = 0 
+	 arsnw       = 0 
+SPI: 0
+[33m
+----- Crypto_TC_ApplySecurity START -----
+[0m22 TF Bytes received
+DEBUG - 20030015000080D2C70008197F0B00310000B1FE3128
+Printed 22 bytes
+[31mError - Making best attempt at a useful error code:
+	[0m[33mIncoming frame parameters:
+[0m[33m	tfvn 00
+[0m[33m	scid 3
+[0m[33m	vcid 0
+[0m[33m	mapid 00
+[0mMC_Log: Error, [20261121,23:43:52], -8
+/src/CryptoLib/test/unit/ut_tc_apply.c:242: Failure
+  Expected : 0
+    Actual : -8
+[  FAILED  ] TC_APPLY_SECURITY.HAPPY_PATH_ENC_CBC (383950ns)
+[ RUN      ] TC_APPLY_SECURITY.HAPPY_PATH_AUTH_ENC
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+[33mDEBUG - Printing local copy of SA Entry for current SPI.
+[0mSA status: 
+	 spi   = 0 
+	 sa_state   = 0x0 
+	 est        = 0x0 
+	 ast        = 0x0 
+	 shivf_len  = 0 
+	 shsnf_len  = 0 
+	 shplf_len  = 0 
+	 stmacf_len = 0 
+	 ecs_len    = 0 
+	 ekid       = 0 
+	 ek_ref     =  
+	 akid       = 0 
+	 ak_ref     =  
+	 null_iv    = 0 
+	 iv_len     = 0 
+	 iv        =  
+	 acs_len    = 0 
+	 acs        = 0x00 
+	 abm_len    = 0 
+	 null_arsn   = 0 
+	 arsn_len    = 0 
+	 arsnw_len   = 0 
+	 arsnw       = 0 
+[33mDEBUG - Printing local copy of SA Entry for current SPI.
+[0mSA status: 
+	 spi   = 5 
+	 sa_state   = 0x3 
+	 est        = 0x0 
+	 ast        = 0x0 
+	 shivf_len  = 0 
+	 shsnf_len  = 0 
+	 shplf_len  = 0 
+	 stmacf_len = 0 
+	 ecs_len    = 0 
+	 ekid       = 130 
+	 ek_ref     =  
+	 akid       = 0 
+	 ak_ref     =  
+	 null_iv    = 0 
+	 iv_len     = 0 
+	 iv        =  
+	 acs_len    = 0 
+	 acs        = 0x00 
+	 abm_len    = 0 
+	 null_arsn   = 0 
+	 arsn_len    = 0 
+	 arsnw_len   = 0 
+	 arsnw       = 0 
+[33m
+----- Crypto_TC_ApplySecurity START -----
+[0m22 TF Bytes received
+DEBUG - 20030015000080D2C70008197F0B00310000B1FE3128
+Printed 22 bytes
+[31mError - Making best attempt at a useful error code:
+	[0m[33mIncoming frame parameters:
+[0m[33m	tfvn 00
+[0m[33m	scid 3
+[0m[33m	vcid 0
+[0m[33m	mapid 00
+[0mMC_Log: Error, [20261121,23:43:52], -8
+/src/CryptoLib/test/unit/ut_tc_apply.c:280: Failure
+  Expected : 0
+    Actual : -8
+[  FAILED  ] TC_APPLY_SECURITY.HAPPY_PATH_AUTH_ENC (570842ns)
+[ RUN      ] TC_APPLY_SECURITY.HAPPY_PATH_APPLY_NONTRANSMITTED_INCREMENTING_IV_ROLLOVER
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+[33mDEBUG - Printing local copy of SA Entry for current SPI.
+[0mSA status: 
+	 spi   = 0 
+	 sa_state   = 0x0 
+	 est        = 0x0 
+	 ast        = 0x0 
+	 shivf_len  = 0 
+	 shsnf_len  = 0 
+	 shplf_len  = 0 
+	 stmacf_len = 0 
+	 ecs_len    = 0 
+	 ekid       = 0 
+	 ek_ref     =  
+	 akid       = 0 
+	 ak_ref     =  
+	 null_iv    = 0 
+	 iv_len     = 0 
+	 iv        =  
+	 acs_len    = 0 
+	 acs        = 0x00 
+	 abm_len    = 0 
+	 null_arsn   = 0 
+	 arsn_len    = 0 
+	 arsnw_len   = 0 
+	 arsnw       = 0 
+[33mDEBUG - Printing local copy of SA Entry for current SPI.
+[0mSA status: 
+	 spi   = 5 
+	 sa_state   = 0x3 
+	 est        = 0x0 
+	 ast        = 0x0 
+	 shivf_len  = 0 
+	 shsnf_len  = 0 
+	 shplf_len  = 0 
+	 stmacf_len = 0 
+	 ecs_len    = 0 
+	 ekid       = 130 
+	 ek_ref     =  
+	 akid       = 0 
+	 ak_ref     =  
+	 null_iv    = 0 
+	 iv_len     = 0 
+	 iv        =  
+	 acs_len    = 0 
+	 acs        = 0x00 
+	 abm_len    = 0 
+	 null_arsn   = 0 
+	 arsn_len    = 0 
+	 arsnw_len   = 0 
+	 arsnw       = 0 
+[33m
+----- Crypto_TC_ApplySecurity START -----
+[0m22 TF Bytes received
+DEBUG - 20030015000080D2C70008197F0B00310000B1FE3128
+Printed 22 bytes
+[31mError - Making best attempt at a useful error code:
+	[0m[33mIncoming frame parameters:
+[0m[33m	tfvn 00
+[0m[33m	scid 3
+[0m[33m	vcid 0
+[0m[33m	mapid 00
+[0mMC_Log: Error, [20261121,23:43:52], -8
+[33m
+----- Crypto_TC_ApplySecurity START -----
+[0m22 TF Bytes received
+DEBUG - 20030015000080D2C70008197F0B00310000B1FE3128
+Printed 22 bytes
+[31mError - Making best attempt at a useful error code:
+	[0m[33mIncoming frame parameters:
+[0m[33m	tfvn 00
+[0m[33m	scid 3
+[0m[33m	vcid 0
+[0m[33m	mapid 00
+[0mMC_Log: Error, [20261121,23:43:52], -8
+[33m
+----- Crypto_TC_ApplySecurity START -----
+[0m22 TF Bytes received
+DEBUG - 20030015000080D2C70008197F0B00310000B1FE3128
+Printed 22 bytes
+[31mError - Making best attempt at a useful error code:
+	[0m[33mIncoming frame parameters:
+[0m[33m	tfvn 00
+[0m[33m	scid 3
+[0m[33m	vcid 0
+[0m[33m	mapid 00
+[0mMC_Log: Error, [20261121,23:43:52], -8
+[33m
+----- Crypto_TC_ApplySecurity START -----
+[0m22 TF Bytes received
+DEBUG - 20030015000080D2C70008197F0B00310000B1FE3128
+Printed 22 bytes
+[31mError - Making best attempt at a useful error code:
+	[0m[33mIncoming frame parameters:
+[0m[33m	tfvn 00
+[0m[33m	scid 3
+[0m[33m	vcid 0
+[0m[33m	mapid 00
+[0mMC_Log: Error, [20261121,23:43:52], -8
+[33m
+----- Crypto_TC_ApplySecurity START -----
+[0m22 TF Bytes received
+DEBUG - 20030015000080D2C70008197F0B00310000B1FE3128
+Printed 22 bytes
+[31mError - Making best attempt at a useful error code:
+	[0m[33mIncoming frame parameters:
+[0m[33m	tfvn 00
+[0m[33m	scid 3
+[0m[33m	vcid 0
+[0m[33m	mapid 00
+[0mMC_Log: Error, [20261121,23:43:52], -8
+[0] Truth: 00, Actual: 00
+[1] Truth: 00, Actual: 00
+[2] Truth: 00, Actual: 00
+[3] Truth: 00, Actual: 00
+[4] Truth: 00, Actual: 00
+[5] Truth: 01, Actual: 00
+/src/CryptoLib/test/unit/ut_tc_apply.c:348: Failure
+  Expected : 1
+    Actual : 0
+[  FAILED  ] TC_APPLY_SECURITY.HAPPY_PATH_APPLY_NONTRANSMITTED_INCREMENTING_IV_ROLLOVER (451710ns)
+[ RUN      ] TC_APPLY_SECURITY.HAPPY_PATH_APPLY_STATIC_IV_ROLLOVER
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+/src/CryptoLib/test/unit/ut_tc_apply.c:379: Failure
+  Expected : 0
+    Actual : 400
+[  FAILED  ] TC_APPLY_SECURITY.HAPPY_PATH_APPLY_STATIC_IV_ROLLOVER (472759ns)
+[ RUN      ] TC_APPLY_SECURITY.HAPPY_PATH_APPLY_NONTRANSMITTED_INCREMENTING_ARSN_ROLLOVER
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+[33mDEBUG - Printing local copy of SA Entry for current SPI.
+[0mSA status: 
+	 spi   = 0 
+	 sa_state   = 0x0 
+	 est        = 0x0 
+	 ast        = 0x0 
+	 shivf_len  = 0 
+	 shsnf_len  = 0 
+	 shplf_len  = 0 
+	 stmacf_len = 0 
+	 ecs_len    = 0 
+	 ekid       = 0 
+	 ek_ref     =  
+	 akid       = 0 
+	 ak_ref     =  
+	 null_iv    = 0 
+	 iv_len     = 0 
+	 iv        =  
+	 acs_len    = 0 
+	 acs        = 0x00 
+	 abm_len    = 0 
+	 null_arsn   = 0 
+	 arsn_len    = 0 
+	 arsnw_len   = 0 
+	 arsnw       = 0 
+[33mDEBUG - Printing local copy of SA Entry for current SPI.
+[0mSA status: 
+	 spi   = 5 
+	 sa_state   = 0x3 
+	 est        = 0x0 
+	 ast        = 0x0 
+	 shivf_len  = 6 
+	 shsnf_len  = 0 
+	 shplf_len  = 0 
+	 stmacf_len = 0 
+	 ecs_len    = 0 
+	 ekid       = 130 
+	 ek_ref     =  
+	 akid       = 0 
+	 ak_ref     =  
+	 null_iv    = 0 
+	 iv_len     = 12 
+	 iv[0]      = 0x00 
+	 iv[1]      = 0x00 
+	 iv[2]      = 0x00 
+	 iv[3]      = 0x00 
+	 iv[4]      = 0x00 
+	 iv[5]      = 0x00 
+	 iv[6]      = 0xff 
+	 iv[7]      = 0xff 
+	 iv[8]      = 0xff 
+	 iv[9]      = 0xff 
+	 iv[10]      = 0xff 
+	 iv[11]      = 0xfc 
+	 acs_len    = 0 
+	 acs        = 0x00 
+	 abm_len    = 0 
+	 null_arsn   = 0 
+	 arsn_len    = 0 
+	 arsnw_len   = 0 
+	 arsnw       = 0 
+[33m
+----- Crypto_TC_ApplySecurity START -----
+[0m22 TF Bytes received
+DEBUG - 20030015000080D2C70008197F0B00310000B1FE3128
+Printed 22 bytes
+[31mError - Making best attempt at a useful error code:
+	[0m[33mIncoming frame parameters:
+[0m[33m	tfvn 00
+[0m[33m	scid 3
+[0m[33m	vcid 0
+[0m[33m	mapid 00
+[0mMC_Log: Error, [20261121,23:43:52], -8
+/src/CryptoLib/test/unit/ut_tc_apply.c:510: Failure
+  Expected : 0
+    Actual : -8
+[  FAILED  ] TC_APPLY_SECURITY.HAPPY_PATH_APPLY_NONTRANSMITTED_INCREMENTING_ARSN_ROLLOVER (452440ns)
+[ RUN      ] TC_APPLY_SECURITY.BAD_SPACE_CRAFT_ID
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+[33m
+----- Crypto_TC_ApplySecurity START -----
+[0m22 TF Bytes received
+DEBUG - 20010015000080D2C70008197F0B00310000B1FE3128
+Printed 22 bytes
+[31mError: Managed Parameters for GVCID(TFVN: 0, SCID: 1, VCID: 0) not found. 
+[0mMC_Log: Error, [20261121,23:43:52], 103
+[       OK ] TC_APPLY_SECURITY.BAD_SPACE_CRAFT_ID (577719ns)
+[ RUN      ] TC_APPLY_SECURITY.BAD_VIRTUAL_CHANNEL_ID
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+[33m
+----- Crypto_TC_ApplySecurity START -----
+[0m22 TF Bytes received
+DEBUG - 20032015000080D2C70008197F0B00310000B1FE3128
+Printed 22 bytes
+[31mError: Managed Parameters for GVCID(TFVN: 0, SCID: 3, VCID: 8) not found. 
+[0mMC_Log: Error, [20261121,23:43:52], 103
+[       OK ] TC_APPLY_SECURITY.BAD_VIRTUAL_CHANNEL_ID (346533ns)
+[ RUN      ] TC_APPLY_SECURITY.NULL_BUFFER
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+[33m
+----- Crypto_TC_ApplySecurity START -----
+[0m[31mError: Input Buffer NULL! 
+[0mMC_Log: Error, [20261121,23:43:52], -9
+[       OK ] TC_APPLY_SECURITY.NULL_BUFFER (470168ns)
+[ RUN      ] TC_APPLY_SECURITY.INVALID_FRAME_SIZE
+[31mERROR: CryptoLib  Managed Parameters must be configured before intializing!
+[0m[       OK ] TC_APPLY_SECURITY.INVALID_FRAME_SIZE (2553ns)
+[ RUN      ] TC_APPLY_SECURITY.ERROR_TC_INPUT_FRAME_TOO_SHORT_FOR_SPEC
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+/src/CryptoLib/test/unit/ut_tc_apply.c:735: Failure
+  Expected : 0
+    Actual : 400
+[  FAILED  ] TC_APPLY_SECURITY.ERROR_TC_INPUT_FRAME_TOO_SHORT_FOR_SPEC (339059ns)
+[ RUN      ] TC_APPLY_SECURITY.ERROR_TC_INPUT_FRAME_TOO_SHORT_FOR_SPECIFIED_FRAME_LENGTH_HEADER
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+/src/CryptoLib/test/unit/ut_tc_apply.c:773: Failure
+  Expected : 0
+    Actual : 400
+[  FAILED  ] TC_APPLY_SECURITY.ERROR_TC_INPUT_FRAME_TOO_SHORT_FOR_SPECIFIED_FRAME_LENGTH_HEADER (395470ns)
+[ RUN      ] TC_APPLY_SECURITY.ENC_CBC_1BP
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+/src/CryptoLib/test/unit/ut_tc_apply.c:810: Failure
+  Expected : 0
+    Actual : 400
+[  FAILED  ] TC_APPLY_SECURITY.ENC_CBC_1BP (448814ns)
+[ RUN      ] TC_APPLY_SECURITY.ENC_CBC_16BP
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+/src/CryptoLib/test/unit/ut_tc_apply.c:894: Failure
+  Expected : 0
+    Actual : 400
+[  FAILED  ] TC_APPLY_SECURITY.ENC_CBC_16BP (330473ns)
+[ RUN      ] TC_APPLY_SECURITY.ENC_CBC_FRAME_MAX
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+/src/CryptoLib/test/unit/ut_tc_apply.c:974: Failure
+  Expected : 0
+    Actual : 400
+[  FAILED  ] TC_APPLY_SECURITY.ENC_CBC_FRAME_MAX (563359ns)
+[ RUN      ] TC_APPLY_SECURITY.ENC_CBC_FRAME_TOO_BIG
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+/src/CryptoLib/test/unit/ut_tc_apply.c:1059: Failure
+  Expected : 0
+    Actual : 400
+[  FAILED  ] TC_APPLY_SECURITY.ENC_CBC_FRAME_TOO_BIG (373222ns)
+[ RUN      ] TC_APPLY_SECURITY.ENC_CBC_1BP_1
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+/src/CryptoLib/test/unit/ut_tc_apply.c:1128: Failure
+  Expected : 0
+    Actual : 400
+[  FAILED  ] TC_APPLY_SECURITY.ENC_CBC_1BP_1 (476762ns)
+[ RUN      ] TC_APPLY_SECURITY.ENC_CBC_NULL_IV
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+/src/CryptoLib/test/unit/ut_tc_apply.c:1200: Failure
+  Expected : 0
+    Actual : 400
+[  FAILED  ] TC_APPLY_SECURITY.ENC_CBC_NULL_IV (340849ns)
+[ RUN      ] TC_APPLY_SECURITY.CBC_NULL_IV_W_IVH
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+/src/CryptoLib/test/unit/ut_tc_apply.c:1272: Failure
+  Expected : 0
+    Actual : 400
+[  FAILED  ] TC_APPLY_SECURITY.CBC_NULL_IV_W_IVH (351383ns)
+[ RUN      ] TC_APPLY_SECURITY.TC_KEY_STATE_TEST
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+/src/CryptoLib/test/unit/ut_tc_apply.c:1403: Failure
+  Expected : 0
+    Actual : 400
+[  FAILED  ] TC_APPLY_SECURITY.TC_KEY_STATE_TEST (427547ns)
+[ RUN      ] TC_APPLY_SECURITY.TC_HEAP_BUFFER_OVERFLOW_TEST
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+/src/CryptoLib/test/unit/ut_tc_apply.c:1454: Failure
+  Expected : 0
+    Actual : 400
+[  FAILED  ] TC_APPLY_SECURITY.TC_HEAP_BUFFER_OVERFLOW_TEST (330006ns)
+[ RUN      ] TC_APPLY_SECURITY.TC_HEAP_BUFFER_OVERFLOW_TEST_2
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+/src/CryptoLib/test/unit/ut_tc_apply.c:1488: Failure
+  Expected : 0
+    Actual : 400
+[  FAILED  ] TC_APPLY_SECURITY.TC_HEAP_BUFFER_OVERFLOW_TEST_2 (562220ns)
+[ RUN      ] TC_APPLY_SECURITY.TC_HEAP_BUFFER_OVERFLOW_TEST_IV
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+/src/CryptoLib/test/unit/ut_tc_apply.c:1522: Failure
+  Expected : 0
+    Actual : 400
+[  FAILED  ] TC_APPLY_SECURITY.TC_HEAP_BUFFER_OVERFLOW_TEST_IV (334701ns)
+[ RUN      ] TC_APPLY_SECURITY.NULL_IV_INTERNAL
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+/src/CryptoLib/test/unit/ut_tc_apply.c:1556: Failure
+  Expected : 0
+    Actual : 400
+[  FAILED  ] TC_APPLY_SECURITY.NULL_IV_INTERNAL (337203ns)
+[ RUN      ] TC_APPLY_SECURITY.TWO_BYTE_PADDING
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+/src/CryptoLib/test/unit/ut_tc_apply.c:1608: Failure
+  Expected : 0
+    Actual : 400
+[  FAILED  ] TC_APPLY_SECURITY.TWO_BYTE_PADDING (410753ns)
+[==========] 29 test cases ran.
+[  PASSED  ] 6 tests.
+[  FAILED  ] 23 tests, listed below:
+[  FAILED  ] TC_APPLY_SECURITY.HAPPY_PATH_CLEAR
+[  FAILED  ] TC_APPLY_SECURITY.HAPPY_PATH_ENC
+[  FAILED  ] TC_APPLY_SECURITY.HAPPY_PATH_ENC_BAD_SPI
+[  FAILED  ] TC_APPLY_SECURITY.HAPPY_PATH_ENC_CBC
+[  FAILED  ] TC_APPLY_SECURITY.HAPPY_PATH_AUTH_ENC
+[  FAILED  ] TC_APPLY_SECURITY.HAPPY_PATH_APPLY_NONTRANSMITTED_INCREMENTING_IV_ROLLOVER
+[  FAILED  ] TC_APPLY_SECURITY.HAPPY_PATH_APPLY_STATIC_IV_ROLLOVER
+[  FAILED  ] TC_APPLY_SECURITY.HAPPY_PATH_APPLY_NONTRANSMITTED_INCREMENTING_ARSN_ROLLOVER
+[  FAILED  ] TC_APPLY_SECURITY.ERROR_TC_INPUT_FRAME_TOO_SHORT_FOR_SPEC
+[  FAILED  ] TC_APPLY_SECURITY.ERROR_TC_INPUT_FRAME_TOO_SHORT_FOR_SPECIFIED_FRAME_LENGTH_HEADER
+[  FAILED  ] TC_APPLY_SECURITY.ENC_CBC_1BP
+[  FAILED  ] TC_APPLY_SECURITY.ENC_CBC_16BP
+[  FAILED  ] TC_APPLY_SECURITY.ENC_CBC_FRAME_MAX
+[  FAILED  ] TC_APPLY_SECURITY.ENC_CBC_FRAME_TOO_BIG
+[  FAILED  ] TC_APPLY_SECURITY.ENC_CBC_1BP_1
+[  FAILED  ] TC_APPLY_SECURITY.ENC_CBC_NULL_IV
+[  FAILED  ] TC_APPLY_SECURITY.CBC_NULL_IV_W_IVH
+[  FAILED  ] TC_APPLY_SECURITY.TC_KEY_STATE_TEST
+[  FAILED  ] TC_APPLY_SECURITY.TC_HEAP_BUFFER_OVERFLOW_TEST
+[  FAILED  ] TC_APPLY_SECURITY.TC_HEAP_BUFFER_OVERFLOW_TEST_2
+[  FAILED  ] TC_APPLY_SECURITY.TC_HEAP_BUFFER_OVERFLOW_TEST_IV
+[  FAILED  ] TC_APPLY_SECURITY.NULL_IV_INTERNAL
+[  FAILED  ] TC_APPLY_SECURITY.TWO_BYTE_PADDING
+
+      Start  2: UT_TC_PROCESS
+ 2/12 Test  #2: UT_TC_PROCESS ....................***Failed    0.01 sec
+[==========] Running 25 test cases.
+[ RUN      ] TC_PROCESS.EXERCISE_IV
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+/src/CryptoLib/test/unit/ut_tc_process.c:53: Failure
+  Expected : 0
+    Actual : 400
+[  FAILED  ] TC_PROCESS.EXERCISE_IV (499248ns)
+[ RUN      ] TC_PROCESS.EXERCISE_ARSN
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+/src/CryptoLib/test/unit/ut_tc_process.c:183: Failure
+  Expected : 0
+    Actual : 400
+[  FAILED  ] TC_PROCESS.EXERCISE_ARSN (328973ns)
+[ RUN      ] TC_PROCESS.HAPPY_PATH_PROCESS_STATIC_IV_ROLLOVER
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+/src/CryptoLib/test/unit/ut_tc_process.c:314: Failure
+  Expected : 0
+    Actual : 400
+[  FAILED  ] TC_PROCESS.HAPPY_PATH_PROCESS_STATIC_IV_ROLLOVER (397731ns)
+[ RUN      ] TC_PROCESS.HAPPY_PATH_PROCESS_NONTRANSMITTED_INCREMENTING_IV_ROLLOVER
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+/src/CryptoLib/test/unit/ut_tc_process.c:412: Failure
+  Expected : 0
+    Actual : 400
+[  FAILED  ] TC_PROCESS.HAPPY_PATH_PROCESS_NONTRANSMITTED_INCREMENTING_IV_ROLLOVER (332184ns)
+[ RUN      ] TC_PROCESS.HAPPY_PATH_PROCESS_NONTRANSMITTED_INCREMENTING_ARSN_ROLLOVER
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+/src/CryptoLib/test/unit/ut_tc_process.c:509: Failure
+  Expected : 0
+    Actual : 400
+[  FAILED  ] TC_PROCESS.HAPPY_PATH_PROCESS_NONTRANSMITTED_INCREMENTING_ARSN_ROLLOVER (326661ns)
+[ RUN      ] TC_PROCESS.ERROR_TC_INPUT_FRAME_TOO_SHORT_FOR_SPEC
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+/src/CryptoLib/test/unit/ut_tc_process.c:601: Failure
+  Expected : 0
+    Actual : 400
+[  FAILED  ] TC_PROCESS.ERROR_TC_INPUT_FRAME_TOO_SHORT_FOR_SPEC (391456ns)
+[ RUN      ] TC_PROCESS.ERROR_TC_INPUT_FRAME_TOO_SHORT_FOR_SPECIFIED_FRAME_LENGTH_HEADER
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+/src/CryptoLib/test/unit/ut_tc_process.c:642: Failure
+  Expected : 0
+    Actual : 400
+[  FAILED  ] TC_PROCESS.ERROR_TC_INPUT_FRAME_TOO_SHORT_FOR_SPECIFIED_FRAME_LENGTH_HEADER (332696ns)
+[ RUN      ] TC_PROCESS.HAPPY_PATH_DECRYPT_CBC
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+/src/CryptoLib/test/unit/ut_tc_process.c:684: Failure
+  Expected : 0
+    Actual : 400
+[  FAILED  ] TC_PROCESS.HAPPY_PATH_DECRYPT_CBC (330733ns)
+[ RUN      ] TC_PROCESS.DECRYPT_CBC_1B
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+/src/CryptoLib/test/unit/ut_tc_process.c:767: Failure
+  Expected : 0
+    Actual : 400
+[  FAILED  ] TC_PROCESS.DECRYPT_CBC_1B (404354ns)
+[ RUN      ] TC_PROCESS.DECRYPT_CBC_16B
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+/src/CryptoLib/test/unit/ut_tc_process.c:849: Failure
+  Expected : 0
+    Actual : 400
+[  FAILED  ] TC_PROCESS.DECRYPT_CBC_16B (329225ns)
+[ RUN      ] TC_PROCESS.GCM_IV_AND_ARSN
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+[33mDEBUG - Printing local copy of SA Entry for current SPI.
+[0mSA status: 
+	 spi   = 0 
+	 sa_state   = 0x0 
+	 est        = 0x0 
+	 ast        = 0x0 
+	 shivf_len  = 0 
+	 shsnf_len  = 0 
+	 shplf_len  = 0 
+	 stmacf_len = 0 
+	 ecs_len    = 0 
+	 ekid       = 0 
+	 ek_ref     =  
+	 akid       = 0 
+	 ak_ref     =  
+	 null_iv    = 0 
+	 iv_len     = 0 
+	 iv        =  
+	 acs_len    = 0 
+	 acs        = 0x00 
+	 abm_len    = 0 
+	 null_arsn   = 0 
+	 arsn_len    = 0 
+	 arsnw_len   = 0 
+	 arsnw       = 0 
+[33mDEBUG - Printing local copy of SA Entry for current SPI.
+[0mSA status: 
+	 spi   = 0 
+	 sa_state   = 0x0 
+	 est        = 0x0 
+	 ast        = 0x0 
+	 shivf_len  = 0 
+	 shsnf_len  = 0 
+	 shplf_len  = 0 
+	 stmacf_len = 0 
+	 ecs_len    = 0 
+	 ekid       = 0 
+	 ek_ref     =  
+	 akid       = 0 
+	 ak_ref     =  
+	 null_iv    = 0 
+	 iv_len     = 0 
+	 iv        =  
+	 acs_len    = 0 
+	 acs        = 0x00 
+	 abm_len    = 0 
+	 null_arsn   = 0 
+	 arsn_len    = 0 
+	 arsnw_len   = 0 
+	 arsnw       = 0 
+[32mChecking replay - using previous received ARSN and previous IV...
+[0m[33m
+----- Crypto_TC_ProcessSecurity START -----
+[0mvcid = 0 
+spi  = 9 
+[33mDEBUG - Printing local copy of SA Entry for current SPI.
+[0mSA status: 
+	 spi   = 0 
+	 sa_state   = 0x3 
+	 est        = 0x1 
+	 ast        = 0x1 
+	 shivf_len  = 12 
+	 shsnf_len  = 2 
+	 shplf_len  = 0 
+	 stmacf_len = 16 
+	 ecs_len    = 1 
+	 ecs[0]     = 0x01 
+	 ekid       = 136 
+	 ek_ref     =  
+	 akid       = 0 
+	 ak_ref     =  
+	 null_iv    = 0 
+	 iv_len     = 12 
+	 iv[0]      = 0xb6 
+	 iv[1]      = 0xac 
+	 iv[2]      = 0x8e 
+	 iv[3]      = 0x49 
+	 iv[4]      = 0x63 
+	 iv[5]      = 0xf4 
+	 iv[6]      = 0x92 
+	 iv[7]      = 0x07 
+	 iv[8]      = 0xff 
+	 iv[9]      = 0xd6 
+	 iv[10]      = 0x37 
+	 iv[11]      = 0x4b 
+	 acs_len    = 0 
+	 acs        = 0x02 
+	 abm_len    = 1024 
+	 abm        = 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+	 null_arsn   = 0 
+	 arsn_len    = 2 
+	 arsn        = 0123
+	 arsnw_len   = 1 
+	 arsnw       = 5 
+[33mDEBUG - Printing local copy of SA Entry for current SPI.
+[0mSA status: 
+	 spi   = 0 
+	 sa_state   = 0x0 
+	 est        = 0x0 
+	 ast        = 0x0 
+	 shivf_len  = 0 
+	 shsnf_len  = 0 
+	 shplf_len  = 0 
+	 stmacf_len = 0 
+	 ecs_len    = 0 
+	 ekid       = 0 
+	 ek_ref     =  
+	 akid       = 0 
+	 ak_ref     =  
+	 null_iv    = 0 
+	 iv_len     = 0 
+	 iv        =  
+	 acs_len    = 0 
+	 acs        = 0x00 
+	 abm_len    = 0 
+	 null_arsn   = 0 
+	 arsn_len    = 0 
+	 arsnw_len   = 0 
+	 arsnw       = 0 
+Malformed SA SPI based on SA Index!
+MC_Log: Error, [20261121,23:43:52], -60
+MC_Log: Error, [20261121,23:43:52], -60
+/src/CryptoLib/test/unit/ut_tc_process.c:1041: Failure
+  Expected : -13
+    Actual : -60
+[  FAILED  ] TC_PROCESS.GCM_IV_AND_ARSN (648122ns)
+[ RUN      ] TC_PROCESS.TC_SA_SEGFAULT_TEST
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+[33m
+----- Crypto_TC_ProcessSecurity START -----
+[0mvcid = 0 
+spi  = 255 
+[31msa_get_from_spi: SPI: 255 > NUM_SA: 64.
+[0mMC_Log: Error, [20261121,23:43:52], -56
+MC_Log: Error, [20261121,23:43:52], -56
+MC_Log: Error, [20261121,23:43:52], -56
+[       OK ] TC_PROCESS.TC_SA_SEGFAULT_TEST (415595ns)
+[ RUN      ] TC_PROCESS.TC_SA_NOT_OPERATIONAL
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+[33m
+----- Crypto_TC_ProcessSecurity START -----
+[0mvcid = 0 
+spi  = 44 
+[33mDEBUG - Printing local copy of SA Entry for current SPI.
+[0mSA status: 
+	 spi   = 0 
+	 sa_state   = 0x0 
+	 est        = 0x0 
+	 ast        = 0x0 
+	 shivf_len  = 0 
+	 shsnf_len  = 0 
+	 shplf_len  = 0 
+	 stmacf_len = 0 
+	 ecs_len    = 0 
+	 ekid       = 0 
+	 ek_ref     =  
+	 akid       = 0 
+	 ak_ref     =  
+	 null_iv    = 0 
+	 iv_len     = 0 
+	 iv        =  
+	 acs_len    = 0 
+	 acs        = 0x00 
+	 abm_len    = 0 
+	 null_arsn   = 0 
+	 arsn_len    = 0 
+	 arsnw_len   = 0 
+	 arsnw       = 0 
+[33mDEBUG - Printing local copy of SA Entry for current SPI.
+[0mSA status: 
+	 spi   = 0 
+	 sa_state   = 0x0 
+	 est        = 0x0 
+	 ast        = 0x0 
+	 shivf_len  = 0 
+	 shsnf_len  = 0 
+	 shplf_len  = 0 
+	 stmacf_len = 0 
+	 ecs_len    = 0 
+	 ekid       = 0 
+	 ek_ref     =  
+	 akid       = 0 
+	 ak_ref     =  
+	 null_iv    = 0 
+	 iv_len     = 0 
+	 iv        =  
+	 acs_len    = 0 
+	 acs        = 0x00 
+	 abm_len    = 0 
+	 null_arsn   = 0 
+	 arsn_len    = 0 
+	 arsnw_len   = 0 
+	 arsnw       = 0 
+Malformed SA SPI based on SA Index!
+MC_Log: Error, [20261121,23:43:52], -60
+MC_Log: Error, [20261121,23:43:52], -60
+/src/CryptoLib/test/unit/ut_tc_process.c:1209: Failure
+  Expected : -57
+    Actual : -60
+[  FAILED  ] TC_PROCESS.TC_SA_NOT_OPERATIONAL (347988ns)
+[ RUN      ] TC_PROCESS.TC_KEY_STATE_TEST
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+/src/CryptoLib/test/unit/ut_tc_process.c:1234: Failure
+  Expected : 0
+    Actual : 400
+[  FAILED  ] TC_PROCESS.TC_KEY_STATE_TEST (475282ns)
+[ RUN      ] TC_PROCESS.TC_HEAP_BUFFER_OVERFLOW_TEST
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+/src/CryptoLib/test/unit/ut_tc_process.c:1290: Failure
+  Expected : 0
+    Actual : 400
+[  FAILED  ] TC_PROCESS.TC_HEAP_BUFFER_OVERFLOW_TEST (389336ns)
+[ RUN      ] TC_PROCESS.TC_PROCESS_PREP_AAD_UNDERFLOW_TEST
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+/src/CryptoLib/test/unit/ut_tc_process.c:1344: Failure
+  Expected : 0
+    Actual : 400
+[  FAILED  ] TC_PROCESS.TC_PROCESS_PREP_AAD_UNDERFLOW_TEST (384875ns)
+[ RUN      ] TC_PROCESS.TC_HEAP_BUFFER_OVERFLOW_TEST_2
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+/src/CryptoLib/test/unit/ut_tc_process.c:1389: Failure
+  Expected : 0
+    Actual : 400
+[  FAILED  ] TC_PROCESS.TC_HEAP_BUFFER_OVERFLOW_TEST_2 (326528ns)
+[ RUN      ] TC_PROCESS.TC_PROCESS_IGNORE_SA_STATE
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+/src/CryptoLib/test/unit/ut_tc_process.c:1426: Failure
+  Expected : 0
+    Actual : 400
+[  FAILED  ] TC_PROCESS.TC_PROCESS_IGNORE_SA_STATE (327919ns)
+[ RUN      ] TC_PROCESS.TC_PROCESS_CHECK_FECF
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+/src/CryptoLib/test/unit/ut_tc_process.c:1507: Failure
+  Expected : 0
+    Actual : 400
+[  FAILED  ] TC_PROCESS.TC_PROCESS_CHECK_FECF (374661ns)
+[ RUN      ] TC_PROCESS.IV_REUSE
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+/src/CryptoLib/test/unit/ut_tc_process.c:1549: Failure
+  Expected : 0
+    Actual : 400
+[  FAILED  ] TC_PROCESS.IV_REUSE (342400ns)
+[ RUN      ] TC_PROCESS.TC_PROCESS_NULL_IV
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+/src/CryptoLib/test/unit/ut_tc_process.c:1601: Failure
+  Expected : 0
+    Actual : 400
+[  FAILED  ] TC_PROCESS.TC_PROCESS_NULL_IV (351202ns)
+[ RUN      ] TC_PROCESS.LARGE_PAD
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+/src/CryptoLib/test/unit/ut_tc_process.c:1654: Failure
+  Expected : 0
+    Actual : 400
+[  FAILED  ] TC_PROCESS.LARGE_PAD (363116ns)
+[ RUN      ] TC_PROCESS.GCM_IV_NO_SHSNF
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+/src/CryptoLib/test/unit/ut_tc_process.c:1715: Failure
+  Expected : 0
+    Actual : 400
+[  FAILED  ] TC_PROCESS.GCM_IV_NO_SHSNF (342787ns)
+[ RUN      ] TC_PROCESS.KEY_LENGTH_ERROR
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+/src/CryptoLib/test/unit/ut_tc_process.c:1777: Failure
+  Expected : 0
+    Actual : 400
+[  FAILED  ] TC_PROCESS.KEY_LENGTH_ERROR (450228ns)
+[ RUN      ] TC_PROCESS.PAD_UNDERFLOW_ERROR
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+/src/CryptoLib/test/unit/ut_tc_process.c:1838: Failure
+  Expected : 0
+    Actual : 400
+[  FAILED  ] TC_PROCESS.PAD_UNDERFLOW_ERROR (352436ns)
+[==========] 25 test cases ran.
+[  PASSED  ] 1 tests.
+[  FAILED  ] 24 tests, listed below:
+[  FAILED  ] TC_PROCESS.EXERCISE_IV
+[  FAILED  ] TC_PROCESS.EXERCISE_ARSN
+[  FAILED  ] TC_PROCESS.HAPPY_PATH_PROCESS_STATIC_IV_ROLLOVER
+[  FAILED  ] TC_PROCESS.HAPPY_PATH_PROCESS_NONTRANSMITTED_INCREMENTING_IV_ROLLOVER
+[  FAILED  ] TC_PROCESS.HAPPY_PATH_PROCESS_NONTRANSMITTED_INCREMENTING_ARSN_ROLLOVER
+[  FAILED  ] TC_PROCESS.ERROR_TC_INPUT_FRAME_TOO_SHORT_FOR_SPEC
+[  FAILED  ] TC_PROCESS.ERROR_TC_INPUT_FRAME_TOO_SHORT_FOR_SPECIFIED_FRAME_LENGTH_HEADER
+[  FAILED  ] TC_PROCESS.HAPPY_PATH_DECRYPT_CBC
+[  FAILED  ] TC_PROCESS.DECRYPT_CBC_1B
+[  FAILED  ] TC_PROCESS.DECRYPT_CBC_16B
+[  FAILED  ] TC_PROCESS.GCM_IV_AND_ARSN
+[  FAILED  ] TC_PROCESS.TC_SA_NOT_OPERATIONAL
+[  FAILED  ] TC_PROCESS.TC_KEY_STATE_TEST
+[  FAILED  ] TC_PROCESS.TC_HEAP_BUFFER_OVERFLOW_TEST
+[  FAILED  ] TC_PROCESS.TC_PROCESS_PREP_AAD_UNDERFLOW_TEST
+[  FAILED  ] TC_PROCESS.TC_HEAP_BUFFER_OVERFLOW_TEST_2
+[  FAILED  ] TC_PROCESS.TC_PROCESS_IGNORE_SA_STATE
+[  FAILED  ] TC_PROCESS.TC_PROCESS_CHECK_FECF
+[  FAILED  ] TC_PROCESS.IV_REUSE
+[  FAILED  ] TC_PROCESS.TC_PROCESS_NULL_IV
+[  FAILED  ] TC_PROCESS.LARGE_PAD
+[  FAILED  ] TC_PROCESS.GCM_IV_NO_SHSNF
+[  FAILED  ] TC_PROCESS.KEY_LENGTH_ERROR
+[  FAILED  ] TC_PROCESS.PAD_UNDERFLOW_ERROR
+
+      Start  3: UT_CRYPTO_CONFIG
+ 3/12 Test  #3: UT_CRYPTO_CONFIG .................   Passed    0.00 sec
+      Start  4: UT_CRYPTO
+ 4/12 Test  #4: UT_CRYPTO ........................***Exception: SegFault  0.00 sec
+
+      Start  5: UT_AOS_APPLY
+ 5/12 Test  #5: UT_AOS_APPLY .....................***Failed    0.01 sec
+[==========] Running 22 test cases.
+[ RUN      ] AOS_APPLY.NULL_BUFFER
+[       OK ] AOS_APPLY.NULL_BUFFER (17285ns)
+[ RUN      ] AOS_APPLY.NO_CONFIG
+[31mERROR: CryptoLib Configuration Not Set! -- CRYPTO_LIB_ERR_NO_CONFIG, Will Exit
+[0m[       OK ] AOS_APPLY.NO_CONFIG (5455ns)
+[ RUN      ] AOS_APPLY.NO_INIT
+[31mERROR: CryptoLib Configuration Not Set! -- CRYPTO_LIB_ERR_NO_CONFIG, Will Exit
+[0m[       OK ] AOS_APPLY.NO_INIT (267086ns)
+[ RUN      ] AOS_APPLY.HAPPY_PATH_CLEAR_FECF
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+[33mDEBUG - Printing local copy of SA Entry for current SPI.
+[0mSA status: 
+	 spi   = 0 
+	 sa_state   = 0x0 
+	 est        = 0x0 
+	 ast        = 0x0 
+	 shivf_len  = 0 
+	 shsnf_len  = 0 
+	 shplf_len  = 0 
+	 stmacf_len = 0 
+	 ecs_len    = 0 
+	 ekid       = 0 
+	 ek_ref     =  
+	 akid       = 0 
+	 ak_ref     =  
+	 null_iv    = 0 
+	 iv_len     = 0 
+	 iv        =  
+	 acs_len    = 0 
+	 acs        = 0x00 
+	 abm_len    = 0 
+	 null_arsn   = 0 
+	 arsn_len    = 0 
+	 arsnw_len   = 0 
+	 arsnw       = 0 
+[33mDEBUG - Printing local copy of SA Entry for current SPI.
+[0mSA status: 
+	 spi   = 0 
+	 sa_state   = 0x0 
+	 est        = 0x0 
+	 ast        = 0x0 
+	 shivf_len  = 0 
+	 shsnf_len  = 0 
+	 shplf_len  = 0 
+	 stmacf_len = 0 
+	 ecs_len    = 0 
+	 ekid       = 0 
+	 ek_ref     =  
+	 akid       = 0 
+	 ak_ref     =  
+	 null_iv    = 0 
+	 iv_len     = 0 
+	 iv        =  
+	 acs_len    = 0 
+	 acs        = 0x00 
+	 abm_len    = 0 
+	 null_arsn   = 0 
+	 arsn_len    = 0 
+	 arsnw_len   = 0 
+	 arsnw       = 0 
+[33m
+----- Crypto_AOS_ApplySecurity START -----
+[0mThe following GVCID parameters will be used:
+	TVFN: 0x0001		SCID: 0x0003	VCID: 0x0000	MAP: 0
+	PriHdr as follows:
+		40C000000000
+[31mError - Making best attempt at a useful error code:
+	[0m[33mIncoming frame parameters:
+[0m[33m	tfvn 01
+[0m[33m	scid 3
+[0m[33m	vcid 0
+[0m[33m	mapid 00
+[0m[31mError: Could not retrieve an SA!
+[0mMC_Log: Error, [20261121,23:43:52], -8
+/src/CryptoLib/test/unit/ut_aos_apply.c:272: Failure
+  Expected : 0
+    Actual : -8
+[  FAILED  ] AOS_APPLY.HAPPY_PATH_CLEAR_FECF (928245ns)
+[ RUN      ] AOS_APPLY.HAPPY_PATH_CLEAR_FECF_LEFT_BLANK
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+/src/CryptoLib/test/unit/ut_aos_apply.c:312: Failure
+  Expected : 0
+    Actual : 400
+[  FAILED  ] AOS_APPLY.HAPPY_PATH_CLEAR_FECF_LEFT_BLANK (357204ns)
+[ RUN      ] AOS_APPLY.HAPPY_PATH_CLEAR_FHEC_FECF
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+/src/CryptoLib/test/unit/ut_aos_apply.c:451: Failure
+  Expected : 0
+    Actual : 400
+[  FAILED  ] AOS_APPLY.HAPPY_PATH_CLEAR_FHEC_FECF (317327ns)
+[ RUN      ] AOS_APPLY.HAPPY_PATH_CLEAR_FHEC_OID_FECF
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+/src/CryptoLib/test/unit/ut_aos_apply.c:588: Failure
+  Expected : 0
+    Actual : 400
+[  FAILED  ] AOS_APPLY.HAPPY_PATH_CLEAR_FHEC_OID_FECF (296146ns)
+[ RUN      ] AOS_APPLY.AES_CMAC_256_TEST_BITMASK_1
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+/src/CryptoLib/test/unit/ut_aos_apply.c:732: Failure
+  Expected : 0
+    Actual : 400
+[  FAILED  ] AOS_APPLY.AES_CMAC_256_TEST_BITMASK_1 (382715ns)
+[ RUN      ] AOS_APPLY.AES_CMAC_256_TEST_BITMASK_0
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+/src/CryptoLib/test/unit/ut_aos_apply.c:876: Failure
+  Expected : 0
+    Actual : 400
+[  FAILED  ] AOS_APPLY.AES_CMAC_256_TEST_BITMASK_0 (304024ns)
+[ RUN      ] AOS_APPLY.AES_GCM
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+/src/CryptoLib/test/unit/ut_aos_apply.c:1025: Failure
+  Expected : 0
+    Actual : 400
+[  FAILED  ] AOS_APPLY.AES_GCM (304984ns)
+[ RUN      ] AOS_APPLY.AOS_KEY_STATE_TEST
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+/src/CryptoLib/test/unit/ut_aos_apply.c:1175: Failure
+  Expected : 0
+    Actual : 400
+[  FAILED  ] AOS_APPLY.AOS_KEY_STATE_TEST (360417ns)
+[ RUN      ] AOS_APPLY.AEAD_GCM_BITMASK_1
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+/src/CryptoLib/test/unit/ut_aos_apply.c:1317: Failure
+  Expected : 0
+    Actual : 400
+[  FAILED  ] AOS_APPLY.AEAD_GCM_BITMASK_1 (300585ns)
+[ RUN      ] AOS_APPLY.AOS_APPLY_BUFFER_OVERFLOW_TEST
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+[33m
+----- Crypto_AOS_ApplySecurity START -----
+[0mThe following GVCID parameters will be used:
+	TVFN: 0x0001		SCID: 0x0003	VCID: 0x0000	MAP: 0
+	PriHdr as follows:
+		40C000000000
+[31mError - Making best attempt at a useful error code:
+	[0m[33mIncoming frame parameters:
+[0m[33m	tfvn 01
+[0m[33m	scid 3
+[0m[33m	vcid 0
+[0m[33m	mapid 00
+[0m[31mError: Could not retrieve an SA!
+[0mMC_Log: Error, [20261121,23:43:52], -8
+/src/CryptoLib/test/unit/ut_aos_apply.c:1467: Failure
+  Expected : -77
+    Actual : -8
+[  FAILED  ] AOS_APPLY.AOS_APPLY_BUFFER_OVERFLOW_TEST (315395ns)
+[ RUN      ] AOS_APPLY.AES_CBC_256_ENCRYPT_16B_PADDING
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+/src/CryptoLib/test/unit/ut_aos_apply.c:1491: Failure
+  Expected : 0
+    Actual : 400
+[  FAILED  ] AOS_APPLY.AES_CBC_256_ENCRYPT_16B_PADDING (377385ns)
+[ RUN      ] AOS_APPLY.AES_CBC_256_ENCRYPT_2B_PADDING
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+/src/CryptoLib/test/unit/ut_aos_apply.c:1554: Failure
+  Expected : 0
+    Actual : 400
+[  FAILED  ] AOS_APPLY.AES_CBC_256_ENCRYPT_2B_PADDING (283744ns)
+[ RUN      ] AOS_APPLY.AES_CBC_256_ENCRYPT_2B_SHPLF
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+/src/CryptoLib/test/unit/ut_aos_apply.c:1611: Failure
+  Expected : 0
+    Actual : 400
+[  FAILED  ] AOS_APPLY.AES_CBC_256_ENCRYPT_2B_SHPLF (278928ns)
+[ RUN      ] AOS_APPLY.AOS_APPLY_NULL_IV
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+[33mDEBUG - Printing local copy of SA Entry for current SPI.
+[0mSA status: 
+	 spi   = 0 
+	 sa_state   = 0x2 
+	 est        = 0x0 
+	 ast        = 0x0 
+	 shivf_len  = 0 
+	 shsnf_len  = 0 
+	 shplf_len  = 0 
+	 stmacf_len = 0 
+	 ecs_len    = 0 
+	 ekid       = 0 
+	 ek_ref     =  
+	 akid       = 0 
+	 ak_ref     =  
+	 null_iv    = 0 
+	 iv_len     = 0 
+	 iv        =  
+	 acs_len    = 0 
+	 acs        = 0x00 
+	 abm_len    = 0 
+	 null_arsn   = 0 
+	 arsn_len    = 0 
+	 arsnw_len   = 0 
+	 arsnw       = 0 
+[33m
+----- Crypto_AOS_ApplySecurity START -----
+[0mThe following GVCID parameters will be used:
+	TVFN: 0x0001		SCID: 0x0003	VCID: 0x0000	MAP: 0
+	PriHdr as follows:
+		40C000000000
+[31mError - Making best attempt at a useful error code:
+	[0m[33mIncoming frame parameters:
+[0m[33m	tfvn 01
+[0m[33m	scid 3
+[0m[33m	vcid 0
+[0m[33m	mapid 00
+[0m[31mError: Could not retrieve an SA!
+[0mMC_Log: Error, [20261121,23:43:52], -8
+/src/CryptoLib/test/unit/ut_aos_apply.c:1694: Failure
+  Expected : -28
+    Actual : -8
+[  FAILED  ] AOS_APPLY.AOS_APPLY_NULL_IV (411046ns)
+[ RUN      ] AOS_APPLY.AEAD_GCM_BITMASK_1_TRUNC_IV
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+/src/CryptoLib/test/unit/ut_aos_apply.c:1722: Failure
+  Expected : 0
+    Actual : 400
+[  FAILED  ] AOS_APPLY.AEAD_GCM_BITMASK_1_TRUNC_IV (282028ns)
+[ RUN      ] AOS_APPLY.HAPPY_PATH_APPLY_NONTRANSMITTED_INCREMENTING_IV_ROLLOVER
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+/src/CryptoLib/test/unit/ut_aos_apply.c:1869: Failure
+  Expected : 0
+    Actual : 400
+[  FAILED  ] AOS_APPLY.HAPPY_PATH_APPLY_NONTRANSMITTED_INCREMENTING_IV_ROLLOVER (271458ns)
+[ RUN      ] AOS_APPLY.AES_CBC_256_ENCRYPT_12B_PADDING_TRUNC_IV
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+/src/CryptoLib/test/unit/ut_aos_apply.c:1943: Failure
+  Expected : 0
+    Actual : 400
+[  FAILED  ] AOS_APPLY.AES_CBC_256_ENCRYPT_12B_PADDING_TRUNC_IV (501480ns)
+[ RUN      ] AOS_APPLY.AEAD_AUTH_ONLY_GCM_BITMASK_1
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+/src/CryptoLib/test/unit/ut_aos_apply.c:2011: Failure
+  Expected : 0
+    Actual : 400
+[  FAILED  ] AOS_APPLY.AEAD_AUTH_ONLY_GCM_BITMASK_1 (279350ns)
+[ RUN      ] AOS_APPLY.AES_CBC_CMAC_TEST
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+/src/CryptoLib/test/unit/ut_aos_apply.c:2149: Failure
+  Expected : 0
+    Actual : 400
+[  FAILED  ] AOS_APPLY.AES_CBC_CMAC_TEST (276253ns)
+[==========] 22 test cases ran.
+[  PASSED  ] 3 tests.
+[  FAILED  ] 19 tests, listed below:
+[  FAILED  ] AOS_APPLY.HAPPY_PATH_CLEAR_FECF
+[  FAILED  ] AOS_APPLY.HAPPY_PATH_CLEAR_FECF_LEFT_BLANK
+[  FAILED  ] AOS_APPLY.HAPPY_PATH_CLEAR_FHEC_FECF
+[  FAILED  ] AOS_APPLY.HAPPY_PATH_CLEAR_FHEC_OID_FECF
+[  FAILED  ] AOS_APPLY.AES_CMAC_256_TEST_BITMASK_1
+[  FAILED  ] AOS_APPLY.AES_CMAC_256_TEST_BITMASK_0
+[  FAILED  ] AOS_APPLY.AES_GCM
+[  FAILED  ] AOS_APPLY.AOS_KEY_STATE_TEST
+[  FAILED  ] AOS_APPLY.AEAD_GCM_BITMASK_1
+[  FAILED  ] AOS_APPLY.AOS_APPLY_BUFFER_OVERFLOW_TEST
+[  FAILED  ] AOS_APPLY.AES_CBC_256_ENCRYPT_16B_PADDING
+[  FAILED  ] AOS_APPLY.AES_CBC_256_ENCRYPT_2B_PADDING
+[  FAILED  ] AOS_APPLY.AES_CBC_256_ENCRYPT_2B_SHPLF
+[  FAILED  ] AOS_APPLY.AOS_APPLY_NULL_IV
+[  FAILED  ] AOS_APPLY.AEAD_GCM_BITMASK_1_TRUNC_IV
+[  FAILED  ] AOS_APPLY.HAPPY_PATH_APPLY_NONTRANSMITTED_INCREMENTING_IV_ROLLOVER
+[  FAILED  ] AOS_APPLY.AES_CBC_256_ENCRYPT_12B_PADDING_TRUNC_IV
+[  FAILED  ] AOS_APPLY.AEAD_AUTH_ONLY_GCM_BITMASK_1
+[  FAILED  ] AOS_APPLY.AES_CBC_CMAC_TEST
+
+      Start  6: UT_AOS_PROCESS
+ 6/12 Test  #6: UT_AOS_PROCESS ...................***Exception: SegFault  0.01 sec
+[==========] Running 28 test cases.
+[ RUN      ] AOS_PROCESS.NO_CONFIG
+[33m
+----- Crypto_AOS_ProcessSecurity START -----
+[0m[31mERROR: CryptoLib Configuration Not Set! -- CRYPTO_LIB_ERR_NO_CONFIG, Will Exit
+[0m[       OK ] AOS_PROCESS.NO_CONFIG (204854ns)
+[ RUN      ] AOS_PROCESS.NO_INIT
+[33m
+----- Crypto_AOS_ProcessSecurity START -----
+[0m[31mERROR: CryptoLib Configuration Not Set! -- CRYPTO_LIB_ERR_NO_CONFIG, Will Exit
+[0m[       OK ] AOS_PROCESS.NO_INIT (182379ns)
+[ RUN      ] AOS_PROCESS.HAPPY_PATH_CLEAR_FECF
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+/src/CryptoLib/test/unit/ut_aos_process.c:204: Failure
+  Expected : 0
+    Actual : 400
+[  FAILED  ] AOS_PROCESS.HAPPY_PATH_CLEAR_FECF (412227ns)
+[ RUN      ] AOS_PROCESS.SECONDARY_HDR_PRESENT_PLAINTEXT
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+/src/CryptoLib/test/unit/ut_aos_process.c:344: Failure
+  Expected : 0
+    Actual : 400
+[  FAILED  ] AOS_PROCESS.SECONDARY_HDR_PRESENT_PLAINTEXT (276535ns)
+[ RUN      ] AOS_PROCESS.INSERT_ZONE_PRESENT_PLAINTEXT
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+/src/CryptoLib/test/unit/ut_aos_process.c:483: Failure
+  Expected : 0
+    Actual : 400
+[  FAILED  ] AOS_PROCESS.INSERT_ZONE_PRESENT_PLAINTEXT (271635ns)
+[ RUN      ] AOS_PROCESS.AES_CMAC_256_TEST_0
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+/src/CryptoLib/test/unit/ut_aos_process.c:624: Failure
+  Expected : 0
+    Actual : 400
+[  FAILED  ] AOS_PROCESS.AES_CMAC_256_TEST_0 (302509ns)
+[ RUN      ] AOS_PROCESS.AES_CMAC_256_TEST_1
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+/src/CryptoLib/test/unit/ut_aos_process.c:777: Failure
+  Expected : 0
+    Actual : 400
+[  FAILED  ] AOS_PROCESS.AES_CMAC_256_TEST_1 (272741ns)
+[ RUN      ] AOS_PROCESS.AES_HMAC_256_TEST_0
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+/src/CryptoLib/test/unit/ut_aos_process.c:932: Failure
+  Expected : 0
+    Actual : 400
+[  FAILED  ] AOS_PROCESS.AES_HMAC_256_TEST_0 (272485ns)
+[ RUN      ] AOS_PROCESS.AES_HMAC_256_TEST_1
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+/src/CryptoLib/test/unit/ut_aos_process.c:1089: Failure
+  Expected : 0
+    Actual : 400
+[  FAILED  ] AOS_PROCESS.AES_HMAC_256_TEST_1 (299846ns)
+[ RUN      ] AOS_PROCESS.AES_HMAC_512_TEST_0
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+/src/CryptoLib/test/unit/ut_aos_process.c:1240: Failure
+  Expected : 0
+    Actual : 400
+[  FAILED  ] AOS_PROCESS.AES_HMAC_512_TEST_0 (271865ns)
+[ RUN      ] AOS_PROCESS.AES_HMAC_512_TEST_1
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+/src/CryptoLib/test/unit/ut_aos_process.c:1395: Failure
+  Expected : 0
+    Actual : 400
+[  FAILED  ] AOS_PROCESS.AES_HMAC_512_TEST_1 (275368ns)
+[ RUN      ] AOS_PROCESS.AES_GCM_DEC_ONLY
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+/src/CryptoLib/test/unit/ut_aos_process.c:1547: Failure
+  Expected : 0
+    Actual : 400
+[  FAILED  ] AOS_PROCESS.AES_GCM_DEC_ONLY (270637ns)
+[ RUN      ] AOS_PROCESS.AEAD_GCM_BITMASK_1
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+/src/CryptoLib/test/unit/ut_aos_process.c:1735: Failure
+  Expected : 0
+    Actual : 400
+[  FAILED  ] AOS_PROCESS.AEAD_GCM_BITMASK_1 (327004ns)
+[ RUN      ] AOS_PROCESS.AOS_SA_SEGFAULT_TEST
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+/src/CryptoLib/test/unit/ut_aos_process.c:1876: Failure
+  Expected : 0
+    Actual : 400
+[  FAILED  ] AOS_PROCESS.AOS_SA_SEGFAULT_TEST (271642ns)
+[ RUN      ] AOS_PROCESS.AOS_SA_NOT_OPERATIONAL
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+/src/CryptoLib/test/unit/ut_aos_process.c:1915: Failure
+  Expected : 0
+    Actual : 400
+[  FAILED  ] AOS_PROCESS.AOS_SA_NOT_OPERATIONAL (298658ns)
+[ RUN      ] AOS_PROCESS.AOS_OCF_TEST
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+/src/CryptoLib/test/unit/ut_aos_process.c:1969: Failure
+  Expected : 0
+    Actual : 400
+[  FAILED  ] AOS_PROCESS.AOS_OCF_TEST (416199ns)
+[ RUN      ] AOS_PROCESS.AOS_KEY_STATE_TEST
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+/src/CryptoLib/test/unit/ut_aos_process.c:2021: Failure
+  Expected : 0
+    Actual : 400
+[  FAILED  ] AOS_PROCESS.AOS_KEY_STATE_TEST (277980ns)
+[ RUN      ] AOS_PROCESS.AOS_PROCESS_HEAP_UNDERFLOW_TEST
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+[33mDEBUG - Printing local copy of SA Entry for current SPI.
+[0mSA status: 
+	 spi   = 0 
+	 sa_state   = 0x0 
+	 est        = 0x0 
+	 ast        = 0x0 
+	 shivf_len  = 0 
+	 shsnf_len  = 0 
+	 shplf_len  = 0 
+	 stmacf_len = 0 
+	 ecs_len    = 0 
+	 ekid       = 0 
+	 ek_ref     =  
+	 akid       = 0 
+	 ak_ref     =  
+	 null_iv    = 0 
+	 iv_len     = 0 
+	 iv        =  
+	 acs_len    = 0 
+	 acs        = 0x00 
+	 abm_len    = 0 
+	 null_arsn   = 0 
+	 arsn_len    = 0 
+	 arsnw_len   = 0 
+	 arsnw       = 0 
+[33m
+----- Crypto_AOS_ProcessSecurity START -----
+[0m[32mAOS Process Using following parameters:
+	[0m[32mtvfn: 1	 scid: 0	 vcid: 48
+[0m[33mDEBUG - Printing local copy of SA Entry for current SPI.
+[0mSA status: 
+	 spi   = 0 
+	 sa_state   = 0x3 
+	 est        = 0x0 
+	 ast        = 0x0 
+	 shivf_len  = 0 
+	 shsnf_len  = 0 
+	 shplf_len  = 0 
+	 stmacf_len = 0 
+	 ecs_len    = 0 
+	 ekid       = 0 
+	 ek_ref     =  
+	 akid       = 0 
+	 ak_ref     =  
+	 null_iv    = 0 
+	 iv_len     = 0 
+	 iv        =  
+	 acs_len    = 0 
+	 acs        = 0x00 
+	 abm_len    = 0 
+	 null_arsn   = 0 
+	 arsn_len    = 0 
+	 arsnw_len   = 0 
+	 arsnw       = 0 
+TFVN SA(1) == FRAME(1)?
+SCID SA(0) == FRAME(0)?
+VCID SA(48) == FRAME(48)?
+[33mDEBUG - Printing SA Entry for current frame.
+[0mSA status: 
+	 spi   = 0 
+	 sa_state   = 0x3 
+	 est        = 0x0 
+	 ast        = 0x0 
+	 shivf_len  = 0 
+	 shsnf_len  = 0 
+	 shplf_len  = 0 
+	 stmacf_len = 0 
+	 ecs_len    = 0 
+	 ekid       = 0 
+	 ek_ref     =  
+	 akid       = 0 
+	 ak_ref     =  
+	 null_iv    = 0 
+	 iv_len     = 0 
+	 iv        =  
+	 acs_len    = 0 
+	 acs        = 0x00 
+	 abm_len    = 0 
+	 null_arsn   = 0 
+	 arsn_len    = 0 
+	 arsnw_len   = 0 
+	 arsnw       = 0 
+[34mProcessing a AOS - CLEAR!
+[0mMC_Log: Error, [20261121,23:43:52], -77
+[       OK ] AOS_PROCESS.AOS_PROCESS_HEAP_UNDERFLOW_TEST (342582ns)
+[ RUN      ] AOS_PROCESS.AOS_FHECF_TEST
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+[33mDEBUG - Printing local copy of SA Entry for current SPI.
+[0mSA status: 
+	 spi   = 0 
+	 sa_state   = 0x0 
+	 est        = 0x0 
+	 ast        = 0x0 
+	 shivf_len  = 0 
+	 shsnf_len  = 0 
+	 shplf_len  = 0 
+	 stmacf_len = 0 
+	 ecs_len    = 0 
+	 ekid       = 0 
+	 ek_ref     =  
+	 akid       = 0 
+	 ak_ref     =  
+	 null_iv    = 0 
+	 iv_len     = 0 
+	 iv        =  
+	 acs_len    = 0 
+	 acs        = 0x00 
+	 abm_len    = 0 
+	 null_arsn   = 0 
+	 arsn_len    = 0 
+	 arsnw_len   = 0 
+	 arsnw       = 0 
+[33mDEBUG - Printing local copy of SA Entry for current SPI.
+[0mSA status: 
+	 spi   = 0 
+	 sa_state   = 0x0 
+	 est        = 0x0 
+	 ast        = 0x0 
+	 shivf_len  = 0 
+	 shsnf_len  = 0 
+	 shplf_len  = 0 
+	 stmacf_len = 0 
+	 ecs_len    = 0 
+	 ekid       = 0 
+	 ek_ref     =  
+	 akid       = 0 
+	 ak_ref     =  
+	 null_iv    = 0 
+	 iv_len     = 0 
+	 iv        =  
+	 acs_len    = 0 
+	 acs        = 0x00 
+	 abm_len    = 0 
+	 null_arsn   = 0 
+	 arsn_len    = 0 
+	 arsnw_len   = 0 
+	 arsnw       = 0 
+[33m
+----- Crypto_AOS_ProcessSecurity START -----
+[0m[32mAOS Process Using following parameters:
+	[0m[32mtvfn: 1	 scid: 3	 vcid: 0
+[0mRecieved FHECF: da84
+[33mCalculating FHECF...
+[0mParity[0] = 0x0d
+Parity[1] = 0x0a
+Par
+
+      Start  7: UT_TM_APPLY
+ 7/12 Test  #7: UT_TM_APPLY ......................***Exception: SegFault  0.00 sec
+[==========] Running 25 test cases.
+[ RUN      ] TM_APPLY_SECURITY.NO_CRYPTO_INIT
+[31mERROR: CryptoLib Configuration Not Set! -- CRYPTO_LIB_ERR_NO_CONFIG, Will Exit
+[0m[       OK ] TM_APPLY_SECURITY.NO_CRYPTO_INIT (202204ns)
+[ RUN      ] TM_APPLY_SECURITY.NULL_BUFFER
+[       OK ] TM_APPLY_SECURITY.NULL_BUFFER (2674ns)
+[ RUN      ] TM_APPLY_SECURITY.NO_CONFIG
+[31mERROR: CryptoLib Configuration Not Set! -- CRYPTO_LIB_ERR_NO_CONFIG, Will Exit
+[0m[       OK ] TM_APPLY_SECURITY.NO_CONFIG (174584ns)
+[ RUN      ] TM_APPLY_SECURITY.HAPPY_PATH_CLEAR_FECF
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+[33m
+----- Crypto_TM_ApplySecurity START -----
+[0mThe following GVCID parameters will be used:
+	TVFN: 0x0000		SCID: 0x0003	VCID: 0x0000	MAP: 0
+	PriHdr as follows:
+		003000001800
+[31mError - Making best attempt at a useful error code:
+	[0m[33mIncoming frame parameters:
+[0m[33m	tfvn 00
+[0m[33m	scid 3
+[0m[33m	vcid 0
+[0m[33m	mapid 00
+[0m[31mError: Could not retrieve an SA!
+[0mMC_Log: Error, [20261121,23:43:52], -8
+/src/CryptoLib/test/unit/ut_tm_apply.c:284: Failure
+  Expected : 0
+    Actual : -8
+[  FAILED  ] TM_APPLY_SECURITY.HAPPY_PATH_CLEAR_FECF (774590ns)
+[ RUN      ] TM_APPLY_SECURITY.HAPPY_PATH_CLEAR_FECF_LEFT_BLANK
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+/src/CryptoLib/test/unit/ut_tm_apply.c:323: Failure
+  Expected : 0
+    Actual : 400
+[  FAILED  ] TM_APPLY_SECURITY.HAPPY_PATH_CLEAR_FECF_LEFT_BLANK (275370ns)
+[ RUN      ] TM_APPLY_SECURITY.SECONDARY_HDR_PRESENT_PLAINTEXT
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+/src/CryptoLib/test/unit/ut_tm_apply.c:474: Failure
+  Expected : 0
+    Actual : 400
+[  FAILED  ] TM_APPLY_SECURITY.SECONDARY_HDR_PRESENT_PLAINTEXT (269677ns)
+[ RUN      ] TM_APPLY_SECURITY.SECONDARY_HDR_PRESENT_MAC
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+[33mDEBUG - Printing local copy of SA Entry for current SPI.
+[0mSA status: 
+	 spi   = 0 
+	 sa_state   = 0x0 
+	 est        = 0x0 
+	 ast        = 0x0 
+	 shivf_len  = 0 
+	 shsnf_len  = 0 
+	 shplf_len  = 0 
+	 stmacf_len = 0 
+	 ecs_len    = 0 
+	 ekid       = 0 
+	 ek_ref     =  
+	 akid       = 0 
+	 ak_ref     =  
+	 null_iv    = 0 
+	 iv_len     = 0 
+	 iv        =  
+	 acs_len    = 0 
+	 acs        = 0x00 
+	 abm_len    = 0 
+	 null_arsn   = 0 
+	 arsn_len    = 0 
+	 arsnw_len   = 0 
+	 arsnw       = 0 
+[33mDEBUG - Printing local copy of SA Entry for current SPI.
+[0mSA status: 
+	 spi   = 0 
+	 sa_state   = 0x0 
+	 est        = 0x0 
+	 ast        = 0x0 
+	 shivf_len  = 0 
+	 shsnf_len  = 0 
+	 shplf_len  = 0 
+	 stmacf_len = 0 
+	 ecs_len    = 0 
+	 ekid       = 0 
+	 ek_ref     =  
+	 akid       = 0 
+	 ak_ref     =  
+	 null_iv    = 0 
+	 iv_len     = 0 
+	 iv        =  
+	 acs_len    = 0 
+	 acs        = 0x00 
+	 abm_len    = 0 
+	 null_arsn   = 0 
+	 arsn_len    = 0 
+	 arsnw_len   = 0 
+	 arsnw       = 0 
+[33m
+----- Crypto_TM_ApplySecurity START -----
+[0mThe following GVCID parameters will be used:
+	TVFN: 0x0000		SCID: 0x002C	VCID: 0x0000	MAP: 0
+	PriHdr as follows:
+		02C000009800
+Valid operational SA found at index 5.
+	 Tfvn: 0
+	 Scid: 44
+	 Vcid: 0
+[33mTM BEFORE Apply Sec:
+	[0m02C00000980006AABBCCDDEEFF000008010000000F00112233445566778899AABBCCDDEEFFA107FF000006D2ABBABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAABBAA00000000000000000000000000000000
+[33mDEBUG - Printing SA Entry for current frame.
+[0mSA status: 
+	 spi   = 0 
+	 sa_state   = 0x3 
+	 est        = 0x0 
+	 ast        = 0x1 
+	 shivf_len  = 0 
+	 shsnf_len  = 0 
+	 shplf_len  = 0 
+	 stmacf_len = 16 
+	 ecs_len    = 0 
+	 ekid       = 0 
+	 ek_ref     =  
+	 akid       = 136 
+	 ak_ref     =  
+	 null_iv    = 0 
+	 iv_len     = 0 
+	 iv        =  
+	 acs_len    = 1 
+	 acs        = 0x01 
+	 abm_len    = 1786 
+	 abm        = ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+	 null_arsn   = 0 
+	 arsn_len    = 0 
+	 arsnw_len   = 0 
+	 arsnw       = 0 
+[33mCRYPTO IS AEAD? : FALSE
+[0m[34mCreating a SDLS TM - AUTHENTICATED!
+[0m[33mA TM Secondary Header flag is set!
+[33mSecondary Header Length is decoded as: 6
+Secondary Header Version Number: 0
+len_ingest: 1786 
+byte_idx: 13
+Actual secondary header length: 7
+Calculated PKCS padding of 0
+[33mData location starts at: 15
+[0m[33mData size is: 1755
+[0m[33mIndex at end of SPI is: 15
+[33mMAC location is: 1770
+[0m[33mMAC size is: 16
+[0mCalculated AAD Length: 1770
+[33mAAD before ABM Bitmask:
+	02c00000980006aabbccddeeff000008010000000f00112233445566778899aabbccddeeffa107ff000006d2abbabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaa
+[0m[33mPreparing AAD:
+	Using AAD Length of 1770
+	02c00000980006aabbccddeeff000008010000000f00112233445566778899aabbccddeeffa107ff000006d2abbabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabbaabb
+
+      Start  8: UT_TM_PROCESS
+ 8/12 Test  #8: UT_TM_PROCESS ....................***Failed    0.01 sec
+[==========] Running 25 test cases.
+[ RUN      ] TM_PROCESS_SECURITY.NO_CRYPTO_INIT
+[33m
+----- Crypto_TM_ProcessSecurity START -----
+[0m[31mERROR: CryptoLib Configuration Not Set! -- CRYPTO_LIB_ERR_NO_CONFIG, Will Exit
+[0m[32mTM Process Using following parameters:
+	[0m[32mtvfn: 0	 scid: 771	 vcid: 1
+[0m[31m**NO LUCK WITH GVCID!
+[0m[       OK ] TM_PROCESS_SECURITY.NO_CRYPTO_INIT (202375ns)
+[ RUN      ] TM_PROCESS_SECURITY.NO_CONFIG
+[33m
+----- Crypto_TM_ProcessSecurity START -----
+[0m[31mERROR: CryptoLib Configuration Not Set! -- CRYPTO_LIB_ERR_NO_CONFIG, Will Exit
+[0m[32mTM Process Using following parameters:
+	[0m[32mtvfn: 0	 scid: 771	 vcid: 1
+[0m[31m**NO LUCK WITH GVCID!
+[0m[       OK ] TM_PROCESS_SECURITY.NO_CONFIG (176659ns)
+[ RUN      ] TM_PROCESS_SECURITY.HAPPY_PATH_CLEAR_FECF
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+/src/CryptoLib/test/unit/ut_tm_process.c:217: Failure
+  Expected : 0
+    Actual : 400
+[  FAILED  ] TM_PROCESS_SECURITY.HAPPY_PATH_CLEAR_FECF (327928ns)
+[ RUN      ] TM_PROCESS_SECURITY.SECONDARY_HDR_PRESENT_PLAINTEXT
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+/src/CryptoLib/test/unit/ut_tm_process.c:368: Failure
+  Expected : 0
+    Actual : 400
+[  FAILED  ] TM_PROCESS_SECURITY.SECONDARY_HDR_PRESENT_PLAINTEXT (271957ns)
+[ RUN      ] TM_PROCESS_SECURITY.SECONDARY_HDR_PRESENT_MAC
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+/src/CryptoLib/test/unit/ut_tm_process.c:535: Failure
+  Expected : 0
+    Actual : 400
+[  FAILED  ] TM_PROCESS_SECURITY.SECONDARY_HDR_PRESENT_MAC (326463ns)
+[ RUN      ] TM_PROCESS_SECURITY.AES_CMAC_256_TEST_0
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+/src/CryptoLib/test/unit/ut_tm_process.c:703: Failure
+  Expected : 0
+    Actual : 400
+[  FAILED  ] TM_PROCESS_SECURITY.AES_CMAC_256_TEST_0 (274324ns)
+[ RUN      ] TM_PROCESS_SECURITY.AES_CMAC_256_TEST_1
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+/src/CryptoLib/test/unit/ut_tm_process.c:886: Failure
+  Expected : 0
+    Actual : 400
+[  FAILED  ] TM_PROCESS_SECURITY.AES_CMAC_256_TEST_1 (268989ns)
+[ RUN      ] TM_PROCESS_ENC_VAL.AES_HMAC_SHA_256_TEST_0
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+/src/CryptoLib/test/unit/ut_tm_process.c:1070: Failure
+  Expected : 0
+    Actual : 400
+[  FAILED  ] TM_PROCESS_ENC_VAL.AES_HMAC_SHA_256_TEST_0 (314809ns)
+[ RUN      ] TM_PROCESS_ENC_VAL.AES_HMAC_SHA_256_TEST_1
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+/src/CryptoLib/test/unit/ut_tm_process.c:1253: Failure
+  Expected : 0
+    Actual : 400
+[  FAILED  ] TM_PROCESS_ENC_VAL.AES_HMAC_SHA_256_TEST_1 (269883ns)
+[ RUN      ] TM_PROCESS_ENC_VAL.AES_HMAC_SHA_512_TEST_0
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+/src/CryptoLib/test/unit/ut_tm_process.c:1436: Failure
+  Expected : 0
+    Actual : 400
+[  FAILED  ] TM_PROCESS_ENC_VAL.AES_HMAC_SHA_512_TEST_0 (268967ns)
+[ RUN      ] TM_PROCESS_ENC_VAL.AES_HMAC_SHA_512_TEST_1
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+/src/CryptoLib/test/unit/ut_tm_process.c:1622: Failure
+  Expected : 0
+    Actual : 400
+[  FAILED  ] TM_PROCESS_ENC_VAL.AES_HMAC_SHA_512_TEST_1 (269066ns)
+[ RUN      ] TM_PROCESS_ENC_VAL.AES_GCM_BITMASK_1
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+/src/CryptoLib/test/unit/ut_tm_process.c:1808: Failure
+  Expected : 0
+    Actual : 400
+[  FAILED  ] TM_PROCESS_ENC_VAL.AES_GCM_BITMASK_1 (296226ns)
+[ RUN      ] TM_PROCESS_ENC_VAL.AEAD_AES_GCM_BITMASK_1
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+/src/CryptoLib/test/unit/ut_tm_process.c:1999: Failure
+  Expected : 0
+    Actual : 400
+[  FAILED  ] TM_PROCESS_ENC_VAL.AEAD_AES_GCM_BITMASK_1 (268930ns)
+[ RUN      ] TM_PROCESS.TM_SA_SEGFAULT_TEST
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+/src/CryptoLib/test/unit/ut_tm_process.c:2171: Failure
+  Expected : 0
+    Actual : 400
+[  FAILED  ] TM_PROCESS.TM_SA_SEGFAULT_TEST (271871ns)
+[ RUN      ] TM_PROCESS.TM_OCF_TEST
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+/src/CryptoLib/test/unit/ut_tm_process.c:2209: Failure
+  Expected : 0
+    Actual : 400
+[  FAILED  ] TM_PROCESS.TM_OCF_TEST (296588ns)
+[ RUN      ] TM_PROCESS.TM_SA_NOT_OPERATIONAL
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+/src/CryptoLib/test/unit/ut_tm_process.c:2263: Failure
+  Expected : 0
+    Actual : 400
+[  FAILED  ] TM_PROCESS.TM_SA_NOT_OPERATIONAL (273771ns)
+[ RUN      ] TM_PROCESS.TM_KEY_STATE_TEST
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+/src/CryptoLib/test/unit/ut_tm_process.c:2315: Failure
+  Expected : 0
+    Actual : 400
+[  FAILED  ] TM_PROCESS.TM_KEY_STATE_TEST (267646ns)
+[ RUN      ] TM_PROCESS.TM_PROCESS_HEAP_UNDERFLOW_TEST
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+[33mDEBUG - Printing local copy of SA Entry for current SPI.
+[0mSA status: 
+	 spi   = 0 
+	 sa_state   = 0x0 
+	 est        = 0x0 
+	 ast        = 0x0 
+	 shivf_len  = 0 
+	 shsnf_len  = 0 
+	 shplf_len  = 0 
+	 stmacf_len = 0 
+	 ecs_len    = 0 
+	 ekid       = 0 
+	 ek_ref     =  
+	 akid       = 0 
+	 ak_ref     =  
+	 null_iv    = 0 
+	 iv_len     = 0 
+	 iv        =  
+	 acs_len    = 0 
+	 acs        = 0x00 
+	 abm_len    = 0 
+	 null_arsn   = 0 
+	 arsn_len    = 0 
+	 arsnw_len   = 0 
+	 arsnw       = 0 
+[33m
+----- Crypto_TM_ProcessSecurity START -----
+[0m[32mTM Process Using following parameters:
+	[0m[32mtvfn: 0	 scid: 44	 vcid: 0
+[0m[33mDEBUG - Printing local copy of SA Entry for current SPI.
+[0mSA status: 
+	 spi   = 0 
+	 sa_state   = 0x3 
+	 est        = 0x0 
+	 ast        = 0x0 
+	 shivf_len  = 0 
+	 shsnf_len  = 0 
+	 shplf_len  = 0 
+	 stmacf_len = 0 
+	 ecs_len    = 0 
+	 ekid       = 0 
+	 ek_ref     =  
+	 akid       = 0 
+	 ak_ref     =  
+	 null_iv    = 0 
+	 iv_len     = 0 
+	 iv        =  
+	 acs_len    = 0 
+	 acs        = 0x00 
+	 abm_len    = 8 
+	 abm        = 0000000000000000
+	 null_arsn   = 0 
+	 arsn_len    = 0 
+	 arsnw_len   = 0 
+	 arsnw       = 0 
+TFVN SA(0) == FRAME(0)?
+SCID SA(44) == FRAME(44)?
+VCID SA(0) == FRAME(0)?
+[33mDEBUG - Printing SA Entry for current frame.
+[0mSA status: 
+	 spi   = 0 
+	 sa_state   = 0x3 
+	 est        = 0x0 
+	 ast        = 0x0 
+	 shivf_len  = 0 
+	 shsnf_len  = 0 
+	 shplf_len  = 0 
+	 stmacf_len = 0 
+	 ecs_len    = 0 
+	 ekid       = 0 
+	 ek_ref     =  
+	 akid       = 0 
+	 ak_ref     =  
+	 null_iv    = 0 
+	 iv_len     = 0 
+	 iv        =  
+	 acs_len    = 0 
+	 acs        = 0x00 
+	 abm_len    = 8 
+	 abm        = 0000000000000000
+	 null_arsn   = 0 
+	 arsn_len    = 0 
+	 arsnw_len   = 0 
+	 arsnw       = 0 
+[34mProcessing a TM - CLEAR!
+[0mMC_Log: Error, [20261121,23:43:52], -76
+[       OK ] TM_PROCESS.TM_PROCESS_HEAP_UNDERFLOW_TEST (437077ns)
+[ RUN      ] TM_PROCESS.TM_PROCESS_Secondary_Hdr_OVERFLOW_TEST
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+[33m
+----- Crypto_TM_ProcessSecurity START -----
+[0m[32mTM Process Using following parameters:
+	[0m[32mtvfn: 0	 scid: 44	 vcid: 1
+[0m[33mA TM Secondary Header flag is set!
+Secondary Header Version Number: 0
+[33mSecondary Header Length is decoded as: 63
+len_ingest: 8 
+byte_idx: 6
+Actual secondary header length: 64
+MC_Log: Error, [20261121,23:43:52], -80
+[       OK ] TM_PROCESS.TM_PROCESS_Secondary_Hdr_OVERFLOW_TEST (283080ns)
+[ RUN      ] TM_PROCESS.TM_PROCESS_Secondary_Hdr_Spec_Violation
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+[33m
+----- Crypto_TM_ProcessSecurity START -----
+[0m[32mTM Process Using following parameters:
+	[0m[32mtvfn: 0	 scid: 44	 vcid: 0
+[0m[33mA TM Secondary Header flag is set!
+Secondary Header Version Number: 1
+MC_Log: Error, [20261121,23:43:52], -81
+[       OK ] TM_PROCESS.TM_PROCESS_Secondary_Hdr_Spec_Violation (312236ns)
+[ RUN      ] TM_PROCESS.TM_PROCESS_Secondary_Hdr_One_Too_Big
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+[33m
+----- Crypto_TM_ProcessSecurity START -----
+[0m[32mTM Process Using following parameters:
+	[0m[32mtvfn: 0	 scid: 44	 vcid: 0
+[0m[33mA TM Secondary Header flag is set!
+Secondary Header Version Number: 0
+[33mSecondary Header Length is decoded as: 1
+len_ingest: 8 
+byte_idx: 6
+Actual secondary header length: 2
+MC_Log: Error, [20261121,23:43:52], -80
+[       OK ] TM_PROCESS.TM_PROCESS_Secondary_Hdr_One_Too_Big (337553ns)
+[ RUN      ] TM_PROCESS.TM_PROCESS_NULL_IV
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+[33mDEBUG - Printing local copy of SA Entry for current SPI.
+[0mSA status: 
+	 spi   = 0 
+	 sa_state   = 0x0 
+	 est        = 0x0 
+	 ast        = 0x0 
+	 shivf_len  = 0 
+	 shsnf_len  = 0 
+	 shplf_len  = 0 
+	 stmacf_len = 0 
+	 ecs_len    = 0 
+	 ekid       = 0 
+	 ek_ref     =  
+	 akid       = 0 
+	 ak_ref     =  
+	 null_iv    = 0 
+	 iv_len     = 0 
+	 iv        =  
+	 acs_len    = 0 
+	 acs        = 0x00 
+	 abm_len    = 0 
+	 null_arsn   = 0 
+	 arsn_len    = 0 
+	 arsnw_len   = 0 
+	 arsnw       = 0 
+[33m
+----- Crypto_TM_ProcessSecurity START -----
+[0m[32mTM Process Using following parameters:
+	[0m[32mtvfn: 0	 scid: 44	 vcid: 0
+[0m[33mDEBUG - Printing local copy of SA Entry for current SPI.
+[0mSA status: 
+	 spi   = 0 
+	 sa_state   = 0x3 
+	 est        = 0x0 
+	 ast        = 0x0 
+	 shivf_len  = 0 
+	 shsnf_len  = 0 
+	 shplf_len  = 0 
+	 stmacf_len = 0 
+	 ecs_len    = 0 
+	 ekid       = 0 
+	 ek_ref     =  
+	 akid       = 0 
+	 ak_ref     =  
+	 null_iv    = 1 
+	 iv_len     = 0 
+	 iv        =  
+	 acs_len    = 0 
+	 acs        = 0x00 
+	 abm_len    = 0 
+	 null_arsn   = 0 
+	 arsn_len    = 0 
+	 arsnw_len   = 0 
+	 arsnw       = 0 
+MC_Log: Error, [20261121,23:43:52], -28
+[       OK ] TM_PROCESS.TM_PROCESS_NULL_IV (299109ns)
+[ RUN      ] TM_PROCESS_ENC_VAL.AEAD_AES_GCM_BITMASK_1_TRUNC_IV
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+/src/CryptoLib/test/unit/ut_tm_process.c:2590: Failure
+  Expected : 0
+    Actual : 400
+[  FAILED  ] TM_PROCESS_ENC_VAL.AEAD_AES_GCM_BITMASK_1_TRUNC_IV (273402ns)
+[ RUN      ] TM_PROCESS_ENC_VAL.AEAD_AUTH_ONLY_AES_GCM_BITMASK_1
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+/src/CryptoLib/test/unit/ut_tm_process.c:2771: Failure
+  Expected : 0
+    Actual : 400
+[  FAILED  ] TM_PROCESS_ENC_VAL.AEAD_AUTH_ONLY_AES_GCM_BITMASK_1 (271336ns)
+[ RUN      ] TM_PROCESS.LARGE_PAD_LEN
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+[33mDEBUG - Printing local copy of SA Entry for current SPI.
+[0mSA status: 
+	 spi   = 0 
+	 sa_state   = 0x0 
+	 est        = 0x0 
+	 ast        = 0x0 
+	 shivf_len  = 0 
+	 shsnf_len  = 0 
+	 shplf_len  = 0 
+	 stmacf_len = 0 
+	 ecs_len    = 0 
+	 ekid       = 0 
+	 ek_ref     =  
+	 akid       = 0 
+	 ak_ref     =  
+	 null_iv    = 0 
+	 iv_len     = 0 
+	 iv        =  
+	 acs_len    = 0 
+	 acs        = 0x00 
+	 abm_len    = 0 
+	 null_arsn   = 0 
+	 arsn_len    = 0 
+	 arsnw_len   = 0 
+	 arsnw       = 0 
+[33mDEBUG - Printing local copy of SA Entry for current SPI.
+[0mSA status: 
+	 spi   = 0 
+	 sa_state   = 0x3 
+	 est        = 0x0 
+	 ast        = 0x0 
+	 shivf_len  = 0 
+	 shsnf_len  = 0 
+	 shplf_len  = 0 
+	 stmacf_len = 0 
+	 ecs_len    = 0 
+	 ekid       = 0 
+	 ek_ref     =  
+	 akid       = 0 
+	 ak_ref     =  
+	 null_iv    = 1 
+	 iv_len     = 0 
+	 iv        =  
+	 acs_len    = 0 
+	 acs        = 0x00 
+	 abm_len    = 0 
+	 null_arsn   = 0 
+	 arsn_len    = 0 
+	 arsnw_len   = 0 
+	 arsnw       = 0 
+[33m
+----- Crypto_TM_ProcessSecurity START -----
+[0m[32mTM Process Using following parameters:
+	[0m[32mtvfn: 0	 scid: 44	 vcid: 0
+[0m[33mDEBUG - Printing local copy of SA Entry for current SPI.
+[0mSA status: 
+	 spi   = 0 
+	 sa_state   = 0x3 
+	 est        = 0x1 
+	 ast        = 0x0 
+	 shivf_len  = 12 
+	 shsnf_len  = 0 
+	 shplf_len  = 2 
+	 stmacf_len = 0 
+	 ecs_len    = 1 
+	 ecs[0]     = 0x02 
+	 ekid       = 130 
+	 ek_ref     =  
+	 akid       = 0 
+	 ak_ref     =  
+	 null_iv    = 1 
+	 iv_len     = 16 
+	 iv[0]      = 0x00 
+	 iv[1]      = 0x00 
+	 iv[2]      = 0x00 
+	 iv[3]      = 0x00 
+	 iv[4]      = 0x00 
+	 iv[5]      = 0x00 
+	 iv[6]      = 0x00 
+	 iv[7]      = 0x00 
+	 iv[8]      = 0x00 
+	 iv[9]      = 0x00 
+	 iv[10]      = 0x00 
+	 iv[11]      = 0x00 
+	 iv[12]      = 0x00 
+	 iv[13]      = 0x00 
+	 iv[14]      = 0x00 
+	 iv[15]      = 0x00 
+	 acs_len    = 0 
+	 acs        = 0x00 
+	 abm_len    = 0 
+	 null_arsn   = 0 
+	 arsn_len    = 0 
+	 arsnw_len   = 0 
+	 arsnw       = 0 
+MC_Log: Error, [20261121,23:43:52], -28
+/src/CryptoLib/test/unit/ut_tm_process.c:2969: Failure
+  Expected : -100
+    Actual : -28
+[  FAILED  ] TM_PROCESS.LARGE_PAD_LEN (367005ns)
+[==========] 25 test cases ran.
+[  PASSED  ] 7 tests.
+[  FAILED  ] 18 tests, listed below:
+[  FAILED  ] TM_PROCESS_SECURITY.HAPPY_PATH_CLEAR_FECF
+[  FAILED  ] TM_PROCESS_SECURITY.SECONDARY_HDR_PRESENT_PLAINTEXT
+[  FAILED  ] TM_PROCESS_SECURITY.SECONDARY_HDR_PRESENT_MAC
+[  FAILED  ] TM_PROCESS_SECURITY.AES_CMAC_256_TEST_0
+[  FAILED  ] TM_PROCESS_SECURITY.AES_CMAC_256_TEST_1
+[  FAILED  ] TM_PROCESS_ENC_VAL.AES_HMAC_SHA_256_TEST_0
+[  FAILED  ] TM_PROCESS_ENC_VAL.AES_HMAC_SHA_256_TEST_1
+[  FAILED  ] TM_PROCESS_ENC_VAL.AES_HMAC_SHA_512_TEST_0
+[  FAILED  ] TM_PROCESS_ENC_VAL.AES_HMAC_SHA_512_TEST_1
+[  FAILED  ] TM_PROCESS_ENC_VAL.AES_GCM_BITMASK_1
+[  FAILED  ] TM_PROCESS_ENC_VAL.AEAD_AES_GCM_BITMASK_1
+[  FAILED  ] TM_PROCESS.TM_SA_SEGFAULT_TEST
+[  FAILED  ] TM_PROCESS.TM_OCF_TEST
+[  FAILED  ] TM_PROCESS.TM_SA_NOT_OPERATIONAL
+[  FAILED  ] TM_PROCESS.TM_KEY_STATE_TEST
+[  FAILED  ] TM_PROCESS_ENC_VAL.AEAD_AES_GCM_BITMASK_1_TRUNC_IV
+[  FAILED  ] TM_PROCESS_ENC_VAL.AEAD_AUTH_ONLY_AES_GCM_BITMASK_1
+[  FAILED  ] TM_PROCESS.LARGE_PAD_LEN
+
+      Start  9: UT_EP_MC
+ 9/12 Test  #9: UT_EP_MC .........................***Failed    0.00 sec
+[==========] Running 6 test cases.
+[ RUN      ] EP_MC.MC_REGULAR_PING
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+/src/CryptoLib/test/unit/ut_ep_mc.c:21: Failure
+  Expected : 0
+    Actual : 400
+[  FAILED  ] EP_MC.MC_REGULAR_PING (334853ns)
+[ RUN      ] EP_MC.MC_STATUS
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+/src/CryptoLib/test/unit/ut_ep_mc.c:120: Failure
+  Expected : 0
+    Actual : 400
+[  FAILED  ] EP_MC.MC_STATUS (270326ns)
+[ RUN      ] EP_MC.MC_DUMP
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+/src/CryptoLib/test/unit/ut_ep_mc.c:203: Failure
+  Expected : 0
+    Actual : 400
+[  FAILED  ] EP_MC.MC_DUMP (323702ns)
+[ RUN      ] EP_MC.MC_ERASE
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+/src/CryptoLib/test/unit/ut_ep_mc.c:287: Failure
+  Expected : 0
+    Actual : 400
+[  FAILED  ] EP_MC.MC_ERASE (268696ns)
+[ RUN      ] EP_MC.MC_SELF_TEST
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+/src/CryptoLib/test/unit/ut_ep_mc.c:370: Failure
+  Expected : 0
+    Actual : 400
+[  FAILED  ] EP_MC.MC_SELF_TEST (269803ns)
+[ RUN      ] EP_MC.MC_ALARM_FLAG_RESET
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+/src/CryptoLib/test/unit/ut_ep_mc.c:454: Failure
+  Expected : 0
+    Actual : 400
+[  FAILED  ] EP_MC.MC_ALARM_FLAG_RESET (325982ns)
+[==========] 6 test cases ran.
+[  PASSED  ] 0 tests.
+[  FAILED  ] 6 tests, listed below:
+[  FAILED  ] EP_MC.MC_REGULAR_PING
+[  FAILED  ] EP_MC.MC_STATUS
+[  FAILED  ] EP_MC.MC_DUMP
+[  FAILED  ] EP_MC.MC_ERASE
+[  FAILED  ] EP_MC.MC_SELF_TEST
+[  FAILED  ] EP_MC.MC_ALARM_FLAG_RESET
+
+      Start 10: UT_EP_SA_MGMT
+10/12 Test #10: UT_EP_SA_MGMT ....................***Failed    0.00 sec
+[==========] Running 9 test cases.
+[ RUN      ] EP_SA_MGMT.SA_6_REKEY_133
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+/src/CryptoLib/test/unit/ut_ep_sa_mgmt.c:23: Failure
+  Expected : 0
+    Actual : 400
+[  FAILED  ] EP_SA_MGMT.SA_6_REKEY_133 (374405ns)
+[ RUN      ] EP_SA_MGMT.SA_START_6
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+/src/CryptoLib/test/unit/ut_ep_sa_mgmt.c:81: Failure
+  Expected : 0
+    Actual : 400
+[  FAILED  ] EP_SA_MGMT.SA_START_6 (272310ns)
+[ RUN      ] EP_SA_MGMT.SA_4_READ_ARSN
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+/src/CryptoLib/test/unit/ut_ep_sa_mgmt.c:212: Failure
+  Expected : 0
+    Actual : 400
+[  FAILED  ] EP_SA_MGMT.SA_4_READ_ARSN (269006ns)
+[ RUN      ] EP_SA_MGMT.SA_6_SET_ARSNW
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+/src/CryptoLib/test/unit/ut_ep_sa_mgmt.c:302: Failure
+  Expected : 0
+    Actual : 400
+[  FAILED  ] EP_SA_MGMT.SA_6_SET_ARSNW (268688ns)
+[ RUN      ] EP_SA_MGMT.SA_6_SET_ARSN
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+/src/CryptoLib/test/unit/ut_ep_sa_mgmt.c:362: Failure
+  Expected : 0
+    Actual : 400
+[  FAILED  ] EP_SA_MGMT.SA_6_SET_ARSN (302441ns)
+[ RUN      ] EP_SA_MGMT.SA_6_STATUS
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+/src/CryptoLib/test/unit/ut_ep_sa_mgmt.c:426: Failure
+  Expected : 0
+    Actual : 400
+[  FAILED  ] EP_SA_MGMT.SA_6_STATUS (269181ns)
+[ RUN      ] EP_SA_MGMT.SA_STOP_6
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+/src/CryptoLib/test/unit/ut_ep_sa_mgmt.c:519: Failure
+  Expected : 0
+    Actual : 400
+[  FAILED  ] EP_SA_MGMT.SA_STOP_6 (268957ns)
+[ RUN      ] EP_SA_MGMT.SA_EXPIRE_6
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+/src/CryptoLib/test/unit/ut_ep_sa_mgmt.c:577: Failure
+  Expected : 0
+    Actual : 400
+[  FAILED  ] EP_SA_MGMT.SA_EXPIRE_6 (302289ns)
+[ RUN      ] EP_SA_MGMT.SA_STOP_SELF
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+/src/CryptoLib/test/unit/ut_ep_sa_mgmt.c:642: Failure
+  Expected : 0
+    Actual : 400
+[  FAILED  ] EP_SA_MGMT.SA_STOP_SELF (278344ns)
+[==========] 9 test cases ran.
+[  PASSED  ] 0 tests.
+[  FAILED  ] 9 tests, listed below:
+[  FAILED  ] EP_SA_MGMT.SA_6_REKEY_133
+[  FAILED  ] EP_SA_MGMT.SA_START_6
+[  FAILED  ] EP_SA_MGMT.SA_4_READ_ARSN
+[  FAILED  ] EP_SA_MGMT.SA_6_SET_ARSNW
+[  FAILED  ] EP_SA_MGMT.SA_6_SET_ARSN
+[  FAILED  ] EP_SA_MGMT.SA_6_STATUS
+[  FAILED  ] EP_SA_MGMT.SA_STOP_6
+[  FAILED  ] EP_SA_MGMT.SA_EXPIRE_6
+[  FAILED  ] EP_SA_MGMT.SA_STOP_SELF
+
+      Start 11: UT_EP_KEY_MGMT
+11/12 Test #11: UT_EP_KEY_MGMT ...................***Failed    0.01 sec
+[==========] Running 12 test cases.
+[ RUN      ] EP_KEY_MGMT.OTAR_0_140_142
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+/src/CryptoLib/test/unit/ut_ep_key_mgmt.c:24: Failure
+  Expected : 0
+    Actual : 400
+[  FAILED  ] EP_KEY_MGMT.OTAR_0_140_142 (385707ns)
+[ RUN      ] EP_KEY_MGMT.ACTIVATE_141_142
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+/src/CryptoLib/test/unit/ut_ep_key_mgmt.c:98: Failure
+  Expected : 0
+    Actual : 400
+[  FAILED  ] EP_KEY_MGMT.ACTIVATE_141_142 (271428ns)
+[ RUN      ] EP_KEY_MGMT.DEACTIVATE_142
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+/src/CryptoLib/test/unit/ut_ep_key_mgmt.c:176: Failure
+  Expected : 0
+    Actual : 400
+[  FAILED  ] EP_KEY_MGMT.DEACTIVATE_142 (271451ns)
+[ RUN      ] EP_KEY_MGMT.INVENTORY_132_134
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+/src/CryptoLib/test/unit/ut_ep_key_mgmt.c:254: Failure
+  Expected : 0
+    Actual : 400
+[  FAILED  ] EP_KEY_MGMT.INVENTORY_132_134 (405314ns)
+[ RUN      ] EP_KEY_MGMT.VERIFY_132_134
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+/src/CryptoLib/test/unit/ut_ep_key_mgmt.c:352: Failure
+  Expected : 0
+    Actual : 400
+[  FAILED  ] EP_KEY_MGMT.VERIFY_132_134 (277640ns)
+[ RUN      ] EP_KEY_MGMT.OTAR_0_140_142_MK_NOT_ACTIVE
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+/src/CryptoLib/test/unit/ut_ep_key_mgmt.c:461: Failure
+  Expected : 0
+    Actual : 400
+[  FAILED  ] EP_KEY_MGMT.OTAR_0_140_142_MK_NOT_ACTIVE (271609ns)
+[ RUN      ] EP_KEY_MGMT.OTAR_0_140_142_BAD_DECRYPT
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+/src/CryptoLib/test/unit/ut_ep_key_mgmt.c:567: Failure
+  Expected : 0
+    Actual : 400
+[  FAILED  ] EP_KEY_MGMT.OTAR_0_140_142_BAD_DECRYPT (272326ns)
+[ RUN      ] EP_KEY_MGMT.DEACTIVATE_142_NO_PUS
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+/src/CryptoLib/test/unit/ut_ep_key_mgmt.c:669: Failure
+  Expected : 0
+    Actual : 400
+[  FAILED  ] EP_KEY_MGMT.DEACTIVATE_142_NO_PUS (354536ns)
+[ RUN      ] EP_KEY_MGMT.DEACTIVATE_142_NO_PUS_BAD_TLV
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+/src/CryptoLib/test/unit/ut_ep_key_mgmt.c:753: Failure
+  Expected : 0
+    Actual : 400
+[  FAILED  ] EP_KEY_MGMT.DEACTIVATE_142_NO_PUS_BAD_TLV (274159ns)
+[ RUN      ] EP_KEY_MGMT.DEACTIVATE_142_PUS_BAD_TLV
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+/src/CryptoLib/test/unit/ut_ep_key_mgmt.c:833: Failure
+  Expected : 0
+    Actual : 400
+[  FAILED  ] EP_KEY_MGMT.DEACTIVATE_142_PUS_BAD_TLV (270924ns)
+[ RUN      ] EP_KEY_MGMT.TLV_KEY_DEACTIVATE_TESTS
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+[33mDEBUG - Printing local copy of SA Entry for current SPI.
+[0mSA status: 
+	 spi   = 0 
+	 sa_state   = 0x0 
+	 est        = 0x0 
+	 ast        = 0x0 
+	 shivf_len  = 0 
+	 shsnf_len  = 0 
+	 shplf_len  = 0 
+	 stmacf_len = 0 
+	 ecs_len    = 0 
+	 ekid       = 0 
+	 ek_ref     =  
+	 akid       = 0 
+	 ak_ref     =  
+	 null_iv    = 0 
+	 iv_len     = 0 
+	 iv        =  
+	 acs_len    = 0 
+	 acs        = 0x00 
+	 abm_len    = 0 
+	 null_arsn   = 0 
+	 arsn_len    = 0 
+	 arsnw_len   = 0 
+	 arsnw       = 0 
+[33mDEBUG - Printing local copy of SA Entry for current SPI.
+[0mSA status: 
+	 spi   = 0 
+	 sa_state   = 0x0 
+	 est        = 0x0 
+	 ast        = 0x0 
+	 shivf_len  = 0 
+	 shsnf_len  = 0 
+	 shplf_len  = 0 
+	 stmacf_len = 0 
+	 ecs_len    = 0 
+	 ekid       = 0 
+	 ek_ref     =  
+	 akid       = 0 
+	 ak_ref     =  
+	 null_iv    = 0 
+	 iv_len     = 0 
+	 iv        =  
+	 acs_len    = 0 
+	 acs        = 0x00 
+	 abm_len    = 0 
+	 null_arsn   = 0 
+	 arsn_len    = 0 
+	 arsnw_len   = 0 
+	 arsnw       = 0 
+[32mChecking for TLV overrun, should fail... 
+[0m[33m
+----- Crypto_TC_ProcessSecurity START -----
+[0mvcid = 0 
+spi  = 0 
+[33mDEBUG - Printing local copy of SA Entry for current SPI.
+[0mSA status: 
+	 spi   = 0 
+	 sa_state   = 0x3 
+	 est        = 0x0 
+	 ast        = 0x0 
+	 shivf_len  = 0 
+	 shsnf_len  = 0 
+	 shplf_len  = 0 
+	 stmacf_len = 0 
+	 ecs_len    = 0 
+	 ekid       = 0 
+	 ek_ref     =  
+	 akid       = 0 
+	 ak_ref     =  
+	 null_iv    = 0 
+	 iv_len     = 0 
+	 iv        =  
+	 acs_len    = 0 
+	 acs        = 0x00 
+	 abm_len    = 0 
+	 null_arsn   = 0 
+	 arsn_len    = 0 
+	 arsnw_len   = 0 
+	 arsnw       = 0 
+[33mDEBUG - Printing local copy of SA Entry for current SPI.
+[0mSA status: 
+	 spi   = 0 
+	 sa_state   = 0x3 
+	 est        = 0x0 
+	 ast        = 0x0 
+	 shivf_len  = 0 
+	 shsnf_len  = 0 
+	 shplf_len  = 0 
+	 stmacf_len = 0 
+	 ecs_len    = 0 
+	 ekid       = 0 
+	 ek_ref     =  
+	 akid       = 0 
+	 ak_ref     =  
+	 null_iv    = 0 
+	 iv_len     = 0 
+	 iv        =  
+	 acs_len    = 0 
+	 acs        = 0x00 
+	 abm_len    = 0 
+	 null_arsn   = 0 
+	 arsn_len    = 0 
+	 arsnw_len   = 0 
+	 arsnw       = 0 
+SA Index matches SPI
+TFVN SA(0) == FRAME(0)?
+SCID SA(3) == FRAME(3)?
+VCID SA(0) == FRAME(0)?
+[34mProcessing a TC - CLEAR!
+[0mFull IV Value from Frame and SADB (if applicable):
+
+Full ARSN Value from Frame and SADB (if applicable):
+
+[33mTC PDU Calculated Length: 1016 
+[0m[32mReceived SDLS command w/ packet header:
+	 [0mPrinting lengths for sanity check:
+	 TC Frame Header Length (bytes): 1023 
+	 TC Frame Actual Length (bytes): 1024 
+	 TC Frame Space Pkt Length (bytes): 1016 
+	 Received TLV Length (bits): 8024 
+	 Derived TLV Length (bytes): 1003 
+	 Received TLV Length (bytes): 1003.000000 
+[31mPacket Header Length GT TLV_DATA_SIZE
+[0mMC_Log: Error, [20261121,23:43:52], -64
+[32mChecking for 1 key (16 bits), should pass... 
+[0m[33m
+----- Crypto_TC_ProcessSecurity START -----
+[0mvcid = 0 
+spi  = 0 
+[33mDEBUG - Printing local copy of SA Entry for current SPI.
+[0mSA status: 
+	 spi   = 0 
+	 sa_state   = 0x3 
+	 est        = 0x0 
+	 ast        = 0x0 
+	 shivf_len  = 0 
+	 shsnf_len  = 0 
+	 shplf_len  = 0 
+	 stmacf_len = 0 
+	 ecs_len    = 0 
+	 ekid       = 0 
+	 ek_ref     =  
+	 akid       = 0 
+	 ak_ref     =  
+	 null_iv    = 0 
+	 iv_len     = 0 
+	 iv        =  
+	 acs_len    = 0 
+	 acs        = 0x00 
+	 abm_len    = 0 
+	 null_arsn   = 0 
+	 arsn_len    = 0 
+	 arsnw_len   = 0 
+	 arsnw       = 0 
+[33mDEBUG - Printing local copy of SA Entry for current SPI.
+[0mSA status: 
+	 spi   = 0 
+	 sa_state   = 0x3 
+	 est        = 0x0 
+	 ast        = 0x0 
+	 shivf_len  = 0 
+	 shsnf_len  = 0 
+	 shplf_len  = 0 
+	 stmacf_len = 0 
+	 ecs_len    = 0 
+	 ekid       = 0 
+	 ek_ref     =  
+	 akid       = 0 
+	 ak_ref     =  
+	 null_iv    = 0 
+	 iv_len     = 0 
+	 iv        =  
+	 acs_len    = 0 
+	 acs        = 0x00 
+	 abm_len    = 0 
+	 null_arsn   = 0 
+	 arsn_len    = 0 
+	 arsnw_len   = 0 
+	 arsnw       = 0 
+SA Index matches SPI
+TFVN SA(0) == FRAME(0)?
+SCID SA(3) == FRAME(3)?
+VCID SA(0) == FRAME(0)?
+[34mProcessing a TC - CLEAR!
+[0mFull IV Value from Frame and SADB (if applicable):
+
+Full ARSN Value from Frame and SADB (if applicable):
+
+[33mTC PDU Calculated Length: 15 
+[0m[32mReceived SDLS command w/ packet header:
+	 [0mPrinting lengths for sanity check:
+	 TC Frame Header Length (bytes): 22 
+	 TC Frame Actual Length (bytes): 23 
+	 TC Frame Space Pkt Length (bytes): 15 
+	 Received TLV Length (bits): 16 
+	 Derived TLV Length (bytes): 2 
+	 Received TLV Length (bytes): 2.000000 
+Current CCSDS in memory is: 
+	 Primary Header
+		 pvn        = 0x0 
+		 type       = 0x1 
+		 shdr       = 0x1 
+		 appID      = 0x180 
+		 seq        = 0x3 
+		 pktid      = 0x1039 
+		 pkt_length = 0x0009 
+	 PUS Header
+		 shf        = 0x0 
+		 pusv       = 0x1 
+		 ack        = 0x9 
+		 st         = 0x7f 
+		 sst        = 0x0b 
+		 sid        = 0x0 
+		 spare      = 0x0 
+	 TLV PDU 
+		 type       = 0x0 
+		 uf         = 0x0 
+		 sg         = 0x0 
+		 pid        = 0x3 
+		 pdu_len    = 0x0010 
+		 data[0]    = 0x00 
+		 data[1]    = 0x8e 
+		 data[2]    = 0xab 
+
+[32mKey Deactivate
+[0mKey(s) and 142 changed to state DEACTIVATED. 
+[32mChecking for 16 keys (494 bits), should pass... 
+[0m[33m
+----- Crypto_TC_ProcessSecurity START -----
+[0mvcid = 0 
+spi  = 0 
+[33mDEBUG - Printing local copy of SA Entry for current SPI.
+[0mSA status: 
+	 spi   = 0 
+	 sa_state   = 0x3 
+	 est        = 0x0 
+	 ast        = 0x0 
+	 shivf_len  = 0 
+	 shsnf_len  = 0 
+	 shplf_len  = 0 
+	 stmacf_len = 0 
+	 ecs_len    = 0 
+	 ekid       = 0 
+	 ek_ref     =  
+	 akid       = 0 
+	 ak_ref     =  
+	 null_iv    = 0 
+	 iv_len     = 0 
+	 iv        =  
+	 acs_len    = 0 
+	 acs        = 0x00 
+	 abm_len    = 0 
+	 null_arsn   = 0 
+	 arsn_len    = 0 
+	 arsnw_len   = 0 
+	 arsnw       = 0 
+[33mDEBUG - Printing local copy of SA Entry for current SPI.
+[0mSA status: 
+	 spi   = 0 
+	 sa_state   = 0x3 
+	 est        = 0x0 
+	 ast        = 0x0 
+	 shivf_len  = 0 
+	 shsnf_len  = 0 
+	 shplf_len  = 0 
+	 stmacf_len = 0 
+	 ecs_len    = 0 
+	 ekid       = 0 
+	 ek_ref     =  
+	 akid       = 0 
+	 ak_ref     =  
+	 null_iv    = 0 
+	 iv_len     = 0 
+	 iv        =  
+	 acs_len    = 0 
+	 acs        = 0x00 
+	 abm_len    = 0 
+	 null_arsn   = 0 
+	 arsn_len    = 0 
+	 arsnw_len   = 0 
+	 arsnw       = 0 
+SA Index matches SPI
+TFVN SA(0) == FRAME(0)?
+SCID SA(3) == FRAME(3)?
+VCID SA(0) == FRAME(0)?
+[34mProcessing a TC - CLEAR!
+[0mFull IV Value from Frame and SADB (if applicable):
+
+Full ARSN Value from Frame and SADB (if applicable):
+
+[33mTC PDU Calculated Length: 45 
+[0m[32mReceived SDLS command w/ packet header:
+	 [0mPrinting lengths for sanity check:
+	 TC Frame Header Length (bytes): 52 
+	 TC Frame Actual Length (bytes): 53 
+	 TC Frame Space Pkt Length (bytes): 45 
+	 Received TLV Length (bits): 256 
+	 Derived TLV Length (bytes): 32 
+	 Received TLV Length (bytes): 32.000000 
+Current CCSDS in memory is: 
+	 Primary Header
+		 pvn        = 0x0 
+		 type       = 0x1 
+		 shdr       = 0x1 
+		 appID      = 0x180 
+		 seq        = 0x3 
+		 pktid      = 0x1039 
+		 pkt_length = 0x0026 
+	 PUS Header
+		 shf        = 0x0 
+		 pusv       = 0x1 
+		 ack        = 0x9 
+		 st         = 0x7f 
+		 sst        = 0x0b 
+		 sid        = 0x0 
+		 spare      = 0x0 
+	 TLV PDU 
+		 type       = 0x0 
+		 uf         = 0x0 
+		 sg         = 0x0 
+		 pid        = 0x3 
+		 pdu_len    = 0x0100 
+		 data[0]    = 0x00 
+		 data[1]    = 0x80 
+		 data[2]    = 0x00 
+
+[32mKey Deactivate
+[0mKey(s) 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, and 143 changed to state DEACTIVATED. 
+[32mChecking for 10 keys (160 bits), should pass... 
+[0m[33m
+----- Crypto_TC_ProcessSecurity START -----
+[0mvcid = 0 
+spi  = 0 
+[33mDEBUG - Printing local copy of SA Entry for current SPI.
+[0mSA status: 
+	 spi   = 0 
+	 sa_state   = 0x3 
+	 est        = 0x0 
+	 ast        = 0x0 
+	 shivf_len  = 0 
+	 shsnf_len  = 0 
+	 shplf_len  = 0 
+	 stmacf_len = 0 
+	 ecs_len    = 0 
+	 ekid       = 0 
+	 ek_ref     =  
+	 akid       = 0 
+	 ak_ref     =  
+	 null_iv    = 0 
+	 iv_len     = 0 
+	 iv        =  
+	 acs_len    = 0 
+	 acs        = 0x00 
+	 abm_len    = 0 
+	 null_arsn   = 0 
+	 arsn_len    = 0 
+	 arsnw_len   = 0 
+	 arsnw       = 0 
+[33mDEBUG - Printing local copy of SA Entry for current SPI.
+[0mSA status: 
+	 spi   = 0 
+	 sa_state   = 0x3 
+	 est        = 0x0 
+	 ast        = 0x0 
+	 shivf_len  = 0 
+	 shsnf_len  = 0 
+	 shplf_len  = 0 
+	 stmacf_len = 0 
+	 ecs_len    = 0 
+	 ekid       = 0 
+	 ek_ref     =  
+	 akid       = 0 
+	 ak_ref     =  
+	 null_iv    = 0 
+	 iv_len     = 0 
+	 iv        =  
+	 acs_len    = 0 
+	 acs        = 0x00 
+	 abm_len    = 0 
+	 null_arsn   = 0 
+	 arsn_len    = 0 
+	 arsnw_len   = 0 
+	 arsnw       = 0 
+SA Index matches SPI
+TFVN SA(0) == FRAME(0)?
+SCID SA(3) == FRAME(3)?
+VCID SA(0) == FRAME(0)?
+[34mProcessing a TC - CLEAR!
+[0mFull IV Value from Frame and SADB (if applicable):
+
+Full ARSN Value from Frame and SADB (if applicable):
+
+[33mTC PDU Calculated Length: 33 
+[0m[32mReceived SDLS command w/ packet header:
+	 [0mPrinting lengths for sanity check:
+	 TC Frame Header Length (bytes): 40 
+	 TC Frame Actual Length (bytes): 41 
+	 TC Frame Space Pkt Length (bytes): 33 
+	 Received TLV Length (bits): 160 
+	 Derived TLV Length (bytes): 20 
+	 Received TLV Length (bytes): 20.000000 
+Current CCSDS in memory is: 
+	 Primary Header
+		 pvn        = 0x0 
+		 type       = 0x1 
+		 shdr       = 0x1 
+		 appID      = 0x180 
+		 seq        = 0x3 
+		 pktid      = 0x1039 
+		 pkt_length = 0x001a 
+	 PUS Header
+		 shf        = 0x0 
+		 pusv       = 0x1 
+		 ack        = 0x9 
+		 st         = 0x7f 
+		 sst        = 0x0b 
+		 sid        = 0x0 
+		 spare      = 0x0 
+	 TLV PDU 
+		 type       = 0x0 
+		 uf         = 0x0 
+		 sg         = 0x0 
+		 pid        = 0x3 
+		 pdu_len    = 0x00a0 
+		 data[0]    = 0x00 
+		 data[1]    = 0x80 
+		 data[2]    = 0x00 
+
+[32mKey Deactivate
+[0mKey(s) 128, 129, 130, 131, 132, 133, 134, 135, 136, and 137 changed to state DEACTIVATED. 
+[32mChecking for 3 keys with bad pdu len (512 bits), should fail... 
+[0m[33m
+----- Crypto_TC_ProcessSecurity START -----
+[0mvcid = 0 
+spi  = 0 
+[33mDEBUG - Printing local copy of SA Entry for current SPI.
+[0mSA status: 
+	 spi   = 0 
+	 sa_state   = 0x3 
+	 est        = 0x0 
+	 ast        = 0x0 
+	 shivf_len  = 0 
+	 shsnf_len  = 0 
+	 shplf_len  = 0 
+	 stmacf_len = 0 
+	 ecs_len    = 0 
+	 ekid       = 0 
+	 ek_ref     =  
+	 akid       = 0 
+	 ak_ref     =  
+	 null_iv    = 0 
+	 iv_len     = 0 
+	 iv        =  
+	 acs_len    = 0 
+	 acs        = 0x00 
+	 abm_len    = 0 
+	 null_arsn   = 0 
+	 arsn_len    = 0 
+	 arsnw_len   = 0 
+	 arsnw       = 0 
+[33mDEBUG - Printing local copy of SA Entry for current SPI.
+[0mSA status: 
+	 spi   = 0 
+	 sa_state   = 0x3 
+	 est        = 0x0 
+	 ast        = 0x0 
+	 shivf_len  = 0 
+	 shsnf_len  = 0 
+	 shplf_len  = 0 
+	 stmacf_len = 0 
+	 ecs_len    = 0 
+	 ekid       = 0 
+	 ek_ref     =  
+	 akid       = 0 
+	 ak_ref     =  
+	 null_iv    = 0 
+	 iv_len     = 0 
+	 iv        =  
+	 acs_len    = 0 
+	 acs        = 0x00 
+	 abm_len    = 0 
+	 null_arsn   = 0 
+	 arsn_len    = 0 
+	 arsnw_len   = 0 
+	 arsnw       = 0 
+SA Index matches SPI
+TFVN SA(0) == FRAME(0)?
+SCID SA(3) == FRAME(3)?
+VCID SA(0) == FRAME(0)?
+[34mProcessing a TC - CLEAR!
+[0mFull IV Value from Frame and SADB (if applicable):
+
+Full ARSN Value from Frame and SADB (if applicable):
+
+[33mTC PDU Calculated Length: 19 
+[0m[32mReceived SDLS command w/ packet header:
+	 [0mPrinting lengths for sanity check:
+	 TC Frame Header Length (bytes): 26 
+	 TC Frame Actual Length (bytes): 27 
+	 TC Frame Space Pkt Length (bytes): 19 
+	 Received TLV Length (bits): 256 
+	 Derived TLV Length (bytes): 6 
+	 Received TLV Length (bytes): 32.000000 
+[31mPacket PDU_LEN Not Equal To Derived PDU Len
+[0mMC_Log: Error, [20261121,23:43:52], -64
+[32mChecking for TLV length of 1 bit, should FAIL... 
+[0m[33m
+----- Crypto_TC_ProcessSecurity START -----
+[0mvcid = 0 
+spi  = 0 
+[33mDEBUG - Printing local copy of SA Entry for current SPI.
+[0mSA status: 
+	 spi   = 0 
+	 sa_state   = 0x3 
+	 est        = 0x0 
+	 ast        = 0x0 
+	 shivf_len  = 0 
+	 shsnf_len  = 0 
+	 shplf_len  = 0 
+	 stmacf_len = 0 
+	 ecs_len    = 0 
+	 ekid       = 0 
+	 ek_ref     =  
+	 akid       = 0 
+	 ak_ref     =  
+	 null_iv    = 0 
+	 iv_len     = 0 
+	 iv        =  
+	 acs_len    = 0 
+	 acs        = 0x00 
+	 abm_len    = 0 
+	 null_arsn   = 0 
+	 arsn_len    = 0 
+	 arsnw_len   = 0 
+	 arsnw       = 0 
+[33mDEBUG - Printing local copy of SA Entry for current SPI.
+[0mSA status: 
+	 spi   = 0 
+	 sa_state   = 0x3 
+	 est        = 0x0 
+	 ast        = 0x0 
+	 shivf_len  = 0 
+	 shsnf_len  = 0 
+	 shplf_len  = 0 
+	 stmacf_len = 0 
+	 ecs_len    = 0 
+	 ekid       = 0 
+	 ek_ref     =  
+	 akid       = 0 
+	 ak_ref     =  
+	 null_iv    = 0 
+	 iv_len     = 0 
+	 iv        =  
+	 acs_len    = 0 
+	 acs        = 0x00 
+	 abm_len    = 0 
+	 null_arsn   = 0 
+	 arsn_len    = 0 
+	 arsnw_len   = 0 
+	 arsnw       = 0 
+SA Index matches SPI
+TFVN SA(0) == FRAME(0)?
+SCID SA(3) == FRAME(3)?
+VCID SA(0) == FRAME(0)?
+[34mProcessing a TC - CLEAR!
+[0mFull IV Value from Frame and SADB (if applicable):
+
+Full ARSN Value from Frame and SADB (if applicable):
+
+[33mTC PDU Calculated Length: 14 
+[0m[32mReceived SDLS command w/ packet header:
+	 [0mPrinting lengths for sanity check:
+	 TC Frame Header Length (bytes): 21 
+	 TC Frame Actual Length (bytes): 22 
+	 TC Frame Space Pkt Length (bytes): 14 
+	 Received TLV Length (bits): 1 
+	 Derived TLV Length (bytes): 1 
+	 Received TLV Length (bytes): 0.125000 
+[31mPacket PDU_LEN Not Equal To Derived PDU Len
+[0mMC_Log: Error, [20261121,23:43:52], -64
+[32mChecking for TLV length of 0 bits, should pass... 
+[0m[33m
+----- Crypto_TC_ProcessSecurity START -----
+[0mvcid = 0 
+spi  = 0 
+[33mDEBUG - Printing local copy of SA Entry for current SPI.
+[0mSA status: 
+	 spi   = 0 
+	 sa_state   = 0x3 
+	 est        = 0x0 
+	 ast        = 0x0 
+	 shivf_len  = 0 
+	 shsnf_len  = 0 
+	 shplf_len  = 0 
+	 stmacf_len = 0 
+	 ecs_len    = 0 
+	 ekid       = 0 
+	 ek_ref     =  
+	 akid       = 0 
+	 ak_ref     =  
+	 null_iv    = 0 
+	 iv_len     = 0 
+	 iv        =  
+	 acs_len    = 0 
+	 acs        = 0x00 
+	 abm_len    = 0 
+	 null_arsn   = 0 
+	 arsn_len    = 0 
+	 arsnw_len   = 0 
+	 arsnw       = 0 
+[33mDEBUG - Printing local copy of SA Entry for current SPI.
+[0mSA status: 
+	 spi   = 0 
+	 sa_state   = 0x3 
+	 est        = 0x0 
+	 ast        = 0x0 
+	 shivf_len  = 0 
+	 shsnf_len  = 0 
+	 shplf_len  = 0 
+	 stmacf_len = 0 
+	 ecs_len    = 0 
+	 ekid       = 0 
+	 ek_ref     =  
+	 akid       = 0 
+	 ak_ref     =  
+	 null_iv    = 0 
+	 iv_len     = 0 
+	 iv        =  
+	 acs_len    = 0 
+	 acs        = 0x00 
+	 abm_len    = 0 
+	 null_arsn   = 0 
+	 arsn_len    = 0 
+	 arsnw_len   = 0 
+	 arsnw       = 0 
+SA Index matches SPI
+TFVN SA(0) == FRAME(0)?
+SCID SA(3) == FRAME(3)?
+VCID SA(0) == FRAME(0)?
+[34mProcessing a TC - CLEAR!
+[0mFull IV Value from Frame and SADB (if applicable):
+
+Full ARSN Value from Frame and SADB (if applicable):
+
+[33mTC PDU Calculated Length: 13 
+[0m[32mReceived SDLS command w/ packet header:
+	 [0mPrinting lengths for sanity check:
+	 TC Frame Header Length (bytes): 20 
+	 TC Frame Actual Length (bytes): 21 
+	 TC Frame Space Pkt Length (bytes): 13 
+	 Received TLV Length (bits): 0 
+	 Derived TLV Length (bytes): 0 
+	 Received TLV Length (bytes): 0.000000 
+Current CCSDS in memory is: 
+	 Primary Header
+		 pvn        = 0x0 
+		 type       = 0x1 
+		 shdr       = 0x1 
+		 appID      = 0x180 
+		 seq        = 0x3 
+		 pktid      = 0x1039 
+		 pkt_length = 0x0006 
+	 PUS Header
+		 shf        = 0x0 
+		 pusv       = 0x1 
+		 ack        = 0x9 
+		 st         = 0x7f 
+		 sst        = 0x0b 
+		 sid        = 0x0 
+		 spare      = 0x0 
+	 TLV PDU 
+		 type       = 0x0 
+		 uf         = 0x0 
+		 sg         = 0x0 
+		 pid        = 0x3 
+		 pdu_len    = 0x0000 
+		 data[0]    = 0x00 
+		 data[1]    = 0x80 
+		 data[2]    = 0x00 
+
+[32mKey Deactivate
+[0m[33mPDU Length not long enough to hold key values
+[0mKey(s) changed to state DEACTIVATED. 
+
+[       OK ] EP_KEY_MGMT.TLV_KEY_DEACTIVATE_TESTS (587544ns)
+[ RUN      ] EP_KEY_MGMT.TLV_KEY_VERIFY_TESTS
+[32mKey internal interface intialized 
+[0mFatal Error: Unable to identify Cryptography Interface!
+/src/CryptoLib/test/unit/ut_ep_key_mgmt.c:1072: Failure
+  Expected : 0
+    Actual : 400
+[  FAILED  ] EP_KEY_MGMT.TLV_KEY_VERIFY_TESTS (273261ns)
+[==========] 12 test cases ran.
+[  PASSED  ] 1 tests.
+[  FAILED  ] 11 tests, listed below:
+[  FAILED  ] EP_KEY_MGMT.OTAR_0_140_142
+[  FAILED  ] EP_KEY_MGMT.ACTIVATE_141_142
+[  FAILED  ] EP_KEY_MGMT.DEACTIVATE_142
+[  FAILED  ] EP_KEY_MGMT.INVENTORY_132_134
+[  FAILED  ] EP_KEY_MGMT.VERIFY_132_134
+[  FAILED  ] EP_KEY_MGMT.OTAR_0_140_142_MK_NOT_ACTIVE
+[  FAILED  ] EP_KEY_MGMT.OTAR_0_140_142_BAD_DECRYPT
+[  FAILED  ] EP_KEY_MGMT.DEACTIVATE_142_NO_PUS
+[  FAILED  ] EP_KEY_MGMT.DEACTIVATE_142_NO_PUS_BAD_TLV
+[  FAILED  ] EP_KEY_MGMT.DEACTIVATE_142_PUS_BAD_TLV
+[  FAILED  ] EP_KEY_MGMT.TLV_KEY_VERIFY_TESTS
+
+      Start 12: UT_AES_GCM_SIV
+12/12 Test #12: UT_AES_GCM_SIV ...................***Exception: SegFault  0.00 sec
+
+
+8% tests passed, 11 tests failed out of 12
+
+Total Test time (real) =   0.10 sec
+
+The following tests FAILED:
+	  1 - UT_TC_APPLY (Failed)
+	  2 - UT_TC_PROCESS (Failed)
+	  4 - UT_CRYPTO (SEGFAULT)
+	  5 - UT_AOS_APPLY (Failed)
+	  6 - UT_AOS_PROCESS (SEGFAULT)
+	  7 - UT_TM_APPLY (SEGFAULT)
+	  8 - UT_TM_PROCESS (Failed)
+	  9 - UT_EP_MC (Failed)
+	 10 - UT_EP_SA_MGMT (Failed)
+	 11 - UT_EP_KEY_MGMT (Failed)
+	 12 - UT_AES_GCM_SIV (SEGFAULT)
+Errors while running CTest
