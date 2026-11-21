@@ -1,0 +1,12 @@
+{
+  "cell_rows": 86,
+  "git_commit_base": "d52ae927a631afb3ef7ebdf6176d1174e4327ab2",
+  "git_dirty_note": "study_g/ and docs/study_g/ are untracked additions",
+  "grid_sha256": "757b768a97864e0edc0f453c64cb9bb54aaedf7361b402048998def61c2cb26e",
+  "platform": "Linux-6.8.0-149-generic-x86_64-with-glibc2.35",
+  "protocol_body_sha256": "74d6d7683fded82bf794ead5fdb08d5216141aba135801f280bd74c9a1303606",
+  "protocol_footer_matches": true,
+  "python": "3.10.12",
+  "results_csv_sha256": "fe7e36e8388e9b1b5fc8169b3601545b9dabdb3192337793fc475f2f51833b00",
+  "study": "G (exploratory, post hoc, same-author, AI-implemented, not third-party pre-registered)"
+}

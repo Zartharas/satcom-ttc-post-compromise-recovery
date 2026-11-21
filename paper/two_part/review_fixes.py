@@ -20,26 +20,33 @@ def _span(text, start, end, new):
 
 
 CONTRIB = (
-    "The paper reports four findings, obtained with a conservative comparison framework and a bounded "
-    "recovery-control treatment (T1) that serve as the experimental apparatus.\n\n"
+    "Part I is best read as a validation harness and a taxonomy of recovery end states for a bounded recovery-control "
+    "treatment (T1) and three baseline abstractions. The four properties below follow from the model's stated rules, "
+    "which the experiment makes visible; they are not discoveries about links or cryptography.\n\n"
     "1. **Convergence is not verified recovery.** In four of 31 single-fault cells the endpoints converged "
-    "but the controller lacked command or telemetry evidence, so the outcome was `INDETERMINATE`. Recording alignment, "
-    "security state, availability and verification evidence separately exposes states a single success flag hides, "
-    "such as a `SECURE_DEGRADED` label with an `UNSAFE` security state.\n"
-    "2. **Retransmission absorbs omission, not destroyed state.** Single drops and contact closures were recovered "
-    "within the retry budget. An endpoint restart at COMMIT or CONFIRM, and exhausted retries, left a compromised key "
-    "active (two of 31 cells and all eight retry-exhaustion schedules). Extra retries cannot rebuild state an endpoint "
-    "no longer holds, so pending state needs protected persistence or an authenticated re-initiation path. This follows from the model's rules "
-    "and is untested outside the model. Exhaustion before the spacecraft activates leaves the starting divergence "
-    "unresolved, whereas exhaustion at CONFIRM leaves the spacecraft ahead.\n"
+    "but the controller lacked command or telemetry evidence, so the outcome was `INDETERMINATE`. T1 attempts the "
+    "test-command and status-telemetry steps once by design, and B0 and B1 under local activation model no such steps; "
+    "when Study G (Section 5.12) gives T1 the same three transmissions, one or two lost steps no longer leave it "
+    "`INDETERMINATE`, so this finding is a consequence of that design choice. "
+    "Recording alignment, security state, availability and verification evidence separately exposes states a single "
+    "success flag hides.\n"
+    "2. **Retransmission absorbs lost messages, not destroyed state.** Single "
+    "drops and contact closures of the four recovery messages were recovered within the retry budget. A restart clears "
+    "an endpoint's pending state but not its counter, so a retried PREPARE is rejected and extra retries cannot rebuild "
+    "what the endpoint no longer holds; pending state needs protected persistence or an authenticated re-initiation "
+    "path (a property of the model's rules, untested outside it). Every Part I run starts from one seeded divergence "
+    "(ground epoch 2, spacecraft epoch 1, both keys marked compromised). In seven of the ten unsafe deterministic "
+    "schedules no new key was activated at either endpoint, so the compromised key simply stayed active; in the other "
+    "three (a ground restart at CONFIRM and two exhaustions at CONFIRM) the spacecraft had already activated the new key "
+    "and the ground had not, which locks the ground out of command.\n"
     "3. **Parity is a boundary, not a result.** Four matched families gave the same authorized categorical outcomes for "
     "the treatments present, but two inject no fault and two hold only B2 and T1, so they cannot discriminate. A later "
-    "descriptive run (Study F) found that retransmission alone lets baselines absorb isolated loss. The fixed 100-schedule "
-    "mixed population is descriptive and carries no reliability claim.\n"
-    "4. **The activation exchange can be analyzed exactly.** In a pre-specified parametric study, hypotheses, grid and "
-    "policy set were frozen before the confirmatory run, which was computed exactly and reproduced in a second environment. "
-    "Some hypotheses were supported and others falsified or only partly supported; the falsifications are model-rule "
-    "effects, not link behavior.\n\n"
+    "descriptive run (Study F, Section 5.11) found that retransmission alone lets baselines absorb isolated loss. The fixed "
+    "100-schedule mixed population is descriptive and carries no reliability claim.\n"
+    "4. **The activation exchange can be analyzed exactly.** In a parametric study, the author declared hypotheses, grid and "
+    "policy set before the confirmatory run, which was computed exactly and recomputed in a second software environment; "
+    "this is an author-frozen declaration, not an external registration. Some hypotheses were supported and others "
+    "falsified or only partly supported; the falsifications are model-rule effects, not link behavior.\n\n"
 )
 
 SCOPE = (
@@ -47,10 +54,12 @@ SCOPE = (
     "source-to-model mappings was completed, and the experiment does not establish strong post-compromise security, "
     "CCSDS/SDLS conformance, causal superiority, flight readiness, or real-world fault prevalence. Several Part I findings "
     "are rules of the model: lost verification evidence yields `INDETERMINATE`, a restart destroys volatile pending state, "
-    "and the Study D threshold follows from fault multiplicity in a designed set (Table S2). Study F (Supplementary Table S7) "
+    "and the Study D threshold follows from fault multiplicity in a designed set (Table S2). Study F (Section 5.11) "
     "put B0-B2 through step-level faults and found that, with up to three transmissions, every cell with one or two losses "
-    "succeeded. Ten of the 40 deterministic schedules end unsafe (Tables S4 and S5). Part II's loss values are stress "
-    "parameters, not measurements of a TT&C uplink, and its exchange has not been independently reviewed."
+    "succeeded; Study G found the same for T1 once its verification steps were retransmitted. Ten of the 40 deterministic schedules end with the ground's active key still the compromised one "
+    "(Tables S4 and S5). Part I and Part II are different models and no quantitative result is transferred between them. "
+    "Part II's loss values are stress parameters, not measurements of a TT&C uplink, and its exchange has not been "
+    "independently reviewed."
 )
 
 
@@ -62,8 +71,9 @@ def apply_review_fixes(text):
         "services needed to operate an SDLS implementation [@ccsds_sdls_ep_355_1_b_1]. "
         "Set and Read ARSN commands help resynchronize anti-replay state, and key verification and "
         "key inventory let the Initiator check key state, but all of them need an operating security "
-        "association, and the text does not present them as recovery from a failed activation "
-        "[@ccsds_sdls_ep_355_1_b_1].",
+        "association: Section 4.3.1.1 requires Extended Procedures command PDUs to travel over an SDLS channel "
+        "\"protected by authentication or authenticated encryption\", and the text does not present them as recovery "
+        "from a failed activation [@ccsds_sdls_ep_355_1_b_1].",
     )
     pair = "[@poettering_roesler_bidirectional_rke; @poettering_roesler_async_rke]"
     if pair not in t:
@@ -91,7 +101,9 @@ def apply_review_fixes(text):
         "These establish that post-compromise key renewal matters and that stateful mechanisms can suit disrupted links.",
         "These establish that post-compromise key renewal matters and that stateful mechanisms can suit disrupted links. "
         "The nearest work, SDLS-DR [@ledin_sdls_dr_risc2026], persists ratchet state at commit points and adds a Recovery association; "
-        "its authors did not evaluate contact windows, delay or flight hardware, the setting examined here.",
+        "its authors did not evaluate contact windows, delay or flight hardware, the setting examined here. "
+        "Atomic-commit protocols [@gray_notes_1978; @skeen_nonblocking_1981] already explain why a participant must persist "
+        "prepared state across a restart; the Part I restart result is that behavior restated for a link that is not always on.",
     )
     t = _rep(
         t,
