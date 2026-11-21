@@ -170,7 +170,7 @@ FIGURES_IEEE = {
 # Part I's eight-term, semicolon-separated line is hash-locked, so it is replaced here, in the output only.
 KEYWORDS_TWO_PART = "fault injection, key management, post-compromise recovery, satellite cybersecurity"
 
-TABLE2_CAPTION = "**Table 2. Full deterministic T1 fault-coverage matrix.**"
+TABLE2_CAPTION = "**Table 2. Full deterministic T1 fault-coverage matrix; exact source fields are retained in Supplementary Table S1.**"
 TABLE3_CAPTION = "**Table 3. Study E hypotheses and outcomes over the full grid (exact arithmetic).**"
 COMPACT_POINTER = (
     "The complete 40-row deterministic fault-coverage matrix (schedule, class, fault, phase, outcome, alignment, "
@@ -530,12 +530,13 @@ def main() -> None:
         suffix = "_trim" if args.trim else ""
         (out / f"manuscript_two_part_compact{suffix}.md").write_text(manuscript, encoding="utf-8")
         supp = supplement_table.replace("**Table 2.", "**Supplementary Table S1.", 1)
+        supp = supp.replace("; exact source fields are retained in Supplementary Table S1.**", ".**", 1)
         (out / "supplement_S1_deterministic_matrix.md").write_text(supp + "\n", encoding="utf-8")
         (out / "supplement_README.md").write_text(
             "# Supplementary material for the two-part TT&C resynchronization paper (DRAFT)\n\n"
             "- `supplement_S1_deterministic_matrix.md`: Supplementary Table S1, the 40-row deterministic T1 fault-coverage matrix.\n"
             "  It is copied unchanged from Table 2 of the Part I manuscript (paper/manuscript/manuscript.md, sha256 "
-            + sha256(PART1_MANUSCRIPT) + "); only the label changes from Table 2 to Supplementary Table S1.\n"
+            + sha256(PART1_MANUSCRIPT) + "); only the label changes from Table 2 to Supplementary Table S1, and the self-referring clause in the caption (\"; exact source fields are retained in Supplementary Table S1\") is dropped.\n"
             "- `supplement_S2_evidence_details.md`: Supplementary Tables S2-S6 (Study D challenge-set structure, unreached Study C cells, outcome by security state, terms, fault scope), generated read-only from frozen CSV/JSON inputs.\n"
             "- The main text keeps a one-paragraph pointer to S1; every other table, figure and result is in the main text.\n"
             "- Source data and code: see Section 9 (Reproducibility and Artifact Availability) of the paper.\n"

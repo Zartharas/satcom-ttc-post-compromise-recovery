@@ -153,7 +153,7 @@ def build_table2():
         "Alignment", "Security", "Availability", "Verified", "Reject evidence",
     ]
     lines = [
-        "**Table 2. Full deterministic T1 fault-coverage matrix.**",
+        "**Table 2. Full deterministic T1 fault-coverage matrix; exact source fields are retained in Supplementary Table S1.**",
         "",
         "| " + " | ".join(headers) + " |",
         "|" + "|".join(["---"] * len(headers)) + "|",
