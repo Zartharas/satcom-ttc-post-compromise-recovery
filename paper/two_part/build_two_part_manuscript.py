@@ -45,7 +45,7 @@ INTRO_BRIDGE = (
     "contact windows disrupt key activation and verification, how often does the exchange finish, diverge or "
     "stall, and how much do persistence, retry and resumability choices change that? "
     "CCSDS 355.1-B-1 specifies key activation and key verification as separate procedures, with no recovery "
-    "procedure found in its text; CCSDS 354.0-M-1 places recovery procedures outside its scope; and SDLS-DR does not "
+    "procedure found in its text; the review draft of CCSDS 354.0 excludes session-key recovery from its scope; and SDLS-DR does not "
     " evaluate contact windows, handover, delay, Doppler or flight hardware "
     "[@ccsds_sdls_ep_355_1_b_1; @ccsds_key_mgmt_354_0_m_1; @ledin_sdls_dr_risc2026]."
 )
