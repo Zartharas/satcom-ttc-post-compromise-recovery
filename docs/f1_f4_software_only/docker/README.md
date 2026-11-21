@@ -9,4 +9,4 @@ Run (no network, results to ./out):
 Record the image id: docker inspect --format '{{.Id}}' cryptolib-f1f4
 
 MySQL/TLS test targets are not built (make -k) or run. Key-command (OTAR/ACTIVATE) frames are not part of this kit.
-Runs 1-3 failed for kit errors and are kept as out_run1..3_*; run 4 is out_run4_pass/. Do not edit frozen records.
+Runs 1-3 failed for kit errors and are kept as out_run1..3_*; runs 4 and 5 are out_run4_pass/ and out_run5_pass/. Do not edit frozen records.

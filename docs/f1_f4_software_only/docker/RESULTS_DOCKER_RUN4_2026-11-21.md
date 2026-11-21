@@ -19,3 +19,17 @@ Also: with SA_FILE=ON, SA0 reads state 3 after restart (frame-driven snapshot); 
 
 Reading: matches the earlier sandbox result. SA persistence depends on the build option and is a snapshot at the next accepted frame; the in-memory key ring does not persist in either build. Not tested: EP key commands (OTAR/ACTIVATE) via valid frames, cFS processor vs power-on reset, CCSDS behaviour. The key_direct row mutates RAM directly and says nothing about command-driven activation.
 Caveats: single run per configuration, one architecture; image not rebuilt bit-for-bit reproducibly (apt unpinned).
+
+## Run 5 addendum: command-driven key load and activation (2026-11-21)
+
+Image id sha256:abaf63dc248f370c36ff7de6bc51dbc5fb8c101e2e0e50ff6012f89faa1b9057 (same base image and CryptoLib commit; kit commit 73c876a). Output: `out_run5_pass/`. Unit tests again 13/13 (SA_FILE on) and 12/12 (off).
+
+Why run 4's key row said nothing about commands: the unit-test OTAR/ACTIVATE frames carry two extra 0x0000 bytes before the 0x1980 packet header (SA0 shivf_len = 0), so the extended-procedure dispatcher never ran; the test frame's ACTIVATE TLV length is also not in bits. Run 5 builds valid frames in `restart_harness.c` (`build_ep_frame`, no FECF; OTAR payload AES-256-GCM encrypted under the library's default master key 0, a published test key). All frames returned status 0 and changed the key ring.
+
+| scenario | in process 1 | after restart, SA_FILE on | after restart, SA_FILE off |
+|---|---|---|---|
+| otar_only (load keys 140-142) | values loaded (a0.., a1.., a2..), state 0 | empty, state 0 | empty, state 0 |
+| otar_activate (load, then ACTIVATE) | loaded, state 1 | empty, state 0 | empty, state 0 |
+| activate_only | state 1 | state 0 | state 0 |
+
+Reading: command-driven key load and activation do not survive a process restart in either build; the key ring is volatile. This removes run 4's caveat that the key row was a direct RAM change. Not tested: cFS processor reset vs power-on reset (cFE CDS), CCSDS-level behaviour, FECF-enabled or encrypted-SA command paths, other key IDs. Library quirk seen, not investigated: key_len stays 0 after OTAR although the bytes are stored.
