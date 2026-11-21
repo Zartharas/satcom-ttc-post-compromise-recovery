@@ -1,0 +1,772 @@
+{
+ "claims": [
+  "SatNOGS windows: scheduled observation windows by volunteer downlink stations. They bracket plausible window lengths and show uneven scheduling; they say nothing about loss, command uplink or contact gaps.",
+  "Starlink bursts: one consumer broadband link; low average loss with occasional total-loss bursts and mild burst-to-burst persistence at 10 s resolution. Not spacecraft TT&C.",
+  "Pass table: geometry only; real contacts are shorter (masks, terrain, scheduling).",
+  "None of these is a measured TT&C uplink dataset. The paper must call the study parametric, anchored to downlink proxies and published ranges."
+ ],
+ "ge_table": [
+  {
+   "a_good_to_bad": "1/38",
+   "b_bad_to_good": "1/2",
+   "mean_bad_sojourn_slots": 2,
+   "p_bad": "1",
+   "p_good": "0",
+   "p_stationary": "1/20"
+  },
+  {
+   "a_good_to_bad": "1/76",
+   "b_bad_to_good": "1/4",
+   "mean_bad_sojourn_slots": 4,
+   "p_bad": "1",
+   "p_good": "0",
+   "p_stationary": "1/20"
+  },
+  {
+   "a_good_to_bad": "1/18",
+   "b_bad_to_good": "1/2",
+   "mean_bad_sojourn_slots": 2,
+   "p_bad": "1",
+   "p_good": "0",
+   "p_stationary": "1/10"
+  },
+  {
+   "a_good_to_bad": "1/36",
+   "b_bad_to_good": "1/4",
+   "mean_bad_sojourn_slots": 4,
+   "p_bad": "1",
+   "p_good": "0",
+   "p_stationary": "1/10"
+  },
+  {
+   "a_good_to_bad": "1/8",
+   "b_bad_to_good": "1/2",
+   "mean_bad_sojourn_slots": 2,
+   "p_bad": "1",
+   "p_good": "0",
+   "p_stationary": "1/5"
+  },
+  {
+   "a_good_to_bad": "1/16",
+   "b_bad_to_good": "1/4",
+   "mean_bad_sojourn_slots": 4,
+   "p_bad": "1",
+   "p_good": "0",
+   "p_stationary": "1/5"
+  },
+  {
+   "a_good_to_bad": "3/14",
+   "b_bad_to_good": "1/2",
+   "mean_bad_sojourn_slots": 2,
+   "p_bad": "1",
+   "p_good": "0",
+   "p_stationary": "3/10"
+  },
+  {
+   "a_good_to_bad": "3/28",
+   "b_bad_to_good": "1/4",
+   "mean_bad_sojourn_slots": 4,
+   "p_bad": "1",
+   "p_good": "0",
+   "p_stationary": "3/10"
+  },
+  {
+   "a_good_to_bad": "1/2",
+   "b_bad_to_good": "1/2",
+   "mean_bad_sojourn_slots": 2,
+   "p_bad": "1",
+   "p_good": "0",
+   "p_stationary": "1/2"
+  },
+  {
+   "a_good_to_bad": "1/4",
+   "b_bad_to_good": "1/4",
+   "mean_bad_sojourn_slots": 4,
+   "p_bad": "1",
+   "p_good": "0",
+   "p_stationary": "1/2"
+  }
+ ],
+ "inspection_order_note": "The Starlink ping summary statistics were inspected BEFORE this report's fitting rule was written, so they cannot be presented as blind. The SatNOGS timing summaries were computed by this tool for the first time; Study 8E's own results (frozen separately) used the same trace, so the author is not blind to its timing behaviour either. The Gilbert-Elliott cases below are therefore a stated sensitivity rule with stress-test values, not parameters fitted to these files.",
+ "pass_table": [
+  {
+   "altitude_km": 400,
+   "max_pass_s": 474.5,
+   "mean_pass_s": 373.8,
+   "min_elevation_deg": 5,
+   "slots_at_30s_max": 15,
+   "slots_at_30s_mean": 12,
+   "slots_at_60s_max": 7,
+   "slots_at_60s_mean": 6
+  },
+  {
+   "altitude_km": 400,
+   "max_pass_s": 372.6,
+   "mean_pass_s": 293.2,
+   "min_elevation_deg": 10,
+   "slots_at_30s_max": 12,
+   "slots_at_30s_mean": 9,
+   "slots_at_60s_max": 6,
+   "slots_at_60s_mean": 4
+  },
+  {
+   "altitude_km": 400,
+   "max_pass_s": 242.0,
+   "mean_pass_s": 190.2,
+   "min_elevation_deg": 20,
+   "slots_at_30s_max": 8,
+   "slots_at_30s_mean": 6,
+   "slots_at_60s_max": 4,
+   "slots_at_60s_mean": 3
+  },
+  {
+   "altitude_km": 550,
+   "max_pass_s": 589.6,
+   "mean_pass_s": 465.1,
+   "min_elevation_deg": 5,
+   "slots_at_30s_max": 19,
+   "slots_at_30s_mean": 15,
+   "slots_at_60s_max": 9,
+   "slots_at_60s_mean": 7
+  },
+  {
+   "altitude_km": 550,
+   "max_pass_s": 476.9,
+   "mean_pass_s": 375.6,
+   "min_elevation_deg": 10,
+   "slots_at_30s_max": 15,
+   "slots_at_30s_mean": 12,
+   "slots_at_60s_max": 7,
+   "slots_at_60s_mean": 6
+  },
+  {
+   "altitude_km": 550,
+   "max_pass_s": 322.2,
+   "mean_pass_s": 253.4,
+   "min_elevation_deg": 20,
+   "slots_at_30s_max": 10,
+   "slots_at_30s_mean": 8,
+   "slots_at_60s_max": 5,
+   "slots_at_60s_mean": 4
+  },
+  {
+   "altitude_km": 800,
+   "max_pass_s": 764.2,
+   "mean_pass_s": 604.3,
+   "min_elevation_deg": 5,
+   "slots_at_30s_max": 25,
+   "slots_at_30s_mean": 20,
+   "slots_at_60s_max": 12,
+   "slots_at_60s_mean": 10
+  },
+  {
+   "altitude_km": 800,
+   "max_pass_s": 637.1,
+   "mean_pass_s": 502.7,
+   "min_elevation_deg": 10,
+   "slots_at_30s_max": 21,
+   "slots_at_30s_mean": 16,
+   "slots_at_60s_max": 10,
+   "slots_at_60s_mean": 8
+  },
+  {
+   "altitude_km": 800,
+   "max_pass_s": 450.2,
+   "mean_pass_s": 354.4,
+   "min_elevation_deg": 20,
+   "slots_at_30s_max": 15,
+   "slots_at_30s_mean": 11,
+   "slots_at_60s_max": 7,
+   "slots_at_60s_mean": 5
+  },
+  {
+   "altitude_km": 1200,
+   "max_pass_s": 1022.1,
+   "mean_pass_s": 811.2,
+   "min_elevation_deg": 5,
+   "slots_at_30s_max": 34,
+   "slots_at_30s_mean": 27,
+   "slots_at_60s_max": 17,
+   "slots_at_60s_mean": 13
+  },
+  {
+   "altitude_km": 1200,
+   "max_pass_s": 876.0,
+   "mean_pass_s": 693.2,
+   "min_elevation_deg": 10,
+   "slots_at_30s_max": 29,
+   "slots_at_30s_mean": 23,
+   "slots_at_60s_max": 14,
+   "slots_at_60s_mean": 11
+  },
+  {
+   "altitude_km": 1200,
+   "max_pass_s": 646.7,
+   "mean_pass_s": 510.0,
+   "min_elevation_deg": 20,
+   "slots_at_30s_max": 21,
+   "slots_at_30s_mean": 16,
+   "slots_at_60s_max": 10,
+   "slots_at_60s_mean": 8
+  }
+ ],
+ "ping": {
+  "adjacent_pair_rule": "spacing <= 15 s and no blank row between",
+  "blank_rows_excluded": 74,
+  "full_loss_bursts": 520,
+  "label": "consumer LEO BROADBAND (Starlink) ICMP ping bursts; not TT&C, not telemetry, 10 s cadence",
+  "lossy_run_length_hist": {
+   "1": 6360,
+   "2": 716,
+   "3": 56,
+   "4": 19,
+   "5": 2,
+   "7": 1
+  },
+  "lossy_run_max": 7,
+  "lossy_run_mean": 1.1256639642158233,
+  "mean_packet_loss": 0.02159532649050011,
+  "p_lossy_given_prev_lossy": 0.13729383017715333,
+  "p_lossy_given_prev_ok": 0.07756531753076941,
+  "packets_lost": 19777,
+  "packets_sent": 915800,
+  "resolution_note": "10 packets per 10 s: cannot resolve packet-level sojourns or a 15 s handover cycle",
+  "share_bursts_with_loss": 0.087934046735095,
+  "usable_bursts": 91580
+ },
+ "ping_hash_check": {
+  "checked": true,
+  "files": 12,
+  "limit": "hashes were recorded locally at download; not compared with Zenodo checksums",
+  "matches_local_record": true
+ },
+ "satnogs": {
+  "duration_s": {
+   "max": 771.0,
+   "mean": 314.3046218487395,
+   "median": 277.0,
+   "min": 180.0,
+   "n": 476,
+   "p25": 208.75,
+   "p75": 406.25,
+   "p90": 466.5
+  },
+  "gap_s": {
+   "max": 683981.0,
+   "mean": 76783.62938596492,
+   "median": 46507.0,
+   "min": 30.0,
+   "n": 456,
+   "p25": 38046.0,
+   "p75": 85558.25,
+   "p90": 169550.0
+  },
+  "label": "SCHEDULED downlink observation windows; not contacts, not loss, not uplink",
+  "n_pairs": 20,
+  "n_rows": 476,
+  "overlaps_excluded": 0,
+  "per_pair": [
+   {
+    "duration_s": {
+     "max": 539.0,
+     "mean": 478.4,
+     "median": 509.0,
+     "min": 261.0,
+     "n": 25,
+     "p25": 473.0,
+     "p75": 531.0,
+     "p90": 535.0
+    },
+    "gap_s": {
+     "max": 113901.0,
+     "mean": 37152.291666666664,
+     "median": 34745.5,
+     "min": 5508.0,
+     "n": 24,
+     "p25": 27421.25,
+     "p75": 49251.75,
+     "p90": 49290.0
+    },
+    "ground_station": 766,
+    "n_windows": 25,
+    "norad_cat_id": 27844
+   },
+   {
+    "duration_s": {
+     "max": 257.0,
+     "mean": 231.52,
+     "median": 238.0,
+     "min": 189.0,
+     "n": 25,
+     "p25": 216.0,
+     "p75": 247.0,
+     "p90": 254.0
+    },
+    "gap_s": {
+     "max": 169758.0,
+     "mean": 70128.875,
+     "median": 67202.5,
+     "min": 34891.0,
+     "n": 24,
+     "p25": 47456.75,
+     "p75": 84746.75,
+     "p90": 84762.8
+    },
+    "ground_station": 812,
+    "n_windows": 25,
+    "norad_cat_id": 27844
+   },
+   {
+    "duration_s": {
+     "max": 209.0,
+     "mean": 197.95652173913044,
+     "median": 202.0,
+     "min": 183.0,
+     "n": 23,
+     "p25": 188.5,
+     "p75": 206.0,
+     "p90": 208.8
+    },
+    "gap_s": {
+     "max": 306217.0,
+     "mean": 113680.45454545454,
+     "median": 48057.0,
+     "min": 39533.0,
+     "n": 22,
+     "p25": 39541.0,
+     "p75": 209721.5,
+     "p90": 253999.0000000001
+    },
+    "ground_station": 812,
+    "n_windows": 23,
+    "norad_cat_id": 27939
+   },
+   {
+    "duration_s": {
+     "max": 180.0,
+     "mean": 180.0,
+     "median": 180.0,
+     "min": 180.0,
+     "n": 21,
+     "p25": 180.0,
+     "p75": 180.0,
+     "p90": 180.0
+    },
+    "gap_s": {
+     "max": 345257.0,
+     "mean": 110487.25,
+     "median": 90551.0,
+     "min": 5641.0,
+     "n": 20,
+     "p25": 57671.25,
+     "p75": 171089.75,
+     "p90": 182208.0000000001
+    },
+    "ground_station": 1864,
+    "n_windows": 21,
+    "norad_cat_id": 39133
+   },
+   {
+    "duration_s": {
+     "max": 180.0,
+     "mean": 180.0,
+     "median": 180.0,
+     "min": 180.0,
+     "n": 25,
+     "p25": 180.0,
+     "p75": 180.0,
+     "p90": 180.0
+    },
+    "gap_s": {
+     "max": 133542.0,
+     "mean": 64703.875,
+     "median": 42875.0,
+     "min": 42339.0,
+     "n": 24,
+     "p25": 42737.5,
+     "p75": 85394.0,
+     "p90": 89331.3
+    },
+    "ground_station": 4451,
+    "n_windows": 25,
+    "norad_cat_id": 40014
+   },
+   {
+    "duration_s": {
+     "max": 464.0,
+     "mean": 434.04,
+     "median": 440.0,
+     "min": 378.0,
+     "n": 25,
+     "p25": 427.0,
+     "p75": 450.0,
+     "p90": 457.4
+    },
+    "gap_s": {
+     "max": 170756.0,
+     "mean": 75145.70833333333,
+     "median": 85113.5,
+     "min": 38016.0,
+     "n": 24,
+     "p25": 46653.25,
+     "p75": 85139.0,
+     "p90": 129271.1
+    },
+    "ground_station": 4460,
+    "n_windows": 25,
+    "norad_cat_id": 40014
+   },
+   {
+    "duration_s": {
+     "max": 323.0,
+     "mean": 274.7,
+     "median": 271.0,
+     "min": 203.0,
+     "n": 20,
+     "p25": 250.0,
+     "p75": 304.25,
+     "p90": 317.0
+    },
+    "gap_s": {
+     "max": 504719.0,
+     "mean": 126627.57894736843,
+     "median": 86045.0,
+     "min": 5487.0,
+     "n": 19,
+     "p25": 43217.5,
+     "p75": 148998.0,
+     "p90": 270002.5999999999
+    },
+    "ground_station": 71,
+    "n_windows": 20,
+    "norad_cat_id": 41340
+   },
+   {
+    "duration_s": {
+     "max": 281.0,
+     "mean": 245.4,
+     "median": 254.0,
+     "min": 181.0,
+     "n": 25,
+     "p25": 212.0,
+     "p75": 278.0,
+     "p90": 280.0
+    },
+    "gap_s": {
+     "max": 174333.0,
+     "mean": 57261.208333333336,
+     "median": 46395.5,
+     "min": 37595.0,
+     "n": 24,
+     "p25": 41801.75,
+     "p75": 55913.75,
+     "p90": 84281.2
+    },
+    "ground_station": 1861,
+    "n_windows": 25,
+    "norad_cat_id": 46506
+   },
+   {
+    "duration_s": {
+     "max": 418.0,
+     "mean": 258.9,
+     "median": 269.0,
+     "min": 187.0,
+     "n": 20,
+     "p25": 211.75,
+     "p75": 291.0,
+     "p90": 299.1
+    },
+    "gap_s": {
+     "max": 683981.0,
+     "mean": 112550.1052631579,
+     "median": 84523.0,
+     "min": 30.0,
+     "n": 19,
+     "p25": 23600.5,
+     "p75": 154523.5,
+     "p90": 174029.59999999998
+    },
+    "ground_station": 6,
+    "n_windows": 20,
+    "norad_cat_id": 48606
+   },
+   {
+    "duration_s": {
+     "max": 391.0,
+     "mean": 320.88,
+     "median": 335.0,
+     "min": 246.0,
+     "n": 25,
+     "p25": 277.0,
+     "p75": 360.0,
+     "p90": 377.6
+    },
+    "gap_s": {
+     "max": 86311.0,
+     "mean": 28553.75,
+     "median": 31165.0,
+     "min": 5000.0,
+     "n": 24,
+     "p25": 5038.5,
+     "p75": 44089.75,
+     "p90": 44158.8
+    },
+    "ground_station": 2173,
+    "n_windows": 25,
+    "norad_cat_id": 49263
+   },
+   {
+    "duration_s": {
+     "max": 268.0,
+     "mean": 242.0,
+     "median": 253.0,
+     "min": 180.0,
+     "n": 25,
+     "p25": 235.0,
+     "p75": 265.0,
+     "p90": 267.0
+    },
+    "gap_s": {
+     "max": 258520.0,
+     "mean": 84093.125,
+     "median": 46184.5,
+     "min": 37726.0,
+     "n": 24,
+     "p25": 41956.25,
+     "p75": 99259.5,
+     "p90": 200816.8
+    },
+    "ground_station": 4497,
+    "n_windows": 25,
+    "norad_cat_id": 59809
+   },
+   {
+    "duration_s": {
+     "max": 180.0,
+     "mean": 180.0,
+     "median": 180.0,
+     "min": 180.0,
+     "n": 25,
+     "p25": 180.0,
+     "p75": 180.0,
+     "p90": 180.0
+    },
+    "gap_s": {
+     "max": 171310.0,
+     "mean": 81495.33333333333,
+     "median": 82614.5,
+     "min": 5705.0,
+     "n": 24,
+     "p25": 79670.5,
+     "p75": 85559.25,
+     "p90": 169523.0
+    },
+    "ground_station": 1864,
+    "n_windows": 25,
+    "norad_cat_id": 60243
+   },
+   {
+    "duration_s": {
+     "max": 645.0,
+     "mean": 537.0,
+     "median": 603.5,
+     "min": 230.0,
+     "n": 24,
+     "p25": 467.25,
+     "p75": 637.5,
+     "p90": 642.4
+    },
+    "gap_s": {
+     "max": 345693.0,
+     "mean": 104605.95652173914,
+     "median": 84440.0,
+     "min": 5413.0,
+     "n": 23,
+     "p25": 39063.5,
+     "p75": 151994.0,
+     "p90": 202836.00000000003
+    },
+    "ground_station": 4320,
+    "n_windows": 24,
+    "norad_cat_id": 61736
+   },
+   {
+    "duration_s": {
+     "max": 255.0,
+     "mean": 230.4,
+     "median": 234.0,
+     "min": 188.0,
+     "n": 20,
+     "p25": 215.5,
+     "p75": 249.0,
+     "p90": 254.0
+    },
+    "gap_s": {
+     "max": 345166.0,
+     "mean": 122568.84210526316,
+     "median": 88813.0,
+     "min": 37211.0,
+     "n": 19,
+     "p25": 45898.5,
+     "p75": 150921.5,
+     "p90": 308112.39999999997
+    },
+    "ground_station": 1861,
+    "n_windows": 20,
+    "norad_cat_id": 61763
+   },
+   {
+    "duration_s": {
+     "max": 335.0,
+     "mean": 312.4782608695652,
+     "median": 327.0,
+     "min": 238.0,
+     "n": 23,
+     "p25": 304.5,
+     "p75": 333.0,
+     "p90": 333.8
+    },
+    "gap_s": {
+     "max": 558342.0,
+     "mean": 111767.86363636363,
+     "median": 47093.0,
+     "min": 33211.0,
+     "n": 22,
+     "p25": 40917.75,
+     "p75": 86237.75,
+     "p90": 320054.10000000056
+    },
+    "ground_station": 91,
+    "n_windows": 23,
+    "norad_cat_id": 61790
+   },
+   {
+    "duration_s": {
+     "max": 471.0,
+     "mean": 287.52,
+     "median": 270.0,
+     "min": 184.0,
+     "n": 25,
+     "p25": 219.0,
+     "p75": 356.0,
+     "p90": 416.8
+    },
+    "gap_s": {
+     "max": 172531.0,
+     "mean": 93292.20833333333,
+     "median": 132427.5,
+     "min": 39637.0,
+     "n": 24,
+     "p25": 39720.75,
+     "p75": 132490.0,
+     "p90": 132533.5
+    },
+    "ground_station": 3020,
+    "n_windows": 25,
+    "norad_cat_id": 62628
+   },
+   {
+    "duration_s": {
+     "max": 771.0,
+     "mean": 446.24,
+     "median": 361.0,
+     "min": 190.0,
+     "n": 25,
+     "p25": 262.0,
+     "p75": 651.0,
+     "p90": 762.6
+    },
+    "gap_s": {
+     "max": 173161.0,
+     "mean": 58806.916666666664,
+     "median": 44227.0,
+     "min": 4998.0,
+     "n": 24,
+     "p25": 32991.0,
+     "p75": 86472.25,
+     "p90": 127322.5
+    },
+    "ground_station": 4595,
+    "n_windows": 25,
+    "norad_cat_id": 62709
+   },
+   {
+    "duration_s": {
+     "max": 439.0,
+     "mean": 403.76,
+     "median": 416.0,
+     "min": 331.0,
+     "n": 25,
+     "p25": 386.0,
+     "p75": 431.0,
+     "p90": 434.6
+    },
+    "gap_s": {
+     "max": 90332.0,
+     "mean": 46395.166666666664,
+     "median": 44946.0,
+     "min": 5271.0,
+     "n": 24,
+     "p25": 37792.0,
+     "p75": 46498.75,
+     "p90": 73232.49999999997
+    },
+    "ground_station": 3623,
+    "n_windows": 25,
+    "norad_cat_id": 63235
+   },
+   {
+    "duration_s": {
+     "max": 438.0,
+     "mean": 399.48,
+     "median": 412.0,
+     "min": 329.0,
+     "n": 25,
+     "p25": 372.0,
+     "p75": 429.0,
+     "p90": 433.6
+    },
+    "gap_s": {
+     "max": 90330.0,
+     "mean": 42853.875,
+     "median": 42168.5,
+     "min": 5271.0,
+     "n": 24,
+     "p25": 37756.0,
+     "p75": 46509.0,
+     "p90": 46534.1
+    },
+    "ground_station": 4242,
+    "n_windows": 25,
+    "norad_cat_id": 63235
+   },
+   {
+    "duration_s": {
+     "max": 440.0,
+     "mean": 387.6,
+     "median": 400.0,
+     "min": 300.0,
+     "n": 25,
+     "p25": 370.0,
+     "p75": 420.0,
+     "p90": 430.0
+    },
+    "gap_s": {
+     "max": 46440.0,
+     "mean": 33642.916666666664,
+     "median": 38000.0,
+     "min": 5260.0,
+     "n": 24,
+     "p25": 36600.0,
+     "p75": 46410.0,
+     "p90": 46420.0
+    },
+    "ground_station": 1156,
+    "n_windows": 25,
+    "norad_cat_id": 63242
+   }
+  ]
+ },
+ "satnogs_sha256": "6f80a44fa6cfa63a70df49de3ba447de3d59efe0632208180f26552f37b46a8e"
+}

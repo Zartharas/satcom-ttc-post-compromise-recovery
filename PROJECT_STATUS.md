@@ -124,3 +124,23 @@ Unless required by peer review:
 - concrete cryptographic primitive implementation;
 - live RF/operational-spacecraft testing; and
 - new cross-treatment timing/retry comparisons.
+
+## Update 2026-11-21 (branch `study-e-freeze-candidate`)
+
+```text
+STUDIES_A_D=FROZEN_UNCHANGED
+PART_II_STUDY_E=PRE_REGISTERED_CONFIRMATORY_RESULTS_RETAINED
+STUDY_F=DESCRIPTIVE_BASELINE_STEP_FAULT_RUN_NOT_PART_OF_FROZEN_PART_I
+TWO_PART_MANUSCRIPT_BUILD=19_PAGES_0_OVERFULL_0_UNDEFINED
+PART_I_TESTS=256_OF_256_PASS
+INDEPENDENT_VALIDATION=false
+PUBLISHER_SUBMISSION_AUTHORIZED=false
+F1_F4_RUNTIME=HOLD
+```
+
+- Part II and Study F are additions; Studies A-D are not rerun, reclassified or pooled. The two-part manuscript is generated output (`paper/two_part/out/`, git-ignored); Part I `paper/manuscript/manuscript.md` is unchanged.
+- The Part II pre-registration is frozen at annotated tag `study-e-prereg-v1` (author approval 2026-11-19). The registration document itself still carries its freeze-candidate header; this is disclosed in the manuscript.
+- A four-agent independent review found no fatal integrity defect (verdict: scientifically defensible but editorially weak). Verified fixes were applied to the generated manuscript only.
+- Open, author-only: full PDF read, overlength-fee decision, PR #26/#27/#30/#31 decisions, final sign-off, any submission.
+- CCSDS source checks complete: 350.5-G-2 is an approved Green Book Issue 2 (Jan 2024; the public PDF cover keeps a Draft Report template label), 350.11-G-1 is Issue 1, July 2024.
+- Prospective work needing a separate protocol: adversary that uses the compromised key; ground-compromise variant; protected-command implementation.
