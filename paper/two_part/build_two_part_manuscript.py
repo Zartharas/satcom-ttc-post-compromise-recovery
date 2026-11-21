@@ -544,6 +544,8 @@ def main() -> None:
     if missing:
         raise SystemExit("Unresolved citation keys: " + ", ".join(missing))
 
+    from safe_trims import apply_safe_trims
+    manuscript = apply_safe_trims(manuscript)
     manuscript = remove_em_dashes(manuscript)
     out = TWO / "out"
     out.mkdir(exist_ok=True)
