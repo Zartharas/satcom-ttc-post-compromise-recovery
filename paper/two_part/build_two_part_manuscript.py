@@ -157,8 +157,8 @@ FIGURES_IEEE = {
 KEYWORDS_TWO_PART = "fault injection, key management, post-compromise recovery, satellite cybersecurity"
 
 PENDING_DECISIONS = [
-    "read-through and approval of the combined abstract text (paper/two_part/abstract_candidate_250w.md; you chose to keep the descriptive-counts caveat)",
-    "read-through of the new 7.10, 8.10 and 9.7 text and of the chosen title",
+    "approval of the combined abstract text (paper/two_part/abstract_candidate_250w.md; author read it in full 2026-11-20; the descriptive-counts caveat is kept by decision)",
+    "approval of the new 7.10, 8.10 and 9.7 text and of the chosen title (author read them in full 2026-11-20)",
     "approval of the four keywords (fault injection, key management, post-compromise recovery, satellite cybersecurity); Part I keeps its own eight-term line",
     "journal abstract length limit: the TAES page found did not state one; IEEE-wide guidance found says 150-250 words, so 250 fits",
 ]
@@ -207,6 +207,8 @@ def bib_keys(text: str) -> list[str]:
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     parser.add_argument("--abstract", default=str(TWO / "abstract_candidate_250w.md"))
+    parser.add_argument("--acknowledgment", default=str(TWO / "acknowledgment_candidate.md"),
+                        help="AI-use Acknowledgment; inserted only when it has no [AUTHOR ...] tag left")
     parser.add_argument("--title", default=TITLE_TWO_PART, help="Title of the two-part paper (default revised 2026-11-19 to follow the TAES no-abbreviation guidance)")
     args = parser.parse_args()
 
@@ -268,6 +270,21 @@ def main() -> None:
         raise SystemExit(f"Future-work sentence anchor matched {n} times")
     paras[f] = new
 
+    # Acknowledgment (IEEE/AESS: AI-generated content must be disclosed here). Inserted only when complete.
+    extra_pending = []
+    ack_inserted = False
+    ack_path = Path(args.acknowledgment)
+    if ack_path.is_file():
+        ack = re.sub(r"<!--.*?-->", "", ack_path.read_text(encoding="utf-8"), flags=re.S)
+        ack = re.sub(r"\s+", " ", ack).strip()
+        if re.search(r"\[AUTHOR", ack):
+            extra_pending.append("Acknowledgment (AI-use disclosure) NOT inserted: unresolved [AUTHOR ...] tags in " + ack_path.name)
+        else:
+            paras.append("## Acknowledgment {-}\n\n" + ack)
+            ack_inserted = True
+    else:
+        extra_pending.append("Acknowledgment file missing: " + str(ack_path))
+
     manuscript = "\n\n".join(paras) + "\n"
 
     # Figures: point at the IEEE-ready copies and add the moved notes to the captions.
@@ -316,8 +333,9 @@ def main() -> None:
     print(f"citation_keys_used={len(used)}  new_bib_keys={len(k2)}")
     print("exact_duplicate_long_paragraphs=0")
     print("two_part_manuscript_written=PASS")
+    print(f"acknowledgment_inserted={ack_inserted}")
     print("AUTHOR DECISIONS STILL PENDING:")
-    for d in PENDING_DECISIONS:
+    for d in PENDING_DECISIONS + extra_pending:
         print(f"  - {d}")
 
 
