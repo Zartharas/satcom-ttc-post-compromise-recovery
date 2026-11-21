@@ -165,7 +165,7 @@ The deterministic replay, stale-counter, duplicate, and reordering cases were al
 
 Study A found categorical parity, not treatment superiority, and the comparability work excluded families whose fields or semantics were not equivalent enough for a defensible cross-treatment claim. Within the four retained families, T1 reached the same authorized terminal classifications as the corresponding abstract baselines, a sanity boundary showing that the controller does not obtain its fault-handling story from obviously different classifications in the simplest matched cases.
 
-Studies B and D instead document T1's mechanisms alone and show no advantage over any baseline: Study F (Supplementary Table S7) found that, with retransmission, a baseline absorbs a lost status message that T1 leaves indeterminate by rule.
+Studies B to D instead document T1's mechanisms alone and show no advantage over any baseline: Study F (Supplementary Table S7) found that, with retransmission, a baseline absorbs a lost status message that T1 leaves indeterminate by rule.
 
 ### 7.7 The mixed-schedule panel is descriptive, not a reliability estimate
 
