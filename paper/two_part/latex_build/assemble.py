@@ -22,6 +22,7 @@ tex=r'''\documentclass{IEEEtaes}
 \providecommand{\tightlist}{\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 \providecommand{\pandocbounded}[1]{#1}
 \jvol{XX}\jnum{XX}\jmonth{XXXXX}\paper{0000000}\pubyear{2026}\doiinfo{TAES.2026.Doi Number}
+\setlength{\textwidth}{7.1in}\setlength{\columnsep}{0.2in}\setlength{\oddsidemargin}{0.58in}\setlength{\evensidemargin}{0.58in}
 \setcounter{page}{1}
 \begin{document}
 \title{'''+tx(title)+r'''}
