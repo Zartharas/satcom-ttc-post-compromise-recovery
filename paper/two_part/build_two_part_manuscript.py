@@ -200,9 +200,9 @@ INTRO_INVENTORY_SENTENCE = (
 )
 
 PENDING_DECISIONS = [
-    "approval of the combined abstract text (paper/two_part/abstract_candidate_250w.md; author read it in full 2026-11-20; the descriptive-counts caveat is kept by decision)",
-    "approval of the new 7.10, 8.10 and 9.7 text and of the chosen title (author read them in full 2026-11-20)",
-    "approval of the four keywords (fault injection, key management, post-compromise recovery, satellite cybersecurity); Part I keeps its own eight-term line",
+    "approved by the author 2026-11-21: abstract v7, Sections 7.10, 8.10 and 9.7, Supplementary Table S7 and the Study F scope sentence",
+    "approval of the chosen title and of the four keywords (fault injection, key management, post-compromise recovery, satellite cybersecurity); Part I keeps its own eight-term line",
+    "approval of the figures after the 0.9-width change (checked for legibility on pages 7 and 11 only)",
     "journal abstract length limit: the TAES page found did not state one; IEEE-wide guidance found says 150-250 words, so 250 fits",
 ]
 

@@ -25,9 +25,9 @@ tex=r'''\documentclass{IEEEtaes}
 \setcounter{page}{1}
 \begin{document}
 \title{'''+tx(title)+r'''}
-\author{AUTHOR NAME PLACEHOLDER -- HOLD}
-\affil{AFFILIATION PLACEHOLDER -- author-confirmed value required}
-\markboth{AUTHOR ET AL.}{POST-COMPROMISE RESYNCHRONIZATION UNDER INTERMITTENT LINKS}
+\author{Aman Singh}
+\affil{Independent researcher}
+\markboth{SINGH}{POST-COMPROMISE RESYNCHRONIZATION UNDER INTERMITTENT LINKS}
 \maketitle
 \begin{abstract}'''+tx(abstract)+r'''\end{abstract}
 \begin{IEEEkeywords}'''+tx(kw)+r'''\end{IEEEkeywords}
