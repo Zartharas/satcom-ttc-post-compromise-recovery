@@ -13,6 +13,12 @@ Inputs (all read-only):
 Outputs (written only under paper/two_part/out/):
   manuscript_two_part.md
   bibliography_two_part.bib
+With --compact (opt-in; the default output is unchanged) the 40-row deterministic fault-coverage matrix is moved
+out of the main text into a supplement (TAES accepts supplementary material and charges $200 per printed page
+beyond 10):
+  manuscript_two_part_compact.md
+  supplement_S1_deterministic_matrix.md
+  supplement_README.md
 
 The framing edits below implement paper/two_part/FRAMING_TEXT_PROPOSAL_v1_2026-11-19.md. Keep the two in sync.
 Every edit asserts that its anchor occurs exactly once, so a changed Part I text fails loudly instead of
@@ -156,6 +162,14 @@ FIGURES_IEEE = {
 # Part I's eight-term, semicolon-separated line is hash-locked, so it is replaced here, in the output only.
 KEYWORDS_TWO_PART = "fault injection, key management, post-compromise recovery, satellite cybersecurity"
 
+TABLE2_CAPTION = "**Table 2. Full deterministic T1 fault-coverage matrix.**"
+TABLE3_CAPTION = "**Table 3. Study E hypotheses and outcomes over the full grid (exact arithmetic).**"
+COMPACT_POINTER = (
+    "The complete 40-row deterministic fault-coverage matrix (schedule, class, fault, phase, outcome, alignment, "
+    "security, availability, verification and reject evidence for every schedule) is provided as Supplementary "
+    "Table S1 in the supplementary material."
+)
+
 PENDING_DECISIONS = [
     "approval of the combined abstract text (paper/two_part/abstract_candidate_250w.md; author read it in full 2026-11-20; the descriptive-counts caveat is kept by decision)",
     "approval of the new 7.10, 8.10 and 9.7 text and of the chosen title (author read them in full 2026-11-20)",
@@ -210,6 +224,8 @@ def main() -> None:
     parser.add_argument("--acknowledgment", default=str(TWO / "acknowledgment_candidate.md"),
                         help="AI-use Acknowledgment; inserted only when it has no [AUTHOR ...] tag left")
     parser.add_argument("--title", default=TITLE_TWO_PART, help="Title of the two-part paper (default revised 2026-11-19 to follow the TAES no-abbreviation guidance)")
+    parser.add_argument("--compact", action="store_true",
+                        help="Move the 40-row deterministic matrix (Part I Table 2) to a supplement; writes *_compact outputs only")
     args = parser.parse_args()
 
     verify_part1_unchanged()
@@ -270,6 +286,22 @@ def main() -> None:
         raise SystemExit(f"Future-work sentence anchor matched {n} times")
     paras[f] = new
 
+    # Optional compact mode: move Part I Table 2 (40 rows) to a supplement. Output only; Part I is untouched.
+    supplement_table = None
+    if args.compact:
+        a = para_index(paras, TABLE2_CAPTION)
+        if not (paras[a + 1].startswith("| Schedule |") and paras[a + 2].startswith("*Reject evidence is reported as")):
+            raise SystemExit("Table 2 layout changed: caption, table and note paragraphs not found in expected order")
+        supplement_table = "\n\n".join(paras[a:a + 3])
+        rows = [ln for ln in paras[a + 1].split("\n") if ln.startswith("|")]
+        if len(rows) - 2 != 40:
+            raise SystemExit(f"Expected 40 data rows in Table 2, found {len(rows) - 2}")
+        paras[a:a + 3] = [COMPACT_POINTER]
+        hits = [i for i, x in enumerate(paras) if TABLE3_CAPTION in x]  # Part II is inserted as one block
+        if len(hits) != 1 or paras[hits[0]].count(TABLE3_CAPTION) != 1:
+            raise SystemExit("Table 3 caption anchor not found exactly once")
+        paras[hits[0]] = paras[hits[0]].replace("**Table 3.", "**Table 2.", 1)
+
     # Acknowledgment (IEEE/AESS: AI-generated content must be disclosed here). Inserted only when complete.
     extra_pending = []
     ack_inserted = False
@@ -325,14 +357,27 @@ def main() -> None:
 
     out = TWO / "out"
     out.mkdir(exist_ok=True)
-    (out / "manuscript_two_part.md").write_text(manuscript, encoding="utf-8")
+    if args.compact:
+        (out / "manuscript_two_part_compact.md").write_text(manuscript, encoding="utf-8")
+        supp = supplement_table.replace("**Table 2.", "**Supplementary Table S1.", 1)
+        (out / "supplement_S1_deterministic_matrix.md").write_text(supp + "\n", encoding="utf-8")
+        (out / "supplement_README.md").write_text(
+            "# Supplementary material for the two-part TT&C resynchronization paper (DRAFT)\n\n"
+            "- `supplement_S1_deterministic_matrix.md`: Supplementary Table S1, the 40-row deterministic T1 fault-coverage matrix.\n"
+            "  It is copied unchanged from Table 2 of the Part I manuscript (paper/manuscript/manuscript.md, sha256 "
+            + sha256(PART1_MANUSCRIPT) + "); only the label changes from Table 2 to Supplementary Table S1.\n"
+            "- The main text keeps a one-paragraph pointer to it; every other table, figure and result is in the main text.\n"
+            "- Source data and code: see Section 9 (Reproducibility and Artifact Availability) of the paper.\n"
+            "- Status: draft. Nothing here has been submitted or published.\n", encoding="utf-8")
+    else:
+        (out / "manuscript_two_part.md").write_text(manuscript, encoding="utf-8")
     (out / "bibliography_two_part.bib").write_text(combined, encoding="utf-8")
 
     print(f"part1_manuscript_sha256={sha256(PART1_MANUSCRIPT)} (matches manifest)")
     print(f"abstract_words={abstract_words}" + ("" if abstract_words == 250 else "  (Part I CI rule is exactly 250)"))
     print(f"citation_keys_used={len(used)}  new_bib_keys={len(k2)}")
     print("exact_duplicate_long_paragraphs=0")
-    print("two_part_manuscript_written=PASS")
+    print("two_part_manuscript_written=PASS" + ("  (compact: Table 2 moved to supplement S1, Table 3 renumbered 2)" if args.compact else ""))
     print(f"acknowledgment_inserted={ack_inserted}")
     print("AUTHOR DECISIONS STILL PENDING:")
     for d in PENDING_DECISIONS + extra_pending:
