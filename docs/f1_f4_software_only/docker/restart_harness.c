@@ -7,6 +7,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <gcrypt.h>
 
 static void hexconv(const char *h, uint8_t **b, int *len) {
     size_t n = strlen(h) / 2; *b = malloc(n);
@@ -29,7 +30,7 @@ static void dump_key(const char *tag, int kid) {
 }
 static void dump_all(const char *tag) {
     dump_sa(tag, 0); dump_sa(tag, 6); dump_sa(tag, 7);
-    dump_key(tag, 132); dump_key(tag, 140); dump_key(tag, 141); dump_key(tag, 142);
+    dump_key(tag, 0); dump_key(tag, 132); dump_key(tag, 140); dump_key(tag, 141); dump_key(tag, 142);
 }
 static int init_lib(int frame_len) {
     Crypto_Config_CryptoLib(KEY_TYPE_INTERNAL, MC_TYPE_INTERNAL, SA_TYPE_INMEMORY, CRYPTOGRAPHY_TYPE_LIBGCRYPT, IV_INTERNAL);
@@ -47,6 +48,44 @@ static int send(const char *hex, const char *name) {
     int st = Crypto_TC_ProcessSecurity(b, &len, &pf);
     fprintf(stderr, "HARNESS|frame|%s status=%d\n", name, st);
     free(b); return st;
+}
+
+/* ---- Valid extended-procedure frame builder (added in run 5) ----
+ * The CryptoLib unit-test OTAR/ACTIVATE frames carry two extra 0x0000 bytes ahead of the 0x1980 packet header
+ * (SA0 shivf_len is 0), so Crypto_Process_Extended_Procedure_Pdu never dispatches them. Frames built here start the
+ * TC PDU at 0x1980 and carry correct frame, packet and TLV (bits) lengths. No FECF (managed parameters TC_NO_FECF). */
+static int build_ep_frame(uint8_t *out, uint8_t tlv_hdr, const uint8_t *data, int dlen) {
+    int pdu = 6 + 4 + 3 + dlen, total = 5 + 1 + 2 + pdu, i = 0;
+    out[i++] = 0x20; out[i++] = 0x03; out[i++] = (uint8_t)(((total - 1) >> 8) & 0x03); out[i++] = (uint8_t)((total - 1) & 0xFF);
+    out[i++] = 0x00; out[i++] = 0xFF; out[i++] = 0x00; out[i++] = 0x00;      /* seq, MAP/segment hdr, SPI 0 */
+    out[i++] = 0x19; out[i++] = 0x80; out[i++] = 0xD0; out[i++] = 0x37;     /* CCSDS apid 0x1980, seq/pktid */
+    out[i++] = (uint8_t)(((dlen + 4) >> 8) & 0xFF); out[i++] = (uint8_t)((dlen + 4) & 0xFF);
+    out[i++] = 0x19; out[i++] = 0x7F; out[i++] = 0x0B; out[i++] = 0x00;      /* PUS hdr */
+    out[i++] = tlv_hdr; out[i++] = (uint8_t)(((dlen * 8) >> 8) & 0xFF); out[i++] = (uint8_t)((dlen * 8) & 0xFF);
+    memcpy(out + i, data, dlen); i += dlen;
+    return i;
+}
+static int send_ep(uint8_t *f, int len, const char *name) {
+    TC_t pf; int st = Crypto_TC_ProcessSecurity(f, &len, &pf);
+    fprintf(stderr, "HARNESS|frame|%s len=%d status=%d\n", name, len, st); return st;
+}
+/* ACTIVATE keys 140,141,142 (TLV pid 2; data = 2-byte key ids) */
+static int send_activate(void) {
+    uint8_t d[6] = {0x00,0x8C,0x00,0x8D,0x00,0x8E}, f[64];
+    int n = build_ep_frame(f, 0x02, d, 6); return send_ep(f, n, "ACTIVATE_140_142_valid");
+}
+/* OTAR under master key MKID 0 (must be ACTIVE): data = MKID(2) | IV(12) | AES-256-GCM(keyid(2)|key(32) x3) | tag(16).
+ * Master key value is read from the key ring (library default); keys loaded are fixed test patterns 0xA0+n. */
+static int send_otar(void) {
+    uint8_t iv[12] = {1,2,3,4,5,6,7,8,9,10,11,12}, pt[102], d[2+12+102+16], f[256];
+    for (int n = 0; n < 3; n++) { int o = n * 34; pt[o] = 0x00; pt[o+1] = (uint8_t)(0x8C + n); memset(pt + o + 2, 0xA0 + n, 32); }
+    crypto_key_t *mk = key_if->get_key(0);
+    gcry_cipher_hd_t h; uint8_t tag[16], ct[102];
+    if (gcry_cipher_open(&h, GCRY_CIPHER_AES256, GCRY_CIPHER_MODE_GCM, 0)) return -1000;
+    gcry_cipher_setkey(h, mk->value, 32); gcry_cipher_setiv(h, iv, 12);
+    gcry_cipher_encrypt(h, ct, 102, pt, 102); gcry_cipher_gettag(h, tag, 16); gcry_cipher_close(h);
+    d[0] = 0x00; d[1] = 0x00; memcpy(d + 2, iv, 12); memcpy(d + 14, ct, 102); memcpy(d + 116, tag, 16);
+    int n = build_ep_frame(f, 0x01, d, 132); return send_ep(f, n, "OTAR_140_142_valid");
 }
 /* SA0 setup as in ut_ep_key_mgmt.c OTAR test (no IV / no ARSN) */
 static void sa0_plain(void) {
@@ -87,9 +126,11 @@ int main(int argc, char **argv) {
     int st = init_lib(200); fprintf(stderr, "HARNESS|%s|init status=%d\n", sc, st);
     dump_all("baseline_after_init");
     if (!strcmp(sc, "otar_only")) {          /* F3a: key load (PREACTIVE) then restart before ACTIVATE */
-        sa0_plain(); send(OTAR, "OTAR_140_142");
+        sa0_plain(); send_otar();
     } else if (!strcmp(sc, "otar_activate")) { /* F3b: OTAR + ACTIVATE completed, then restart */
-        sa0_plain(); send(OTAR, "OTAR_140_142"); sa0_iv(); send(ACTIVATE, "ACTIVATE_141_142");
+        sa0_plain(); send_otar(); send_activate();
+    } else if (!strcmp(sc, "activate_only")) { /* F3e: command-driven activation only (keys stay empty PREACTIVE->ACTIVE) */
+        sa0_plain(); send_activate();
     } else if (!strcmp(sc, "sa_stop6")) {    /* F1/F3c: SA6 OPERATIONAL -> KEYED by SA_STOP, restart */
         sa0_sdls(); SecurityAssociation_t *s; sa_if->sa_get_from_spi(6, &s); s->sa_state = SA_OPERATIONAL;
         send(STOP6, "SA_STOP_6");

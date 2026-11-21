@@ -17,7 +17,7 @@ for cfg in on off; do
   # harness
   gcc -o /build/h_$cfg /src/restart_harness.c -I/src/CryptoLib/include -L$b -lcryptolib -Wl,-rpath,$b -lgcrypt > /out/harness_${cfg}_compile.txt 2>&1
   w=/work/$cfg; rm -rf $w; mkdir -p $w; cd $w
-  for sc in sa_stop6 set_arsn7 key_direct; do
+  for sc in sa_stop6 set_arsn7 key_direct otar_only otar_activate activate_only; do
     /build/h_$cfg $sc > /out/harness_${cfg}_${sc}_p1.txt 2>&1
     /build/h_$cfg dump > /out/harness_${cfg}_${sc}_p2.txt 2>&1
     echo "harness $cfg $sc done" >> /out/summary.txt
