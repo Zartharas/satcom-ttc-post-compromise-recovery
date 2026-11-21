@@ -1,0 +1,13 @@
+
+
+-- Configuring done (0.2s)
+-- Generating done (0.0s)
+-- Build files have been written to: /tmp/f1f4/build
+[ 75%] Linking C executable ut_aos_process
+[ 75%] Built target ut_aos_apply
+Created /tmp/f1f4/build/bin/ut_aos_process
+[ 75%] Built target ut_aos_process
+[ 76%] Linking C executable ut_sa_save
+Created /tmp/f1f4/build/bin/ut_sa_save
+[ 76%] Built target ut_sa_save
+make: *** [Makefile:146: all] Error 2

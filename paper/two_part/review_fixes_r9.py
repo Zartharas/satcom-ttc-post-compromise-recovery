@@ -213,4 +213,15 @@ def apply_round9_fixes(text):
     t = _rep(t, ', since losing that evidence leaves the implementation synchronized but unable to justify a success classification.', '; without it a synchronized implementation cannot justify success.')
     t = _rep(t, ' The dominant adverse cases were missing evidence, exhausted delivery opportunities, and destroyed endpoint state, not successful replays.', ' The dominant adverse cases were missing evidence, exhausted delivery, and destroyed state, not successful replays.')
     t = _rep(t, "so a single independent-loss figure is not a safe planning assumption.", "so a single independent-loss figure is not a safe planning assumption (Supplementary Figure S8 maps outcome regions over p and K for one slice).")
+    t = _rep(
+        t,
+        "The falsified hypotheses describe the model's rules and should not be transferred to Part I or to real links.",
+        "A software-only check (`docs/f1_f4_software_only`; NASA CryptoLib commit 329f895 run, cFE and PSP read only) found persistence differing by state class and build option: the key ring reverted on process restart, the security-association table survived only in the optional file-save build as a snapshot at the next accepted frame, and a stop command issued before restart was lost. Command-driven key activation, processor or power resets, and CCSDS-specified behavior were not exercised, so the volatile, commit and journal levels are not validated. The falsified hypotheses describe the model's rules and should not be transferred to Part I or to real links.",
+    )
+    t = _rep(t, 'Satellite cybersecurity research is moving toward controlled experimental platforms. ', '')
+    t = _rep(t, 'are the natural basis for the follow-up testing this paper does not perform.', 'are the natural basis for follow-up testing; this paper reports only a software-only source check (Section 8.10).')
+    t = _rep(t, ' The approaches are complementary: high-fidelity testbeds can later test whether these mechanisms survive concrete flight software, transport, storage, timing and link behavior.', ' High-fidelity testbeds can later test whether the mechanisms survive concrete flight software and links.')
+    t = _rep(t, ' These establish that post-compromise key renewal matters and that stateful mechanisms can suit disrupted links.', '')
+    t = _rep(t, 'A software-only check (`docs/f1_f4_software_only`; NASA CryptoLib commit 329f895 run, cFE and PSP read only) found persistence differing by state class and build option:', 'A software-only check (`docs/f1_f4_software_only`; CryptoLib commit 329f895 run, cFE and PSP read only) found persistence differing by state class and build option:')
+    t = _rep(t, ' Command-driven key activation, processor or power resets, and CCSDS-specified behavior were not exercised, so the volatile, commit and journal levels are not validated.', ' Command-driven key activation, processor or power resets and CCSDS behavior were not exercised, so the three levels are not validated.')
     return t
