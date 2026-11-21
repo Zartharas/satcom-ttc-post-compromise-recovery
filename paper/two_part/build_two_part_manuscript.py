@@ -44,9 +44,9 @@ INTRO_BRIDGE = (
     "Part II asks a complementary, parametric question: when message loss, spacecraft restarts and short "
     "contact windows disrupt key activation and verification, how often does the exchange finish, diverge or "
     "stall, and how much do persistence, retry and resumability choices change that? "
-    "CCSDS 355.1-B-1 specifies key activation and key verification as separate procedures, with no recovery "
-    "procedure found in its text; the review draft of CCSDS 354.0 excludes session-key recovery from its scope; and SDLS-DR does not "
-    " evaluate contact windows, handover, delay, Doppler or flight hardware "
+    "CCSDS 355.1-B-1 separates key activation from verification and has no recovery procedure in the text "
+    "read; CCSDS 354.0-M-1 excludes session-key recovery procedures; and SDLS-DR does not evaluate "
+    "contact windows, handover, delay, Doppler or flight hardware "
     "[@ccsds_sdls_ep_355_1_b_1; @ccsds_key_mgmt_354_0_m_1; @ledin_sdls_dr_risc2026]."
 )
 
@@ -61,7 +61,7 @@ CONTRIBUTION_3_FINDINGS = (
 )
 
 CONTRIBUTION_4 = (
-    "4. **A pre-specified parametric study of the activation exchange.** Hypotheses, grid and analysis rules "
+    "4. **A pre-specified parametric study of the activation exchange.** Hypotheses, grid and policy set "
     "were frozen before the confirmatory run, which was computed exactly and reproduced in a second "
     "environment. Some hypotheses were supported and others were falsified or only partly supported in the "
     "model; the falsifications are reported as model-rule effects, not link behavior."
@@ -73,8 +73,7 @@ SCOPE_EVIDENCE = (
     "baseline. A later descriptive run, Study F (Supplementary Table S7), put B0-B2 through step-level faults: with "
     "up to three transmissions every cell with one or two losses succeeded, so retransmission alone absorbs isolated loss. That lost verification evidence yields `INDETERMINATE` and that a restart destroys volatile pending "
     "state are rules of the model, and the Study D threshold follows from fault multiplicity in a designed set "
-    "(Table S2). Ten of the 40 deterministic schedules end unsafe, meaning a compromised key is still active "
-    "(Tables S4 and S5)."
+    "(Table S2). Ten of the 40 deterministic schedules end unsafe (Tables S4 and S5)."
 )
 
 PARITY_OLD = re.compile(r"In the four\s+defensibly matched families, the treatments produced the same authorized categorical terminal\s+classifications\.")
@@ -90,8 +89,8 @@ SCOPE_ADDITION = (
 CONCLUSION_PART_II = (
     "Part II extended the question to the activation exchange. In an exact model, resumable verification (an "
     "assumption outside the standards) cleared indeterminate outcomes that plain retries could not, and recovery "
-    "reached the declared 0.95 level in 83-90% of multi-attempt configurations with divergence, not almost always. "
-    "These effects arise from the abstraction's rules, not from real link behavior."
+    "reached the declared 0.95 level in 83-90% of multi-attempt configurations with divergence, not almost always, "
+    "in the model, not on a real link."
 )
 
 FUTURE_WORK_OLD = r"evaluate\s+protected\s+persistent-state\s+strategies\s+across\s+endpoint\s+restart,"
@@ -110,7 +109,8 @@ SECTION_7_10 = (
     "whereas journaled progress made divergence invariant to restart probability. Convergence without verified "
     "recovery appears as `INDETERMINATE`, which plain retries could not clear and resumable verification could, "
     "if the remaining messages are idempotent, which neither Part I nor the standards establish. The two parts use "
-    "different models, and no quantitative result is transferred between them."
+    "different models, and no quantitative result is transferred between them. Part I has no Recovery SA fallback; "
+    "Part II models one (H-E4)."
 )
 
 SECTION_8_10 = (
@@ -185,7 +185,7 @@ CONCLUSION_TRIM_NEW = (
     "were absorbed within the retry budget, and delayed, duplicated, reordered, stale-counter and stale-replay cases "
     "completed while invalid material was rejected. Lost post-convergence evidence left the controller synchronized "
     "but `INDETERMINATE` rather than successful. Endpoint restart around COMMIT or CONFIRM destroyed or separated "
-    "pending or activated state and produced unsafe asymmetric outcomes: raising the transmission budget from two to "
+    "pending or activated state and produced unsafe asymmetric outcomes. Raising the transmission budget from two to "
     "three repaired the repeated omission and contact challenges in that fixed set, a fourth opportunity added no observed benefit, and "
     "none of them repaired the COMMIT-stage restart failure. Retransmission can recover missing messages; it cannot "
     "reconstruct protocol state that no longer exists. The fixed 100-schedule population is descriptive only: many "
@@ -255,7 +255,7 @@ def build_supplement_s2() -> str:
     import json
     cfg = json.loads((ROOT / "experiments" / "configs" / "paper-final-experiment.json").read_text(encoding="utf-8"))
     sched = cfg["studies"]["study_d_sensitivity_t1"]["schedules"]
-    lines = ["# Supplementary Tables S2-S7 (DRAFT, S2-S6 derived read-only from frozen Part I inputs; S7 from the Study F run)", ""]
+    lines = ["# Supplementary Tables S2-S7 (S2-S6 derived read-only from frozen Part I inputs; S7 from the Study F run)", ""]
     lines += ["**Supplementary Table S2. Study D challenge set: fault structure of the 12 designed schedules.**", "",
               "| Schedule | Faults | Same-phase consecutive faults | Transmissions needed for that phase |", "|---|---|---|---|"]
     rows = []
@@ -295,7 +295,7 @@ def build_supplement_s2() -> str:
     lines += ["", f"{unsafe} of {len(t2)} schedules end `UNSAFE`.", ""]
     lines += ["**Supplementary Table S5. Terms.**", "", "| Term | Meaning in this paper |", "|---|---|",
         "| `G_AHEAD`, `S_AHEAD` (Part I) | Ground (spacecraft) epoch counter exceeds the other endpoint's at the end of the run. The base scenario starts with the ground at epoch 2 and the spacecraft at epoch 1, with active keys marked compromised, so `G_AHEAD` after expiry is the starting divergence left unresolved; `S_AHEAD` arises when the spacecraft activates the new epoch and ground never confirms. |",
-        "| `UNSAFE` (security state) | At the end, the ground's active key is marked compromised at either endpoint, or the recovery authority is. It does not mean an attack occurred during the run. |",
+        "| `UNSAFE` (security state) | At the end, a compromised key is still marked active at the ground or the spacecraft, or the recovery authority is marked compromised. It means recovery did not complete, not that an attack occurred during the run. |",
         "| `SECURE_DEGRADED` (raw outcome) | Historical enum name kept for reproducibility; its security state is `UNSAFE` in all three deterministic schedules in which it occurs, so it is not a secure state. |",
         "| `SUCCESS` | Endpoints converged and verification evidence (test command and authenticated status) completed. |",
         "| `INDETERMINATE` | Endpoints converged but verification evidence is missing. |",
@@ -328,6 +328,9 @@ def build_supplement_s7() -> list:
             c = collections.Counter(r["outcome"] for r in sel)
             out.append(f"| {names[flow]} | {b} | {len(sel)} | " + " | ".join(str(c.get(o, 0)) for o in outcomes)
                        + f" | {sum(r['security_state'] == 'UNSAFE' for r in sel)} |")
+    nd_path = ROOT / "study_f_out" / "mac" / "study_f_not_defined.csv"
+    nd_count = len(list(csv.DictReader(nd_path.open(encoding="utf-8")))) if nd_path.exists() else 0
+    assert nd_count == 44, "not-defined count changed"
     loss = ("DROP", "CONTACT_CLOSE")
     b1 = [r for r in rows if r["budget"] == "1"]
     b3 = [r for r in rows if r["budget"] == "3"]
@@ -341,6 +344,7 @@ def build_supplement_s7() -> list:
     other = collections.Counter(r["kind"] for r in fails3 if r["kind"] not in loss)
     out += ["", f"At budget 1, all {len(single)} single-loss cells ended without success. At budget 3, all {len(absorbed)} cells with one or two consecutive losses succeeded; the {len(fails3)} non-successes were {len(exhaustion)} cells with three consecutive losses, "
             + ", ".join(f"{n} {k.lower().replace('_', ' ')}" for k, n in sorted(other.items())) + ". "
+            f"Cells per budget: " + ", ".join(f"{names[f]} {sum(1 for r in b1 if r['flow'] == f)}" for f in names) + f"; the controller has 31 canonical cells. {nd_count} flow-step-kind combinations are not defined for the baseline abstractions and are not run (study_f_not_defined.csv). "
             "Budget 3 also lets B2 re-request a lost status, whereas the controller treats lost verification evidence as indeterminate by rule, so those cells are not like for like. Baseline cells map to the controller's fault kinds by family, not one to one, and the same author wrote the engine and the model.", ""]
     return out
 
@@ -399,6 +403,19 @@ def main() -> None:
     if args.title:
         t0 = para_index(paras, "# ")
         paras[t0] = "# " + args.title.strip()
+
+    # Essential-roadmap wording fixes (output only; Part I file untouched).
+    i76 = para_index(paras, "The distinctive T1 contribution appears instead")
+    paras[i76] = (
+        "Studies B and D instead document T1's mechanisms alone and show no advantage over any baseline: Study F "
+        "(Supplementary Table S7) found that, with retransmission, a baseline absorbs a lost status message that T1 "
+        "leaves indeterminate by rule."
+    )
+    pat79 = re.compile(r"an\s+independently\s+encoded\s+control-state\s+view")
+    h79 = [i for i, x in enumerate(paras) if pat79.search(x)]
+    if len(h79) != 1:
+        raise SystemExit("Section 7.9 anchor not found exactly once")
+    paras[h79[0]] = pat79.sub("a second encoding of the control-state view", paras[h79[0]], count=1)
 
     # Discussion 7.10 and Threats 8.10, before the next top-level sections.
     d = para_index(paras, "## 8. Threats to Validity and Limitations")

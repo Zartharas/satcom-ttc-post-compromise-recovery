@@ -25,8 +25,8 @@ tex=r'''\documentclass{IEEEtaes}
 \setcounter{page}{1}
 \begin{document}
 \title{'''+tx(title)+r'''}
-\author{Aman Singh}
-\affil{Independent researcher}
+\author{Aman Kumar Singh}
+\affil{Independent researcher, The Woodlands, TX, USA (e-mail: aman.singh2406@live.com)}
 \markboth{SINGH}{POST-COMPROMISE RESYNCHRONIZATION UNDER INTERMITTENT LINKS}
 \maketitle
 \begin{abstract}'''+tx(abstract)+r'''\end{abstract}
