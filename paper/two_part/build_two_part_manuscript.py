@@ -349,6 +349,23 @@ def build_supplement_s7() -> list:
     return out
 
 
+def remove_em_dashes(text):
+    """Output-only: replace every em dash (the template does not require any) with plain punctuation."""
+    text = re.sub(r"(?m)^(#{2,4} [^\n]*?) \u2014 ", r"\1: ", text)
+    text = re.sub(r"\*\*(RQ\d) \u2014 ", r"**\1: ", text)
+    for old, new in (
+        ("baseline abstractions\u2014an SDLS", "baseline abstractions (an SDLS"),
+        ("(B2)\u2014and compare", "(B2)) and compare"),
+        ("and\u2014after response\u2014the candidate", "and, after response, the candidate"),
+    ):
+        if text.count(old) != 1:
+            raise SystemExit("em-dash anchor not found exactly once: " + old)
+        text = text.replace(old, new)
+    if "\u2014" in text:
+        raise SystemExit("unhandled em dash remains in the manuscript output")
+    return text
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     parser.add_argument("--abstract", default=str(TWO / "abstract_candidate_250w.md"))
@@ -518,11 +535,16 @@ def main() -> None:
     if clash:
         raise SystemExit("Bibliography key collision: " + ", ".join(clash))
     combined = b1.rstrip() + "\n\n" + b2.strip() + "\n"
+    combined = combined.replace("Extended Procedures---Summary of Concept and Rationale", "Extended Procedures, Summary of Concept and Rationale")  # output-only; Part I .bib untouched
+    combined = re.sub(r"(?m)^(\s*title\s*=\s*\{[^\n]*?)---", lambda m: m.group(1) + ": ", combined)
+    if re.search(r"(?m)^\s*title\s*=.*---", combined):
+        raise SystemExit("bibliography title still contains an em dash")
     used = set(re.findall(r"@([A-Za-z0-9_:-]+)", manuscript))
     missing = sorted(u for u in used if u not in set(k1) | set(k2))
     if missing:
         raise SystemExit("Unresolved citation keys: " + ", ".join(missing))
 
+    manuscript = remove_em_dashes(manuscript)
     out = TWO / "out"
     out.mkdir(exist_ok=True)
     (out / "supplement_S2_evidence_details.md").write_text(build_supplement_s2() + "\n", encoding="utf-8")
