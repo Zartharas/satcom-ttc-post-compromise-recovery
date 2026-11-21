@@ -135,7 +135,7 @@ TWO_PART_MANUSCRIPT_BUILD=19_PAGES_0_OVERFULL_0_UNDEFINED
 PART_I_TESTS=256_OF_256_PASS
 INDEPENDENT_VALIDATION=false
 PUBLISHER_SUBMISSION_AUTHORIZED=false
-F1_F4_RUNTIME=HOLD
+F1_F4_RUNTIME=SOFTWARE_ONLY_AUTHORIZED_2026-11-21
 ```
 
 - Part II and Study F are additions; Studies A-D are not rerun, reclassified or pooled. The two-part manuscript is generated output (`paper/two_part/out/`, git-ignored); Part I `paper/manuscript/manuscript.md` is unchanged.
@@ -144,3 +144,7 @@ F1_F4_RUNTIME=HOLD
 - Open, author-only: full PDF read, overlength-fee decision, PR #26/#27/#30/#31 decisions, final sign-off, any submission.
 - CCSDS source checks complete: 350.5-G-2 is an approved Green Book Issue 2 (Jan 2024; the public PDF cover keeps a Draft Report template label), 350.11-G-1 is Issue 1, July 2024.
 - Prospective work needing a separate protocol: adversary that uses the compromised key; ground-compromise variant; protected-command implementation.
+
+## Update 2026-11-21 (F1-F4 software-only authorization)
+
+The author lifted the F1-F4 hold for a software-only run only: isolated sandbox, no hardware, no RF, no restricted or vendor images, no operational-spacecraft or live-network experiments, public NASA source only, pinned commits recorded. Output is evidence for the persistence mapping (Part II volatile/commit/journal); results and non-exercised steps are reported without editing frozen records. PR #31: mark ready for review only after CI is green; merge remains author-only.
