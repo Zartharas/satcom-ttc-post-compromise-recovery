@@ -42,40 +42,56 @@ PART1_BIB = ROOT / "references" / "bibliography.bib"
 INTRO_BRIDGE = (
     "Part I (Sections 3-9) studies the recovery-control exchange in a deterministic fault-injection model. "
     "Part II asks a complementary, parametric question: when message loss, spacecraft restarts and short "
-    "contact windows disrupt the key-activation and verification exchange, how often does the exchange "
-    "finish, diverge or stall, and how much do persistence, retry and resumability choices change that? "
+    "contact windows disrupt key activation and verification, how often does the exchange finish, diverge or "
+    "stall, and how much do persistence, retry and resumability choices change that? "
     "CCSDS 355.1-B-1 specifies key activation and key verification as separate procedures, with no recovery "
-    "procedure found in its text; CCSDS 354.0-M-1 places recovery procedures for master-key-protected "
-    "procedures outside its scope; and SDLS-DR, a ratcheted extension, does not evaluate contact windows, "
-    "handover, delay, Doppler or flight hardware "
+    "procedure found in its text; CCSDS 354.0-M-1 places recovery procedures outside its scope; and SDLS-DR does not "
+    " evaluate contact windows, handover, delay, Doppler or flight hardware "
     "[@ccsds_sdls_ep_355_1_b_1; @ccsds_key_mgmt_354_0_m_1; @ledin_sdls_dr_risc2026]."
 )
 
-CONTRIBUTION_5 = (
-    "5. **A pre-specified parametric study of the activation exchange.** Hypotheses, grid and analysis rules "
+CONTRIBUTION_3_FINDINGS = (
+    "3. **Fault-response findings.** In predeclared deterministic experiments on the controller alone, 25 of 31 "
+    "single-fault cells succeeded, four ended indeterminate, and two ended unsafe, with a compromised key still "
+    "active; so did all eight retry-exhaustion schedules. Bounded retransmission absorbed isolated delivery faults "
+    "but not lost verification evidence or endpoint-state loss around activation. On twelve designed schedules, "
+    "six with two consecutive same-phase faults, a third transmission raised verification-complete executions from "
+    "5/12 to 11/12, which illustrates the mechanism and is not a rate estimate. A fixed 100-schedule mixed "
+    "population is reported descriptively, without reliability or prevalence claims."
+)
+
+CONTRIBUTION_4 = (
+    "4. **A pre-specified parametric study of the activation exchange.** Hypotheses, grid and analysis rules "
     "were frozen before the confirmatory run, which was computed exactly and reproduced in a second "
     "environment. Some hypotheses were supported and others were falsified or only partly supported in the "
     "model; the falsifications are reported as model-rule effects, not link behavior."
 )
 
+SCOPE_EVIDENCE = (
+    "Baselines B0-B2 appear in Study A's matched families, two of which inject no fault and two of which "
+    "contain only B2 and T1, so Studies B-D document the mechanisms of T1 alone and show no advantage over any "
+    "baseline. A later descriptive run, Study F (Supplementary Table S7), put B0-B2 through step-level faults: with "
+    "up to three transmissions every cell with one or two losses succeeded, so retransmission alone absorbs isolated loss. That lost verification evidence yields `INDETERMINATE` and that a restart destroys volatile pending "
+    "state are rules of the model, and the Study D threshold follows from fault multiplicity in a designed set "
+    "(Table S2). Ten of the 40 deterministic schedules end unsafe, meaning a compromised key is still active "
+    "(Tables S4 and S5)."
+)
+
+PARITY_OLD = re.compile(r"In the four\s+defensibly matched families, the treatments produced the same authorized categorical terminal\s+classifications\.")
+PARITY_NEW = ("In the four matched families, the treatments present produced the same authorized categorical "
+              "classifications, but two families inject no fault and the other two contain only B2 and T1, so these "
+              "cases check consistency and cannot discriminate between treatments.")
+
 SCOPE_ADDITION = (
     "Part II is a parametric model study: its loss values are stress parameters rather than measurements of a "
-    "TT&C uplink, its six-message exchange has not been independently reviewed, and its recovery-association "
-    "and resumption parameters are assumptions."
+    "TT&C uplink, and its exchange has not been independently reviewed."
 )
 
 CONCLUSION_PART_II = (
-    "Part II extended the question to the activation exchange itself. In an exact model of a six-message "
-    "abstraction, plain retries could not remove the mass of indeterminate outcomes, while resumable "
-    "verification could, provided the remaining messages are idempotent, which is an assumption and not a "
-    "standard feature. Bursty loss changed outcomes relative to independent loss at the same average rate, in "
-    "both directions. Several expected regularities did not hold: success was not monotone in loss or slot "
-    "count when restarts occur and state is not journaled; durable persistence sometimes raised ground-ahead "
-    "divergence; and volatile-state divergence did not always grow with restart probability. The recovery "
-    "fraction reached the declared 0.95 level in 83-90% of multi-attempt configurations rather than almost "
-    "always. These failures arise from the abstraction's rules, in which durable progress can carry more "
-    "attempts into the window where ground has activated and the spacecraft has not, and they should not be "
-    "read as behavior of a real link."
+    "Part II extended the question to the activation exchange. In an exact model, resumable verification (an "
+    "assumption outside the standards) cleared indeterminate outcomes that plain retries could not, and recovery "
+    "reached the declared 0.95 level in 83-90% of multi-attempt configurations with divergence, not almost always. "
+    "These effects arise from the abstraction's rules, not from real link behavior."
 )
 
 FUTURE_WORK_OLD = r"evaluate\s+protected\s+persistent-state\s+strategies\s+across\s+endpoint\s+restart,"
@@ -89,42 +105,34 @@ TITLE_TWO_PART = "Post-Compromise Resynchronization of Satellite Telemetry, Trac
 
 SECTION_7_10 = (
     "### 7.10 Part II and the Part I mechanisms\n\n"
-    "Part II examines two of the mechanisms discussed above in a parametric abstraction. The Part I result that "
-    "retransmission cannot repair destroyed endpoint state has a counterpart in the persistence levels of Part II: "
-    "under volatile or commit-level persistence, restarts can leave the endpoints divergent, whereas journaled "
-    "progress made divergence invariant to the restart probability. The Part I distinction between convergence and "
-    "verified recovery appears in Part II as the `INDETERMINATE` outcome, which plain retries could not clear; "
-    "resumable verification could, but only under an assumption that the remaining messages are idempotent, which "
-    "neither Part I nor the cited standards establish. Part II also shows that more durable persistence can raise "
-    "ground-ahead divergence under gated activation in the abstraction, so persistence is not a monotone improvement, and that this is a "
-    "property of the model's rules rather than of a measured link. The two parts use different models, the T1 "
-    "controller and a six-message exchange, and no quantitative result is transferred between them."
+    "Part II examines two Part I mechanisms parametrically. Retransmission could not repair destroyed endpoint "
+    "state in Part I; in Part II, volatile or commit-level persistence leaves endpoints divergent after restarts, "
+    "whereas journaled progress made divergence invariant to restart probability. Convergence without verified "
+    "recovery appears as `INDETERMINATE`, which plain retries could not clear and resumable verification could, "
+    "if the remaining messages are idempotent, which neither Part I nor the standards establish. The two parts use "
+    "different models, and no quantitative result is transferred between them."
 )
 
 SECTION_8_10 = (
     "### 8.10 Part II validity\n\n"
-    "Part II states its own limitations in Section II.5; the points below bear on how far Part II supports the rest "
-    "of the paper. For construct validity, the six-message exchange is an abstraction that has not been independently "
-    "reviewed, and its loss values are stress parameters rather than TT&C uplink measurements. For external validity, "
-    "the anchors are proxies (satellite observation windows, a broadband ping dataset and published loss ranges), "
-    "and the broadband statistics were inspected before the Gilbert-Elliott rule was written, so the anchors are not "
-    "blind. For conclusion validity, the hypotheses were frozen in the repository and not in an external registry, "
-    "the analysis script was added after the freeze under a disclosed amendment, and the reading of \"fallback "
-    "required\" in H-E2c as total divergence is one operationalization of ambiguous wording. Reproduction was "
-    "performed by the same author in a second environment. The falsified hypotheses describe the rules of the model "
-    "and should not be transferred to Part I or to real links."
+    "For construct and external validity, the six-message "
+    "exchange is an unreviewed abstraction whose loss values are stress parameters anchored to proxies. For "
+    "conclusion validity, the hypotheses were frozen in the repository and not an external registry, the analysis "
+    "script was added after the freeze under a disclosed amendment, and reading \"fallback required\" in H-E2c as "
+    "total divergence is one operationalization of ambiguous wording. Reproduction was same-author. The "
+    "falsified hypotheses describe the model's rules and should not be transferred to Part I or to real links."
 )
 
 SECTION_9_7 = (
     "### 9.7 Part II artifacts\n\n"
     "The Part II code, tests, TLA+ specifications, frozen pre-registration, analysis-script amendment and "
-    "confirmatory results are in the same repository at the tags `study-e-prereg-v1` and "
-    "`study-e-analysis-script-v1`. Outcome probabilities are computed in exact rational arithmetic and are "
-    "deterministic; the results-table digest dfed99fa...a47d was reproduced in a second environment, and the test "
-    "suite has 99 tests. A public deposit of the summary data has been planned but has not been made, and a "
-    "SatNOGS-derived summary would carry the CC BY-SA 4.0 licence of its source. The reproduction boundary of "
-    "Section 9.6 applies: reproducing Part II establishes the arithmetic of the model, not link behavior or "
-    "cryptographic security."
+    "confirmatory results are in the project repository [@study_e_repository]. The frozen versions are identified "
+    "by two permanent labels in that repository (tags `study-e-prereg-v1` and `study-e-analysis-script-v1`), and "
+    "the results table carries a SHA-256 checksum for checking a reproduction. "
+    "The arithmetic is deterministic; the checksum was reproduced in a second environment by the same author, "
+    "and the test suite has 99 tests. A public deposit of the summary data is planned but not made; a "
+    "SatNOGS-derived summary would carry the CC BY-SA 4.0 licence of its source. Reproducing Part II establishes "
+    "the arithmetic of the model, not link behavior or cryptographic security."
 )
 
 PROHIBITED = [
@@ -168,6 +176,27 @@ COMPACT_POINTER = (
     "The complete 40-row deterministic fault-coverage matrix (schedule, class, fault, phase, outcome, alignment, "
     "security, availability, verification and reject evidence for every schedule) is provided as Supplementary "
     "Table S1 in the supplementary material."
+)
+
+CONCLUSION_TRIM_START = "The deterministic T1 study provided the clearest mechanism-level evidence."
+CONCLUSION_TRIM_END = "Bounded TLA+/Python comparisons provide"
+CONCLUSION_TRIM_NEW = (
+    "The deterministic T1 study provided the clearest mechanism-level evidence. Isolated loss and contact closure "
+    "were absorbed within the retry budget, and delayed, duplicated, reordered, stale-counter and stale-replay cases "
+    "completed while invalid material was rejected. Lost post-convergence evidence left the controller synchronized "
+    "but `INDETERMINATE` rather than successful. Endpoint restart around COMMIT or CONFIRM destroyed or separated "
+    "pending or activated state and produced unsafe asymmetric outcomes: raising the transmission budget from two to "
+    "three repaired the repeated omission and contact challenges in that fixed set, a fourth opportunity added no observed benefit, and "
+    "none of them repaired the COMMIT-stage restart failure. Retransmission can recover missing messages; it cannot "
+    "reconstruct protocol state that no longer exists. The fixed 100-schedule population is descriptive only: many "
+    "later-attempt faults were never reached at runtime, so its 74 successful schedules are not a fault-conditioned "
+    "success rate."
+)
+
+INTRO_INVENTORY_SENTENCE = (
+    "The retained study contains four matched comparison families, 40 deterministic T1 schedules, a fixed "
+    "100-schedule mixed-fault population, a 3 x 3 sensitivity grid producing 108 executions, and bounded "
+    "TLA+/Python cross-validation evidence."
 )
 
 PENDING_DECISIONS = [
@@ -218,6 +247,104 @@ def bib_keys(text: str) -> list[str]:
     return re.findall(r"@\w+\{([^,\s]+),", text)
 
 
+
+def build_supplement_s2() -> str:
+    """Supplementary Tables S2-S6, generated read-only from the frozen CSV/JSON inputs plus fixed glossary text."""
+    import collections
+    import csv
+    import json
+    cfg = json.loads((ROOT / "experiments" / "configs" / "paper-final-experiment.json").read_text(encoding="utf-8"))
+    sched = cfg["studies"]["study_d_sensitivity_t1"]["schedules"]
+    lines = ["# Supplementary Tables S2-S7 (DRAFT, S2-S6 derived read-only from frozen Part I inputs; S7 from the Study F run)", ""]
+    lines += ["**Supplementary Table S2. Study D challenge set: fault structure of the 12 designed schedules.**", "",
+              "| Schedule | Faults | Same-phase consecutive faults | Transmissions needed for that phase |", "|---|---|---|---|"]
+    rows = []
+    for s in sched:
+        acts = s["actions"]
+        label = "none" if not acts else "; ".join(f"{a['kind']} {a['phase'].replace('RECOVERY_', '')} (attempt {a['attempt']}, {a['contacts']} contact(s))" for a in acts)
+        kinds = {a["kind"] for a in acts}
+        n = len(acts)
+        if not acts:
+            need = "1"
+        elif kinds <= {"DROP", "CONTACT_CLOSE"}:
+            need = str(n + 1)
+        elif kinds == {"ENDPOINT_RESTART"}:
+            need = "no budget in the grid repairs it"
+        else:
+            need = "not set by the budget (delay or replay)"
+        rows.append((n if kinds <= {"DROP", "CONTACT_CLOSE"} else 0, need))
+        lines.append(f"| {s['id']} | {label} | {n if kinds <= {'DROP', 'CONTACT_CLOSE'} else '-'} | {need} |")
+    two = sum(1 for n, _ in rows if n == 2)
+    lines += ["", f"{two} of {len(sched)} schedules carry two consecutive drops or contact closures in one phase and therefore need three transmissions; one is an endpoint restart that no budget in the grid repaired; the other {len(sched) - two - 1} carry at most one drop, a delay or a stale replay, or no fault. "
+              "The counts in the sensitivity summary (5 verification-complete at a budget of two; 11 at three and four) match the five schedules with no repeated drop or closure and no restart, and those five plus the six repeated-fault schedules, "
+              "and the three candidate lifetimes gave identical counts. Per-schedule outcomes are not tabulated here because they are not in the tracked tables.", ""]
+    cov = list(csv.DictReader((ROOT / "paper" / "tables" / "study-c-execution-coverage-audit.csv").open(encoding="utf-8")))
+    un = [x for x in cov if x["runtime_exercised"] != "True"]
+    lines += [f"**Supplementary Table S3. Study C: the {len(un)} of {len(cov)} fault cells never exercised at runtime.**", "",
+              "| Fault | Phase | Scheduled | Applied |", "|---|---|---|---|"]
+    for x in un:
+        lines.append(f"| {x['fault_kind']} | {x['phase'].replace('RECOVERY_', '')} | {x['scheduled_action_count']} | {x['applied_action_count']} |")
+    lines += ["", f"Across all {len(cov)} cells, {sum(int(x['scheduled_action_count']) for x in cov)} fault actions were scheduled and {sum(int(x['applied_action_count']) for x in cov)} were applied.", ""]
+    t2 = list(csv.DictReader((ROOT / "paper" / "tables" / "table-2-deterministic-t1.csv").open(encoding="utf-8")))
+    ct = collections.Counter((x["schedule_class"], x["outcome"], x["security_state"]) for x in t2)
+    lines += ["**Supplementary Table S4. Outcome by security state in the 40 deterministic schedules.**", "",
+              "| Schedule class | Raw outcome | Security state | Schedules |", "|---|---|---|---|"]
+    for (k1, k2, k3), v in sorted(ct.items()):
+        lines.append(f"| {k1} | {k2} | {k3} | {v} |")
+    unsafe = sum(v for (k1, k2, k3), v in ct.items() if k3 == "UNSAFE")
+    lines += ["", f"{unsafe} of {len(t2)} schedules end `UNSAFE`.", ""]
+    lines += ["**Supplementary Table S5. Terms.**", "", "| Term | Meaning in this paper |", "|---|---|",
+        "| `G_AHEAD`, `S_AHEAD` (Part I) | Ground (spacecraft) epoch counter exceeds the other endpoint's at the end of the run. The base scenario starts with the ground at epoch 2 and the spacecraft at epoch 1, with active keys marked compromised, so `G_AHEAD` after expiry is the starting divergence left unresolved; `S_AHEAD` arises when the spacecraft activates the new epoch and ground never confirms. |",
+        "| `UNSAFE` (security state) | At the end, the ground's active key is marked compromised at either endpoint, or the recovery authority is. It does not mean an attack occurred during the run. |",
+        "| `SECURE_DEGRADED` (raw outcome) | Historical enum name kept for reproducibility; its security state is `UNSAFE` in all three deterministic schedules in which it occurs, so it is not a secure state. |",
+        "| `SUCCESS` | Endpoints converged and verification evidence (test command and authenticated status) completed. |",
+        "| `INDETERMINATE` | Endpoints converged but verification evidence is missing. |",
+        "| `DIVERGED_G_AHEAD`, `DIVERGED_S_AHEAD` (Part II) | Ground has activated the new epoch and the spacecraft has not, or the reverse. |",
+        "| gated activation (Part II) | The spacecraft activates only on authenticated status; local activation activates on COMMIT. |",
+        "| $B$ | Transmission budget per phase. Part I uses 2-4; Part II grid uses 4-12; it is unrelated to baseline B0-B2. |", ""]
+    kinds = ", ".join(cfg["base_t1_parameters"]["allowed_faults"])
+    lines += ["**Supplementary Table S6. Fault kinds exercised and not exercised.**", "",
+              f"Fault kinds the plan allows: {kinds}. Faults are single, scheduled and non-adaptive. Not exercised: adaptive fault timing; injected messages other than stale-counter and stale-replay cases; wall-clock timing, clock drift or link budgets (contacts are abstract slots); and any baseline under Studies B-D (baselines are covered only by Study F, Table S7).", ""]
+    lines += build_supplement_s7()
+    return "\n".join(lines)
+
+
+def build_supplement_s7() -> list:
+    """Supplementary Table S7 from the Study F results CSV (read-only). Asserts the counts quoted in the text."""
+    import collections
+    import csv
+    path = ROOT / "study_f_out" / "mac" / "study_f_results.csv"
+    if not path.exists():
+        return []
+    rows = list(csv.DictReader(path.open(encoding="utf-8")))
+    outcomes = ["SUCCESS", "EXPIRED", "DIVERGED", "LOCKED", "INDETERMINATE"]
+    names = {"B0": "B0 OTAR", "B1_LOCAL": "B1 local activation", "B1_DEFERRED": "B1 deferred activation", "B2": "B2 strict URKE"}
+    out = ["**Supplementary Table S7. Study F: baselines under step-level faults (descriptive; a later run, plan tag `study-f-plan-v1`, not part of the frozen Part I).**", "",
+           "Cells exist only where the frozen baseline abstraction defines the fault; other fault kinds and steps are recorded as not defined. Budget 1 transmits each message once, as specified; budget 3 allows up to three transmissions of a lost message, an assumption favorable to the baselines (COP-1 retransmits telecommand frames). Start state: ground epoch 2, spacecraft epoch 1, current keys attacker-known. Unsafe means a compromised key is still active.", "",
+           "| Baseline | Budget | Cells | " + " | ".join(o.title() for o in outcomes) + " | Unsafe |", "|---|---|---|" + "---|" * (len(outcomes) + 1)]
+    for flow in names:
+        for b in ("1", "3"):
+            sel = [r for r in rows if r["flow"] == flow and r["budget"] == b]
+            c = collections.Counter(r["outcome"] for r in sel)
+            out.append(f"| {names[flow]} | {b} | {len(sel)} | " + " | ".join(str(c.get(o, 0)) for o in outcomes)
+                       + f" | {sum(r['security_state'] == 'UNSAFE' for r in sel)} |")
+    loss = ("DROP", "CONTACT_CLOSE")
+    b1 = [r for r in rows if r["budget"] == "1"]
+    b3 = [r for r in rows if r["budget"] == "3"]
+    single = [r for r in b1 if r["kind"] in loss and r["lost_transmissions"] == "1"]
+    absorbed = [r for r in b3 if r["kind"] in loss and r["lost_transmissions"] in ("1", "2")]
+    fails3 = [r for r in b3 if r["outcome"] != "SUCCESS"]
+    exhaustion = [r for r in fails3 if r["kind"] in loss]
+    assert single and all(r["outcome"] != "SUCCESS" for r in single), "single-loss claim no longer holds"
+    assert absorbed and all(r["outcome"] == "SUCCESS" for r in absorbed), "absorbed-loss claim no longer holds"
+    assert all(r["lost_transmissions"] == "3" for r in exhaustion)
+    other = collections.Counter(r["kind"] for r in fails3 if r["kind"] not in loss)
+    out += ["", f"At budget 1, all {len(single)} single-loss cells ended without success. At budget 3, all {len(absorbed)} cells with one or two consecutive losses succeeded; the {len(fails3)} non-successes were {len(exhaustion)} cells with three consecutive losses, "
+            + ", ".join(f"{n} {k.lower().replace('_', ' ')}" for k, n in sorted(other.items())) + ". "
+            "Budget 3 also lets B2 re-request a lost status, whereas the controller treats lost verification evidence as indeterminate by rule, so those cells are not like for like. Baseline cells map to the controller's fault kinds by family, not one to one, and the same author wrote the engine and the model.", ""]
+    return out
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     parser.add_argument("--abstract", default=str(TWO / "abstract_candidate_250w.md"))
@@ -226,7 +353,11 @@ def main() -> None:
     parser.add_argument("--title", default=TITLE_TWO_PART, help="Title of the two-part paper (default revised 2026-11-19 to follow the TAES no-abbreviation guidance)")
     parser.add_argument("--compact", action="store_true",
                         help="Move the 40-row deterministic matrix (Part I Table 2) to a supplement; writes *_compact outputs only")
+    parser.add_argument("--trim", action="store_true",
+                        help="Opt-in, only with --compact: condense the three results-recap paragraphs of the Conclusion and drop the Introduction's study-inventory sentence (about 100 words together; every number stays in the abstract and Sections 5-6); writes *_compact_trim outputs")
     args = parser.parse_args()
+    if args.trim and not args.compact:
+        raise SystemExit("--trim requires --compact")
 
     verify_part1_unchanged()
 
@@ -251,14 +382,18 @@ def main() -> None:
     if not 3 <= len(kw) <= 4 or kw != sorted(kw, key=str.lower):
         raise SystemExit("Keywords must be 3-4 terms in alphabetical order")
 
-    # Introduction: bridge paragraph, five contributions, scope sentence.
+    # Introduction: bridge paragraph, four contributions (items 3-4 of Part I merged into findings; Part II added), scope sentence.
     i = para_index(paras, "The paper makes four contributions.")
-    paras[i] = "The paper makes five contributions."
     paras.insert(i, INTRO_BRIDGE)
     j = para_index(paras, "1. **A conservative operational comparison framework.**")
-    paras[j] = paras[j].rstrip() + "\n" + CONTRIBUTION_5
+    cut = paras[j].index("\n3. **Predeclared fault and sensitivity experiments.**")
+    paras[j] = paras[j][:cut].rstrip() + "\n" + CONTRIBUTION_3_FINDINGS + "\n" + CONTRIBUTION_4
     k = para_index(paras, "The scope of the claims is deliberately narrow")
-    paras[k] = paras[k].rstrip() + " " + SCOPE_ADDITION
+    paras[k] = paras[k].rstrip() + " " + SCOPE_EVIDENCE + " " + SCOPE_ADDITION
+    pk = para_index(paras, "The results do not support a universal superiority claim")
+    paras[pk], npar = PARITY_OLD.subn(PARITY_NEW, paras[pk])
+    if npar != 1:
+        raise SystemExit("Parity sentence anchor not found exactly once")
 
     # Title (optional, author decision).
     if args.title:
@@ -285,6 +420,22 @@ def main() -> None:
     if n != 1:
         raise SystemExit(f"Future-work sentence anchor matched {n} times")
     paras[f] = new
+
+    # Optional Conclusion trim (output only; every number and the not-a-success-rate caveat are kept and asserted).
+    if args.trim:
+        a = para_index(paras, CONCLUSION_TRIM_START)
+        b = para_index(paras, CONCLUSION_TRIM_END)
+        if b - a != 3:
+            raise SystemExit(f"Conclusion trim expects exactly 3 paragraphs to replace, found {b - a}")
+        for token in ("two to three", "a fourth opportunity", "COMMIT-stage restart failure", "74 successful schedules", "not a fault-conditioned success rate"):
+            if token not in CONCLUSION_TRIM_NEW:
+                raise SystemExit("Conclusion trim lost required content: " + token)
+        paras[a:b] = [CONCLUSION_TRIM_NEW]
+        pat = re.compile(r"\s+" + r"\s+".join(re.escape(w) for w in INTRO_INVENTORY_SENTENCE.split()))
+        hits = [i for i, x in enumerate(paras) if pat.search(x)]
+        if len(hits) != 1 or len(pat.findall(paras[hits[0]])) != 1:
+            raise SystemExit("Introduction inventory sentence not found exactly once")
+        paras[hits[0]] = pat.sub("", paras[hits[0]], count=1)
 
     # Optional compact mode: move Part I Table 2 (40 rows) to a supplement. Output only; Part I is untouched.
     supplement_table = None
@@ -357,8 +508,10 @@ def main() -> None:
 
     out = TWO / "out"
     out.mkdir(exist_ok=True)
+    (out / "supplement_S2_evidence_details.md").write_text(build_supplement_s2() + "\n", encoding="utf-8")
     if args.compact:
-        (out / "manuscript_two_part_compact.md").write_text(manuscript, encoding="utf-8")
+        suffix = "_trim" if args.trim else ""
+        (out / f"manuscript_two_part_compact{suffix}.md").write_text(manuscript, encoding="utf-8")
         supp = supplement_table.replace("**Table 2.", "**Supplementary Table S1.", 1)
         (out / "supplement_S1_deterministic_matrix.md").write_text(supp + "\n", encoding="utf-8")
         (out / "supplement_README.md").write_text(
@@ -366,8 +519,11 @@ def main() -> None:
             "- `supplement_S1_deterministic_matrix.md`: Supplementary Table S1, the 40-row deterministic T1 fault-coverage matrix.\n"
             "  It is copied unchanged from Table 2 of the Part I manuscript (paper/manuscript/manuscript.md, sha256 "
             + sha256(PART1_MANUSCRIPT) + "); only the label changes from Table 2 to Supplementary Table S1.\n"
-            "- The main text keeps a one-paragraph pointer to it; every other table, figure and result is in the main text.\n"
+            "- `supplement_S2_evidence_details.md`: Supplementary Tables S2-S6 (Study D challenge-set structure, unreached Study C cells, outcome by security state, terms, fault scope), generated read-only from frozen CSV/JSON inputs.\n"
+            "- The main text keeps a one-paragraph pointer to S1; every other table, figure and result is in the main text.\n"
             "- Source data and code: see Section 9 (Reproducibility and Artifact Availability) of the paper.\n"
+            "- Frozen Part II versions: tags `study-e-prereg-v1` (commit 93636b1777e7865f5f3c0480e0ce1d3e6be6c3cf) and "
+            "`study-e-analysis-script-v1` (commit 6eb87f272444c6965e2fd9b36bbe2c4aec53212d); full list in docs/study_e/FROZEN_VERSIONS.md.\n"
             "- Status: draft. Nothing here has been submitted or published.\n", encoding="utf-8")
     else:
         (out / "manuscript_two_part.md").write_text(manuscript, encoding="utf-8")
