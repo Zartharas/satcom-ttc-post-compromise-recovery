@@ -546,6 +546,8 @@ def main() -> None:
 
     from safe_trims import apply_safe_trims
     manuscript = apply_safe_trims(manuscript)
+    from review_fixes import apply_review_fixes
+    manuscript = apply_review_fixes(manuscript)
     manuscript = remove_em_dashes(manuscript)
     out = TWO / "out"
     out.mkdir(exist_ok=True)
