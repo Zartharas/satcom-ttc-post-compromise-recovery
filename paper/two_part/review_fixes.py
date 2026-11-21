@@ -17,8 +17,9 @@ def apply_review_fixes(text):
         t,
         "services needed to operate an SDLS implementation [@ccsds_sdls_ep_355_1_b_1].",
         "services needed to operate an SDLS implementation [@ccsds_sdls_ep_355_1_b_1]. "
-        "They include Set and Read ARSN commands and key inventory and verification services, "
-        "which help resynchronize anti-replay state but require an operating security association "
+        "Set and Read ARSN commands help resynchronize anti-replay state, and key verification and "
+        "key inventory let the Initiator check key state, but all of them need an operating security "
+        "association, and the text does not present them as recovery from a failed activation "
         "[@ccsds_sdls_ep_355_1_b_1].",
     )
     pair = "[@poettering_roesler_bidirectional_rke; @poettering_roesler_async_rke]"
@@ -76,5 +77,29 @@ def apply_review_fixes(text):
         "The freeze is recorded by annotated tags that note the author's approval of 2026-11-19; the pre-registration "
         "document itself still carries its freeze-candidate header. The frozen versions are identified by two permanent "
         "labels in that repository",
+    )
+    t = _rep(
+        t,
+        "terminated `EXPIRED` with the ground side ahead (`G_AHEAD`),",
+        "terminated `EXPIRED` with the ground side ahead (`G_AHEAD`, the unresolved starting divergence, since the ground had not yet activated),",
+    )
+    t = _rep(t, "A restart at `RECOVERY_CONFIRM` produced", "A ground restart at `RECOVERY_CONFIRM` produced")
+    t = _rep(
+        t,
+        "`RECOVERY_COMMIT` produced `EXPIRED`, `G_AHEAD`, `UNSAFE`, and `UNAVAILABLE`.",
+        "`RECOVERY_COMMIT` produced `EXPIRED`, `G_AHEAD`, `UNSAFE`, and `UNAVAILABLE`; `G_AHEAD` is again the unresolved starting divergence.",
+    )
+    t = _rep(
+        t,
+        "recovery cannot be guaranteed against indefinite denial [@bader_ttc_key_management].",
+        "recovery cannot be guaranteed against indefinite denial [@bader_ttc_key_management]. "
+        "The fault schedules inject transport and state faults only; no schedule has the adversary use a compromised key "
+        "to issue accepted commands, so `UNSAFE` records that a compromised key is still active at the end of the run, "
+        "not an observed exploit.",
+    )
+    t = _rep(
+        t,
+        "`ENDPOINT_RESTART` at COMMIT and CONFIRM;",
+        "`ENDPOINT_RESTART` of the spacecraft at COMMIT and of the ground at CONFIRM;",
     )
     return t

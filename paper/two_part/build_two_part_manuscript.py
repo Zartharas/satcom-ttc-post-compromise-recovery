@@ -536,6 +536,14 @@ def main() -> None:
         raise SystemExit("Bibliography key collision: " + ", ".join(clash))
     combined = b1.rstrip() + "\n\n" + b2.strip() + "\n"
     combined = combined.replace("Extended Procedures---Summary of Concept and Rationale", "Extended Procedures, Summary of Concept and Rationale")  # output-only; Part I .bib untouched
+    _d = "number      = {CCSDS 355.0-B-2},\n  month       = aug,"
+    if _d not in combined:
+        raise SystemExit("355.0-B-2 date anchor missing")
+    combined = combined.replace(_d, "number      = {CCSDS 355.0-B-2},\n  month       = jul,")  # issued date July 2022
+    _g = "number      = {CCSDS 350.5-G-2},\n  month       = jan,"
+    if _g not in combined:
+        raise SystemExit("350.5-G-2 anchor missing")
+    combined = combined.replace(_g, "number      = {CCSDS 350.5-G-2},\n  note        = {Public PDF cover reads Draft Report},\n  month       = jan,")
     combined = re.sub(r"(?m)^(\s*title\s*=\s*\{[^\n]*?)---", lambda m: m.group(1) + ": ", combined)
     if re.search(r"(?m)^\s*title\s*=.*---", combined):
         raise SystemExit("bibliography title still contains an em dash")
