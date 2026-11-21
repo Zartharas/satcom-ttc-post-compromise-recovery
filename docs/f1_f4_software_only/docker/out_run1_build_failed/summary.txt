@@ -1,0 +1,6 @@
+sa_file_on build exit: 2
+sa_file_on ctest exit: 8
+sa_file_off build exit: 2
+sa_file_off ctest exit: 8
+sa_mariadb build exit: 2
+sa_mariadb ctest exit: 8
