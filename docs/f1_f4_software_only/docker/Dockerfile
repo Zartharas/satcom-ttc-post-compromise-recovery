@@ -6,6 +6,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential cmake git ca-certificates libgcrypt20-dev \
     && rm -rf /var/lib/apt/lists/*
 ARG CRYPTOLIB_SHA=329f895bd19a6ca1bce509f5f88ebfc9f98c3900
+ARG OLD_API=
+ENV OLD_API=${OLD_API}
 WORKDIR /src
 RUN git clone https://github.com/nasa/CryptoLib.git && cd CryptoLib && git checkout ${CRYPTOLIB_SHA}
 COPY restart_harness.c /src/restart_harness.c

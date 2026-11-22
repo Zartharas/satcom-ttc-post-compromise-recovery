@@ -33,6 +33,18 @@ static void dump_all(const char *tag) {
     dump_key(tag, 0); dump_key(tag, 132); dump_key(tag, 140); dump_key(tag, 141); dump_key(tag, 142);
 }
 static int init_lib(int frame_len) {
+#ifdef CRYPTOLIB_OLD_API
+    /* CryptoLib b46879c (NOS3 pin): single-call config and GvcidManagedParameters_t; same option values as the new-API branch */
+    Crypto_Config_CryptoLib(KEY_TYPE_INTERNAL, MC_TYPE_INTERNAL, SA_TYPE_INMEMORY, CRYPTOGRAPHY_TYPE_LIBGCRYPT, IV_INTERNAL,
+                            CRYPTO_TC_CREATE_FECF_TRUE, TC_PROCESS_SDLS_PDUS_TRUE, TC_HAS_PUS_HDR, TC_IGNORE_SA_STATE_FALSE,
+                            TC_IGNORE_ANTI_REPLAY_FALSE, TC_UNIQUE_SA_PER_MAP_ID_FALSE, TC_CHECK_FECF_TRUE, 0x3F,
+                            SA_INCREMENT_NONTRANSMITTED_IV_TRUE);
+    GvcidManagedParameters_t p0 = {0, 0x0003, 0, TC_NO_FECF, AOS_FHEC_NA, AOS_IZ_NA, 0, TC_HAS_SEGMENT_HDRS, (uint16_t)frame_len, TC_OCF_NA, 1};
+    Crypto_Config_Add_Gvcid_Managed_Parameters(p0);
+    GvcidManagedParameters_t p1 = {0, 0x0003, 1, TC_NO_FECF, AOS_FHEC_NA, AOS_IZ_NA, 0, TC_HAS_SEGMENT_HDRS, (uint16_t)frame_len, TC_OCF_NA, 1};
+    Crypto_Config_Add_Gvcid_Managed_Parameters(p1);
+    return Crypto_Init();
+#else
     Crypto_Config_CryptoLib(KEY_TYPE_INTERNAL, MC_TYPE_INTERNAL, SA_TYPE_INMEMORY, CRYPTOGRAPHY_TYPE_LIBGCRYPT, IV_INTERNAL);
     Crypto_Config_TC(CRYPTO_TC_CREATE_FECF_TRUE, TC_PROCESS_SDLS_PDUS_TRUE, TC_HAS_PUS_HDR, TC_IGNORE_ANTI_REPLAY_FALSE,
                      TC_IGNORE_SA_STATE_FALSE, TC_UNIQUE_SA_PER_MAP_ID_FALSE, TC_CHECK_FECF_TRUE, 0x3F,
@@ -42,6 +54,7 @@ static int init_lib(int frame_len) {
     TCGvcidManagedParameters_t p1 = {0, 0x0003, 1, TC_NO_FECF, TC_HAS_SEGMENT_HDRS, (uint16_t)frame_len, 1};
     Crypto_Config_Add_TC_Gvcid_Managed_Parameters(p1);
     return Crypto_Init();
+#endif
 }
 static int send(const char *hex, const char *name) {
     uint8_t *b; int len; TC_t pf; hexconv(hex, &b, &len);

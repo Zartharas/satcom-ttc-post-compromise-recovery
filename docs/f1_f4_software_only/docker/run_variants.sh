@@ -15,7 +15,7 @@ for cfg in on off; do
   echo "sa_file_$cfg ctest exit: $?" >> /out/summary.txt
   grep -E "tests passed|tests failed" /out/sa_file_${cfg}_ctest.txt >> /out/summary.txt
   # harness
-  gcc -o /build/h_$cfg /src/restart_harness.c -I/src/CryptoLib/include -L$b -lcryptolib -Wl,-rpath,$b -lgcrypt > /out/harness_${cfg}_compile.txt 2>&1
+  gcc ${OLD_API:+-DCRYPTOLIB_OLD_API} -o /build/h_$cfg /src/restart_harness.c -I/src/CryptoLib/include -L$b -lcryptolib -Wl,-rpath,$b -lgcrypt > /out/harness_${cfg}_compile.txt 2>&1
   w=/work/$cfg; rm -rf $w; mkdir -p $w; cd $w
   for sc in sa_stop6 set_arsn7 key_direct otar_only otar_activate activate_only; do
     /build/h_$cfg $sc > /out/harness_${cfg}_${sc}_p1.txt 2>&1
