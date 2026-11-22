@@ -1,0 +1,29 @@
+Test project /build/sa_file_off
+      Start  1: UT_TC_APPLY
+ 1/12 Test  #1: UT_TC_APPLY ......................   Passed    1.21 sec
+      Start  2: UT_TC_PROCESS
+ 2/12 Test  #2: UT_TC_PROCESS ....................   Passed    1.09 sec
+      Start  3: UT_CRYPTO_CONFIG
+ 3/12 Test  #3: UT_CRYPTO_CONFIG .................   Passed    0.00 sec
+      Start  4: UT_CRYPTO
+ 4/12 Test  #4: UT_CRYPTO ........................   Passed    0.22 sec
+      Start  5: UT_AOS_APPLY
+ 5/12 Test  #5: UT_AOS_APPLY .....................   Passed    0.86 sec
+      Start  6: UT_AOS_PROCESS
+ 6/12 Test  #6: UT_AOS_PROCESS ...................   Passed    1.12 sec
+      Start  7: UT_TM_APPLY
+ 7/12 Test  #7: UT_TM_APPLY ......................   Passed    1.01 sec
+      Start  8: UT_TM_PROCESS
+ 8/12 Test  #8: UT_TM_PROCESS ....................   Passed    1.03 sec
+      Start  9: UT_EP_MC
+ 9/12 Test  #9: UT_EP_MC .........................   Passed    0.24 sec
+      Start 10: UT_EP_SA_MGMT
+10/12 Test #10: UT_EP_SA_MGMT ....................   Passed    0.36 sec
+      Start 11: UT_EP_KEY_MGMT
+11/12 Test #11: UT_EP_KEY_MGMT ...................   Passed    0.49 sec
+      Start 12: UT_AES_GCM_SIV
+12/12 Test #12: UT_AES_GCM_SIV ...................   Passed    0.24 sec
+
+100% tests passed, 0 tests failed out of 12
+
+Total Test time (real) =   7.89 sec

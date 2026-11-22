@@ -1,0 +1,287 @@
+{
+ "meta": {
+  "grid": "frozen",
+  "head": "6eb87f272444c6965e2fd9b36bbe2c4aec53212d",
+  "platform": "macOS-26.7.3-x86_64-i386-64bit",
+  "prereg_commit": "93636b1777e7865f5f3c0480e0ce1d3e6be6c3cf",
+  "python": "3.11.7",
+  "script_tag_commit": "6eb87f272444c6965e2fd9b36bbe2c4aec53212d",
+  "seconds": 613.3
+ },
+ "results": {
+  "H-E2a": {
+   "composite_SUCCESS_vs_H": {
+    "first_witnesses": [],
+    "holds_everywhere": true,
+    "label": "SUCCESS non-decreasing in H (per policy)",
+    "pairs_checked": 46080,
+    "violations": 0
+   },
+   "divergence_vs_B_descriptive": {
+    "note": "reported, not asserted",
+    "pairs": 5760,
+    "pairs_where_divergence_increases_with_B": 568
+   },
+   "single_attempt_SUCCESS_vs_B": {
+    "first_witnesses": [],
+    "holds_everywhere": true,
+    "label": "SUCCESS non-decreasing in B",
+    "pairs_checked": 5760,
+    "violations": 0
+   },
+   "single_attempt_SUCCESS_vs_K": {
+    "first_witnesses": [
+     "((Fraction(1, 20), 3, 12, 3, Fraction(1, 100), 'volatile', 'local'), (Fraction(1, 20), 4, 12, 3, Fraction(1, 100), 'volatile', 'local'), '1272352040928639/1280000000000000', '40622816063523691503/40960000000000000000')",
+     "((Fraction(1, 20), 3, 12, 3, Fraction(1, 100), 'volatile', 'gated'), (Fraction(1, 20), 4, 12, 3, Fraction(1, 100), 'volatile', 'gated'), '1272352040928639/1280000000000000', '40622816063523691503/40960000000000000000')",
+     "((Fraction(1, 20), 3, 12, 3, Fraction(1, 100), 'commit', 'gated'), (Fraction(1, 20), 4, 12, 3, Fraction(1, 100), 'commit', 'gated'), '20404692461439/20480000000000', '40625012448653158647/40960000000000000000')",
+     "((Fraction(1, 20), 3, 12, 3, Fraction(1, 20), 'volatile', 'local'), (Fraction(1, 20), 4, 12, 3, Fraction(1, 20), 'volatile', 'local'), '49753794864479/51200000000000', '1570381113604189503/1638400000000000000')",
+     "((Fraction(1, 20), 3, 12, 3, Fraction(1, 20), 'volatile', 'gated'), (Fraction(1, 20), 4, 12, 3, Fraction(1, 20), 'volatile', 'gated'), '49753794864479/51200000000000', '1570381113604189503/1638400000000000000')"
+    ],
+    "holds_everywhere": false,
+    "label": "SUCCESS non-decreasing in K",
+    "pairs_checked": 5760,
+    "violations": 31
+   },
+   "single_attempt_SUCCESS_vs_L": {
+    "first_witnesses": [],
+    "holds_everywhere": true,
+    "label": "SUCCESS non-decreasing in L",
+    "pairs_checked": 5760,
+    "violations": 0
+   },
+   "single_attempt_SUCCESS_vs_p": {
+    "first_witnesses": [
+     "((Fraction(1, 20), 4, 12, 3, Fraction(1, 100), 'volatile', 'local'), (Fraction(1, 10), 4, 12, 3, Fraction(1, 100), 'volatile', 'local'), '40622816063523691503/40960000000000000000', '9928486318405743/10000000000000000')",
+     "((Fraction(1, 20), 4, 12, 3, Fraction(1, 100), 'volatile', 'gated'), (Fraction(1, 10), 4, 12, 3, Fraction(1, 100), 'volatile', 'gated'), '40622816063523691503/40960000000000000000', '9928486318405743/10000000000000000')",
+     "((Fraction(1, 20), 4, 12, 3, Fraction(1, 100), 'commit', 'gated'), (Fraction(1, 10), 4, 12, 3, Fraction(1, 100), 'commit', 'gated'), '40625012448653158647/40960000000000000000', '9931759667598087/10000000000000000')",
+     "((Fraction(1, 20), 4, 12, 3, Fraction(1, 20), 'volatile', 'local'), (Fraction(1, 10), 4, 12, 3, Fraction(1, 20), 'volatile', 'local'), '1570381113604189503/1638400000000000000', '385543345322943/400000000000000')",
+     "((Fraction(1, 20), 4, 12, 3, Fraction(1, 20), 'volatile', 'gated'), (Fraction(1, 10), 4, 12, 3, Fraction(1, 20), 'volatile', 'gated'), '1570381113604189503/1638400000000000000', '385543345322943/400000000000000')"
+    ],
+    "holds_everywhere": false,
+    "label": "SUCCESS non-increasing in p",
+    "pairs_checked": 6144,
+    "violations": 22
+   }
+  },
+  "H-E2b": {
+   "first_witnesses": [
+    "((Fraction(1, 20), 2, 4, 2, Fraction(1, 100)), 'commit', 'journal', '12901779/16000000', '130321/160000')",
+    "((Fraction(1, 20), 2, 4, 2, Fraction(1, 20)), 'commit', 'journal', '2476099/3200000', '130321/160000')",
+    "((Fraction(1, 20), 2, 4, 2, Fraction(1, 10)), 'commit', 'journal', '1172889/1600000', '130321/160000')",
+    "((Fraction(1, 20), 2, 4, 3, Fraction(1, 100)), 'commit', 'journal', '12901779/16000000', '130321/160000')",
+    "((Fraction(1, 20), 2, 4, 3, Fraction(1, 20)), 'commit', 'journal', '2476099/3200000', '130321/160000')"
+   ],
+   "holds_everywhere": false,
+   "label": "gated: P(G-ahead) non-increasing with persistence durability",
+   "pairs_checked": 2560,
+   "violations": 288
+  },
+  "H-E2c": {
+   "journal_invariant_to_r": {
+    "first_witnesses": [],
+    "holds_everywhere": true,
+    "label": "journal distribution identical across r",
+    "pairs_checked": 1920,
+    "violations": 0
+   },
+   "volatile_divergence_nondecreasing_in_r": {
+    "first_witnesses": [
+     "((Fraction(1, 20), 2, 4, 2), 'local', '6859/40000', '679041/4000000')",
+     "((Fraction(1, 20), 2, 4, 2), 'local', '679041/4000000', '130321/800000')",
+     "((Fraction(1, 20), 2, 4, 2), 'local', '130321/800000', '61731/400000')",
+     "((Fraction(1, 20), 2, 4, 3), 'local', '6859/40000', '679041/4000000')",
+     "((Fraction(1, 20), 2, 4, 3), 'local', '679041/4000000', '130321/800000')"
+    ],
+    "holds_everywhere": false,
+    "label": "volatile divergence non-decreasing in r",
+    "pairs_checked": 1920,
+    "violations": 447
+   }
+  },
+  "H-E3": {
+   "points": 7680,
+   "points_with_INDETERMINATE_mass_at_H_hi": 5520,
+   "primary_dS_lt_IND_hi": {
+    "counterexamples": [],
+    "holds": 5520,
+    "of": 5520
+   },
+   "resume_gain_gt_dS_over_all_points": {
+    "holds": 5520,
+    "of": 7680
+   },
+   "resume_gain_gt_dS_over_points_with_IND_mass": {
+    "holds": 5520,
+    "of": 5520
+   },
+   "secondary_dS_lt_IND_lo": {
+    "counterexamples": [],
+    "holds": 5520,
+    "of": 5520
+   }
+  },
+  "H-E4": {
+   "detection_delay": {
+    "H=20": {
+     "1/10": {
+      "delay_matters": 108,
+      "max_range": 0.07402929515754035,
+      "points": 4608
+     },
+     "1/2": {
+      "delay_matters": 2796,
+      "max_range": 0.1444578002184686,
+      "points": 4608
+     },
+     "1/20": {
+      "delay_matters": 240,
+      "max_range": 0.10423827129777795,
+      "points": 4608
+     },
+     "1/5": {
+      "delay_matters": 594,
+      "max_range": 0.043073660869885434,
+      "points": 4608
+     },
+     "3/10": {
+      "delay_matters": 1172,
+      "max_range": 0.1061720355627039,
+      "points": 4608
+     }
+    },
+    "H=4": {
+     "1/10": {
+      "delay_matters": 1716,
+      "max_range": 0.8778733047135,
+      "points": 4608
+     },
+     "1/2": {
+      "delay_matters": 2304,
+      "max_range": 0.271148681640625,
+      "points": 4608
+     },
+     "1/20": {
+      "delay_matters": 1458,
+      "max_range": 0.96524262356904,
+      "points": 4608
+     },
+     "1/5": {
+      "delay_matters": 1977,
+      "max_range": 0.6232534417408,
+      "points": 4608
+     },
+     "3/10": {
+      "delay_matters": 2187,
+      "max_range": 0.5680015601064,
+      "points": 4608
+     }
+    },
+    "H=8": {
+     "1/10": {
+      "delay_matters": 2337,
+      "max_range": 0.8816309067979913,
+      "points": 4608
+     },
+     "1/2": {
+      "delay_matters": 4176,
+      "max_range": 0.4771054834127426,
+      "points": 4608
+     },
+     "1/20": {
+      "delay_matters": 1925,
+      "max_range": 0.9655897132729236,
+      "points": 4608
+     },
+     "1/5": {
+      "delay_matters": 3089,
+      "max_range": 0.6484898105786367,
+      "points": 4608
+     },
+     "3/10": {
+      "delay_matters": 3818,
+      "max_range": 0.6336458875258134,
+      "points": 4608
+     }
+    }
+   },
+   "recovery_fraction": {
+    "expired_only": {
+     "median": 0.9999999958604208,
+     "min": 0.5829015143408901,
+     "points_with_divergence": 6960,
+     "share_ge_threshold": 0.8982758620689655
+    },
+    "restart_indeterminate": {
+     "median": 0.9991841417164636,
+     "min": 0.5829015143408901,
+     "points_with_divergence": 6960,
+     "share_ge_threshold": 0.832183908045977
+    },
+    "resume": {
+     "median": 0.9999999958604208,
+     "min": 0.5829015143408901,
+     "points_with_divergence": 6960,
+     "share_ge_threshold": 0.8982758620689655
+    }
+   },
+   "thresholds": {
+    "almost_always": "19/20",
+    "delay_matters": "1/100"
+   }
+  },
+  "H-E5": {
+   "bursty_higher": 4664,
+   "bursty_lower": 3112,
+   "equal": 7584,
+   "examples_higher": [
+    "(2, (Fraction(1, 20), 2, 6, 3, Fraction(0, 1), 'volatile', 'local'), '3607119/64000000')",
+    "(2, (Fraction(1, 20), 2, 6, 3, Fraction(0, 1), 'volatile', 'gated'), '3607119/64000000')",
+    "(2, (Fraction(1, 20), 2, 6, 3, Fraction(0, 1), 'commit', 'local'), '3607119/64000000')"
+   ],
+   "examples_lower": [
+    "(2, (Fraction(1, 20), 2, 8, 4, Fraction(0, 1), 'volatile', 'local'), '-303291621/25600000000')",
+    "(2, (Fraction(1, 20), 2, 8, 4, Fraction(0, 1), 'volatile', 'gated'), '-303291621/25600000000')",
+    "(2, (Fraction(1, 20), 2, 8, 4, Fraction(0, 1), 'commit', 'local'), '-303291621/25600000000')"
+   ],
+   "invalid_combinations_skipped": 0,
+   "max_abs_difference": 0.3172131472167969,
+   "witness_in_both_directions": true
+  },
+  "exploratory_post_hoc": {
+   "first_witnesses": [
+    "((Fraction(1, 20), 2, 4, 2, Fraction(1, 100), 'local'), 'commit', 'journal', '679041/4000000', '6859/40000')",
+    "((Fraction(1, 20), 2, 4, 2, Fraction(1, 100), 'gated'), 'commit', 'journal', '12901779/16000000', '130321/160000')",
+    "((Fraction(1, 20), 2, 4, 2, Fraction(1, 20), 'local'), 'commit', 'journal', '130321/800000', '6859/40000')",
+    "((Fraction(1, 20), 2, 4, 2, Fraction(1, 20), 'gated'), 'commit', 'journal', '2476099/3200000', '130321/160000')",
+    "((Fraction(1, 20), 2, 4, 2, Fraction(1, 10), 'local'), 'commit', 'journal', '61731/400000', '6859/40000')"
+   ],
+   "holds_everywhere": false,
+   "label": "EXPLORATORY: total divergence non-increasing with persistence durability",
+   "pairs_checked": 5120,
+   "violations": 609
+  },
+  "grid_sizes": {
+   "B": 4,
+   "H": 3,
+   "K": 4,
+   "L": 4,
+   "activation": 2,
+   "detect": 3,
+   "p": 5,
+   "persist": 3,
+   "policy": 3,
+   "r": 4
+  },
+  "operationalisation": {
+   "H-E1": "Not computed by the runner: established by the validation suite (88 tests) recorded alongside the run.",
+   "H-E2a": "SUCCESS compared between consecutive grid values on each axis with the others fixed: non-decreasing in B, K, L and H (H on the composite grid, per policy); non-increasing in p. Divergence monotonicity is reported descriptively only.",
+   "H-E2b": "Gated activation: P(DIVERGED_G_AHEAD) at volatile >= commit >= journal for every (p,K,B,L,r).",
+   "H-E2c": "Journal: the full exact outcome distribution is identical across the r grid. Volatile: P(DIVERGED_S_AHEAD)+P(DIVERGED_G_AHEAD) is non-decreasing across the r grid ('fallback required' = divergence).",
+   "H-E3": "Policy expired_only. dS = SUCCESS(H=20)-SUCCESS(H=4). Primary: dS < P(INDETERMINATE) at H=20, over points with that mass > 0; secondary: the same with the mass at H=4 (the frozen wording does not say which horizon). Dominant lever: S_resume(20)-S_expired(20) > dS, reported over points with INDETERMINATE mass > 0 and over all points.",
+   "H-E4": "At H=20, divergence recovery fraction = RECOVERED/(RECOVERED+UNRECOVERED_DIVERGED) over points with divergence mass > 0; 'almost always' is declared as >= 0.95 and the full distribution is also reported. Detection delay 'matters' if the range of UNRECOVERED_DIVERGED over detect in {1,3,5} exceeds 0.01 (absolute); reported by H and by p.",
+   "H-E5": "SUCCESS under the matched-stationary Gilbert-Elliott rule (good never loses, bad always loses, mean bad run m in {2,4}) versus i.i.d. loss at the same stationary p, exchange level only (the composite scenario does not support ge). Directions counted; the hypothesis is supported if a witness exists in both directions.",
+   "R0 parameters": "n_msgs=4, B0=8, L0=3 as in the frozen tools/size_grid.py; the pre-registration text gives no values."
+  },
+  "table_sha256": "dfed99fac58eecd39eb67dd51ae40f662153212d5abefa3eadb55a4f20ada47d"
+ }
+}

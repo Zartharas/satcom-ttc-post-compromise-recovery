@@ -1,0 +1,1 @@
+ERROR: Loading internal monitoring and control interface stub source code. Rebuild CryptoLib with -DMC_INTERNAL=ON to use implementation.

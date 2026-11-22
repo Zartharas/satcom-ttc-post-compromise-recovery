@@ -1,0 +1,12 @@
+sa_file_on make exit: 2 (mysql/TLS targets may fail to compile)
+sa_file_on ctest exit: 8
+8% tests passed, 12 tests failed out of 13
+harness on sa_stop6 done
+harness on set_arsn7 done
+harness on key_direct done
+sa_file_off make exit: 2 (mysql/TLS targets may fail to compile)
+sa_file_off ctest exit: 8
+8% tests passed, 11 tests failed out of 12
+harness off sa_stop6 done
+harness off set_arsn7 done
+harness off key_direct done

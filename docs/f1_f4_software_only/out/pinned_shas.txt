@@ -1,0 +1,10 @@
+CryptoLib 329f895bd19a6ca1bce509f5f88ebfc9f98c3900 dev
+PSP 5c8a96967e7fc8c6cab1c657fed114abe2336f76 dev
+cFE 3673163b7fd34d7bb69546f1cd13ddb39ac7cde6 dev
+nos3 1dadc685effc26730603c36c7864afce3c546406 main
+osal ffc9d265abd5e21e257c3304fad54fe32c41407c dev
+CryptoLib https://github.com/nasa/CryptoLib.git 329f895bd19a6ca1bce509f5f88ebfc9f98c3900 2026-11-18T15:41:12-05:00
+PSP https://github.com/nasa/PSP.git 5c8a96967e7fc8c6cab1c657fed114abe2336f76 2026-10-26T12:04:48-04:00
+cFE https://github.com/nasa/cFE.git 3673163b7fd34d7bb69546f1cd13ddb39ac7cde6 2026-10-29T11:06:33-04:00
+nos3 https://github.com/nasa/nos3.git 1dadc685effc26730603c36c7864afce3c546406 2026-10-30T13:06:21-04:00
+osal https://github.com/nasa/osal.git ffc9d265abd5e21e257c3304fad54fe32c41407c 2026-11-19T15:26:35-05:00

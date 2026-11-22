@@ -1,0 +1,314 @@
+{
+ "note": "post hoc descriptive reanalysis of retained Part I records; frozen files read only",
+ "studies": {
+  "study-b-deterministic-t1": {
+   "schedules": 40,
+   "unsafe": 10,
+   "unsafe_by_alignment": {
+    "G_AHEAD": 7,
+    "S_AHEAD": 3
+   },
+   "unsafe_by_kind": {
+    "no_endpoint_activated": 7,
+    "spacecraft_only_activated": 3
+   },
+   "unsafe_by_outcome": {
+    "EXPIRED": 7,
+    "SECURE_DEGRADED": 3
+   },
+   "unsafe_rows": [
+    {
+     "alignment": "G_AHEAD",
+     "contacts_ground_held_old_key": 0,
+     "contacts_spacecraft_held_old_key": 0,
+     "divergent_contact_windows": 0,
+     "ground_never_activated": true,
+     "kind": "no_endpoint_activated",
+     "outcome": "EXPIRED",
+     "run_contacts_advanced": 0,
+     "schedule_id": "DET-CELL-RST-COMM",
+     "security_state": "UNSAFE",
+     "spacecraft_never_activated": true
+    },
+    {
+     "alignment": "S_AHEAD",
+     "contacts_ground_held_old_key": 0,
+     "contacts_spacecraft_held_old_key": 0,
+     "divergent_contact_windows": 0,
+     "ground_never_activated": true,
+     "kind": "spacecraft_only_activated",
+     "outcome": "SECURE_DEGRADED",
+     "run_contacts_advanced": 0,
+     "schedule_id": "DET-CELL-RST-CONF",
+     "security_state": "UNSAFE",
+     "spacecraft_never_activated": false
+    },
+    {
+     "alignment": "G_AHEAD",
+     "contacts_ground_held_old_key": 0,
+     "contacts_spacecraft_held_old_key": 0,
+     "divergent_contact_windows": 0,
+     "ground_never_activated": true,
+     "kind": "no_endpoint_activated",
+     "outcome": "EXPIRED",
+     "run_contacts_advanced": 0,
+     "schedule_id": "DET-EXHAUST-DROP-PREP",
+     "security_state": "UNSAFE",
+     "spacecraft_never_activated": true
+    },
+    {
+     "alignment": "G_AHEAD",
+     "contacts_ground_held_old_key": 0,
+     "contacts_spacecraft_held_old_key": 0,
+     "divergent_contact_windows": 0,
+     "ground_never_activated": true,
+     "kind": "no_endpoint_activated",
+     "outcome": "EXPIRED",
+     "run_contacts_advanced": 0,
+     "schedule_id": "DET-EXHAUST-DROP-RESP",
+     "security_state": "UNSAFE",
+     "spacecraft_never_activated": true
+    },
+    {
+     "alignment": "G_AHEAD",
+     "contacts_ground_held_old_key": 0,
+     "contacts_spacecraft_held_old_key": 0,
+     "divergent_contact_windows": 0,
+     "ground_never_activated": true,
+     "kind": "no_endpoint_activated",
+     "outcome": "EXPIRED",
+     "run_contacts_advanced": 0,
+     "schedule_id": "DET-EXHAUST-DROP-COMM",
+     "security_state": "UNSAFE",
+     "spacecraft_never_activated": true
+    },
+    {
+     "alignment": "S_AHEAD",
+     "contacts_ground_held_old_key": 0,
+     "contacts_spacecraft_held_old_key": 0,
+     "divergent_contact_windows": 0,
+     "ground_never_activated": true,
+     "kind": "spacecraft_only_activated",
+     "outcome": "SECURE_DEGRADED",
+     "run_contacts_advanced": 0,
+     "schedule_id": "DET-EXHAUST-DROP-CONF",
+     "security_state": "UNSAFE",
+     "spacecraft_never_activated": false
+    },
+    {
+     "alignment": "G_AHEAD",
+     "contacts_ground_held_old_key": 3,
+     "contacts_spacecraft_held_old_key": 3,
+     "divergent_contact_windows": 3,
+     "ground_never_activated": true,
+     "kind": "no_endpoint_activated",
+     "outcome": "EXPIRED",
+     "run_contacts_advanced": 3,
+     "schedule_id": "DET-EXHAUST-CLOSE-PREP",
+     "security_state": "UNSAFE",
+     "spacecraft_never_activated": true
+    },
+    {
+     "alignment": "G_AHEAD",
+     "contacts_ground_held_old_key": 3,
+     "contacts_spacecraft_held_old_key": 3,
+     "divergent_contact_windows": 3,
+     "ground_never_activated": true,
+     "kind": "no_endpoint_activated",
+     "outcome": "EXPIRED",
+     "run_contacts_advanced": 3,
+     "schedule_id": "DET-EXHAUST-CLOSE-RESP",
+     "security_state": "UNSAFE",
+     "spacecraft_never_activated": true
+    },
+    {
+     "alignment": "G_AHEAD",
+     "contacts_ground_held_old_key": 3,
+     "contacts_spacecraft_held_old_key": 3,
+     "divergent_contact_windows": 3,
+     "ground_never_activated": true,
+     "kind": "no_endpoint_activated",
+     "outcome": "EXPIRED",
+     "run_contacts_advanced": 3,
+     "schedule_id": "DET-EXHAUST-CLOSE-COMM",
+     "security_state": "UNSAFE",
+     "spacecraft_never_activated": true
+    },
+    {
+     "alignment": "S_AHEAD",
+     "contacts_ground_held_old_key": 3,
+     "contacts_spacecraft_held_old_key": 0,
+     "divergent_contact_windows": 3,
+     "ground_never_activated": true,
+     "kind": "spacecraft_only_activated",
+     "outcome": "SECURE_DEGRADED",
+     "run_contacts_advanced": 3,
+     "schedule_id": "DET-EXHAUST-CLOSE-CONF",
+     "security_state": "UNSAFE",
+     "spacecraft_never_activated": false
+    }
+   ]
+  },
+  "study-c-mixed-fault-t1": {
+   "schedules": 100,
+   "unsafe": 11,
+   "unsafe_by_alignment": {
+    "G_AHEAD": 5,
+    "S_AHEAD": 6
+   },
+   "unsafe_by_kind": {
+    "no_endpoint_activated": 5,
+    "spacecraft_only_activated": 6
+   },
+   "unsafe_by_outcome": {
+    "EXPIRED": 5,
+    "SECURE_DEGRADED": 6
+   },
+   "unsafe_rows": [
+    {
+     "alignment": "S_AHEAD",
+     "contacts_ground_held_old_key": 0,
+     "contacts_spacecraft_held_old_key": 0,
+     "divergent_contact_windows": 0,
+     "ground_never_activated": true,
+     "kind": "spacecraft_only_activated",
+     "outcome": "SECURE_DEGRADED",
+     "run_contacts_advanced": 0,
+     "schedule_id": "MIX-10016",
+     "security_state": "UNSAFE",
+     "spacecraft_never_activated": false
+    },
+    {
+     "alignment": "G_AHEAD",
+     "contacts_ground_held_old_key": 0,
+     "contacts_spacecraft_held_old_key": 0,
+     "divergent_contact_windows": 0,
+     "ground_never_activated": true,
+     "kind": "no_endpoint_activated",
+     "outcome": "EXPIRED",
+     "run_contacts_advanced": 0,
+     "schedule_id": "MIX-10025",
+     "security_state": "UNSAFE",
+     "spacecraft_never_activated": true
+    },
+    {
+     "alignment": "G_AHEAD",
+     "contacts_ground_held_old_key": 0,
+     "contacts_spacecraft_held_old_key": 0,
+     "divergent_contact_windows": 0,
+     "ground_never_activated": true,
+     "kind": "no_endpoint_activated",
+     "outcome": "EXPIRED",
+     "run_contacts_advanced": 0,
+     "schedule_id": "MIX-10026",
+     "security_state": "UNSAFE",
+     "spacecraft_never_activated": true
+    },
+    {
+     "alignment": "G_AHEAD",
+     "contacts_ground_held_old_key": 0,
+     "contacts_spacecraft_held_old_key": 0,
+     "divergent_contact_windows": 0,
+     "ground_never_activated": true,
+     "kind": "no_endpoint_activated",
+     "outcome": "EXPIRED",
+     "run_contacts_advanced": 0,
+     "schedule_id": "MIX-10033",
+     "security_state": "UNSAFE",
+     "spacecraft_never_activated": true
+    },
+    {
+     "alignment": "S_AHEAD",
+     "contacts_ground_held_old_key": 0,
+     "contacts_spacecraft_held_old_key": 0,
+     "divergent_contact_windows": 0,
+     "ground_never_activated": true,
+     "kind": "spacecraft_only_activated",
+     "outcome": "SECURE_DEGRADED",
+     "run_contacts_advanced": 0,
+     "schedule_id": "MIX-10044",
+     "security_state": "UNSAFE",
+     "spacecraft_never_activated": false
+    },
+    {
+     "alignment": "S_AHEAD",
+     "contacts_ground_held_old_key": 0,
+     "contacts_spacecraft_held_old_key": 0,
+     "divergent_contact_windows": 0,
+     "ground_never_activated": true,
+     "kind": "spacecraft_only_activated",
+     "outcome": "SECURE_DEGRADED",
+     "run_contacts_advanced": 0,
+     "schedule_id": "MIX-10050",
+     "security_state": "UNSAFE",
+     "spacecraft_never_activated": false
+    },
+    {
+     "alignment": "G_AHEAD",
+     "contacts_ground_held_old_key": 0,
+     "contacts_spacecraft_held_old_key": 0,
+     "divergent_contact_windows": 0,
+     "ground_never_activated": true,
+     "kind": "no_endpoint_activated",
+     "outcome": "EXPIRED",
+     "run_contacts_advanced": 0,
+     "schedule_id": "MIX-10066",
+     "security_state": "UNSAFE",
+     "spacecraft_never_activated": true
+    },
+    {
+     "alignment": "G_AHEAD",
+     "contacts_ground_held_old_key": 0,
+     "contacts_spacecraft_held_old_key": 0,
+     "divergent_contact_windows": 0,
+     "ground_never_activated": true,
+     "kind": "no_endpoint_activated",
+     "outcome": "EXPIRED",
+     "run_contacts_advanced": 0,
+     "schedule_id": "MIX-10079",
+     "security_state": "UNSAFE",
+     "spacecraft_never_activated": true
+    },
+    {
+     "alignment": "S_AHEAD",
+     "contacts_ground_held_old_key": 0,
+     "contacts_spacecraft_held_old_key": 0,
+     "divergent_contact_windows": 0,
+     "ground_never_activated": true,
+     "kind": "spacecraft_only_activated",
+     "outcome": "SECURE_DEGRADED",
+     "run_contacts_advanced": 0,
+     "schedule_id": "MIX-10084",
+     "security_state": "UNSAFE",
+     "spacecraft_never_activated": false
+    },
+    {
+     "alignment": "S_AHEAD",
+     "contacts_ground_held_old_key": 0,
+     "contacts_spacecraft_held_old_key": 0,
+     "divergent_contact_windows": 0,
+     "ground_never_activated": true,
+     "kind": "spacecraft_only_activated",
+     "outcome": "SECURE_DEGRADED",
+     "run_contacts_advanced": 0,
+     "schedule_id": "MIX-10085",
+     "security_state": "UNSAFE",
+     "spacecraft_never_activated": false
+    },
+    {
+     "alignment": "S_AHEAD",
+     "contacts_ground_held_old_key": 0,
+     "contacts_spacecraft_held_old_key": 0,
+     "divergent_contact_windows": 0,
+     "ground_never_activated": true,
+     "kind": "spacecraft_only_activated",
+     "outcome": "SECURE_DEGRADED",
+     "run_contacts_advanced": 0,
+     "schedule_id": "MIX-10091",
+     "security_state": "UNSAFE",
+     "spacecraft_never_activated": false
+    }
+   ]
+  }
+ }
+}

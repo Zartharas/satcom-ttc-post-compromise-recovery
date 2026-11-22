@@ -1,0 +1,81 @@
+=== otar_only P1
+=== otar_only P2 (new process)
+otar_only HARNESS|otar_only|init status=0
+otar_only HARNESS|baseline_after_init|SA0 state=1 ekid=0 iv_len=0 iv= arsn_len=0 arsn= arsnw=0
+otar_only HARNESS|baseline_after_init|SA6 state=2 ekid=6 iv_len=16 iv=00000000000000000000000000000000 arsn_len=2 arsn=0000 arsnw=5
+otar_only HARNESS|baseline_after_init|KEY140 state=0 len=0 val[0..3]=00000000
+otar_only HARNESS|baseline_after_init|KEY141 state=0 len=0 val[0..3]=00000000
+otar_only HARNESS|baseline_after_init|KEY142 state=0 len=0 val[0..3]=00000000
+otar_only HARNESS|frame|OTAR_140_142 status=0
+otar_only HARNESS|end_of_process1_in_RAM|SA0 state=3 ekid=0 iv_len=0 iv= arsn_len=0 arsn= arsnw=5
+otar_only [33mDEBUG - Printing local copyHARNESS|end_of_process1_in_RAM|SA6 state=2 ekid=6 iv_len=16 iv=00000000000000000000000000000000 arsn_len=2 arsn=0000 arsnw=5
+otar_only HARNESS|end_of_process1_in_RAM|KEY140 state=0 len=0 val[0..3]=00000000
+otar_only HARNESS|end_of_process1_in_RAM|KEY141 state=0 len=0 val[0..3]=00000000
+otar_only HARNESS|end_of_process1_in_RAM|KEY142 state=0 len=0 val[0..3]=00000000
+otar_only HARNESS|dump|init status=0
+otar_only HARNESS|after_restart|SA0 state=3 ekid=0 iv_len=0 iv= arsn_len=0 arsn= arsnw=5
+otar_only HARNESS|after_restart|SA6 state=2 ekid=6 iv_len=16 iv=00000000000000000000000000000000 arsn_len=2 arsn=0000 arsnw=5
+otar_only HARNESS|after_restart|KEY140 state=0 len=0 val[0..3]=00000000
+otar_only HARNESS|after_restart|KEY141 state=0 len=0 val[0..3]=00000000
+otar_only HARNESS|after_restart|KEY142 state=0 len=0 val[0..3]=00000000
+=== otar_activate P1
+=== otar_activate P2 (new process)
+otar_activate HARNESS|otar_activate|init status=0
+otar_activate HARNESS|baseline_after_init|SA0 state=1 ekid=0 iv_len=0 iv= arsn_len=0 arsn= arsnw=0
+otar_activate HARNESS|baseline_after_init|SA6 state=2 ekid=6 iv_len=16 iv=00000000000000000000000000000000 arsn_len=2 arsn=0000 arsnw=5
+otar_activate HARNESS|baseline_after_init|KEY140 state=0 len=0 val[0..3]=00000000
+otar_activate HARNESS|baseline_after_init|KEY141 state=0 len=0 val[0..3]=00000000
+otar_activate HARNESS|baseline_after_init|KEY142 state=0 len=0 val[0..3]=00000000
+otar_activate HARNESS|frame|OTAR_140_142 status=0
+otar_activate [33mDEBUG - Printing local copyHARNESS|frame|ACTIVATE_141_142 status=0
+otar_activate HARNESS|end_of_process1_in_RAM|SA0 state=3 ekid=0 iv_len=12 iv=b6ac8e4963f49207ffd6374b arsn_len=0 arsn= arsnw=5
+otar_activate 	 shivf_lHARNESS|end_of_process1_in_RAM|SA6 state=2 ekid=6 iv_len=16 iv=00000000000000000000000000000000 arsn_len=2 arsn=0000 arsnw=5
+otar_activate HARNESS|end_of_process1_in_RAM|KEY140 state=0 len=0 val[0..3]=00000000
+otar_activate HARNESS|end_of_process1_in_RAM|KEY141 state=0 len=0 val[0..3]=00000000
+otar_activate HARNESS|end_of_process1_in_RAM|KEY142 state=0 len=0 val[0..3]=00000000
+otar_activate HARNESS|dump|init status=0
+otar_activate HARNESS|after_restart|SA0 state=3 ekid=0 iv_len=12 iv=b6ac8e4963f49207ffd6374b arsn_len=0 arsn= arsnw=5
+otar_activate HARNESS|after_restart|SA6 state=2 ekid=6 iv_len=16 iv=00000000000000000000000000000000 arsn_len=2 arsn=0000 arsnw=5
+otar_activate HARNESS|after_restart|KEY140 state=0 len=0 val[0..3]=00000000
+otar_activate HARNESS|after_restart|KEY141 state=0 len=0 val[0..3]=00000000
+otar_activate HARNESS|after_restart|KEY142 state=0 len=0 val[0..3]=00000000
+=== sa_stop6 P1
+=== sa_stop6 P2 (new process)
+sa_stop6 HARNESS|sa_stop6|init status=0
+sa_stop6 HARNESS|baseline_after_init|SA0 state=1 ekid=0 iv_len=0 iv= arsn_len=0 arsn= arsnw=0
+sa_stop6 HARNESS|baseline_after_init|SA6 state=2 ekid=6 iv_len=16 iv=00000000000000000000000000000000 arsn_len=2 arsn=0000 arsnw=5
+sa_stop6 HARNESS|baseline_after_init|KEY140 state=0 len=0 val[0..3]=00000000
+sa_stop6 HARNESS|baseline_after_init|KEY141 state=0 len=0 val[0..3]=00000000
+sa_stop6 HARNESS|baseline_after_init|KEY142 state=0 len=0 val[0..3]=00000000
+sa_stop6 	 akid      HARNESS|frame|SA_STOP_6 status=0
+sa_stop6 HARNESS|end_of_process1_in_RAM|SA0 state=3 ekid=0 iv_len=12 iv=000000000000000000000000 arsn_len=0 arsn= arsnw=5
+sa_stop6 HARNESS|end_of_process1_in_RAM|SA6 state=2 ekid=6 iv_len=16 iv=00000000000000000000000000000000 arsn_len=2 arsn=0000 arsnw=5
+sa_stop6 HARNESS|end_of_process1_in_RAM|KEY140 state=0 len=0 val[0..3]=00000000
+sa_stop6 HARNESS|end_of_process1_in_RAM|KEY141 state=0 len=0 val[0..3]=00000000
+sa_stop6 HARNESS|end_of_process1_in_RAM|KEY142 state=0 len=0 val[0..3]=00000000
+sa_stop6 HARNESS|dump|init status=0
+sa_stop6 HARNESS|after_restart|SA0 state=3 ekid=0 iv_len=12 iv=000000000000000000000000 arsn_len=0 arsn= arsnw=5
+sa_stop6 HARNESS|after_restart|SA6 state=3 ekid=6 iv_len=16 iv=00000000000000000000000000000000 arsn_len=2 arsn=0000 arsnw=5
+sa_stop6 HARNESS|after_restart|KEY140 state=0 len=0 val[0..3]=00000000
+sa_stop6 HARNESS|after_restart|KEY141 state=0 len=0 val[0..3]=00000000
+sa_stop6 HARNESS|after_restart|KEY142 state=0 len=0 val[0..3]=00000000
+=== set_arsn7 P1
+=== set_arsn7 P2 (new process)
+set_arsn7 HARNESS|dump|init status=0
+set_arsn7 HARNESS|after_restart|SA0 state=3 ekid=0 iv_len=12 iv=000000000000000000000000 arsn_len=0 arsn= arsnw=5
+set_arsn7 HARNESS|after_restart|SA6 state=2 ekid=6 iv_len=16 iv=00000000000000000000000000000000 arsn_len=2 arsn=0000 arsnw=5
+set_arsn7 HARNESS|after_restart|KEY140 state=0 len=0 val[0..3]=00000000
+set_arsn7 HARNESS|after_restart|KEY141 state=0 len=0 val[0..3]=00000000
+set_arsn7 HARNESS|after_restart|KEY142 state=0 len=0 val[0..3]=00000000
+set_arsn7 HARNESS|set_arsn7|init status=0
+set_arsn7 HARNESS|baseline_after_init|SA0 state=1 ekid=0 iv_len=0 iv= arsn_len=0 arsn= arsnw=0
+set_arsn7 HARNESS|baseline_after_init|SA6 state=2 ekid=6 iv_len=16 iv=00000000000000000000000000000000 arsn_len=2 arsn=0000 arsnw=5
+set_arsn7 HARNESS|baseline_after_init|KEY140 state=0 len=0 val[0..3]=00000000
+set_arsn7 HARNESS|baseline_after_init|KEY141 state=0 len=0 val[0..3]=00000000
+set_arsn7 HARNESS|baseline_after_init|KEY142 state=0 len=0 val[0..3]=00000000
+set_arsn7 [32mRHARNESS|frame|SA_SET_ARSN_7 status=0
+set_arsn7 HARNESS|end_of_process1_in_RAM|SA0 state=3 ekid=0 iv_len=12 iv=000000000000000000000000 arsn_len=0 arsn= arsnw=5
+set_arsn7 HARNESS|end_of_process1_in_RAM|SA6 state=2 ekid=6 iv_len=16 iv=00000000000000000000000000000000 arsn_len=2 arsn=0000 arsnw=5
+set_arsn7 HARNESS|end_of_process1_in_RAM|KEY140 state=0 len=0 val[0..3]=00000000
+set_arsn7 HARNESS|end_of_process1_in_RAM|KEY141 state=0 len=0 val[0..3]=00000000
+set_arsn7 HARNESS|end_of_process1_in_RAM|KEY142 state=0 len=0 val[0..3]=00000000

@@ -1,0 +1,68 @@
+Test project /build/sa_file_off
+      Start  1: UT_TC_APPLY
+ 1/12 Test  #1: UT_TC_APPLY ......................***Exception: SegFault  0.00 sec
+ERROR: Loading internal monitoring and control interface stub source code. Rebuild CryptoLib with -DMC_INTERNAL=ON to use implementation.
+
+      Start  2: UT_TC_PROCESS
+ 2/12 Test  #2: UT_TC_PROCESS ....................***Exception: SegFault  0.00 sec
+ERROR: Loading internal monitoring and control interface stub source code. Rebuild CryptoLib with -DMC_INTERNAL=ON to use implementation.
+
+      Start  3: UT_CRYPTO_CONFIG
+ 3/12 Test  #3: UT_CRYPTO_CONFIG .................***Exception: SegFault  0.00 sec
+ERROR: Loading internal monitoring and control interface stub source code. Rebuild CryptoLib with -DMC_INTERNAL=ON to use implementation.
+
+      Start  4: UT_CRYPTO
+ 4/12 Test  #4: UT_CRYPTO ........................***Exception: SegFault  0.00 sec
+ERROR: Loading internal monitoring and control interface stub source code. Rebuild CryptoLib with -DMC_INTERNAL=ON to use implementation.
+
+      Start  5: UT_AOS_APPLY
+ 5/12 Test  #5: UT_AOS_APPLY .....................***Exception: SegFault  0.00 sec
+ERROR: Loading internal monitoring and control interface stub source code. Rebuild CryptoLib with -DMC_INTERNAL=ON to use implementation.
+
+      Start  6: UT_AOS_PROCESS
+ 6/12 Test  #6: UT_AOS_PROCESS ...................***Exception: SegFault  0.00 sec
+ERROR: Loading internal monitoring and control interface stub source code. Rebuild CryptoLib with -DMC_INTERNAL=ON to use implementation.
+
+      Start  7: UT_TM_APPLY
+ 7/12 Test  #7: UT_TM_APPLY ......................***Exception: SegFault  0.00 sec
+ERROR: Loading internal monitoring and control interface stub source code. Rebuild CryptoLib with -DMC_INTERNAL=ON to use implementation.
+
+      Start  8: UT_TM_PROCESS
+ 8/12 Test  #8: UT_TM_PROCESS ....................***Exception: SegFault  0.00 sec
+ERROR: Loading internal monitoring and control interface stub source code. Rebuild CryptoLib with -DMC_INTERNAL=ON to use implementation.
+
+      Start  9: UT_EP_MC
+ 9/12 Test  #9: UT_EP_MC .........................***Exception: SegFault  0.00 sec
+ERROR: Loading internal monitoring and control interface stub source code. Rebuild CryptoLib with -DMC_INTERNAL=ON to use implementation.
+
+      Start 10: UT_EP_SA_MGMT
+10/12 Test #10: UT_EP_SA_MGMT ....................***Exception: SegFault  0.00 sec
+ERROR: Loading internal monitoring and control interface stub source code. Rebuild CryptoLib with -DMC_INTERNAL=ON to use implementation.
+
+      Start 11: UT_EP_KEY_MGMT
+11/12 Test #11: UT_EP_KEY_MGMT ...................***Exception: SegFault  0.00 sec
+ERROR: Loading internal monitoring and control interface stub source code. Rebuild CryptoLib with -DMC_INTERNAL=ON to use implementation.
+
+      Start 12: UT_AES_GCM_SIV
+12/12 Test #12: UT_AES_GCM_SIV ...................***Exception: SegFault  0.00 sec
+ERROR: Loading internal monitoring and control interface stub source code. Rebuild CryptoLib with -DMC_INTERNAL=ON to use implementation.
+
+
+0% tests passed, 12 tests failed out of 12
+
+Total Test time (real) =   0.03 sec
+
+The following tests FAILED:
+	  1 - UT_TC_APPLY (SEGFAULT)
+	  2 - UT_TC_PROCESS (SEGFAULT)
+	  3 - UT_CRYPTO_CONFIG (SEGFAULT)
+	  4 - UT_CRYPTO (SEGFAULT)
+	  5 - UT_AOS_APPLY (SEGFAULT)
+	  6 - UT_AOS_PROCESS (SEGFAULT)
+	  7 - UT_TM_APPLY (SEGFAULT)
+	  8 - UT_TM_PROCESS (SEGFAULT)
+	  9 - UT_EP_MC (SEGFAULT)
+	 10 - UT_EP_SA_MGMT (SEGFAULT)
+	 11 - UT_EP_KEY_MGMT (SEGFAULT)
+	 12 - UT_AES_GCM_SIV (SEGFAULT)
+Errors while running CTest

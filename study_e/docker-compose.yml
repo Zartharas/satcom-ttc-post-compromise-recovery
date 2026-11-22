@@ -1,0 +1,21 @@
+# Usage (on the Mac):
+#   export TTC_REPO_ROOT=/absolute/path/to/satcom-ttc-post-compromise-recovery   # optional, enables the frozen-record guard
+#   docker compose run --rm test
+#   docker compose run --rm test-full
+services:
+  test: &base
+    build: .
+    network_mode: none          # the model needs no network at runtime
+    read_only: true
+    tmpfs: ["/tmp"]
+    cap_drop: [ALL]
+    security_opt: ["no-new-privileges:true"]
+    environment:
+      TTC_REPO_ROOT: /repo
+    volumes:
+      - ${TTC_REPO_ROOT:-/dev/null}:/repo:ro   # frozen repo mounted READ-ONLY; unset => guard test skips
+  test-full:
+    <<: *base
+    environment:
+      TTC_REPO_ROOT: /repo
+      STUDY_E_FULL: "1"

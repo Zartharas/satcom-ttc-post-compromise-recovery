@@ -1,0 +1,555 @@
+[  2%] Building C object src/CMakeFiles/crypto.dir/core/crypto.c.o
+[  2%] Building C object src/CMakeFiles/crypto.dir/core/crypto_aos.c.o
+In file included from /src/CryptoLib/include/crypto.h:37,
+                 from /src/CryptoLib/src/core/crypto.c:22:
+/src/CryptoLib/include/crypto_config_structs.h:282:1: note: offset of packed bit-field 'vcid' has changed in GCC 4.4
+  282 | } __attribute__((packed));
+      | ^
+/src/CryptoLib/include/crypto_config_structs.h:311:1: note: offset of packed bit-field 'scid' has changed in GCC 4.4
+  311 | } __attribute__((packed));
+      | ^
+In file included from /src/CryptoLib/include/crypto.h:37,
+                 from /src/CryptoLib/src/core/crypto_aos.c:22:
+/src/CryptoLib/include/crypto_config_structs.h:282:1: note: offset of packed bit-field 'vcid' has changed in GCC 4.4
+  282 | } __attribute__((packed));
+      | ^
+/src/CryptoLib/include/crypto_config_structs.h:311:1: note: offset of packed bit-field 'scid' has changed in GCC 4.4
+  311 | } __attribute__((packed));
+      | ^
+In file included from /src/CryptoLib/include/crypto_print.h:26,
+                 from /src/CryptoLib/include/crypto.h:40:
+/src/CryptoLib/include/crypto_structs.h:103:1: note: offset of packed bit-field 'arsn_len' has changed in GCC 4.4
+  103 | } __attribute__((packed)) SecurityAssociation_t;
+      | ^
+In file included from /src/CryptoLib/include/crypto_print.h:26,
+                 from /src/CryptoLib/include/crypto.h:40:
+/src/CryptoLib/include/crypto_structs.h:103:1: note: offset of packed bit-field 'arsn_len' has changed in GCC 4.4
+  103 | } __attribute__((packed)) SecurityAssociation_t;
+      | ^
+[  4%] Building C object src/CMakeFiles/crypto.dir/core/crypto_config.c.o
+[  5%] Building C object src/CMakeFiles/crypto.dir/core/crypto_error.c.o
+In file included from /src/CryptoLib/include/crypto.h:37,
+                 from /src/CryptoLib/src/core/crypto_config.c:23:
+/src/CryptoLib/include/crypto_config_structs.h:282:1: note: offset of packed bit-field 'vcid' has changed in GCC 4.4
+  282 | } __attribute__((packed));
+      | ^
+/src/CryptoLib/include/crypto_config_structs.h:311:1: note: offset of packed bit-field 'scid' has changed in GCC 4.4
+  311 | } __attribute__((packed));
+      | ^
+In file included from /src/CryptoLib/include/crypto_print.h:26,
+                 from /src/CryptoLib/include/crypto.h:40:
+/src/CryptoLib/include/crypto_structs.h:103:1: note: offset of packed bit-field 'arsn_len' has changed in GCC 4.4
+  103 | } __attribute__((packed)) SecurityAssociation_t;
+      | ^
+In file included from /src/CryptoLib/include/crypto.h:37,
+                 from /src/CryptoLib/src/core/crypto_error.c:22:
+/src/CryptoLib/include/crypto_config_structs.h:282:1: note: offset of packed bit-field 'vcid' has changed in GCC 4.4
+  282 | } __attribute__((packed));
+      | ^
+/src/CryptoLib/include/crypto_config_structs.h:311:1: note: offset of packed bit-field 'scid' has changed in GCC 4.4
+  311 | } __attribute__((packed));
+      | ^
+In file included from /src/CryptoLib/include/crypto_print.h:26,
+                 from /src/CryptoLib/include/crypto.h:40:
+/src/CryptoLib/include/crypto_structs.h:103:1: note: offset of packed bit-field 'arsn_len' has changed in GCC 4.4
+  103 | } __attribute__((packed)) SecurityAssociation_t;
+      | ^
+[  6%] Building C object src/CMakeFiles/crypto.dir/core/crypto_key_mgmt.c.o
+[  8%] Building C object src/CMakeFiles/crypto.dir/core/crypto_mc.c.o
+In file included from /src/CryptoLib/include/crypto.h:37,
+                 from /src/CryptoLib/src/core/crypto_key_mgmt.c:28:
+/src/CryptoLib/include/crypto_config_structs.h:282:1: note: offset of packed bit-field 'vcid' has changed in GCC 4.4
+  282 | } __attribute__((packed));
+      | ^
+/src/CryptoLib/include/crypto_config_structs.h:311:1: note: offset of packed bit-field 'scid' has changed in GCC 4.4
+  311 | } __attribute__((packed));
+      | ^
+In file included from /src/CryptoLib/include/crypto_print.h:26,
+                 from /src/CryptoLib/include/crypto.h:40:
+/src/CryptoLib/include/crypto_structs.h:103:1: note: offset of packed bit-field 'arsn_len' has changed in GCC 4.4
+  103 | } __attribute__((packed)) SecurityAssociation_t;
+      | ^
+In file included from /src/CryptoLib/include/crypto.h:37,
+                 from /src/CryptoLib/src/core/crypto_mc.c:22:
+/src/CryptoLib/include/crypto_config_structs.h:282:1: note: offset of packed bit-field 'vcid' has changed in GCC 4.4
+  282 | } __attribute__((packed));
+      | ^
+/src/CryptoLib/include/crypto_config_structs.h:311:1: note: offset of packed bit-field 'scid' has changed in GCC 4.4
+  311 | } __attribute__((packed));
+      | ^
+In file included from /src/CryptoLib/include/crypto_print.h:26,
+                 from /src/CryptoLib/include/crypto.h:40:
+/src/CryptoLib/include/crypto_structs.h:103:1: note: offset of packed bit-field 'arsn_len' has changed in GCC 4.4
+  103 | } __attribute__((packed)) SecurityAssociation_t;
+      | ^
+[  9%] Building C object src/CMakeFiles/crypto.dir/core/crypto_print.c.o
+[ 11%] Building C object src/CMakeFiles/crypto.dir/core/crypto_tc.c.o
+In file included from /src/CryptoLib/include/crypto.h:37,
+                 from /src/CryptoLib/include/crypto_print.h:25,
+                 from /src/CryptoLib/src/core/crypto_print.c:25:
+/src/CryptoLib/include/crypto_config_structs.h:282:1: note: offset of packed bit-field 'vcid' has changed in GCC 4.4
+  282 | } __attribute__((packed));
+      | ^
+/src/CryptoLib/include/crypto_config_structs.h:311:1: note: offset of packed bit-field 'scid' has changed in GCC 4.4
+  311 | } __attribute__((packed));
+      | ^
+In file included from /src/CryptoLib/include/crypto.h:41:
+/src/CryptoLib/include/crypto_structs.h:103:1: note: offset of packed bit-field 'arsn_len' has changed in GCC 4.4
+  103 | } __attribute__((packed)) SecurityAssociation_t;
+      | ^
+In file included from /src/CryptoLib/include/crypto.h:37,
+                 from /src/CryptoLib/src/core/crypto_tc.c:22:
+/src/CryptoLib/include/crypto_config_structs.h:282:1: note: offset of packed bit-field 'vcid' has changed in GCC 4.4
+  282 | } __attribute__((packed));
+      | ^
+/src/CryptoLib/include/crypto_config_structs.h:311:1: note: offset of packed bit-field 'scid' has changed in GCC 4.4
+  311 | } __attribute__((packed));
+      | ^
+In file included from /src/CryptoLib/include/crypto_print.h:26,
+                 from /src/CryptoLib/include/crypto.h:40:
+/src/CryptoLib/include/crypto_structs.h:103:1: note: offset of packed bit-field 'arsn_len' has changed in GCC 4.4
+  103 | } __attribute__((packed)) SecurityAssociation_t;
+      | ^
+[ 12%] Building C object src/CMakeFiles/crypto.dir/core/crypto_tm.c.o
+In file included from /src/CryptoLib/include/crypto.h:37,
+                 from /src/CryptoLib/src/core/crypto_tm.c:22:
+/src/CryptoLib/include/crypto_config_structs.h:282:1: note: offset of packed bit-field 'vcid' has changed in GCC 4.4
+  282 | } __attribute__((packed));
+      | ^
+/src/CryptoLib/include/crypto_config_structs.h:311:1: note: offset of packed bit-field 'scid' has changed in GCC 4.4
+  311 | } __attribute__((packed));
+      | ^
+In file included from /src/CryptoLib/include/crypto_print.h:26,
+                 from /src/CryptoLib/include/crypto.h:40:
+/src/CryptoLib/include/crypto_structs.h:103:1: note: offset of packed bit-field 'arsn_len' has changed in GCC 4.4
+  103 | } __attribute__((packed)) SecurityAssociation_t;
+      | ^
+[ 13%] Building C object src/CMakeFiles/crypto.dir/core/crypto_user.c.o
+In file included from /src/CryptoLib/include/crypto.h:37,
+                 from /src/CryptoLib/src/core/crypto_user.c:22:
+/src/CryptoLib/include/crypto_config_structs.h:282:1: note: offset of packed bit-field 'vcid' has changed in GCC 4.4
+  282 | } __attribute__((packed));
+      | ^
+/src/CryptoLib/include/crypto_config_structs.h:311:1: note: offset of packed bit-field 'scid' has changed in GCC 4.4
+  311 | } __attribute__((packed));
+      | ^
+In file included from /src/CryptoLib/include/crypto_print.h:26,
+                 from /src/CryptoLib/include/crypto.h:40:
+/src/CryptoLib/include/crypto_structs.h:103:1: note: offset of packed bit-field 'arsn_len' has changed in GCC 4.4
+  103 | } __attribute__((packed)) SecurityAssociation_t;
+      | ^
+[ 15%] Building C object src/CMakeFiles/crypto.dir/crypto/custom_stub/cryptography_interface_custom_stub.template.c.o
+In file included from /src/CryptoLib/include/cryptography_interface.h:27,
+                 from /src/CryptoLib/src/crypto/custom_stub/cryptography_interface_custom_stub.template.c:15:
+/src/CryptoLib/include/crypto_structs.h:103:1: note: offset of packed bit-field 'arsn_len' has changed in GCC 4.4
+  103 | } __attribute__((packed)) SecurityAssociation_t;
+      | ^
+[ 16%] Building C object src/CMakeFiles/crypto.dir/crypto/libgcrypt/cryptography_interface_libgcrypt.template.c.o
+[ 18%] Building C object src/CMakeFiles/crypto.dir/crypto/kmc_stub/cryptography_interface_kmc.stub.c.o
+In file included from /src/CryptoLib/include/crypto.h:37,
+                 from /src/CryptoLib/src/crypto/libgcrypt/cryptography_interface_libgcrypt.template.c:17:
+/src/CryptoLib/include/crypto_config_structs.h:282:1: note: offset of packed bit-field 'vcid' has changed in GCC 4.4
+  282 | } __attribute__((packed));
+      | ^
+/src/CryptoLib/include/crypto_config_structs.h:311:1: note: offset of packed bit-field 'scid' has changed in GCC 4.4
+  311 | } __attribute__((packed));
+      | ^
+In file included from /src/CryptoLib/include/crypto_print.h:26,
+                 from /src/CryptoLib/include/crypto.h:40:
+/src/CryptoLib/include/crypto_structs.h:103:1: note: offset of packed bit-field 'arsn_len' has changed in GCC 4.4
+  103 | } __attribute__((packed)) SecurityAssociation_t;
+      | ^
+In file included from /src/CryptoLib/include/cryptography_interface.h:27,
+                 from /src/CryptoLib/src/crypto/kmc_stub/cryptography_interface_kmc.stub.c:15:
+/src/CryptoLib/include/crypto_structs.h:103:1: note: offset of packed bit-field 'arsn_len' has changed in GCC 4.4
+  103 | } __attribute__((packed)) SecurityAssociation_t;
+      | ^
+[ 19%] Building C object src/CMakeFiles/crypto.dir/crypto/wolfssl_stub/cryptography_interface_wolfssl.stub.c.o
+In file included from /src/CryptoLib/include/cryptography_interface.h:27,
+                 from /src/CryptoLib/src/crypto/wolfssl_stub/cryptography_interface_wolfssl.stub.c:15:
+/src/CryptoLib/include/crypto_structs.h:103:1: note: offset of packed bit-field 'arsn_len' has changed in GCC 4.4
+  103 | } __attribute__((packed)) SecurityAssociation_t;
+      | ^
+[ 20%] Building C object src/CMakeFiles/crypto.dir/key/custom_stub/key_interface_custom_stub.template.c.o
+[ 22%] Building C object src/CMakeFiles/crypto.dir/key/internal/key_interface_internal.template.c.o
+In file included from /src/CryptoLib/include/key_interface.h:22,
+                 from /src/CryptoLib/src/key/custom_stub/key_interface_custom_stub.template.c:19:
+/src/CryptoLib/include/crypto_structs.h:103:1: note: offset of packed bit-field 'arsn_len' has changed in GCC 4.4
+  103 | } __attribute__((packed)) SecurityAssociation_t;
+      | ^
+In file included from /src/CryptoLib/include/key_interface.h:22,
+                 from /src/CryptoLib/src/key/internal/key_interface_internal.template.c:18:
+/src/CryptoLib/include/crypto_structs.h:103:1: note: offset of packed bit-field 'arsn_len' has changed in GCC 4.4
+  103 | } __attribute__((packed)) SecurityAssociation_t;
+      | ^
+[ 23%] Building C object src/CMakeFiles/crypto.dir/key/kmc_stub/key_interface_kmc_stub.template.c.o
+In file included from /src/CryptoLib/include/key_interface.h:22,
+                 from /src/CryptoLib/src/key/kmc_stub/key_interface_kmc_stub.template.c:19:
+/src/CryptoLib/include/crypto_structs.h:103:1: note: offset of packed bit-field 'arsn_len' has changed in GCC 4.4
+  103 | } __attribute__((packed)) SecurityAssociation_t;
+      | ^
+[ 25%] Building C object src/CMakeFiles/crypto.dir/mc/custom_stub/mc_interface_custom_stub.template.c.o
+In file included from /src/CryptoLib/include/mc_interface.h:22,
+                 from /src/CryptoLib/src/mc/custom_stub/mc_interface_custom_stub.template.c:19:
+/src/CryptoLib/include/crypto_structs.h:103:1: note: offset of packed bit-field 'arsn_len' has changed in GCC 4.4
+  103 | } __attribute__((packed)) SecurityAssociation_t;
+      | ^
+[ 26%] Building C object src/CMakeFiles/crypto.dir/mc/disabled_stub/mc_interface_disabled_stub.template.c.o
+[ 27%] Building C object src/CMakeFiles/crypto.dir/mc/internal/mc_interface_internal.template.c.o
+In file included from /src/CryptoLib/include/mc_interface.h:22,
+                 from /src/CryptoLib/src/mc/disabled_stub/mc_interface_disabled_stub.template.c:19:
+/src/CryptoLib/include/crypto_structs.h:103:1: note: offset of packed bit-field 'arsn_len' has changed in GCC 4.4
+  103 | } __attribute__((packed)) SecurityAssociation_t;
+      | ^
+In file included from /src/CryptoLib/include/mc_interface.h:22,
+                 from /src/CryptoLib/src/mc/internal/mc_interface_internal.template.c:18:
+/src/CryptoLib/include/crypto_structs.h:103:1: note: offset of packed bit-field 'arsn_len' has changed in GCC 4.4
+  103 | } __attribute__((packed)) SecurityAssociation_t;
+      | ^
+[ 29%] Building C object src/CMakeFiles/crypto.dir/sa/custom_stub/sa_interface_custom.stub.c.o
+In file included from /src/CryptoLib/include/sa_interface.h:27,
+                 from /src/CryptoLib/src/sa/custom_stub/sa_interface_custom.stub.c:15:
+/src/CryptoLib/include/crypto_structs.h:103:1: note: offset of packed bit-field 'arsn_len' has changed in GCC 4.4
+  103 | } __attribute__((packed)) SecurityAssociation_t;
+      | ^
+[ 30%] Building C object src/CMakeFiles/crypto.dir/sa/internal/sa_interface_inmemory.template.c.o
+[ 31%] Building C object src/CMakeFiles/crypto.dir/sa/mariadb_stub/sa_interface_mariadb.stub.c.o
+In file included from /src/CryptoLib/include/crypto.h:37,
+                 from /src/CryptoLib/src/sa/internal/sa_interface_inmemory.template.c:15:
+/src/CryptoLib/include/crypto_config_structs.h:282:1: note: offset of packed bit-field 'vcid' has changed in GCC 4.4
+  282 | } __attribute__((packed));
+      | ^
+/src/CryptoLib/include/crypto_config_structs.h:311:1: note: offset of packed bit-field 'scid' has changed in GCC 4.4
+  311 | } __attribute__((packed));
+      | ^
+In file included from /src/CryptoLib/include/crypto_print.h:26,
+                 from /src/CryptoLib/include/crypto.h:40:
+/src/CryptoLib/include/crypto_structs.h:103:1: note: offset of packed bit-field 'arsn_len' has changed in GCC 4.4
+  103 | } __attribute__((packed)) SecurityAssociation_t;
+      | ^
+In file included from /src/CryptoLib/include/sa_interface.h:27,
+                 from /src/CryptoLib/src/sa/mariadb_stub/sa_interface_mariadb.stub.c:15:
+/src/CryptoLib/include/crypto_structs.h:103:1: note: offset of packed bit-field 'arsn_len' has changed in GCC 4.4
+  103 | } __attribute__((packed)) SecurityAssociation_t;
+      | ^
+[ 33%] Linking C shared library libcryptolib.so
+Created /build/sa_file_on/libcryptolib.so
+[ 33%] Built target crypto
+[ 36%] Building C object test/CMakeFiles/ut_aos_apply.dir/unit/ut_aos_apply.c.o
+[ 36%] Building C object test/CMakeFiles/ut_aes_gcm_siv.dir/unit/ut_aes_gcm_siv.c.o
+In file included from /src/CryptoLib/include/crypto.h:37,
+                 from /src/CryptoLib/test/include/ut_aes_gcm_siv.h:9,
+                 from /src/CryptoLib/test/unit/ut_aes_gcm_siv.c:20:
+/src/CryptoLib/include/crypto_config_structs.h:282:1: note: offset of packed bit-field 'vcid' has changed in GCC 4.4
+  282 | } __attribute__((packed));
+      | ^
+In file included from /src/CryptoLib/include/crypto.h:37,
+                 from /src/CryptoLib/test/include/ut_aos_apply.h:27,
+                 from /src/CryptoLib/test/unit/ut_aos_apply.c:23:
+/src/CryptoLib/include/crypto_config_structs.h:282:1: note: offset of packed bit-field 'vcid' has changed in GCC 4.4
+  282 | } __attribute__((packed));
+      | ^
+/src/CryptoLib/include/crypto_config_structs.h:311:1: note: offset of packed bit-field 'scid' has changed in GCC 4.4
+  311 | } __attribute__((packed));
+      | ^
+/src/CryptoLib/include/crypto_config_structs.h:311:1: note: offset of packed bit-field 'scid' has changed in GCC 4.4
+  311 | } __attribute__((packed));
+      | ^
+In file included from /src/CryptoLib/include/crypto_print.h:26,
+                 from /src/CryptoLib/include/crypto.h:40:
+/src/CryptoLib/include/crypto_structs.h:103:1: note: offset of packed bit-field 'arsn_len' has changed in GCC 4.4
+  103 | } __attribute__((packed)) SecurityAssociation_t;
+      | ^
+In file included from /src/CryptoLib/include/crypto_print.h:26,
+                 from /src/CryptoLib/include/crypto.h:40:
+/src/CryptoLib/include/crypto_structs.h:103:1: note: offset of packed bit-field 'arsn_len' has changed in GCC 4.4
+  103 | } __attribute__((packed)) SecurityAssociation_t;
+      | ^
+[ 37%] Building C object test/CMakeFiles/ut_aes_gcm_siv.dir/core/shared_util.c.o
+[ 38%] Linking C executable ut_aes_gcm_siv
+Created /build/sa_file_on/bin/ut_aes_gcm_siv
+[ 38%] Built target ut_aes_gcm_siv
+[ 40%] Building C object test/CMakeFiles/ut_aos_apply.dir/core/shared_util.c.o
+[ 41%] Building C object test/CMakeFiles/ut_aos_process.dir/unit/ut_aos_process.c.o
+In file included from /src/CryptoLib/include/crypto.h:37,
+                 from /src/CryptoLib/test/include/ut_aos_process.h:27,
+                 from /src/CryptoLib/test/unit/ut_aos_process.c:22:
+/src/CryptoLib/include/crypto_config_structs.h:282:1: note: offset of packed bit-field 'vcid' has changed in GCC 4.4
+  282 | } __attribute__((packed));
+      | ^
+/src/CryptoLib/include/crypto_config_structs.h:311:1: note: offset of packed bit-field 'scid' has changed in GCC 4.4
+  311 | } __attribute__((packed));
+      | ^
+In file included from /src/CryptoLib/include/crypto_print.h:26,
+                 from /src/CryptoLib/include/crypto.h:40:
+/src/CryptoLib/include/crypto_structs.h:103:1: note: offset of packed bit-field 'arsn_len' has changed in GCC 4.4
+  103 | } __attribute__((packed)) SecurityAssociation_t;
+      | ^
+[ 43%] Linking C executable ut_aos_apply
+Created /build/sa_file_on/bin/ut_aos_apply
+[ 43%] Built target ut_aos_apply
+[ 44%] Building C object test/CMakeFiles/ut_crypto.dir/unit/ut_crypto.c.o
+In file included from /src/CryptoLib/include/crypto.h:37,
+                 from /src/CryptoLib/test/include/ut_crypto.h:27,
+                 from /src/CryptoLib/test/unit/ut_crypto.c:22:
+/src/CryptoLib/include/crypto_config_structs.h:282:1: note: offset of packed bit-field 'vcid' has changed in GCC 4.4
+  282 | } __attribute__((packed));
+      | ^
+/src/CryptoLib/include/crypto_config_structs.h:311:1: note: offset of packed bit-field 'scid' has changed in GCC 4.4
+  311 | } __attribute__((packed));
+      | ^
+In file included from /src/CryptoLib/include/crypto_print.h:26,
+                 from /src/CryptoLib/include/crypto.h:40:
+/src/CryptoLib/include/crypto_structs.h:103:1: note: offset of packed bit-field 'arsn_len' has changed in GCC 4.4
+  103 | } __attribute__((packed)) SecurityAssociation_t;
+      | ^
+[ 45%] Building C object test/CMakeFiles/ut_aos_process.dir/core/shared_util.c.o
+[ 47%] Building C object test/CMakeFiles/ut_crypto.dir/core/shared_util.c.o
+[ 48%] Linking C executable ut_aos_process
+[ 50%] Linking C executable ut_crypto
+Created /build/sa_file_on/bin/ut_aos_process
+[ 50%] Built target ut_aos_process
+Created /build/sa_file_on/bin/ut_crypto
+[ 51%] Building C object test/CMakeFiles/ut_crypto_config.dir/unit/ut_crypto_config.c.o
+[ 51%] Built target ut_crypto
+In file included from /src/CryptoLib/include/crypto.h:37,
+                 from /src/CryptoLib/test/include/ut_crypto_config.h:27,
+                 from /src/CryptoLib/test/unit/ut_crypto_config.c:22:
+/src/CryptoLib/include/crypto_config_structs.h:282:1: note: offset of packed bit-field 'vcid' has changed in GCC 4.4
+  282 | } __attribute__((packed));
+      | ^
+/src/CryptoLib/include/crypto_config_structs.h:311:1: note: offset of packed bit-field 'scid' has changed in GCC 4.4
+  311 | } __attribute__((packed));
+      | ^
+In file included from /src/CryptoLib/include/crypto_print.h:26,
+                 from /src/CryptoLib/include/crypto.h:40:
+/src/CryptoLib/include/crypto_structs.h:103:1: note: offset of packed bit-field 'arsn_len' has changed in GCC 4.4
+  103 | } __attribute__((packed)) SecurityAssociation_t;
+      | ^
+[ 52%] Building C object test/CMakeFiles/ut_ep_key_mgmt.dir/unit/ut_ep_key_mgmt.c.o
+In file included from /src/CryptoLib/include/crypto.h:37,
+                 from /src/CryptoLib/test/include/ut_ep_key_mgmt.h:9,
+                 from /src/CryptoLib/test/unit/ut_ep_key_mgmt.c:1:
+/src/CryptoLib/include/crypto_config_structs.h:282:1: note: offset of packed bit-field 'vcid' has changed in GCC 4.4
+  282 | } __attribute__((packed));
+      | ^
+/src/CryptoLib/include/crypto_config_structs.h:311:1: note: offset of packed bit-field 'scid' has changed in GCC 4.4
+  311 | } __attribute__((packed));
+      | ^
+In file included from /src/CryptoLib/include/crypto_print.h:26,
+                 from /src/CryptoLib/include/crypto.h:40:
+/src/CryptoLib/include/crypto_structs.h:103:1: note: offset of packed bit-field 'arsn_len' has changed in GCC 4.4
+  103 | } __attribute__((packed)) SecurityAssociation_t;
+      | ^
+[ 54%] Building C object test/CMakeFiles/ut_crypto_config.dir/core/shared_util.c.o
+[ 55%] Linking C executable ut_crypto_config
+Created /build/sa_file_on/bin/ut_crypto_config
+[ 55%] Built target ut_crypto_config
+[ 56%] Building C object test/CMakeFiles/ut_ep_key_mgmt.dir/core/shared_util.c.o
+[ 58%] Building C object test/CMakeFiles/ut_ep_mc.dir/unit/ut_ep_mc.c.o
+In file included from /src/CryptoLib/include/crypto.h:37,
+                 from /src/CryptoLib/test/include/ut_ep_mc.h:27,
+                 from /src/CryptoLib/test/unit/ut_ep_mc.c:1:
+/src/CryptoLib/include/crypto_config_structs.h:282:1: note: offset of packed bit-field 'vcid' has changed in GCC 4.4
+  282 | } __attribute__((packed));
+      | ^
+/src/CryptoLib/include/crypto_config_structs.h:311:1: note: offset of packed bit-field 'scid' has changed in GCC 4.4
+  311 | } __attribute__((packed));
+      | ^
+In file included from /src/CryptoLib/include/crypto_print.h:26,
+                 from /src/CryptoLib/include/crypto.h:40:
+/src/CryptoLib/include/crypto_structs.h:103:1: note: offset of packed bit-field 'arsn_len' has changed in GCC 4.4
+  103 | } __attribute__((packed)) SecurityAssociation_t;
+      | ^
+[ 59%] Linking C executable ut_ep_key_mgmt
+Created /build/sa_file_on/bin/ut_ep_key_mgmt
+[ 59%] Built target ut_ep_key_mgmt
+[ 62%] Building C object test/CMakeFiles/ut_ep_mc.dir/core/shared_util.c.o
+[ 62%] Building C object test/CMakeFiles/ut_ep_sa_mgmt.dir/unit/ut_ep_sa_mgmt.c.o
+In file included from /src/CryptoLib/include/crypto.h:37,
+                 from /src/CryptoLib/test/include/ut_ep_sa_mgmt.h:27,
+                 from /src/CryptoLib/test/unit/ut_ep_sa_mgmt.c:1:
+/src/CryptoLib/include/crypto_config_structs.h:282:1: note: offset of packed bit-field 'vcid' has changed in GCC 4.4
+  282 | } __attribute__((packed));
+      | ^
+/src/CryptoLib/include/crypto_config_structs.h:311:1: note: offset of packed bit-field 'scid' has changed in GCC 4.4
+  311 | } __attribute__((packed));
+      | ^
+In file included from /src/CryptoLib/include/crypto_print.h:26,
+                 from /src/CryptoLib/include/crypto.h:40:
+/src/CryptoLib/include/crypto_structs.h:103:1: note: offset of packed bit-field 'arsn_len' has changed in GCC 4.4
+  103 | } __attribute__((packed)) SecurityAssociation_t;
+      | ^
+[ 63%] Linking C executable ut_ep_mc
+Created /build/sa_file_on/bin/ut_ep_mc
+[ 63%] Built target ut_ep_mc
+[ 65%] Building C object test/CMakeFiles/ut_mysql_m_tls_connection.dir/unit/ut_mysql_m_tls_connection.c.o
+[ 66%] Building C object test/CMakeFiles/ut_ep_sa_mgmt.dir/core/shared_util.c.o
+In file included from /src/CryptoLib/include/crypto.h:37,
+                 from /src/CryptoLib/test/include/ut_tc_apply.h:27,
+                 from /src/CryptoLib/test/unit/ut_mysql_m_tls_connection.c:55:
+/src/CryptoLib/include/crypto_config_structs.h:282:1: note: offset of packed bit-field 'vcid' has changed in GCC 4.4
+  282 | } __attribute__((packed));
+      | ^
+/src/CryptoLib/include/crypto_config_structs.h:311:1: note: offset of packed bit-field 'scid' has changed in GCC 4.4
+  311 | } __attribute__((packed));
+      | ^
+In file included from /src/CryptoLib/include/crypto_print.h:26,
+                 from /src/CryptoLib/include/crypto.h:40:
+/src/CryptoLib/include/crypto_structs.h:103:1: note: offset of packed bit-field 'arsn_len' has changed in GCC 4.4
+  103 | } __attribute__((packed)) SecurityAssociation_t;
+      | ^
+/src/CryptoLib/test/unit/ut_mysql_m_tls_connection.c:62:10: fatal error: mysql/mysql.h: No such file or directory
+   62 | #include <mysql/mysql.h>
+      |          ^~~~~~~~~~~~~~~
+compilation terminated.
+make[2]: *** [test/CMakeFiles/ut_mysql_m_tls_connection.dir/build.make:76: test/CMakeFiles/ut_mysql_m_tls_connection.dir/unit/ut_mysql_m_tls_connection.c.o] Error 1
+[ 68%] Building C object test/CMakeFiles/ut_mysql_m_tls_connection.dir/core/shared_util.c.o
+[ 69%] Linking C executable ut_ep_sa_mgmt
+make[2]: Target 'test/CMakeFiles/ut_mysql_m_tls_connection.dir/build' not remade because of errors.
+make[1]: *** [CMakeFiles/Makefile2:1136: test/CMakeFiles/ut_mysql_m_tls_connection.dir/all] Error 2
+[ 70%] Building C object test/CMakeFiles/ut_mysql_tls_connection.dir/unit/ut_mysql_tls_connection.c.o
+Created /build/sa_file_on/bin/ut_ep_sa_mgmt
+In file included from /src/CryptoLib/include/crypto.h:37,
+                 from /src/CryptoLib/test/include/ut_tc_apply.h:27,
+                 from /src/CryptoLib/test/unit/ut_mysql_tls_connection.c:53:
+/src/CryptoLib/include/crypto_config_structs.h:282:1: note: offset of packed bit-field 'vcid' has changed in GCC 4.4
+  282 | } __attribute__((packed));
+      | ^
+/src/CryptoLib/include/crypto_config_structs.h:311:1: note: offset of packed bit-field 'scid' has changed in GCC 4.4
+  311 | } __attribute__((packed));
+      | ^
+In file included from /src/CryptoLib/include/crypto_print.h:26,
+                 from /src/CryptoLib/include/crypto.h:40:
+/src/CryptoLib/include/crypto_structs.h:103:1: note: offset of packed bit-field 'arsn_len' has changed in GCC 4.4
+  103 | } __attribute__((packed)) SecurityAssociation_t;
+      | ^
+[ 70%] Built target ut_ep_sa_mgmt
+/src/CryptoLib/test/unit/ut_mysql_tls_connection.c:60:10: fatal error: mysql/mysql.h: No such file or directory
+   60 | #include <mysql/mysql.h>
+      |          ^~~~~~~~~~~~~~~
+compilation terminated.
+make[2]: *** [test/CMakeFiles/ut_mysql_tls_connection.dir/build.make:76: test/CMakeFiles/ut_mysql_tls_connection.dir/unit/ut_mysql_tls_connection.c.o] Error 1
+[ 72%] Building C object test/CMakeFiles/ut_mysql_tls_connection.dir/core/shared_util.c.o
+[ 73%] Building C object test/CMakeFiles/ut_sa_save.dir/unit/ut_sa_save.c.o
+In file included from /src/CryptoLib/include/crypto.h:37,
+                 from /src/CryptoLib/test/include/ut_sa_save.h:27,
+                 from /src/CryptoLib/test/unit/ut_sa_save.c:30:
+/src/CryptoLib/include/crypto_config_structs.h:282:1: note: offset of packed bit-field 'vcid' has changed in GCC 4.4
+  282 | } __attribute__((packed));
+      | ^
+/src/CryptoLib/include/crypto_config_structs.h:311:1: note: offset of packed bit-field 'scid' has changed in GCC 4.4
+  311 | } __attribute__((packed));
+      | ^
+In file included from /src/CryptoLib/include/crypto_print.h:26,
+                 from /src/CryptoLib/include/crypto.h:40:
+/src/CryptoLib/include/crypto_structs.h:103:1: note: offset of packed bit-field 'arsn_len' has changed in GCC 4.4
+  103 | } __attribute__((packed)) SecurityAssociation_t;
+      | ^
+make[2]: Target 'test/CMakeFiles/ut_mysql_tls_connection.dir/build' not remade because of errors.
+make[1]: *** [CMakeFiles/Makefile2:1162: test/CMakeFiles/ut_mysql_tls_connection.dir/all] Error 2
+[ 75%] Building C object test/CMakeFiles/ut_sadb_err_cases_kmc_crypto.dir/unit/ut_sadb_err_cases_kmc_crypto.c.o
+In file included from /src/CryptoLib/include/crypto.h:37,
+                 from /src/CryptoLib/test/unit/ut_sadb_err_cases_kmc_crypto.c:23:
+/src/CryptoLib/include/crypto_config_structs.h:282:1: note: offset of packed bit-field 'vcid' has changed in GCC 4.4
+  282 | } __attribute__((packed));
+      | ^
+/src/CryptoLib/include/crypto_config_structs.h:311:1: note: offset of packed bit-field 'scid' has changed in GCC 4.4
+  311 | } __attribute__((packed));
+      | ^
+In file included from /src/CryptoLib/include/crypto_print.h:26,
+                 from /src/CryptoLib/include/crypto.h:40:
+/src/CryptoLib/include/crypto_structs.h:103:1: note: offset of packed bit-field 'arsn_len' has changed in GCC 4.4
+  103 | } __attribute__((packed)) SecurityAssociation_t;
+      | ^
+/src/CryptoLib/test/unit/ut_sadb_err_cases_kmc_crypto.c:32:10: fatal error: mysql/mysql.h: No such file or directory
+   32 | #include <mysql/mysql.h>
+      |          ^~~~~~~~~~~~~~~
+compilation terminated.
+make[2]: *** [test/CMakeFiles/ut_sadb_err_cases_kmc_crypto.dir/build.make:76: test/CMakeFiles/ut_sadb_err_cases_kmc_crypto.dir/unit/ut_sadb_err_cases_kmc_crypto.c.o] Error 1
+[ 76%] Building C object test/CMakeFiles/ut_sadb_err_cases_kmc_crypto.dir/core/shared_util.c.o
+make[2]: Target 'test/CMakeFiles/ut_sadb_err_cases_kmc_crypto.dir/build' not remade because of errors.
+make[1]: *** [CMakeFiles/Makefile2:1214: test/CMakeFiles/ut_sadb_err_cases_kmc_crypto.dir/all] Error 2
+[ 77%] Building C object test/CMakeFiles/ut_tc_apply.dir/unit/ut_tc_apply.c.o
+In file included from /src/CryptoLib/include/crypto.h:37,
+                 from /src/CryptoLib/test/include/ut_tc_apply.h:27,
+                 from /src/CryptoLib/test/unit/ut_tc_apply.c:22:
+/src/CryptoLib/include/crypto_config_structs.h:282:1: note: offset of packed bit-field 'vcid' has changed in GCC 4.4
+  282 | } __attribute__((packed));
+      | ^
+/src/CryptoLib/include/crypto_config_structs.h:311:1: note: offset of packed bit-field 'scid' has changed in GCC 4.4
+  311 | } __attribute__((packed));
+      | ^
+In file included from /src/CryptoLib/include/crypto_print.h:26,
+                 from /src/CryptoLib/include/crypto.h:40:
+/src/CryptoLib/include/crypto_structs.h:103:1: note: offset of packed bit-field 'arsn_len' has changed in GCC 4.4
+  103 | } __attribute__((packed)) SecurityAssociation_t;
+      | ^
+[ 79%] Building C object test/CMakeFiles/ut_tc_apply.dir/core/shared_util.c.o
+[ 80%] Linking C executable ut_tc_apply
+Created /build/sa_file_on/bin/ut_tc_apply
+[ 80%] Built target ut_tc_apply
+[ 81%] Building C object test/CMakeFiles/ut_tc_process.dir/unit/ut_tc_process.c.o
+In file included from /src/CryptoLib/include/crypto.h:37,
+                 from /src/CryptoLib/test/include/ut_tc_process.h:27,
+                 from /src/CryptoLib/test/unit/ut_tc_process.c:22:
+/src/CryptoLib/include/crypto_config_structs.h:282:1: note: offset of packed bit-field 'vcid' has changed in GCC 4.4
+  282 | } __attribute__((packed));
+      | ^
+/src/CryptoLib/include/crypto_config_structs.h:311:1: note: offset of packed bit-field 'scid' has changed in GCC 4.4
+  311 | } __attribute__((packed));
+      | ^
+In file included from /src/CryptoLib/include/crypto_print.h:26,
+                 from /src/CryptoLib/include/crypto.h:40:
+/src/CryptoLib/include/crypto_structs.h:103:1: note: offset of packed bit-field 'arsn_len' has changed in GCC 4.4
+  103 | } __attribute__((packed)) SecurityAssociation_t;
+      | ^
+[ 83%] Building C object test/CMakeFiles/ut_sa_save.dir/core/shared_util.c.o
+[ 84%] Linking C executable ut_sa_save
+Created /build/sa_file_on/bin/ut_sa_save
+[ 84%] Built target ut_sa_save
+[ 86%] Building C object test/CMakeFiles/ut_tm_apply.dir/unit/ut_tm_apply.c.o
+In file included from /src/CryptoLib/include/crypto.h:37,
+                 from /src/CryptoLib/test/include/ut_tm_apply.h:27,
+                 from /src/CryptoLib/test/unit/ut_tm_apply.c:22:
+/src/CryptoLib/include/crypto_config_structs.h:282:1: note: offset of packed bit-field 'vcid' has changed in GCC 4.4
+  282 | } __attribute__((packed));
+      | ^
+/src/CryptoLib/include/crypto_config_structs.h:311:1: note: offset of packed bit-field 'scid' has changed in GCC 4.4
+  311 | } __attribute__((packed));
+      | ^
+In file included from /src/CryptoLib/include/crypto_print.h:26,
+                 from /src/CryptoLib/include/crypto.h:40:
+/src/CryptoLib/include/crypto_structs.h:103:1: note: offset of packed bit-field 'arsn_len' has changed in GCC 4.4
+  103 | } __attribute__((packed)) SecurityAssociation_t;
+      | ^
+[ 87%] Building C object test/CMakeFiles/ut_tc_process.dir/core/shared_util.c.o
+[ 88%] Linking C executable ut_tc_process
+Created /build/sa_file_on/bin/ut_tc_process
+[ 88%] Built target ut_tc_process
+[ 90%] Building C object test/CMakeFiles/ut_tm_process.dir/unit/ut_tm_process.c.o
+[ 91%] Building C object test/CMakeFiles/ut_tm_apply.dir/core/shared_util.c.o
+In file included from /src/CryptoLib/include/crypto.h:37,
+                 from /src/CryptoLib/test/include/ut_tm_process.h:27,
+                 from /src/CryptoLib/test/unit/ut_tm_process.c:22:
+/src/CryptoLib/include/crypto_config_structs.h:282:1: note: offset of packed bit-field 'vcid' has changed in GCC 4.4
+  282 | } __attribute__((packed));
+      | ^
+/src/CryptoLib/include/crypto_config_structs.h:311:1: note: offset of packed bit-field 'scid' has changed in GCC 4.4
+  311 | } __attribute__((packed));
+      | ^
+In file included from /src/CryptoLib/include/crypto_print.h:26,
+                 from /src/CryptoLib/include/crypto.h:40:
+/src/CryptoLib/include/crypto_structs.h:103:1: note: offset of packed bit-field 'arsn_len' has changed in GCC 4.4
+  103 | } __attribute__((packed)) SecurityAssociation_t;
+      | ^
+[ 93%] Linking C executable ut_tm_apply
+Created /build/sa_file_on/bin/ut_tm_apply
+[ 93%] Built target ut_tm_apply
+[ 94%] Building C object test/CMakeFiles/ut_tm_process.dir/core/shared_util.c.o
+[ 95%] Linking C executable ut_tm_process
+Created /build/sa_file_on/bin/ut_tm_process
+[ 95%] Built target ut_tm_process
+make[1]: Target 'all' not remade because of errors.
+make: *** [Makefile:146: all] Error 2
+make: Target 'default_target' not remade because of errors.

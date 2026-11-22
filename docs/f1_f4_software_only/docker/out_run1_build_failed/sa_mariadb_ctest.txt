@@ -1,0 +1,314 @@
+Test project /build/sa_mariadb
+    Start 1: UT_TC_APPLY
+Could not find executable /build/sa_mariadb/bin/ut_tc_apply
+Looked in the following places:
+/build/sa_mariadb/bin/ut_tc_apply
+/build/sa_mariadb/bin/ut_tc_apply
+/build/sa_mariadb/bin/Release/ut_tc_apply
+/build/sa_mariadb/bin/Release/ut_tc_apply
+/build/sa_mariadb/bin/Debug/ut_tc_apply
+/build/sa_mariadb/bin/Debug/ut_tc_apply
+/build/sa_mariadb/bin/MinSizeRel/ut_tc_apply
+/build/sa_mariadb/bin/MinSizeRel/ut_tc_apply
+/build/sa_mariadb/bin/RelWithDebInfo/ut_tc_apply
+/build/sa_mariadb/bin/RelWithDebInfo/ut_tc_apply
+/build/sa_mariadb/bin/Deployment/ut_tc_apply
+/build/sa_mariadb/bin/Deployment/ut_tc_apply
+/build/sa_mariadb/bin/Development/ut_tc_apply
+/build/sa_mariadb/bin/Development/ut_tc_apply
+build/sa_mariadb/bin/ut_tc_apply
+build/sa_mariadb/bin/ut_tc_apply
+build/sa_mariadb/bin/Release/ut_tc_apply
+build/sa_mariadb/bin/Release/ut_tc_apply
+build/sa_mariadb/bin/Debug/ut_tc_apply
+build/sa_mariadb/bin/Debug/ut_tc_apply
+build/sa_mariadb/bin/MinSizeRel/ut_tc_apply
+build/sa_mariadb/bin/MinSizeRel/ut_tc_apply
+build/sa_mariadb/bin/RelWithDebInfo/ut_tc_apply
+build/sa_mariadb/bin/RelWithDebInfo/ut_tc_apply
+build/sa_mariadb/bin/Deployment/ut_tc_apply
+build/sa_mariadb/bin/Deployment/ut_tc_apply
+build/sa_mariadb/bin/Development/ut_tc_apply
+build/sa_mariadb/bin/Development/ut_tc_apply
+Unable to find executable: /build/sa_mariadb/bin/ut_tc_apply
+1/9 Test #1: UT_TC_APPLY ......................***Not Run   0.00 sec
+    Start 2: UT_TC_PROCESS
+Could not find executable /build/sa_mariadb/bin/ut_tc_process
+Looked in the following places:
+/build/sa_mariadb/bin/ut_tc_process
+/build/sa_mariadb/bin/ut_tc_process
+/build/sa_mariadb/bin/Release/ut_tc_process
+/build/sa_mariadb/bin/Release/ut_tc_process
+/build/sa_mariadb/bin/Debug/ut_tc_process
+/build/sa_mariadb/bin/Debug/ut_tc_process
+/build/sa_mariadb/bin/MinSizeRel/ut_tc_process
+/build/sa_mariadb/bin/MinSizeRel/ut_tc_process
+/build/sa_mariadb/bin/RelWithDebInfo/ut_tc_process
+/build/sa_mariadb/bin/RelWithDebInfo/ut_tc_process
+/build/sa_mariadb/bin/Deployment/ut_tc_process
+/build/sa_mariadb/bin/Deployment/ut_tc_process
+/build/sa_mariadb/bin/Development/ut_tc_process
+/build/sa_mariadb/bin/Development/ut_tc_process
+build/sa_mariadb/bin/ut_tc_process
+build/sa_mariadb/bin/ut_tc_process
+build/sa_mariadb/bin/Release/ut_tc_process
+build/sa_mariadb/bin/Release/ut_tc_process
+build/sa_mariadb/bin/Debug/ut_tc_process
+build/sa_mariadb/bin/Debug/ut_tc_process
+build/sa_mariadb/bin/MinSizeRel/ut_tc_process
+build/sa_mariadb/bin/MinSizeRel/ut_tc_process
+build/sa_mariadb/bin/RelWithDebInfo/ut_tc_process
+build/sa_mariadb/bin/RelWithDebInfo/ut_tc_process
+build/sa_mariadb/bin/Deployment/ut_tc_process
+build/sa_mariadb/bin/Deployment/ut_tc_process
+build/sa_mariadb/bin/Development/ut_tc_process
+build/sa_mariadb/bin/Development/ut_tc_process
+Unable to find executable: /build/sa_mariadb/bin/ut_tc_process
+2/9 Test #2: UT_TC_PROCESS ....................***Not Run   0.00 sec
+    Start 3: UT_CRYPTO_CONFIG
+Could not find executable /build/sa_mariadb/bin/ut_crypto_config
+Looked in the following places:
+/build/sa_mariadb/bin/ut_crypto_config
+/build/sa_mariadb/bin/ut_crypto_config
+/build/sa_mariadb/bin/Release/ut_crypto_config
+/build/sa_mariadb/bin/Release/ut_crypto_config
+/build/sa_mariadb/bin/Debug/ut_crypto_config
+/build/sa_mariadb/bin/Debug/ut_crypto_config
+/build/sa_mariadb/bin/MinSizeRel/ut_crypto_config
+/build/sa_mariadb/bin/MinSizeRel/ut_crypto_config
+/build/sa_mariadb/bin/RelWithDebInfo/ut_crypto_config
+/build/sa_mariadb/bin/RelWithDebInfo/ut_crypto_config
+/build/sa_mariadb/bin/Deployment/ut_crypto_config
+/build/sa_mariadb/bin/Deployment/ut_crypto_config
+/build/sa_mariadb/bin/Development/ut_crypto_config
+/build/sa_mariadb/bin/Development/ut_crypto_config
+build/sa_mariadb/bin/ut_crypto_config
+build/sa_mariadb/bin/ut_crypto_config
+build/sa_mariadb/bin/Release/ut_crypto_config
+build/sa_mariadb/bin/Release/ut_crypto_config
+build/sa_mariadb/bin/Debug/ut_crypto_config
+build/sa_mariadb/bin/Debug/ut_crypto_config
+build/sa_mariadb/bin/MinSizeRel/ut_crypto_config
+build/sa_mariadb/bin/MinSizeRel/ut_crypto_config
+build/sa_mariadb/bin/RelWithDebInfo/ut_crypto_config
+build/sa_mariadb/bin/RelWithDebInfo/ut_crypto_config
+build/sa_mariadb/bin/Deployment/ut_crypto_config
+build/sa_mariadb/bin/Deployment/ut_crypto_config
+build/sa_mariadb/bin/Development/ut_crypto_config
+build/sa_mariadb/bin/Development/ut_crypto_config
+Unable to find executable: /build/sa_mariadb/bin/ut_crypto_config
+3/9 Test #3: UT_CRYPTO_CONFIG .................***Not Run   0.00 sec
+    Start 4: UT_CRYPTO
+Could not find executable /build/sa_mariadb/bin/ut_crypto
+Looked in the following places:
+/build/sa_mariadb/bin/ut_crypto
+/build/sa_mariadb/bin/ut_crypto
+/build/sa_mariadb/bin/Release/ut_crypto
+/build/sa_mariadb/bin/Release/ut_crypto
+/build/sa_mariadb/bin/Debug/ut_crypto
+/build/sa_mariadb/bin/Debug/ut_crypto
+/build/sa_mariadb/bin/MinSizeRel/ut_crypto
+/build/sa_mariadb/bin/MinSizeRel/ut_crypto
+/build/sa_mariadb/bin/RelWithDebInfo/ut_crypto
+/build/sa_mariadb/bin/RelWithDebInfo/ut_crypto
+/build/sa_mariadb/bin/Deployment/ut_crypto
+/build/sa_mariadb/bin/Deployment/ut_crypto
+/build/sa_mariadb/bin/Development/ut_crypto
+/build/sa_mariadb/bin/Development/ut_crypto
+build/sa_mariadb/bin/ut_crypto
+build/sa_mariadb/bin/ut_crypto
+build/sa_mariadb/bin/Release/ut_crypto
+build/sa_mariadb/bin/Release/ut_crypto
+build/sa_mariadb/bin/Debug/ut_crypto
+build/sa_mariadb/bin/Debug/ut_crypto
+build/sa_mariadb/bin/MinSizeRel/ut_crypto
+build/sa_mariadb/bin/MinSizeRel/ut_crypto
+build/sa_mariadb/bin/RelWithDebInfo/ut_crypto
+build/sa_mariadb/bin/RelWithDebInfo/ut_crypto
+build/sa_mariadb/bin/Deployment/ut_crypto
+build/sa_mariadb/bin/Deployment/ut_crypto
+build/sa_mariadb/bin/Development/ut_crypto
+build/sa_mariadb/bin/Development/ut_crypto
+Unable to find executable: /build/sa_mariadb/bin/ut_crypto
+4/9 Test #4: UT_CRYPTO ........................***Not Run   0.00 sec
+    Start 5: UT_AOS_APPLY
+Could not find executable /build/sa_mariadb/bin/ut_aos_apply
+Looked in the following places:
+/build/sa_mariadb/bin/ut_aos_apply
+/build/sa_mariadb/bin/ut_aos_apply
+/build/sa_mariadb/bin/Release/ut_aos_apply
+/build/sa_mariadb/bin/Release/ut_aos_apply
+/build/sa_mariadb/bin/Debug/ut_aos_apply
+/build/sa_mariadb/bin/Debug/ut_aos_apply
+/build/sa_mariadb/bin/MinSizeRel/ut_aos_apply
+/build/sa_mariadb/bin/MinSizeRel/ut_aos_apply
+/build/sa_mariadb/bin/RelWithDebInfo/ut_aos_apply
+/build/sa_mariadb/bin/RelWithDebInfo/ut_aos_apply
+/build/sa_mariadb/bin/Deployment/ut_aos_apply
+/build/sa_mariadb/bin/Deployment/ut_aos_apply
+/build/sa_mariadb/bin/Development/ut_aos_apply
+/build/sa_mariadb/bin/Development/ut_aos_apply
+build/sa_mariadb/bin/ut_aos_apply
+build/sa_mariadb/bin/ut_aos_apply
+build/sa_mariadb/bin/Release/ut_aos_apply
+build/sa_mariadb/bin/Release/ut_aos_apply
+build/sa_mariadb/bin/Debug/ut_aos_apply
+build/sa_mariadb/bin/Debug/ut_aos_apply
+build/sa_mariadb/bin/MinSizeRel/ut_aos_apply
+build/sa_mariadb/bin/MinSizeRel/ut_aos_apply
+build/sa_mariadb/bin/RelWithDebInfo/ut_aos_apply
+build/sa_mariadb/bin/RelWithDebInfo/ut_aos_apply
+build/sa_mariadb/bin/Deployment/ut_aos_apply
+build/sa_mariadb/bin/Deployment/ut_aos_apply
+build/sa_mariadb/bin/Development/ut_aos_apply
+build/sa_mariadb/bin/Development/ut_aos_apply
+Unable to find executable: /build/sa_mariadb/bin/ut_aos_apply
+5/9 Test #5: UT_AOS_APPLY .....................***Not Run   0.00 sec
+    Start 6: UT_AOS_PROCESS
+Could not find executable /build/sa_mariadb/bin/ut_aos_process
+Looked in the following places:
+/build/sa_mariadb/bin/ut_aos_process
+/build/sa_mariadb/bin/ut_aos_process
+/build/sa_mariadb/bin/Release/ut_aos_process
+/build/sa_mariadb/bin/Release/ut_aos_process
+/build/sa_mariadb/bin/Debug/ut_aos_process
+/build/sa_mariadb/bin/Debug/ut_aos_process
+/build/sa_mariadb/bin/MinSizeRel/ut_aos_process
+/build/sa_mariadb/bin/MinSizeRel/ut_aos_process
+/build/sa_mariadb/bin/RelWithDebInfo/ut_aos_process
+/build/sa_mariadb/bin/RelWithDebInfo/ut_aos_process
+/build/sa_mariadb/bin/Deployment/ut_aos_process
+/build/sa_mariadb/bin/Deployment/ut_aos_process
+/build/sa_mariadb/bin/Development/ut_aos_process
+/build/sa_mariadb/bin/Development/ut_aos_process
+build/sa_mariadb/bin/ut_aos_process
+build/sa_mariadb/bin/ut_aos_process
+build/sa_mariadb/bin/Release/ut_aos_process
+build/sa_mariadb/bin/Release/ut_aos_process
+build/sa_mariadb/bin/Debug/ut_aos_process
+build/sa_mariadb/bin/Debug/ut_aos_process
+build/sa_mariadb/bin/MinSizeRel/ut_aos_process
+build/sa_mariadb/bin/MinSizeRel/ut_aos_process
+build/sa_mariadb/bin/RelWithDebInfo/ut_aos_process
+build/sa_mariadb/bin/RelWithDebInfo/ut_aos_process
+build/sa_mariadb/bin/Deployment/ut_aos_process
+build/sa_mariadb/bin/Deployment/ut_aos_process
+build/sa_mariadb/bin/Development/ut_aos_process
+build/sa_mariadb/bin/Development/ut_aos_process
+Unable to find executable: /build/sa_mariadb/bin/ut_aos_process
+6/9 Test #6: UT_AOS_PROCESS ...................***Not Run   0.00 sec
+    Start 7: UT_TM_APPLY
+Could not find executable /build/sa_mariadb/bin/ut_tm_apply
+Looked in the following places:
+/build/sa_mariadb/bin/ut_tm_apply
+/build/sa_mariadb/bin/ut_tm_apply
+/build/sa_mariadb/bin/Release/ut_tm_apply
+/build/sa_mariadb/bin/Release/ut_tm_apply
+/build/sa_mariadb/bin/Debug/ut_tm_apply
+/build/sa_mariadb/bin/Debug/ut_tm_apply
+/build/sa_mariadb/bin/MinSizeRel/ut_tm_apply
+/build/sa_mariadb/bin/MinSizeRel/ut_tm_apply
+/build/sa_mariadb/bin/RelWithDebInfo/ut_tm_apply
+/build/sa_mariadb/bin/RelWithDebInfo/ut_tm_apply
+/build/sa_mariadb/bin/Deployment/ut_tm_apply
+/build/sa_mariadb/bin/Deployment/ut_tm_apply
+/build/sa_mariadb/bin/Development/ut_tm_apply
+/build/sa_mariadb/bin/Development/ut_tm_apply
+build/sa_mariadb/bin/ut_tm_apply
+build/sa_mariadb/bin/ut_tm_apply
+build/sa_mariadb/bin/Release/ut_tm_apply
+build/sa_mariadb/bin/Release/ut_tm_apply
+build/sa_mariadb/bin/Debug/ut_tm_apply
+build/sa_mariadb/bin/Debug/ut_tm_apply
+build/sa_mariadb/bin/MinSizeRel/ut_tm_apply
+build/sa_mariadb/bin/MinSizeRel/ut_tm_apply
+build/sa_mariadb/bin/RelWithDebInfo/ut_tm_apply
+build/sa_mariadb/bin/RelWithDebInfo/ut_tm_apply
+build/sa_mariadb/bin/Deployment/ut_tm_apply
+build/sa_mariadb/bin/Deployment/ut_tm_apply
+build/sa_mariadb/bin/Development/ut_tm_apply
+build/sa_mariadb/bin/Development/ut_tm_apply
+Unable to find executable: /build/sa_mariadb/bin/ut_tm_apply
+7/9 Test #7: UT_TM_APPLY ......................***Not Run   0.00 sec
+    Start 8: UT_TM_PROCESS
+Could not find executable /build/sa_mariadb/bin/ut_tm_process
+Looked in the following places:
+/build/sa_mariadb/bin/ut_tm_process
+/build/sa_mariadb/bin/ut_tm_process
+/build/sa_mariadb/bin/Release/ut_tm_process
+/build/sa_mariadb/bin/Release/ut_tm_process
+/build/sa_mariadb/bin/Debug/ut_tm_process
+/build/sa_mariadb/bin/Debug/ut_tm_process
+/build/sa_mariadb/bin/MinSizeRel/ut_tm_process
+/build/sa_mariadb/bin/MinSizeRel/ut_tm_process
+/build/sa_mariadb/bin/RelWithDebInfo/ut_tm_process
+/build/sa_mariadb/bin/RelWithDebInfo/ut_tm_process
+/build/sa_mariadb/bin/Deployment/ut_tm_process
+/build/sa_mariadb/bin/Deployment/ut_tm_process
+/build/sa_mariadb/bin/Development/ut_tm_process
+/build/sa_mariadb/bin/Development/ut_tm_process
+build/sa_mariadb/bin/ut_tm_process
+build/sa_mariadb/bin/ut_tm_process
+build/sa_mariadb/bin/Release/ut_tm_process
+build/sa_mariadb/bin/Release/ut_tm_process
+build/sa_mariadb/bin/Debug/ut_tm_process
+build/sa_mariadb/bin/Debug/ut_tm_process
+build/sa_mariadb/bin/MinSizeRel/ut_tm_process
+build/sa_mariadb/bin/MinSizeRel/ut_tm_process
+build/sa_mariadb/bin/RelWithDebInfo/ut_tm_process
+build/sa_mariadb/bin/RelWithDebInfo/ut_tm_process
+build/sa_mariadb/bin/Deployment/ut_tm_process
+build/sa_mariadb/bin/Deployment/ut_tm_process
+build/sa_mariadb/bin/Development/ut_tm_process
+build/sa_mariadb/bin/Development/ut_tm_process
+Unable to find executable: /build/sa_mariadb/bin/ut_tm_process
+8/9 Test #8: UT_TM_PROCESS ....................***Not Run   0.00 sec
+    Start 9: UT_AES_GCM_SIV
+Could not find executable /build/sa_mariadb/bin/ut_aes_gcm_siv
+Looked in the following places:
+/build/sa_mariadb/bin/ut_aes_gcm_siv
+/build/sa_mariadb/bin/ut_aes_gcm_siv
+/build/sa_mariadb/bin/Release/ut_aes_gcm_siv
+/build/sa_mariadb/bin/Release/ut_aes_gcm_siv
+/build/sa_mariadb/bin/Debug/ut_aes_gcm_siv
+/build/sa_mariadb/bin/Debug/ut_aes_gcm_siv
+/build/sa_mariadb/bin/MinSizeRel/ut_aes_gcm_siv
+/build/sa_mariadb/bin/MinSizeRel/ut_aes_gcm_siv
+/build/sa_mariadb/bin/RelWithDebInfo/ut_aes_gcm_siv
+/build/sa_mariadb/bin/RelWithDebInfo/ut_aes_gcm_siv
+/build/sa_mariadb/bin/Deployment/ut_aes_gcm_siv
+/build/sa_mariadb/bin/Deployment/ut_aes_gcm_siv
+/build/sa_mariadb/bin/Development/ut_aes_gcm_siv
+/build/sa_mariadb/bin/Development/ut_aes_gcm_siv
+build/sa_mariadb/bin/ut_aes_gcm_siv
+build/sa_mariadb/bin/ut_aes_gcm_siv
+build/sa_mariadb/bin/Release/ut_aes_gcm_siv
+build/sa_mariadb/bin/Release/ut_aes_gcm_siv
+build/sa_mariadb/bin/Debug/ut_aes_gcm_siv
+build/sa_mariadb/bin/Debug/ut_aes_gcm_siv
+build/sa_mariadb/bin/MinSizeRel/ut_aes_gcm_siv
+build/sa_mariadb/bin/MinSizeRel/ut_aes_gcm_siv
+build/sa_mariadb/bin/RelWithDebInfo/ut_aes_gcm_siv
+build/sa_mariadb/bin/RelWithDebInfo/ut_aes_gcm_siv
+build/sa_mariadb/bin/Deployment/ut_aes_gcm_siv
+build/sa_mariadb/bin/Deployment/ut_aes_gcm_siv
+build/sa_mariadb/bin/Development/ut_aes_gcm_siv
+build/sa_mariadb/bin/Development/ut_aes_gcm_siv
+Unable to find executable: /build/sa_mariadb/bin/ut_aes_gcm_siv
+9/9 Test #9: UT_AES_GCM_SIV ...................***Not Run   0.00 sec
+
+0% tests passed, 9 tests failed out of 9
+
+Total Test time (real) =   0.03 sec
+
+The following tests FAILED:
+	  1 - UT_TC_APPLY (Not Run)
+	  2 - UT_TC_PROCESS (Not Run)
+	  3 - UT_CRYPTO_CONFIG (Not Run)
+	  4 - UT_CRYPTO (Not Run)
+	  5 - UT_AOS_APPLY (Not Run)
+	  6 - UT_AOS_PROCESS (Not Run)
+	  7 - UT_TM_APPLY (Not Run)
+	  8 - UT_TM_PROCESS (Not Run)
+	  9 - UT_AES_GCM_SIV (Not Run)
+Errors while running CTest

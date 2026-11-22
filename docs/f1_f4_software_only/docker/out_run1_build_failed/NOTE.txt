@@ -1,0 +1,1 @@
+First Docker run (image sha256:a90d0542be9d...): all three configurations failed to build because MySQL TLS test targets need mysql/mysql.h; ctest exit 8 as a result. Kept as a record; superseded by the updated kit.

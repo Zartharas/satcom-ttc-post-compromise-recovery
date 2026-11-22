@@ -1,0 +1,14 @@
+-- The C compiler identification is GNU 13.3.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+CMake Warning at CMakeLists.txt:172 (message):
+  Cryptolib Extended Procedures NOT complete.  NOT Fully tested.  Use at own
+  risk!
+
+
+-- Configuring done (0.3s)
+-- Generating done (0.1s)
+-- Build files have been written to: /build/sa_file_on

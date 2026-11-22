@@ -1,0 +1,174 @@
+[ 33%] Built target crypto
+[ 34%] Linking C executable ut_crypto
+[ 36%] Linking C executable ut_aos_apply
+[ 37%] Linking C executable ut_aos_process
+[ 38%] Linking C executable ut_aes_gcm_siv
+[ 40%] Linking C executable ut_ep_mc
+[ 41%] Linking C executable ut_crypto_config
+[ 43%] Linking C executable ut_ep_sa_mgmt
+[ 44%] Linking C executable ut_ep_key_mgmt
+Created /tmp/f1f4/build/bin/ut_aos_process
+Created /tmp/f1f4/build/bin/ut_crypto
+Created /tmp/f1f4/build/bin/ut_aes_gcm_siv
+Created /tmp/f1f4/build/bin/ut_ep_sa_mgmt
+Created /tmp/f1f4/build/bin/ut_ep_key_mgmt
+Created /tmp/f1f4/build/bin/ut_crypto_config
+Created /tmp/f1f4/build/bin/ut_aos_apply
+Created /tmp/f1f4/build/bin/ut_ep_mc
+[ 48%] Built target ut_aos_process
+[ 50%] Built target ut_ep_sa_mgmt
+[ 55%] Built target ut_aes_gcm_siv
+[ 55%] Built target ut_crypto
+[ 58%] Built target ut_ep_key_mgmt
+[ 66%] Built target ut_aos_apply
+[ 61%] Built target ut_crypto_config
+[ 68%] Building C object test/CMakeFiles/ut_mysql_tls_connection.dir/unit/ut_mysql_tls_connection.c.o
+[ 63%] Built target ut_ep_mc
+[ 69%] Linking C executable ut_sa_save
+[ 70%] Building C object test/CMakeFiles/ut_mysql_m_tls_connection.dir/unit/ut_mysql_m_tls_connection.c.o
+[ 72%] Building C object test/CMakeFiles/ut_sadb_err_cases_kmc_crypto.dir/unit/ut_sadb_err_cases_kmc_crypto.c.o
+[ 73%] Building C object test/CMakeFiles/ut_tc_apply.dir/unit/ut_tc_apply.c.o
+In file included from /tmp/f1f4/src/CryptoLib/include/crypto.h:37,
+                 from /tmp/f1f4/src/CryptoLib/test/include/ut_tc_apply.h:27,
+                 from /tmp/f1f4/src/CryptoLib/test/unit/ut_mysql_tls_connection.c:53:
+/tmp/f1f4/src/CryptoLib/include/crypto_config_structs.h:282:1: note: offset of packed bit-field 'vcid' has changed in GCC 4.4
+  282 | } __attribute__((packed));
+      | ^
+/tmp/f1f4/src/CryptoLib/include/crypto_config_structs.h:311:1: note: offset of packed bit-field 'scid' has changed in GCC 4.4
+  311 | } __attribute__((packed));
+      | ^
+[ 75%] Building C object test/CMakeFiles/ut_tc_process.dir/unit/ut_tc_process.c.o
+[ 76%] Building C object test/CMakeFiles/ut_tm_apply.dir/unit/ut_tm_apply.c.o
+In file included from /tmp/f1f4/src/CryptoLib/include/crypto_print.h:26,
+                 from /tmp/f1f4/src/CryptoLib/include/crypto.h:40:
+/tmp/f1f4/src/CryptoLib/include/crypto_structs.h:103:1: note: offset of packed bit-field 'arsn_len' has changed in GCC 4.4
+  103 | } __attribute__((packed)) SecurityAssociation_t;
+      | ^
+[ 77%] Building C object test/CMakeFiles/ut_tm_process.dir/unit/ut_tm_process.c.o
+In file included from /tmp/f1f4/src/CryptoLib/include/crypto.h:37,
+                 from /tmp/f1f4/src/CryptoLib/test/include/ut_tc_apply.h:27,
+                 from /tmp/f1f4/src/CryptoLib/test/unit/ut_mysql_m_tls_connection.c:55:
+/tmp/f1f4/src/CryptoLib/include/crypto_config_structs.h:282:1: note: offset of packed bit-field 'vcid' has changed in GCC 4.4
+  282 | } __attribute__((packed));
+      | ^
+/tmp/f1f4/src/CryptoLib/include/crypto_config_structs.h:311:1: note: offset of packed bit-field 'scid' has changed in GCC 4.4
+  311 | } __attribute__((packed));
+      | ^
+In file included from /tmp/f1f4/src/CryptoLib/include/crypto_print.h:26,
+                 from /tmp/f1f4/src/CryptoLib/include/crypto.h:40:
+/tmp/f1f4/src/CryptoLib/include/crypto_structs.h:103:1: note: offset of packed bit-field 'arsn_len' has changed in GCC 4.4
+  103 | } __attribute__((packed)) SecurityAssociation_t;
+      | ^
+/tmp/f1f4/src/CryptoLib/test/unit/ut_mysql_tls_connection.c:60:10: fatal error: mysql/mysql.h: No such file or directory
+   60 | #include <mysql/mysql.h>
+      |          ^~~~~~~~~~~~~~~
+compilation terminated.
+make[2]: *** [test/CMakeFiles/ut_mysql_tls_connection.dir/build.make:76: test/CMakeFiles/ut_mysql_tls_connection.dir/unit/ut_mysql_tls_connection.c.o] Error 1
+In file included from /tmp/f1f4/src/CryptoLib/include/crypto.h:37,
+                 from /tmp/f1f4/src/CryptoLib/test/unit/ut_sadb_err_cases_kmc_crypto.c:23:
+/tmp/f1f4/src/CryptoLib/include/crypto_config_structs.h:282:1: note: offset of packed bit-field 'vcid' has changed in GCC 4.4
+  282 | } __attribute__((packed));
+      | ^
+/tmp/f1f4/src/CryptoLib/include/crypto_config_structs.h:311:1: note: offset of packed bit-field 'scid' has changed in GCC 4.4
+  311 | } __attribute__((packed));
+      | ^
+In file included from /tmp/f1f4/src/CryptoLib/include/crypto_print.h:26,
+                 from /tmp/f1f4/src/CryptoLib/include/crypto.h:40:
+/tmp/f1f4/src/CryptoLib/include/crypto_structs.h:103:1: note: offset of packed bit-field 'arsn_len' has changed in GCC 4.4
+  103 | } __attribute__((packed)) SecurityAssociation_t;
+      | ^
+In file included from /tmp/f1f4/src/CryptoLib/include/crypto.h:37,
+                 from /tmp/f1f4/src/CryptoLib/test/include/ut_tc_apply.h:27,
+                 from /tmp/f1f4/src/CryptoLib/test/unit/ut_tc_apply.c:22:
+/tmp/f1f4/src/CryptoLib/include/crypto_config_structs.h:282:1: note: offset of packed bit-field 'vcid' has changed in GCC 4.4
+  282 | } __attribute__((packed));
+      | ^
+/tmp/f1f4/src/CryptoLib/include/crypto_config_structs.h:311:1: note: offset of packed bit-field 'scid' has changed in GCC 4.4
+  311 | } __attribute__((packed));
+      | ^
+In file included from /tmp/f1f4/src/CryptoLib/include/crypto_print.h:26,
+                 from /tmp/f1f4/src/CryptoLib/include/crypto.h:40:
+/tmp/f1f4/src/CryptoLib/include/crypto_structs.h:103:1: note: offset of packed bit-field 'arsn_len' has changed in GCC 4.4
+  103 | } __attribute__((packed)) SecurityAssociation_t;
+      | ^
+/tmp/f1f4/src/CryptoLib/test/unit/ut_mysql_m_tls_connection.c:62:10: fatal error: mysql/mysql.h: No such file or directory
+   62 | #include <mysql/mysql.h>
+      |          ^~~~~~~~~~~~~~~
+compilation terminated.
+[ 79%] Building C object test/CMakeFiles/ut_mysql_tls_connection.dir/core/shared_util.c.o
+make[2]: *** [test/CMakeFiles/ut_mysql_m_tls_connection.dir/build.make:76: test/CMakeFiles/ut_mysql_m_tls_connection.dir/unit/ut_mysql_m_tls_connection.c.o] Error 1
+/tmp/f1f4/src/CryptoLib/test/unit/ut_sadb_err_cases_kmc_crypto.c:32:10: fatal error: mysql/mysql.h: No such file or directory
+   32 | #include <mysql/mysql.h>
+      |          ^~~~~~~~~~~~~~~
+compilation terminated.
+Created /tmp/f1f4/build/bin/ut_sa_save
+make[2]: *** [test/CMakeFiles/ut_sadb_err_cases_kmc_crypto.dir/build.make:76: test/CMakeFiles/ut_sadb_err_cases_kmc_crypto.dir/unit/ut_sadb_err_cases_kmc_crypto.c.o] Error 1
+make[2]: Target 'test/CMakeFiles/ut_sadb_err_cases_kmc_crypto.dir/build' not remade because of errors.
+make[1]: *** [CMakeFiles/Makefile2:1214: test/CMakeFiles/ut_sadb_err_cases_kmc_crypto.dir/all] Error 2
+In file included from /tmp/f1f4/src/CryptoLib/include/crypto.h:37,
+                 from /tmp/f1f4/src/CryptoLib/test/include/ut_tm_apply.h:27,
+                 from /tmp/f1f4/src/CryptoLib/test/unit/ut_tm_apply.c:22:
+/tmp/f1f4/src/CryptoLib/include/crypto_config_structs.h:282:1: note: offset of packed bit-field 'vcid' has changed in GCC 4.4
+  282 | } __attribute__((packed));
+      | ^
+[ 80%] Building C object test/CMakeFiles/ut_tm_apply.dir/core/shared_util.c.o
+/tmp/f1f4/src/CryptoLib/include/crypto_config_structs.h:311:1: note: offset of packed bit-field 'scid' has changed in GCC 4.4
+  311 | } __attribute__((packed));
+      | ^
+In file included from /tmp/f1f4/src/CryptoLib/include/crypto_print.h:26,
+                 from /tmp/f1f4/src/CryptoLib/include/crypto.h:40:
+/tmp/f1f4/src/CryptoLib/include/crypto_structs.h:103:1: note: offset of packed bit-field 'arsn_len' has changed in GCC 4.4
+  103 | } __attribute__((packed)) SecurityAssociation_t;
+      | ^
+In file included from /tmp/f1f4/src/CryptoLib/include/crypto.h:37,
+                 from /tmp/f1f4/src/CryptoLib/test/include/ut_tc_process.h:27,
+                 from /tmp/f1f4/src/CryptoLib/test/unit/ut_tc_process.c:22:
+/tmp/f1f4/src/CryptoLib/include/crypto_config_structs.h:282:1: note: offset of packed bit-field 'vcid' has changed in GCC 4.4
+  282 | } __attribute__((packed));
+      | ^
+/tmp/f1f4/src/CryptoLib/include/crypto_config_structs.h:311:1: note: offset of packed bit-field 'scid' has changed in GCC 4.4
+  311 | } __attribute__((packed));
+      | ^
+In file included from /tmp/f1f4/src/CryptoLib/include/crypto_print.h:26,
+                 from /tmp/f1f4/src/CryptoLib/include/crypto.h:40:
+/tmp/f1f4/src/CryptoLib/include/crypto_structs.h:103:1: note: offset of packed bit-field 'arsn_len' has changed in GCC 4.4
+  103 | } __attribute__((packed)) SecurityAssociation_t;
+      | ^
+In file included from /tmp/f1f4/src/CryptoLib/include/crypto.h:37,
+                 from /tmp/f1f4/src/CryptoLib/test/include/ut_tm_process.h:27,
+                 from /tmp/f1f4/src/CryptoLib/test/unit/ut_tm_process.c:22:
+/tmp/f1f4/src/CryptoLib/include/crypto_config_structs.h:282:1: note: offset of packed bit-field 'vcid' has changed in GCC 4.4
+  282 | } __attribute__((packed));
+      | ^
+/tmp/f1f4/src/CryptoLib/include/crypto_config_structs.h:311:1: note: offset of packed bit-field 'scid' has changed in GCC 4.4
+  311 | } __attribute__((packed));
+      | ^
+In file included from /tmp/f1f4/src/CryptoLib/include/crypto_print.h:26,
+                 from /tmp/f1f4/src/CryptoLib/include/crypto.h:40:
+/tmp/f1f4/src/CryptoLib/include/crypto_structs.h:103:1: note: offset of packed bit-field 'arsn_len' has changed in GCC 4.4
+  103 | } __attribute__((packed)) SecurityAssociation_t;
+      | ^
+[ 81%] Building C object test/CMakeFiles/ut_mysql_m_tls_connection.dir/core/shared_util.c.o
+[ 84%] Built target ut_sa_save
+make[2]: Target 'test/CMakeFiles/ut_mysql_tls_connection.dir/build' not remade because of errors.
+[ 86%] Building C object test/CMakeFiles/ut_tm_process.dir/core/shared_util.c.o
+make[1]: *** [CMakeFiles/Makefile2:1162: test/CMakeFiles/ut_mysql_tls_connection.dir/all] Error 2
+[ 87%] Building C object test/CMakeFiles/ut_tc_apply.dir/core/shared_util.c.o
+make[2]: Target 'test/CMakeFiles/ut_mysql_m_tls_connection.dir/build' not remade because of errors.
+make[1]: *** [CMakeFiles/Makefile2:1136: test/CMakeFiles/ut_mysql_m_tls_connection.dir/all] Error 2
+[ 88%] Building C object test/CMakeFiles/ut_tc_process.dir/core/shared_util.c.o
+[ 90%] Linking C executable ut_tm_process
+Created /tmp/f1f4/build/bin/ut_tm_process
+[ 91%] Linking C executable ut_tc_apply
+[ 91%] Built target ut_tm_process
+[ 93%] Linking C executable ut_tm_apply
+Created /tmp/f1f4/build/bin/ut_tc_apply
+[ 93%] Built target ut_tc_apply
+Created /tmp/f1f4/build/bin/ut_tm_apply
+[ 94%] Linking C executable ut_tc_process
+[ 94%] Built target ut_tm_apply
+Created /tmp/f1f4/build/bin/ut_tc_process
+[ 94%] Built target ut_tc_process
+make[1]: Target 'all' not remade because of errors.
+make: *** [Makefile:146: all] Error 2
+make: Target 'default_target' not remade because of errors.

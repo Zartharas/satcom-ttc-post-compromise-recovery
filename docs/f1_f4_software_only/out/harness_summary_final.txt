@@ -1,0 +1,39 @@
+== key_direct
+HARNESS|baseline_after_init|SA6 state=2 ekid=6 iv_len=16 iv=00000000000000000000000000000000 arsn_len=2 arsn=0000 arsnw=5
+HARNESS|baseline_after_init|SA7 state=2 ekid=7 iv_len=12 iv=000000000000000000000000 arsn_len=2 arsn=0000 arsnw=5
+HARNESS|baseline_after_init|KEY132 state=0 len=32 val[0..3]=01234567
+HARNESS|baseline_after_init|KEY141 state=0 len=0 val[0..3]=00000000
+HARNESS|end_of_process1_in_RAM|SA6 state=2 ekid=6 iv_len=16 iv=00000000000000000000000000000000 arsn_len=2 arsn=0000 arsnw=5
+HARNESS|end_of_process1_in_RAM|SA7 state=2 ekid=7 iv_len=12 iv=000000000000000000000000 arsn_len=2 arsn=0000 arsnw=5
+HARNESS|end_of_process1_in_RAM|KEY132 state=1 len=32 val[0..3]=01234567
+HARNESS|end_of_process1_in_RAM|KEY141 state=1 len=32 val[0..3]=ab000000
+HARNESS|after_restart|SA6 state=2 ekid=6 iv_len=16 iv=00000000000000000000000000000000 arsn_len=2 arsn=0000 arsnw=5
+HARNESS|after_restart|SA7 state=2 ekid=7 iv_len=12 iv=000000000000000000000000 arsn_len=2 arsn=0000 arsnw=5
+HARNESS|after_restart|KEY132 state=0 len=32 val[0..3]=01234567
+HARNESS|after_restart|KEY141 state=0 len=0 val[0..3]=00000000
+== sa_stop6
+HARNESS|after_restart|SA6 state=3 ekid=6 iv_len=16 iv=00000000000000000000000000000000 arsn_len=2 arsn=0000 arsnw=5
+HARNESS|after_restart|SA7 state=2 ekid=7 iv_len=12 iv=000000000000000000000000 arsn_len=2 arsn=0000 arsnw=5
+HARNESS|after_restart|KEY132 state=0 len=32 val[0..3]=01234567
+HARNESS|after_restart|KEY141 state=0 len=0 val[0..3]=00000000
+HARNESS|baseline_after_init|SA6 state=2 ekid=6 iv_len=16 iv=00000000000000000000000000000000 arsn_len=2 arsn=0000 arsnw=5
+HARNESS|baseline_after_init|SA7 state=2 ekid=7 iv_len=12 iv=000000000000000000000000 arsn_len=2 arsn=0000 arsnw=5
+HARNESS|baseline_after_init|KEY132 state=0 len=32 val[0..3]=01234567
+HARNESS|baseline_after_init|KEY141 state=0 len=0 val[0..3]=00000000
+HARNESS|end_of_process1_in_RAM|SA6 state=2 ekid=6 iv_len=16 iv=00000000000000000000000000000000 arsn_len=2 arsn=0000 arsnw=5
+HARNESS|end_of_process1_in_RAM|SA7 state=2 ekid=7 iv_len=12 iv=000000000000000000000000 arsn_len=2 arsn=0000 arsnw=5
+HARNESS|end_of_process1_in_RAM|KEY132 state=0 len=32 val[0..3]=01234567
+HARNESS|end_of_process1_in_RAM|KEY141 state=0 len=0 val[0..3]=00000000
+== set_arsn7
+HARNESS|baseline_after_init|SA6 state=2 ekid=6 iv_len=16 iv=00000000000000000000000000000000 arsn_len=2 arsn=0000 arsnw=5
+HARNESS|baseline_after_init|SA7 state=2 ekid=7 iv_len=12 iv=000000000000000000000000 arsn_len=2 arsn=0000 arsnw=5
+HARNESS|baseline_after_init|KEY132 state=0 len=32 val[0..3]=01234567
+HARNESS|baseline_after_init|KEY141 state=0 len=0 val[0..3]=00000000
+HARNESS|end_of_process1_in_RAM|SA6 state=2 ekid=6 iv_len=16 iv=00000000000000000000000000000000 arsn_len=2 arsn=0000 arsnw=5
+HARNESS|end_of_process1_in_RAM|SA7 state=3 ekid=7 iv_len=12 iv=000000000000000000000000 arsn_len=11 arsn=0000000000000000000000 arsnw=5
+HARNESS|end_of_process1_in_RAM|KEY132 state=0 len=32 val[0..3]=01234567
+HARNESS|end_of_process1_in_RAM|KEY141 state=0 len=0 val[0..3]=00000000
+HARNESS|after_restart|SA6 state=2 ekid=6 iv_len=16 iv=00000000000000000000000000000000 arsn_len=2 arsn=0000 arsnw=5
+HARNESS|after_restart|SA7 state=3 ekid=7 iv_len=12 iv=000000000000000000000000 arsn_len=11 arsn=0000000000000000000000 arsnw=5
+HARNESS|after_restart|KEY132 state=0 len=32 val[0..3]=01234567
+HARNESS|after_restart|KEY141 state=0 len=0 val[0..3]=00000000

@@ -1,0 +1,18 @@
+sa_file_on make exit: 2 (mysql/TLS targets may fail to compile)
+sa_file_on ctest exit: 0
+100% tests passed, 0 tests failed out of 13
+harness on sa_stop6 done
+harness on set_arsn7 done
+harness on key_direct done
+harness on otar_only done
+harness on otar_activate done
+harness on activate_only done
+sa_file_off make exit: 2 (mysql/TLS targets may fail to compile)
+sa_file_off ctest exit: 0
+100% tests passed, 0 tests failed out of 12
+harness off sa_stop6 done
+harness off set_arsn7 done
+harness off key_direct done
+harness off otar_only done
+harness off otar_activate done
+harness off activate_only done

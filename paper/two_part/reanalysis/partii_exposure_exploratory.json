@@ -1,0 +1,491 @@
+{
+ "status": "EXPLORATORY_NOT_PREREGISTERED",
+ "H": 20,
+ "R0": {
+  "n_msgs": 4,
+  "B0": 8,
+  "L0": 3
+ },
+ "rows": [
+  {
+   "p": 0.05,
+   "K": 2,
+   "detect": 1,
+   "p_restored_within_H": 0.9999999999999998,
+   "p_not_restored": 1.2292680470194142e-16,
+   "expected_contacts_capped_at_H": 3.190377950583245
+  },
+  {
+   "p": 0.05,
+   "K": 2,
+   "detect": 3,
+   "p_restored_within_H": 0.9999999999999897,
+   "p_not_restored": 1.0225897657484185e-14,
+   "expected_contacts_capped_at_H": 5.190377950583234
+  },
+  {
+   "p": 0.05,
+   "K": 2,
+   "detect": 5,
+   "p_restored_within_H": 0.9999999999999448,
+   "p_not_restored": 5.512799033651637e-14,
+   "expected_contacts_capped_at_H": 7.190377950583125
+  },
+  {
+   "p": 0.05,
+   "K": 3,
+   "detect": 1,
+   "p_restored_within_H": 0.9999999999999999,
+   "p_not_restored": 1.3364428550404913e-29,
+   "expected_contacts_capped_at_H": 3.002260688341264
+  },
+  {
+   "p": 0.05,
+   "K": 3,
+   "detect": 3,
+   "p_restored_within_H": 0.9999999999999999,
+   "p_not_restored": 1.9344897223924893e-27,
+   "expected_contacts_capped_at_H": 5.002260688341263
+  },
+  {
+   "p": 0.05,
+   "K": 3,
+   "detect": 5,
+   "p_restored_within_H": 0.9999999999999999,
+   "p_not_restored": 8.675449669477913e-25,
+   "expected_contacts_capped_at_H": 7.002260688341264
+  },
+  {
+   "p": 0.05,
+   "K": 4,
+   "detect": 1,
+   "p_restored_within_H": 0.9999999999999998,
+   "p_not_restored": 9.0626429788555e-45,
+   "expected_contacts_capped_at_H": 2.185512012673628
+  },
+  {
+   "p": 0.05,
+   "K": 4,
+   "detect": 3,
+   "p_restored_within_H": 0.9999999999999998,
+   "p_not_restored": 5.8829678155693515e-40,
+   "expected_contacts_capped_at_H": 4.185512012673628
+  },
+  {
+   "p": 0.05,
+   "K": 4,
+   "detect": 5,
+   "p_restored_within_H": 0.9999999999999998,
+   "p_not_restored": 3.818898129361768e-35,
+   "expected_contacts_capped_at_H": 6.185512012673627
+  },
+  {
+   "p": 0.05,
+   "K": 6,
+   "detect": 1,
+   "p_restored_within_H": 0.9999999999999999,
+   "p_not_restored": 1.0894317358338122e-46,
+   "expected_contacts_capped_at_H": 2.002245283221137
+  },
+  {
+   "p": 0.05,
+   "K": 6,
+   "detect": 3,
+   "p_restored_within_H": 0.9999999999999999,
+   "p_not_restored": 7.071989765152989e-42,
+   "expected_contacts_capped_at_H": 4.002245283221136
+  },
+  {
+   "p": 0.05,
+   "K": 6,
+   "detect": 5,
+   "p_restored_within_H": 0.9999999999999999,
+   "p_not_restored": 4.590745578028387e-37,
+   "expected_contacts_capped_at_H": 6.002245283221137
+  },
+  {
+   "p": 0.1,
+   "K": 2,
+   "detect": 1,
+   "p_restored_within_H": 0.9999999999841449,
+   "p_not_restored": 1.5855341456721413e-11,
+   "expected_contacts_capped_at_H": 3.3816491388288794
+  },
+  {
+   "p": 0.1,
+   "K": 2,
+   "detect": 3,
+   "p_restored_within_H": 0.9999999996559844,
+   "p_not_restored": 3.440158944458355e-10,
+   "expected_contacts_capped_at_H": 5.381649138469009
+  },
+  {
+   "p": 0.1,
+   "K": 2,
+   "detect": 5,
+   "p_restored_within_H": 0.9999999989996633,
+   "p_not_restored": 1.0003370004240636e-09,
+   "expected_contacts_capped_at_H": 7.381649136468334
+  },
+  {
+   "p": 0.1,
+   "K": 3,
+   "detect": 1,
+   "p_restored_within_H": 1.0000000000000002,
+   "p_not_restored": 6.468304724124811e-21,
+   "expected_contacts_capped_at_H": 3.0167205174113416
+  },
+  {
+   "p": 0.1,
+   "K": 3,
+   "detect": 3,
+   "p_restored_within_H": 1.0000000000000002,
+   "p_not_restored": 2.3751333227702585e-19,
+   "expected_contacts_capped_at_H": 5.016720517411342
+  },
+  {
+   "p": 0.1,
+   "K": 3,
+   "detect": 5,
+   "p_restored_within_H": 1.0000000000000002,
+   "p_not_restored": 1.4985068282462197e-17,
+   "expected_contacts_capped_at_H": 7.016720517411341
+  },
+  {
+   "p": 0.1,
+   "K": 4,
+   "detect": 1,
+   "p_restored_within_H": 1.0000000000000002,
+   "p_not_restored": 1.7890310701910281e-31,
+   "expected_contacts_capped_at_H": 2.344480344940894
+  },
+  {
+   "p": 0.1,
+   "K": 4,
+   "detect": 3,
+   "p_restored_within_H": 1.0000000000000002,
+   "p_not_restored": 4.144633546139297e-28,
+   "expected_contacts_capped_at_H": 4.344480344940896
+  },
+  {
+   "p": 0.1,
+   "K": 4,
+   "detect": 5,
+   "p_restored_within_H": 1.0000000000000002,
+   "p_not_restored": 9.601838401805387e-25,
+   "expected_contacts_capped_at_H": 6.344480344940895
+  },
+  {
+   "p": 0.1,
+   "K": 6,
+   "detect": 1,
+   "p_restored_within_H": 1.0000000000000002,
+   "p_not_restored": 8.245461605852805e-33,
+   "expected_contacts_capped_at_H": 2.0162886810091574
+  },
+  {
+   "p": 0.1,
+   "K": 6,
+   "detect": 3,
+   "p_restored_within_H": 1.0000000000000002,
+   "p_not_restored": 1.9102192993983095e-29,
+   "expected_contacts_capped_at_H": 4.016288681009158
+  },
+  {
+   "p": 0.1,
+   "K": 6,
+   "detect": 5,
+   "p_restored_within_H": 1.0000000000000002,
+   "p_not_restored": 4.425389318657034e-26,
+   "expected_contacts_capped_at_H": 6.0162886810091605
+  },
+  {
+   "p": 0.2,
+   "K": 2,
+   "detect": 1,
+   "p_restored_within_H": 0.999999065346264,
+   "p_not_restored": 9.346537364124758e-07,
+   "expected_contacts_capped_at_H": 3.874643134219791
+  },
+  {
+   "p": 0.2,
+   "K": 2,
+   "detect": 3,
+   "p_restored_within_H": 0.9999944193005064,
+   "p_not_restored": 5.580699494113324e-06,
+   "expected_contacts_capped_at_H": 5.87463661886656
+  },
+  {
+   "p": 0.2,
+   "K": 2,
+   "detect": 5,
+   "p_restored_within_H": 0.9999905475957083,
+   "p_not_restored": 9.452404292197361e-06,
+   "expected_contacts_capped_at_H": 7.874617714057977
+  },
+  {
+   "p": 0.2,
+   "K": 3,
+   "detect": 1,
+   "p_restored_within_H": 0.9999999999987306,
+   "p_not_restored": 1.269998159152463e-12,
+   "expected_contacts_capped_at_H": 3.1209514693694396
+  },
+  {
+   "p": 0.2,
+   "K": 3,
+   "detect": 3,
+   "p_restored_within_H": 0.9999999999879332,
+   "p_not_restored": 1.2067325681983734e-11,
+   "expected_contacts_capped_at_H": 5.120951469356103
+  },
+  {
+   "p": 0.2,
+   "K": 3,
+   "detect": 5,
+   "p_restored_within_H": 0.9999999998779604,
+   "p_not_restored": 1.2204010600711698e-10,
+   "expected_contacts_capped_at_H": 7.120951469112024
+  },
+  {
+   "p": 0.2,
+   "K": 4,
+   "detect": 1,
+   "p_restored_within_H": 1.0000000000000004,
+   "p_not_restored": 8.449888650046526e-19,
+   "expected_contacts_capped_at_H": 2.6071243791390746
+  },
+  {
+   "p": 0.2,
+   "K": 4,
+   "detect": 3,
+   "p_restored_within_H": 1.0000000000000004,
+   "p_not_restored": 8.119896073614814e-17,
+   "expected_contacts_capped_at_H": 4.6071243791390755
+  },
+  {
+   "p": 0.2,
+   "K": 4,
+   "detect": 5,
+   "p_restored_within_H": 0.9999999999999927,
+   "p_not_restored": 7.802790661145842e-15,
+   "expected_contacts_capped_at_H": 6.6071243791390675
+  },
+  {
+   "p": 0.2,
+   "K": 6,
+   "detect": 1,
+   "p_restored_within_H": 1.0000000000000007,
+   "p_not_restored": 1.415184603178524e-19,
+   "expected_contacts_capped_at_H": 2.1104356374172197
+  },
+  {
+   "p": 0.2,
+   "K": 6,
+   "detect": 3,
+   "p_restored_within_H": 1.0000000000000007,
+   "p_not_restored": 1.3599175537924e-17,
+   "expected_contacts_capped_at_H": 4.110435637417222
+  },
+  {
+   "p": 0.2,
+   "K": 6,
+   "detect": 5,
+   "p_restored_within_H": 0.9999999999999992,
+   "p_not_restored": 1.3068088424358077e-15,
+   "expected_contacts_capped_at_H": 6.110435637417218
+  },
+  {
+   "p": 0.3,
+   "K": 2,
+   "detect": 1,
+   "p_restored_within_H": 0.9997205639337085,
+   "p_not_restored": 0.00027943606629122255,
+   "expected_contacts_capped_at_H": 4.707241299269314
+  },
+  {
+   "p": 0.3,
+   "K": 2,
+   "detect": 3,
+   "p_restored_within_H": 0.9991695276828394,
+   "p_not_restored": 0.0008304723171602335,
+   "expected_contacts_capped_at_H": 6.706131390885859
+  },
+  {
+   "p": 0.3,
+   "K": 2,
+   "detect": 5,
+   "p_restored_within_H": 0.9989071294681399,
+   "p_not_restored": 0.0010928705318597625,
+   "expected_contacts_capped_at_H": 8.70394564982214
+  },
+  {
+   "p": 0.3,
+   "K": 3,
+   "detect": 1,
+   "p_restored_within_H": 0.9999999620585286,
+   "p_not_restored": 3.7941471207791333e-08,
+   "expected_contacts_capped_at_H": 3.394493087374224
+  },
+  {
+   "p": 0.3,
+   "K": 3,
+   "detect": 3,
+   "p_restored_within_H": 0.999999832643642,
+   "p_not_restored": 1.6735635778093757e-07,
+   "expected_contacts_capped_at_H": 5.3944928820763955
+  },
+  {
+   "p": 0.3,
+   "K": 3,
+   "detect": 5,
+   "p_restored_within_H": 0.9999993454716343,
+   "p_not_restored": 6.545283655244148e-07,
+   "expected_contacts_capped_at_H": 7.394491573019662
+  },
+  {
+   "p": 0.3,
+   "K": 4,
+   "detect": 1,
+   "p_restored_within_H": 0.9999999999943836,
+   "p_not_restored": 5.6160077048436424e-12,
+   "expected_contacts_capped_at_H": 2.868194866125304
+  },
+  {
+   "p": 0.3,
+   "K": 4,
+   "detect": 3,
+   "p_restored_within_H": 0.9999999999031178,
+   "p_not_restored": 9.688175568344832e-11,
+   "expected_contacts_capped_at_H": 4.868194866021029
+  },
+  {
+   "p": 0.3,
+   "K": 4,
+   "detect": 5,
+   "p_restored_within_H": 0.9999999983286922,
+   "p_not_restored": 1.671307284035981e-09,
+   "expected_contacts_capped_at_H": 6.86819486422223
+  },
+  {
+   "p": 0.3,
+   "K": 6,
+   "detect": 1,
+   "p_restored_within_H": 0.9999999999981101,
+   "p_not_restored": 1.8896657587201876e-12,
+   "expected_contacts_capped_at_H": 2.3329584700543258
+  },
+  {
+   "p": 0.3,
+   "K": 6,
+   "detect": 3,
+   "p_restored_within_H": 0.9999999999674011,
+   "p_not_restored": 3.259862628069601e-11,
+   "expected_contacts_capped_at_H": 4.332958470014335
+  },
+  {
+   "p": 0.3,
+   "K": 6,
+   "detect": 5,
+   "p_restored_within_H": 0.9999999994376408,
+   "p_not_restored": 5.62358941249059e-10,
+   "expected_contacts_capped_at_H": 6.332958469324485
+  },
+  {
+   "p": 0.5,
+   "K": 2,
+   "detect": 1,
+   "p_restored_within_H": 0.9201240753754973,
+   "p_not_restored": 0.07987592462450266,
+   "expected_contacts_capped_at_H": 8.942754386924207
+  },
+  {
+   "p": 0.5,
+   "K": 2,
+   "detect": 3,
+   "p_restored_within_H": 0.8858915362507105,
+   "p_not_restored": 0.11410846374928951,
+   "expected_contacts_capped_at_H": 10.748769998550415
+  },
+  {
+   "p": 0.5,
+   "K": 2,
+   "detect": 5,
+   "p_restored_within_H": 0.8782843053340912,
+   "p_not_restored": 0.12171569466590881,
+   "expected_contacts_capped_at_H": 12.505338609218597
+  },
+  {
+   "p": 0.5,
+   "K": 3,
+   "detect": 1,
+   "p_restored_within_H": 0.9977014291252111,
+   "p_not_restored": 0.0022985708747889078,
+   "expected_contacts_capped_at_H": 5.164488581949289
+  },
+  {
+   "p": 0.5,
+   "K": 3,
+   "detect": 3,
+   "p_restored_within_H": 0.9958477429358652,
+   "p_not_restored": 0.004152257064134801,
+   "expected_contacts_capped_at_H": 7.1580377540103655
+  },
+  {
+   "p": 0.5,
+   "K": 3,
+   "detect": 5,
+   "p_restored_within_H": 0.993672751140366,
+   "p_not_restored": 0.006327248859633983,
+   "expected_contacts_capped_at_H": 9.145383256291097
+  },
+  {
+   "p": 0.5,
+   "K": 4,
+   "detect": 1,
+   "p_restored_within_H": 0.9998966862499825,
+   "p_not_restored": 0.00010331375001739234,
+   "expected_contacts_capped_at_H": 4.042719650036772
+  },
+  {
+   "p": 0.5,
+   "K": 4,
+   "detect": 3,
+   "p_restored_within_H": 0.9997156094623176,
+   "p_not_restored": 0.0002843905376822843,
+   "expected_contacts_capped_at_H": 6.042325058165738
+  },
+  {
+   "p": 0.5,
+   "K": 4,
+   "detect": 5,
+   "p_restored_within_H": 0.999217161530681,
+   "p_not_restored": 0.0007828384693189762,
+   "expected_contacts_capped_at_H": 8.04123886978956
+  },
+  {
+   "p": 0.5,
+   "K": 6,
+   "detect": 1,
+   "p_restored_within_H": 0.9999276803749879,
+   "p_not_restored": 7.231962501217465e-05,
+   "expected_contacts_capped_at_H": 3.6010505365153076
+  },
+  {
+   "p": 0.5,
+   "K": 6,
+   "detect": 3,
+   "p_restored_within_H": 0.9998009266236224,
+   "p_not_restored": 0.000199073376377599,
+   "expected_contacts_capped_at_H": 5.600741261805578
+  },
+  {
+   "p": 0.5,
+   "K": 6,
+   "detect": 5,
+   "p_restored_within_H": 0.9994520130714767,
+   "p_not_restored": 0.0005479869285232833,
+   "expected_contacts_capped_at_H": 7.599889924970195
+  }
+ ]
+}
