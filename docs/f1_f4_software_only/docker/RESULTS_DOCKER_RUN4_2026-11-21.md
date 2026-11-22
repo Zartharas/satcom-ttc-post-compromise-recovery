@@ -33,3 +33,9 @@ Why run 4's key row said nothing about commands: the unit-test OTAR/ACTIVATE fra
 | activate_only | state 1 | state 0 | state 0 |
 
 Reading: command-driven key load and activation do not survive a process restart in either build; the key ring is volatile. This removes run 4's caveat that the key row was a direct RAM change. Not tested: cFS processor reset vs power-on reset (cFE CDS), CCSDS-level behaviour, FECF-enabled or encrypted-SA command paths, other key IDs. Library quirk seen, not investigated: key_len stays 0 after OTAR although the bytes are stored.
+
+## Run 6 addendum: NOS3-pinned CryptoLib (2026-11-22)
+
+Same kit, same base image, CryptoLib at b46879c094f1ae279c2ff04dea3d8e5ecbd4ef92 (the commit NOS3 1dadc685 pins in components/cryptolib), harness built with -DCRYPTOLIB_OLD_API (older config API; same option values). Image `cryptolib-f1f4-nos3pin` id sha256:0ba24c21a59f302e303c2f4dca6c6101df07fb27b849fdcc3a969196a2553e2a (kit commit 53e1f0e). Output: `out_nos3pin/`. Unit tests 13/13 (SA_FILE on) and 12/12 (off), MySQL/TLS targets excluded.
+
+Restart results are the same as at 329f895 in every scenario and both SA_FILE settings: all frames status 0; with SA_FILE on, SA7 ARSN set by command persists, an SA6 stop is lost (SA6 back to state 3), SA0 reads state 3 after restart; with SA_FILE off, all SA changes revert to initial values; the key ring (direct change, OTAR load, ACTIVATE) reverts to empty/state 0 in both. Not tested: cFS processor vs power-on reset, the NOS3 wrapper and ground path, any NOS3 build (only the CryptoLib commit and its default-off SA_FILE are NOS3's).
