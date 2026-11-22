@@ -255,7 +255,7 @@ def build_supplement_s2() -> str:
     import json
     cfg = json.loads((ROOT / "experiments" / "configs" / "paper-final-experiment.json").read_text(encoding="utf-8"))
     sched = cfg["studies"]["study_d_sensitivity_t1"]["schedules"]
-    lines = ["# Supplementary Tables S2-S7 (S2-S6 derived read-only from frozen Part I inputs; S7 from the Study F run)", ""]
+    lines = ["# Supplementary Tables S2-S7 and S9 (S2-S6 derived read-only from frozen Part I inputs; S7 from the Study F run; S9 lists archived identifiers)", ""]
     lines += ["**Supplementary Table S2. Study D challenge set: fault structure of the 12 designed schedules.**", "",
               "| Schedule | Faults | Same-phase consecutive faults | Transmissions needed for that phase |", "|---|---|---|---|"]
     rows = []
@@ -306,6 +306,7 @@ def build_supplement_s2() -> str:
     lines += ["**Supplementary Table S6. Fault kinds exercised and not exercised.**", "",
               f"Fault kinds the plan allows: {kinds}. Faults are single, scheduled and non-adaptive. Not exercised: adaptive fault timing; injected messages other than stale-counter and stale-replay cases; wall-clock timing, clock drift or link budgets (contacts are abstract slots); and any baseline under Studies B-D (baselines are covered only by Study F, Table S7).", ""]
     lines += build_supplement_s7()
+    lines += build_supplement_s9()
     return "\n".join(lines)
 
 
@@ -319,7 +320,7 @@ def build_supplement_s7() -> list:
     rows = list(csv.DictReader(path.open(encoding="utf-8")))
     outcomes = ["SUCCESS", "EXPIRED", "DIVERGED", "LOCKED", "INDETERMINATE"]
     names = {"B0": "B0 OTAR", "B1_LOCAL": "B1 local activation", "B1_DEFERRED": "B1 deferred activation", "B2": "B2 strict URKE"}
-    out = ["**Supplementary Table S7. Study F: baselines under step-level faults (descriptive; a later run, plan tag `study-f-plan-v1`, not part of the frozen Part I).**", "",
+    out = ["**Supplementary Table S7. Study F: baselines under step-level faults (descriptive; a later run under an archived plan, see Table S9, not part of the frozen Part I).**", "",
            "Cells exist only where the frozen baseline abstraction defines the fault; other fault kinds and steps are recorded as not defined. Budget 1 transmits each message once, as specified; budget 3 allows up to three transmissions of a lost message, an assumption favorable to the baselines (COP-1 retransmits telecommand frames). Start state: ground epoch 2, spacecraft epoch 1, current keys attacker-known. Unsafe means a compromised key is still active.", "",
            "| Baseline | Budget | Cells | " + " | ".join(o.title() for o in outcomes) + " | Unsafe |", "|---|---|---|" + "---|" * (len(outcomes) + 1)]
     for flow in names:
@@ -346,6 +347,27 @@ def build_supplement_s7() -> list:
             + ", ".join(f"{n} {k.lower().replace('_', ' ')}" for k, n in sorted(other.items())) + ". "
             f"Cells per budget: " + ", ".join(f"{names[f]} {sum(1 for r in b1 if r['flow'] == f)}" for f in names) + f"; the controller has 31 canonical cells. {nd_count} flow-step-kind combinations are not defined for the baseline abstractions and are not run (study_f_not_defined.csv). "
             "Budget 3 also lets B2 re-request a lost status, whereas the controller treats lost verification evidence as indeterminate by rule, so those cells are not like for like. Baseline cells map to the controller's fault kinds by family, not one to one, and the same author wrote the engine and the model.", ""]
+    return out
+
+
+def build_supplement_s9() -> list:
+    """Supplementary Table S9: full archived identifiers (values fixed from the repository, verified with git on 2026-11-22)."""
+    rows = [
+        ("Part I", "Outcome-blind plan", "commit", "cfb730a8191d37863e9e419823686b3c3afe18a2", "2026-08-14 02:17 UTC"),
+        ("Part I", "Outcome-blind plan", "file SHA-256", "3570834a70c76e020dada459e036786f690698125fe1d9e171e9f945748a1012", "2026-08-14"),
+        ("Part I", "Code version run (runner)", "commit", "c630fb4f65ad78211fd3ffb0391000d7ed3629b1", "2026-08-14 02:22 UTC"),
+        ("Part I", "Retained raw bundle (run 20260814T022506Z-gc630fb4)", "SHA-256 (external)", "b3b8c55a9e522ffe3f7898d7b786583e46a4dc3db0aba9d3947fd6ebdaeecaa1", "2026-08-14"),
+        ("Part II", "Pre-registration (label study-e-prereg-v1)", "commit", "93636b1777e7865f5f3c0480e0ce1d3e6be6c3cf", "2026-11-19"),
+        ("Part II", "Analysis script (label study-e-analysis-script-v1)", "commit", "6eb87f272444c6965e2fd9b36bbe2c4aec53212d", "2026-11-19"),
+        ("Study F", "Baseline-fault plan (label study-f-plan-v1)", "commit", "4f109e980d2945d0a75acec1067f5a153885ad50", "2026-11-21"),
+    ]
+    out = ["", "**Supplementary Table S9. Archived identifiers for the pre-run plans and the retained bundle.**", "",
+           "| Study | What was fixed | Identifier type | Full identifier | Date |", "|---|---|---|---|---|"]
+    out += [f"| {a} | {b} | {c} | `{d}` | {e} |" for a, b, c, d, e in rows]
+    out += ["", "A commit identifier names an exact, unchangeable version of the repository at "
+            "https://github.com/Zartharas/satcom-ttc-post-compromise-recovery; a reader can check out that version and confirm that the plan existed unchanged "
+            "before the runs. Labels are permanent names for those versions. Part I commit times are the repository timestamps, shown in UTC. "
+            "Study G is a post hoc run and has no pre-run label."]
     return out
 
 

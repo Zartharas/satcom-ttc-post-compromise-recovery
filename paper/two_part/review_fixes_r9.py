@@ -224,4 +224,20 @@ def apply_round9_fixes(text):
     t = _rep(t, ' These establish that post-compromise key renewal matters and that stateful mechanisms can suit disrupted links.', '')
     t = _rep(t, 'A software-only check (`docs/f1_f4_software_only`; NASA CryptoLib commit 329f895 run, cFE and PSP read only) found persistence differing by state class and build option:', 'A software-only check (`docs/f1_f4_software_only`; CryptoLib commits 329f895 and NOS3-pinned b46879c run, cFE and PSP read only) found persistence differing by state class and build option:')
     t = _rep(t, ' Command-driven key activation, processor or power resets, and CCSDS-specified behavior were not exercised, so the volatile, commit and journal levels are not validated.', ' Command-driven key load and activation also reverted on restart; processor or power resets and CCSDS behavior were not exercised, so the three levels are not validated.')
+    # --- Round 12: plain wording for repository identifiers in the body; full values in Supplementary Table S9 ---
+    t = _rep(t, "The final experiment was executed from commit `c630fb4f65ad78211fd3ffb0391000d7ed3629b1`. The outcome-blind plan was committed earlier at `cfb730a8191d37863e9e419823686b3c3afe18a2`, with plan SHA-256 `3570834a70c76e020dada459e036786f690698125fe1d9e171e9f945748a1012`.",
+             "The final experiment was executed from an archived code version, and the outcome-blind plan was fixed and archived before the run (2026-08-14 UTC). Section 9.1 and Supplementary Table S9 give the identifiers and checksums.")
+    t = _rep(t, "executed from commit `c630fb4f65ad78211fd3ffb0391000d7ed3629b1` using the predeclared final plan committed at `cfb730a8191d37863e9e419823686b3c3afe18a2`.",
+             "executed from the archived code version and predeclared final plan identified in Section 9.1.")
+    t = _rep(t, "The final retained study used: - plan commit: `cfb730a8191d37863e9e419823686b3c3afe18a2`; - plan SHA-256: `3570834a70c76e020dada459e036786f690698125fe1d9e171e9f945748a1012`; - execution/runner commit: `c630fb4f65ad78211fd3ffb0391000d7ed3629b1`; and - retained run identifier: `20260814T022506Z-gc630fb4`.",
+             "The final retained study used the archived inputs below, shortened to 12 hexadecimal characters; Supplementary Table S9 gives the full values. Such identifiers let a reader confirm that the plan existed unchanged before the runs.\n\n- plan identifier: `cfb730a8191d`;\n- plan SHA-256 (first 12 characters): `3570834a70c7`;\n- runner identifier: `c630fb4f65ad`; and\n- retained run identifier: `20260814T022506Z-gc630fb4`.")
+    t = _rep(t, "check the committed plan and schedule contracts", "check the archived plan and schedule contracts")
+    t = _rep(t, "Manuscript-only commits rerun the same checks in CI.", "Manuscript-only changes rerun the same checks automatically.")
+    t = _rep(t, "The raw bundle stays outside Git history,", "The raw bundle stays outside the repository's version history,")
+    t = _rep(t, "The freeze is recorded by annotated tags that note", "The freeze is recorded by permanent, dated labels that note")
+    t = _rep(t, "The frozen versions are identified by two permanent labels in that repository (tags `study-e-prereg-v1` and `study-e-analysis-script-v1`), and the results table",
+             "The two frozen versions (pre-registration and analysis script) and the Study F plan are identified in Supplementary Table S9, and the results table")
+    t = _rep(t, "planned under tag `study-f-plan-v1` and not part of the frozen Part I.", "planned in an archived plan fixed before the runs (Supplementary Table S9) and not part of the frozen Part I.")
+    t = _rep(t, "Plan and schedules were committed before the single retained run from a clean commit.", "Plan and schedules were archived before the single retained run from a clean code version.")
+    t = _rep(t, "Results tie to an exact commit, plan hash,", "Results tie to an exact code version, plan checksum,")
     return t
