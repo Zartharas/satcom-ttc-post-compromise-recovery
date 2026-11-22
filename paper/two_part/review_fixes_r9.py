@@ -282,4 +282,10 @@ def apply_round9_fixes(text):
     t = _rep(t, "Duplicate faults are not counted at TEST_COMMAND or STATUS_TELEMETRY because", "Duplicate faults are not counted at `TEST_COMMAND` or `STATUS_TELEMETRY` because")
     t = _fix_message_identifiers(t)
     t = _table1_security_state(t)
+    # --- Round 15: remove optional process detail that no publisher rule requires (output-only) ---
+    t = _rep(t, "the author's approval of 2026-11-19; the pre-registration document itself still carries its freeze-candidate header.", "the author's approval of 2026-11-19.")
+    t = _rep(t, "the checksum was recomputed in a second software environment and an AI agent re-implemented Study B from the specification (same 40 outcomes), not an independent party, and the test suite has 99 tests.", "the checksum was recomputed in a second software environment, and the test suite has 99 tests.")
+    t = _rep(t, "A public deposit of the summary data is planned but not made; a SatNOGS-derived summary would carry", "A SatNOGS-derived summary would carry")
+    t = _rep(t, "is same-author, omits the resume policy and the Gilbert-Elliott channel, and its tool jar digest was not compared to the publisher's.", "is same-author and omits the resume policy and the Gilbert-Elliott channel.")
+    t = _rep(t, "Study E examines these gaps at the level of an abstract exchange only, with no claim of CCSDS conformance.", "Study E examines these gaps at the level of an abstract exchange only.")
     return t
