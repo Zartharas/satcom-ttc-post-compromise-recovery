@@ -63,9 +63,10 @@ def build_s10(t: str) -> str:
         ("S10.6 Reproducibility detail", ["### 9.1 ", "### 9.2 ", "### 9.3 ", "### 9.4 ", "### 9.5 "]),
     ]
     out = [
-        "# Supplementary Material S10: method and policy detail moved from the main text (DRAFT)\n\n"
-        "The passages below are moved unchanged from the previous review draft of the paper; no number or claim differs from it. "
-        "Section references inside them have been updated to the current numbering. Nothing here was submitted or published.\n"
+        "# Supplementary Material S10: method and policy detail referenced from the main text\n\n"
+        "This supplement holds the detail that the main text summarizes: research questions and answers, study designs, "
+        "formal-assurance detail, the predeclaration and rerun policy, treatment boundaries and reproducibility detail. "
+        "Section references follow the numbering of the main text.\n"
     ]
     for title, prefixes in parts:
         out.append(f"## {title}\n")

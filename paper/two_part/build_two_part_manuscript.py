@@ -295,7 +295,7 @@ def build_supplement_s2() -> str:
     lines += ["", f"{unsafe} of {len(t2)} schedules end `UNSAFE`.", ""]
     lines += ["**Supplementary Table S5. Terms.**", "", "| Term | Meaning in this paper |", "|---|---|",
         "| `G_AHEAD`, `S_AHEAD` (Part I) | Ground (spacecraft) epoch counter exceeds the other endpoint's at the end of the run. The base scenario starts with the ground at epoch 2 and the spacecraft at epoch 1, with active keys marked compromised, so `G_AHEAD` after expiry is the starting divergence left unresolved; `S_AHEAD` arises when the spacecraft activates the new epoch and ground never confirms. |",
-        "| `UNSAFE` (security state) | At the end, a compromised key is still marked active at the ground or the spacecraft, or the recovery authority is marked compromised. It means recovery did not complete, not that an attack occurred during the run. |",
+        "| `UNSAFE` (security state) | At the end, the ground's active key is still marked compromised (at either endpoint), or the recovery authority is marked compromised. It means recovery did not complete, not that an attack occurred during the run. |",
         "| `SECURE_DEGRADED` (raw outcome) | Historical enum name kept for reproducibility; its security state is `UNSAFE` in all three deterministic schedules in which it occurs, so it is not a secure state. |",
         "| `SUCCESS` | Endpoints converged and verification evidence (test command and authenticated status) completed. |",
         "| `INDETERMINATE` | Endpoints converged but verification evidence is missing. |",
@@ -319,7 +319,7 @@ def build_supplement_s7() -> list:
         return []
     rows = list(csv.DictReader(path.open(encoding="utf-8")))
     outcomes = ["SUCCESS", "EXPIRED", "DIVERGED", "LOCKED", "INDETERMINATE"]
-    names = {"B0": "B0 OTAR", "B1_LOCAL": "B1 local activation", "B1_DEFERRED": "B1 deferred activation", "B2": "B2 strict URKE"}
+    names = {"B0": "B0 OTAR (over-the-air rekeying)", "B1_LOCAL": "B1 local activation", "B1_DEFERRED": "B1 deferred activation", "B2": "B2 strict URKE (unidirectional ratcheted key exchange)"}
     out = ["**Supplementary Table S7. Study F: baselines under step-level faults (descriptive; a later run under an archived plan, see Table S9, not part of the frozen Part I).**", "",
            "Cells exist only where the frozen baseline abstraction defines the fault; other fault kinds and steps are recorded as not defined. Budget 1 transmits each message once, as specified; budget 3 allows up to three transmissions of a lost message, an assumption favorable to the baselines (COP-1 retransmits telecommand frames). Start state: ground epoch 2, spacecraft epoch 1, current keys attacker-known. Unsafe means a compromised key is still active.", "",
            "| Baseline | Budget | Cells | " + " | ".join(o.title() for o in outcomes) + " | Unsafe |", "|---|---|---|" + "---|" * (len(outcomes) + 1)]
@@ -357,7 +357,7 @@ def build_supplement_s9() -> list:
         ("Part I", "Outcome-blind plan", "file SHA-256", "3570834a70c76e020dada459e036786f690698125fe1d9e171e9f945748a1012", "2026-08-14"),
         ("Part I", "Code version run (runner)", "commit", "c630fb4f65ad78211fd3ffb0391000d7ed3629b1", "2026-08-14 02:22 UTC"),
         ("Part I", "Retained raw bundle (run 20260814T022506Z-gc630fb4)", "SHA-256 (external)", "b3b8c55a9e522ffe3f7898d7b786583e46a4dc3db0aba9d3947fd6ebdaeecaa1", "2026-08-14"),
-        ("Part II", "Pre-registration (label study-e-prereg-v1)", "commit", "93636b1777e7865f5f3c0480e0ce1d3e6be6c3cf", "2026-11-19"),
+        ("Part II", "Hypothesis declaration (label study-e-prereg-v1)", "commit", "93636b1777e7865f5f3c0480e0ce1d3e6be6c3cf", "2026-11-19"),
         ("Part II", "Analysis script (label study-e-analysis-script-v1)", "commit", "6eb87f272444c6965e2fd9b36bbe2c4aec53212d", "2026-11-19"),
         ("Study F", "Baseline-fault plan (label study-f-plan-v1)", "commit", "4f109e980d2945d0a75acec1067f5a153885ad50", "2026-11-21"),
     ]
@@ -585,6 +585,27 @@ def main() -> None:
     if args.restructure:
         from restructure_r17 import apply_restructure
         manuscript, s10_text = apply_restructure(manuscript)
+        # Terminology: the Part II freeze is author-frozen in git, not an external registration.
+        for _o, _n in [
+            ("### II.3 Pre-registration and results", "### II.3 Frozen hypotheses and results"),
+            ("frozen pre-registration, analysis-script amendment", "frozen hypothesis declaration, analysis-script amendment"),
+            ("The two frozen versions (pre-registration and analysis script)", "The two frozen versions (hypothesis declaration and analysis script)"),
+            ("(not pre-registered;", "(post hoc;"),
+            ("Pre-registration (label study-e-prereg-v1)", "Hypothesis declaration (label study-e-prereg-v1)"),
+        ]:
+            manuscript = manuscript.replace(_o, _n)
+            s10_text = s10_text.replace(_o, _n)
+        from trim_r28 import TRIMS as _TRIMS_R28
+        for _o, _n in _TRIMS_R28:
+            assert manuscript.count(_o) == 1, ("trim_r28 no unique match: " + _o[:60])
+            manuscript = manuscript.replace(_o, _n)
+        from trim_r28 import drop_fig2 as _drop_fig2, TRIMS_B as _TRIMS_B
+        for _o, _n in _TRIMS_B:
+            assert manuscript.count(_o) == 1, ("trim_r28 TRIMS_B no unique match: " + _o[:60])
+            manuscript = manuscript.replace(_o, _n)
+        manuscript = _drop_fig2(manuscript)
+        from trim_r28 import style_pass as _style_pass
+        manuscript = _style_pass(manuscript)
     out = TWO / "out"
     out.mkdir(exist_ok=True)
     (out / "supplement_S2_evidence_details.md").write_text(build_supplement_s2() + "\n", encoding="utf-8")
@@ -595,17 +616,18 @@ def main() -> None:
         supp = supp.replace("; exact source fields are retained in Supplementary Table S1.**", ".**", 1)
         (out / "supplement_S1_deterministic_matrix.md").write_text(supp + "\n", encoding="utf-8")
         (out / "supplement_README.md").write_text(
-            "# Supplementary material for the two-part TT&C resynchronization paper (DRAFT)\n\n"
+            "# Supplementary material for the two-part TT&C resynchronization paper\n\n"
             "- `supplement_S1_deterministic_matrix.md`: Supplementary Table S1, the 40-row deterministic T1 fault-coverage matrix.\n"
             "  It is copied unchanged from Table 2 of the Part I manuscript (paper/manuscript/manuscript.md, sha256 "
             + sha256(PART1_MANUSCRIPT) + "); only the label changes from Table 2 to Supplementary Table S1, and the self-referring clause in the caption (\"; exact source fields are retained in Supplementary Table S1\") is dropped.\n"
             "- `supplement_S2_evidence_details.md`: Supplementary Tables S2-S6 (Study D challenge-set structure, unreached Study C cells, outcome by security state, terms, fault scope), generated read-only from frozen CSV/JSON inputs.\n"
             "- `supplement_S10_method_and_policy_detail.md` (written only with --restructure): research questions and answers, full designs of Studies B to D, formal-assurance detail, the predeclaration and rerun policy, treatment boundaries and reproducibility detail, moved unchanged from the main text.\n"
-            "- The main text keeps a one-paragraph pointer to S1; every other table, figure and result is in the main text.\n"
+            "- `figS11_study_c_terminal_outcomes.pdf`: Supplementary Figure S11, descriptive terminal-outcome counts for the fixed 100-schedule Study C population (also given in Section 6.3 text); moved out of the main text to save a page.\n"
+            "- The main text keeps a one-paragraph pointer to S1; every other table and result is in the main text.\n"
             "- Source data and code: see Section 9 (Reproducibility and Artifact Availability) of the paper.\n"
             "- Frozen Part II versions: tags `study-e-prereg-v1` (commit 93636b1777e7865f5f3c0480e0ce1d3e6be6c3cf) and "
             "`study-e-analysis-script-v1` (commit 6eb87f272444c6965e2fd9b36bbe2c4aec53212d); full list in docs/study_e/FROZEN_VERSIONS.md.\n"
-            "- Status: draft. Nothing here has been submitted or published.\n", encoding="utf-8")
+, encoding="utf-8")
     else:
         (out / "manuscript_two_part.md").write_text(manuscript, encoding="utf-8")
     if s10_text is not None:
