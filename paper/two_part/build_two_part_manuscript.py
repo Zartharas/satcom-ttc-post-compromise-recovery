@@ -396,9 +396,13 @@ def main() -> None:
     parser.add_argument("--title", default=TITLE_TWO_PART, help="Title of the two-part paper (default revised 2026-11-19 to follow the TAES no-abbreviation guidance)")
     parser.add_argument("--compact", action="store_true",
                         help="Move the 40-row deterministic matrix (Part I Table 2) to a supplement; writes *_compact outputs only")
+    parser.add_argument("--restructure", action="store_true",
+                        help="Opt-in, only with --compact --trim: journal-paper restructure (fewer subsections, detail moved to supplement S10); output only")
     parser.add_argument("--trim", action="store_true",
                         help="Opt-in, only with --compact: condense the three results-recap paragraphs of the Conclusion and drop the Introduction's study-inventory sentence (about 100 words together; every number stays in the abstract and Sections 5-6); writes *_compact_trim outputs")
     args = parser.parse_args()
+    if args.restructure and not args.trim:
+        raise SystemExit("--restructure requires --trim")
     if args.trim and not args.compact:
         raise SystemExit("--trim requires --compact")
 
@@ -577,6 +581,10 @@ def main() -> None:
     from review_fixes_r9 import apply_round9_fixes
     manuscript = apply_round9_fixes(manuscript)
     manuscript = remove_em_dashes(manuscript)
+    s10_text = None
+    if args.restructure:
+        from restructure_r17 import apply_restructure
+        manuscript, s10_text = apply_restructure(manuscript)
     out = TWO / "out"
     out.mkdir(exist_ok=True)
     (out / "supplement_S2_evidence_details.md").write_text(build_supplement_s2() + "\n", encoding="utf-8")
@@ -592,6 +600,7 @@ def main() -> None:
             "  It is copied unchanged from Table 2 of the Part I manuscript (paper/manuscript/manuscript.md, sha256 "
             + sha256(PART1_MANUSCRIPT) + "); only the label changes from Table 2 to Supplementary Table S1, and the self-referring clause in the caption (\"; exact source fields are retained in Supplementary Table S1\") is dropped.\n"
             "- `supplement_S2_evidence_details.md`: Supplementary Tables S2-S6 (Study D challenge-set structure, unreached Study C cells, outcome by security state, terms, fault scope), generated read-only from frozen CSV/JSON inputs.\n"
+            "- `supplement_S10_method_and_policy_detail.md` (written only with --restructure): research questions and answers, full designs of Studies B to D, formal-assurance detail, the predeclaration and rerun policy, treatment boundaries and reproducibility detail, moved unchanged from the main text.\n"
             "- The main text keeps a one-paragraph pointer to S1; every other table, figure and result is in the main text.\n"
             "- Source data and code: see Section 9 (Reproducibility and Artifact Availability) of the paper.\n"
             "- Frozen Part II versions: tags `study-e-prereg-v1` (commit 93636b1777e7865f5f3c0480e0ce1d3e6be6c3cf) and "
@@ -599,6 +608,8 @@ def main() -> None:
             "- Status: draft. Nothing here has been submitted or published.\n", encoding="utf-8")
     else:
         (out / "manuscript_two_part.md").write_text(manuscript, encoding="utf-8")
+    if s10_text is not None:
+        (out / "supplement_S10_method_and_policy_detail.md").write_text(s10_text, encoding="utf-8")
     (out / "bibliography_two_part.bib").write_text(combined, encoding="utf-8")
 
     print(f"part1_manuscript_sha256={sha256(PART1_MANUSCRIPT)} (matches manifest)")
