@@ -1,0 +1,6 @@
+SATCOM TT&C post-compromise recovery: timestamp anchor (prepared 2026-11-22; nothing has been submitted anywhere)
+repository: https://github.com/Zartharas/satcom-ttc-post-compromise-recovery
+tag study-e-prereg-v1          commit 93636b1777e7865f5f3c0480e0ce1d3e6be6c3cf tree 161e1fe6a0570197119a190cd192fa99d7fe2e2b tar_sha256 563afc01c24e7d849d3b98797f58de6fb0e546c0b70a436ae23ba046046247a0 tagged 2026-11-19
+tag study-e-analysis-script-v1 commit 6eb87f272444c6965e2fd9b36bbe2c4aec53212d tree ee9af6643a08036a677d9f97197589204a8641e8 tar_sha256 eece37a3d43003918ed21a2e51132e04f725b6464455a106376c600bf1dbf0c8 tagged 2026-11-19
+tag study-f-plan-v1            commit 4f109e980d2945d0a75acec1067f5a153885ad50 tree 3351c922cf215edc5cd09aeef9bd2798cb7f4041 tar_sha256 f50316f5cb1a4867f3e8c8114aa629264c221ad120d735b178700644b2d4046f tagged 2026-11-21
+tar_sha256 = SHA-256 of `git archive --format=tar <tag>` (uncompressed tar, reproducible from the commit).
