@@ -63,8 +63,8 @@ def _fix_message_identifiers(text):
 
 
 def _table1_security_state(text):
-    """Replace Table 1's Source column by Security state (values from the authorized evidence; CF-06 has none)."""
-    sec = {"CF-01": r"\texttt{SECURE\_\allowbreak PROVISIONAL}", "CF-02": r"\texttt{SECURE\_\allowbreak PROVISIONAL}", "CF-05": r"\texttt{NOT\_\allowbreak ESTABLISHED}", "CF-06": "n/a"}
+    """Replace Table 1's Source column by Security state (CF-06 value from the retained run metrics, see footnote)."""
+    sec = {"CF-01": r"\texttt{SECURE\_\allowbreak PROVISIONAL}", "CF-02": r"\texttt{SECURE\_\allowbreak PROVISIONAL}", "CF-05": r"\texttt{NOT\_\allowbreak ESTABLISHED}", "CF-06": r"\texttt{SECURE\_\allowbreak PROVISIONAL}"}
     head = "| Family | Treatment / policy | Source | Outcome | Alignment | Availability | Evidence cue |"
     if text.count(head) != 1:
         raise SystemExit("round14 anchor: Table 1 header")
@@ -82,7 +82,7 @@ def _table1_security_state(text):
         raise SystemExit(f"round14 anchor: expected 13 Table 1 rows, got {n}")
     text = "\n".join(out)
     text = _rep(text, "CF-01, active key not marked compromised and security_state=SECURE_PROVISIONAL; CF-02, verification_complete=true and security_state=SECURE_PROVISIONAL; CF-05, one drop with missing telemetry/verification and security_state=NOT_ESTABLISHED; CF-06, replay_count=1, replay_rejection_count=1, and rejection_count=1.",
-                "CF-01, active key not marked compromised; CF-02, verification_complete=true; CF-05, one drop with missing telemetry/verification; CF-06, replay_count=1, replay_rejection_count=1, and rejection_count=1. Security state is the simulator label from the authorized evidence (n/a for CF-06).")
+                "CF-01, active key not marked compromised; CF-02, verification_complete=true; CF-05, one drop with missing telemetry/verification; CF-06, replay_count=1, replay_rejection_count=1, and rejection_count=1. Security state is the simulator label; for CF-06 it comes from the retained run metrics and is not one of that family's authorized evidence fields.")
     return text
 
 
