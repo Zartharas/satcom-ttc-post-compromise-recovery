@@ -48,6 +48,44 @@ The experiment was deliberately scoped as a bounded, synthetic, software-only st
 """
 
 
+def _fix_message_identifiers(text):
+    """Set the Part II six-message list and its outcome labels in code font, as everywhere else."""
+    lines = text.split("\n")
+    hit = [i for i, l in enumerate(lines) if l.startswith("The exchange is a six-message abstraction")]
+    if len(hit) != 1:
+        raise SystemExit(f"round14 anchor count {len(hit)} for six-message paragraph")
+    l = lines[hit[0]]
+    l = l.replace("(PREPARE, RESPONSE, COMMIT, CONFIRM, TEST\\_COMMAND, STATUS\\_TELEMETRY)",
+                  "(`PREPARE`, `RESPONSE`, `COMMIT`, `CONFIRM`, `TEST_COMMAND`, `STATUS_TELEMETRY`)")
+    l = re.sub(r"(?<![`A-Za-z])([A-Z]+(?:\\_[A-Z]+)+)(?![`A-Za-z])", lambda m: "`" + m.group(1).replace("\\_", "_") + "`", l)
+    lines[hit[0]] = l
+    return "\n".join(lines)
+
+
+def _table1_security_state(text):
+    """Replace Table 1's Source column by Security state (values from the authorized evidence; CF-06 has none)."""
+    sec = {"CF-01": r"\texttt{SECURE\_\allowbreak PROVISIONAL}", "CF-02": r"\texttt{SECURE\_\allowbreak PROVISIONAL}", "CF-05": r"\texttt{NOT\_\allowbreak ESTABLISHED}", "CF-06": "n/a"}
+    head = "| Family | Treatment / policy | Source | Outcome | Alignment | Availability | Evidence cue |"
+    if text.count(head) != 1:
+        raise SystemExit("round14 anchor: Table 1 header")
+    text = text.replace(head, "| Family | Treatment / policy | Security state | Outcome | Alignment | Availability | Evidence cue |", 1)
+    out, n = [], 0
+    for line in text.split("\n"):
+        m = re.match(r"\| (CF-0[1256]) \|", line)
+        if m:
+            cells = line.split("|")
+            cells[3] = " " + sec[m.group(1)] + " "
+            line = "|".join(cells)
+            n += 1
+        out.append(line)
+    if n != 13:
+        raise SystemExit(f"round14 anchor: expected 13 Table 1 rows, got {n}")
+    text = "\n".join(out)
+    text = _rep(text, "CF-01, active key not marked compromised and security_state=SECURE_PROVISIONAL; CF-02, verification_complete=true and security_state=SECURE_PROVISIONAL; CF-05, one drop with missing telemetry/verification and security_state=NOT_ESTABLISHED; CF-06, replay_count=1, replay_rejection_count=1, and rejection_count=1.",
+                "CF-01, active key not marked compromised; CF-02, verification_complete=true; CF-05, one drop with missing telemetry/verification; CF-06, replay_count=1, replay_rejection_count=1, and rejection_count=1. Security state is the simulator label from the authorized evidence (n/a for CF-06).")
+    return text
+
+
 def apply_round9_fixes(text):
     t = text
 
@@ -240,4 +278,8 @@ def apply_round9_fixes(text):
     t = _rep(t, "planned under tag `study-f-plan-v1` and not part of the frozen Part I.", "planned in an archived plan fixed before the runs (Supplementary Table S9) and not part of the frozen Part I.")
     t = _rep(t, "Plan and schedules were committed before the single retained run from a clean commit.", "Plan and schedules were archived before the single retained run from a clean code version.")
     t = _rep(t, "Results tie to an exact commit, plan hash,", "Results tie to an exact code version, plan checksum,")
+    # --- Round 14: typography of identifiers and a Security state column in Table 1 (output-only; frozen CSVs untouched) ---
+    t = _rep(t, "Duplicate faults are not counted at TEST_COMMAND or STATUS_TELEMETRY because", "Duplicate faults are not counted at `TEST_COMMAND` or `STATUS_TELEMETRY` because")
+    t = _fix_message_identifiers(t)
+    t = _table1_security_state(t)
     return t

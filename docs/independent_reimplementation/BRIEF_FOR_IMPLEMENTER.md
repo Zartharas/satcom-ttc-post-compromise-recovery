@@ -3,7 +3,7 @@
 Purpose: an independent, blind check that the written specification of the Part I T1 exchange determines the Study B outcomes. The AI-agent re-implementation (docs/study_g/AI_REIMPLEMENTATION_REPORT_2026-11-21.md) was not independent and not blind; this replaces it only if a human does it from the spec alone.
 
 ## Give the implementer (specification only)
-paper/manuscript/{system-threat-model,recovery-designs,experimental-method}.md, spec/*.json, docs/phase-15-data-dictionary.md, docs/phase-15-experiment-protocol.md, docs/t1-provisional-design.md.
+paper/manuscript/{system-threat-model,recovery-designs,experimental-method}.md, spec/{system-model,t1-requirements,t1-provisional-design,transition-guards,security-invariants}.json (an allowlist, not spec/*.json: phase-09 to phase-14, phase-15-* and baseline-* spec files describe witnesses, outcomes or the review package and must be withheld), docs/phase-15-data-dictionary.md, docs/phase-15-experiment-protocol.md, docs/t1-provisional-design.md.
 ## Withhold
 paper/manuscript/{results,discussion,introduction,conclusion,manuscript}.md and the abstract, paper/tables, results/, src/, tests/, experiments/, study_*/, formal/ and every results figure. Before handing over, the author should grep the given files for result numbers (e.g. "25", "SUCCESS", "INDETERMINATE", "EXPIRED") and redact any aggregate; the earlier attempt leaked through manuscript prose.
 
